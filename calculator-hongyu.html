@@ -434,11 +434,14 @@ function selectGender(el) {
 // Load data
 async function loadData() {
   if (CALC_DATA) return;
+  showError('正在加载演算数据...');
   try {
-    const res = await fetch('files/演算器/hongyu_data.json');
+    const res = await fetch('hongyu_data.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     CALC_DATA = await res.json();
+    document.getElementById('errorMsg').classList.remove('show');
   } catch (e) {
-    showError('演算数据加载失败，请检查网络后刷新页面重试');
+    showError('演算数据加载失败：' + e.message + '，请刷新页面重试');
     throw e;
   }
 }
@@ -511,7 +514,7 @@ async function generate() {
     }
     
     const key = `${currentGender}_${age}_${term}`;
-    const entry = CALC_DATA.data[key];
+    const entry = CALC_DATA[key];
     if (!entry) {
       showError(`未找到该参数组合的数据，请检查输入`);
       btn.disabled = false;
@@ -520,7 +523,7 @@ async function generate() {
     }
     
     const E = entry.E;
-    const years = entry.years;
+    const years = entry.y;
     const scale = premium / 1000;
     const sumAssured = Math.round(E * scale);
     
@@ -539,13 +542,13 @@ async function generate() {
     const tbody = document.getElementById('resultBody');
     let html = '';
     let prevTotal = null;
-    const maxYear = Math.min(years.length - 1, 54); // Show up to 54 years (age up to 105)
+    const maxYear = Math.min(years.length, 54); // Show up to 54 years (age up to 105)
     
     for (let yr = 1; yr <= maxYear; yr++) {
-      const row = years[yr];
+      const row = years[yr-1];  // new format: 0-indexed
       if (!row) continue;
       
-      const [J, M, P] = row;
+      const [J, P] = row;  // new format: only [guarantee, paidup]
       const guaranteed = J * scale;
       const paidup = P * scale;
       const total = guaranteed + paidup;
