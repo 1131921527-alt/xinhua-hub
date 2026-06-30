@@ -707,6 +707,7 @@ const TYPE_CONFIG = {
   link:   { icon: '🔗', label: '链接',  class: 'icon-link' },
   image:  { icon: '🖼️', label: '图片',  class: 'icon-image' },
   video:  { icon: '🎬', label: '视频',  class: 'icon-video' },
+  calculator: { icon: '🧮', label: '计算器', class: 'icon-link' },
   default:{ icon: '📁', label: '文件',  class: 'icon-default' }
 };
 
@@ -805,7 +806,10 @@ function renderContent(query) {
     
     items.forEach(item => {
       const tc = getTypeConfig(item.type);
-      const onclick = `window.open('${item.url}', '_blank')`;
+      const isCalc = item.type === 'calculator';
+      const onclick = isCalc 
+        ? `location.href='${item.url}'`
+        : `window.open('${item.url}', '_blank')`;
       
       html += `
         <div class="card" onclick="${onclick}">

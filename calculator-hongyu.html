@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宏御世家 · 利益演示计算器</title>
+<style>
+:root {
+  --primary: #1D4ED8;
+  --primary-light: #DBEAFE;
+  --bg: #F8FAFC;
+  --card: #FFFFFF;
+  --text: #1E293B;
+  --text2: #64748B;
+  --text3: #94A3B8;
+  --border: #E2E8F0;
+  --green: #16A34A;
+  --red: #DC2626;
+  --orange: #EA580C;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #2563EB, #1D4ED8, #1E40AF);
+  color: #fff;
+  padding: 40px 16px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -30px;
+  width: 160px; height: 160px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+.header h1 { font-size:20px; font-weight:700; position:relative; z-index:1; }
+.header p { font-size:12px; opacity:0.75; margin-top:4px; position:relative; z-index:1; }
+.header .back {
+  display:inline-flex; align-items:center; gap:4px;
+  color: rgba(255,255,255,0.8); text-decoration:none;
+  font-size:13px; margin-bottom:8px; position:relative; z-index:1;
+}
+.header .back:hover { color: #fff; }
+
+/* Container */
+.container { max-width:680px; margin:0 auto; padding:16px; }
+
+/* Form Card */
+.form-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  border: 1px solid var(--border);
+}
+.form-card h3 {
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 16px; color: var(--primary);
+  display: flex; align-items: center; gap: 6px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 12px; font-weight: 600; color: var(--text2);
+}
+.form-group input, .form-group select {
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text);
+  background: #F8FAFC;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+
+/* Gender radio */
+.gender-group {
+  display: flex; gap: 8px;
+}
+.gender-btn {
+  flex: 1; text-align: center;
+  padding: 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  background: #F8FAFC;
+  transition: all 0.2s;
+  user-select: none;
+  color: var(--text);
+}
+.gender-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* Generate button */
+.btn-generate {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+.btn-generate:active { transform: scale(0.97); }
+.btn-generate:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Product info */
+.product-info {
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border: 1px solid #BFDBFE;
+}
+.product-info h3 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+.product-info .highlights {
+  display: flex; flex-wrap: wrap; gap: 4px;
+}
+.product-info .hl-tag {
+  font-size: 11px;
+  background: #fff;
+  color: var(--primary);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Results */
+.results { display: none; }
+.results.show { display: block; }
+
+.param-bar {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text2);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.param-bar span { font-weight: 600; color: var(--text); }
+
+/* Table */
+.table-wrap {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 16px;
+}
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 700px;
+}
+thead th {
+  background: #F1F5F9;
+  padding: 10px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+}
+tbody td {
+  padding: 8px 6px;
+  text-align: center;
+  border-bottom: 1px solid #F1F5F9;
+  white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: #F8FAFC; }
+tbody tr:hover { background: #EFF6FF; }
+.col-num { font-weight: 600; color: var(--text); }
+.col-guarantee { color: var(--primary); font-weight: 500; }
+.col-paidup { color: var(--green); font-weight: 500; }
+.col-total { color: var(--orange); font-weight: 600; }
+.col-rate { font-weight: 600; }
+.rate-up { color: var(--green); }
+.rate-reserve { color: var(--text3); }
+
+/* Download bar */
+.download-bar {
+  display: flex; gap: 10px; margin-bottom: 20px;
+}
+.btn-download {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  border: none;
+}
+.btn-download:active { transform: scale(0.97); }
+.btn-dl-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-dl-secondary {
+  background: var(--card);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+
+/* Loading */
+.loading-overlay {
+  display: none;
+  position: fixed; top:0; left:0; right:0; bottom:0;
+  background: rgba(255,255,255,0.8);
+  z-index: 1000;
+  justify-content: center; align-items: center;
+}
+.loading-overlay.show { display: flex; }
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error */
+.error-msg {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #DC2626;
+  font-size: 13px;
+  display: none;
+  margin-bottom: 12px;
+}
+.error-msg.show { display: block; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30,41,59,0.9);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+
+/* Disclaimer */
+.disclaimer {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.8;
+}
+
+/* Canvas (hidden) */
+#renderCanvas { display: none; }
+
+/* Responsive */
+@media (min-width: 768px) {
+  .container { padding: 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="index.html" class="back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+    返回资料库
+  </a>
+  <h1>宏御世家 终身寿险（分红型）</h1>
+  <p>利益演示计算器 · 数据源自官方演算表5.20</p>
+</div>
+
+<div class="container">
+
+  <!-- Product Info -->
+  <div class="product-info">
+    <h3>产品亮点</h3>
+    <div class="highlights">
+      <span class="hl-tag">保额1.75%复利</span>
+      <span class="hl-tag">分红≥70%盈余</span>
+      <span class="hl-tag">身故全残保障</span>
+      <span class="hl-tag">可减保</span>
+      <span class="hl-tag">可贷现价80%</span>
+      <span class="hl-tag">定向传承</span>
+      <span class="hl-tag">保底+分红</span>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div class="error-msg" id="errorMsg"></div>
+
+  <!-- Form -->
+  <div class="form-card">
+    <h3>📋 输入演示参数</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>性别</label>
+        <div class="gender-group" id="genderGroup">
+          <div class="gender-btn active" data-value="0" onclick="selectGender(this)">👨 男</div>
+          <div class="gender-btn" data-value="1" onclick="selectGender(this)">👩 女</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>投保年龄（周岁）</label>
+        <input type="number" id="age" value="40" min="0" max="69" placeholder="0~69">
+      </div>
+      <div class="form-group">
+        <label>交费方式</label>
+        <select id="term">
+          <option value="1">一次交清（趸交）</option>
+          <option value="3">3年交</option>
+          <option value="5">5年交</option>
+          <option value="10">10年交</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>年交保费（元）</label>
+        <input type="number" id="premium" value="300000" min="1000" step="1000" placeholder="最低1000元整数倍">
+      </div>
+    </div>
+    <button class="btn-generate" id="btnGenerate" onclick="generate()">📊 生成利益演示</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="param-bar" id="paramBar"></div>
+    <div class="download-bar">
+      <button class="btn-download btn-dl-primary" onclick="downloadImage()">📥 下载计划书图片</button>
+      <button class="btn-download btn-dl-secondary" onclick="copyTable()">📋 复制表格数据</button>
+    </div>
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table id="resultTable">
+          <thead>
+            <tr>
+              <th>保单年度</th>
+              <th>年龄(年初)</th>
+              <th>当年保险费(年初)</th>
+              <th>现金价值<br>(保证部分)</th>
+              <th>累计红利现价<br>(交清增额)</th>
+              <th>生存总利益<br>(保证+累计红利)</th>
+              <th>生存总利益<br>年增值率</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ 本计算器数据源自官方演算表，仅供参考<br>
+    具体利益以保险合同条款和正式计划书为准<br>
+    红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值
+  </div>
+
+</div>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Canvas -->
+<canvas id="renderCanvas"></canvas>
+
+<script>
+let CALC_DATA = null;
+let currentGender = 0;
+
+// Gender selection
+function selectGender(el) {
+  document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  currentGender = parseInt(el.dataset.value);
+}
+
+// Load data
+async function loadData() {
+  if (CALC_DATA) return;
+  try {
+    const res = await fetch('files/演算器/hongyu_data.json');
+    CALC_DATA = await res.json();
+  } catch (e) {
+    showError('演算数据加载失败，请检查网络后刷新页面重试');
+    throw e;
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 5000);
+}
+
+function showLoading(show) {
+  document.getElementById('loadingOverlay').classList.toggle('show', show);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// Format number
+function fmt(n) {
+  if (n === null || n === undefined) return '-';
+  return Math.round(n).toLocaleString('zh-CN');
+}
+
+function fmtRate(r) {
+  if (r === null || r === undefined || r === '') return '-';
+  if (r === '储备期') return '储备期';
+  return r.toFixed(2) + '%';
+}
+
+// Main generate function
+async function generate() {
+  const btn = document.getElementById('btnGenerate');
+  btn.disabled = true;
+  btn.textContent = '计算中...';
+  
+  try {
+    await loadData();
+    
+    const age = parseInt(document.getElementById('age').value);
+    const term = parseInt(document.getElementById('term').value);
+    const premium = parseInt(document.getElementById('premium').value);
+    
+    // Validate
+    if (isNaN(age) || age < 0 || age > 69) {
+      showError('投保年龄须在0~69周岁之间');
+      btn.disabled = false;
+      btn.textContent = '📊 生成利益演示';
+      return;
+    }
+    if (isNaN(premium) || premium < 1000) {
+      showError('年交保费最低1,000元，且应为1,000元整数倍');
+      btn.disabled = false;
+      btn.textContent = '📊 生成利益演示';
+      return;
+    }
+    
+    // Check max age for term
+    const maxAgeMap = { 1: 65, 3: 65, 5: 64, 10: 61 };
+    const maxAge = maxAgeMap[term] || 65;
+    if (age > maxAge) {
+      showError(`该交费方式最高投保年龄为${maxAge}周岁`);
+      btn.disabled = false;
+      btn.textContent = '📊 生成利益演示';
+      return;
+    }
+    
+    const key = `${currentGender}_${age}_${term}`;
+    const entry = CALC_DATA.data[key];
+    if (!entry) {
+      showError(`未找到该参数组合的数据，请检查输入`);
+      btn.disabled = false;
+      btn.textContent = '📊 生成利益演示';
+      return;
+    }
+    
+    const E = entry.E;
+    const years = entry.years;
+    const scale = premium / 1000;
+    const sumAssured = Math.round(E * scale);
+    
+    // Build param bar
+    const genderLabel = currentGender === 0 ? '男' : '女';
+    const termLabel = {1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
+    document.getElementById('paramBar').innerHTML = `
+      <span>${genderLabel}</span> ·
+      <span>${age}周岁</span> ·
+      <span>${termLabel}</span> ·
+      <span>保费 ${fmt(premium)} 元</span> ·
+      <span>基本保额 ${fmt(sumAssured)} 元</span>
+    `;
+    
+    // Build table
+    const tbody = document.getElementById('resultBody');
+    let html = '';
+    let prevTotal = null;
+    const maxYear = Math.min(years.length - 1, 54); // Show up to 54 years (age up to 105)
+    
+    for (let yr = 1; yr <= maxYear; yr++) {
+      const row = years[yr];
+      if (!row) continue;
+      
+      const [J, M, P] = row;
+      const guaranteed = J * scale;
+      const paidup = P * scale;
+      const total = guaranteed + paidup;
+      
+      let rate = '';
+      let rateClass = '';
+      if (yr === 1) {
+        rate = '储备期';
+        rateClass = 'rate-reserve';
+      } else if (prevTotal !== null && prevTotal > 0) {
+        const r = ((total / prevTotal) - 1) * 100;
+        rate = r.toFixed(2) + '%';
+        rateClass = r > 0 ? 'rate-up' : '';
+      }
+      
+      // Annual premium
+      const paymentYears = term === 1 ? 1 : term;
+      const annualPremium = yr <= paymentYears ? premium : 0;
+      const currentAge = age + yr - 1;
+      
+      html += `<tr>
+        <td class="col-num">${yr}</td>
+        <td>${currentAge}</td>
+        <td>${annualPremium > 0 ? fmt(annualPremium) : '-'}</td>
+        <td class="col-guarantee">${fmt(guaranteed)}</td>
+        <td class="col-paidup">${fmt(paidup)}</td>
+        <td class="col-total">${fmt(total)}</td>
+        <td class="col-rate ${rateClass}">${rate}</td>
+      </tr>`;
+      
+      prevTotal = total;
+    }
+    
+    tbody.innerHTML = html;
+    document.getElementById('results').classList.add('show');
+    document.getElementById('errorMsg').classList.remove('show');
+    
+    // Scroll to results
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+  } catch (e) {
+    showError('计算出错：' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '📊 生成利益演示';
+  }
+}
+
+// Copy table
+function copyTable() {
+  const tbody = document.getElementById('resultBody');
+  if (!tbody || !tbody.innerHTML) {
+    showToast('请先生成利益演示');
+    return;
+  }
+  
+  let text = '保单年度\t年龄\t当年保险费\t现金价值(保证)\t累计红利现价(交清增额)\t生存总利益\t年增值率\n';
+  const rows = tbody.querySelectorAll('tr');
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    const vals = Array.from(cells).map(c => c.textContent.trim());
+    text += vals.join('\t') + '\n';
+  });
+  
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('表格数据已复制到剪贴板');
+  }).catch(() => {
+    showToast('复制失败，请手动选择表格');
+  });
+}
+
+// Download image via canvas
+function downloadImage() {
+  const tbody = document.getElementById('resultBody');
+  if (!tbody || !tbody.innerHTML) {
+    showToast('请先生成利益演示');
+    return;
+  }
+  
+  showLoading(true);
+  
+  setTimeout(() => {
+    try {
+      const canvas = document.getElementById('renderCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      const age = parseInt(document.getElementById('age').value);
+      const term = parseInt(document.getElementById('term').value);
+      const premium = parseInt(document.getElementById('premium').value);
+      const genderLabel = currentGender === 0 ? '男' : '女';
+      const termLabel = {1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
+      
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      
+      // Layout constants
+      const colWidths = [60, 55, 80, 100, 100, 110, 80];
+      const totalWidth = colWidths.reduce((a, b) => a + b, 0) + colWidths.length * 2;
+      const rowH = 28;
+      const headerH = 50;
+      const titleH = 90;
+      const paramH = 50;
+      const footerH = 50;
+      const padding = 20;
+      
+      const tableH = headerH + rows.length * rowH;
+      const canvasH = titleH + paramH + tableH + footerH + padding * 2;
+      const canvasW = totalWidth + padding * 2 + 100;
+      
+      canvas.width = canvasW * 2; // Retina
+      canvas.height = canvasH * 2;
+      canvas.style.width = canvasW + 'px';
+      canvas.style.height = canvasH + 'px';
+      ctx.scale(2, 2);
+      
+      // Background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvasW, canvasH);
+      
+      // Gradient header
+      const grad = ctx.createLinearGradient(0, 0, canvasW, 0);
+      grad.addColorStop(0, '#2563EB');
+      grad.addColorStop(1, '#1E40AF');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvasW, titleH);
+      
+      // Title
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('新华保险 · 宏御世家终身寿险（分红型）', canvasW / 2, 30);
+      ctx.font = '12px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.fillText('利益演示计划书', canvasW / 2, 52);
+      ctx.font = '10px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.fillText(`—— 数据源自官方演算表5.20 ——`, canvasW / 2, 70);
+      
+      // Params
+      const paramY = titleH + 10;
+      ctx.fillStyle = '#F1F5F9';
+      ctx.fillRect(padding, paramY, canvasW - padding * 2, 32);
+      ctx.fillStyle = '#1E293B';
+      ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(
+        `${genderLabel} · ${age}周岁 · ${termLabel} · 保费${premium.toLocaleString()}元`,
+        canvasW / 2, paramY + 22
+      );
+      
+      const tableX = padding + 50;
+      const tableY = paramY + 50;
+      
+      // Table header
+      ctx.fillStyle = '#1D4ED8';
+      ctx.fillRect(tableX, tableY, totalWidth, headerH);
+      
+      const headers = ['保单年度', '年龄', '当年保险费', '现金价值\n(保证)', '累计红利\n(交清增额)', '生存总利益', '年增值率'];
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.textAlign = 'center';
+      
+      let x = tableX + padding / 2;
+      headers.forEach((h, i) => {
+        const lines = h.split('\n');
+        const cx = x + colWidths[i] / 2;
+        if (lines.length === 1) {
+          ctx.fillText(lines[0], cx, tableY + headerH / 2 + 4);
+        } else {
+          ctx.fillText(lines[0], cx, tableY + headerH / 2 - 2);
+          ctx.fillText(lines[1], cx, tableY + headerH / 2 + 14);
+        }
+        x += colWidths[i];
+      });
+      
+      // Table body
+      rows.forEach((row, idx) => {
+        const y = tableY + headerH + idx * rowH;
+        
+        // Alternating background
+        ctx.fillStyle = idx % 2 === 0 ? '#FFFFFF' : '#F8FAFC';
+        ctx.fillRect(tableX, y, totalWidth, rowH);
+        
+        // Bottom border
+        ctx.strokeStyle = '#F1F5F9';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(tableX, y + rowH);
+        ctx.lineTo(tableX + totalWidth, y + rowH);
+        ctx.stroke();
+        
+        const cells = Array.from(row.querySelectorAll('td'));
+        let cx = tableX + padding / 2;
+        
+        cells.forEach((cell, ci) => {
+          const cellX = cx + colWidths[ci] / 2;
+          
+          if (ci === 0) {
+            ctx.fillStyle = '#1E293B';
+            ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 3) {
+            ctx.fillStyle = '#1D4ED8';
+            ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 4) {
+            ctx.fillStyle = '#16A34A';
+            ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 5) {
+            ctx.fillStyle = '#EA580C';
+            ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 6) {
+            const v = cell.textContent.trim();
+            ctx.fillStyle = v.includes('%') ? '#16A34A' : '#94A3B8';
+            ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else {
+            ctx.fillStyle = '#64748B';
+            ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+          }
+          
+          ctx.textAlign = 'center';
+          ctx.fillText(cell.textContent.trim(), cellX, y + rowH / 2 + 4);
+          cx += colWidths[ci];
+        });
+      });
+      
+      const footerY = tableY + headerH + rows.length * rowH + 16;
+      
+      // Disclaimer
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '9px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('本计划书数据源自官方演算表，仅供参考。具体利益以保险合同条款和正式计划书为准。', canvasW / 2, footerY);
+      ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 14);
+      
+      // Download
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `宏御世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('计划书图片已下载');
+        showLoading(false);
+      }, 'image/png');
+      
+    } catch (e) {
+      showError('图片生成失败：' + e.message);
+      showLoading(false);
+    }
+  }, 200);
+}
+
+// Enter key support
+document.getElementById('premium').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') generate();
+});
+
+document.getElementById('age').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') generate();
+});
+
+// Preload data
+loadData();
+</script>
+
+</body>
+</html>

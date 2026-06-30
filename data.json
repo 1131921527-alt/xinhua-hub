@@ -100,9 +100,15 @@
       "icon": "🧮",
       "items": [
         {
-          "name": "S11 宏御世家终身寿（分红型）",
+          "name": "🧮 S11 宏御世家终身寿（分红型）在线演算",
+          "type": "calculator",
+          "description": "输入年龄/性别/金额 → 即时生成利益演示 → 可下载计划书图片",
+          "url": "calculator-hongyu.html"
+        },
+        {
+          "name": "📗 S11 宏御演算表 Excel 原文件",
           "type": "excel",
-          "description": "演算表 5.20版",
+          "description": "演算表 5.20版（原始Excel文件）",
           "url": "files/演算器/S11宏御世家终身寿（分红型）演算表5.20.xlsx"
         },
         {
