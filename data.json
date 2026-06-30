@@ -22,27 +22,75 @@
       ]
     },
     {
-      "id": "product-compare",
-      "name": "产品对比",
-      "icon": "📊",
+      "id": "workflow",
+      "name": "操作流程",
+      "icon": "🔧",
       "items": [
         {
-          "name": "招行在架产品对比分析",
-          "type": "ppt",
-          "description": "招行渠道在架产品横向对比分析",
-          "url": "files/产品对比/招行在架产品对比分析.pptx"
-        },
-        {
-          "name": "招行在架产品对比表",
-          "type": "excel",
-          "description": "招行渠道在架产品对比明细表",
-          "url": "files/产品对比/招行在架产品对比.xlsx"
-        },
-        {
-          "name": "在售产品投保年龄及起售金额",
+          "name": "已签回执未做回访 - 操作流程图",
           "type": "image",
-          "description": "所有在售产品的投保年龄、起售金额、形态特点汇总表",
-          "url": "files/产品对比/在售产品投保年龄及起售金额.jpg"
+          "description": "已签回执但未做回访的操作流程说明",
+          "url": "files/操作流程/已签回执未做回访操作流程.png"
+        },
+        {
+          "name": "回访专属操作链接",
+          "type": "link",
+          "description": "只做回访的链接（之前的回执回访链接已失效）",
+          "url": "https://weixinplatform.newchinalife.com/6kg6Zk"
+        },
+        {
+          "name": "保单复效操作流程",
+          "type": "link",
+          "description": "扫码进入找到保单复效操作指引",
+          "url": "https://mp.weixin.qq.com/s/wJNPQJLsJ2cL8XzTQbjevQ"
+        },
+        {
+          "name": "复效操作扫码图",
+          "type": "image",
+          "description": "扫码点进去，找到保单复效",
+          "url": "files/操作流程/复效操作扫码.jpg"
+        },
+        {
+          "name": "宏御世家 出单流程图",
+          "type": "image",
+          "description": "宏御世家终身寿险出单完整流程指引",
+          "url": "files/操作流程/宏御世家出单流程图.jpg"
+        },
+        {
+          "name": "宏泰世家 出单流程图",
+          "type": "image",
+          "description": "宏泰世家分红型出单完整流程指引",
+          "url": "files/操作流程/宏泰世家出单流程图.jpg"
+        },
+        {
+          "name": "宏愿人生 出单流程图",
+          "type": "image",
+          "description": "宏愿人生养老年金（分红型）出单完整流程指引",
+          "url": "files/操作流程/宏愿人生出单流程图.jpg"
+        },
+        {
+          "name": "华彩鎏金 出单流程图",
+          "type": "image",
+          "description": "华彩鎏金年金保险（分红型）出单完整流程指引",
+          "url": "files/操作流程/华彩鎏金出单流程图.jpg"
+        },
+        {
+          "name": "恒享人生 出单流程图",
+          "type": "image",
+          "description": "恒享人生年金险出单完整流程指引",
+          "url": "files/操作流程/恒享人生出单流程图.jpg"
+        },
+        {
+          "name": "福盛世家添翼版 出单流程图",
+          "type": "image",
+          "description": "福盛世家添翼版出单完整流程指引",
+          "url": "files/操作流程/福盛世家添翼版出单流程图.jpg"
+        },
+        {
+          "name": "客户获取电子保单和纸质保单的方式",
+          "type": "pdf",
+          "description": "电子保单和纸质保单获取方式说明",
+          "url": "files/操作流程/客户获取电子保单和纸质保单的方式.pdf"
         }
       ]
     },
@@ -52,10 +100,10 @@
       "icon": "🧮",
       "items": [
         {
-          "name": "S12 宏禧来两全保险（分红型）",
+          "name": "S11 宏御世家终身寿（分红型）",
           "type": "excel",
-          "description": "利益演示Excel版，供银行签约使用",
-          "url": "files/演算器/S12宏禧来两全保险（分红型）利益演示excel版（供银行签约使用）N.xlsx"
+          "description": "演算表 5.20版",
+          "url": "files/演算器/S11宏御世家终身寿（分红型）演算表5.20.xlsx"
         },
         {
           "name": "宏泰世家（分红型）",
@@ -64,10 +112,10 @@
           "url": "files/演算器/新华人寿 宏泰世家（分红型）.xlsx"
         },
         {
-          "name": "S11 宏御世家终身寿（分红型）",
+          "name": "宏愿人生养老年金（分红型）",
           "type": "excel",
-          "description": "演算表 5.20版",
-          "url": "files/演算器/S11宏御世家终身寿（分红型）演算表5.20.xlsx"
+          "description": "利益演示演算表",
+          "url": "files/演算器/新华宏愿人生养老年金分红型利益演示.xlsx"
         },
         {
           "name": "S24 华彩鎏金年金保险（分红型）",
@@ -76,10 +124,10 @@
           "url": "files/演算器/S24华彩鎏金年金保险（分红型）利益演示.xlsx"
         },
         {
-          "name": "宏愿人生养老年金（分红型）",
+          "name": "S12 宏禧来两全保险（分红型）",
           "type": "excel",
-          "description": "利益演示演算表",
-          "url": "files/演算器/新华宏愿人生养老年金分红型利益演示.xlsx"
+          "description": "利益演示Excel版，供银行签约使用",
+          "url": "files/演算器/S12宏禧来两全保险（分红型）利益演示excel版（供银行签约使用）N.xlsx"
         },
         {
           "name": "S06 宏坤人生养老年金险",
@@ -114,6 +162,31 @@
       ]
     },
     {
+      "id": "product-compare",
+      "name": "产品对比",
+      "icon": "📊",
+      "items": [
+        {
+          "name": "招行在架产品对比分析",
+          "type": "ppt",
+          "description": "招行渠道在架产品横向对比分析",
+          "url": "files/产品对比/招行在架产品对比分析.pptx"
+        },
+        {
+          "name": "招行在架产品对比表",
+          "type": "excel",
+          "description": "招行渠道在架产品对比明细表",
+          "url": "files/产品对比/招行在架产品对比.xlsx"
+        },
+        {
+          "name": "在售产品投保年龄及起售金额",
+          "type": "image",
+          "description": "所有在售产品的投保年龄、起售金额、形态特点汇总表",
+          "url": "files/产品对比/在售产品投保年龄及起售金额.jpg"
+        }
+      ]
+    },
+    {
       "id": "product-rules",
       "name": "产品规则",
       "icon": "📋",
@@ -128,7 +201,7 @@
     },
     {
       "id": "templates",
-      "name": "表单模板",
+      "name": "手工单模板",
       "icon": "📝",
       "items": [
         {
@@ -216,79 +289,6 @@
           "type": "pdf",
           "description": "分红型产品专题汇报材料",
           "url": "files/分红资料/新华保险分红专题汇报fts.pdf"
-        }
-      ]
-    },
-    {
-      "id": "workflow",
-      "name": "操作流程",
-      "icon": "🔧",
-      "items": [
-        {
-          "name": "已签回执未做回访 - 操作流程图",
-          "type": "image",
-          "description": "已签回执但未做回访的操作流程说明",
-          "url": "files/操作流程/已签回执未做回访操作流程.png"
-        },
-        {
-          "name": "回访专属操作链接",
-          "type": "link",
-          "description": "只做回访的链接（之前的回执回访链接已失效）",
-          "url": "https://weixinplatform.newchinalife.com/6kg6Zk"
-        },
-        {
-          "name": "保单复效操作流程",
-          "type": "link",
-          "description": "扫码进入找到保单复效操作指引",
-          "url": "https://mp.weixin.qq.com/s/wJNPQJLsJ2cL8XzTQbjevQ"
-        },
-        {
-          "name": "复效操作扫码图",
-          "type": "image",
-          "description": "扫码点进去，找到保单复效",
-          "url": "files/操作流程/复效操作扫码.jpg"
-        },
-        {
-          "name": "宏御世家 出单流程图",
-          "type": "image",
-          "description": "宏御世家终身寿险出单完整流程指引",
-          "url": "files/操作流程/宏御世家出单流程图.jpg"
-        },
-        {
-          "name": "宏泰世家 出单流程图",
-          "type": "image",
-          "description": "宏泰世家分红型出单完整流程指引",
-          "url": "files/操作流程/宏泰世家出单流程图.jpg"
-        },
-        {
-          "name": "华彩鎏金 出单流程图",
-          "type": "image",
-          "description": "华彩鎏金年金保险（分红型）出单完整流程指引",
-          "url": "files/操作流程/华彩鎏金出单流程图.jpg"
-        },
-        {
-          "name": "宏愿人生 出单流程图",
-          "type": "image",
-          "description": "宏愿人生养老年金（分红型）出单完整流程指引",
-          "url": "files/操作流程/宏愿人生出单流程图.jpg"
-        },
-        {
-          "name": "恒享人生 出单流程图",
-          "type": "image",
-          "description": "恒享人生年金险出单完整流程指引",
-          "url": "files/操作流程/恒享人生出单流程图.jpg"
-        },
-        {
-          "name": "福盛世家添翼版 出单流程图",
-          "type": "image",
-          "description": "福盛世家添翼版出单完整流程指引",
-          "url": "files/操作流程/福盛世家添翼版出单流程图.jpg"
-        },
-        {
-          "name": "客户获取电子保单和纸质保单的方式",
-          "type": "pdf",
-          "description": "电子保单和纸质保单获取方式说明",
-          "url": "files/操作流程/客户获取电子保单和纸质保单的方式.pdf"
         }
       ]
     },
