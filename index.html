@@ -451,6 +451,41 @@
     background: var(--border);
     margin: 16px 0;
   }
+  .vip-star-cell {
+    background: #F1F5F9;
+    border-radius: 8px;
+    padding: 8px 2px;
+    border: 1.5px solid transparent;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .vip-star-cell-active {
+    background: #DBEAFE;
+    border-color: #3B82F6;
+  }
+  .vip-stars {
+    font-size: 15px;
+    line-height: 1.2;
+    letter-spacing: -2.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    padding: 0 2px;
+  }
+  .vip-star-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748B;
+    margin-top: 2px;
+  }
+  .vip-star-range {
+    font-size: 10px;
+    color: #94A3B8;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   /* Password Gate */
   .pw-overlay {
@@ -835,25 +870,25 @@ function renderVIPOverview() {
       <div class="vip-info-card">
         <h4>⭐ 新华瑞 · 2026年星级对照表</h4>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px;text-align:center;">
-          <div style="background:#F1F5F9;border-radius:8px;padding:8px 4px;">
-            <div style="font-size:18px;">★</div><div style="font-size:11px;font-weight:600;color:#64748B;">一星</div>
-            <div style="font-size:10px;color:#94A3B8;margin-top:2px;">1~5万</div>
+          <div class="vip-star-cell">
+            <div class="vip-stars">★</div><div class="vip-star-label">一星</div>
+            <div class="vip-star-range">1~5万</div>
           </div>
-          <div style="background:#F1F5F9;border-radius:8px;padding:8px 4px;">
-            <div style="font-size:18px;">★★</div><div style="font-size:11px;font-weight:600;color:#64748B;">二星</div>
-            <div style="font-size:10px;color:#94A3B8;margin-top:2px;">5~10万</div>
+          <div class="vip-star-cell">
+            <div class="vip-stars">★★</div><div class="vip-star-label">二星</div>
+            <div class="vip-star-range">5~10万</div>
           </div>
-          <div style="background:#F1F5F9;border-radius:8px;padding:8px 4px;">
-            <div style="font-size:18px;">★★★</div><div style="font-size:11px;font-weight:600;color:#64748B;">三星</div>
-            <div style="font-size:10px;color:#94A3B8;margin-top:2px;">10~20万</div>
+          <div class="vip-star-cell">
+            <div class="vip-stars">★★★</div><div class="vip-star-label">三星</div>
+            <div class="vip-star-range">10~20万</div>
           </div>
-          <div style="background:#DBEAFE;border-radius:8px;padding:8px 4px;border:1.5px solid #3B82F6;">
-            <div style="font-size:18px;">★★★★</div><div style="font-size:11px;font-weight:700;color:#2563EB;">四星</div>
-            <div style="font-size:10px;color:#3B82F6;margin-top:2px;font-weight:600;">20~30万</div>
+          <div class="vip-star-cell vip-star-cell-active">
+            <div class="vip-stars">★★★★</div><div class="vip-star-label" style="color:#2563EB;">四星</div>
+            <div class="vip-star-range" style="color:#3B82F6;font-weight:600;">20~30万</div>
           </div>
-          <div style="background:#DBEAFE;border-radius:8px;padding:8px 4px;border:1.5px solid #2563EB;">
-            <div style="font-size:18px;">★★★★★</div><div style="font-size:11px;font-weight:700;color:#1D4ED8;">五星</div>
-            <div style="font-size:10px;color:#1D4ED8;margin-top:2px;font-weight:600;">30万+</div>
+          <div class="vip-star-cell vip-star-cell-active" style="border-color:#2563EB;background:#DBEAFE;">
+            <div class="vip-stars">★★★★★</div><div class="vip-star-label" style="color:#1D4ED8;">五星</div>
+            <div class="vip-star-range" style="color:#1D4ED8;font-weight:600;">30万+</div>
           </div>
         </div>
         <p style="margin-top:8px;font-size:11px;color:#64748B;">📌 四星/五星 = 爱康国宾体检（每年1次·限本人·终身有效）</p>
