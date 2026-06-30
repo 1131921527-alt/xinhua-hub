@@ -817,122 +817,152 @@ document.getElementById('search').addEventListener('input', function(e) {
   }, 200);
 });
 
-// VIP Benefits System Overview
+// VIP Benefits System Overview (2026最新版)
 function renderVIPOverview() {
   return `
     <div class="vip-section">
-      <div class="vip-section-title">👑 增值服务权益体系</div>
+      <div class="vip-section-title">👑 增值服务权益体系（2026版）</div>
 
-      <!-- 新华瑞 -->
+      <!-- 核心速查 -->
+      <div class="vip-info-card" style="background:linear-gradient(135deg,#FEF3C7 0%,#FDE68A 100%);border-color:#F59E0B;">
+        <h4>⚡ 一句话记住规则</h4>
+        <p><b>新华瑞</b> → 限本人，每年1次，<span style="color:#D97706;font-weight:600;">四星五星享爱康国宾体检</span></p>
+        <p><b>新华尊</b> → 可绑定家人扫码共享，体检走<span style="color:#D97706;font-weight:600;">瑞慈</span>（黑钻额外+三甲）</p>
+        <p style="margin-top:4px;"><b>权益终身有效</b> → 只要现金价值＞当年标保即可</p>
+      </div>
+
+      <!-- 新华瑞 星级对照 -->
       <div class="vip-info-card">
-        <h4>🏥 新华瑞 · 基础体检权益</h4>
-        <p>一星到五星，对应总保费<span class="highlight">10万 ~ 300万</span></p>
-        <p>四星/五星：爱康国宾体检，限本人使用，每年1次</p>
-        <p style="margin-top:6px;"><span class="highlight">权益终身有效</span>，只要现金价值大于当年对应的标保即可</p>
+        <h4>⭐ 新华瑞 · 2026年星级对照表</h4>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px;text-align:center;">
+          <div style="background:#F1F5F9;border-radius:8px;padding:8px 4px;">
+            <div style="font-size:18px;">★</div><div style="font-size:11px;font-weight:600;color:#64748B;">一星</div>
+            <div style="font-size:10px;color:#94A3B8;margin-top:2px;">1~5万</div>
+          </div>
+          <div style="background:#F1F5F9;border-radius:8px;padding:8px 4px;">
+            <div style="font-size:18px;">★★</div><div style="font-size:11px;font-weight:600;color:#64748B;">二星</div>
+            <div style="font-size:10px;color:#94A3B8;margin-top:2px;">5~10万</div>
+          </div>
+          <div style="background:#F1F5F9;border-radius:8px;padding:8px 4px;">
+            <div style="font-size:18px;">★★★</div><div style="font-size:11px;font-weight:600;color:#64748B;">三星</div>
+            <div style="font-size:10px;color:#94A3B8;margin-top:2px;">10~20万</div>
+          </div>
+          <div style="background:#DBEAFE;border-radius:8px;padding:8px 4px;border:1.5px solid #3B82F6;">
+            <div style="font-size:18px;">★★★★</div><div style="font-size:11px;font-weight:700;color:#2563EB;">四星</div>
+            <div style="font-size:10px;color:#3B82F6;margin-top:2px;font-weight:600;">20~30万</div>
+          </div>
+          <div style="background:#DBEAFE;border-radius:8px;padding:8px 4px;border:1.5px solid #2563EB;">
+            <div style="font-size:18px;">★★★★★</div><div style="font-size:11px;font-weight:700;color:#1D4ED8;">五星</div>
+            <div style="font-size:10px;color:#1D4ED8;margin-top:2px;font-weight:600;">30万+</div>
+          </div>
+        </div>
+        <p style="margin-top:8px;font-size:11px;color:#64748B;">📌 四星/五星 = 爱康国宾体检（每年1次·限本人·终身有效）</p>
       </div>
 
-      <div class="vip-tier-card" style="--tier-color:#94A3B8;">
-        <div class="vip-tier-header">
-          <div class="vip-tier-name">⭐ 新华瑞 四星</div>
-          <div class="vip-tier-badge">总保费100万</div>
-        </div>
-        <div class="vip-tier-range">总保费 ≥ 100万</div>
-        <div class="vip-tier-benefits">
-          <span class="vip-benefit-tag">爱康国宾体检</span>
-          <span class="vip-benefit-tag">限本人</span>
-          <span class="vip-benefit-tag">每年1次</span>
-          <span class="vip-benefit-tag">终身有效</span>
-        </div>
-      </div>
-
-      <div class="vip-tier-card" style="--tier-color:#64748B;">
-        <div class="vip-tier-header">
-          <div class="vip-tier-name">⭐⭐⭐⭐⭐ 新华瑞 五星</div>
-          <div class="vip-tier-badge">总保费300万</div>
-        </div>
-        <div class="vip-tier-range">总保费 ≥ 300万</div>
-        <div class="vip-tier-benefits">
-          <span class="vip-benefit-tag">爱康国宾体检</span>
-          <span class="vip-benefit-tag">限本人</span>
-          <span class="vip-benefit-tag">每年1次</span>
-          <span class="vip-benefit-tag">终身有效</span>
-        </div>
-      </div>
-
-      <div class="vip-divider"></div>
-
-      <!-- 新华尊 -->
+      <!-- 新华尊 钻级对照 -->
       <div class="vip-info-card" style="background:linear-gradient(135deg,#FFF7ED 0%,#FFEDD5 100%);border-color:#FED7AA;">
-        <h4>💎 新华尊 · VIP增值服务</h4>
-        <p>可<span class="highlight" style="color:#EA580C;">绑定家人，扫码共享权益</span></p>
-        <p>含健康管理 + 财税法家办 + 商旅贵宾三大服务板块</p>
-      </div>
-
-      <div class="vip-tier-card" style="--tier-color:#A78BFA;">
-        <div class="vip-tier-header">
-          <div class="vip-tier-name">💎 新钻</div>
-          <div class="vip-tier-badge">总保费500万</div>
+        <h4>💎 新华尊 · 2026年钻级对照表</h4>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
+          <div style="background:#fff;border-radius:10px;padding:12px 8px;text-align:center;border:2px solid #A78BFA;box-shadow:0 2px 8px rgba(167,139,250,0.15);">
+            <div style="font-size:22px;">💎</div>
+            <div style="font-size:14px;font-weight:700;color:#7C3AED;margin:4px 0;">新钻</div>
+            <div style="font-size:10px;background:#EDE9FE;color:#7C3AED;padding:3px 6px;border-radius:4px;display:inline-block;font-weight:600;">500~1000万</div>
+            <div style="font-size:10px;color:#94A3B8;margin-top:4px;">或年交≥100万</div>
+            <div style="margin-top:6px;"><span class="vip-benefit-tag" style="font-size:10px;">瑞慈一档</span></div>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:12px 8px;text-align:center;border:2px solid #3B82F6;box-shadow:0 2px 8px rgba(59,130,246,0.15);">
+            <div style="font-size:22px;">💠</div>
+            <div style="font-size:14px;font-weight:700;color:#2563EB;margin:4px 0;">蓝钻</div>
+            <div style="font-size:10px;background:#DBEAFE;color:#2563EB;padding:3px 6px;border-radius:4px;display:inline-block;font-weight:600;">1000~2000万</div>
+            <div style="margin-top:6px;"><span class="vip-benefit-tag" style="font-size:10px;">瑞慈二档</span></div>
+          </div>
+          <div style="background:#1E293B;border-radius:10px;padding:12px 8px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.2);">
+            <div style="font-size:22px;">🖤</div>
+            <div style="font-size:14px;font-weight:700;color:#F8FAFC;margin:4px 0;">黑钻</div>
+            <div style="font-size:10px;background:#334155;color:#F1F5F9;padding:3px 6px;border-radius:4px;display:inline-block;font-weight:600;">2000万+</div>
+            <div style="margin-top:6px;"><span class="vip-benefit-tag" style="font-size:10px;background:#334155;color:#F8FAFC;">瑞慈三档+三甲</span></div>
+          </div>
         </div>
-        <div class="vip-tier-range">首年保费100万 或 总保费500万</div>
-        <div class="vip-tier-benefits">
-          <span class="vip-benefit-tag">瑞慈一档体检</span>
-          <span class="vip-benefit-tag">健康管理全套</span>
-          <span class="vip-benefit-tag">财税法咨询</span>
-          <span class="vip-benefit-tag">商旅贵宾</span>
-        </div>
-        <div class="vip-note">
-          💡 100万×3年客户可享<span style="color:#7C3AED;font-weight:600;">4年新华尊新钻体检</span>，之后转为新华瑞五星体检
-        </div>
-      </div>
-
-      <div class="vip-tier-card" style="--tier-color:#3B82F6;">
-        <div class="vip-tier-header">
-          <div class="vip-tier-name">💎 蓝钻</div>
-          <div class="vip-tier-badge">总保费1000万</div>
-        </div>
-        <div class="vip-tier-range">总保费 500万 ~ 1000万</div>
-        <div class="vip-tier-benefits">
-          <span class="vip-benefit-tag">瑞慈二档体检</span>
-          <span class="vip-benefit-tag">健康管理全套</span>
-          <span class="vip-benefit-tag">财税法咨询</span>
-          <span class="vip-benefit-tag">商旅贵宾</span>
-        </div>
-      </div>
-
-      <div class="vip-tier-card" style="--tier-color:#1E293B;">
-        <div class="vip-tier-header">
-          <div class="vip-tier-name">💎 黑钻</div>
-          <div class="vip-tier-badge">总保费2000万+</div>
-        </div>
-        <div class="vip-tier-range">总保费 ≥ 2000万</div>
-        <div class="vip-tier-benefits">
-          <span class="vip-benefit-tag">瑞慈三档体检</span>
-          <span class="vip-benefit-tag">三甲医院体检</span>
-          <span class="vip-benefit-tag">国际就医协助</span>
-          <span class="vip-benefit-tag">私享律师</span>
-          <span class="vip-benefit-tag">全部VIP服务</span>
+        <div class="vip-note" style="margin-top:10px;background:#FEF3C7;border-color:#F59E0B;">
+          💡 <b>100万×3年客户</b> → 可享<b>4年新华尊新钻体检</b>，第5年起转为<b>新华瑞五星体检</b>
         </div>
       </div>
 
       <div class="vip-divider"></div>
 
-      <!-- 服务内容 -->
-      <div class="vip-info-card">
-        <h4>📋 新华尊服务内容</h4>
-        <p>🏥 <span class="highlight">健康管理</span>：健康体检、评估改善、视频问诊（24小时在线医生）、就医协助（一对一陪诊）、速通服务（检查/手术/住院）、专家会诊、国际就医协助、疫苗预约</p>
-        <p style="margin-top:6px;">⚖️ <span class="highlight">财税法家办</span>：日常财税咨询、日常法律咨询、私享律师</p>
-        <p style="margin-top:4px;font-size:11px;color:var(--text-light);">合作律所：中伦律师事务所、君泽君律师事务所</p>
-        <p style="margin-top:6px;">✈️ <span class="highlight">商旅贵宾</span>：国内高铁贵宾室、国内机场贵宾室、国际机场贵宾室</p>
+      <!-- 官方完整权益表 图片链接 -->
+      <div class="vip-info-card" style="background:linear-gradient(135deg,#F0FDF4 0%,#DCFCE7 100%);border-color:#86EFAC;">
+        <h4>📊 2026年官方完整权益表</h4>
+        <p style="font-size:12px;">点击下方卡片查看官方完整版权益明细表（含所有星级/钻级的全量权益项目）：</p>
       </div>
 
-      <!-- 居家养老 -->
+      <div class="vip-tier-card" style="--tier-color:#16A34A;cursor:pointer;" onclick="window.open('files/增值服务/2026年新华瑞客户权益一览.jpg','_blank')">
+        <div class="vip-tier-header">
+          <div class="vip-tier-name">📋 新华瑞 · 2026年完整权益表</div>
+          <div class="vip-tier-badge" style="background:#16A34A;">点击查看</div>
+        </div>
+        <div class="vip-tier-benefits">
+          <span class="vip-benefit-tag">健康管理</span>
+          <span class="vip-benefit-tag">财税法商</span>
+          <span class="vip-benefit-tag">商旅贵宾</span>
+          <span class="vip-benefit-tag">子女教育NEW</span>
+          <span class="vip-benefit-tag">亲子乐园NEW</span>
+          <span class="vip-benefit-tag">居家养老</span>
+          <span class="vip-benefit-tag">康养生态</span>
+          <span class="vip-benefit-tag">深圳专属</span>
+        </div>
+      </div>
+
+      <div class="vip-tier-card" style="--tier-color:#EA580C;cursor:pointer;" onclick="window.open('files/增值服务/2026年新华尊客户权益一览.jpg','_blank')">
+        <div class="vip-tier-header">
+          <div class="vip-tier-name">📋 新华尊 · 2026年完整权益表</div>
+          <div class="vip-tier-badge" style="background:#EA580C;">点击查看</div>
+        </div>
+        <div class="vip-tier-benefits">
+          <span class="vip-benefit-tag">视频医生</span>
+          <span class="vip-benefit-tag">检查/住院/手术速通</span>
+          <span class="vip-benefit-tag">就医协助</span>
+          <span class="vip-benefit-tag">专家会诊</span>
+          <span class="vip-benefit-tag">私享律师</span>
+          <span class="vip-benefit-tag">贵宾厅</span>
+          <span class="vip-benefit-tag">财税咨询</span>
+        </div>
+      </div>
+
+      <div class="vip-divider"></div>
+
+      <!-- 使用指南 -->
+      <div class="vip-info-card" style="background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%);border-color:#93C5FD;">
+        <h4>📱 新华尊小程序使用指南</h4>
+        <p><b>步骤：</b>微信搜索「新华尊」小程序 → 进入首页点「激活权益」→ 实名认证 → 查看并预约专属权益</p>
+        <p style="margin-top:4px;font-size:11px;color:#64748B;">✅ 可绑定家人共享权益 | ✅ 无需下载APP | ✅ 微信内直接使用</p>
+      </div>
+
+      <!-- 服务内容摘要 -->
+      <div class="vip-info-card">
+        <h4>📦 服务内容总览</h4>
+        <p>🏥 <span class="highlight">健康管理</span>：健康体检（爱康国宾/瑞慈/三甲）、视频问诊、检查/住院/手术速通、就医协助、专家会诊（国内+国际）、心理评估改善</p>
+        <p style="margin-top:6px;">⚖️ <span class="highlight">财税法商</span>：财税咨询、法律咨询、私享律师（合作律所：<b>中伦</b>、<b>君泽君</b>）</p>
+        <p style="margin-top:6px;">✈️ <span class="highlight">商旅贵宾</span>：高铁贵宾室、机场贵宾室（国内+国际）、要客通道</p>
+        <p style="margin-top:6px;">👶 <span class="highlight">子女教育</span><span style="font-size:10px;background:#EF4444;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px;">NEW</span>：海外留学咨询</p>
+        <p style="margin-top:6px;">🏡 <span class="highlight">居家养老</span>：居家照护（3000分护理包可选）、安全监测、适老化改造、上门服务</p>
+      </div>
+
+      <!-- 居家养老详情 -->
       <div class="vip-info-card" style="background:linear-gradient(135deg,#F0FDF4 0%,#DCFCE7 100%);border-color:#86EFAC;">
-        <h4>🏡 居家养老权益</h4>
-        <p>🏠 <span class="highlight" style="color:#16A34A;">居家照护</span>：住院陪护、康复护理、适老化改造</p>
-        <p>🧹 <span class="highlight" style="color:#16A34A;">日常生活</span>：定期保洁、生活协助</p>
-        <p>💊 <span class="highlight" style="color:#16A34A;">健康管理</span>：专业陪诊、理疗按摩、健康监测</p>
-        <p style="margin-top:8px;font-size:11px;">📅 保单犹豫期后次月生效，2年有效</p>
-        <p style="font-size:11px;">📞 专属客服预约：<span class="highlight" style="color:#16A34A;">18926583039</span></p>
+        <h4>🏠 居家养老 · 3000分护理包</h4>
+        <p>保单犹豫期后次月生效，<b>2年有效</b></p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">家政服务 45-50元/时</span>
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">居家照护 50元/时</span>
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">专业陪诊 50元/时</span>
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">住院陪护 300-350元/天</span>
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">简易按摩 90元/次</span>
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">肩颈舒缓理疗 260元/次</span>
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">入户助浴 280元/次</span>
+          <span class="vip-benefit-tag" style="background:#DCFCE7;color:#166534;">适老化改造 自费</span>
+        </div>
+        <p style="margin-top:8px;font-size:11px;">💡 点击下方「居家养老3000分护理包明细」查看完整价格和服务说明</p>
       </div>
 
       <div class="vip-divider"></div>
