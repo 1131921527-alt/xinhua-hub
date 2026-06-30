@@ -1,0 +1,340 @@
+{
+  "siteTitle": "新华保险 · 资料库",
+  "siteSubtitle": "随时查 · 随时发",
+  "categories": [
+    {
+      "id": "company-intro",
+      "name": "公司介绍",
+      "icon": "🏢",
+      "items": [
+        {
+          "name": "新华保险公司介绍 2026",
+          "type": "pdf",
+          "description": "2026年最新版公司整体介绍",
+          "url": "files/公司介绍/新华公司介绍2026.pdf"
+        },
+        {
+          "name": "新华在售产品培训",
+          "type": "ppt",
+          "description": "2026年4月在售产品培训材料",
+          "url": "files/公司介绍/2604新华在售产品培训.pptx"
+        }
+      ]
+    },
+    {
+      "id": "product-compare",
+      "name": "产品对比",
+      "icon": "📊",
+      "items": [
+        {
+          "name": "招行在架产品对比分析",
+          "type": "ppt",
+          "description": "招行渠道在架产品横向对比分析",
+          "url": "files/产品对比/招行在架产品对比分析.pptx"
+        },
+        {
+          "name": "招行在架产品对比表",
+          "type": "excel",
+          "description": "招行渠道在架产品对比明细表",
+          "url": "files/产品对比/招行在架产品对比.xlsx"
+        },
+        {
+          "name": "在售产品投保年龄及起售金额",
+          "type": "image",
+          "description": "所有在售产品的投保年龄、起售金额、形态特点汇总表",
+          "url": "files/产品对比/在售产品投保年龄及起售金额.jpg"
+        }
+      ]
+    },
+    {
+      "id": "calculators",
+      "name": "演算器",
+      "icon": "🧮",
+      "items": [
+        {
+          "name": "S12 宏禧来两全保险（分红型）",
+          "type": "excel",
+          "description": "利益演示Excel版，供银行签约使用",
+          "url": "files/演算器/S12宏禧来两全保险（分红型）利益演示excel版（供银行签约使用）N.xlsx"
+        },
+        {
+          "name": "宏泰世家（分红型）",
+          "type": "excel",
+          "description": "新华人寿 宏泰世家演算表",
+          "url": "files/演算器/新华人寿 宏泰世家（分红型）.xlsx"
+        },
+        {
+          "name": "S11 宏御世家终身寿（分红型）",
+          "type": "excel",
+          "description": "演算表 5.20版",
+          "url": "files/演算器/S11宏御世家终身寿（分红型）演算表5.20.xlsx"
+        },
+        {
+          "name": "S24 华彩鎏金年金保险（分红型）",
+          "type": "excel",
+          "description": "利益演示演算表",
+          "url": "files/演算器/S24华彩鎏金年金保险（分红型）利益演示.xlsx"
+        },
+        {
+          "name": "宏愿人生养老年金（分红型）",
+          "type": "excel",
+          "description": "利益演示演算表",
+          "url": "files/演算器/新华宏愿人生养老年金分红型利益演示.xlsx"
+        },
+        {
+          "name": "S06 宏坤人生养老年金险",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/S06 宏坤人生养老年金险演算表.xlsx"
+        },
+        {
+          "name": "福盛世家添翼版",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/福盛世家添翼版.xlsx"
+        },
+        {
+          "name": "G23 恒享人生年金险",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/G23 恒享人生年金险演算表.xlsx"
+        },
+        {
+          "name": "稳得福",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/稳得福演算表.xlsx"
+        },
+        {
+          "name": "S10 宏安世家终身寿险（分红型）",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/S10宏安世家终身寿险（分红型）演算表(6).xls"
+        }
+      ]
+    },
+    {
+      "id": "product-rules",
+      "name": "产品规则",
+      "icon": "📋",
+      "items": [
+        {
+          "name": "荣尊世家减保规则",
+          "type": "ppt",
+          "description": "荣尊世家产品减保规则说明",
+          "url": "files/产品规则/荣尊世家减保规则).pptx"
+        }
+      ]
+    },
+    {
+      "id": "templates",
+      "name": "表单模板",
+      "icon": "📝",
+      "items": [
+        {
+          "name": "新华手工单模板 - 模板1",
+          "type": "image",
+          "description": "手工单模板图片1",
+          "url": "files/手工单模板/手工单模板1.png"
+        },
+        {
+          "name": "新华手工单模板 - 模板2",
+          "type": "image",
+          "description": "手工单模板图片2",
+          "url": "files/手工单模板/手工单模板2.png"
+        },
+        {
+          "name": "新华手工单模板 - 职业分类表",
+          "type": "pdf",
+          "description": "配套职业分类表",
+          "url": "files/手工单模板/职业分类表.pdf"
+        },
+        {
+          "name": "个人客户税收居民身份声明文件【2026新版】",
+          "type": "pdf",
+          "description": "2026新版税收居民身份声明文件",
+          "url": "files/手工单模板/个人客户税收居民身份声明文件【2026新版】.pdf"
+        },
+        {
+          "name": "职业分类表（单独版）",
+          "type": "pdf",
+          "description": "单独职业分类表，方便单独查找使用",
+          "url": "files/手工单模板/职业分类表（单独版）.pdf"
+        }
+      ]
+    },
+    {
+      "id": "contracts",
+      "name": "合同模板",
+      "icon": "📑",
+      "items": [
+        {
+          "name": "S11 宏御世家 合同模板",
+          "type": "pdf",
+          "description": "新华宏御世家终身寿险合同模板",
+          "url": "files/合同模板/S11新华宏御世家合同.pdf"
+        },
+        {
+          "name": "宏泰世家 合同模板",
+          "type": "pdf",
+          "description": "宏泰世家分红型合同模板",
+          "url": "files/合同模板/宏泰合同模板.pdf"
+        },
+        {
+          "name": "华彩鎏金年金保险（分红型）合同模板",
+          "type": "pdf",
+          "description": "华彩鎏金年金保险合同模板",
+          "url": "files/合同模板/华彩鎏金年金保险（分红型）合同模板.pdf"
+        },
+        {
+          "name": "宏愿人生 合同模板",
+          "type": "pdf",
+          "description": "宏愿人生养老年金合同模板",
+          "url": "files/合同模板/宏愿合同模板.pdf"
+        },
+        {
+          "name": "恒享人生 合同模板",
+          "type": "pdf",
+          "description": "恒享人生年金险合同模板",
+          "url": "files/合同模板/恒享人生合同模版.pdf"
+        },
+        {
+          "name": "福盛世家添翼版 合同模板",
+          "type": "pdf",
+          "description": "福盛世家添翼版合同模板",
+          "url": "files/合同模板/福盛添翼版合同模板.pdf"
+        }
+      ]
+    },
+    {
+      "id": "dividend",
+      "name": "分红资料",
+      "icon": "💰",
+      "items": [
+        {
+          "name": "新华保险分红专题汇报",
+          "type": "pdf",
+          "description": "分红型产品专题汇报材料",
+          "url": "files/分红资料/新华保险分红专题汇报fts.pdf"
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "name": "操作流程",
+      "icon": "🔧",
+      "items": [
+        {
+          "name": "已签回执未做回访 - 操作流程图",
+          "type": "image",
+          "description": "已签回执但未做回访的操作流程说明",
+          "url": "files/操作流程/已签回执未做回访操作流程.png"
+        },
+        {
+          "name": "回访专属操作链接",
+          "type": "link",
+          "description": "只做回访的链接（之前的回执回访链接已失效）",
+          "url": "https://weixinplatform.newchinalife.com/6kg6Zk"
+        },
+        {
+          "name": "保单复效操作流程",
+          "type": "link",
+          "description": "扫码进入找到保单复效操作指引",
+          "url": "https://mp.weixin.qq.com/s/wJNPQJLsJ2cL8XzTQbjevQ"
+        },
+        {
+          "name": "复效操作扫码图",
+          "type": "image",
+          "description": "扫码点进去，找到保单复效",
+          "url": "files/操作流程/复效操作扫码.jpg"
+        },
+        {
+          "name": "宏御世家 出单流程图",
+          "type": "image",
+          "description": "宏御世家终身寿险出单完整流程指引",
+          "url": "files/操作流程/宏御世家出单流程图.jpg"
+        },
+        {
+          "name": "宏泰世家 出单流程图",
+          "type": "image",
+          "description": "宏泰世家分红型出单完整流程指引",
+          "url": "files/操作流程/宏泰世家出单流程图.jpg"
+        },
+        {
+          "name": "华彩鎏金 出单流程图",
+          "type": "image",
+          "description": "华彩鎏金年金保险（分红型）出单完整流程指引",
+          "url": "files/操作流程/华彩鎏金出单流程图.jpg"
+        },
+        {
+          "name": "宏愿人生 出单流程图",
+          "type": "image",
+          "description": "宏愿人生养老年金（分红型）出单完整流程指引",
+          "url": "files/操作流程/宏愿人生出单流程图.jpg"
+        },
+        {
+          "name": "恒享人生 出单流程图",
+          "type": "image",
+          "description": "恒享人生年金险出单完整流程指引",
+          "url": "files/操作流程/恒享人生出单流程图.jpg"
+        },
+        {
+          "name": "福盛世家添翼版 出单流程图",
+          "type": "image",
+          "description": "福盛世家添翼版出单完整流程指引",
+          "url": "files/操作流程/福盛世家添翼版出单流程图.jpg"
+        },
+        {
+          "name": "客户获取电子保单和纸质保单的方式",
+          "type": "pdf",
+          "description": "电子保单和纸质保单获取方式说明",
+          "url": "files/操作流程/客户获取电子保单和纸质保单的方式.pdf"
+        }
+      ]
+    },
+    {
+      "id": "retirement",
+      "name": "养老社区",
+      "icon": "🏡",
+      "items": [
+        {
+          "name": "润华松鹤颐养中心 - 介绍",
+          "type": "pdf",
+          "description": "招行全新重点合作养老项目 | 深圳福田下梅林核心区位 | 医养配套完善 | 合作保司总保费满100万锁定入住资格",
+          "url": "files/养老社区/润华松鹤一页通.pdf"
+        },
+        {
+          "name": "公司养老社区价格汇总表",
+          "type": "excel",
+          "description": "各养老社区价格汇总表",
+          "url": "files/养老社区/附件2：公司养老社区价格汇总表(0827).xls"
+        }
+      ]
+    },
+    {
+      "id": "vip-service",
+      "name": "增值服务",
+      "icon": "👑",
+      "items": [
+        {
+          "name": "新华尊服务项目介绍",
+          "type": "pdf",
+          "description": "健康管理 + 财税法家办 + 商旅贵宾 全套VIP服务目录",
+          "url": "files/增值服务/新华尊服务项目介绍.pdf"
+        },
+        {
+          "name": "新华尊瑞慈体检套餐 2025版",
+          "type": "excel",
+          "description": "新钻/蓝钻/黑钻各档位体检项目明细（含男女分类）",
+          "url": "files/增值服务/新华尊瑞慈体检套餐-2025年更新版.xlsx"
+        },
+        {
+          "name": "居家养老权益服务一页通",
+          "type": "pdf",
+          "description": "居家照护 + 日常生活 + 健康管理 三大权益 | 保单犹豫期后次月生效，2年有效",
+          "url": "files/增值服务/居家养老权益服务一页通.pdf"
+        }
+      ]
+    }
+  ]
+}

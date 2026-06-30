@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>新华保险 · 资料库</title>
+<style>
+  :root {
+    --primary: #2563EB;
+    --primary-dark: #1D4ED8;
+    --primary-light: #DBEAFE;
+    --primary-bg: #EFF6FF;
+    --accent: #3B82F6;
+    --bg: #F8FAFC;
+    --card-bg: #FFFFFF;
+    --text: #1E293B;
+    --text-secondary: #64748B;
+    --text-light: #94A3B8;
+    --border: #E2E8F0;
+    --shadow: 0 1px 3px rgba(37,99,235,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-hover: 0 4px 16px rgba(37,99,235,0.12), 0 2px 4px rgba(0,0,0,0.04);
+    --radius: 12px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-bottom: calc(72px + var(--safe-bottom));
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+    color: #fff;
+    padding: 44px 20px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 150px;
+    height: 150px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header-content { position: relative; z-index: 1; }
+  .header h1 { font-size: 21px; font-weight: 700; letter-spacing: 0.5px; }
+  .header p { font-size: 12px; opacity: 0.8; margin-top: 3px; }
+
+  /* Search */
+  .search-wrap {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+    padding: 0 20px 16px;
+    margin-top: -20px;
+    position: relative;
+    z-index: 2;
+  }
+  .search-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .search-box svg { flex-shrink: 0; color: var(--text-light); }
+  .search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    width: 100%;
+    color: var(--text);
+  }
+  .search-box input::placeholder { color: #CBD5E1; }
+
+  /* Category Tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    padding: 14px 16px 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: var(--bg);
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 7px 16px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    user-select: none;
+  }
+  .tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+  }
+  .tab:active { transform: scale(0.95); }
+
+  /* Content */
+  .content { padding: 8px 16px 20px; }
+
+  .category-section { margin-bottom: 20px; }
+  .category-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-left: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .category-title .count {
+    font-size: 11px;
+    color: var(--primary);
+    font-weight: 600;
+    background: var(--primary-bg);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+    cursor: pointer;
+    border: 1px solid var(--border);
+  }
+  .card:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .icon-pdf    { background: #FEF2F2; }
+  .icon-ppt    { background: #FFF7ED; }
+  .icon-excel  { background: #F0FDF4; }
+  .icon-link   { background: #EFF6FF; }
+  .icon-image  { background: #FDF4FF; }
+  .icon-video  { background: #FFF1F2; }
+  .icon-default{ background: #F1F5F9; }
+
+  .card-body { flex: 1; min-width: 0; }
+  .card-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-tag {
+    font-size: 10px;
+    color: var(--text-light);
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 4px;
+    display: inline-block;
+    font-weight: 500;
+  }
+  .card-arrow {
+    flex-shrink: 0;
+    color: var(--text-light);
+  }
+
+  /* Empty state */
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+  }
+  .empty-icon { font-size: 44px; margin-bottom: 10px; }
+  .empty p { font-size: 14px; }
+
+  /* No results */
+  .no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    display: none;
+  }
+
+  /* Footer */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    padding: 8px 20px calc(8px + var(--safe-bottom));
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    z-index: 100;
+  }
+  .footer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 10px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.2s;
+    user-select: none;
+  }
+  .footer-item.active { color: var(--primary); }
+  .footer-item svg { width: 22px; height: 22px; }
+  .footer-item:active { transform: scale(0.9); }
+
+  /* Loading */
+  .loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+
+  /* Back to top */
+  .back-top {
+    position: fixed;
+    bottom: 84px;
+    right: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 50;
+    border: 1px solid var(--border);
+  }
+  .back-top.show { opacity: 1; }
+  .back-top:active { transform: scale(0.9); }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(30,41,59,0.9);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 200;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    text-align: center;
+    padding: 16px 20px 8px;
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+  .disclaimer .badge {
+    display: inline-block;
+    background: var(--primary-bg);
+    color: var(--primary);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    body { max-width: 640px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.05); min-height: 100vh; }
+  }
+
+  /* ===== VIP Benefits System ===== */
+  .vip-section {
+    margin-bottom: 20px;
+  }
+  .vip-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    padding-left: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .vip-tier-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--tier-color, var(--primary));
+    transition: all 0.2s;
+  }
+  .vip-tier-card:active { transform: scale(0.98); }
+  .vip-tier-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .vip-tier-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .vip-tier-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    color: #fff;
+    background: var(--tier-color, var(--primary));
+  }
+  .vip-tier-range {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .vip-tier-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .vip-benefit-tag {
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: var(--bg);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .vip-note {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #FFF7ED;
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .vip-info-card {
+    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border: 1px solid #BFDBFE;
+  }
+  .vip-info-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .vip-info-card p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .vip-info-card .highlight {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .vip-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0;
+  }
+
+  /* Password Gate */
+  .pw-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+  .pw-overlay::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 250px;
+    height: 250px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .pw-overlay::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 180px;
+    height: 180px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .pw-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px 28px;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .pw-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--primary-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+  }
+  .pw-card h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .pw-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .pw-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .pw-input:focus { border-color: var(--primary); }
+  .pw-input.shake {
+    animation: shake 0.4s;
+    border-color: #EF4444;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+  .pw-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.2s;
+  }
+  .pw-btn:active { transform: scale(0.97); background: var(--primary-dark); }
+  .pw-hint {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-card">
+    <div class="pw-icon">🔐</div>
+    <h2>新华保险 · 资料库<br><span style="font-size:12px;font-weight:400;color:var(--text-secondary);">Made by 王铭泽</span></h2>
+    <p>请输入今日访问密码</p>
+    <input type="text" class="pw-input" id="pwInput" placeholder="输入密码" autocomplete="off">
+    <button class="pw-btn" onclick="checkPassword()">进 入</button>
+    <div class="pw-hint">仅限内部使用</div>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-content">
+    <h1>新华保险 · 资料库<span style="font-size:12px;font-weight:400;opacity:0.7;margin-left:6px;">Made by 王铭泽</span></h1>
+    <p>随时查 · 随时发</p>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="搜索资料名称…">
+  </div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="content" id="content">
+  <div class="loading">加载中…</div>
+</div>
+
+<div class="no-results" id="noResults">
+  没有找到相关资料
+</div>
+
+<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="footer">
+  <div class="footer-item active" onclick="showAll()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span>全部</span>
+  </div>
+  <div class="footer-item" onclick="document.getElementById('search').focus()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>搜索</span>
+  </div>
+  <div class="footer-item" onclick="shareSite()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg>
+    <span>分享</span>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <span class="badge">声明</span><br>
+  仅用于资料查询 · 个人制作 · 仅供参考
+</div>
+
+<script>
+// ===== Password System =====
+const SITE_PASSWORD = '0225';
+
+function getTodayKey() {
+  const now = new Date();
+  return 'pw_' + now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate();
+}
+
+function checkPassword() {
+  const input = document.getElementById('pwInput');
+  const val = input.value.trim();
+  
+  if (val === SITE_PASSWORD) {
+    localStorage.setItem(getTodayKey(), '1');
+    document.getElementById('pwOverlay').style.display = 'none';
+  } else {
+    input.classList.add('shake');
+    setTimeout(() => input.classList.remove('shake'), 400);
+    input.value = '';
+    input.placeholder = '密码错误，重新输入';
+  }
+}
+
+// Enter key support
+document.addEventListener('DOMContentLoaded', function() {
+  const pwInput = document.getElementById('pwInput');
+  if (pwInput) {
+    pwInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkPassword();
+    });
+  }
+  
+  // Check if already authenticated today
+  if (localStorage.getItem(getTodayKey()) === '1') {
+    document.getElementById('pwOverlay').style.display = 'none';
+  }
+});
+
+let DATA = null;
+let activeCategory = 'all';
+
+const TYPE_CONFIG = {
+  pdf:    { icon: '📄', label: 'PDF',   class: 'icon-pdf' },
+  ppt:    { icon: '📊', label: 'PPT',   class: 'icon-ppt' },
+  excel:  { icon: '📗', label: 'Excel', class: 'icon-excel' },
+  link:   { icon: '🔗', label: '链接',  class: 'icon-link' },
+  image:  { icon: '🖼️', label: '图片',  class: 'icon-image' },
+  video:  { icon: '🎬', label: '视频',  class: 'icon-video' },
+  default:{ icon: '📁', label: '文件',  class: 'icon-default' }
+};
+
+function getTypeConfig(type) {
+  const t = (type || '').toLowerCase();
+  if (t.includes('pdf')) return TYPE_CONFIG.pdf;
+  if (t.includes('ppt') || t.includes('pptx')) return TYPE_CONFIG.ppt;
+  if (t.includes('excel') || t.includes('xls') || t.includes('xlsx')) return TYPE_CONFIG.excel;
+  if (t.includes('link') || t.includes('url') || t.startsWith('http')) return TYPE_CONFIG.link;
+  if (t.includes('image') || t.includes('img') || t.includes('png') || t.includes('jpg') || t.includes('jpeg')) return TYPE_CONFIG.image;
+  if (t.includes('video') || t.includes('mp4')) return TYPE_CONFIG.video;
+  return TYPE_CONFIG.default;
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+async function loadData() {
+  try {
+    const res = await fetch('data.json');
+    DATA = await res.json();
+    renderTabs();
+    renderContent();
+  } catch (e) {
+    document.getElementById('content').innerHTML = '<div class="empty"><div class="empty-icon">⚠️</div><p>数据加载失败，请刷新重试</p></div>';
+  }
+}
+
+function renderTabs() {
+  const tabs = document.getElementById('tabs');
+  let html = `<div class="tab active" data-cat="all" onclick="selectCategory('all')">全部</div>`;
+  DATA.categories.forEach(cat => {
+    const count = (cat.items || []).length;
+    html += `<div class="tab" data-cat="${cat.id}" onclick="selectCategory('${cat.id}')">${cat.icon} ${cat.name}</div>`;
+  });
+  tabs.innerHTML = html;
+}
+
+function selectCategory(catId) {
+  activeCategory = catId;
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.cat === catId);
+  });
+  renderContent();
+  document.getElementById('search').value = '';
+  document.getElementById('noResults').style.display = 'none';
+  document.querySelectorAll('.footer-item').forEach(f => f.classList.remove('active'));
+  if (catId === 'all') document.querySelectorAll('.footer-item')[0].classList.add('active');
+}
+
+function showAll() {
+  selectCategory('all');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function renderContent(query) {
+  const content = document.getElementById('content');
+  const noResults = document.getElementById('noResults');
+  
+  if (!DATA) return;
+  
+  let categories = DATA.categories;
+  if (activeCategory !== 'all') {
+    categories = categories.filter(c => c.id === activeCategory);
+  }
+  
+  let html = '';
+  let totalItems = 0;
+  
+  // VIP Benefits System overview (only for vip-service category)
+  if (activeCategory === 'vip-service' && !query) {
+    html += renderVIPOverview();
+  }
+  
+  categories.forEach(cat => {
+    let items = cat.items || [];
+    
+    if (query) {
+      const q = query.toLowerCase();
+      items = items.filter(item => 
+        item.name.toLowerCase().includes(q) || 
+        (item.description || '').toLowerCase().includes(q)
+      );
+    }
+    
+    if (items.length === 0) return;
+    
+    totalItems += items.length;
+    
+    html += `<div class="category-section">`;
+    html += `<div class="category-title">${cat.icon} ${cat.name} <span class="count">${items.length}</span></div>`;
+    
+    items.forEach(item => {
+      const tc = getTypeConfig(item.type);
+      const onclick = `window.open('${item.url}', '_blank')`;
+      
+      html += `
+        <div class="card" onclick="${onclick}">
+          <div class="card-icon ${tc.class}">${tc.icon}</div>
+          <div class="card-body">
+            <div class="card-name">${item.name}</div>
+            ${item.description ? `<div class="card-desc">${item.description}</div>` : ''}
+            <span class="card-tag">${tc.label}</span>
+          </div>
+          <div class="card-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </div>
+      `;
+    });
+    
+    html += `</div>`;
+  });
+  
+  if (totalItems === 0) {
+    content.innerHTML = '';
+    noResults.style.display = 'block';
+  } else {
+    content.innerHTML = html;
+    noResults.style.display = 'none';
+  }
+}
+
+// Search
+let searchTimer;
+document.getElementById('search').addEventListener('input', function(e) {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const val = e.target.value.trim();
+    if (val) {
+      activeCategory = 'all';
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.cat === 'all');
+      });
+      renderContent(val);
+    } else {
+      renderContent();
+    }
+  }, 200);
+});
+
+// VIP Benefits System Overview
+function renderVIPOverview() {
+  return `
+    <div class="vip-section">
+      <div class="vip-section-title">👑 增值服务权益体系</div>
+
+      <!-- 新华瑞 -->
+      <div class="vip-info-card">
+        <h4>🏥 新华瑞 · 基础体检权益</h4>
+        <p>一星到五星，对应总保费<span class="highlight">10万 ~ 300万</span></p>
+        <p>四星/五星：爱康国宾体检，限本人使用，每年1次</p>
+        <p style="margin-top:6px;"><span class="highlight">权益终身有效</span>，只要现金价值大于当年对应的标保即可</p>
+      </div>
+
+      <div class="vip-tier-card" style="--tier-color:#94A3B8;">
+        <div class="vip-tier-header">
+          <div class="vip-tier-name">⭐ 新华瑞 四星</div>
+          <div class="vip-tier-badge">总保费100万</div>
+        </div>
+        <div class="vip-tier-range">总保费 ≥ 100万</div>
+        <div class="vip-tier-benefits">
+          <span class="vip-benefit-tag">爱康国宾体检</span>
+          <span class="vip-benefit-tag">限本人</span>
+          <span class="vip-benefit-tag">每年1次</span>
+          <span class="vip-benefit-tag">终身有效</span>
+        </div>
+      </div>
+
+      <div class="vip-tier-card" style="--tier-color:#64748B;">
+        <div class="vip-tier-header">
+          <div class="vip-tier-name">⭐⭐⭐⭐⭐ 新华瑞 五星</div>
+          <div class="vip-tier-badge">总保费300万</div>
+        </div>
+        <div class="vip-tier-range">总保费 ≥ 300万</div>
+        <div class="vip-tier-benefits">
+          <span class="vip-benefit-tag">爱康国宾体检</span>
+          <span class="vip-benefit-tag">限本人</span>
+          <span class="vip-benefit-tag">每年1次</span>
+          <span class="vip-benefit-tag">终身有效</span>
+        </div>
+      </div>
+
+      <div class="vip-divider"></div>
+
+      <!-- 新华尊 -->
+      <div class="vip-info-card" style="background:linear-gradient(135deg,#FFF7ED 0%,#FFEDD5 100%);border-color:#FED7AA;">
+        <h4>💎 新华尊 · VIP增值服务</h4>
+        <p>可<span class="highlight" style="color:#EA580C;">绑定家人，扫码共享权益</span></p>
+        <p>含健康管理 + 财税法家办 + 商旅贵宾三大服务板块</p>
+      </div>
+
+      <div class="vip-tier-card" style="--tier-color:#A78BFA;">
+        <div class="vip-tier-header">
+          <div class="vip-tier-name">💎 新钻</div>
+          <div class="vip-tier-badge">总保费500万</div>
+        </div>
+        <div class="vip-tier-range">首年保费100万 或 总保费500万</div>
+        <div class="vip-tier-benefits">
+          <span class="vip-benefit-tag">瑞慈一档体检</span>
+          <span class="vip-benefit-tag">健康管理全套</span>
+          <span class="vip-benefit-tag">财税法咨询</span>
+          <span class="vip-benefit-tag">商旅贵宾</span>
+        </div>
+        <div class="vip-note">
+          💡 100万×3年客户可享<span style="color:#7C3AED;font-weight:600;">4年新华尊新钻体检</span>，之后转为新华瑞五星体检
+        </div>
+      </div>
+
+      <div class="vip-tier-card" style="--tier-color:#3B82F6;">
+        <div class="vip-tier-header">
+          <div class="vip-tier-name">💎 蓝钻</div>
+          <div class="vip-tier-badge">总保费1000万</div>
+        </div>
+        <div class="vip-tier-range">总保费 500万 ~ 1000万</div>
+        <div class="vip-tier-benefits">
+          <span class="vip-benefit-tag">瑞慈二档体检</span>
+          <span class="vip-benefit-tag">健康管理全套</span>
+          <span class="vip-benefit-tag">财税法咨询</span>
+          <span class="vip-benefit-tag">商旅贵宾</span>
+        </div>
+      </div>
+
+      <div class="vip-tier-card" style="--tier-color:#1E293B;">
+        <div class="vip-tier-header">
+          <div class="vip-tier-name">💎 黑钻</div>
+          <div class="vip-tier-badge">总保费2000万+</div>
+        </div>
+        <div class="vip-tier-range">总保费 ≥ 2000万</div>
+        <div class="vip-tier-benefits">
+          <span class="vip-benefit-tag">瑞慈三档体检</span>
+          <span class="vip-benefit-tag">三甲医院体检</span>
+          <span class="vip-benefit-tag">国际就医协助</span>
+          <span class="vip-benefit-tag">私享律师</span>
+          <span class="vip-benefit-tag">全部VIP服务</span>
+        </div>
+      </div>
+
+      <div class="vip-divider"></div>
+
+      <!-- 服务内容 -->
+      <div class="vip-info-card">
+        <h4>📋 新华尊服务内容</h4>
+        <p>🏥 <span class="highlight">健康管理</span>：健康体检、评估改善、视频问诊（24小时在线医生）、就医协助（一对一陪诊）、速通服务（检查/手术/住院）、专家会诊、国际就医协助、疫苗预约</p>
+        <p style="margin-top:6px;">⚖️ <span class="highlight">财税法家办</span>：日常财税咨询、日常法律咨询、私享律师</p>
+        <p style="margin-top:4px;font-size:11px;color:var(--text-light);">合作律所：中伦律师事务所、君泽君律师事务所</p>
+        <p style="margin-top:6px;">✈️ <span class="highlight">商旅贵宾</span>：国内高铁贵宾室、国内机场贵宾室、国际机场贵宾室</p>
+      </div>
+
+      <!-- 居家养老 -->
+      <div class="vip-info-card" style="background:linear-gradient(135deg,#F0FDF4 0%,#DCFCE7 100%);border-color:#86EFAC;">
+        <h4>🏡 居家养老权益</h4>
+        <p>🏠 <span class="highlight" style="color:#16A34A;">居家照护</span>：住院陪护、康复护理、适老化改造</p>
+        <p>🧹 <span class="highlight" style="color:#16A34A;">日常生活</span>：定期保洁、生活协助</p>
+        <p>💊 <span class="highlight" style="color:#16A34A;">健康管理</span>：专业陪诊、理疗按摩、健康监测</p>
+        <p style="margin-top:8px;font-size:11px;">📅 保单犹豫期后次月生效，2年有效</p>
+        <p style="font-size:11px;">📞 专属客服预约：<span class="highlight" style="color:#16A34A;">18926583039</span></p>
+      </div>
+
+      <div class="vip-divider"></div>
+    </div>
+  `;
+}
+
+// Share
+function shareSite() {  const url = window.location.href;
+  if (navigator.share) {
+    navigator.share({ title: '新华保险 · 资料库', url: url });
+  } else {
+    const input = document.createElement('input');
+    input.value = url;
+    document.body.appendChild(input);
+    input.select();
+    input.setSelectionRange(0, 99999);
+    try {
+      document.execCommand('copy');
+      showToast('链接已复制，可粘贴发送');
+    } catch (e) {
+      showToast('请手动复制地址栏链接');
+    }
+    document.body.removeChild(input);
+  }
+}
+
+// Back to top
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('backTop');
+  if (window.scrollY > 300) {
+    btn.classList.add('show');
+  } else {
+    btn.classList.remove('show');
+  }
+});
+
+// Init
+loadData();
+</script>
+
+</body>
+</html>
