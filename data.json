@@ -196,6 +196,12 @@
           "type": "ppt",
           "description": "荣尊世家产品减保规则说明",
           "url": "files/产品规则/荣尊世家减保规则).pptx"
+        },
+        {
+          "name": "交清增额释义",
+          "type": "image",
+          "description": "交清增额功能规则释义图",
+          "url": "files/产品规则/交清增额释义.png"
         }
       ]
     },
