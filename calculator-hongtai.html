@@ -134,6 +134,56 @@ body {
 .btn-generate:active { transform: scale(0.97); }
 .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; }
 
+/* Company Intro */
+.company-intro {
+  background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  border: 1px solid #BBF7D0;
+}
+.company-intro h3 { font-size: 15px; font-weight: 700; color: #166534; margin-bottom: 10px; }
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 14px;
+}
+.intro-item {
+  font-size: 12.5px;
+  color: #334155;
+  line-height: 1.5;
+}
+
+/* Product Detail */
+.product-detail {
+  background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  border: 1px solid #FED7AA;
+}
+.product-detail h3 { font-size: 15px; font-weight: 700; color: #9A3412; margin-bottom: 8px; }
+.detail-content p { font-size: 14px; color: #1E293B; margin-bottom: 6px; font-weight: 600; }
+.detail-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.detail-content li {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.8;
+  padding-left: 12px;
+  position: relative;
+}
+.detail-content li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #EA580C;
+  font-weight: bold;
+}
+
 /* Product info */
 .product-info {
   background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
@@ -325,17 +375,50 @@ tbody tr:hover { background: #EFF6FF; }
 
 <div class="container">
 
-  <!-- Product Info -->
+  <!-- 公司介绍 -->
+  <div class="company-intro">
+    <h3>🏢 公司介绍</h3>
+    <div class="intro-grid">
+      <div class="intro-item">📅 成立日期：1996年9月</div>
+      <div class="intro-item">🏦 股东构成：中央汇金（持股约31.6%）+ 中国宝武钢铁集团等</div>
+      <div class="intro-item">💰 总资产：超1.78万亿元</div>
+      <div class="intro-item">📈 综合投资收益率：8.5% · 财务收益率：5.7%</div>
+      <div class="intro-item">🏆 国内首家A+H股同步上市保险公司</div>
+      <div class="intro-item">⭐ 连续多年入围财富世界500强、福布斯全球2000强</div>
+      <div class="intro-item">📊 信用评级：惠誉A级（财务实力强劲）· 穆迪A2级</div>
+      <div class="intro-item">🌍 服务网络：覆盖全国1700余家分支机构</div>
+    </div>
+  </div>
+
+  <!-- 产品简介 -->
+  <div class="product-detail">
+    <h3>📋 产品简介</h3>
+    <div class="detail-content">
+      <p><strong>S03 宏泰世家 终身寿险（分红型）</strong></p>
+      <ul>
+        <li><b>投保年龄：</b>出生满30天~69周岁</li>
+        <li><b>交费方式：</b>一次交清 / 3年交 / 5年交 / 10年交（趸交1万起，期交5000元起）</li>
+        <li><b>保险期间：</b>终身</li>
+        <li><b>保障责任：</b>客运航空意外身故/全残额外给付（最高199.875万）、保证身价保险金、预期身价保险金（含红利）</li>
+        <li><b>保额增长：</b>有效保险金额每年按1.75%递增</li>
+        <li><b>红利分配：</b>不低于可分配盈余的70%</li>
+        <li><b>其他权益：</b>保单贷款（现金价值80%）、减保取现、自动垫交、减额交清</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Product Info Highlights -->
   <div class="product-info">
     <h3>产品亮点</h3>
     <div class="highlights">
       <span class="hl-tag">保额1.75%复利</span>
       <span class="hl-tag">分红≥70%盈余</span>
-      <span class="hl-tag">身故全残保障</span>
+      <span class="hl-tag">客运航空意外双倍</span>
       <span class="hl-tag">可减保</span>
       <span class="hl-tag">可贷现价80%</span>
       <span class="hl-tag">定向传承</span>
       <span class="hl-tag">保底+分红</span>
+      <span class="hl-tag">A+H股上市险企</span>
     </div>
   </div>
 
@@ -1030,6 +1113,14 @@ document.getElementById('age').addEventListener('keydown', function(e) {
 
 // Preload data
 loadData();
+
+// 初始化：同步 currentGender 与默认选中按钮
+(function() {
+  const activeBtn = document.querySelector('.gender-btn.active');
+  if (activeBtn) {
+    currentGender = parseInt(activeBtn.dataset.value);
+  }
+})();
 </script>
 
 </body>

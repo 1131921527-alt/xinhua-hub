@@ -497,16 +497,19 @@ async function generate() {
       btn.textContent = '📊 生成利益演示';
       return;
     }
-    if (isNaN(premium) || premium < 1000) {
+    if (isNaN(premium) || premium < 1000 || premium % 1000 !== 0) {
       showError('年交保费最低1,000元，且应为1,000元整数倍');
       btn.disabled = false;
       btn.textContent = '📊 生成利益演示';
       return;
     }
     
-    // Check max age for term
-    const maxAgeMap = { 1: 65, 3: 65, 5: 64, 10: 61 };
-    const maxAge = maxAgeMap[term] || 65;
+    // Check max age for term (女性最大投保年龄高于男性)
+    const maxAgeMap = {
+      0: { 1: 65, 3: 65, 5: 64, 10: 61 },   // 男
+      1: { 1: 69, 3: 69, 5: 68, 10: 64 }    // 女
+    };
+    const maxAge = (maxAgeMap[currentGender] && maxAgeMap[currentGender][term]) || 65;
     if (age > maxAge) {
       showError(`该交费方式最高投保年龄为${maxAge}周岁`);
       btn.disabled = false;
