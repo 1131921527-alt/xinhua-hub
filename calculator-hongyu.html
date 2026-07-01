@@ -43,12 +43,12 @@ body {
   background: rgba(255,255,255,0.05);
   border-radius: 50%;
 }
-.header h1 { font-size:20px; font-weight:700; position:relative; z-index:1; }
-.header p { font-size:12px; opacity:0.75; margin-top:4px; position:relative; z-index:1; }
+.header h1 { font-size:22px; font-weight:700; position:relative; z-index:1; }
+.header p { font-size:13px; opacity:0.75; margin-top:4px; position:relative; z-index:1; }
 .header .back {
   display:inline-flex; align-items:center; gap:4px;
   color: rgba(255,255,255,0.8); text-decoration:none;
-  font-size:13px; margin-bottom:8px; position:relative; z-index:1;
+  font-size:14px; margin-bottom:8px; position:relative; z-index:1;
 }
 .header .back:hover { color: #fff; }
 
@@ -65,7 +65,7 @@ body {
   border: 1px solid var(--border);
 }
 .form-card h3 {
-  font-size: 15px; font-weight: 700;
+  font-size: 16px; font-weight: 700;
   margin-bottom: 16px; color: var(--primary);
   display: flex; align-items: center; gap: 6px;
 }
@@ -77,7 +77,7 @@ body {
 .form-group { display: flex; flex-direction: column; gap: 4px; }
 .form-group.full { grid-column: 1 / -1; }
 .form-group label {
-  font-size: 12px; font-weight: 600; color: var(--text2);
+  font-size: 13px; font-weight: 600; color: var(--text2);
 }
 .form-group input, .form-group select {
   padding: 10px 12px;
@@ -104,7 +104,7 @@ body {
   padding: 10px;
   border: 1.5px solid var(--border);
   border-radius: 8px;
-  font-size: 14px; font-weight: 500;
+  font-size: 15px; font-weight: 500;
   cursor: pointer;
   background: #F8FAFC;
   transition: all 0.2s;
@@ -125,7 +125,7 @@ body {
   color: #fff;
   border: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -142,12 +142,12 @@ body {
   margin-bottom: 16px;
   border: 1px solid #BFDBFE;
 }
-.product-info h3 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+.product-info h3 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
 .product-info .highlights {
   display: flex; flex-wrap: wrap; gap: 4px;
 }
 .product-info .hl-tag {
-  font-size: 11px;
+  font-size: 12px;
   background: #fff;
   color: var(--primary);
   padding: 3px 8px;
@@ -167,7 +167,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text2);
   border: 1px solid var(--border);
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
@@ -190,13 +190,13 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14px;
   min-width: 700px;
 }
 thead th {
   background: #F1F5F9;
   padding: 10px 6px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text2);
   text-align: center;
@@ -229,7 +229,7 @@ tbody tr:hover { background: #EFF6FF; }
   flex: 1;
   padding: 12px;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
@@ -298,7 +298,7 @@ tbody tr:hover { background: #EFF6FF; }
 .disclaimer {
   text-align: center;
   padding: 20px 16px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text3);
   line-height: 1.8;
 }
@@ -676,12 +676,12 @@ function downloadImage() {
       
       // Title
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('新华保险 · 宏御世家终身寿险（分红型）', canvasW / 2, 30);
-      ctx.font = '12px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.fillText('利益演示计划书', canvasW / 2, 52);
-      ctx.font = '10px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.fillText(`—— 数据源自官方演算表5.20 ——`, canvasW / 2, 70);
       
       // Params
@@ -689,7 +689,7 @@ function downloadImage() {
       ctx.fillStyle = '#F1F5F9';
       ctx.fillRect(padding, paramY, canvasW - padding * 2, 32);
       ctx.fillStyle = '#1E293B';
-      ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 14px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(
         `${genderLabel} · ${age}周岁 · ${termLabel} · 保费${premium.toLocaleString()}元`,
@@ -705,7 +705,7 @@ function downloadImage() {
       
       const headers = ['保单年度', '年龄', '当年保险费', '现金价值\n(保证)', '累计红利\n(交清增额)', '生存总利益', '年增值率'];
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       
       let x = tableX + padding / 2;
@@ -745,23 +745,23 @@ function downloadImage() {
           
           if (ci === 0) {
             ctx.fillStyle = '#1E293B';
-            ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 3) {
             ctx.fillStyle = '#1D4ED8';
-            ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 4) {
             ctx.fillStyle = '#16A34A';
-            ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 5) {
             ctx.fillStyle = '#EA580C';
-            ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 6) {
             const v = cell.textContent.trim();
             ctx.fillStyle = v.includes('%') ? '#16A34A' : '#94A3B8';
-            ctx.font = 'bold 11px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else {
             ctx.fillStyle = '#64748B';
-            ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
           }
           
           ctx.textAlign = 'center';
@@ -774,7 +774,7 @@ function downloadImage() {
       
       // Disclaimer
       ctx.fillStyle = '#94A3B8';
-      ctx.font = '9px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('本计划书数据源自官方演算表，仅供参考。具体利益以保险合同条款和正式计划书为准。', canvasW / 2, footerY);
       ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 14);
