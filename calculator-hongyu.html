@@ -1017,6 +1017,14 @@ document.getElementById('age').addEventListener('keydown', function(e) {
 
 // Preload data
 loadData();
+
+// 初始化：同步 currentGender 与默认选中按钮
+(function() {
+  const activeBtn = document.querySelector('.gender-btn.active');
+  if (activeBtn) {
+    currentGender = parseInt(activeBtn.dataset.value);
+  }
+})();
 </script>
 
 </body>
