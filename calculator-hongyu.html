@@ -933,11 +933,24 @@ function downloadImage() {
           ctx.textAlign = 'center';
 
           if (ci === 7 && r.rate === '储备期') {
-            // 储备期合并居中：只在第一行绘制，垂直居中
+            // 储备期合并居中：竖排逐字绘制
             if (idx === 0 || dlRows[idx - 1].rate !== '储备期') {
               let rc = 0;
               for (let j = idx; j < dlRows.length && dlRows[j].rate === '储备期'; j++) rc++;
-              ctx.fillText('储备期', cellX, y + (rc * rowH) / 2 + 6);
+              const text = '储备期';
+              const charSize = 18;
+              const totalTextH = text.length * charSize;
+              const blockH = rc * rowH;
+              const startY = y + (blockH - totalTextH) / 2 + charSize * 0.7;
+              ctx.save();
+              ctx.fillStyle = '#94A3B8';
+              ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              for (let k = 0; k < text.length; k++) {
+                ctx.fillText(text[k], cellX, startY + k * charSize);
+              }
+              ctx.restore();
             }
           } else {
             ctx.fillText(String(cv.t), cellX, y + rowH / 2 + 6);
@@ -957,31 +970,44 @@ function downloadImage() {
       // ===== 下载 =====
       const filename = `宏御世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
       
-      // 方案1: 优先用 toBlob
+      let blobOk = false;
       if (canvas.toBlob) {
-        canvas.toBlob(blob => {
-          if (blob) {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(() => {
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-            }, 100);
-            showToast('计划书图片已下载');
-            showLoading(false);
-          } else {
-            // blob为null，降级到toDataURL
-            downloadViaDataURL(filename);
-          }
-        }, 'image/png');
+        try {
+          canvas.toBlob(blob => {
+            if (blob) {
+              try {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                  document.body.removeChild(a);
+                  URL.revokeObjectURL(url);
+                }, 200);
+                showToast('计划书图片已下载');
+                showLoading(false);
+                blobOk = true;
+              } catch(e3) {
+                showImagePreview(canvas, filename);
+              }
+            } else {
+              showImagePreview(canvas, filename);
+            }
+          }, 'image/png');
+        } catch(e4) {
+          showImagePreview(canvas, filename);
+        }
       } else {
-        // 不支持toBlob，直接用toDataURL
         downloadViaDataURL(filename);
       }
+      
+      setTimeout(() => {
+        if (!blobOk) {
+          try { showImagePreview(canvas, filename); } catch(e) {}
+        }
+      }, 3000);
       
       function downloadViaDataURL(fname) {
         try {
@@ -997,7 +1023,31 @@ function downloadImage() {
           showToast('计划书图片已下载');
           showLoading(false);
         } catch(e2) {
-          showError('图片下载失败，请长按截图保存：' + e2.message);
+          showImagePreview(canvas, fname);
+        }
+      }
+      
+      function showImagePreview(cv, fname) {
+        try {
+          const dataURL = cv.toDataURL('image/png');
+          let overlay = document.getElementById('imgPreviewOverlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'imgPreviewOverlay';
+            overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;';
+            overlay.innerHTML = '<div style="color:#fff;font-size:16px;font-weight:600;margin-bottom:12px;">长按图片保存到手机</div><img id="imgPreviewImg" style="max-width:100%;max-height:75vh;border-radius:8px;border:2px solid rgba(255,255,255,0.3);"><div style="margin-top:16px;display:flex;gap:12px;"><a id="imgPreviewDownload" style="padding:10px 24px;background:#2563EB;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">下载图片</a><button id="imgPreviewClose" style="padding:10px 24px;background:#64748B;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">关闭</button></div>';
+            document.body.appendChild(overlay);
+            overlay.querySelector('#imgPreviewClose').onclick = () => { overlay.style.display = 'none'; };
+          }
+          overlay.querySelector('#imgPreviewImg').src = dataURL;
+          const dlLink = overlay.querySelector('#imgPreviewDownload');
+          dlLink.href = dataURL;
+          dlLink.download = fname;
+          overlay.style.display = 'flex';
+          showLoading(false);
+          showToast('长按图片可保存到手机');
+        } catch(e5) {
+          showError('图片生成失败，请截图保存');
           showLoading(false);
         }
       }
