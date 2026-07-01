@@ -115,7 +115,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 
     <!-- 切换查看 -->
     <div class="toggle-bar">
-      <button class="toggle-btn active" onclick="switchTab('rui-img')">📋 权益一览图</button>
+      <button class="toggle-btn active" onclick="switchTab('rui-img', event)">📋 权益一览图</button>
     </div>
     <div class="viewer active" id="tab-rui-img">
       <a href="preview.html?file=files%2F增值服务%2F2026年新华瑞客户权益一览.jpg&title=2026年新华瑞客户权益一览&type=jpg">
@@ -142,11 +142,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 
     <!-- 切换栏 -->
     <div class="toggle-bar">
-      <button class="toggle-btn active" onclick="switchZun('img')">📋 权益一览图</button>
-      <button class="toggle-btn" onclick="switchZun('qr')">📱 小程序二维码</button>
-      <button class="toggle-btn" onclick="switchZun('flow')">🔧 使用流程指引</button>
-      <button class="toggle-btn" onclick="switchZun('service')">📦 服务项目介绍</button>
-      <button class="toggle-btn" onclick="switchZun('exam')">🏥 瑞慈体检套餐</button>
+      <button class="toggle-btn active" onclick="switchZun('img', event)">📋 权益一览图</button>
+      <button class="toggle-btn" onclick="switchZun('qr', event)">📱 小程序二维码</button>
+      <button class="toggle-btn" onclick="switchZun('flow', event)">🔧 使用流程指引</button>
+      <button class="toggle-btn" onclick="switchZun('service', event)">📦 服务项目介绍</button>
+      <button class="toggle-btn" onclick="switchZun('exam', event)">🏥 瑞慈体检套餐</button>
     </div>
 
     <!-- 权益图 -->
@@ -202,8 +202,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
     </div>
 
     <div class="toggle-bar">
-      <button class="toggle-btn active" onclick="switchJujia('detail')">📋 护理包明细</button>
-      <button class="toggle-btn" onclick="switchJujia('guide')">📖 权益一页通PDF</button>
+      <button class="toggle-btn active" onclick="switchJujia('detail', event)">📋 护理包明细</button>
+      <button class="toggle-btn" onclick="switchJujia('guide', event)">📖 权益一页通PDF</button>
     </div>
 
     <div class="viewer active" id="jujia-detail">
@@ -221,27 +221,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 
 <script>
 // 新华尊切换
-function switchZun(tab) {
+function switchZun(tab, e) {
   document.querySelectorAll('[id^="zun-"]').forEach(el => el.classList.remove('active'));
   document.getElementById('zun-' + tab).classList.add('active');
-  event.target.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  var btns = e.currentTarget.parentElement.querySelectorAll('.toggle-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  e.currentTarget.classList.add('active');
 }
 
 // 居家养老切换
-function switchJujia(tab) {
+function switchJujia(tab, e) {
   document.querySelectorAll('[id^="jujia-"]').forEach(el => el.classList.remove('active'));
   document.getElementById('jujia-' + tab).classList.add('active');
-  event.target.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  var btns = e.currentTarget.parentElement.querySelectorAll('.toggle-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  e.currentTarget.classList.add('active');
 }
 
 // 新华瑞切换
-function switchTab(tab) {
+function switchTab(tab, e) {
   document.querySelectorAll('[id^="tab-"]').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  event.target.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  var btns = e.currentTarget.parentElement.querySelectorAll('.toggle-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  e.currentTarget.classList.add('active');
 }
 </script>
 </body>

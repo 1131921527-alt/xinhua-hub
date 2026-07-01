@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="新华保险资料库 - 随时查 · 随时发 | 公司介绍、产品演算器、出单流程、合同模板、增值服务">
+<!-- Open Graph / WeChat Share -->
+<meta property="og:title" content="新华保险 · 资料库">
+<meta property="og:description" content="随时查 · 随时发 | 公司介绍、产品演算器、出单流程、合同模板、增值服务">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://1131921527-alt.github.io">
 <link rel="dns-prefetch" href="https://1131921527-alt.github.io">
 <title>新华保险 · 资料库</title>
@@ -187,6 +193,7 @@
   .icon-ppt    { background: #FFF7ED; }
   .icon-excel  { background: #F0FDF4; }
   .icon-doc    { background: #EFF6FF; }
+  .icon-contract { background: #FEF3C7; }
   .icon-link   { background: #EFF6FF; }
   .icon-image  { background: #FDF4FF; }
   .icon-video  { background: #FFF1F2; }
@@ -729,8 +736,9 @@ window.open = function(url, target, features) {
 
 const TYPE_CONFIG = {
   pdf:    { icon: '📄', label: 'PDF',   class: 'icon-pdf' },
-  ppt:    { icon: '📊', label: 'PPT',   class: 'icon-ppt' },
-  excel:  { icon: '📗', label: 'Excel', class: 'icon-excel' },
+  ppt:    { icon: '📽️', label: 'PPT',   class: 'icon-ppt' },
+  excel:  { icon: '📈', label: 'Excel', class: 'icon-excel' },
+  contract:{ icon: '📜', label: '合同',  class: 'icon-contract' },
   link:   { icon: '🔗', label: '链接',  class: 'icon-link' },
   image:  { icon: '🖼️', label: '图片',  class: 'icon-image' },
   video:  { icon: '🎬', label: '视频',  class: 'icon-video' },
@@ -741,6 +749,7 @@ const TYPE_CONFIG = {
 
 function getTypeConfig(type) {
   const t = (type || '').toLowerCase();
+  if (t.includes('contract')) return TYPE_CONFIG.contract;
   if (t.includes('pdf')) return TYPE_CONFIG.pdf;
   if (t.includes('ppt') || t.includes('pptx')) return TYPE_CONFIG.ppt;
   if (t.includes('excel') || t.includes('xls') || t.includes('xlsx')) return TYPE_CONFIG.excel;
@@ -1048,7 +1057,16 @@ function renderVIPOverview() {
 }
 
 // Share
-function shareSite() {  const url = window.location.href;
+function shareSite() {
+  const url = window.location.href;
+  const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+  
+  if (isWeChat) {
+    // 微信内：引导用户用右上角菜单分享
+    showToast('请点击右上角 ··· 分享给好友');
+    return;
+  }
+  
   if (navigator.share) {
     navigator.share({ title: '新华保险 · 资料库', url: url });
   } else {

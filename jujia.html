@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>居家养老权益服务</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -62,6 +62,19 @@
     border: none;
     display: block;
   }
+  #imgViewer {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #1a1a1a;
+    text-align: center;
+  }
+  #imgViewer img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+    touch-action: pan-x pan-y pinch-zoom;
+  }
   .loading-overlay {
     position: absolute;
     inset: 0;
@@ -119,7 +132,10 @@
     <button class="toggle-btn" id="btnPdf" onclick="showPdf()">📄 权益一页通</button>
   </div>
   <div class="viewer-wrap">
-    <iframe id="imgViewer" src="files/增值服务/居家养老3000分护理包.jpg"></iframe>
+    <iframe id="imgViewer" src="" style="display:none;"></iframe>
+    <div id="imgContainer" style="width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;background:#1a1a1a;text-align:center;">
+      <img id="imgEl" src="" style="max-width:100%;width:100%;height:auto;display:block;touch-action:pan-x pan-y pinch-zoom;" alt="护理包明细">
+    </div>
     <iframe id="pdfViewer" src="" style="display:none;"></iframe>
     <div class="loading-overlay" id="loading">
       <div style="text-align:center">
@@ -133,17 +149,21 @@
     <button class="btn btn-secondary" onclick="openNew()">🌐 新窗口打开</button>
   </div>
 <script>
-const imgView = document.getElementById('imgViewer');
+const imgContainer = document.getElementById('imgContainer');
+const imgEl = document.getElementById('imgEl');
 const pdfView = document.getElementById('pdfViewer');
 const loading = document.getElementById('loading');
 const dlBtn = document.getElementById('dlBtn');
 let currentMode = 'img';
 
-imgView.onload = () => { loading.classList.add('hidden'); };
+// Load image
+imgEl.src = 'files/增值服务/居家养老3000分护理包.jpg';
+imgEl.onload = () => { loading.classList.add('hidden'); };
+imgEl.onerror = () => { loading.classList.add('hidden'); };
 setTimeout(() => loading.classList.add('hidden'), 8000);
 
 function showImg() {
-  imgView.style.display = 'block';
+  imgContainer.style.display = 'block';
   pdfView.style.display = 'none';
   document.getElementById('btnImg').classList.add('active');
   document.getElementById('btnPdf').classList.remove('active');
@@ -152,7 +172,7 @@ function showImg() {
 }
 
 function showPdf() {
-  imgView.style.display = 'none';
+  imgContainer.style.display = 'none';
   pdfView.style.display = 'block';
   document.getElementById('btnPdf').classList.add('active');
   document.getElementById('btnImg').classList.remove('active');
