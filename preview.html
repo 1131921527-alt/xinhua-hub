@@ -7,10 +7,12 @@
 <style>
   :root {
     --primary: #1D4ED8;
+    --primary-light: #2563EB;
     --bg: #F8FAFC;
     --text: #1E293B;
     --text2: #64748B;
     --border: #E2E8F0;
+    --blue-bg: #EFF6FF;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -22,8 +24,10 @@
     flex-direction: column;
     overflow: hidden;
   }
+
+  /* Header */
   .header {
-    background: linear-gradient(135deg, #2563EB, #1D4ED8);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
     color: #fff;
     padding: 12px 16px;
     display: flex;
@@ -31,22 +35,37 @@
     gap: 12px;
     flex-shrink: 0;
   }
-  .header .back {
-    color: rgba(255,255,255,0.9);
-    text-decoration: none;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  .header .back { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 15px; display:flex; align-items:center; gap:4px; }
+  .header h2 { font-size: 15px; font-weight:600; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  /* Toggle bar (for images that have text versions) */
+  .toggle-bar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: none;
+    gap: 8px;
+    flex-shrink: 0;
   }
-  .header h2 {
-    font-size: 16px;
-    font-weight: 600;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .toggle-bar.show { display: flex; }
+  .toggle-btn {
+    padding: 7px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    color: var(--text2);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
   }
+  .toggle-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+
+  /* Viewer area */
   .viewer-wrap {
     flex: 1;
     overflow: hidden;
@@ -57,46 +76,99 @@
     width: 100%;
     height: 100%;
     border: none;
+    display: block;
   }
+  /* Text version container */
+  #textViewer {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* No preview fallback */
   .file-info {
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: var(--text2);
-    display: none;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    text-align: center; color: var(--text2); display: none;
   }
-  .file-info .icon { font-size: 64px; margin-bottom: 12px; }
-  .file-info .msg { font-size: 14px; line-height: 1.6; }
-  .bottom-bar {
-    background: #fff;
-    border-top: 1px solid var(--border);
-    padding: 12px 16px 24px;
+  .file-info .icon { font-size: 56px; margin-bottom: 12px; }
+  .file-info .msg { font-size: 14px; line-height: 1.7; max-width: 280px; }
+  .file-info .size { font-size: 13px; color: var(--text2); margin-top: 8px; opacity: 0.7; }
+
+  /* Loading spinner */
+  .loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.95);
     display: flex;
-    gap: 10px;
-    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: opacity 0.3s;
+  }
+  .loading-overlay.hidden { opacity: 0; pointer-events:none; }
+  .spinner {
+    width: 36px; height: 36px; border: 3px solid #e5e7eb; border-top-color: var(--primary);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { margin-top: 12px; font-size: 13px; color: var(--text2); }
+
+  /* Bottom bar */
+  .bottom-bar {
+    background: #fff; border-top: 1px solid var(--border); padding: 12px 16px 20px;
+    display: flex; gap: 10px; flex-shrink: 0;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
   }
   .btn {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: center;
+    flex: 1; padding: 11px; border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 600; cursor: pointer; text-align: center;
     text-decoration: none;
   }
   .btn-primary {
-    background: linear-gradient(135deg, #2563EB, #1D4ED8);
-    color: #fff;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary)); color: #fff;
   }
   .btn-primary:active { transform: scale(0.97); }
-  .btn-secondary {
-    background: #F1F5F9;
-    color: var(--text);
+  .btn-secondary { background: #F1F5F9; color: var(--text); }
+
+  /* ========== 文字版出单流程样式 ========== */
+  .flow-container { padding: 16px; max-width: 500px; margin: 0 auto; }
+  .flow-title {
+    font-size: 17px; font-weight:700; color: var(--primary); text-align:center;
+    padding: 14px 0 4px; border-bottom: 2px solid var(--primary-light);
+    margin-bottom: 18px;
   }
+  .flow-step {
+    position:relative; padding-left: 44px; margin-bottom: 22px;
+  }
+  .flow-step::before {
+    content:''; position:absolute; left: 14px; top: 28px; bottom: -22px;
+    width: 2px; background: var(--border);
+  }
+  .flow-step:last-child::before { display:none; }
+  .step-num {
+    position:absolute; left:0; top:2px; width:30px; height:30px;
+    background: var(--primary); color:#fff; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700;
+  }
+  .step-title {
+    font-size: 15px; font-weight:600; color: var(--text); margin-bottom: 4px;
+  }
+  .step-desc { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .step-desc ul { margin: 4px 0 0 16px; padding: 0; list-style-type: disc; }
+  .step-desc li { margin: 2px 0; line-height: 1.55; }
+  .step-tip {
+    display:inline-block; background:#FEF3C7; color:#92400E; font-size:11px;
+    padding:2px 7px; border-radius:4px; margin-left:6px; vertical-align:middle;
+  }
+  .flow-footer {
+    text-align:center; margin: 24px 0 40px; padding: 16px;
+    background:var(--blue-bg); border-radius:10px; font-size:13px; color: var(--text2);
+  }
+  .flow-footer strong { color: var(--primary); }
 </style>
 </head>
 <body>
@@ -104,48 +176,228 @@
     <a class="back" href="./">← 返回</a>
     <h2 id="title">文件预览</h2>
   </div>
+
+  <div class="toggle-bar" id="toggleBar">
+    <button class="toggle-btn active" id="btnImgView" onclick="showImage()">📷 图片版</button>
+    <button class="toggle-btn" id="btnTextView" onclick="showText()">📝 文字版</button>
+  </div>
+
   <div class="viewer-wrap">
     <iframe id="viewer" src=""></iframe>
+    <div id="textViewer"></div>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div style="text-align:center">
+        <div class="spinner"></div>
+        <div class="loading-text">正在加载文件...</div>
+      </div>
+    </div>
+
+    <!-- Fallback for non-previewable types -->
     <div class="file-info" id="noPreview">
       <div class="icon" id="typeIcon">📄</div>
-      <div class="msg" id="typeMsg">该文件类型暂不支持在线预览<br>请点击下方按钮下载查看</div>
+      <div class="msg" id="typeMsg"></div>
+      <div class="size" id="fileSize"></div>
     </div>
   </div>
+
   <div class="bottom-bar">
-    <a id="dlBtn" class="btn btn-primary" href="" target="_blank" download>📥 下载文件</a>
-    <button class="btn btn-secondary" onclick="window.open(document.getElementById('viewer').src, '_blank')">🌐 新窗口打开</button>
+    <a id="dlBtn" class="btn btn-primary" href="" download>📥 下载文件</a>
+    <button class="btn btn-secondary" onclick="openInNew()">🌐 新窗口打开</button>
   </div>
 
+  <!-- ========== 文字版出单流程数据 ========== -->
   <script>
-    const params = new URLSearchParams(location.search);
-    const file = decodeURIComponent(params.get('file') || '');
-    const title = decodeURIComponent(params.get('title') || '文件预览');
-    const type = (params.get('type') || '').toLowerCase();
+  // ===== 出单流程文字版内容 =====
+  const FLOW_TEXT_DATA = {
 
-    document.getElementById('title').textContent = title;
-    document.getElementById('dlBtn').href = file;
+    '华彩鎏金出单流程图': `
+      <div class="flow-title">华彩鎏金年金保险（分红型）<br>出单流程 · 招行手机银行</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」APP → 点击顶部搜索框 → 输入产品代码<strong>S24</strong>或产品名称「华彩鎏金年金保险」→ 进入产品详情页</div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-title">选择产品 & 填写被保人信息</div><div class="step-desc"><ul><li>选择「新华华彩鎏金年金保险（分红型）」</li><li>填写被保人：性别、出生日期</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>选择保费金额（最低 ¥5,000 起）</li><li>选择缴费方式：<strong>一次交清 / 年缴 / 3年 / 5年 / 10年</strong></li><li>选择缴费年限</li><li>保险期间至 <strong>105周岁</strong></li></ul></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-title">阅读健康告知 & 免责条款</div><div class="step-desc"><ul><li>仔细阅读《消费者权益保障告知》</li><li>阅读《健康告知》— 确认健康状况符合要求</li><li>阅读《免责条款》《客户声明》</li><li>勾选<span class="step-tip">已全部阅读</span>后点击下一步</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写客户信息</div><div class="step-desc"><ul><li>姓名、证件类型、证件号码</li><li>手机号码、电子邮箱</li><li>通讯地址、邮政编码</li><li>婚姻状态、户籍属性</li><li>证件起始日期</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">6</div><div class="step-title">确认填写正确 → 电子签名</div><div class="step-desc">核对所有信息无误后，点击「确认填写正确」，进行电子签名确认</div></div>
+      <div class="flow-step"><div class="step-num">7</div><div class="step-title">交易确认 & 支付</div><div class="step-desc"><ul><li>核对订单详情（保障内容、保费、缴费方式等）</li><li>输入<strong>招商银行卡密码</strong>完成支付</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">8</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示「投保成功」提示页，可查看订单详情。<span class="step-tip">通常在22:30前投保当日生效</span></div></div>
+      <div class="flow-footer">💡 <strong>温馨提示：</strong>华彩鎏金为年金型分红产品，<br>支持减保领取、保单贷款（最高80%现价）、身故全残保障</div>
+    `,
 
-    const viewer = document.getElementById('viewer');
-    const noPreview = document.getElementById('noPreview');
-    const typeIcon = document.getElementById('typeIcon');
-    const typeMsg = document.getElementById('typeMsg');
+    '宏御世家出单流程图': `
+      <div class="flow-title">宏御世家终身寿险（分红型）<br>出单流程 · 招行手机银行</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」APP → 搜索框输入 <strong>S11</strong> 或「宏御世家终身寿险」→ 进入产品页</div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-title">选择产品 & 填写被保人</div><div class="step-desc"><ul><li>选择「新华宏御世家终身寿险（分红型）」</li><li>填写：性别、出生日期（投保年龄 0~69周岁）</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>年缴保费：<strong>¥20,000 起（1,000元整数倍）</strong></li><li>缴费方式：一次交清 / <strong>3年交</strong> / 5年交 / 10年交</li><li>保险期间：<strong>终身</strong></li></ul></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-title">阅读健康告知 & 条款</div><div class="step-desc"><ul><li>《消费者权益保障告知》</li><li>《健康告知》— 根据实际情况如实填写</li><li>《免责条款》《客户声明》</li><li>点击「已全部阅读，下一步」</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写客户信息</div><div class="step-desc"><ul><li>姓名、证件类型、身份证号</li><li>手机号、邮箱、通讯地址</li><li>婚姻状态、邮编</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">6</div><div class="step-title">电子签名确认</div><div class="step-desc">核对信息 → 「确认填写正确」→ 手写电子签名</div></div>
+      <div class="flow-step"><div class="step-num">7</div><div class="step-title">交易确认 & 支付</div><div class="step-desc"><ul><li>核对：被保人信息、保费、基本保额、缴费期</li><li>输入招行密码完成支付</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">8</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示投保成功页面，可查看保单详情。<span class="step-tip">建议截图保存订单号</span></div></div>
+      <div class="flow-footer">💡 <strong>宏御世家特点：</strong>R2风险等级 · 保额每年递增1.75% · 分红可选现金/累积生息/交清增额<br>🔒 保单贷款可达现金价值80%</div>
+    `,
 
-    const previewTypes = ['pdf', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg', 'html', 'htm', 'txt'];
-    const isPreviewable = previewTypes.includes(type) || previewTypes.some(t => file.toLowerCase().endsWith('.' + t));
+    '宏愿人生出单流程图': `
+      <div class="flow-title">宏愿人生养老年金保险（分红型）<br>出单流程 · 招行手机银行</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>S06</strong> 或「宏愿人生养老年金」→ 选择产品进入</div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc"><ul><li>选择「新华宏愿人生养老年金保险（分红型）」</li><li>填写性别、出生日期</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费金额</li><li>选择缴费方式（趸交/3年/5年/10年/20年交等）</li><li>选择领取年龄（男60/65/70岁，女55/60/65岁）</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款确认</div><div class="step-desc"><ul><li>阅读消费者权益保障告知</li><li>根据健康情况如实填写健康告知</li><li>阅读并确认免责条款与客户声明</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写完整客户资料</div><div class="step-desc"><ul><li>姓名、身份证件信息</li><li>联系方式（手机、邮箱、地址）</li><li>其他必要身份信息</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">6</div><div class="step-title">签名 & 交易确认支付</div><div class="step-desc"><ul><li>电子签名确认</li><li>核对订单详情</li><li>输入招行密码支付</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示成功页面。宏愿人生是养老年金+分红双驱动产品。</div></div>
+      <div class="flow-footer">💡 <strong>宏愿人生特点：</strong>养老年金 + 红利分配 · 多种领取年龄可选<br>🔒 身故/全残保障 + 红利灵活领取</div>
+    `,
 
-    if (isPreviewable) {
-      viewer.src = file;
-      viewer.style.display = 'block';
-      noPreview.style.display = 'none';
-    } else {
-      viewer.style.display = 'none';
-      noPreview.style.display = 'block';
-      const iconMap = {
-        'ppt': '📊', 'pptx': '📊', 'doc': '📝', 'docx': '📝', 'xls': '📈', 'xlsx': '📈', 'zip': '📦', 'rar': '📦'
-      };
-      typeIcon.textContent = iconMap[type] || iconMap[file.split('.').pop().toLowerCase()] || '📄';
-      typeMsg.innerHTML = '该文件类型（' + (type || file.split('.').pop() || '未知') + '）暂不支持在线预览<br>请点击下方按钮下载查看';
+    '宏泰世家出单流程图': `
+      <div class="flow-title">宏泰世家终身寿险（分红型）<br>出单流程 · 招行手机银行</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>宏泰世家</strong> 或产品代码 → 选择进入</div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc">选择「新华宏泰世家（分红型）」→ 填写性别、出生日期</div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费（最低起投金额）</li><li>选择缴费方式（一次交清 / 3年 / 5年 / 10年）</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款</div><div class="step-desc">阅读健康告知、免责条款 → 确认无异常 → 下一步</div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写客户信息 & 签名</div><div class="step-desc">填写姓名、证件、联系方式 → 电子签名确认</div></div>
+      <div class="flow-step"><div class="step-num">6</div><div class="step-title">交易确认 & 支付</div><div class="step-desc">核对订单详情 → 输入招行密码支付</div></div>
+      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示投保成功，可查看保单详情。</div></div>
+      <div class="flow-footer">💡 <strong>宏泰世家：</strong>终身寿险 + 分红 · 财富传承工具<br>🔒 减保灵活 · 可贷现价80%</div>
+    `,
+
+    '恒享人生出单流程图': `
+      <div class="flow-title">恒享人生年金保险（分红型）<br>出单流程 · 招行手机银行</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>G23</strong> 或「恒享人生年金」→ 选择产品</div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc">选择「新华恒享人生年金险（分红型）」→ 填写基本信息</div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费金额</li><li>选择缴费方式</li><li>确认领取方案</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款确认</div><div class="step-desc">阅读各项告知与条款 → 勾选确认</div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-title">客户信息 & 签名</div><div class="step-desc">填写客户资料 → 电子签名</div></div>
+      <div class="flow-step"><div class="step-num">6</div><div class="step-title">交易确认 & 支付</div><div class="step-desc">核对订单 → 招行密码支付</div></div>
+      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示成功页面。</div></div>
+      <div class="flow-footer">💡 <strong>恒享人生：</strong>年金 + 分红 · 灵活领取<br>🔒 生存金 + 红利双重收益</div>
+    `,
+
+    '福盛世家添翼版出单流程图': `
+      <div class="flow-title">福盛世家添翼版终身寿险（分红型）<br>出单流程 · 招行手机银行</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>福盛世家</strong> 或产品代码 → 选择产品</div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc">选择「福盛世家添翼版（分红型）」→ 填写性别、出生日期</div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费</li><li>选择缴费方式（趸交/3年/5年/10年）</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款</div><div class="step-desc">阅读告知与条款 → 确认</div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-title">客户信息 & 签名</div><div class="step-desc">填写资料 → 电子签名</div></div>
+      <div class="flow-step"><div class="step-num">6</div><div class="step-title">交易确认 & 支付</div><div class="step-desc">核对订单 → 密码支付</div></div>
+      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示成功页面。</div></div>
+      <div class="flow-footer">💡 <strong>福盛世家添翼版：</strong>增额终身寿险 + 分红<br>🔒 保额递增 · 减保灵活 · 传承规划</div>
+    `,
+  };
+
+  // ===== 主逻辑 =====
+  const params = new URLSearchParams(location.search);
+  const file = decodeURIComponent(params.get('file') || '');
+  const title = decodeURIComponent(params.get('title') || '文件预览');
+  const type = (params.get('type') || '').toLowerCase();
+
+  document.getElementById('title').textContent = title;
+  document.getElementById('dlBtn').href = file;
+
+  const viewer = document.getElementById('viewer');
+  const textViewer = document.getElementById('textViewer');
+  const noPreview = document.getElementById('noPreview');
+  const toggleBar = document.getElementById('toggleBar');
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const typeIcon = document.getElementById('typeIcon');
+  const typeMsg = document.getElementById('typeMsg');
+  const fileSizeEl = document.getElementById('fileSize');
+
+  // 判断是否有文字版（出单流程图）
+  function hasTextVersion(t) {
+    return FLOW_TEXT_DATA[t] !== undefined;
+  }
+
+  const imgTypes = ['jpg','jpeg','png','gif','webp','bmp','svg'];
+  const pdfTypes = ['pdf'];
+  const noPreviewTypes = ['ppt','pptx','doc','docx','xls','xlsx','zip','rar'];
+  const ext = file.split('.').pop().toLowerCase();
+  const isImg = imgTypes.includes(ext) || imgTypes.includes(type);
+  const isPdf = pdfTypes.includes(ext) || type === 'pdf';
+  const isNoPreview = noPreviewTypes.includes(ext) || noPreviewTypes.includes(type);
+  const hasText = hasTextVersion(title);
+
+  // 显示加载中
+  loadingOverlay.classList.remove('hidden');
+
+  if (hasText) {
+    // 有文字版 → 显示切换按钮
+    toggleBar.classList.add('show');
+    viewer.style.display = 'block';
+    textViewer.innerHTML = '<div class="flow-container">' + FLOW_TEXT_DATA[title] + '</div>';
+    // 默认显示图片版
+    viewer.src = file;
+  } else if (isNoPreview) {
+    // 不支持预览的类型
+    hideLoading();
+    viewer.style.display = 'none';
+    noPreview.style.display = 'block';
+    const iconMap = {'ppt':'📊','pptx':'📊','doc':'📝','docx':'📝','xls':'📈','xlsx':'📈','zip':'📦','rar':'📦'};
+    typeIcon.textContent = iconMap[ext] || iconMap[type] || '📄';
+    
+    let sizeStr = '';
+    if (params.get('size')) {
+      sizeStr = '文件大小：' + (parseInt(params.get('size')) > 1024*1024 
+        ? (parseInt(params.get('size'))/(1024*1024)).toFixed(1) + ' MB' 
+        : Math.round(parseInt(params.get('size'))/1024) + ' KB');
     }
+    typeMsg.innerHTML = '<b>' + (ext.toUpperCase() || type.toUpperCase()) + '</b> 格式暂不支持在线预览<br>请点击下方「下载文件」查看';
+    if (sizeStr) {
+      fileSizeEl.textContent = sizeStr;
+      fileSizeEl.style.display = 'block';
+    }
+  } else if (isImg || isPdf) {
+    // 图片或PDF → iframe预览
+    viewer.style.display = 'block';
+    viewer.src = file;
+    // 监听iframe加载
+    viewer.onload = () => { hideLoading(); };
+    viewer.onerror = () => {
+      hideLoading();
+      noPreview.style.display = 'block';
+      viewer.style.display = 'none';
+      typeIcon.textContent = '⚠️';
+      typeMsg.innerHTML = '图片加载失败<br>请尝试下载后查看';
+    };
+    // 超时自动隐藏loading
+    setTimeout(hideLoading, 8000);
+  } else {
+    // 其他类型也走下载
+    hideLoading();
+    viewer.style.display = 'none';
+    noPreview.style.display = 'block';
+    typeIcon.textContent = '📄';
+    typeMsg.innerHTML = '该文件请下载查看';
+  }
+
+  function hideLoading() {
+    loadingOverlay.classList.add('hidden');
+  }
+
+  // 切换到图片版
+  function showImage() {
+    viewer.style.display = 'block';
+    textViewer.style.display = 'none';
+    document.getElementById('btnImgView').classList.add('active');
+    document.getElementById('btnTextView').classList.remove('active');
+    // 重新触发加载
+    if (!viewer.src) viewer.src = file;
+  }
+
+  // 切换到文字版
+  function showText() {
+    viewer.style.display = 'none';
+    textViewer.style.display = 'block';
+    document.getElementById('btnTextView').classList.add('active');
+    document.getElementById('btnImgView').classList.remove('active');
+    hideLoading();
+  }
+
+  function openInNew() {
+    window.open(file, '_blank');
+  }
   </script>
 </body>
 </html>

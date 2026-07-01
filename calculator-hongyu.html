@@ -696,10 +696,25 @@ function downloadImage() {
       const colGap = 30;
       const infoColW = (canvasW - padding * 2 - colGap) / 2;
 
+      // 圆角矩形（兼容所有浏览器）
+      function drawRoundRect(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        ctx.fill();
+      }
+
       // 左栏：公司背景
       ctx.fillStyle = '#EFF6FF';
-      ctx.roundRect(padding, infoY, infoColW, infoH - 8, 6);
-      ctx.fill();
+      drawRoundRect(padding, infoY, infoColW, infoH - 8, 6);
       ctx.fillStyle = '#1D4ED8';
       ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'left';
@@ -722,8 +737,7 @@ function downloadImage() {
       // 右栏：产品特点
       const rightX = padding + infoColW + colGap;
       ctx.fillStyle = '#EFF6FF';
-      ctx.roundRect(rightX, infoY, infoColW, infoH - 8, 6);
-      ctx.fill();
+      drawRoundRect(rightX, infoY, infoColW, infoH - 8, 6);
       ctx.fillStyle = '#1D4ED8';
       ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.fillText('★ 产品特点', rightX + 14, infoY + 28);
@@ -864,16 +878,52 @@ function downloadImage() {
       ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 18);
       
       // ===== 下载 =====
-      canvas.toBlob(blob => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `宏御世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
-        a.click();
-        URL.revokeObjectURL(url);
-        showToast('计划书图片已下载');
-        showLoading(false);
-      }, 'image/png');
+      const filename = `宏御世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
+      
+      // 方案1: 优先用 toBlob
+      if (canvas.toBlob) {
+        canvas.toBlob(blob => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            }, 100);
+            showToast('计划书图片已下载');
+            showLoading(false);
+          } else {
+            // blob为null，降级到toDataURL
+            downloadViaDataURL(filename);
+          }
+        }, 'image/png');
+      } else {
+        // 不支持toBlob，直接用toDataURL
+        downloadViaDataURL(filename);
+      }
+      
+      function downloadViaDataURL(fname) {
+        try {
+          const dataURL = canvas.toDataURL('image/png');
+          const a = document.createElement('a');
+          a.href = dataURL;
+          a.download = fname;
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+          }, 100);
+          showToast('计划书图片已下载');
+          showLoading(false);
+        } catch(e2) {
+          showError('图片下载失败，请长按截图保存：' + e2.message);
+          showLoading(false);
+        }
+      }
       
     } catch (e) {
       showError('图片生成失败：' + e.message);

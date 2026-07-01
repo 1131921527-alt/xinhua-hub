@@ -820,10 +820,9 @@ function renderContent(query) {
         onclick = `location.href='${item.url}'`;
       } else if (isExternal) {
         onclick = `window.open('${item.url}', '_blank')`;
-      } else if (isPreviewable) {
-        onclick = `window.open('preview.html?file=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.name)}&type=${item.type}', '_blank')`;
       } else {
-        onclick = `window.open('${item.url}', '_blank')`;
+        // 所有本地文件统一走preview.html（包括PPT/XLS等不可预览的）
+        onclick = `window.open('preview.html?file=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.name)}&type=${item.type}', '_blank')`;
       }
       
       html += `
