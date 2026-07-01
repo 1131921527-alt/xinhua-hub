@@ -14,9 +14,9 @@
   --text2: #64748B;
   --text3: #94A3B8;
   --border: #E2E8F0;
-  --green: #16A34A;
+  --blue-accent: #2563EB;
   --red: #DC2626;
-  --orange: #EA580C;
+  --blue-dark: #1E40AF;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -215,10 +215,10 @@ tbody tr:nth-child(even) { background: #F8FAFC; }
 tbody tr:hover { background: #EFF6FF; }
 .col-num { font-weight: 600; color: var(--text); }
 .col-guarantee { color: var(--primary); font-weight: 500; }
-.col-paidup { color: var(--green); font-weight: 500; }
-.col-total { color: var(--orange); font-weight: 600; }
+.col-paidup { color: var(--blue-accent); font-weight: 500; }
+.col-total { color: var(--blue-dark); font-weight: 600; }
 .col-rate { font-weight: 600; }
-.rate-up { color: var(--green); }
+.rate-up { color: var(--blue-accent); }
 .rate-reserve { color: var(--text3); }
 
 /* Download bar */
@@ -691,10 +691,11 @@ function downloadImage() {
       ctx.textAlign = 'center';
       ctx.fillText('新华宏御世家终身寿险（分红型）保险计划书', canvasW / 2, 55);
       
-      // ===== 2. 公司背景 + 产品特点（两栏）=====
+      // ===== 2. 公司背景 + 产品特点（两栏对称）=====
       const infoY = titleH + 4;
-      const infoColW = (canvasW - padding * 2) / 2 - 8;
-      
+      const colGap = 30;
+      const infoColW = (canvasW - padding * 2 - colGap) / 2;
+
       // 左栏：公司背景
       ctx.fillStyle = '#EFF6FF';
       ctx.roundRect(padding, infoY, infoColW, infoH - 8, 6);
@@ -702,42 +703,43 @@ function downloadImage() {
       ctx.fillStyle = '#1D4ED8';
       ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText('★ 公司背景', padding + 12, infoY + 26);
-      
+      ctx.fillText('★ 公司背景', padding + 14, infoY + 28);
+
       const companyLines = [
-        '■ 股东构成: 1.中央汇金投资有限公司  2.中国宝武钢',
-        '■ 公司实力: 总资产超过1.78万亿，综合投资收益率8.5%，',
-        '   财务投资收益率5.7%,净资产收益率15.9%',
-        '■ 主要荣誉: 2011年成为国内首家A+H股同步上市公司，连续多年入围财富、福布斯世界500强，',
-        '   连续3年入围《财富》世界500强，惠誉国际信用评级A级(强劲)、穆迪交增额。',
-        '   财务实力评级A2级'
+        '■ 股东构成: 中央汇金、中国宝武钢铁集团',
+        '■ 公司实力: 总资产超1.78万亿元',
+        '   综合投资收益率8.5%，财务收益率5.7%',
+        '■ 上市地位: 国内首家A+H股同步上市保险公司',
+        '■ 世界500强: 连续多年入围财富、福布斯',
+        '■ 信用评级: 惠誉A级(强劲)、穆迪A2级'
       ];
       ctx.fillStyle = '#334155';
       ctx.font = '15px "PingFang SC", "Microsoft YaHei", sans-serif';
       companyLines.forEach((line, i) => {
-        ctx.fillText(line, padding + 12, infoY + 50 + i * 20);
+        ctx.fillText(line, padding + 14, infoY + 54 + i * 18);
       });
-      
+
       // 右栏：产品特点
-      const rightX = padding + infoColW + 16;
-      ctx.fillStyle = '#F0FDF4';
+      const rightX = padding + infoColW + colGap;
+      ctx.fillStyle = '#EFF6FF';
       ctx.roundRect(rightX, infoY, infoColW, infoH - 8, 6);
       ctx.fill();
-      ctx.fillStyle = '#16A34A';
+      ctx.fillStyle = '#1D4ED8';
       ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
-      ctx.fillText('★ 产品特点', rightX + 12, infoY + 26);
-      
+      ctx.fillText('★ 产品特点', rightX + 14, infoY + 28);
+
       const productLines = [
-        '■ 收益明确：R2风险等级，确定部分利益在合同中明确',
-        '■ 稳定增值：保额每年1.75%递增，保单现金价值稳定增长',
-        '■ 身故保障：具备寿险风险保障与财富传承功能',
-        '■ 流动性高：红利领取灵活：可选择现金分红、累积生息、交清增额。',
-        '   可质押现金价值的80%'
+        '■ 收益明确: R2风险等级，确定利益合同明确',
+        '■ 稳定增值: 保额每年1.75%递增，现价稳定增长',
+        '■ 身故保障: 寿险风险保障与财富传承功能',
+        '■ 红利灵活: 可选现金分红、累积生息、交清增额',
+        '■ 保单贷款: 可贷现金价值的80%，灵活周转',
+        '■ 财富传承: 定向传承，实现资产隔离'
       ];
       ctx.fillStyle = '#334155';
       ctx.font = '15px "PingFang SC", "Microsoft YaHei", sans-serif';
       productLines.forEach((line, i) => {
-        ctx.fillText(line, rightX + 12, infoY + 50 + i * 20);
+        ctx.fillText(line, rightX + 14, infoY + 54 + i * 18);
       });
       
       // ===== 3. 参数栏 =====
@@ -756,7 +758,7 @@ function downloadImage() {
       
       // ===== 4. 子标题 "利益演示表" =====
       const subHdrY = paramY + paramH;
-      ctx.fillStyle = '#DC2626';
+      ctx.fillStyle = '#1D4ED8';
       ctx.fillRect(padding, subHdrY, canvasW - padding * 2, subHeaderH);
       ctx.fillStyle = '#FFFFFF';
       ctx.font = 'bold 22px "PingFang SC", "Microsoft YaHei", sans-serif';
@@ -771,7 +773,7 @@ function downloadImage() {
       ctx.fillStyle = '#1D4ED8';
       ctx.fillRect(tableX, tableY, totalWidth, headerH);
       
-      const headers = ['保单年度', '年龄', '当年保险费', '累计保险费', '当年红利\n保险现价', '累计红利\n保险现价①', '生存总利益\n①+②', '当年\n收益率'];
+      const headers = ['保单年度', '年龄', '当年保险费', '累计保险费', '现金价值\n(保证)', '累计红利现价\n(交清增额)①', '生存总利益\n(保证+红利)', '年增值率'];
       ctx.fillStyle = '#FFFFFF';
       ctx.font = 'bold 19px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
@@ -830,18 +832,18 @@ function downloadImage() {
             cellText = fmt(Math.min(yrNum, payYears) * premium);
           }
           
-          // 字体颜色
+          // 字体颜色（蓝白主题）
           if (ci === 0) {
             ctx.fillStyle = '#1E293B'; ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
-          } else if (ci === 4) {  // 当年红利
-            ctx.fillStyle = '#EA580C'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
-          } else if (ci === 5) {  // 累计红利
-            ctx.fillStyle = '#16A34A'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 4) {  // 现金价值(保证)
+            ctx.fillStyle = '#2563EB'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 5) {  // 累计红利现价
+            ctx.fillStyle = '#1E40AF'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 6) {  // 生存总利益
-            ctx.fillStyle = '#DC2626'; ctx.font = 'bold 19px "PingFang SC", "Microsoft YaHei", sans-serif';
-          } else if (ci === 7) {  // 当年收益率
+            ctx.fillStyle = '#1D4ED8'; ctx.font = 'bold 19px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 7) {  // 年增值率
             const v = cellText;
-            ctx.fillStyle = v.includes('%') && !v.includes('-') ? '#16A34A' : (v === '储备期' ? '#94A3B8' : '#64748B');
+            ctx.fillStyle = v.includes('%') && !v.includes('-') ? '#2563EB' : (v === '储备期' ? '#94A3B8' : '#64748B');
             ctx.font = 'bold 17px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else {
             ctx.fillStyle = '#334155'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
