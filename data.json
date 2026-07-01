@@ -40,15 +40,9 @@
         },
         {
           "name": "保单复效操作流程",
-          "type": "link",
-          "description": "扫码进入找到保单复效操作指引",
-          "url": "https://mp.weixin.qq.com/s/wJNPQJLsJ2cL8XzTQbjevQ"
-        },
-        {
-          "name": "复效操作扫码图",
-          "type": "image",
-          "description": "扫码点进去，找到保单复效",
-          "url": "files/操作流程/复效操作扫码.jpg"
+          "type": "calculator",
+          "description": "扫码或点击进入保单复效操作指引",
+          "url": "fuxing.html"
         },
         {
           "name": "宏御世家 出单流程图",
@@ -242,16 +236,10 @@
       "icon": "📝",
       "items": [
         {
-          "name": "新华手工单模板 - 模板1",
+          "name": "新华手工单模板（完整版）",
           "type": "image",
-          "description": "手工单模板图片1",
-          "url": "files/手工单模板/手工单模板1.jpg"
-        },
-        {
-          "name": "新华手工单模板 - 模板2",
-          "type": "image",
-          "description": "手工单模板图片2",
-          "url": "files/手工单模板/手工单模板2.jpg"
+          "description": "手工单模板完整版（模板1+模板2上下拼接）",
+          "url": "files/手工单模板/手工单模板合并.jpg"
         },
         {
           "name": "新华手工单模板 - 职业分类表",
@@ -378,10 +366,10 @@
           "url": "files/增值服务/新华尊小程序二维码.jpg"
         },
         {
-          "name": "居家养老3000分护理包明细",
-          "type": "image",
-          "description": "3000分护理包个性化服务清单（家政/居家照护/专业陪诊/住院陪护/按摩/理疗等）",
-          "url": "files/增值服务/居家养老3000分护理包.jpg"
+          "name": "居家养老权益服务（一页通+护理包明细）",
+          "type": "calculator",
+          "description": "居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效",
+          "url": "jujia.html"
         },
         {
           "name": "新华尊服务项目介绍",
@@ -394,12 +382,6 @@
           "type": "excel",
           "description": "新钻/蓝钻/黑钻各档位体检项目明细（含男女分类）",
           "url": "files/增值服务/新华尊瑞慈体检套餐-2025年更新版.xlsx"
-        },
-        {
-          "name": "居家养老权益服务一页通",
-          "type": "pdf",
-          "description": "居家照护 + 日常生活 + 健康管理 三大权益 | 保单犹豫期后次月生效，2年有效",
-          "url": "files/增值服务/居家养老权益服务一页通.pdf"
         }
       ]
     }

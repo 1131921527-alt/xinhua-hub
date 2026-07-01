@@ -285,6 +285,15 @@
       <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示成功页面。</div></div>
       <div class="flow-footer">💡 <strong>福盛世家添翼版：</strong>增额终身寿险 + 分红<br>🔒 保额递增 · 减保灵活 · 传承规划</div>
     `,
+
+    '交清增额释义': `
+      <div class="flow-title">交清增额（Paid-up Addition）<br>分红方式释义</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-title">什么是交清增额？</div><div class="step-desc">交清增额是分红型保险的一种红利领取方式。保险公司将当年红利作为一次性保费，自动购买额外的保额（交清增额保险），增加到原有保单上。</div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-title">核心特点</div><div class="step-desc"><ul><li><strong>无需额外缴费：</strong>红利自动购买，不需要投保人再交保费</li><li><strong>保额递增：</strong>每年红利购买的增额会累积，总保额逐年增长</li><li><strong>永久有效：</strong>增额一旦购买即为"交清"状态，终身有效</li><li><strong>提升现金价值：</strong>交清增额部分也有现金价值，随时间增长</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-title">对保单的影响</div><div class="step-desc"><ul><li><strong>身故保险金：</strong>基本保额 + 累计交清增额保额</li><li><strong>现金价值：</strong>基本保单现金价值 + 交清增额现金价值</li><li><strong>减保权益：</strong>可申请减少交清增额部分，领取对应现金价值</li></ul></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-title">与其他分红方式对比</div><div class="step-desc"><ul><li><strong>现金领取：</strong>红利以现金形式直接发放</li><li><strong>累积生息：</strong>红利留存公司按累积利率生息</li><li><strong>交清增额：</strong>红利购买额外保额 ← 当前选择</li><li><strong>抵交保费：</strong>红利用于抵扣下一期保费</li></ul></div></div>
+      <div class="flow-footer">💡 <strong>交清增额优势：</strong>保额复利增长 · 现金价值同步提升<br>适合追求长期保障增长、不急于领取红利的客户</div>
+    `,
   };
 
   // ===== 主逻辑 =====
@@ -312,12 +321,20 @@
 
   const imgTypes = ['jpg','jpeg','png','gif','webp','bmp','svg'];
   const pdfTypes = ['pdf'];
-  const noPreviewTypes = ['ppt','pptx','doc','docx','xls','xlsx','zip','rar'];
+  const officeTypes = ['ppt','pptx','doc','docx','xls','xlsx'];
+  const archiveTypes = ['zip','rar'];
   const ext = file.split('.').pop().toLowerCase();
   const isImg = imgTypes.includes(ext) || imgTypes.includes(type);
   const isPdf = pdfTypes.includes(ext) || type === 'pdf';
-  const isNoPreview = noPreviewTypes.includes(ext) || noPreviewTypes.includes(type);
+  const isOffice = officeTypes.includes(ext) || officeTypes.includes(type);
+  const isArchive = archiveTypes.includes(ext) || archiveTypes.includes(type);
   const hasText = hasTextVersion(title);
+
+  // 获取文件绝对URL（用于在线预览服务）
+  function getAbsoluteUrl(relUrl) {
+    try { return new URL(relUrl, window.location.href).href; }
+    catch(e) { return relUrl; }
+  }
 
   // 显示加载中
   loadingOverlay.classList.remove('hidden');
@@ -327,32 +344,67 @@
     toggleBar.classList.add('show');
     viewer.style.display = 'block';
     textViewer.innerHTML = '<div class="flow-container">' + FLOW_TEXT_DATA[title] + '</div>';
-    // 默认显示图片版
+    // 交清增额释义默认显示文字版，出单流程图默认显示图片版
+    const textFirstTitles = ['交清增额释义'];
     viewer.src = file;
-  } else if (isNoPreview) {
-    // 不支持预览的类型
-    hideLoading();
-    viewer.style.display = 'none';
-    noPreview.style.display = 'block';
-    const iconMap = {'ppt':'📊','pptx':'📊','doc':'📝','docx':'📝','xls':'📈','xlsx':'📈','zip':'📦','rar':'📦'};
-    typeIcon.textContent = iconMap[ext] || iconMap[type] || '📄';
-    
-    let sizeStr = '';
-    if (params.get('size')) {
-      sizeStr = '文件大小：' + (parseInt(params.get('size')) > 1024*1024 
-        ? (parseInt(params.get('size'))/(1024*1024)).toFixed(1) + ' MB' 
-        : Math.round(parseInt(params.get('size'))/1024) + ' KB');
+    if (textFirstTitles.includes(title)) {
+      showText();
+    } else {
+      viewer.onload = () => { hideLoading(); };
+      setTimeout(hideLoading, 8000);
     }
-    typeMsg.innerHTML = '<b>' + (ext.toUpperCase() || type.toUpperCase()) + '</b> 格式暂不支持在线预览<br>请点击下方「下载文件」查看';
-    if (sizeStr) {
-      fileSizeEl.textContent = sizeStr;
-      fileSizeEl.style.display = 'block';
-    }
-  } else if (isImg || isPdf) {
-    // 图片或PDF → iframe预览
+  } else if (isOffice) {
+    // Office文件 → 使用Microsoft Office Online Viewer在线预览
+    const absUrl = getAbsoluteUrl(file);
+    const officeUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absUrl);
+    viewer.style.display = 'block';
+    viewer.src = officeUrl;
+    document.querySelector('.loading-text').textContent = '正在加载在线预览，请稍候...';
+    viewer.onload = () => { hideLoading(); };
+    // Office文件超时时间更长（大文件可能需要时间）
+    setTimeout(() => {
+      if (!loadingOverlay.classList.contains('hidden')) {
+        hideLoading();
+        noPreview.style.display = 'block';
+        viewer.style.display = 'none';
+        const iconMap = {'ppt':'📊','pptx':'📊','doc':'📝','docx':'📝','xls':'📈','xlsx':'📈'};
+        typeIcon.textContent = iconMap[ext] || iconMap[type] || '📄';
+        typeMsg.innerHTML = '在线预览加载超时<br>请点击下方「下载文件」或「新窗口打开」查看';
+      }
+    }, 20000);
+  } else if (isPdf) {
+    // PDF → iframe预览，添加#view=FitH参数加速首屏渲染
+    viewer.style.display = 'block';
+    const pdfUrl = file + (file.indexOf('#') === -1 ? '#view=FitH' : '');
+    viewer.src = pdfUrl;
+    document.querySelector('.loading-text').textContent = '正在加载PDF文件，请稍候...';
+    viewer.onload = () => { hideLoading(); };
+    viewer.onerror = () => {
+      hideLoading();
+      noPreview.style.display = 'block';
+      viewer.style.display = 'none';
+      typeIcon.textContent = '⚠️';
+      typeMsg.innerHTML = 'PDF加载失败<br>请尝试下载后查看';
+    };
+    // 添加快速预览按钮（Google Docs Viewer，可加速大PDF加载）
+    const quickBtn = document.createElement('button');
+    quickBtn.className = 'btn btn-secondary';
+    quickBtn.style.cssText = 'flex:0 0 auto;padding:11px 14px;white-space:nowrap;';
+    quickBtn.textContent = '⚡ 快速预览';
+    quickBtn.onclick = () => {
+      const gurl = 'https://docs.google.com/gview?embedded=true&url=' + encodeURIComponent(getAbsoluteUrl(file));
+      viewer.src = gurl;
+      loadingOverlay.classList.remove('hidden');
+      document.querySelector('.loading-text').textContent = '正在通过Google加速加载...';
+      viewer.onload = () => { hideLoading(); };
+      setTimeout(hideLoading, 15000);
+    };
+    document.querySelector('.bottom-bar').insertBefore(quickBtn, document.getElementById('dlBtn'));
+    setTimeout(hideLoading, 15000);
+  } else if (isImg) {
+    // 图片 → iframe预览
     viewer.style.display = 'block';
     viewer.src = file;
-    // 监听iframe加载
     viewer.onload = () => { hideLoading(); };
     viewer.onerror = () => {
       hideLoading();
@@ -361,8 +413,24 @@
       typeIcon.textContent = '⚠️';
       typeMsg.innerHTML = '图片加载失败<br>请尝试下载后查看';
     };
-    // 超时自动隐藏loading
     setTimeout(hideLoading, 8000);
+  } else if (isArchive) {
+    // 压缩文件 → 不支持预览
+    hideLoading();
+    viewer.style.display = 'none';
+    noPreview.style.display = 'block';
+    typeIcon.textContent = '📦';
+    let sizeStr = '';
+    if (params.get('size')) {
+      sizeStr = '文件大小：' + (parseInt(params.get('size')) > 1024*1024 
+        ? (parseInt(params.get('size'))/(1024*1024)).toFixed(1) + ' MB' 
+        : Math.round(parseInt(params.get('size'))/1024) + ' KB');
+    }
+    typeMsg.innerHTML = '<b>ZIP/RAR</b> 压缩文件暂不支持在线预览<br>请点击下方「下载文件」解压后查看';
+    if (sizeStr) {
+      fileSizeEl.textContent = sizeStr;
+      fileSizeEl.style.display = 'block';
+    }
   } else {
     // 其他类型也走下载
     hideLoading();

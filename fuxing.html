@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>保单复效操作流程</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #F8FAFC;
+    color: #1E293B;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .header {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+    color: #fff;
+    padding: 44px 20px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .header .back { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 15px; }
+  .header h2 { font-size: 17px; font-weight: 600; }
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 40px;
+  }
+  .qr-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.08);
+    border: 1px solid #E2E8F0;
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+  }
+  .qr-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1D4ED8;
+    margin-bottom: 6px;
+  }
+  .qr-subtitle {
+    font-size: 13px;
+    color: #64748B;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .qr-img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+  }
+  .qr-hint {
+    font-size: 12px;
+    color: #94A3B8;
+    margin-top: 12px;
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    width: 100%;
+    max-width: 360px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #E2E8F0;
+  }
+  .divider span {
+    font-size: 12px;
+    color: #94A3B8;
+  }
+  .btn-link {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    padding: 14px;
+    background: linear-gradient(135deg, #2563EB, #1D4ED8);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    transition: transform 0.2s;
+  }
+  .btn-link:active { transform: scale(0.97); }
+  .info-box {
+    background: #EFF6FF;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 20px;
+    max-width: 360px;
+    width: 100%;
+    font-size: 13px;
+    color: #64748B;
+    line-height: 1.7;
+  }
+  .info-box strong { color: #1D4ED8; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <a class="back" href="./">← 返回</a>
+    <h2>保单复效操作流程</h2>
+  </div>
+  <div class="content">
+    <div class="qr-card">
+      <div class="qr-title">📋 保单复效操作指引</div>
+      <div class="qr-subtitle">微信扫码进入<br>找到保单复效操作步骤</div>
+      <img class="qr-img" src="files/操作流程/复效操作扫码.jpg" alt="复效操作扫码">
+      <div class="qr-hint">👆 长按或截图后扫码</div>
+    </div>
+    <div class="divider"><span>或</span></div>
+    <a class="btn-link" href="https://mp.weixin.qq.com/s/wJNPQJLsJ2cL8XzTQbjevQ" target="_blank">🔗 点击直接进入复效指引</a>
+    <div class="info-box">
+      <strong>复效操作说明：</strong><br>
+      1. 扫码或点击上方链接进入公众号文章<br>
+      2. 按文章指引找到「保单复效」入口<br>
+      3. 按步骤完成复效操作<br><br>
+      <strong>适用场景：</strong>保单因未按时交费导致失效后，申请恢复保单效力。
+    </div>
+  </div>
+</body>
+</html>
