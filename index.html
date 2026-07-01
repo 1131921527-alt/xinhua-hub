@@ -184,6 +184,7 @@
   .icon-pdf    { background: #FEF2F2; }
   .icon-ppt    { background: #FFF7ED; }
   .icon-excel  { background: #F0FDF4; }
+  .icon-doc    { background: #EFF6FF; }
   .icon-link   { background: #EFF6FF; }
   .icon-image  { background: #FDF4FF; }
   .icon-video  { background: #FFF1F2; }
@@ -707,6 +708,7 @@ const TYPE_CONFIG = {
   link:   { icon: '🔗', label: '链接',  class: 'icon-link' },
   image:  { icon: '🖼️', label: '图片',  class: 'icon-image' },
   video:  { icon: '🎬', label: '视频',  class: 'icon-video' },
+  doc:    { icon: '📝', label: 'Word',  class: 'icon-doc' },
   calculator: { icon: '🧮', label: '计算器', class: 'icon-link' },
   default:{ icon: '📁', label: '文件',  class: 'icon-default' }
 };
@@ -718,6 +720,7 @@ function getTypeConfig(type) {
   if (t.includes('excel') || t.includes('xls') || t.includes('xlsx')) return TYPE_CONFIG.excel;
   if (t.includes('link') || t.includes('url') || t.startsWith('http')) return TYPE_CONFIG.link;
   if (t.includes('image') || t.includes('img') || t.includes('png') || t.includes('jpg') || t.includes('jpeg')) return TYPE_CONFIG.image;
+  if (t.includes('doc') || t.includes('word')) return TYPE_CONFIG.doc;
   if (t.includes('video') || t.includes('mp4')) return TYPE_CONFIG.video;
   return TYPE_CONFIG.default;
 }

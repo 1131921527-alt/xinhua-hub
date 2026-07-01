@@ -91,6 +91,25 @@
           "type": "pdf",
           "description": "电子保单和纸质保单获取方式说明",
           "url": "files/操作流程/客户获取电子保单和纸质保单的方式.pdf"
+        },
+        {
+          "name": "招行手机银行投保常见问题",
+          "type": "pdf",
+          "description": "招行手机银行投保新华产品常见问题解答",
+          "url": "files/操作流程/招行手机银行投保常见问题（新华）.pdf"
+        }
+      ]
+    },
+    {
+      "id": "product-intro",
+      "name": "产品介绍",
+      "icon": "📖",
+      "items": [
+        {
+          "name": "宏御世家 知识问答卡片",
+          "type": "doc",
+          "description": "宏御世家终身寿险（分红型）产品知识卡片 —— 常见问题/卖点/话术",
+          "url": "files/产品介绍/新华宏御世家_知识问答卡片 (6).docx"
         }
       ]
     },
@@ -201,13 +220,19 @@
           "name": "荣尊世家减保规则",
           "type": "ppt",
           "description": "荣尊世家产品减保规则说明",
-          "url": "files/产品规则/荣尊世家减保规则).pptx"
+          "url": "files/产品规则/荣尊世家减保规则.pptx"
         },
         {
           "name": "交清增额释义",
           "type": "image",
           "description": "交清增额功能规则释义图",
           "url": "files/产品规则/交清增额释义.png"
+        },
+        {
+          "name": "华彩鎏金年金保险（分红型）条款",
+          "type": "pdf",
+          "description": "华彩鎏金法定条款全文，含保险责任/免责/退保等",
+          "url": "files/产品规则/华彩鎏金年金保险（分红型）条款.pdf"
         }
       ]
     },
