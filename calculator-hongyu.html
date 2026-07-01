@@ -190,8 +190,8 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 20px;
-  min-width: 900px;
+  font-size: 19px;
+  min-width: 1050px;
 }
 thead th {
   background: #F1F5F9;
@@ -370,6 +370,14 @@ tbody tr:hover { background: #EFF6FF; }
         <label>年交保费（元）</label>
         <input type="number" id="premium" value="1000000" min="1000" step="1000" placeholder="最低1000元整数倍">
       </div>
+      <div class="form-group">
+        <label>表格显示方式</label>
+        <select id="displayMode">
+          <option value="all">每年都显示</option>
+          <option value="after50">50岁后每隔5年</option>
+          <option value="after60" selected>60岁后每隔5年</option>
+        </select>
+      </div>
     </div>
     <button class="btn-generate" id="btnGenerate" onclick="generate()">📊 生成利益演示</button>
   </div>
@@ -388,11 +396,12 @@ tbody tr:hover { background: #EFF6FF; }
             <tr>
               <th>保单年度</th>
               <th>年龄(年初)</th>
-              <th>当年保险费(年初)</th>
-              <th>现金价值<br>(保证部分)</th>
+              <th>当年保险费<br>(年初)</th>
+              <th>累计保险费</th>
+              <th>现金价值<br>(保证)</th>
               <th>累计红利现价<br>(交清增额)</th>
               <th>生存总利益<br>(保证+累计红利)</th>
-              <th>生存总利益<br>年增值率</th>
+              <th>年增值率</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -532,18 +541,31 @@ async function generate() {
     
     // Build table
     const tbody = document.getElementById('resultBody');
+    const displayMode = document.getElementById('displayMode').value;
     let html = '';
     let prevTotal = null;
-    const maxYear = Math.min(years.length, 54); // Show up to 54 years (age up to 105)
+    let cumPremiumAll = 0;  // 累计保费
+    const maxYear = Math.min(years.length, 105); // Show up to 105 years (age up to ~105)
     
     for (let yr = 1; yr <= maxYear; yr++) {
       const row = years[yr-1];  // new format: 0-indexed
       if (!row) continue;
       
+      const currentAge = age + yr - 1;
+      
+      // Filter by display mode
+      if (displayMode === 'after50' && currentAge > 50 && (currentAge - 50) % 5 !== 0) continue;
+      if (displayMode === 'after60' && currentAge > 60 && (currentAge - 60) % 5 !== 0) continue;
+      
       const [J, P] = row;  // new format: only [guarantee, paidup]
       const guaranteed = J * scale;
       const paidup = P * scale;
       const total = guaranteed + paidup;
+      
+      // Annual premium
+      const paymentYears = term === 1 ? 1 : term;
+      const annualPremium = yr <= paymentYears ? premium : 0;
+      cumPremiumAll += annualPremium;
       
       let rate = '';
       let rateClass = '';
@@ -556,15 +578,11 @@ async function generate() {
         rateClass = r > 0 ? 'rate-up' : '';
       }
       
-      // Annual premium
-      const paymentYears = term === 1 ? 1 : term;
-      const annualPremium = yr <= paymentYears ? premium : 0;
-      const currentAge = age + yr - 1;
-      
       html += `<tr>
         <td class="col-num">${yr}</td>
         <td>${currentAge}</td>
         <td>${annualPremium > 0 ? fmt(annualPremium) : '-'}</td>
+        <td>${fmt(cumPremiumAll)}</td>
         <td class="col-guarantee">${fmt(guaranteed)}</td>
         <td class="col-paidup">${fmt(paidup)}</td>
         <td class="col-total">${fmt(total)}</td>
@@ -597,7 +615,7 @@ function copyTable() {
     return;
   }
   
-  let text = '保单年度\t年龄\t当年保险费\t现金价值(保证)\t累计红利现价(交清增额)\t生存总利益\t年增值率\n';
+  let text = '保单年度\t年龄\t当年保险费\t累计保险费\t现金价值(保证)\t累计红利现价(交清增额)\t生存总利益\t年增值率\n';
   const rows = tbody.querySelectorAll('tr');
   rows.forEach(row => {
     const cells = row.querySelectorAll('td');
@@ -612,7 +630,7 @@ function copyTable() {
   });
 }
 
-// Download image via canvas
+// Download image via canvas - 计划书风格（蓝色大字）
 function downloadImage() {
   const tbody = document.getElementById('resultBody');
   if (!tbody || !tbody.innerHTML) {
@@ -635,19 +653,21 @@ function downloadImage() {
       
       const rows = Array.from(tbody.querySelectorAll('tr'));
       
-      // Layout constants
-      const colWidths = [100, 90, 130, 160, 160, 170, 130];
-      const totalWidth = colWidths.reduce((a, b) => a + b, 0) + colWidths.length * 2;
-      const rowH = 42;
-      const headerH = 70;
-      const titleH = 130;
-      const paramH = 70;
-      const footerH = 70;
-      const padding = 30;
+      // ===== Layout constants (大字体) =====
+      const colWidths = [85, 70, 110, 130, 140, 140, 140, 120];
+      const totalWidth = colWidths.reduce((a, b) => a + b, 0);
+      const rowH = 46;
+      const headerH = 80;
+      const titleH = 85;          // 蓝色标题栏高度
+      const infoH = 160;         // 公司背景+产品特点区域
+      const paramH = 60;         // 参数栏
+      const subHeaderH = 45;     // "利益演示表"子标题行
+      const footerH = 65;
+      const padding = 25;
       
       const tableH = headerH + rows.length * rowH;
-      const canvasH = titleH + paramH + tableH + footerH + padding * 2;
-      const canvasW = totalWidth + padding * 2 + 100;
+      const canvasW = totalWidth + padding * 2;
+      const canvasH = titleH + infoH + paramH + subHeaderH + tableH + footerH + padding * 1.5;
       
       canvas.width = canvasW * 2; // Retina
       canvas.height = canvasH * 2;
@@ -655,74 +675,131 @@ function downloadImage() {
       canvas.style.height = canvasH + 'px';
       ctx.scale(2, 2);
       
-      // Background
+      // ===== Background =====
       ctx.fillStyle = '#FFFFFF';
       ctx.fillRect(0, 0, canvasW, canvasH);
       
-      // Gradient header
+      // ===== 1. 蓝色大标题栏 =====
       const grad = ctx.createLinearGradient(0, 0, canvasW, 0);
-      grad.addColorStop(0, '#2563EB');
+      grad.addColorStop(0, '#1D4ED8');
+      grad.addColorStop(0.5, '#2563EB');
       grad.addColorStop(1, '#1E40AF');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvasW, titleH);
-      
-      // Title
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 36px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 34px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('新华保险 · 宏御世家终身寿险（分红型）', canvasW / 2, 45);
-      ctx.font = '22px "PingFang SC", "Microsoft YaHei", sans-serif';
-      ctx.fillText('利益演示计划书', canvasW / 2, 80);
-      ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
-      ctx.fillText(`—— 数据源自官方演算表5.20 ——`, canvasW / 2, 110);
+      ctx.fillText('新华宏御世家终身寿险（分红型）保险计划书', canvasW / 2, 55);
       
-      // Params
-      const paramY = titleH + 10;
-      ctx.fillStyle = '#F1F5F9';
-      ctx.fillRect(padding, paramY, canvasW - padding * 2, 55);
+      // ===== 2. 公司背景 + 产品特点（两栏）=====
+      const infoY = titleH + 4;
+      const infoColW = (canvasW - padding * 2) / 2 - 8;
+      
+      // 左栏：公司背景
+      ctx.fillStyle = '#EFF6FF';
+      ctx.roundRect(padding, infoY, infoColW, infoH - 8, 6);
+      ctx.fill();
+      ctx.fillStyle = '#1D4ED8';
+      ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('★ 公司背景', padding + 12, infoY + 26);
+      
+      const companyLines = [
+        '■ 股东构成: 1.中央汇金投资有限公司  2.中国宝武钢',
+        '■ 公司实力: 总资产超过1.78万亿，综合投资收益率8.5%，',
+        '   财务投资收益率5.7%,净资产收益率15.9%',
+        '■ 主要荣誉: 2011年成为国内首家A+H股同步上市公司，连续多年入围财富、福布斯世界500强，',
+        '   连续3年入围《财富》世界500强，惠誉国际信用评级A级(强劲)、穆迪交增额。',
+        '   财务实力评级A2级'
+      ];
+      ctx.fillStyle = '#334155';
+      ctx.font = '15px "PingFang SC", "Microsoft YaHei", sans-serif';
+      companyLines.forEach((line, i) => {
+        ctx.fillText(line, padding + 12, infoY + 50 + i * 20);
+      });
+      
+      // 右栏：产品特点
+      const rightX = padding + infoColW + 16;
+      ctx.fillStyle = '#F0FDF4';
+      ctx.roundRect(rightX, infoY, infoColW, infoH - 8, 6);
+      ctx.fill();
+      ctx.fillStyle = '#16A34A';
+      ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.fillText('★ 产品特点', rightX + 12, infoY + 26);
+      
+      const productLines = [
+        '■ 收益明确：R2风险等级，确定部分利益在合同中明确',
+        '■ 稳定增值：保额每年1.75%递增，保单现金价值稳定增长',
+        '■ 身故保障：具备寿险风险保障与财富传承功能',
+        '■ 流动性高：红利领取灵活：可选择现金分红、累积生息、交清增额。',
+        '   可质押现金价值的80%'
+      ];
+      ctx.fillStyle = '#334155';
+      ctx.font = '15px "PingFang SC", "Microsoft YaHei", sans-serif';
+      productLines.forEach((line, i) => {
+        ctx.fillText(line, rightX + 12, infoY + 50 + i * 20);
+      });
+      
+      // ===== 3. 参数栏 =====
+      const paramY = infoY + infoH;
+      const totalPremium = premium * (term === 1 ? 1 : term);
+      const sumAssured = Math.round((CALC_DATA[`${currentGender}_${age}_${term}`] || {E:0}).E * premium / 1000);
+      
+      ctx.fillStyle = '#DBEAFE';
+      ctx.fillRect(padding, paramY, canvasW - padding * 2, paramH);
       ctx.fillStyle = '#1E293B';
-      ctx.font = 'bold 24px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(
-        `${genderLabel} · ${age}周岁 · ${termLabel} · 保费${premium.toLocaleString()}元`,
-        canvasW / 2, paramY + 36
-      );
       
-      const tableX = (canvasW - totalWidth) / 2;
-      const tableY = paramY + 50;
+      const paramText = `性别 ${genderLabel}     年龄 ${age}周岁     年缴保费 ${premium.toLocaleString()}元     缴费期限 ${termLabel}     总保费 ${totalPremium.toLocaleString()}元     保险期间 终身     基本保额金额 ${sumAssured.toLocaleString()}元`;
+      ctx.fillText(paramText, canvasW / 2, paramY + 37);
       
-      // Table header
+      // ===== 4. 子标题 "利益演示表" =====
+      const subHdrY = paramY + paramH;
+      ctx.fillStyle = '#DC2626';
+      ctx.fillRect(padding, subHdrY, canvasW - padding * 2, subHeaderH);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 22px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('利 益 演 示 表', canvasW / 2, subHdrY + 30);
+      
+      // ===== 5. 表格 =====
+      const tableX = padding;
+      const tableY = subHdrY + subHeaderH;
+      
+      // 表头（蓝色背景）
       ctx.fillStyle = '#1D4ED8';
       ctx.fillRect(tableX, tableY, totalWidth, headerH);
       
-      const headers = ['保单年度', '年龄', '当年保险费', '现金价值\n(保证)', '累计红利\n(交清增额)', '生存总利益', '年增值率'];
+      const headers = ['保单年度', '年龄', '当年保险费', '累计保险费', '当年红利\n保险现价', '累计红利\n保险现价①', '生存总利益\n①+②', '当年\n收益率'];
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 19px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       
-      let x = tableX + padding / 2;
+      let x = tableX + 6;
       headers.forEach((h, i) => {
         const lines = h.split('\n');
         const cx = x + colWidths[i] / 2;
         if (lines.length === 1) {
-          ctx.fillText(lines[0], cx, tableY + headerH / 2 + 6);
-        } else {
-          ctx.fillText(lines[0], cx, tableY + headerH / 2 - 4);
-          ctx.fillText(lines[1], cx, tableY + headerH / 2 + 20);
+          ctx.fillText(lines[0], cx, tableY + headerH / 2 + 7);
+        } else if (lines.length === 2) {
+          ctx.fillText(lines[0], cx, tableY + headerH / 2 - 5);
+          ctx.fillText(lines[1], cx, tableY + headerH / 2 + 17);
         }
         x += colWidths[i];
       });
       
-      // Table body
+      // ===== 表格数据 =====
+      let cumPremiumVal = 0;  // 累计保费
       rows.forEach((row, idx) => {
         const y = tableY + headerH + idx * rowH;
         
-        // Alternating background
-        ctx.fillStyle = idx % 2 === 0 ? '#FFFFFF' : '#F8FAFC';
+        // 交替背景色
+        ctx.fillStyle = idx % 2 === 0 ? '#FFFFFF' : '#F0F9FF';
         ctx.fillRect(tableX, y, totalWidth, rowH);
         
-        // Bottom border
-        ctx.strokeStyle = '#F1F5F9';
+        // 底部分割线
+        ctx.strokeStyle = '#E2E8F0';
         ctx.lineWidth = 0.5;
         ctx.beginPath();
         ctx.moveTo(tableX, y + rowH);
@@ -730,48 +807,61 @@ function downloadImage() {
         ctx.stroke();
         
         const cells = Array.from(row.querySelectorAll('td'));
-        let cx = tableX + padding / 2;
+        let cx = tableX + 6;
         
+        // 需要计算累计保费（从表格中取值或自己算）
+        const yrNum = parseInt(cells[0].textContent.trim());
+        const yrAge = parseInt(cells[1].textContent.trim());
+        const yrPremStr = cells[2].textContent.trim();
+        const yrPrem = yrPremStr === '-' ? 0 : parseInt(yrPremStr.replace(/,/g, '')) / scale * 1000;
+        if (!isNaN(yrPrem)) cumPremiumVal += yrPrem;
+        
+        // 重绘每列
         cells.forEach((cell, ci) => {
           const cellX = cx + colWidths[ci] / 2;
           
+          let cellText = cell.textContent.trim();
+          
+          // 对累计保费列特殊处理（ci=3）：用计算的值
+          if (ci === 3) {
+            cellText = fmt(cumPremiumVal * scale / 1000 * premium / (premium/1000));  // 按比例缩回
+            // Actually just use the cumulative sum of annual premiums at current scale
+            const payYears = term === 1 ? 1 : term;
+            cellText = fmt(Math.min(yrNum, payYears) * premium);
+          }
+          
+          // 字体颜色
           if (ci === 0) {
-            ctx.fillStyle = '#1E293B';
-            ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
-          } else if (ci === 3) {
-            ctx.fillStyle = '#1D4ED8';
-            ctx.font = '20px "PingFang SC", "Microsoft YaHei", sans-serif';
-          } else if (ci === 4) {
-            ctx.fillStyle = '#16A34A';
-            ctx.font = '20px "PingFang SC", "Microsoft YaHei", sans-serif';
-          } else if (ci === 5) {
-            ctx.fillStyle = '#EA580C';
-            ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
-          } else if (ci === 6) {
-            const v = cell.textContent.trim();
-            ctx.fillStyle = v.includes('%') ? '#16A34A' : '#94A3B8';
-            ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.fillStyle = '#1E293B'; ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 4) {  // 当年红利
+            ctx.fillStyle = '#EA580C'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 5) {  // 累计红利
+            ctx.fillStyle = '#16A34A'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 6) {  // 生存总利益
+            ctx.fillStyle = '#DC2626'; ctx.font = 'bold 19px "PingFang SC", "Microsoft YaHei", sans-serif';
+          } else if (ci === 7) {  // 当年收益率
+            const v = cellText;
+            ctx.fillStyle = v.includes('%') && !v.includes('-') ? '#16A34A' : (v === '储备期' ? '#94A3B8' : '#64748B');
+            ctx.font = 'bold 17px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else {
-            ctx.fillStyle = '#64748B';
-            ctx.font = '20px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.fillStyle = '#334155'; ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
           }
           
           ctx.textAlign = 'center';
-          ctx.fillText(cell.textContent.trim(), cellX, y + rowH / 2 + 6);
+          ctx.fillText(cellText, cellX, y + rowH / 2 + 6);
           cx += colWidths[ci];
         });
       });
       
-      const footerY = tableY + headerH + rows.length * rowH + 28;
-      
-      // Disclaimer
+      // ===== 6. 底部声明 =====
+      const footerY = tableY + headerH + rows.length * rowH + 24;
       ctx.fillStyle = '#94A3B8';
-      ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = '14px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('本计划书数据源自官方演算表，仅供参考。具体利益以保险合同条款和正式计划书为准。', canvasW / 2, footerY);
-      ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 22);
+      ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 18);
       
-      // Download
+      // ===== 下载 =====
       canvas.toBlob(blob => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
