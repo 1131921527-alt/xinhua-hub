@@ -154,14 +154,14 @@ body {
   border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); margin-bottom: 14px;
 }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-table { width: 100%; border-collapse: collapse; font-size: 17px; min-width: 1100px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 900px; }
 thead th {
-  background: #F1F5F9; padding: 12px 8px; font-size: 16px; font-weight: 600;
+  background: #F1F5F9; padding: 8px 6px; font-size: 12px; font-weight: 600;
   color: var(--text2); text-align: center; white-space: nowrap;
   border-bottom: 2px solid var(--border); position: sticky; top: 0;
 }
 tbody td {
-  padding: 11px 8px; text-align: center; border-bottom: 1px solid #F1F5F9; white-space: nowrap;
+  padding: 7px 6px; text-align: center; border-bottom: 1px solid #F1F5F9; white-space: nowrap;
 }
 tbody tr:nth-child(even) { background: #F8FAFC; }
 tbody tr:hover { background: #EFF6FF; }
@@ -249,23 +249,6 @@ tbody tr:hover { background: #EFF6FF; }
       <div class="intro-item">⭐ 连续多年入围财富世界500强、福布斯全球2000强</div>
       <div class="intro-item">📊 信用评级：惠誉A级（财务强劲）· 穆迪A2级</div>
       <div class="intro-item">🌍 服务网络：覆盖全国1700余家分支机构</div>
-    </div>
-  </div>
-
-  <!-- 产品简介 -->
-  <div class="product-detail">
-    <h3>📋 产品简介</h3>
-    <div class="detail-content">
-      <p><strong>S24 宏愿人生 养老年金保险（分红型）</strong></p>
-      <ul>
-        <li><b>投保年龄：</b>出生满30天~69周岁</li>
-        <li><b>交费方式：</b>趸交（1万起）/ 3年交（2.7万起）/ 5年交（2万起）</li>
-        <li><b>保险期间：</b>终身</li>
-        <li><b>领取方式：</b>年金领取起始日为被保险人60周岁，可领终身，灵活变更</li>
-        <li><b>保障责任：</b>身故或全残保险金 + 年金给付 + 红利分配</li>
-        <li><b>红利分配：</b>不低于可分配盈余的70%</li>
-        <li><b>其他权益：</b>保单贷款、减保取现、自动垫交、减额交清</li>
-      </ul>
     </div>
   </div>
 
@@ -490,7 +473,13 @@ async function generate() {
     let reserveCellRendered = false;
     let reserveRowCount = 0;
     
-    for (let i = 0; i < HY_DATA.length && HY_DATA[i][0] <= paymentYears + 2; i++) reserveRowCount++;
+    // 只统计实际显示的储备期行数（排除被displayMode跳过的行）
+    for (let i = 0; i < HY_DATA.length; i++) {
+      if (HY_DATA[i][0] > paymentYears + 2) break;
+      const ca = HY_DATA[i][1] + ageOffset;
+      const sk = (displayMode==='after50' && ca>50 && (ca-50)%5!==0) || (displayMode==='after60' && ca>60 && (ca-60)%5!==0);
+      if (!sk) reserveRowCount++;
+    }
     
     for (let idx = 0; idx < HY_DATA.length; idx++) {
       const row = HY_DATA[idx];
@@ -516,7 +505,7 @@ async function generate() {
       const rateStr = row[11];
       if (yr <= paymentYears + 2) {
         if (!reserveCellRendered && reserveRowCount > 0) {
-          rateCell = `<td class="col-rate rate-reserve" rowspan="${reserveRowCount}" style="vertical-align:middle;text-align:center;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:4px;padding:8px 4px;">储备期</td>`;
+          rateCell = `<td class="col-rate rate-reserve" rowspan="${reserveRowCount}" style="vertical-align:middle;text-align:center;font-size:14px;letter-spacing:2px;color:#94A3B8;">储备期</td>`;
           reserveCellRendered = true;
         } else rateCell = '';
       } else if (rateStr && rateStr !== '') {
@@ -658,6 +647,16 @@ function downloadImage() {
           total:Math.round(r[9]*scale),rate:r[11]});
       }
       
+      // 计算储备期行范围
+      const dlPayYears = term===1?1:term;
+      let dlReserveCount=0, dlReserveStartIdx=-1;
+      dlRows.forEach((r,i)=>{
+        if(r.yr<=dlPayYears+2){
+          if(dlReserveStartIdx===-1) dlReserveStartIdx=i;
+          dlReserveCount++;
+        }
+      });
+      
       dlRows.forEach((r,idx)=>{
         const y=tblY+headerH+idx*rowH,isHL=(r.yr===5);
         ctx.fillStyle=isHL?'#FEF2F2':(idx%2===0?'#FFFFFF':'#F0F9FF');
@@ -675,12 +674,28 @@ function downloadImage() {
           {t:fmt(r.death),c:'#1E293B',f:'15px PingFang SC'},
           {t:fmt(r.cv),c:'#1E40AF',f:'bold 15px PingFang SC'},
           {t:fmt(r.surv),c:isHL?'#DC2626':'#1D4ED8',f:`bold ${isHL?'17':'16'}px PingFang SC`},
-          {t:(r.rate&&r.rate!=='')?r.rate:'-',c:r.rate&&r.rate!==''?'#16A34A':'#94A3B8',f:'bold 14px PingFang SC'}
+          {t:'',c:'#94A3B8',f:'14px PingFang SC'}
         ];
+        // 储备期合并：只在第一行画"储备期"，垂直居中
+        const isReserveRow = r.yr <= dlPayYears + 2;
+        const isReserveStart = isReserveRow && idx === dlReserveStartIdx;
+        if (!isReserveRow) {
+          vals[9] = {t:(r.rate&&r.rate!=='')?r.rate:'-',c:r.rate&&r.rate!==''?'#16A34A':'#94A3B8',f:'bold 14px PingFang SC'};
+        } else if (isReserveStart) {
+          vals[9] = {t:'储备期',c:'#94A3B8',f:'bold 15px PingFang SC'};
+        }
         let cellX=tblX+4;vals.forEach((v,i)=>{
           const px=cellX+colWidths[i]/2;
           ctx.fillStyle=isHL&&!['#DC2626','#16A34A'].includes(v.c)?'#DC2626':v.c;
-          ctx.font=v.f;ctx.textAlign='center';ctx.fillText(String(v.t),px,y+rowH/2+5);
+          ctx.font=v.f;ctx.textAlign='center';
+          // 储备期第一行：垂直居中跨越所有储备期行
+          if (isReserveStart && i === 9) {
+            ctx.fillText(String(v.t), px, y + (dlReserveCount * rowH) / 2 + 5);
+          } else if (isReserveRow && i === 9 && !isReserveStart) {
+            // 其他储备期行不画rate列
+          } else {
+            ctx.fillText(String(v.t),px,y+rowH/2+5);
+          }
           cellX+=colWidths[i];
         });
       });
