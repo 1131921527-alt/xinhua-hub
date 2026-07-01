@@ -703,6 +703,30 @@ document.addEventListener('DOMContentLoaded', function() {
 let DATA = null;
 let activeCategory = 'all';
 
+// ===== 滚动位置记忆 =====
+const SCROLL_KEY = 'xh_scroll_pos';
+function saveScrollPos() { try { sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)); } catch(e){} }
+function restoreScrollPos() {
+  try {
+    const pos = sessionStorage.getItem(SCROLL_KEY);
+    if (pos) { sessionStorage.removeItem(SCROLL_KEY); window.scrollTo(0, parseInt(pos)); }
+  } catch(e){}
+}
+// 从二级页面返回时自动恢复
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden) setTimeout(restoreScrollPos, 50);
+});
+window.addEventListener('focus', function() { setTimeout(restoreScrollPos, 100); });
+// 页面加载时也尝试恢复
+window.addEventListener('load', function() { setTimeout(restoreScrollPos, 100); });
+
+// 包装open函数，打开前保存滚动位置
+const _origOpen = window.open;
+window.open = function(url, target, features) {
+  saveScrollPos();
+  return _origOpen.call(this, url, target, features);
+};
+
 const TYPE_CONFIG = {
   pdf:    { icon: '📄', label: 'PDF',   class: 'icon-pdf' },
   ppt:    { icon: '📊', label: 'PPT',   class: 'icon-ppt' },

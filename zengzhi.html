@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华尊/新华瑞 · 增值服务总览</title>
+<style>
+:root{--primary:#2563EB;--primary-dark:#1D4ED8;--bg:#F8FAFC;--card:#FFFFFF;--text:#1E293B;--text2:#64748B;--border:#E2E8F0;--green:#16A34A;--orange:#EA580C;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+.header{
+  background:linear-gradient(135deg,#2563EB,#1D4ED8,#1E40AF);
+  color:#fff;padding:36px 16px 24px;position:relative;overflow:hidden;
+}
+.header::after{content:'';position:absolute;bottom:-40px;right:-30px;width:160px;height:160px;background:rgba(255,255,255,0.05);border-radius:50%;}
+.header h1{font-size:20px;font-weight:700;position:relative;z-index:1;}
+.header p{font-size:12px;opacity:0.75;margin-top:4px;position:relative;z-index:1;}
+.header .back{display:inline-flex;align-items:center;gap:4px;color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px;margin-bottom:8px;position:relative;z-index:1;}
+.header .back:hover{color:#fff;}
+
+.container{max-width:680px;margin:0 auto;padding:16px;}
+
+/* Section Card */
+.section-card{
+  background:var(--card);border-radius:14px;padding:20px;margin-bottom:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.04);border:1px solid var(--border);
+}
+.section-title{font-size:17px;font-weight:700;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:6px;}
+.section-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px;}
+
+/* Toggle Tabs */
+.toggle-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.toggle-btn{
+  padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;
+  border:2px solid var(--border);background:var(--card);color:var(--text2);
+  transition:all .2s;
+}
+.toggle-btn.active{border-color:var(--primary);background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25);}
+.toggle-btn:active{transform:scale(.95);}
+
+.viewer{display:none;text-align:center;}
+.viewer.active{display:block;}
+.viewer img{max-width:100%;border-radius:10px;border:1px solid var(--border);}
+.viewer iframe{width:100%;min-height:70vh;border-radius:10px;border:1px solid var(--border);}
+
+/* Image Grid */
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.img-item{text-align:center;cursor:pointer;border-radius:10px;border:1px solid var(--border);overflow:hidden;background:var(--card);transition:transform .2s;}
+.img-item:active{transform:scale(.97);}
+.img-item img{width:100%;display:block;}
+.img-item .img-label{font-size:11px;color:var(--text2);padding:6px;}
+
+/* Link Button */
+.link-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 20px;
+  background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;border:none;
+  border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;
+  text-decoration:none;transition:.2s;margin:4px 4px 4px 0;
+}
+.link-btn:active{transform:scale(.96);}
+.link-btn.green{background:linear-gradient(135deg,#16A34A,#15803D);}
+.link-btn.orange{background:linear-gradient(135deg,#EA580C,#C2410C)}
+
+/* Note Box */
+.note-box{
+  background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1px solid #F59E0B;
+  border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.7;margin-bottom:14px;
+}
+.note-box.blue{background:linear-gradient(135deg,#DBEAFE,#BFDBFE);border-color:#3B82F6;}
+.note-box.green{background:linear-gradient(135deg,#DCFCE7,#BBF7D0);border-color:#86EFAC;}
+.note-box b{color:inherit;}
+
+/* Tag */
+.tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:6px;font-weight:600;margin:2px;}
+.tag-blue{background:#DBEAFE;color:#1D4ED8;}
+.tag-green{background:#DCFCE7;color:#166534;}
+.tag-orange{background:#FFEDD5;color:#9A3412;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="back" href="index.html">← 返回资料库</a>
+  <h1>👑 新华尊 / 新华瑞 · 增值服务</h1>
+  <p>新华尊（高客）+ 新华瑞（标保）权益总览</p>
+</div>
+
+<div class="container">
+
+  <!-- 一句话记住规则 -->
+  <div class="note-box" style="background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-color:#F59E0B;">
+    ⚡ <b>一句话记住规则</b><br>
+    <b>新华瑞</b> → 限本人，每年1次，<span style="color:#D97706;">四星五星享爱康国宾体检</span><br>
+    <b>新华尊</b> → 可绑定家人扫码共享，体检走<span style="color:#D97706;">瑞慈</span>（黑钻额外+三甲）<br>
+    <b style="color:#D97706">权益终身有效</b> → 只要现金价值＞当年标保即可
+  </div>
+
+  <!-- ==================== 新华瑞权益 ==================== -->
+  <div class="section-card">
+    <div class="section-title">⭐ 新华瑞 · 客户权益一览</div>
+
+    <!-- 星级对照 -->
+    <div class="note-box blue">
+      📊 <b>2026年星级对照表</b><br>
+      <span class="tag tag-blue">★ 一星 1~5万</span>
+      <span class="tag tag-blue">★★ 二星 5~10万</span>
+      <span class="tag tag-blue">★★★ 三星 10~20万</span><br>
+      <span class="tag" style="background:#DBEAFE;color:#2563EB;border:2px solid #2563EB;">★★★★ 四星 20~30万 ✅爱康国宾体检</span>
+      <span class="tag" style="background:#DBEAFE;color:#1D4ED8;border:2px solid #1D4ED8;">★★★★★ 五星 30万+ ✅爱康国宾体检</span><br>
+      <span style="font-size:11px;color:#64748B;margin-top:4px;display:inline-block;">
+        💡 四星/五星 = 每年1次·限本人·终身有效 | 权益项目：健康管理+财税法商+商旅贵宾+居家养老+康养生态+子女教育+深圳专属
+      </span>
+    </div>
+
+    <!-- 切换查看 -->
+    <div class="toggle-bar">
+      <button class="toggle-btn active" onclick="switchTab('rui-img')">📋 权益一览图</button>
+    </div>
+    <div class="viewer active" id="tab-rui-img">
+      <a href="preview.html?file=files%2F增值服务%2F2026年新华瑞客户权益一览.jpg&title=2026年新华瑞客户权益一览&type=jpg">
+        <img src="files/增值服务/2026年新华瑞客户权益一览.jpg" alt="新华瑞权益一览" loading="lazy">
+      </a>
+      <p style="font-size:12px;color:var(--text2);margin-top:8px;">点击图片可放大预览</p>
+    </div>
+  </div>
+
+  <!-- ==================== 新华尊权益 ==================== -->
+  <div class="section-card">
+    <div class="section-title">💎 新华尊 · 高客权益总览</div>
+
+    <!-- 钻级对照 -->
+    <div class="note-box" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);border-color:#FED7AA;">
+      📊 <b>2026年钻级对照表</b><br>
+      <span class="tag tag-orange">💎 新钻 500~1000万 或 年交≥100万 → 瑞慈一档</span><br>
+      <span class="tag tag-orange">💠 蓝钻 1000~2000万 → 瑞慈二档</span><br>
+      <span class="tag" style="background:#1E293B;color:#F8FAFC;border:2px solid #1E293B;">🖤 黑钻 2000万+ → 瑞慈三档+三甲</span><br>
+      <span style="font-size:11px;color:#64748B;margin-top:4px;display:inline-block;">
+        💡 100万×3年客户 → 可享<b>4年新华尊新钻体检</b>，第5年起转为<b>新华瑞五星体检</b>
+      </span>
+    </div>
+
+    <!-- 切换栏 -->
+    <div class="toggle-bar">
+      <button class="toggle-btn active" onclick="switchZun('img')">📋 权益一览图</button>
+      <button class="toggle-btn" onclick="switchZun('qr')">📱 小程序二维码</button>
+      <button class="toggle-btn" onclick="switchZun('flow')">🔧 使用流程指引</button>
+      <button class="toggle-btn" onclick="switchZun('service')">📦 服务项目介绍</button>
+      <button class="toggle-btn" onclick="switchZun('exam')">🏥 瑞慈体检套餐</button>
+    </div>
+
+    <!-- 权益图 -->
+    <div class="viewer active" id="zun-img">
+      <a href="preview.html?file=files%2F增值服务%2F2026年新华尊客户权益一览.jpg&title=2026年新华尊客户权益一览&type=jpg">
+        <img src="files/增值服务/2026年新华尊客户权益一览.jpg" alt="新华尊权益一览" loading="lazy">
+      </a>
+      <p style="font-size:12px;color:var(--text2);margin-top:8px;">点击图片可放大预览</p>
+    </div>
+
+    <!-- 小程序二维码 -->
+    <div class="viewer" id="zun-qr">
+      <div style="text-align:center;padding:20px;">
+        <img src="files/增值服务/新华尊小程序二维码.jpg" alt="新华尊小程序码" style="width:300px;max-width:100%;border-radius:12px;border:2px solid var(--border);">
+        <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7;">
+          🔍 <b>微信扫描上方二维码</b><br>
+          进入「新华尊」小程序 → 注册认证 → 查看并预约专属权益<br>
+          <span style="font-size:11px;">✅ 可绑定家人共享权益 | ✅ 无需下载APP | ✅ 微信内直接使用</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- 使用流程 -->
+    <div class="viewer" id="zun-flow">
+      <a href="preview.html?file=files%2F增值服务%2F新华尊使用流程指引.jpg&title=新华尊使用流程指引&type=jpg">
+        <img src="files/增值服务/新华尊使用流程指引.jpg" alt="使用流程" loading="lazy">
+      </a>
+      <p style="font-size:12px;color:var(--text2);margin-top:8px;">点击放大查看完整操作步骤</p>
+    </div>
+
+    <!-- 服务项目介绍PDF -->
+    <div class="viewer" id="zun-service">
+      <iframe src="preview.html?file=files%2F增值服务%2F新华尊服务项目介绍.pdf&title=新华尊服务项目介绍&type=pdf" loading="lazy"></iframe>
+    </div>
+
+    <!-- 瑞慈体检套餐Excel -->
+    <div class="viewer" id="zun-exam">
+      <div style="text-align:center;padding:20px;">
+        <p style="font-size:14px;color:var(--text);margin-bottom:12px;">🏥 新钻/蓝钻/黑钻各档位体检项目明细</p>
+        <a href="preview.html?file=files%2F增值服务%2F新华尊瑞慈体检套餐-2025年更新版.xlsx&title=新华尊瑞慈体检套餐&type=excel" class="link-btn green">📗 查看 Excel 体检套餐明细</a>
+        <p style="font-size:11px;color:var(--text2);margin-top:12px;">含男女分类、各档位差异对比</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 居家养老（护理包单独）==================== -->
+  <div class="section-card">
+    <div class="section-title">🏠 居家养老 · 护理包（供应商提供）</div>
+
+    <div class="note-box green">
+      🏥 <b>3000分护理包</b> — 保单犹豫期后次月生效，<b>2年有效</b><br>
+      <span style="font-size:11px;">⚠️ 护理包由第三方供应商提供服务，与总公司增值服务独立运营</span>
+    </div>
+
+    <div class="toggle-bar">
+      <button class="toggle-btn active" onclick="switchJujia('detail')">📋 护理包明细</button>
+      <button class="toggle-btn" onclick="switchJujia('guide')">📖 权益一页通PDF</button>
+    </div>
+
+    <div class="viewer active" id="jujia-detail">
+      <a href="preview.html?file=files%2F增值服务%2F居家养老3000分护理包.jpg&title=居家养老3000分护理包&type=jpg">
+        <img src="files/增值服务/居家养老3000分护理包.jpg" alt="护理包明细" loading="lazy">
+      </a>
+    </div>
+
+    <div class="viewer" id="jujia-guide">
+      <iframe src="preview.html?file=files%2F增值服务%2F居家养老权益服务一页通.pdf&title=居家养老权益服务一页通&type=pdf" loading="lazy"></iframe>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 新华尊切换
+function switchZun(tab) {
+  document.querySelectorAll('[id^="zun-"]').forEach(el => el.classList.remove('active'));
+  document.getElementById('zun-' + tab).classList.add('active');
+  event.target.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// 居家养老切换
+function switchJujia(tab) {
+  document.querySelectorAll('[id^="jujia-"]').forEach(el => el.classList.remove('active'));
+  document.getElementById('jujia-' + tab).classList.add('active');
+  event.target.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// 新华瑞切换
+function switchTab(tab) {
+  document.querySelectorAll('[id^="tab-"]').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

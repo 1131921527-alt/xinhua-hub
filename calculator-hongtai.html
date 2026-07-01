@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宏御世家 · 利益演示计算器</title>
+<title>S03 宏泰世家 · 利益演示计算器</title>
 <style>
 :root {
   --primary: #1D4ED8;
@@ -319,7 +319,7 @@ tbody tr:hover { background: #EFF6FF; }
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
     返回资料库
   </a>
-  <h1>宏御世家 终身寿险（分红型）</h1>
+  <h1>S03 宏泰世家 终身寿险（分红型）</h1>
   <p>利益演示计算器 · 数据源自官方演算表5.20</p>
 </div>
 
@@ -539,53 +539,49 @@ async function generate() {
       <span>基本保额 ${fmt(sumAssured)} 元</span>
     `;
     
-    // Build table - 使用与Excel完全一致的递归公式计算K/L/N
+    // Build table - 宏泰使用查表方式（CALC_DATA: [age, J_per_wan, O_per_wan]）
     const tbody = document.getElementById('resultBody');
     const displayMode = document.getElementById('displayMode').value;
     const maxYear = Math.min(years.length, 105);
     const paymentYears = term === 1 ? 1 : term;
     const reserveYears = paymentYears + 2;  // 储备期 = 缴费年数 + 2年
     
-    // 第一遍：计算所有年份数据（即使被显示模式过滤也要计算）
-    let cumK = 0;       // L = 累计K（累计交清增额基本保险金额）
-    let prevO = null;    // 上一年O值（交清增额净保险费 per 1000）
+    // 查表辅助函数：根据年龄找到对应的J/O值（线性插值）
+    function lookup(ageVal) {
+      if (ageVal <= CALC_DATA[0][0]) return CALC_DATA[0];
+      if (ageVal >= CALC_DATA[CALC_DATA.length - 1][0]) return CALC_DATA[CALC_DATA.length - 1];
+      for (let i = 0; i < CALC_DATA.length - 1; i++) {
+        if (ageVal >= CALC_DATA[i][0] && ageVal <= CALC_DATA[i + 1][0]) {
+          const t = (ageVal - CALC_DATA[i][0]) / (CALC_DATA[i + 1][0] - CALC_DATA[i][0]);
+          return [
+            ageVal,
+            CALC_DATA[i][1] + (CALC_DATA[i + 1][1] - CALC_DATA[i][1]) * t,
+            CALC_DATA[i][2] + (CALC_DATA[i + 1][2] - CALC_DATA[i][2]) * t
+          ];
+        }
+      }
+      return CALC_DATA[CALC_DATA.length - 1];
+    }
+    
+    // 第一遍：计算所有年份数据
     let prevTotal = null;
     let cumPremiumAll = 0;
     const allRows = [];
     
     for (let yr = 1; yr <= maxYear; yr++) {
-      const row = years[yr-1];
-      if (!row) continue;
-      
       const currentAge = age + yr - 1;
-      const [J, M100, O, P] = row;  // [guarantee, dividend*100, paidup_net_prem, paidup_cash_val]
-      const M = M100 / 100;
+      const [lookupAge, jPerWan, oPerWan] = lookup(currentAge);
       
-      // K = 年度交清增额基本保险金额（Excel K列）
-      // 第1年: K = ROUND(M * 份数 * 10000 / O, 0)
-      // 第2年+: K = ROUND((M * 份数 * 10000 + L_prev * O_prev * 0.01225) / O, 0)
-      let k;
-      if (yr === 1) {
-        k = Math.round(M * scale * 10000 / O);
-      } else {
-        k = Math.round((M * scale * 10000 + cumK * prevO * 0.01225) / O);
-      }
-      cumK += k;
-      
-      // N = 累计红利现价(交清增额) = ROUND(L * P / 10000, 0)
-      const paidup = Math.round(cumK * P / 10000);
-      
-      // G = 基本保险金额现金价值 = J * 份数
-      const guaranteed = J * scale;
-      
-      // O = 生存总利益 = N + G
-      const total = guaranteed + paidup;
+      // J = 保证现金价值(每万元), O = 生存总利益(每万元)
+      const guaranteed = Math.round(jPerWan * scale);   // 保证现金价值
+      const total = Math.round(oPerWan * scale);         // 生存总利益
+      const paidup = total - guaranteed;                 // 交清增额(红利)部分
       
       // 累计保费
       const annualPremium = yr <= paymentYears ? premium : 0;
       cumPremiumAll += annualPremium;
       
-      // 生存总利益年增长率（Excel S列 = R / E）
+      // 生存总利益年增长率
       let rate = '';
       let rateClass = '';
       if (yr <= reserveYears) {
@@ -603,7 +599,6 @@ async function generate() {
       allRows.push({ yr, currentAge, annualPremium, cumPremiumAll, guaranteed, paidup, total, rate, rateClass, skipDisplay });
       
       prevTotal = total;
-      prevO = O;
     }
     
     // 第二遍：生成HTML，储备期单元格合并居中
@@ -744,7 +739,7 @@ function downloadImage() {
       ctx.fillStyle = '#FFFFFF';
       ctx.font = 'bold 34px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('新华宏御世家终身寿险（分红型）保险计划书', canvasW / 2, 55);
+      ctx.fillText('S03 新华宏泰世家终身寿险（分红型）保险计划书', canvasW / 2, 55);
       
       // ===== 2. 公司背景 + 产品特点（两栏对称）=====
       const infoY = titleH + 4;
@@ -814,7 +809,7 @@ function downloadImage() {
       // ===== 3. 参数栏 =====
       const paramY = infoY + infoH;
       const totalPremium = premium * (term === 1 ? 1 : term);
-      const sumAssured = Math.round((CALC_DATA[`${currentGender}_${age}_${term}`] || {E:0}).E * premium / 1000);
+      const sumAssured = Math.round(lookup(age)[1] * scale);
       
       ctx.fillStyle = '#DBEAFE';
       ctx.fillRect(padding, paramY, canvasW - padding * 2, paramH);
@@ -860,43 +855,32 @@ function downloadImage() {
         x += colWidths[i];
       });
       
-      // ===== 表格数据（直接从CALC_DATA计算，与generate()完全一致）=====
-      const dlKey = `${currentGender}_${age}_${term}`;
-      const dlEntry = CALC_DATA[dlKey];
-      const dlYears = dlEntry ? dlEntry.y : [];
+      // ===== 表格数据（查表方式，与generate()完全一致）=====
       const dlPayYears = term === 1 ? 1 : term;
       const dlReserveYears = dlPayYears + 2;
       const dlDisplayMode = document.getElementById('displayMode').value;
-      const dlMaxYear = Math.min(dlYears.length, 105);
+      const dlMaxYear = Math.min(CALC_DATA.length, 105);
 
-      let dlCumK = 0, dlPrevO = null, dlPrevTotal = null, dlCumPrem = 0;
+      let dlPrevTotal = null, dlCumPrem = 0;
       const dlRows = [];
 
       for (let yr = 1; yr <= dlMaxYear; yr++) {
-        const dRow = dlYears[yr-1];
-        if (!dRow) continue;
         const currentAge2 = age + yr - 1;
-        const [J, M100, O, P] = dRow;
-        const M = M100 / 100;
-        let k;
-        if (yr === 1) { k = Math.round(M * scale * 10000 / O); }
-        else { k = Math.round((M * scale * 10000 + dlCumK * dlPrevO * 0.01225) / O); }
-        dlCumK += k;
-        const paidup = Math.round(dlCumK * P / 10000);
-        const guaranteed = J * scale;
-        const total = guaranteed + paidup;
+        const [, jPerWan, oPerWan] = lookup(currentAge2);
+        const guaranteed2 = Math.round(jPerWan * scale);
+        const total2 = Math.round(oPerWan * scale);
+        const paidup2 = total2 - guaranteed2;
         const annualPremium = yr <= dlPayYears ? premium : 0;
         dlCumPrem += annualPremium;
         let rate = '';
         if (yr <= dlReserveYears) { rate = '储备期'; }
         else if (dlPrevTotal !== null && dlPrevTotal > 0 && dlCumPrem > 0) {
-          rate = (((total - dlPrevTotal) / dlCumPrem) * 100).toFixed(2) + '%';
+          rate = (((total2 - dlPrevTotal) / dlCumPrem) * 100).toFixed(2) + '%';
         }
         const skip = (dlDisplayMode === 'after50' && currentAge2 > 50 && (currentAge2 - 50) % 5 !== 0) ||
                      (dlDisplayMode === 'after60' && currentAge2 > 60 && (currentAge2 - 60) % 5 !== 0);
-        if (!skip) { dlRows.push({ yr, age: currentAge2, annualPremium, cumPrem: dlCumPrem, guaranteed, paidup, total, rate }); }
-        dlPrevTotal = total;
-        dlPrevO = O;
+        if (!skip) { dlRows.push({ yr, age: currentAge2, annualPremium, cumPrem: dlCumPrem, guaranteed: guaranteed2, paidup: paidup2, total: total2, rate }); }
+        dlPrevTotal = total2;
       }
 
       // 绘制行
@@ -952,7 +936,7 @@ function downloadImage() {
       ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 18);
       
       // ===== 下载 =====
-      const filename = `宏御世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
+      const filename = `S03宏泰世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
       
       // 方案1: 优先用 toBlob
       if (canvas.toBlob) {
