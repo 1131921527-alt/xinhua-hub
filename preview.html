@@ -352,7 +352,22 @@
   const type = (params.get('type') || '').toLowerCase();
 
   document.getElementById('title').textContent = title;
-  document.getElementById('dlBtn').href = file;
+  
+  // 下载按钮：优先使用原图（files/originals/），回退到当前文件
+  const dlBtn = document.getElementById('dlBtn');
+  dlBtn.href = file; // 默认用当前文件
+  // 异步加载mapping，如果有原图则切换到原图
+  fetch('files/originals/mapping.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(map => {
+      if (map && map[file]) {
+        dlBtn.href = map[file];
+        // 设置download属性为原始文件名
+        const origName = map[file].split('/').pop();
+        dlBtn.setAttribute('download', origName);
+      }
+    })
+    .catch(() => {});
 
   const viewer = document.getElementById('viewer');
   const textViewer = document.getElementById('textViewer');
