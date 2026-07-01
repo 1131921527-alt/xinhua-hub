@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>已签回执未做回访操作流程</title>
+<title>电子回执回访操作流程</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -34,23 +34,81 @@
     align-items: center;
     padding: 20px 16px 40px;
   }
+
+  /* Welcome message */
+  .welcome-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    border: 1px solid #E2E8F0;
+    margin-bottom: 16px;
+    line-height: 1.8;
+    font-size: 14px;
+    color: #334155;
+  }
+  .welcome-card .greeting {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1D4ED8;
+    margin-bottom: 8px;
+  }
+
+  /* Big blue link button */
   .btn-link {
     display: block;
     width: 100%;
     max-width: 500px;
-    padding: 14px;
+    padding: 16px;
     background: linear-gradient(135deg, #2563EB, #1D4ED8);
     color: #fff;
     text-decoration: none;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    box-shadow: 0 4px 16px rgba(37,99,235,0.35);
     transition: transform 0.2s;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
   }
   .btn-link:active { transform: scale(0.97); }
+  .link-hint {
+    font-size: 12px;
+    color: #94A3B8;
+    text-align: center;
+    margin-bottom: 16px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  /* Platform-specific boxes */
+  .platform-box {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.7;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .platform-ios {
+    background: #F0F9FF;
+    border: 1px solid #BAE6FD;
+    color: #0C4A6E;
+  }
+  .platform-android {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    color: #166534;
+  }
+  .platform-icon { font-size: 18px; flex-shrink: 0; }
+
+  /* Flow image */
   .flow-img {
     width: 100%;
     max-width: 500px;
@@ -58,50 +116,131 @@
     border-radius: 12px;
     border: 1px solid #E2E8F0;
     box-shadow: 0 4px 20px rgba(37,99,235,0.08);
+    margin-top: 8px;
   }
-  .info-box {
-    background: #EFF6FF;
-    border-radius: 12px;
-    padding: 16px;
+
+  /* Step boxes */
+  .step-box {
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
     margin-top: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    border: 1px solid #E2E8F0;
+  }
+  .step-box h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1D4ED8;
+    margin-bottom: 10px;
+  }
+  .step-list {
+    font-size: 13px;
+    line-height: 2;
+    color: #475569;
+  }
+  .step-list .num {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    background: #2563EB;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  /* Warning/tip boxes */
+  .tip-box {
     max-width: 500px;
     width: 100%;
-    font-size: 13px;
-    color: #64748B;
-    line-height: 1.7;
-  }
-  .info-box strong { color: #1D4ED8; }
-  .warning-box {
-    background: #FEF3C7;
     border-radius: 12px;
-    padding: 12px 16px;
+    padding: 14px 16px;
     margin-top: 12px;
-    max-width: 500px;
-    width: 100%;
     font-size: 13px;
-    color: #92400E;
     line-height: 1.7;
   }
+  .tip-yellow {
+    background: #FEF3C7;
+    border: 1px solid #F59E0B;
+    color: #92400E;
+  }
+  .tip-green {
+    background: #ECFDF5;
+    border: 1px solid #10B981;
+    color: #065F46;
+  }
+  .tip-blue {
+    background: #EFF6FF;
+    border: 1px solid #93C5FD;
+    color: #1E40AF;
+  }
+  .tip-box strong { font-weight: 700; }
 </style>
 </head>
 <body>
   <div class="header">
     <a class="back" href="./">← 返回</a>
-    <h2>已签回执未做回访</h2>
+    <h2>电子回执回访操作流程</h2>
   </div>
   <div class="content">
-    <a class="btn-link" href="https://weixinplatform.newchinalife.com/6kg6Zk" target="_blank">🔗 点击进入回访专属操作链接</a>
-    <img class="flow-img" src="files/操作流程/已签回执未做回访操作流程.jpg" alt="已签回执未做回访操作流程图">
-    <div class="warning-box">
-      ⚠️ <strong>注意：</strong>之前的回执回访链接已失效，请使用上方新链接。
+
+    <!-- Welcome message -->
+    <div class="welcome-card">
+      <div class="greeting">尊敬的客户，欢迎您参与新华随信通电子回执回访</div>
+      请您先参与<strong>回执签收</strong>，再参与<strong>回访</strong>，点击以下链接进入操作：
     </div>
-    <div class="info-box">
-      <strong>操作说明：</strong><br>
-      1. 点击上方蓝色按钮进入回访专属链接<br>
-      2. 按流程图指引完成回访操作<br>
-      3. 如遇链接无法打开，请截图后用微信扫码进入<br><br>
-      <strong>适用场景：</strong>客户已签回执但尚未完成回访，需单独做回访操作。
+
+    <!-- Direct link button -->
+    <a class="btn-link" href="https://weixinplatform.newchinalife.com/5gh5HZ">🔗 点击进入电子回执回访</a>
+    <div class="link-hint">👆 点击上方蓝色按钮直接进入操作页面</div>
+
+    <!-- Platform-specific instructions -->
+    <div class="platform-box platform-android">
+      <span class="platform-icon">🤖</span>
+      <div><strong>鸿蒙 / 安卓系统：</strong>可直接在微信内打开链接，参与回执回访。</div>
     </div>
+    <div class="platform-box platform-ios">
+      <span class="platform-icon">🍎</span>
+      <div><strong>苹果手机：</strong>请复制链接到浏览器中打开参与回执回访。</div>
+    </div>
+
+    <!-- Flow chart -->
+    <img class="flow-img" src="files/操作流程/已签回执未做回访操作流程.jpg" alt="电子回执回访操作流程图">
+
+    <!-- Step-by-step guide -->
+    <div class="step-box">
+      <h3>📋 操作步骤</h3>
+      <div class="step-list">
+        <div class="step-item"><span class="num">1</span><span>业务员下单后约 <strong>3分钟</strong>即可转发链接给客户</span></div>
+        <div class="step-item"><span class="num">2</span><span>客户收到投保成功短信后，点击链接进入操作</span></div>
+        <div class="step-item"><span class="num">3</span><span>先完成<strong>回执签收</strong>，再完成<strong>回访</strong></span></div>
+        <div class="step-item"><span class="num">4</span><span>签字时请<strong>一个字一个字地写</strong>，确保签名清晰</span></div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tip-box tip-yellow">
+      ✍️ <strong>签字提醒：</strong>签字时务必一个字一个字写，不要连笔，避免签名识别失败导致回访不成功。
+    </div>
+    <div class="tip-box tip-green">
+      ✅ <strong>操作顺序：</strong>先签回执 → 再签回访，两步缺一不可。
+    </div>
+    <div class="tip-box tip-blue">
+      💡 <strong>业务员提示：</strong>下单后约3分钟即可将链接转发给客户。客户收到投保成功短信后按流程操作即可。
+    </div>
+
   </div>
 </body>
 </html>
