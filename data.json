@@ -33,16 +33,10 @@
       "icon": "🔧",
       "items": [
         {
-          "name": "已签回执未做回访 - 操作流程图",
-          "type": "image",
-          "description": "已签回执但未做回访的操作流程说明",
-          "url": "files/操作流程/已签回执未做回访操作流程.jpg"
-        },
-        {
-          "name": "回访专属操作链接",
-          "type": "link",
-          "description": "只做回访的链接（之前的回执回访链接已失效）",
-          "url": "https://weixinplatform.newchinalife.com/6kg6Zk"
+          "name": "已签回执未做回访 - 操作流程",
+          "type": "calculator",
+          "description": "操作流程图+回访专属链接（旧链接已失效，请用新链接）",
+          "url": "huifang.html"
         },
         {
           "name": "保单复效操作流程",
