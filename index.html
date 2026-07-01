@@ -810,9 +810,19 @@ function renderContent(query) {
     items.forEach(item => {
       const tc = getTypeConfig(item.type);
       const isCalc = item.type === 'calculator';
-      const onclick = isCalc 
-        ? `location.href='${item.url}'`
-        : `window.open('${item.url}', '_blank')`;
+      const isExternal = item.url.startsWith('http://') || item.url.startsWith('https://');
+      const isPreviewable = ['pdf','ppt','pptx','doc','docx','xls','xlsx','jpg','jpeg','png','gif','webp'].includes(item.type);
+      
+      let onclick;
+      if (isCalc) {
+        onclick = `location.href='${item.url}'`;
+      } else if (isExternal) {
+        onclick = `window.open('${item.url}', '_blank')`;
+      } else if (isPreviewable) {
+        onclick = `window.open('preview.html?file=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.name)}&type=${item.type}', '_blank')`;
+      } else {
+        onclick = `window.open('${item.url}', '_blank')`;
+      }
       
       html += `
         <div class="card" onclick="${onclick}">
@@ -938,7 +948,7 @@ function renderVIPOverview() {
         <p style="font-size:12px;">点击下方卡片查看官方完整版权益明细表（含所有星级/钻级的全量权益项目）：</p>
       </div>
 
-      <div class="vip-tier-card" style="--tier-color:#16A34A;cursor:pointer;" onclick="window.open('files/增值服务/2026年新华瑞客户权益一览.jpg','_blank')">
+      <div class="vip-tier-card" style="--tier-color:#16A34A;cursor:pointer;" onclick="window.open('preview.html?file=files%2F增值服务%2F2026年新华瑞客户权益一览.jpg&title=2026年新华瑞客户权益一览&type=jpg','_blank')">
         <div class="vip-tier-header">
           <div class="vip-tier-name">📋 新华瑞 · 2026年完整权益表</div>
           <div class="vip-tier-badge" style="background:#16A34A;">点击查看</div>
@@ -955,7 +965,7 @@ function renderVIPOverview() {
         </div>
       </div>
 
-      <div class="vip-tier-card" style="--tier-color:#EA580C;cursor:pointer;" onclick="window.open('files/增值服务/2026年新华尊客户权益一览.jpg','_blank')">
+      <div class="vip-tier-card" style="--tier-color:#EA580C;cursor:pointer;" onclick="window.open('preview.html?file=files%2F增值服务%2F2026年新华尊客户权益一览.jpg&title=2026年新华尊客户权益一览&type=jpg','_blank')">
         <div class="vip-tier-header">
           <div class="vip-tier-name">📋 新华尊 · 2026年完整权益表</div>
           <div class="vip-tier-badge" style="background:#EA580C;">点击查看</div>

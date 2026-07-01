@@ -190,13 +190,13 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
-  min-width: 700px;
+  font-size: 20px;
+  min-width: 900px;
 }
 thead th {
   background: #F1F5F9;
-  padding: 10px 6px;
-  font-size: 13px;
+  padding: 14px 10px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text2);
   text-align: center;
@@ -206,7 +206,7 @@ thead th {
   top: 0;
 }
 tbody td {
-  padding: 8px 6px;
+  padding: 12px 10px;
   text-align: center;
   border-bottom: 1px solid #F1F5F9;
   white-space: nowrap;
@@ -349,8 +349,8 @@ tbody tr:hover { background: #EFF6FF; }
       <div class="form-group">
         <label>性别</label>
         <div class="gender-group" id="genderGroup">
-          <div class="gender-btn active" data-value="0" onclick="selectGender(this)">👨 男</div>
-          <div class="gender-btn" data-value="1" onclick="selectGender(this)">👩 女</div>
+          <div class="gender-btn" data-value="0" onclick="selectGender(this)">👨 男</div>
+          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">👩 女</div>
         </div>
       </div>
       <div class="form-group">
@@ -361,14 +361,14 @@ tbody tr:hover { background: #EFF6FF; }
         <label>交费方式</label>
         <select id="term">
           <option value="1">一次交清（趸交）</option>
-          <option value="3">3年交</option>
+          <option value="3" selected>3年交</option>
           <option value="5">5年交</option>
           <option value="10">10年交</option>
         </select>
       </div>
       <div class="form-group">
         <label>年交保费（元）</label>
-        <input type="number" id="premium" value="300000" min="1000" step="1000" placeholder="最低1000元整数倍">
+        <input type="number" id="premium" value="1000000" min="1000" step="1000" placeholder="最低1000元整数倍">
       </div>
     </div>
     <button class="btn-generate" id="btnGenerate" onclick="generate()">📊 生成利益演示</button>
@@ -636,14 +636,14 @@ function downloadImage() {
       const rows = Array.from(tbody.querySelectorAll('tr'));
       
       // Layout constants
-      const colWidths = [60, 55, 80, 100, 100, 110, 80];
+      const colWidths = [100, 90, 130, 160, 160, 170, 130];
       const totalWidth = colWidths.reduce((a, b) => a + b, 0) + colWidths.length * 2;
-      const rowH = 28;
-      const headerH = 50;
-      const titleH = 90;
-      const paramH = 50;
-      const footerH = 50;
-      const padding = 20;
+      const rowH = 42;
+      const headerH = 70;
+      const titleH = 130;
+      const paramH = 70;
+      const footerH = 70;
+      const padding = 30;
       
       const tableH = headerH + rows.length * rowH;
       const canvasH = titleH + paramH + tableH + footerH + padding * 2;
@@ -668,27 +668,27 @@ function downloadImage() {
       
       // Title
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 36px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('新华保险 · 宏御世家终身寿险（分红型）', canvasW / 2, 30);
-      ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
-      ctx.fillText('利益演示计划书', canvasW / 2, 52);
-      ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
-      ctx.fillText(`—— 数据源自官方演算表5.20 ——`, canvasW / 2, 70);
+      ctx.fillText('新华保险 · 宏御世家终身寿险（分红型）', canvasW / 2, 45);
+      ctx.font = '22px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.fillText('利益演示计划书', canvasW / 2, 80);
+      ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.fillText(`—— 数据源自官方演算表5.20 ——`, canvasW / 2, 110);
       
       // Params
       const paramY = titleH + 10;
       ctx.fillStyle = '#F1F5F9';
-      ctx.fillRect(padding, paramY, canvasW - padding * 2, 32);
+      ctx.fillRect(padding, paramY, canvasW - padding * 2, 55);
       ctx.fillStyle = '#1E293B';
-      ctx.font = 'bold 14px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 24px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(
         `${genderLabel} · ${age}周岁 · ${termLabel} · 保费${premium.toLocaleString()}元`,
-        canvasW / 2, paramY + 22
+        canvasW / 2, paramY + 36
       );
       
-      const tableX = padding + 50;
+      const tableX = (canvasW - totalWidth) / 2;
       const tableY = paramY + 50;
       
       // Table header
@@ -697,7 +697,7 @@ function downloadImage() {
       
       const headers = ['保单年度', '年龄', '当年保险费', '现金价值\n(保证)', '累计红利\n(交清增额)', '生存总利益', '年增值率'];
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       
       let x = tableX + padding / 2;
@@ -705,10 +705,10 @@ function downloadImage() {
         const lines = h.split('\n');
         const cx = x + colWidths[i] / 2;
         if (lines.length === 1) {
-          ctx.fillText(lines[0], cx, tableY + headerH / 2 + 4);
+          ctx.fillText(lines[0], cx, tableY + headerH / 2 + 6);
         } else {
-          ctx.fillText(lines[0], cx, tableY + headerH / 2 - 2);
-          ctx.fillText(lines[1], cx, tableY + headerH / 2 + 14);
+          ctx.fillText(lines[0], cx, tableY + headerH / 2 - 4);
+          ctx.fillText(lines[1], cx, tableY + headerH / 2 + 20);
         }
         x += colWidths[i];
       });
@@ -737,39 +737,39 @@ function downloadImage() {
           
           if (ci === 0) {
             ctx.fillStyle = '#1E293B';
-            ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 3) {
             ctx.fillStyle = '#1D4ED8';
-            ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = '20px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 4) {
             ctx.fillStyle = '#16A34A';
-            ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = '20px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 5) {
             ctx.fillStyle = '#EA580C';
-            ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else if (ci === 6) {
             const v = cell.textContent.trim();
             ctx.fillStyle = v.includes('%') ? '#16A34A' : '#94A3B8';
-            ctx.font = 'bold 13px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = 'bold 20px "PingFang SC", "Microsoft YaHei", sans-serif';
           } else {
             ctx.fillStyle = '#64748B';
-            ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.font = '20px "PingFang SC", "Microsoft YaHei", sans-serif';
           }
           
           ctx.textAlign = 'center';
-          ctx.fillText(cell.textContent.trim(), cellX, y + rowH / 2 + 4);
+          ctx.fillText(cell.textContent.trim(), cellX, y + rowH / 2 + 6);
           cx += colWidths[ci];
         });
       });
       
-      const footerY = tableY + headerH + rows.length * rowH + 16;
+      const footerY = tableY + headerH + rows.length * rowH + 28;
       
       // Disclaimer
       ctx.fillStyle = '#94A3B8';
-      ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = '18px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('本计划书数据源自官方演算表，仅供参考。具体利益以保险合同条款和正式计划书为准。', canvasW / 2, footerY);
-      ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 14);
+      ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW / 2, footerY + 22);
       
       // Download
       canvas.toBlob(blob => {
