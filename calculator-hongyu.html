@@ -933,23 +933,18 @@ function downloadImage() {
           ctx.textAlign = 'center';
 
           if (ci === 7 && r.rate === '储备期') {
-            // 储备期合并居中：竖排逐字绘制
+            // 储备期合并居中：水平文字，跨行居中
             if (idx === 0 || dlRows[idx - 1].rate !== '储备期') {
               let rc = 0;
               for (let j = idx; j < dlRows.length && dlRows[j].rate === '储备期'; j++) rc++;
               const text = '储备期';
-              const charSize = 18;
-              const totalTextH = text.length * charSize;
               const blockH = rc * rowH;
-              const startY = y + (blockH - totalTextH) / 2 + charSize * 0.7;
               ctx.save();
               ctx.fillStyle = '#94A3B8';
               ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
-              for (let k = 0; k < text.length; k++) {
-                ctx.fillText(text[k], cellX, startY + k * charSize);
-              }
+              ctx.fillText(text, cellX, y + blockH / 2);
               ctx.restore();
             }
           } else {

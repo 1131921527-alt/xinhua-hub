@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>文件预览</title>
 <style>
   :root {
@@ -78,6 +79,23 @@
     border: none;
     display: block;
   }
+  /* Image viewer - scrollable container with pinch-zoom support */
+  #imgViewer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+    text-align: center;
+    background: #1a1a1a;
+  }
+  #imgViewer img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+    touch-action: pan-x pan-y pinch-zoom;
+  }
   /* Text version container */
   #textViewer {
     width: 100%;
@@ -86,6 +104,21 @@
     display: none;
     -webkit-overflow-scrolling: touch;
   }
+
+  /* WeChat hint banner */
+  .wechat-hint {
+    background: #FFF7ED;
+    border-bottom: 1px solid #FED7AA;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #9A3412;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    line-height: 1.5;
+  }
+  .wechat-hint.show { display: flex; }
 
   /* No preview fallback */
   .file-info {
@@ -177,6 +210,12 @@
     <h2 id="title">文件预览</h2>
   </div>
 
+  <!-- WeChat hint banner -->
+  <div class="wechat-hint" id="wechatHint">
+    <span style="font-size:16px;">💬</span>
+    <span id="wechatHintText"></span>
+  </div>
+
   <div class="toggle-bar" id="toggleBar">
     <button class="toggle-btn active" id="btnImgView" onclick="showImage()">📷 图片版</button>
     <button class="toggle-btn" id="btnTextView" onclick="showText()">📝 文字版</button>
@@ -184,6 +223,7 @@
 
   <div class="viewer-wrap">
     <iframe id="viewer" src=""></iframe>
+    <div id="imgViewer"><img id="imgEl" src="" alt=""></div>
     <div id="textViewer"></div>
 
     <!-- Loading overlay -->
@@ -204,11 +244,15 @@
 
   <div class="bottom-bar">
     <a id="dlBtn" class="btn btn-primary" href="" download>📥 下载文件</a>
-    <button class="btn btn-secondary" onclick="openInNew()">🌐 新窗口打开</button>
+    <button class="btn btn-secondary" onclick="openInNew()">🌐 浏览器打开</button>
   </div>
 
   <!-- ========== 文字版出单流程数据 ========== -->
   <script>
+  // ===== 检测微信环境 =====
+  const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
   // ===== 出单流程文字版内容 =====
   const FLOW_TEXT_DATA = {
 
@@ -298,7 +342,7 @@
     '在售产品投保年龄及起售金额': `
       <div class="flow-title" style="text-align:center;">新华在售产品 投保年龄及起售金额一览</div>
       <div class="flow-desc" style="text-align:center;color:#64748B;font-size:13px;margin-bottom:16px;">线上投保年龄统一为：趸交64周岁，期交59周岁</div>
-      <div style="overflow-x:auto;">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
       <table class="prod-table">
         <thead>
           <tr>
@@ -352,9 +396,26 @@
   const type = (params.get('type') || '').toLowerCase();
 
   document.getElementById('title').textContent = title;
-  document.getElementById('dlBtn').href = file;
+
+  // 下载按钮：优先使用原图（files/originals/），回退到当前文件
+  const dlBtn = document.getElementById('dlBtn');
+  dlBtn.href = file; // 默认用当前文件
+  // 异步加载mapping，如果有原图则切换到原图
+  fetch('files/originals/mapping.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(map => {
+      if (map && map[file]) {
+        dlBtn.href = map[file];
+        // 设置download属性为原始文件名
+        const origName = map[file].split('/').pop();
+        dlBtn.setAttribute('download', origName);
+      }
+    })
+    .catch(() => {});
 
   const viewer = document.getElementById('viewer');
+  const imgViewer = document.getElementById('imgViewer');
+  const imgEl = document.getElementById('imgEl');
   const textViewer = document.getElementById('textViewer');
   const noPreview = document.getElementById('noPreview');
   const toggleBar = document.getElementById('toggleBar');
@@ -362,6 +423,8 @@
   const typeIcon = document.getElementById('typeIcon');
   const typeMsg = document.getElementById('typeMsg');
   const fileSizeEl = document.getElementById('fileSize');
+  const wechatHint = document.getElementById('wechatHint');
+  const wechatHintText = document.getElementById('wechatHintText');
 
   // 判断是否有文字版（出单流程图）
   function hasTextVersion(t) {
@@ -374,7 +437,7 @@
   const archiveTypes = ['zip','rar'];
   const ext = file.split('.').pop().toLowerCase();
   const isImg = imgTypes.includes(ext) || imgTypes.includes(type);
-  const isPdf = pdfTypes.includes(ext) || type === 'pdf';
+  const isPdf = pdfTypes.includes(ext) || type === 'pdf' || type === 'contract';
   const isOffice = officeTypes.includes(ext) || officeTypes.includes(type);
   const isArchive = archiveTypes.includes(ext) || archiveTypes.includes(type);
   const hasText = hasTextVersion(title);
@@ -385,25 +448,36 @@
     catch(e) { return relUrl; }
   }
 
+  // 微信环境提示
+  function showWeChatHint(text) {
+    wechatHintText.textContent = text;
+    wechatHint.classList.add('show');
+  }
+
   // 显示加载中
   loadingOverlay.classList.remove('hidden');
 
   if (hasText) {
     // 有文字版 → 显示切换按钮
     toggleBar.classList.add('show');
-    viewer.style.display = 'block';
+    viewer.style.display = 'none';
+    imgViewer.style.display = 'block';
     textViewer.innerHTML = '<div class="flow-container">' + FLOW_TEXT_DATA[title] + '</div>';
     // 交清增额释义默认显示文字版，出单流程图默认显示图片版
     const textFirstTitles = ['交清增额释义', '在售产品投保年龄及起售金额'];
-    viewer.src = file;
+    imgEl.src = file;
+    imgEl.onload = () => { hideLoading(); };
+    imgEl.onerror = () => { hideLoading(); imgViewer.style.display = 'none'; };
     if (textFirstTitles.includes(title)) {
       showText();
     } else {
-      viewer.onload = () => { hideLoading(); };
       setTimeout(hideLoading, 8000);
     }
   } else if (isOffice) {
     // Office文件 → 使用Microsoft Office Online Viewer在线预览
+    if (isWeChat) {
+      showWeChatHint('微信内可能无法直接预览Office文件，如加载失败请点击「浏览器打开」或下载后查看');
+    }
     const absUrl = getAbsoluteUrl(file);
     const officeUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absUrl);
     viewer.style.display = 'block';
@@ -416,13 +490,16 @@
         hideLoading();
         noPreview.style.display = 'block';
         viewer.style.display = 'none';
-        const iconMap = {'ppt':'📊','pptx':'📊','doc':'📝','docx':'📝','xls':'📈','xlsx':'📈'};
+        const iconMap = {'ppt':'📽️','pptx':'📽️','doc':'📝','docx':'📝','xls':'📈','xlsx':'📈'};
         typeIcon.textContent = iconMap[ext] || iconMap[type] || '📄';
-        typeMsg.innerHTML = '在线预览加载超时<br>请点击下方「下载文件」或「新窗口打开」查看';
+        typeMsg.innerHTML = '在线预览加载超时<br>请点击下方「下载文件」或「浏览器打开」查看';
       }
     }, 20000);
   } else if (isPdf) {
-    // PDF → iframe预览，添加#view=FitH参数加速首屏渲染
+    // PDF → iframe预览
+    if (isWeChat && isIOS) {
+      showWeChatHint('苹果微信内可能无法直接预览PDF，如显示空白请点击「浏览器打开」用Safari查看');
+    }
     viewer.style.display = 'block';
     const pdfUrl = file + (file.indexOf('#') === -1 ? '#view=FitH' : '');
     viewer.src = pdfUrl;
@@ -435,30 +512,17 @@
       typeIcon.textContent = '⚠️';
       typeMsg.innerHTML = 'PDF加载失败<br>请尝试下载后查看';
     };
-    // 添加快速预览按钮（Google Docs Viewer，可加速大PDF加载）
-    const quickBtn = document.createElement('button');
-    quickBtn.className = 'btn btn-secondary';
-    quickBtn.style.cssText = 'flex:0 0 auto;padding:11px 14px;white-space:nowrap;';
-    quickBtn.textContent = '⚡ 快速预览';
-    quickBtn.onclick = () => {
-      const gurl = 'https://docs.google.com/gview?embedded=true&url=' + encodeURIComponent(getAbsoluteUrl(file));
-      viewer.src = gurl;
-      loadingOverlay.classList.remove('hidden');
-      document.querySelector('.loading-text').textContent = '正在通过Google加速加载...';
-      viewer.onload = () => { hideLoading(); };
-      setTimeout(hideLoading, 15000);
-    };
-    document.querySelector('.bottom-bar').insertBefore(quickBtn, document.getElementById('dlBtn'));
     setTimeout(hideLoading, 15000);
   } else if (isImg) {
-    // 图片 → iframe预览
-    viewer.style.display = 'block';
-    viewer.src = file;
-    viewer.onload = () => { hideLoading(); };
-    viewer.onerror = () => {
+    // 图片 → 使用imgViewer（支持双指缩放和滚动）
+    imgViewer.style.display = 'block';
+    viewer.style.display = 'none';
+    imgEl.src = file;
+    imgEl.onload = () => { hideLoading(); };
+    imgEl.onerror = () => {
       hideLoading();
       noPreview.style.display = 'block';
-      viewer.style.display = 'none';
+      imgViewer.style.display = 'none';
       typeIcon.textContent = '⚠️';
       typeMsg.innerHTML = '图片加载失败<br>请尝试下载后查看';
     };
@@ -471,8 +535,8 @@
     typeIcon.textContent = '📦';
     let sizeStr = '';
     if (params.get('size')) {
-      sizeStr = '文件大小：' + (parseInt(params.get('size')) > 1024*1024 
-        ? (parseInt(params.get('size'))/(1024*1024)).toFixed(1) + ' MB' 
+      sizeStr = '文件大小：' + (parseInt(params.get('size')) > 1024*1024
+        ? (parseInt(params.get('size'))/(1024*1024)).toFixed(1) + ' MB'
         : Math.round(parseInt(params.get('size'))/1024) + ' KB');
     }
     typeMsg.innerHTML = '<b>ZIP/RAR</b> 压缩文件暂不支持在线预览<br>请点击下方「下载文件」解压后查看';
@@ -495,16 +559,18 @@
 
   // 切换到图片版
   function showImage() {
-    viewer.style.display = 'block';
+    imgViewer.style.display = 'block';
+    viewer.style.display = 'none';
     textViewer.style.display = 'none';
     document.getElementById('btnImgView').classList.add('active');
     document.getElementById('btnTextView').classList.remove('active');
     // 重新触发加载
-    if (!viewer.src) viewer.src = file;
+    if (!imgEl.src) imgEl.src = file;
   }
 
   // 切换到文字版
   function showText() {
+    imgViewer.style.display = 'none';
     viewer.style.display = 'none';
     textViewer.style.display = 'block';
     document.getElementById('btnTextView').classList.add('active');

@@ -148,6 +148,53 @@ body {
 }
 .param-bar span { font-weight: 600; color: var(--text); }
 
+/* 投保索引卡 */
+.index-card {
+  background: #DC2626;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.25);
+}
+.index-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+.index-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+.index-item {
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.index-item .label {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.index-item .value {
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.index-item.full { grid-column: 1 / -1; }
+
+@media (max-width: 480px) {
+  .index-grid { grid-template-columns: 1fr 1fr; }
+}
+
 /* Table */
 .table-wrap {
   background: var(--card); border-radius: 14px; overflow: hidden;
@@ -282,6 +329,10 @@ tbody tr:hover { background: #EFF6FF; }
         </div>
       </div>
       <div class="form-group">
+        <label>被保险人姓名</label>
+        <input type="text" id="insuredName" value="VIP" placeholder="请输入被保险人姓名">
+      </div>
+      <div class="form-group">
         <label>投保年龄（周岁）</label>
         <input type="number" id="age" value="57" min="0" max="69" placeholder="30~69">
       </div>
@@ -295,8 +346,19 @@ tbody tr:hover { background: #EFF6FF; }
         </select>
       </div>
       <div class="form-group">
+        <label>年金起领年龄</label>
+        <input type="number" id="startAge" value="60" min="50" max="75" placeholder="如60">
+      </div>
+      <div class="form-group">
         <label>年交保费（元）</label>
         <input type="number" id="premium" value="300000" min="10000" step="10000" placeholder="最低1万整数倍">
+      </div>
+      <div class="form-group">
+        <label>领取方式</label>
+        <select id="drawMode">
+          <option value="year" selected>年领</option>
+          <option value="month">月领</option>
+        </select>
       </div>
       <div class="form-group full">
         <label>表格显示方式</label>
@@ -313,6 +375,13 @@ tbody tr:hover { background: #EFF6FF; }
   <!-- Results -->
   <div class="results" id="results">
     <div class="param-bar" id="paramBar"></div>
+
+    <!-- 投保索引 -->
+    <div class="index-card" id="indexCard">
+      <h4>宏愿人生养老年金保险（分红型）· 投保索引</h4>
+      <div class="index-grid" id="indexGrid"></div>
+    </div>
+
     <div class="download-bar">
       <button class="btn-download btn-dl-primary" onclick="downloadImage()">📥 下载计划书图片</button>
       <button class="btn-download btn-dl-secondary" onclick="copyTable()">📋 复制表格数据</button>
@@ -445,8 +514,12 @@ async function generate() {
     const age = parseInt(document.getElementById('age').value);
     const term = parseInt(document.getElementById('term').value);
     const premium = parseInt(document.getElementById('premium').value);
+    const insuredName = document.getElementById('insuredName').value.trim() || 'VIP';
+    const startAge = parseInt(document.getElementById('startAge').value) || 60;
+    const drawMode = document.getElementById('drawMode').value;
     
     if (isNaN(age) || age < 30 || age > 69) { showError('投保年龄须在30~69周岁之间'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
+    if (isNaN(startAge) || startAge < 50 || startAge > 75) { showError('年金起领年龄须在50~75周岁之间'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
     if (isNaN(premium) || premium < 10000) { showError('年交保费最低10,000元'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
     const maxAgeMap = { 1: 65, 3: 65, 5: 65, 10: 60 };
     if (age > (maxAgeMap[term]||65)) { showError(`该交费方式最高投保年龄为${maxAgeMap[term]||65}周岁`); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
@@ -468,6 +541,32 @@ async function generate() {
     const tbody = document.getElementById('resultBody');
     const displayMode = document.getElementById('displayMode').value;
     const paymentYears = term === 1 ? 1 : term;
+    
+    // 计算基本保额（年金起领当年年金）
+    let baseAmount = 0;
+    for (let i = 0; i < HY_DATA.length; i++) {
+      const row = HY_DATA[i];
+      const currentAge = row[1] + ageOffset;
+      if (currentAge >= startAge && row[4] > 0) {
+        baseAmount = Math.round(row[4] * scale);
+        break;
+      }
+    }
+    const monthAmount = Math.round(baseAmount * 0.085);
+    
+    // 填充投保索引
+    document.getElementById('indexGrid').innerHTML = `
+      <div class="index-item"><div class="label">被保险人姓名</div><div class="value">${insuredName}</div></div>
+      <div class="index-item"><div class="label">被保险人性别</div><div class="value">${genderLabel}</div></div>
+      <div class="index-item"><div class="label">被保险人年龄</div><div class="value">${age}周岁</div></div>
+      <div class="index-item"><div class="label">保险期间</div><div class="value">终身</div></div>
+      <div class="index-item"><div class="label">交费方式</div><div class="value">${termLabel}</div></div>
+      <div class="index-item"><div class="label">年金起领年龄</div><div class="value">${startAge}周岁</div></div>
+      <div class="index-item"><div class="label">年交保险费</div><div class="value">${fmt(premium)}元</div></div>
+      <div class="index-item"><div class="label">累计保险费</div><div class="value">${fmt(totalPremium)}元</div></div>
+      <div class="index-item"><div class="label">基本保险金额</div><div class="value">${fmt(baseAmount)}元</div></div>
+      <div class="index-item full"><div class="label">选择养老年金领取方式（年领/月领）</div><div class="value">${drawMode === 'month' ? '月领（每月' + fmt(monthAmount) + '元）' : '年领'}</div></div>
+    `;
     
     let html = '';
     let reserveCellRendered = false;

@@ -148,6 +148,65 @@ body {
 }
 .param-bar span { font-weight: 600; color: var(--text); }
 
+/* 投保索引卡 */
+.index-card {
+  background: #1D4ED8;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.25);
+}
+.index-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+.index-section {
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.index-section:last-child { margin-bottom: 0; }
+.index-section-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.index-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+.index-item {
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 8px 6px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.index-item .label {
+  font-size: 11px;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+.index-item .value {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 480px) {
+  .index-grid { grid-template-columns: 1fr 1fr; }
+}
+
 /* Table */
 .table-wrap {
   background: var(--card); border-radius: 14px; overflow: hidden;
@@ -252,25 +311,6 @@ tbody tr:hover { background: #EFF6FF; }
     </div>
   </div>
 
-  <!-- 产品简介 -->
-  <div class="product-detail">
-    <h3>📋 产品简介</h3>
-    <div class="detail-content">
-      <p><strong>S24 华彩鎏金 年金保险（分红型）</strong></p>
-      <ul>
-        <li><b>投保年龄：</b>30天~72周岁（趸交线上64周岁，期交线上59周岁）</li>
-        <li><b>交费方式：</b>趸交（5万元起售）/ 3年交、5年交、10年交（期交2万起售）</li>
-        <li><b>保险期间：</b>至被保险人年满105周岁后的首个保单周年日零时</li>
-        <li><b>关爱金：</b>第5个保单周年日给付基本保险金额</li>
-        <li><b>年金：</b>第6个保单周年日起每年给付基本保险金额的5倍，直至满期</li>
-        <li><b>满期生存保险金：</b>满期给付已交保险费总额</li>
-        <li><b>身故保险金：</b>身故给付已交保险费总额或现金价值较大者</li>
-        <li><b>红利分配：</b>累积生息，共享央企经营成果</li>
-        <li><b>其他权益：</b>保单贷款、减保取现、自动垫交、减额交清</li>
-      </ul>
-    </div>
-  </div>
-
   <!-- 产品亮点 -->
   <div class="product-info">
     <h3>产品亮点</h3>
@@ -307,6 +347,14 @@ tbody tr:hover { background: #EFF6FF; }
         <input type="number" id="age" value="35" min="0" max="72" placeholder="0~72">
       </div>
       <div class="form-group">
+        <label>被保险人姓名</label>
+        <input type="text" id="insuredName" value="vip" placeholder="请输入被保险人姓名">
+      </div>
+      <div class="form-group">
+        <label>联系电话</label>
+        <input type="text" id="phone" value="18001120000" placeholder="请输入联系电话">
+      </div>
+      <div class="form-group">
         <label>交费方式</label>
         <select id="term">
           <option value="1">一次交清（趸交）</option>
@@ -316,8 +364,25 @@ tbody tr:hover { background: #EFF6FF; }
         </select>
       </div>
       <div class="form-group">
+        <label>是否个人养老金账户投保</label>
+        <select id="pensionAccount">
+          <option value="否" selected>否</option>
+          <option value="是">是</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label>年交保费（元）</label>
         <input type="number" id="premium" value="100000" min="20000" step="10000" placeholder="期交最低2万">
+      </div>
+      <div class="form-group">
+        <label>红利领取方式</label>
+        <select id="dividendMode">
+          <option value="累积生息" selected>累积生息</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>累积生息利率（%）</label>
+        <input type="number" id="dividendRate" value="2.5" step="0.1" min="0" max="10" placeholder="默认2.5%">
       </div>
       <div class="form-group full">
         <label>表格显示方式</label>
@@ -334,6 +399,13 @@ tbody tr:hover { background: #EFF6FF; }
   <!-- Results -->
   <div class="results" id="results">
     <div class="param-bar" id="paramBar"></div>
+
+    <!-- 投保索引 -->
+    <div class="index-card" id="indexCard">
+      <h4>华彩鎏金年金保险（分红型）· 投保索引</h4>
+      <div id="indexContent"></div>
+    </div>
+
     <div class="download-bar">
       <button class="btn-download btn-dl-primary" onclick="downloadImage()">📥 下载计划书图片</button>
       <button class="btn-download btn-dl-secondary" onclick="copyTable()">📋 复制表格数据</button>
@@ -490,6 +562,11 @@ async function generate() {
     const age = parseInt(document.getElementById('age').value);
     const term = parseInt(document.getElementById('term').value);
     const premium = parseInt(document.getElementById('premium').value);
+    const insuredName = document.getElementById('insuredName').value.trim() || 'vip';
+    const phone = document.getElementById('phone').value.trim() || '18001120000';
+    const pensionAccount = document.getElementById('pensionAccount').value;
+    const dividendMode = document.getElementById('dividendMode').value;
+    const dividendRate = parseFloat(document.getElementById('dividendRate').value) || 2.5;
 
     if (isNaN(age) || age < 0 || age > 72) { showError('投保年龄须在0~72周岁之间'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
     if (isNaN(premium) || premium < (term === 1 ? 50000 : 20000)) { showError(term===1 ? '趸交保费最低50,000元' : '期交保费最低20,000元'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
@@ -509,11 +586,47 @@ async function generate() {
       <span>${age}周岁</span> ·
       <span>${termLabel}</span> ·
       <span>保费 ${fmt(premium)} 元</span> ·
-      <span>总保费 ${fmt(totalPremium)} 元</span>`;
+      <span>总保费 ${fmt(totalPremium)} 元</span> ·
+      <span>红利${dividendMode} ${dividendRate}%</span>`;
 
     const tbody = document.getElementById('resultBody');
     const displayMode = document.getElementById('displayMode').value;
     const paymentYears = term === 1 ? 1 : term;
+
+    // 基本保险金额：第5年关爱金/年金
+    const baseAmount = Math.round(HC_DATA[4][4] * scale);
+
+    // 填充投保索引
+    document.getElementById('indexContent').innerHTML = `
+      <div class="index-section">
+        <div class="index-section-title">寿险顾问基本信息</div>
+        <div class="index-grid">
+          <div class="index-item"><div class="label">姓名</div><div class="value">小新</div></div>
+          <div class="index-item"><div class="label">联系电话</div><div class="value">${phone}</div></div>
+        </div>
+      </div>
+      <div class="index-section">
+        <div class="index-section-title">被保险人基本信息</div>
+        <div class="index-grid">
+          <div class="index-item"><div class="label">是否个人养老金账户投保</div><div class="value">${pensionAccount}</div></div>
+          <div class="index-item"><div class="label">姓名</div><div class="value">${insuredName}</div></div>
+          <div class="index-item"><div class="label">性别</div><div class="value">${genderLabel}</div></div>
+          <div class="index-item"><div class="label">投保年龄</div><div class="value">${age}周岁</div></div>
+        </div>
+      </div>
+      <div class="index-section">
+        <div class="index-section-title">产品信息</div>
+        <div class="index-grid">
+          <div class="index-item"><div class="label">产品名称</div><div class="value">华彩鎏金年金保险（分红型）</div></div>
+          <div class="index-item"><div class="label">基本保险金额</div><div class="value">${fmt(baseAmount)}元</div></div>
+          <div class="index-item"><div class="label">保险期间</div><div class="value">至105周岁</div></div>
+          <div class="index-item"><div class="label">交费方式</div><div class="value">${termLabel}</div></div>
+          <div class="index-item"><div class="label">保费</div><div class="value">${fmt(premium)}元</div></div>
+          <div class="index-item"><div class="label">红利领取方式</div><div class="value">${dividendMode}</div></div>
+          <div class="index-item"><div class="label">累积生息利率</div><div class="value">${dividendRate}%</div></div>
+        </div>
+      </div>
+    `;
 
     let html = '';
 

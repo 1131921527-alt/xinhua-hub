@@ -390,23 +390,6 @@ tbody tr:hover { background: #EFF6FF; }
     </div>
   </div>
 
-  <!-- 产品简介 -->
-  <div class="product-detail">
-    <h3>📋 产品简介</h3>
-    <div class="detail-content">
-      <p><strong>S03 宏泰世家 终身寿险（分红型）</strong></p>
-      <ul>
-        <li><b>投保年龄：</b>出生满30天~69周岁</li>
-        <li><b>交费方式：</b>一次交清 / 3年交 / 5年交 / 10年交（趸交1万起，期交5000元起）</li>
-        <li><b>保险期间：</b>终身</li>
-        <li><b>保障责任：</b>客运航空意外身故/全残额外给付（最高199.875万）、保证身价保险金、预期身价保险金（含红利）</li>
-        <li><b>保额增长：</b>有效保险金额每年按1.75%递增</li>
-        <li><b>红利分配：</b>不低于可分配盈余的70%</li>
-        <li><b>其他权益：</b>保单贷款（现金价值80%）、减保取现、自动垫交、减额交清</li>
-      </ul>
-    </div>
-  </div>
-
   <!-- Product Info Highlights -->
   <div class="product-info">
     <h3>产品亮点</h3>
@@ -917,7 +900,7 @@ function downloadImage() {
       // ===== 3. 参数栏 =====
       const paramY = infoY + infoH;
       const totalPremium = premium * (term === 1 ? 1 : term);
-      const sumAssured = Math.round(lookup(age)[1] * scale);
+      const sumAssured = 0; // 宏泰无需显示基本保额
       
       ctx.fillStyle = '#DBEAFE';
       ctx.fillRect(padding, paramY, canvasW - padding * 2, paramH);
@@ -935,7 +918,7 @@ function downloadImage() {
       ctx.fillStyle = '#FFFFFF';
       ctx.font = 'bold 22px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(`利 益 演 示 表   （基本保额 ${sumAssured.toLocaleString()} 元）`, canvasW / 2, subHdrY + 30);
+      ctx.fillText('利 益 演 示 表', canvasW / 2, subHdrY + 30);
       
       // ===== 5. 表格 =====
       const tableX = padding;
@@ -1032,23 +1015,18 @@ function downloadImage() {
           ctx.textAlign = 'center';
 
           if (ci === 10 && (r.rate === '投资期' || r.rate === '储备期')) {
-            // 投资期/储备期合并居中：竖排逐字绘制
+            // 投资期/储备期合并居中：水平文字，跨行居中
             if (idx === 0 || (dlRows[idx - 1].rate !== '投资期' && dlRows[idx - 1].rate !== '储备期')) {
               let rc = 0;
               for (let j = idx; j < dlRows.length && (dlRows[j].rate === '投资期' || dlRows[j].rate === '储备期'); j++) rc++;
               const text = r.rate;
-              const charSize = 18;
-              const totalTextH = text.length * charSize;
               const blockH = rc * rowH;
-              const startY = y + (blockH - totalTextH) / 2 + charSize * 0.7;
               ctx.save();
               ctx.fillStyle = '#94A3B8';
-              ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
+              ctx.font = 'bold 16px "PingFang SC", "Microsoft YaHei", sans-serif';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
-              for (let k = 0; k < text.length; k++) {
-                ctx.fillText(text[k], cellX, startY + k * charSize);
-              }
+              ctx.fillText(text, cellX, y + blockH / 2);
               ctx.restore();
             }
           } else {
