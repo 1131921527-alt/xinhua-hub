@@ -969,9 +969,11 @@ function downloadImage() {
         const divPv = Math.round(row[8] * scale);
         const cvGuar = Math.round(row[9] * scale);
         const cvTotal = Math.round(row[10] * scale);
+        const dlPaymentYears = term === 1 ? 1 : term;
+        const dlReserveYears = dlPaymentYears + 2;
         let rate = row[11];
-        if (rate === '投资期' || rate === '储备期') {
-          // 保持文字不变
+        if (yr <= dlReserveYears) {
+          rate = '投资期';
         } else if (rate && rate !== '' && !isNaN(parseFloat(rate))) {
           rate = (parseFloat(rate) * 100).toFixed(2) + '%';
         } else {
