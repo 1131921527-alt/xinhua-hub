@@ -756,12 +756,28 @@ function downloadImage() {
         }
       });
       
+      // 储备期列的x范围
+      const reserveColXStart = tblX + colWidths.slice(0, 9).reduce((a,b)=>a+b,0);
+      const reserveColXEnd = reserveColXStart + colWidths[9];
+      let reserveCellX = 0;
+      
       dlRows.forEach((r,idx)=>{
         const y=tblY+headerH+idx*rowH,isHL=(r.yr===5);
         ctx.fillStyle=isHL?'#FEF2F2':(idx%2===0?'#FFFFFF':'#F0F9FF');
         ctx.fillRect(tblX,y,totalW,rowH);
+        // 行内分隔线：储备期块内断开（不穿过合并单元格）
+        const isReserveRow = r.yr <= dlPayYears + 2;
         if(isHL){ctx.strokeStyle='#FCA5A5';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(tblX,y);ctx.lineTo(tblX+totalW,y);ctx.lineTo(tblX+totalW,y+rowH);ctx.lineTo(tblX,y+rowH);ctx.closePath();ctx.stroke();}
-        else{ctx.strokeStyle='#E2E8F0';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(tblX,y+rowH);ctx.lineTo(tblX+totalW,y+rowH);ctx.stroke();}
+        else{
+          ctx.strokeStyle='#E2E8F0';ctx.lineWidth=0.5;ctx.beginPath();
+          if(isReserveRow){
+            ctx.moveTo(tblX,y+rowH);ctx.lineTo(reserveColXStart,y+rowH);
+            ctx.moveTo(reserveColXEnd,y+rowH);ctx.lineTo(tblX+totalW,y+rowH);
+          } else {
+            ctx.moveTo(tblX,y+rowH);ctx.lineTo(tblX+totalW,y+rowH);
+          }
+          ctx.stroke();
+        }
         
         const vals=[
           {t:r.yr,c:'#1E293B',f:'bold 16px PingFang SC'},
@@ -775,29 +791,41 @@ function downloadImage() {
           {t:fmt(r.surv),c:isHL?'#DC2626':'#1D4ED8',f:`bold ${isHL?'17':'16'}px PingFang SC`},
           {t:'',c:'#94A3B8',f:'14px PingFang SC'}
         ];
-        // 储备期合并：只在第一行画"储备期"，垂直居中
-        const isReserveRow = r.yr <= dlPayYears + 2;
-        const isReserveStart = isReserveRow && idx === dlReserveStartIdx;
         if (!isReserveRow) {
           vals[9] = {t:(r.rate&&r.rate!=='')?r.rate:'-',c:r.rate&&r.rate!==''?'#16A34A':'#94A3B8',f:'bold 14px PingFang SC'};
-        } else if (isReserveStart) {
-          vals[9] = {t:'储备期',c:'#94A3B8',f:'bold 15px PingFang SC'};
         }
         let cellX=tblX+4;vals.forEach((v,i)=>{
           const px=cellX+colWidths[i]/2;
           ctx.fillStyle=isHL&&!['#DC2626','#16A34A'].includes(v.c)?'#DC2626':v.c;
           ctx.font=v.f;ctx.textAlign='center';
-          // 储备期第一行：垂直居中跨越所有储备期行
-          if (isReserveStart && i === 9) {
-            ctx.fillText(String(v.t), px, y + (dlReserveCount * rowH) / 2 + 5);
-          } else if (isReserveRow && i === 9 && !isReserveStart) {
-            // 其他储备期行不画rate列
+          if (isReserveRow && i === 9) {
+            // 储备期列留空，记录列中心
+            reserveCellX = px;
           } else {
             ctx.fillText(String(v.t),px,y+rowH/2+5);
           }
           cellX+=colWidths[i];
         });
       });
+      
+      // 单独绘制储备期合并单元格（在所有行背景之上）
+      if (dlReserveStartIdx >= 0 && dlReserveCount > 0 && reserveCellX > 0) {
+        const y0 = tblY + headerH + dlReserveStartIdx * rowH;
+        const blockH = dlReserveCount * rowH;
+        // 浅色背景覆盖整个块
+        ctx.fillStyle = '#F1F5F9';
+        ctx.fillRect(reserveColXStart, y0, colWidths[9], blockH);
+        // 外边框包围整个块
+        ctx.strokeStyle = '#CBD5E1';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(reserveColXStart + 0.5, y0 + 0.5, colWidths[9] - 1, blockH - 1);
+        // 合并居中文字
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = 'bold 15px "PingFang SC", "Microsoft YaHei", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('储备期', reserveCellX, y0 + blockH / 2);
+      }
       
       // Footer
       const ftY=tblY+headerH+dlRows.length*rowH+18;
