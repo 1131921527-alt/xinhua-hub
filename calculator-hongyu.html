@@ -913,15 +913,27 @@ function downloadImage() {
 
       // 绘制行（先画背景+数据，储备期列暂时留空）
       let reserveCellX = 0;
+      const reserveColXStart = tableX + colWidths.slice(0, 7).reduce((a, b) => a + b, 0);
+      const reserveColXEnd = reserveColXStart + colWidths[7];
       dlRows.forEach((r, idx) => {
         const y = tableY + headerH + idx * rowH;
         ctx.fillStyle = idx % 2 === 0 ? '#FFFFFF' : '#F0F9FF';
         ctx.fillRect(tableX, y, totalWidth, rowH);
+        // 行内分隔线：储备期块内（idx在reserveStart到reserveStart+reserveCount-1之间）不画到储备期列
+        const isInReserve = idx >= reserveStart && idx < reserveStart + reserveCount;
         ctx.strokeStyle = '#E2E8F0';
         ctx.lineWidth = 0.5;
         ctx.beginPath();
-        ctx.moveTo(tableX, y + rowH);
-        ctx.lineTo(tableX + totalWidth, y + rowH);
+        if (isInReserve) {
+          // 分两段画：储备期列左边 + 储备期列右边
+          ctx.moveTo(tableX, y + rowH);
+          ctx.lineTo(reserveColXStart, y + rowH);
+          ctx.moveTo(reserveColXEnd, y + rowH);
+          ctx.lineTo(tableX + totalWidth, y + rowH);
+        } else {
+          ctx.moveTo(tableX, y + rowH);
+          ctx.lineTo(tableX + totalWidth, y + rowH);
+        }
         ctx.stroke();
 
         const vals = [
@@ -952,10 +964,18 @@ function downloadImage() {
         });
       });
 
-      // 单独绘制储备期合并文字（在所有行背景之上）
+      // 单独绘制储备期合并单元格（在所有行背景之上）
       if (reserveStart >= 0 && reserveCount > 0 && reserveCellX > 0) {
         const y0 = tableY + headerH + reserveStart * rowH;
         const blockH = reserveCount * rowH;
+        // 浅色背景覆盖整个块
+        ctx.fillStyle = '#F1F5F9';
+        ctx.fillRect(reserveColXStart, y0, colWidths[7], blockH);
+        // 外边框包围整个块（像Excel合并单元格）
+        ctx.strokeStyle = '#CBD5E1';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(reserveColXStart + 0.5, y0 + 0.5, colWidths[7] - 1, blockH - 1);
+        // 合并居中文字
         ctx.fillStyle = '#94A3B8';
         ctx.font = 'bold 17px "PingFang SC", "Microsoft YaHei", sans-serif';
         ctx.textAlign = 'center';
