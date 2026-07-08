@@ -90,6 +90,13 @@
         <input id="premium" type="number" value="100000" min="1000" step="1000">
       </div>
       <div class="field">
+        <label>领取方式</label>
+        <select id="drawMode">
+          <option value="year" selected>年领</option>
+          <option value="month">月领</option>
+        </select>
+      </div>
+      <div class="field">
         <label>显示方式</label>
         <select id="displayMode">
           <option value="all">全部年度</option>
@@ -116,7 +123,7 @@
       <table id="resultTable">
         <thead><tr>
           <th>保单年度</th><th>年龄</th><th>当年保费</th><th>累计保费</th>
-          <th>养老年金<br>祝寿金</th><th>累计养老年金<br>祝寿金</th><th>满期生存<br>保险金</th>
+          <th id="thAnn">养老年金<br>祝寿金(年领)</th><th>累计养老年金<br>祝寿金</th><th>满期生存<br>保险金</th>
           <th>身故<br>保险金</th><th>现金价值</th><th>累积红利</th>
           <th>生存总利益<br>(红利演示)</th><th>身故总利益<br>(红利演示)</th><th>阶段</th>
         </tr></thead>
@@ -160,6 +167,9 @@ async function generate(){
     const age=parseInt(document.getElementById('age').value);
     const term=parseInt(document.getElementById('term').value);
     const premium=parseInt(document.getElementById('premium').value);
+    const drawMode=document.getElementById('drawMode').value;
+    const drawLabel=drawMode==='month'?'月领':'年领';
+    const annFactor=drawMode==='month'?0.085:1;
     if(isNaN(age)||age<0||age>75){showError('投保年龄须在0~75周岁');btn.disabled=false;btn.textContent='📊 生成利益演示';return;}
     if(isNaN(premium)||premium<(term===1?10000:1000)||premium%1000!==0){showError('保费须为1,000元整数倍（一次交清最低10,000元）');btn.disabled=false;btn.textContent='📊 生成利益演示';return;}
     const maxAgeMap={0:{1:75,3:75,5:72,10:65},1:{1:75,3:75,5:72,10:65}};
@@ -177,7 +187,8 @@ async function generate(){
     const termLabel={1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
     document.getElementById('paramBar').style.display='flex';
     document.getElementById('paramBar').innerHTML=
-      `<span>${genderLabel}</span><span>${age}周岁</span><span>${termLabel}</span><span>年交 ${fmt(premium)}元</span><span>基本保额 ${fmt(sumAssured)}元</span>`;
+      `<span>${genderLabel}</span><span>${age}周岁</span><span>${termLabel}</span><span>年交 ${fmt(premium)}元</span><span>基本保额 ${fmt(sumAssured)}元</span><span>领取方式 ${drawLabel}</span>`;
+    document.getElementById('thAnn').innerHTML = drawMode==='month' ? '养老年金<br>祝寿金(月领)' : '养老年金<br>祝寿金(年领)';
 
     const dlMode=document.getElementById('displayMode').value;
     const body=document.getElementById('resultBody');
@@ -204,7 +215,7 @@ async function generate(){
       }
       tr.innerHTML=`<td>${yr}</td><td>${curAge}</td>`+
         `<td>${prem>0?fmt(prem*scale):'-'}</td><td>${fmt(cum*scale)}</td>`+
-        `<td class="col-ann">${ann>0?fmt(ann*scale):'-'}</td><td class="col-ann">${fmt(annCum*scale)}</td>`+
+        `<td class="col-ann">${ann>0?fmt(ann*scale*annFactor):'-'}</td><td class="col-ann">${fmt(annCum*scale*annFactor)}</td>`+
         `<td>${mat>0?fmt(mat*scale):'-'}</td><td>${fmt(death*scale)}</td>`+
         `<td class="col-cv">${fmt(cv*scale)}</td><td class="col-div">${fmt(cumDiv*scale)}</td>`+
         `<td class="col-surv">${fmt(surv*scale)}</td><td class="col-surv">${fmt(deathDiv*scale)}</td>`+
@@ -220,6 +231,7 @@ function downloadImage(){
   const term=parseInt(document.getElementById('term').value);
   const premium=parseInt(document.getElementById('premium').value);
   const dlMode=document.getElementById('displayMode').value;
+  const drawMode=document.getElementById('drawMode').value;
   const key=`${currentGender}_${age}_${term}`;
   const entry=CALC_DATA_INLINE[key];
   if(!entry){showToast('请先生成表格');return;}
@@ -228,127 +240,183 @@ function downloadImage(){
   const sumAssured=Math.round(entry.E*scale);
   const years=entry.y;
   const reserveYears=5;
+  const drawLabel = drawMode==='month' ? '月领' : '年领';
+  const annFactor = drawMode==='month' ? 0.085 : 1;
 
   const genderLabel=currentGender===0?'男':'女';
   const termLabel={1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
 
+  // 收集渲染行
   const dlRows=[];
   years.forEach(row=>{
     const yr=row[0],prem=row[1],cum=row[2],ann=row[3],annCum=row[4],mat=row[5],death=row[6],cv=row[7],cumDiv=row[9],surv=row[10],deathDiv=row[11];
     const curAge=age+yr-1;
     const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
     if(skip) return;
-    dlRows.push({yr,age:curAge,prem:prem*scale,cum:cum*scale,ann:ann*scale,annCum:annCum*scale,mat:mat*scale,death:death*scale,cv:cv*scale,cumDiv:cumDiv*scale,surv:surv*scale,deathDiv:deathDiv*scale,reserve:yr<=reserveYears});
+    dlRows.push({
+      yr, age:curAge,
+      prem:prem*scale, cum:cum*scale,
+      ann:ann*scale*annFactor, annCum:annCum*scale*annFactor,
+      mat:mat*scale, death:death*scale, cv:cv*scale,
+      cumDiv:cumDiv*scale, surv:surv*scale, deathDiv:deathDiv*scale,
+      reserve:yr<=reserveYears
+    });
   });
 
-  const dpr=2;
-  const pad=20;
-  const colWidths=[52,44,84,92,92,100,76,76,88,84,108,108,80];
+  // ===== 尺寸常量（统一规范）=====
+  const DPR=2, PAD=22;
+  const TITLE_H=80, INFO_H=130, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
+  const colWidths=[56,46,96,104,100,108,116,112,96,108,108,82];
   const totalW=colWidths.reduce((a,b)=>a+b,0);
-  const headerH=66, rowH=42;
-  const titleH=80, infoH=120, paramH=60, subH=14, footerH=44;
-  const tableH=headerH+dlRows.length*rowH;
-  const canvasW=totalW+pad*2;
-  const canvasH=titleH+infoH+paramH+subH+tableH+footerH+pad;
+  const tableH=HEADER_H+dlRows.length*ROW_H;
+  const canvasW=totalW+PAD*2;
+  const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+tableH+FOOTER_H+PAD*2;
   const canvas=document.getElementById('renderCanvas');
-  canvas.width=canvasW*dpr; canvas.height=canvasH*dpr;
+  canvas.width=canvasW*DPR; canvas.height=canvasH*DPR;
   const ctx=canvas.getContext('2d');
-  ctx.scale(dpr,dpr);
+  ctx.scale(DPR,DPR);
   ctx.fillStyle='#FFFFFF'; ctx.fillRect(0,0,canvasW,canvasH);
 
-  // title
-  ctx.fillStyle='#1E3A5F'; ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.font='bold 22px "PingFang SC","Microsoft YaHei",sans-serif';
-  ctx.fillText('宏坤人生养老年金保险（分红型） · 利益演示', canvasW/2, 36);
-  ctx.fillStyle='#64748B'; ctx.font='13px "PingFang SC","Microsoft YaHei",sans-serif';
-  ctx.fillText('新华保险 · 养老年金（分红型）· 保障至105周岁 · 红利为预期演示值', canvasW/2, 64);
+  const C={
+    titleGrad:['#1D4ED8','#2563EB','#1E40AF'],
+    companyBg:'#EFF6FF', paramBg:'#DBEAFE',
+    subHeader:'#1D4ED8', tableHeader:'#1E3A5F',
+    rowWhite:'#FFFFFF', rowAlt:'#F0F9FF',
+    reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
+    textDark:'#1E293B', textGray:'#334155', textMuted:'#94A3B8',
+    accentBlue:'#2563EB'
+  };
 
-  // info + param
-  const infoY=titleH;
-  ctx.textAlign='left'; ctx.fillStyle='#334155'; ctx.font='14px "PingFang SC","Microsoft YaHei",sans-serif';
-  ctx.fillText(`被保人：${genderLabel} ${age}周岁   |   交费方式：${termLabel}   |   年交保费：${fmt(premium)}元`, pad, infoY+28);
-  ctx.fillText(`基本保额：${fmt(sumAssured)}元   |   领取：年领   |   红利：累积生息（预期演示）`, pad, infoY+54);
-  ctx.fillText(`生成时间：${new Date().toLocaleDateString('zh-CN')}`, pad, infoY+80);
-  const paramY=infoY+infoH;
-  ctx.fillStyle='#E2E8F0'; ctx.fillRect(pad,paramY,totalW,paramH);
-  ctx.fillStyle='#1E293B'; ctx.font='bold 15px "PingFang SC","Microsoft YaHei",sans-serif';
-  ctx.textAlign='center';
-  ctx.fillText(`${genderLabel} ${age}周岁 · ${termLabel} · 年交${fmt(premium)}元 · 基本保额${fmt(sumAssured)}元`, canvasW/2, paramY+paramH/2);
+  // ===== ① 标题栏（蓝头渐变）=====
+  const g=ctx.createLinearGradient(0,0,canvasW,0);
+  g.addColorStop(0,C.titleGrad[0]); g.addColorStop(0.5,C.titleGrad[1]); g.addColorStop(1,C.titleGrad[2]);
+  ctx.fillStyle=g; ctx.fillRect(0,0,canvasW,TITLE_H);
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillStyle='#FFFFFF'; ctx.font='bold 26px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('S06 宏坤人生养老年金保险（分红型） 利益演示', canvasW/2, 32);
+  ctx.font='14px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('新华保险 · 养老年金（分红型） · 综合值能力285% · 年化总投报收益率6.3%', canvasW/2, 60);
 
-  const subHdrY=paramY+paramH;
-  const tableX=pad, tableY=subHdrY+subH;
+  // ===== ② 公司介绍区（左右栏）=====
+  const infoY=TITLE_H;
+  ctx.fillStyle=C.companyBg; ctx.fillRect(0,infoY,canvasW,INFO_H);
+  ctx.textAlign='left';
+  // 左栏：公司背景
+  let lx=PAD;
+  ctx.fillStyle=C.textDark; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('公司背景', lx, infoY+24);
+  ctx.font='14px "PingFang SC","Microsoft YaHei",sans-serif';
+  const leftLines=[
+    '成立1996年9月人民大会堂',
+    '中央汇金（中农工建4行同属大股东）',
+    '全国性大型寿险公司',
+    '2024上市 总规模178亿份',
+    '综合值能力285%'
+  ];
+  leftLines.forEach((t,i)=>ctx.fillText(t, lx, infoY+48+i*16));
+  // 右栏：产品特点（分隔线）
+  const midX=canvasW/2;
+  ctx.strokeStyle='#BFDBFE'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(midX,infoY+14); ctx.lineTo(midX,infoY+INFO_H-14); ctx.stroke();
+  let rx=midX+PAD;
+  ctx.fillStyle=C.textDark; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('产品特点', rx, infoY+24);
+  ctx.font='14px "PingFang SC","Microsoft YaHei",sans-serif';
+  const rightLines=[
+    '投保年龄：30天-75周岁',
+    '交费线18-64岁5万起',
+    '领取线18-59周岁趸交2万起',
+    '养老年金：基本保额100%（可年领/月领）',
+    '分红：累积生息 假设收益率6.3%',
+    '保障期间：至105周岁后首个保单周年日'
+  ];
+  rightLines.forEach((t,i)=>ctx.fillText(t, rx, infoY+48+i*14));
 
-  // header
-  ctx.fillStyle='#334155'; ctx.fillRect(tableX,tableY,totalW,headerH);
-  const headers=['保单\n年度','年龄','当年\n保费','累计\n保费','养老年金\n祝寿金','累计养老年金\n祝寿金','满期生存\n保险金','身故\n保险金','现金\n价值','累积\n红利','生存总利益\n(红利演示)','身故总利益\n(红利演示)','阶段'];
-  ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  // ===== ③ 参数栏 =====
+  const paramY=infoY+INFO_H;
+  ctx.fillStyle=C.paramBg; ctx.fillRect(0,paramY,canvasW,PARAM_H);
+  ctx.fillStyle=C.textDark; ctx.font='bold 16px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(`${genderLabel} ${age}周岁 · ${termLabel} · 年交${fmt(premium)}元 · 基本保额${fmt(sumAssured)}元 · ${drawLabel}`, canvasW/2, paramY+PARAM_H/2);
+
+  // ===== ④ 子标题栏 =====
+  const subY=paramY+PARAM_H;
+  ctx.fillStyle=C.subHeader; ctx.fillRect(0,subY,canvasW,SUBHDR_H);
+  ctx.fillStyle='#FFFFFF'; ctx.font='bold 20px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('利 益 演 示 表', canvasW/2, subY+SUBHDR_H/2);
+
+  // ===== ⑤ 表头 =====
+  const tableX=PAD, tableY=subY+SUBHDR_H;
+  ctx.fillStyle=C.tableHeader; ctx.fillRect(tableX,tableY,totalW,HEADER_H);
+  const annHdr = drawMode==='month' ? '养老年金\n祝寿金(月领)' : '养老年金\n祝寿金(年领)';
+  const headers=['保单年度','年龄\n(年末)','当年保险费\n(年初)',annHdr,'现金价值\n(年末)','红利利益演示\n(年末)(聚积红利)','生存总利益\n(年末)(保证)','加红利\n利益演示','身故总利益\n(年末)','累计保费','累计养老年金\n祝寿金','储备期'];
+  ctx.fillStyle='#FFFFFF'; ctx.textAlign='center'; ctx.textBaseline='middle';
   let hx=tableX;
   headers.forEach((h,i)=>{
-    ctx.font='bold 13px "PingFang SC","Microsoft YaHei",sans-serif';
-    const lines=h.split('\n');
-    const lh=15; const startY=tableY+headerH/2-(lines.length-1)*lh/2;
+    ctx.font='bold 15px "PingFang SC","Microsoft YaHei",sans-serif';
+    const lines=h.split('\n'); const lh=17;
+    const startY=tableY+HEADER_H/2-(lines.length-1)*lh/2;
     lines.forEach((ln,j)=>ctx.fillText(ln, hx+colWidths[i]/2, startY+j*lh));
     hx+=colWidths[i];
   });
 
-  // rows
+  // ===== ⑥ 数据行 =====
   let reserveCellX=0;
   dlRows.forEach((r,idx)=>{
-    const y=tableY+headerH+idx*rowH;
-    ctx.fillStyle=idx%2===0?'#FFFFFF':'#F0F9FF';
-    ctx.fillRect(tableX,y,totalW,rowH);
+    const y=tableY+HEADER_H+idx*ROW_H;
+    ctx.fillStyle=idx%2===0?C.rowWhite:C.rowAlt;
+    ctx.fillRect(tableX,y,totalW,ROW_H);
     ctx.strokeStyle='#E2E8F0'; ctx.lineWidth=0.5;
-    ctx.beginPath(); ctx.moveTo(tableX,y+rowH); ctx.lineTo(tableX+totalW,y+rowH); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(tableX,y+ROW_H); ctx.lineTo(tableX+totalW,y+ROW_H); ctx.stroke();
     const vals=[
-      {t:r.yr,c:'#1E293B',f:'bold 17px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:r.age,c:'#334155',f:'16px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:r.prem>0?fmt(r.prem):'-',c:'#334155',f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:fmt(r.cum),c:'#334155',f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:r.yr,c:C.textDark,f:'bold 17px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:r.age,c:C.textGray,f:'16px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:r.prem>0?fmt(r.prem):'-',c:C.textGray,f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:r.ann>0?fmt(r.ann):'-',c:'#7C3AED',f:'bold 15px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:fmt(r.annCum),c:'#7C3AED',f:'bold 15px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:r.mat>0?fmt(r.mat):'-',c:'#334155',f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:fmt(r.death),c:'#334155',f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:fmt(r.cv),c:'#2563EB',f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:fmt(r.cv),c:C.accentBlue,f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.cumDiv),c:'#7C3AED',f:'bold 15px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.surv),c:'#1D4ED8',f:'bold 17px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:fmt(r.deathDiv),c:'#1D4ED8',f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'}
+      {t:fmt(r.deathDiv),c:'#1D4ED8',f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:fmt(r.death),c:C.textGray,f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:fmt(r.cum),c:C.textGray,f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:fmt(r.annCum),c:'#7C3AED',f:'bold 15px "PingFang SC","Microsoft YaHei",sans-serif'}
     ];
-    let cx=tableX+5;
+    let cx=tableX;
     vals.forEach((cv_,i)=>{
       const cellX=cx+colWidths[i]/2;
       ctx.fillStyle=cv_.c; ctx.font=cv_.f; ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText(String(cv_.t), cellX, y+rowH/2);
+      ctx.fillText(String(cv_.t), cellX, y+ROW_H/2);
       cx+=colWidths[i];
     });
-    if(r.reserve){ reserveCellX=tableX+colWidths.slice(0,12).reduce((a,b)=>a+b,0)+colWidths[12]/2; }
+    if(r.reserve){ reserveCellX=tableX+colWidths.slice(0,11).reduce((a,b)=>a+b,0)+colWidths[11]/2; }
   });
 
-  // 储备期合并单元格（最后列）
+  // ===== ⑦ 储备期合并单元格（两阶段）=====
   const reserveRows=dlRows.filter(r=>r.reserve);
   if(reserveRows.length>0 && reserveCellX>0){
-    const y0=tableY+headerH;
-    const blockH=reserveRows.length*rowH;
-    const colX=tableX+colWidths.slice(0,12).reduce((a,b)=>a+b,0);
-    ctx.fillStyle='#F1F5F9'; ctx.fillRect(colX,y0,colWidths[12],blockH);
-    ctx.strokeStyle='#CBD5E1'; ctx.lineWidth=1; ctx.strokeRect(colX+0.5,y0+0.5,colWidths[12]-1,blockH-1);
-    ctx.fillStyle='#94A3B8'; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
+    const y0=tableY+HEADER_H;
+    const blockH=reserveRows.length*ROW_H;
+    const colX=tableX+colWidths.slice(0,11).reduce((a,b)=>a+b,0);
+    ctx.fillStyle=C.reserveBg; ctx.fillRect(colX,y0,colWidths[11],blockH);
+    ctx.strokeStyle=C.reserveBorder; ctx.lineWidth=1; ctx.strokeRect(colX+0.5,y0+0.5,colWidths[11]-1,blockH-1);
+    ctx.fillStyle=C.textMuted; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillText('储备期', reserveCellX, y0+blockH/2);
   }
 
-  // footer
-  ctx.fillStyle='#94A3B8'; ctx.font='11px "PingFang SC","Microsoft YaHei",sans-serif';
-  ctx.textAlign='center';
-  ctx.fillText('本演示生存总利益=累计养老年金祝寿金+满期保险金+现金价值+累积红利；红利为基于公司经营假设的预期值，实际红利可能高于或低于演示值。具体以保险合同为准', canvasW/2, tableY+headerH+tableH+26);
+  // ===== ⑧ 页脚声明 =====
+  ctx.fillStyle=C.textMuted; ctx.font='12px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('本演示红利为基于公司经营假设的预期值，实际红利可能高于或低于演示值；生存总利益=养老年金祝寿金+满期保险金+现金价值+累积红利。具体以保险合同为准。', canvasW/2, tableY+HEADER_H+tableH+FOOTER_H/2);
 
-  // export
-  canvas.toBlob(function(blob){
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url; a.download=`宏坤人生利益演示_${genderLabel}${age}岁${termLabel}.png`;
-    document.body.appendChild(a); a.click(); a.remove();
-    showToast('图片已下载');
-  },'image/png');
+  // ===== ⑨ 导出（toDataURL）=====
+  const dataUrl=canvas.toDataURL('image/png');
+  const a=document.createElement('a');
+  a.href=dataUrl;
+  a.download=`宏坤人生利益演示_${genderLabel}${age}岁${termLabel}_${drawLabel}.png`;
+  document.body.appendChild(a); a.click(); a.remove();
+  showToast('计划书已下载');
 }
 </script>
 </body>
