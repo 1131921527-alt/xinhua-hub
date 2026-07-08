@@ -229,6 +229,8 @@ tbody tr:hover { background: #EFF6FF; }
 .col-dividend { color: #7C3AED; font-weight: 500; }
 .col-survival { color: var(--blue-dark); font-weight: 600; }
 .col-death { color: var(--primary); font-weight: 500; }
+.col-rate { color: var(--text); }
+.rate-reserve { background: #F1F5F9; color: #94A3B8 !important; font-size: 14px; letter-spacing: 2px; font-weight: 600; }
 .row-highlight { background: #FEF2F2 !important; }
 .row-highlight td { color: var(--red) !important; font-weight: 700 !important; }
 .row-highlight td.col-num, .row-highlight td:nth-child(2) { color: var(--red-highlight) !important; }
@@ -427,6 +429,7 @@ tbody tr:hover { background: #EFF6FF; }
               <th>累积<br>红利</th>
               <th>生存总利益<br>(红利演示)</th>
               <th>身故总利益<br>(红利演示)</th>
+              <th>阶段</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -630,6 +633,17 @@ async function generate() {
 
     let html = '';
 
+    // 储备期：前5年统一标注
+    const reserveYears = 5;
+    let reserveRowCount = 0;
+    for (let i = 0; i < HC_DATA.length; i++) {
+      if (HC_DATA[i][0] > reserveYears) break;
+      const ca0 = HC_DATA[i][1] + ageOffset;
+      const sk = (displayMode==='after60' && ca0>60 && (ca0-60)%5!==0) || (displayMode==='after70' && ca0>70 && (ca0-70)%5!==0);
+      if (!sk) reserveRowCount++;
+    }
+    let reserveCellRendered = false;
+
     for (let idx = 0; idx < HC_DATA.length; idx++) {
       const row = HC_DATA[idx];
       const yr = row[0];
@@ -657,6 +671,14 @@ async function generate() {
       const isMaturity = (yr === 70);
       const rowClass = isMaturity ? ' class="row-maturity"' : (isHighlight ? ' class="row-highlight"' : '');
 
+      let rateCell = '';
+      if (yr <= reserveYears) {
+        if (!reserveCellRendered && reserveRowCount > 0) {
+          rateCell = `<td class="col-rate rate-reserve" rowspan="${reserveRowCount}" style="vertical-align:middle;text-align:center;font-size:14px;letter-spacing:2px;color:#94A3B8;">储备期</td>`;
+          reserveCellRendered = true;
+        }
+      }
+
       html += `<tr${rowClass}>
         <td class="col-num">${yr}</td>
         <td>${currentAge}</td>
@@ -670,6 +692,7 @@ async function generate() {
         <td class="col-dividend">${fmt(cumDiv)}</td>
         <td class="col-survival">${fmt(survDiv)}</td>
         <td class="col-death">${fmt(deathDiv)}</td>
+        ${rateCell}
       </tr>`;
     }
 
@@ -688,7 +711,7 @@ async function generate() {
 function copyTable() {
   const tbody = document.getElementById('resultBody');
   if (!tbody || !tbody.innerHTML) { showToast('请先生成利益演示'); return; }
-  let text = '保单年度\t年龄\t当年保险费\t累计保险费\t关爱金/年金\t累计关爱金/年金\t满期生存保险金\t身故保险金\t现金价值\t累积红利\t生存总利益(红利)\t身故总利益(红利)\n';
+  let text = '保单年度\t年龄\t当年保险费\t累计保险费\t关爱金/年金\t累计关爱金/年金\t满期生存保险金\t身故保险金\t现金价值\t累积红利\t生存总利益(红利)\t身故总利益(红利)\t阶段\n';
   tbody.querySelectorAll('tr').forEach(row => {
     const vals = Array.from(row.querySelectorAll('td')).map(c=>c.textContent.trim());
     text += vals.join('\t') + '\n';
@@ -714,7 +737,7 @@ function downloadImage() {
       const scale = premium/HC_BASE.prem;
 
       const rows = Array.from(tbody.querySelectorAll('tr'));
-      const colWidths=[46,40,72,72,64,80,72,68,68,68,86,86];
+      const colWidths=[46,40,72,72,64,80,72,68,68,68,86,86,90];
       const totalW=colWidths.reduce((a,b)=>a+b,0),rowH=42,headerH=76;
       const titleH=78,infoH=140,paramH=52,subHdrH=40,footerH=56,pad=22;
       const canvasW=totalW+pad*2,canvasH=titleH+infoH+paramH+subHdrH+headerH+rows.length*rowH+footerH+pad*1.5;
@@ -769,7 +792,7 @@ function downloadImage() {
       // Table header
       const tblX=pad,tblY=sHdrY+subHdrH;
       ctx.fillStyle='#1D4ED8';ctx.fillRect(tblX,tblY,totalW,headerH);
-      const hdrs=['保单\n年度','年龄','当年\n保险费','累计\n保险费','关爱金\n年金','累计关爱金\n年金','满期生存\n保险金','身故\n保险金','现金\n价值','累积\n红利','生存总利益\n(红利)','身故总利益\n(红利)'];
+      const hdrs=['保单\n年度','年龄','当年\n保险费','累计\n保险费','关爱金\n年金','累计关爱金\n年金','满期生存\n保险金','身故\n保险金','现金\n价值','累积\n红利','生存总利益\n(红利)','身故总利益\n(红利)','阶段'];
       ctx.fillStyle='#FFF';ctx.font='bold 14px "PingFang SC",sans-serif';ctx.textAlign='center';
       let cx=tblX+2;hdrs.forEach((h,i)=>{
         const lines=h.split('\n'),cx2=cx+colWidths[i]/2;
@@ -792,13 +815,30 @@ function downloadImage() {
           survDiv:Math.round(r[10]*scale),deathDiv:Math.round(r[11]*scale)});
       }
 
+      // 储备期：前5年统一标注
+      const dlReserveYears = 5;
+      let dlReserveCount=0, dlReserveStartIdx=-1;
+      dlRows.forEach((r,i)=>{
+        if(r.yr<=dlReserveYears){
+          if(dlReserveStartIdx===-1) dlReserveStartIdx=i;
+          dlReserveCount++;
+        }
+      });
+      const reserveColIdx = colWidths.length - 1;
+      const reserveColXStart = tblX + colWidths.slice(0, reserveColIdx).reduce((a,b)=>a+b,0);
+      const reserveColXEnd = reserveColXStart + colWidths[reserveColIdx];
+      let reserveCellX = 0;
+
       dlRows.forEach((r,idx)=>{
         const y=tblY+headerH+idx*rowH;
-        const isHL=(r.yr===5),isMat=(r.yr===70);
+        const isHL=(r.yr===5),isMat=(r.yr===70),isReserveRow=(r.yr<=dlReserveYears);
         ctx.fillStyle=isMat?'#FFFBEB':(isHL?'#FEF2F2':(idx%2===0?'#FFFFFF':'#F0F9FF'));
         ctx.fillRect(tblX,y,totalW,rowH);
         if(isHL||isMat){ctx.strokeStyle=isMat?'#FCD34D':'#FCA5A5';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(tblX,y);ctx.lineTo(tblX+totalW,y);ctx.lineTo(tblX+totalW,y+rowH);ctx.lineTo(tblX,y+rowH);ctx.closePath();ctx.stroke();}
-        else{ctx.strokeStyle='#E2E8F0';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(tblX,y+rowH);ctx.lineTo(tblX+totalW,y+rowH);ctx.stroke();}
+        else{ctx.strokeStyle='#E2E8F0';ctx.lineWidth=0.5;ctx.beginPath();
+          if(isReserveRow){ctx.moveTo(tblX,y+rowH);ctx.lineTo(reserveColXStart,y+rowH);ctx.moveTo(reserveColXEnd,y+rowH);ctx.lineTo(tblX+totalW,y+rowH);}
+          else{ctx.moveTo(tblX,y+rowH);ctx.lineTo(tblX+totalW,y+rowH);}
+          ctx.stroke();}
 
         const vals=[
           {t:r.yr,c:'#1E293B',f:'bold 15px PingFang SC'},
@@ -812,15 +852,34 @@ function downloadImage() {
           {t:fmt(r.cv),c:'#2563EB',f:'bold 14px PingFang SC'},
           {t:fmt(r.cumDiv),c:'#7C3AED',f:'14px PingFang SC'},
           {t:fmt(r.survDiv),c:isHL?'#DC2626':(isMat?'#92400E':'#1D4ED8'),f:`bold ${isHL||isMat?'16':'15'}px PingFang SC`},
-          {t:fmt(r.deathDiv),c:'#1D4ED8',f:'14px PingFang SC'}
+          {t:fmt(r.deathDiv),c:'#1D4ED8',f:'14px PingFang SC'},
+          {t:'',c:'#94A3B8',f:'14px PingFang SC'}
         ];
         let cellX=tblX+2;vals.forEach((v,i)=>{
           const px=cellX+colWidths[i]/2;
+          if(i===reserveColIdx){ if(isReserveRow) reserveCellX=px; cellX+=colWidths[i]; return; }
           ctx.fillStyle=isHL&&!['#DC2626','#7C3AED','#2563EB'].includes(v.c)?'#DC2626':(isMat&&!['#92400E','#7C3AED','#2563EB'].includes(v.c)?'#92400E':v.c);
           ctx.font=v.f;ctx.textAlign='center';ctx.fillText(String(v.t),px,y+rowH/2+5);
           cellX+=colWidths[i];
         });
       });
+
+      // 单独绘制储备期合并单元格（在所有行背景之上）
+      if (dlReserveStartIdx >= 0 && dlReserveCount > 0 && reserveCellX > 0) {
+        const y0 = tblY + headerH + dlReserveStartIdx * rowH;
+        const blockH = dlReserveCount * rowH;
+        ctx.fillStyle = '#F1F5F9';
+        ctx.fillRect(reserveColXStart, y0, colWidths[reserveColIdx], blockH);
+        ctx.strokeStyle = '#CBD5E1';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(reserveColXStart + 0.5, y0 + 0.5, colWidths[reserveColIdx] - 1, blockH - 1);
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = 'bold 15px "PingFang SC", "Microsoft YaHei", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('储备期', reserveCellX, y0 + blockH / 2);
+        ctx.textBaseline = 'alphabetic';
+      }
 
       // Footer
       const ftY=tblY+headerH+dlRows.length*rowH+18;
