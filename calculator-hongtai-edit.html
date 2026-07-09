@@ -386,14 +386,14 @@ function downloadImage(){
   ctx.strokeRect(PAD+.5,infoY+.5,totalW-.5,INFO_H-.5);
   ctx.beginPath(); ctx.moveTo(midX,infoY); ctx.lineTo(midX,infoY+INFO_H); ctx.stroke();
   ctx.textAlign='left'; ctx.textBaseline='top';
-  ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
-  ctx.fillText(document.getElementById('ext-company-title').textContent.trim(), PAD+14, infoY+12);
-  ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
-  document.getElementById('ext-company-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*12));
-  ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
-  ctx.fillText(document.getElementById('ext-product-title').textContent.trim(), midX+14, infoY+12);
-  ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
-  document.getElementById('ext-product-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*12));
+  ctx.fillStyle=C.accentDark; ctx.font='bold 20px '+FAM;
+  ctx.fillText(document.getElementById('ext-company-title').textContent.trim(), PAD+14, infoY+10);
+  ctx.fillStyle=C.textDark; ctx.font='13px '+FAM;
+  document.getElementById('ext-company-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*15));
+  ctx.fillStyle=C.accentDark; ctx.font='bold 20px '+FAM;
+  ctx.fillText(document.getElementById('ext-product-title').textContent.trim(), midX+14, infoY+10);
+  ctx.fillStyle=C.textDark; ctx.font='13px '+FAM;
+  document.getElementById('ext-product-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*15));
 
   // 3) VIP参数行
   y+=INFO_H;

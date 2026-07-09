@@ -34,8 +34,8 @@
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:980px;}
   thead th{background:var(--headerbg);color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
-  tbody td{padding:9px 6px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;}
-  tbody td:first-child,tbody td:nth-child(2){text-align:center;}
+  tbody td{padding:9px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+  
   tbody tr:nth-child(even){background:var(--rowalt);}
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
@@ -91,8 +91,8 @@
       <div class="field">
         <label>显示方式</label>
         <select id="displayMode">
+          <option value="after60" selected>60岁后每隔5年</option>
           <option value="all">全部年度</option>
-          <option value="after60">60岁后每隔5年</option>
         </select>
       </div>
       <div class="field">
@@ -255,7 +255,7 @@ function downloadImage(){
     textGray:'#334155',
     textLight:'#64748B',
     textMuted:'#94A3B8',
-    accentRed:'#DC2626',
+    accentRed:'#2563EB',
     lineColor:'#E2E8F0'
   };
   const PAD=22, DPR=2;
@@ -286,12 +286,12 @@ function downloadImage(){
   const infoY=TITLE_H;
   ctx.fillStyle=COLORS.companyBg; ctx.fillRect(0,infoY,canvasW,INFO_H);
   ctx.strokeStyle=COLORS.lineColor; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(canvasW/2,infoY+12); ctx.lineTo(canvasW/2,infoY+INFO_H-12); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(canvasW/2,infoY+10); ctx.lineTo(canvasW/2,infoY+INFO_H-12); ctx.stroke();
   const lx=PAD+4, rx=canvasW/2+12;
   ctx.textAlign='left'; ctx.textBaseline='top';
   ctx.fillStyle=COLORS.subHeader; ctx.font='bold 16px "PingFang SC","Microsoft YaHei",sans-serif';
-  ctx.fillText('公司背景', lx, infoY+12);
-  ctx.fillText('产品特点', rx, infoY+12);
+  ctx.fillText('公司背景', lx, infoY+10);
+  ctx.fillText('产品特点', rx, infoY+10);
   ctx.font='13px "PingFang SC","Microsoft YaHei",sans-serif';
   ctx.fillStyle=COLORS.textGray;
   const leftLines=[

@@ -311,25 +311,25 @@ function downloadImage(){
   ctx.beginPath(); ctx.moveTo(midX,infoY); ctx.lineTo(midX,infoY+INFO_H); ctx.stroke();
   ctx.textAlign='left'; ctx.textBaseline='top';
   // 左：公司介绍
-  ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
-  ctx.fillText('公司介绍', PAD+14, infoY+12);
-  ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
+  ctx.fillStyle=C.accentDark; ctx.font='bold 20px '+FAM;
+  ctx.fillText('公司介绍', PAD+14, infoY+10);
+  ctx.fillStyle=C.textDark; ctx.font='13px '+FAM;
   ['· 2011年国内首家A+H股同步上市',
    '· 连续多年入围财富福布斯世界500强，连续3年入围',
    '· 惠誉国际信用评级A级（强劲），穆迪财务实力评级A3级',
    '· 年化综合投资收益率为8.5%，近十年平均投资收益率5.4%',
    '· 由全球最大的国家主权基金[中投公司]直管，最大股东：中央汇金',
-   '· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*12));
+   '· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*15));
   // 右：产品亮点
-  ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
-  ctx.fillText('产品亮点', midX+14, infoY+12);
-  ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
+  ctx.fillStyle=C.accentDark; ctx.font='bold 20px '+FAM;
+  ctx.fillText('产品亮点', midX+14, infoY+10);
+  ctx.fillStyle=C.textDark; ctx.font='13px '+FAM;
   ['1. 收益稳健：保额以年1.75%复利+分红不低于70%盈余分配',
    '2. 身故赔付：身故或全残保障',
    '3. 资金灵活：可减保，或贷现金价值80%',
    '4. 定向传承：指定受益人及份额，避免遗产纠纷',
    '5. 安全属性："保底+分红"双轮驱动，锁定利率，对抗下行',
-   '6. 额外身价保障：客运列车及航空意外伤害身故或全残额外赔付1.5倍基本保额'].forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*12));
+   '6. 额外身价保障：客运列车及航空意外伤害身故或全残额外赔付1.5倍基本保额'].forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*15));
 
   // 3) VIP参数行
   y+=INFO_H;

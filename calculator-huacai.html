@@ -15,7 +15,7 @@
   --text3: #94A3B8;
   --border: #E2E8F0;
   --blue-accent: #2563EB;
-  --red: #DC2626;
+  --red: #2563EB;
   --blue-dark: #1E40AF;
   --red-highlight: #EF4444;
 }
@@ -264,7 +264,7 @@ tbody tr:hover { background: #EFF6FF; }
 /* Error */
 .error-msg {
   background: #FEF2F2; border: 1px solid #FECACA; border-radius: 10px;
-  padding: 14px 16px; color: #DC2626; font-size: 13px; display: none; margin-bottom: 12px;
+  padding: 14px 16px; color: #2563EB; font-size: 13px; display: none; margin-bottom: 12px;
 }
 .error-msg.show { display: block; }
 
@@ -742,11 +742,11 @@ function downloadImage() {
       const PAD=22, DPR=2, TITLE_H=80, INFO_H=150, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
       const COLORS={
         titleGrad:['#1D4ED8','#2563EB','#1E40AF'],
-        companyBg:'#EFF6FF', productBg:'#FFF7ED', paramBg:'#DBEAFE',
+        companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#DBEAFE',
         subHeader:'#1D4ED8', tableHeader:'#1E3A5F',
         rowWhite:'#FFFFFF', rowAlt:'#F0F9FF', reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
         textDark:'#1E293B', textGray:'#334155', textLight:'#64748B', textMuted:'#94A3B8',
-        accentBlue:'#2563EB', accentRed:'#DC2626', lineColor:'#E2E8F0'
+        accentBlue:'#2563EB', accentRed:'#2563EB', lineColor:'#E2E8F0'
       };
 
       // ===== 表头 13 列（华彩专属） =====
@@ -855,7 +855,7 @@ function downloadImage() {
       dlRows.forEach((r,i)=>{ if(r.yr<=reserveYears){ if(reserveStartIdx===-1)reserveStartIdx=i; reserveCount++; } });
 
       // ===== 表格数据行 =====
-      const HL_EXCLUDE=['#DC2626','#7C3AED','#2563EB','#1D4ED8'];
+      const HL_EXCLUDE=['#2563EB','#7C3AED','#2563EB','#1D4ED8'];
       const MAT_EXCLUDE=['#92400E','#7C3AED','#2563EB','#1D4ED8'];
       ctx.textBaseline='middle';
       dlRows.forEach((r,idx)=>{
@@ -872,7 +872,7 @@ function downloadImage() {
           ctx.strokeRect(tblX+0.5, y+0.5, totalW-1, ROW_H-1);
         }
 
-        const colorFor=(c)=> isHL&&!HL_EXCLUDE.includes(c)?'#DC2626':(isMat&&!MAT_EXCLUDE.includes(c)?'#92400E':c);
+        const colorFor=(c)=> isHL&&!HL_EXCLUDE.includes(c)?'#2563EB':(isMat&&!MAT_EXCLUDE.includes(c)?'#92400E':c);
 
         const vals=[
           {t:r.yr,            c:COLORS.textDark, f:'bold 16px "PingFang SC"'},
@@ -885,7 +885,7 @@ function downloadImage() {
           {t:fmt(r.annualDiv),c:'#7C3AED', f:'13px "PingFang SC"'},
           {t:fmt(r.cumDiv),   c:'#7C3AED', f:'bold 13px "PingFang SC"'},
           {t:fmt(r.cv),       c:COLORS.accentBlue, f:'bold 14px "PingFang SC"'},
-          {t:fmt(r.survDiv),  c:isHL?'#DC2626':(isMat?'#92400E':'#1D4ED8'), f:`bold ${isHL||isMat?'16':'15'}px "PingFang SC"`},
+          {t:fmt(r.survDiv),  c:isHL?'#2563EB':(isMat?'#92400E':'#1D4ED8'), f:`bold ${isHL||isMat?'16':'15'}px "PingFang SC"`},
           {t:fmt(r.survDiv),  c:'#1D4ED8', f:'13px "PingFang SC"'},
           {t:'',               c:COLORS.textMuted, f:'14px "PingFang SC"'}
         ];

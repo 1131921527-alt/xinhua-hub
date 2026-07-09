@@ -33,8 +33,8 @@
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:15px;min-width:720px;}
   thead th{background:var(--headerbg);color:#fff;padding:11px 10px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
-  tbody td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--line);}
-  tbody td:first-child,tbody td:nth-child(2){text-align:center;}
+  tbody td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);}
+  
   tbody tr:nth-child(even){background:var(--rowalt);}
   .rate-reserve{background:#F1F5F9 !important;color:#94A3B8;font-weight:700;text-align:center;vertical-align:middle;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
@@ -76,10 +76,12 @@
     <div class="edit-field"><label>导出图副标题</label><div id="ext-subtitle" contenteditable="true">新华保险 · 终身寿险（非分红型）· 固定收益保证利益</div></div>
     <div class="edit-field"><label>公司背景标题</label><div id="ext-company-title" contenteditable="true">★ 公司背景</div></div>
     <div class="edit-field"><label>产品特点标题</label><div id="ext-product-title" contenteditable="true">★ 产品特点</div></div>
-    <div class="edit-field" style="grid-column:1/3"><label>公司背景内容（每行一句）</label><textarea id="ext-company-bullets">新华保险成立于1996年9月人民大会堂
-国有控股上市险企 A+H股同步上市
-惠誉国际评级A级
-服务网络覆盖全国1700余家机构</textarea></div>
+    <div class="edit-field" style="grid-column:1/3"><label>公司背景内容（每行一句）</label><textarea id="ext-company-bullets">· 2011年国内首家A+H股同步上市
+· 连续多年入围财富福布斯世界500强，连续3年入围
+· 惠誉国际信用评级A级（强劲），穆迪财务实力评级A3级
+· 年化综合投资收益率为8.5%，近十年平均投资收益率5.4%
+· 由全球最大的国家主权基金[中投公司]直管，最大股东：中央汇金
+· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%</textarea></div>
     <div class="edit-field" style="grid-column:1/3"><label>产品特点内容（每行一句）</label><textarea id="ext-product-bullets">福盛世家添翼版 终身寿险(非分红型)
 固定收益保证利益
 现金价值写入合同逐年增长
@@ -124,8 +126,8 @@
       <div class="field">
         <label>显示方式</label>
         <select id="displayMode">
+          <option value="after60" selected>60岁后每隔5年</option>
           <option value="all">全部年度</option>
-          <option value="after60">60岁后每隔5年</option>
         </select>
       </div>
       <div class="field">

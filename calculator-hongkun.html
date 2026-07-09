@@ -34,8 +34,8 @@
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:13px;min-width:1080px;}
   thead th{background:var(--headerbg);color:#fff;padding:9px 6px;text-align:center;font-weight:700;font-size:12px;position:sticky;top:0;}
-  tbody td{padding:8px 5px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;}
-  tbody td:first-child,tbody td:nth-child(2){text-align:center;}
+  tbody td{padding:8px 5px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+  
   tbody tr:nth-child(even){background:var(--rowalt);}
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
@@ -99,8 +99,8 @@
       <div class="field">
         <label>显示方式</label>
         <select id="displayMode">
+          <option value="after60" selected>60岁后每隔5年</option>
           <option value="all">全部年度</option>
-          <option value="after60">60岁后每隔5年</option>
         </select>
       </div>
       <div class="field">
