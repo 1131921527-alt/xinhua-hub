@@ -226,16 +226,16 @@ tbody tr:nth-child(even) { background: #F8FAFC; }
 tbody tr:hover { background: #EFF6FF; }
 .col-num { font-weight: 600; color: var(--text); }
 .col-cv { color: var(--blue-accent); font-weight: 500; }
-.col-dividend { color: #7C3AED; font-weight: 500; }
+.col-dividend { color: var(--blue-accent); font-weight: 500; }
 .col-survival { color: var(--blue-dark); font-weight: 600; }
 .col-death { color: var(--primary); font-weight: 500; }
 .col-rate { color: var(--text); }
 .rate-reserve { background: #F1F5F9; color: #94A3B8 !important; font-size: 14px; letter-spacing: 2px; font-weight: 600; }
-.row-highlight { background: #FEF2F2 !important; }
-.row-highlight td { color: var(--red) !important; font-weight: 700 !important; }
-.row-highlight td.col-num, .row-highlight td:nth-child(2) { color: var(--red-highlight) !important; }
-.row-maturity { background: #FFFBEB !important; }
-.row-maturity td { color: #92400E !important; font-weight: 700 !important; }
+.row-highlight { background: #DBEAFE !important; }
+.row-highlight td { color: #1E40AF !important; font-weight: 700 !important; }
+.row-highlight td.col-num, .row-highlight td:nth-child(2) { color: #1E3A5F !important; }
+.row-maturity { background: #DBEAFE !important; }
+.row-maturity td { color: #1E40AF !important; font-weight: 700 !important; }
 
 /* Download bar */
 .download-bar { display: flex; gap: 10px; margin-bottom: 18px; }
@@ -263,8 +263,8 @@ tbody tr:hover { background: #EFF6FF; }
 
 /* Error */
 .error-msg {
-  background: #FEF2F2; border: 1px solid #FECACA; border-radius: 10px;
-  padding: 14px 16px; color: #2563EB; font-size: 13px; display: none; margin-bottom: 12px;
+  background: #DBEAFE; border: 1px solid #93C5FD; border-radius: 10px;
+  padding: 14px 16px; color: #1E40AF; font-size: 13px; display: none; margin-bottom: 12px;
 }
 .error-msg.show { display: block; }
 
@@ -862,17 +862,17 @@ function downloadImage() {
         const y=tblY+HEADER_H+idx*ROW_H;
         const isHL=(r.yr===5), isMat=(r.yr===70), isRes=(r.yr<=reserveYears);
         // 行背景
-        ctx.fillStyle=isMat?'#FFFBEB':(isHL?'#FEF2F2':(idx%2===0?COLORS.rowWhite:COLORS.rowAlt));
+        ctx.fillStyle=(isHL||isMat)?'#DBEAFE':(idx%2===0?COLORS.rowWhite:COLORS.rowAlt);
         ctx.fillRect(tblX, y, totalW, ROW_H);
         // 行边框
         ctx.strokeStyle=COLORS.lineColor; ctx.lineWidth=0.5;
         ctx.beginPath(); ctx.moveTo(tblX, y+ROW_H); ctx.lineTo(tblX+totalW, y+ROW_H); ctx.stroke();
         if(isHL||isMat){
-          ctx.strokeStyle=isMat?'#FCD34D':'#FCA5A5'; ctx.lineWidth=1.5;
+          ctx.strokeStyle='#93C5FD'; ctx.lineWidth=1.5;
           ctx.strokeRect(tblX+0.5, y+0.5, totalW-1, ROW_H-1);
         }
 
-        const colorFor=(c)=> isHL&&!HL_EXCLUDE.includes(c)?'#2563EB':(isMat&&!MAT_EXCLUDE.includes(c)?'#92400E':c);
+        const colorFor=(c)=> (isHL||isMat)&&!['#2563EB','#1D4ED8'].includes(c)?'#2563EB':c;
 
         const vals=[
           {t:r.yr,            c:COLORS.textDark, f:'bold 16px "PingFang SC"'},
@@ -881,11 +881,11 @@ function downloadImage() {
           {t:fmt(r.cumP),     c:COLORS.textGray, f:'13px "PingFang SC"'},
           {t:r.aAnn>0?fmt(r.aAnn):'-', c:COLORS.textLight, f:'13px "PingFang SC"'},
           {t:r.cAnn>0?fmt(r.cAnn):'0', c:COLORS.textLight, f:'13px "PingFang SC"'},
-          {t:fmt(r.annualDiv),c:'#7C3AED', f:'13px "PingFang SC"'},
-          {t:fmt(r.annualDiv),c:'#7C3AED', f:'13px "PingFang SC"'},
-          {t:fmt(r.cumDiv),   c:'#7C3AED', f:'bold 13px "PingFang SC"'},
+          {t:fmt(r.annualDiv),c:COLORS.accentBlue, f:'13px "PingFang SC"'},
+          {t:fmt(r.annualDiv),c:COLORS.accentBlue, f:'13px "PingFang SC"'},
+          {t:fmt(r.cumDiv),   c:COLORS.accentBlue, f:'bold 13px "PingFang SC"'},
           {t:fmt(r.cv),       c:COLORS.accentBlue, f:'bold 14px "PingFang SC"'},
-          {t:fmt(r.survDiv),  c:isHL?'#2563EB':(isMat?'#92400E':'#1D4ED8'), f:`bold ${isHL||isMat?'16':'15'}px "PingFang SC"`},
+          {t:fmt(r.survDiv),  c:(isHL||isMat)?'#1E40AF':'#1D4ED8', f:`bold ${isHL||isMat?'16':'15'}px "PingFang SC"`},
           {t:fmt(r.survDiv),  c:'#1D4ED8', f:'13px "PingFang SC"'},
           {t:'',               c:COLORS.textMuted, f:'14px "PingFang SC"'}
         ];

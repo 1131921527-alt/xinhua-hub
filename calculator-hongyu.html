@@ -217,9 +217,17 @@ tbody tr:hover { background: #EFF6FF; }
 .col-guarantee { color: var(--primary); font-weight: 500; }
 .col-paidup { color: var(--blue-accent); font-weight: 500; }
 .col-total { color: var(--blue-dark); font-weight: 600; }
+.col-total.highlight-4th { font-weight: 800; color: #1E40AF; background: #DBEAFE; border-radius: 6px; }
 .col-rate { font-weight: 600; }
 .rate-up { color: var(--blue-accent); }
 .rate-reserve { color: var(--text3); }
+
+/* Mobile compact table to show full view like hongtai */
+@media (max-width: 768px) {
+  table { font-size: 13px; min-width: 720px; }
+  thead th { font-size: 12px; padding: 8px 4px; }
+  tbody td { padding: 7px 4px; }
+}
 
 /* Download bar */
 .download-bar {
@@ -640,7 +648,7 @@ async function generate() {
         <td>${fmt(r.cumPremiumAll)}</td>
         <td class="col-guarantee">${fmt(r.guaranteed)}</td>
         <td class="col-paidup">${fmt(r.paidup)}</td>
-        <td class="col-total">${fmt(r.total)}</td>
+        <td class="col-total ${r.yr === 4 ? 'highlight-4th' : ''}">${fmt(r.total)}</td>
         ${rateCell}
       </tr>`;
     }
@@ -943,7 +951,7 @@ function downloadImage() {
           { t: fmt(r.cumPrem), c: '#334155', f: '18px "PingFang SC", "Microsoft YaHei", sans-serif' },
           { t: fmt(r.guaranteed), c: '#2563EB', f: '18px "PingFang SC", "Microsoft YaHei", sans-serif' },
           { t: fmt(r.paidup), c: '#1E40AF', f: '18px "PingFang SC", "Microsoft YaHei", sans-serif' },
-          { t: fmt(r.total), c: '#1D4ED8', f: 'bold 19px "PingFang SC", "Microsoft YaHei", sans-serif' },
+          { t: fmt(r.total), c: r.yr === 4 ? '#1E3A5F' : '#1D4ED8', f: r.yr === 4 ? 'bold 21px "PingFang SC", "Microsoft YaHei", sans-serif' : 'bold 19px "PingFang SC", "Microsoft YaHei", sans-serif' },
           { t: r.rate, c: r.rate.includes('%') ? '#2563EB' : (r.rate === '储备期' ? '#94A3B8' : '#64748B'), f: 'bold 17px "PingFang SC", "Microsoft YaHei", sans-serif' }
         ];
 

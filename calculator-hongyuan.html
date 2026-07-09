@@ -219,9 +219,9 @@ tbody tr:hover { background: #EFF6FF; }
 .col-rate { font-weight: 600; }
 .rate-up { color: var(--blue-accent); }
 .rate-reserve { color: var(--text3); }
-.row-highlight { background: #FEF2F2 !important; }
-.row-highlight td { color: var(--red) !important; font-weight: 700 !important; }
-.row-highlight td.col-num, .row-highlight td:nth-child(2) { color: var(--red-highlight) !important; }
+.row-highlight { background: #DBEAFE !important; }
+.row-highlight td { color: #1E40AF !important; font-weight: 700 !important; }
+.row-highlight td.col-num, .row-highlight td:nth-child(2) { color: #1E3A5F !important; }
 
 /* Download bar */
 .download-bar { display: flex; gap: 10px; margin-bottom: 18px; }
@@ -707,8 +707,8 @@ function downloadImage() {
         paramBg:'#DBEAFE', subHeader:'#1D4ED8', tableHeader:'#1E3A5F',
         rowWhite:'#FFFFFF', rowAlt:'#F0F9FF', reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
         textDark:'#1E293B', textGray:'#334155', textMid:'#64748B', textMuted:'#94A3B8',
-        accentBlue:'#2563EB', accentDark:'#1E40AF', red:'#2563EB', redBg:'#FEF2F2', redBorder:'#FCA5A5',
-        green:'#16A34A', line:'#E2E8F0'
+        accentBlue:'#2563EB', accentDark:'#1E40AF', red:'#2563EB', redBg:'#DBEAFE', redBorder:'#93C5FD',
+        green:'#2563EB', line:'#E2E8F0'
       };
 
       // ---- 表格列定义（12 列，匹配截图格式）----
@@ -919,7 +919,7 @@ function downloadImage() {
           {t:fmt(r.death), c:C.textDark, f:'15px "PingFang SC",sans-serif'},
           {t:fmt(r.cv), c:C.accentDark, f:'bold 15px "PingFang SC",sans-serif'},
           {t:fmt(r.surv), c:isHL?C.red:C.accentBlue, f:`bold ${isHL?'17':'16'}px "PingFang SC",sans-serif`},
-          {t:rateVal, c:(!isReserveRow && r.rate && r.rate!=='')?C.green:C.textMuted, f:'bold 14px "PingFang SC",sans-serif'}
+          {t:rateVal, c:(!isReserveRow && r.rate && r.rate!=='')?C.accentBlue:C.textMuted, f:'bold 14px "PingFang SC",sans-serif'}
         ];
 
         ctx.textAlign = 'center';

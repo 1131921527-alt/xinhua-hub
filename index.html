@@ -75,6 +75,24 @@
   .header-content { position: relative; z-index: 1; }
   .header h1 { font-size: 21px; font-weight: 700; letter-spacing: 0.5px; }
   .header p { font-size: 12px; opacity: 0.8; margin-top: 3px; }
+  .live-clock {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: 0.9;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.12);
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+  .live-clock .dot {
+    width: 5px; height: 5px; background: #fff; border-radius: 50%;
+    animation: pulse 1s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
   /* Search */
   .search-wrap {
@@ -692,6 +710,7 @@
   <div class="header-content">
     <h1>新华保险 · 资料库<span style="font-size:12px;font-weight:400;opacity:0.7;margin-left:6px;">Made by 王铭泽</span></h1>
     <p>随时查 · 随时发</p>
+    <div class="live-clock" id="liveClock"><span class="dot"></span><span id="clockText">--</span></div>
   </div>
 </div>
 
@@ -1240,6 +1259,20 @@ window.addEventListener('scroll', function() {
   el.addEventListener('wheel', function(e){
     if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ el.scrollLeft+=e.deltaY; e.preventDefault(); }
   }, {passive:false});
+})();
+
+// Live clock
+(function updateClock(){
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = now.getMonth() + 1;
+  const d = now.getDate();
+  const h = now.getHours();
+  const min = String(now.getMinutes()).padStart(2, '0');
+  const sec = String(now.getSeconds()).padStart(2, '0');
+  const el = document.getElementById('clockText');
+  if (el) el.textContent = `${y}年${m}月${d}日 ${h}点${min}分${sec}秒`;
+  setTimeout(updateClock, 1000);
 })();
 
 // Init

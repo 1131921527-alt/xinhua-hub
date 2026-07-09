@@ -48,6 +48,16 @@
   .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);align-items:center;justify-content:center;z-index:98;}
   .overlay.show{display:flex;}
   .overlay div{background:#fff;padding:22px 34px;border-radius:12px;font-size:16px;font-weight:600;}
+  @media (max-width: 768px) {
+    .btn{padding:13px 18px;font-size:15px;min-height:46px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+    .dl-bar{flex-direction:column;align-items:stretch !important;}
+    .btn-dl{margin-left:0 !important;width:100%;}
+    .dl-bar .tip{margin:8px 0 0 0 !important;}
+    .form-row{flex-direction:column;align-items:stretch;}
+    .field{width:100%;}
+    input,select{width:100%;}
+    .gender-btn{flex:1;text-align:center;}
+  }
 </style>
 </head>
 <body>
@@ -102,7 +112,7 @@
   <div id="paramBar"></div>
 
   <div class="card">
-    <div style="display:flex;align-items:center;margin-bottom:10px;">
+    <div class="dl-bar" style="display:flex;align-items:center;margin-bottom:10px;">
       <button class="btn btn-dl" onclick="downloadImage()">⬇ 下载理财计划书图片</button>
       <span class="tip" style="margin:0 0 0 12px;">导出为效果图同款planbook版式（蓝白+公司介绍+产品特点+56年演示表）</span>
     </div>
@@ -259,6 +269,10 @@ async function generate(){
 
 // ========== 导出 planbook 图片（匹配效果图） ==========
 function downloadImage(){
+  if(!document.getElementById('resultBody').children.length){
+    showToast('请先生成利益演示');
+    return;
+  }
   const age=parseInt(document.getElementById('age').value);
   const term=parseInt(document.getElementById('term').value);
   const premium=parseInt(document.getElementById('premium').value);
@@ -467,7 +481,7 @@ function downloadImage(){
   }
 
   // 7) 收益率列（非投资期行）
-  for(let i=reserveRows.length;i<dlRows.length;i++){
+  for(let i=reserveCount;i<dlRows.length;i++){
     const r=dlRows[i], ry=rowY0+i*ROW_H, rcX=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
     if(r.rate!==null&&r.rate!==undefined&&typeof r.rate==='number'){
       ctx.fillStyle=C.accentBlue; ctx.font='bold 13px '+FAM;
