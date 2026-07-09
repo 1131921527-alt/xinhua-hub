@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S24 宏愿人生养老年金（分红型）· 利益演示计算器</title>
+<title>S02 宏愿人生养老年金（分红型）· 利益演示计算器</title>
 <style>
 :root {
   --primary: #1D4ED8;
@@ -763,7 +763,7 @@ function downloadImage() {
       ctx.fillStyle = grad;ctx.fillRect(0,0,canvasW,titleH);
       ctx.fillStyle = '#FFFFFF';ctx.textAlign = 'center';
       ctx.font = 'bold 26px "PingFang SC","Microsoft YaHei",sans-serif';
-      ctx.fillText('S24 宏愿人生养老年金保险（分红型）', canvasW/2, 36);
+      ctx.fillText('S02 宏愿人生养老年金保险（分红型）', canvasW/2, 36);
       ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
       ctx.fillText(`利益演示 · 被保人 ${insuredName} · 年金起领${startAge}周岁`, canvasW/2, 62);
 
@@ -920,7 +920,7 @@ function downloadImage() {
       ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW/2, footerY+20);
 
       // ---- 导出（toDataURL）----
-      const fname = `S24宏愿人生_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
+      const fname = `S02宏愿人生_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
       const dataUrl = canvas.toDataURL('image/png');
       try {
         const a = document.createElement('a');
