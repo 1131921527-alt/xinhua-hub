@@ -920,6 +920,9 @@ function renderContent(query) {
           onclick = `alert('该功能即将上线，敬请期待！')`;
         } else if (isCalc) {
           onclick = `location.href='${item.url}'`;
+        } else if (item.url.endsWith('.html') || item.url.endsWith('.htm')) {
+          // 已转换为在线网页（PPT/Word 转制），直接打开，无需下载
+          onclick = `location.href='${item.url}'`;
         } else if (isExternal) {
           onclick = `window.open('${item.url}', '_blank')`;
         } else {

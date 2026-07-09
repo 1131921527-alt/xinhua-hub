@@ -605,8 +605,16 @@ async function generate() {
       }
       if (dividend < 0) dividend = 0;
       
+      let rateStr = row[11];
+      // 末行（如105岁）原始数据未存增速时，用生存总利益同比上一保单年度补算（比例与保费缩放无关）
+      if ((rateStr === undefined || rateStr === null || rateStr === '') && idx > 0) {
+        const prevSurv = HY_DATA[idx-1][8];
+        if (prevSurv > 0) {
+          const g = (row[8] - prevSurv) / prevSurv * 100;
+          rateStr = g.toFixed(2) + '%';
+        }
+      }
       let rateCell;
-      const rateStr = row[11];
       if (yr <= paymentYears + 2) {
         if (!reserveCellRendered && reserveRowCount > 0) {
           rateCell = `<td class="col-rate rate-reserve" rowspan="${reserveRowCount}" style="vertical-align:middle;text-align:center;font-size:14px;letter-spacing:2px;color:#94A3B8;">储备期</td>`;
@@ -723,13 +731,18 @@ function downloadImage() {
           dividend = dividendCum - prevCum;
         }
         if (dividend < 0) dividend = 0;
+        let rt = r[11];
+        if ((rt === undefined || rt === null || rt === '') && j > 0) {
+          const ps = HY_DATA[j-1][8];
+          if (ps > 0) rt = ((r[8] - ps) / ps * 100).toFixed(2) + '%';
+        }
         dlRows.push({
           yr:r[0], age:ca,
           aPrem:Math.round(r[2]*scale), cPrem:Math.round(r[3]*scale),
           aAnn:r[4]>0?Math.round(r[4]*scale):0, cAnn:Math.round(r[5]*scale),
           dividend:dividend, dividendCum:dividendCum,
           death:Math.round(r[6]*scale), cv:Math.round(r[7]*scale), surv:Math.round(r[8]*scale),
-          rate:r[11]
+          rate:rt, idx:j
         });
       }
 
