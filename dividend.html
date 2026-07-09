@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>红利实现率 · 新华保险公开信息披露</title>
+<style>
+  :root{
+    --blue:#2563EB; --blue-d:#1E40AF; --blue-l:#EFF6FF;
+    --ink:#0F172A; --sub:#64748B; --line:#E2E8F0; --bg:#F4F7FB;
+    --good:#16A34A; --warn:#D97706; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); padding:0 0 40px;}
+  header{background:linear-gradient(135deg,var(--blue-d),var(--blue)); color:#fff; padding:22px 18px 18px;}
+  header h1{margin:0; font-size:20px; font-weight:700; letter-spacing:.5px;}
+  header .sub{margin-top:6px; font-size:12px; opacity:.9;}
+  header a.back{color:#fff; opacity:.85; font-size:13px; text-decoration:none; display:inline-block; margin-bottom:8px;}
+  .meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .meta span{background:rgba(255,255,255,.16); padding:3px 9px; border-radius:20px; font-size:11px;}
+  .meta a{color:#fff;}
+  .wrap{max-width:720px; margin:0 auto; padding:14px 14px 0;}
+  .controls{position:sticky; top:0; background:var(--bg); z-index:5; padding:12px 0 10px;}
+  .search{width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:12px; font-size:15px; outline:none; background:#fff;}
+  .search:focus{border-color:var(--blue);}
+  .chips{display:flex; gap:8px; margin-top:9px; flex-wrap:wrap;}
+  .chip{padding:6px 13px; border-radius:20px; background:#fff; border:1px solid var(--line); font-size:13px; color:var(--sub); cursor:pointer;}
+  .chip.on{background:var(--blue); color:#fff; border-color:var(--blue);}
+  .count{font-size:12px; color:var(--sub); margin:10px 2px 4px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:12px; overflow:hidden; box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .card-h{display:flex; align-items:center; justify-content:space-between; padding:13px 15px; cursor:pointer;}
+  .card-h .nm{font-size:15px; font-weight:600; line-height:1.35;}
+  .badge{font-size:11px; padding:2px 9px; border-radius:20px; background:var(--blue-l); color:var(--blue-d); white-space:nowrap; margin-left:8px;}
+  .arrow{color:var(--sub); font-size:13px; transition:transform .2s; flex:none; margin-left:6px;}
+  .card.open .arrow{transform:rotate(90deg);}
+  .body{max-height:0; overflow:hidden; transition:max-height .28s ease;}
+  .card.open .body{max-height:1200px;}
+  table{width:100%; border-collapse:collapse; font-size:14px;}
+  th,td{padding:9px 15px; text-align:left; border-top:1px solid var(--line);}
+  th{background:var(--blue-l); color:var(--blue-d); font-weight:600; font-size:12px;}
+  td .rate{font-weight:700; font-size:15px;}
+  .r-good{color:var(--good);} .r-warn{color:var(--warn);}
+  .note{margin:16px 2px; padding:13px 15px; background:#FFF7ED; border:1px solid #FED7AA; border-radius:12px; font-size:12px; color:#9A3412; line-height:1.6;}
+  .note b{color:#7C2D12;}
+  .err{padding:30px; text-align:center; color:var(--sub); font-size:14px;}
+  footer{text-align:center; font-size:11px; color:var(--sub); margin-top:20px; padding:0 16px;}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← 返回资料库</a>
+  <h1>📊 红利实现率</h1>
+  <div class="sub">新华保险 · 公开信息披露（官方同步）</div>
+  <div class="meta">
+    <span id="m-upd">更新：—</span>
+    <span><a id="m-src" href="https://www.newchinalife.com/node/2360" target="_blank" rel="noopener">数据来源：新华保险官网 ↗</a></span>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <input class="search" id="q" placeholder="搜索产品名称，如：宏御 / 华彩 / 年金">
+    <div class="chips" id="chips">
+      <div class="chip on" data-f="all">全部</div>
+      <div class="chip" data-f="现金红利型">现金红利型</div>
+      <div class="chip" data-f="增额红利型">增额红利型</div>
+    </div>
+  </div>
+  <div class="count" id="cnt"></div>
+  <div id="list"></div>
+  <div class="note" id="noteBox"></div>
+  <footer>本页红利实现率数据同步自新华保险官网公开信息披露，仅供产品展示与学习参考，不构成任何销售建议或收益承诺。</footer>
+</div>
+
+<script>
+let DATA = null, filter = 'all', kw = '';
+const $ = s => document.querySelector(s);
+
+function rateClass(r){ return r >= 100 ? 'r-good' : 'r-warn'; }
+function latestRate(p){
+  if(!p.records || !p.records.length) return null;
+  return p.records.reduce((a,b)=> b.year > a.year ? b : a);
+}
+
+function render(){
+  if(!DATA) return;
+  const list = $('#list'); list.innerHTML = '';
+  const kw2 = kw.trim();
+  let shown = 0;
+  DATA.products.forEach((p, i) => {
+    if(filter !== 'all' && p.type !== filter) return;
+    if(kw2 && !p.name.includes(kw2)) return;
+    shown++;
+    const lr = latestRate(p);
+    const card = document.createElement('div');
+    card.className = 'card';
+    let rows = (p.records||[]).map(r =>
+      `<tr><td>${r.year}</td><td>${r.label}</td><td><span class="rate ${rateClass(r.rate)}">${r.rate}%</span></td></tr>`).join('');
+    card.innerHTML = `
+      <div class="card-h" onclick="this.parentElement.classList.toggle('open')">
+        <div style="display:flex;align-items:center;flex-wrap:wrap;">
+          <span class="nm">${p.name}</span>
+          <span class="badge">${p.type}</span>
+        </div>
+        <span style="display:flex;align-items:center;gap:8px;">
+          ${lr ? `<span class="rate ${rateClass(lr.rate)}">最新 ${lr.rate}%</span>` : ''}
+          <span class="arrow">▶</span>
+        </span>
+      </div>
+      <div class="body"><table>
+        <thead><tr><th>分红年度</th><th>实现率类型</th><th>实现率</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>`;
+    list.appendChild(card);
+  });
+  $('#cnt').textContent = `共显示 ${shown} / ${DATA.products.length} 款分红型产品`;
+  if(shown === 0) list.innerHTML = '<div class="err">没有匹配的产品，换个关键词试试。</div>';
+}
+
+function init(d){
+  DATA = d;
+  $('#m-upd').textContent = '更新：' + (d.updated || '—');
+  if(d.sourceUrl) $('#m-src').href = d.sourceUrl;
+  if(d.note) $('#noteBox').innerHTML = '<b>重要说明：</b>' + d.note;
+  render();
+}
+
+fetch('dividend.json', {cache:'no-store'})
+  .then(r => r.json()).then(init)
+  .catch(e => { $('#list').innerHTML = '<div class="err">数据加载失败，请稍后刷新（' + e.message + '）</div>'; });
+
+$('#q').addEventListener('input', e => { kw = e.target.value; render(); });
+$('#chips').addEventListener('click', e => {
+  const c = e.target.closest('.chip'); if(!c) return;
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on'); filter = c.dataset.f; render();
+});
+</script>
+</body>
+</html>

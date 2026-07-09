@@ -745,6 +745,7 @@ const TYPE_CONFIG = {
   doc:    { icon: '📝', label: 'Word',  class: 'icon-doc' },
   calculator: { icon: '🧮', label: '计算器', class: 'icon-link' },
   clause: { icon: '📜', label: '条款',  class: 'icon-link' },
+  dividend: { icon: '📊', label: '红利实现率', class: 'icon-link' },
   default:{ icon: '📁', label: '文件',  class: 'icon-default' }
 };
 
@@ -759,6 +760,7 @@ function getTypeConfig(type) {
   if (t.includes('doc') || t.includes('word')) return TYPE_CONFIG.doc;
   if (t.includes('video') || t.includes('mp4')) return TYPE_CONFIG.video;
   if (t.includes('clause')) return TYPE_CONFIG.clause;
+  if (t.includes('dividend')) return TYPE_CONFIG.dividend;
   return TYPE_CONFIG.default;
 }
 
@@ -846,7 +848,7 @@ function renderContent(query) {
     
     items.forEach(item => {
       const tc = getTypeConfig(item.type);
-      const isCalc = item.type === 'calculator' || item.type === 'clause';
+      const isCalc = item.type === 'calculator' || item.type === 'clause' || item.type === 'dividend';
       const isExternal = item.url.startsWith('http://') || item.url.startsWith('https://');
       const isPreviewable = ['pdf','ppt','pptx','doc','docx','xls','xlsx','jpg','jpeg','png','gif','webp'].includes(item.type);
       
