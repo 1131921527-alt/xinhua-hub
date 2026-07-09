@@ -79,66 +79,6 @@
           "type": "calculator",
           "description": "固收型终身寿利益演示 → 7列完整数据 → 可下载计划书图片",
           "url": "calculator-fusheng.html"
-        },
-        {
-          "name": "S11 宏御演算表 Excel 原文件",
-          "type": "excel",
-          "description": "演算表 5.20版（原始Excel文件）",
-          "url": "files/演算器/S11宏御世家终身寿（分红型）演算表5.20.xlsx"
-        },
-        {
-          "name": "S03 宏泰世家（分红型）演算表",
-          "type": "excel",
-          "description": "新华人寿 宏泰世家演算表",
-          "url": "files/演算器/新华人寿 宏泰世家（分红型）.xlsx"
-        },
-        {
-          "name": "宏愿人生养老年金（分红型）演算表",
-          "type": "excel",
-          "description": "利益演示演算表",
-          "url": "files/演算器/新华宏愿人生养老年金分红型利益演示.xlsx"
-        },
-        {
-          "name": "S24 华彩鎏金年金保险（分红型）演算表",
-          "type": "excel",
-          "description": "利益演示演算表",
-          "url": "files/演算器/S24华彩鎏金年金保险（分红型）利益演示.xlsx"
-        },
-        {
-          "name": "S12 宏禧来两全保险（分红型）演算表",
-          "type": "excel",
-          "description": "利益演示Excel版，供银行签约使用",
-          "url": "files/演算器/S12宏禧来两全保险（分红型）利益演示excel版（供银行签约使用）N.xlsx"
-        },
-        {
-          "name": "S06 宏坤人生养老年金险演算表",
-          "type": "excel",
-          "description": "演算表",
-          "url": "files/演算器/S06 宏坤人生养老年金险演算表.xlsx"
-        },
-        {
-          "name": "G24 福盛世家添翼版演算表",
-          "type": "excel",
-          "description": "演算表",
-          "url": "files/演算器/福盛世家添翼版.xlsx"
-        },
-        {
-          "name": "G23 恒享人生年金险演算表",
-          "type": "excel",
-          "description": "演算表",
-          "url": "files/演算器/G23 恒享人生年金险演算表.xlsx"
-        },
-        {
-          "name": "稳得福演算表",
-          "type": "excel",
-          "description": "演算表",
-          "url": "files/演算器/稳得福演算表.xlsx"
-        },
-        {
-          "name": "S10 宏安世家终身寿险（分红型）演算表",
-          "type": "excel",
-          "description": "演算表",
-          "url": "files/演算器/S10宏安世家终身寿险（分红型）演算表(6).xls"
         }
       ]
     },
@@ -157,7 +97,7 @@
         {
           "name": "居家养老 · 3000分护理包（供应商）",
           "type": "calculator",
-          "description": "居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供",
+          "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供",
           "url": "jujia.html",
           "subsection": "居家服务"
         },
@@ -458,6 +398,73 @@
           "type": "dividend",
           "description": "同步官网公开信息披露的红利实现率，支持搜索/按类型筛选",
           "url": "dividend.html"
+        }
+      ]
+    },
+    {
+      "id": "excel-tables",
+      "name": "演算表",
+      "icon": "📊",
+      "items": [
+        {
+          "name": "S11 宏御演算表 Excel 原文件",
+          "type": "excel",
+          "description": "演算表 5.20版（原始Excel文件）",
+          "url": "files/演算器/S11宏御世家终身寿（分红型）演算表5.20.xlsx"
+        },
+        {
+          "name": "S03 宏泰世家（分红型）演算表",
+          "type": "excel",
+          "description": "新华人寿 宏泰世家演算表",
+          "url": "files/演算器/新华人寿 宏泰世家（分红型）.xlsx"
+        },
+        {
+          "name": "宏愿人生养老年金（分红型）演算表",
+          "type": "excel",
+          "description": "利益演示演算表",
+          "url": "files/演算器/新华宏愿人生养老年金分红型利益演示.xlsx"
+        },
+        {
+          "name": "S24 华彩鎏金年金保险（分红型）演算表",
+          "type": "excel",
+          "description": "利益演示演算表",
+          "url": "files/演算器/S24华彩鎏金年金保险（分红型）利益演示.xlsx"
+        },
+        {
+          "name": "S12 宏禧来两全保险（分红型）演算表",
+          "type": "excel",
+          "description": "利益演示Excel版，供银行签约使用",
+          "url": "files/演算器/S12宏禧来两全保险（分红型）利益演示excel版（供银行签约使用）N.xlsx"
+        },
+        {
+          "name": "S06 宏坤人生养老年金险演算表",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/S06 宏坤人生养老年金险演算表.xlsx"
+        },
+        {
+          "name": "G24 福盛世家添翼版演算表",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/福盛世家添翼版.xlsx"
+        },
+        {
+          "name": "G23 恒享人生年金险演算表",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/G23 恒享人生年金险演算表.xlsx"
+        },
+        {
+          "name": "稳得福演算表",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/稳得福演算表.xlsx"
+        },
+        {
+          "name": "S10 宏安世家终身寿险（分红型）演算表",
+          "type": "excel",
+          "description": "演算表",
+          "url": "files/演算器/S10宏安世家终身寿险（分红型）演算表(6).xls"
         }
       ]
     }
