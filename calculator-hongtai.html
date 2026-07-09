@@ -204,11 +204,27 @@ async function generate(){
     const body=document.getElementById('resultBody');
     body.innerHTML='';
     const reserveYears=5;
+
+    // 预计算可见的储备期行数与首行索引
+    let visibleIdx=-1, reserveCount=0, firstReserveVisibleIdx=-1;
+    rows.forEach(row=>{
+      const curAge=age+row.yr;
+      const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
+      if(skip) return;
+      visibleIdx++;
+      if(row.yr<=reserveYears){
+        if(firstReserveVisibleIdx===-1) firstReserveVisibleIdx=visibleIdx;
+        reserveCount++;
+      }
+    });
+
+    visibleIdx=-1;
     rows.forEach(row=>{
       const yr=row.yr;
       const curAge=age+yr; // 年龄（年末）= 投保年龄 + 保单年度
       const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
       if(skip) return;
+      visibleIdx++;
       const tr=document.createElement('tr');
       const isReserve=yr<=reserveYears;
       const isPayback=yr===5;
@@ -224,11 +240,16 @@ async function generate(){
       // 生存总利益 - 保证+红利
       if(isPayback) cells+=`<td class="col-cv cell-hl">${fmt(row.cv_total)}</td>`;
       else cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
-      // 收益率
-      const rv=row.rate_raw;
-      if(isReserve) cells+=`<td style="color:#64748B;font-weight:700;">储备期</td>`;
-      else if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
-      else cells+=`<td></td>`;
+      // 收益率（储备期合并为一个单元格）
+      if(isReserve){
+        if(visibleIdx===firstReserveVisibleIdx){
+          cells+=`<td rowspan="${reserveCount}" class="reserve-cell">储备期</td>`;
+        }
+      }else{
+        const rv=row.rate_raw;
+        if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
+        else cells+=`<td></td>`;
+      }
       tr.innerHTML=cells;
       body.appendChild(tr);
     });
@@ -266,7 +287,7 @@ function downloadImage(){
   const DPR=window.devicePixelRatio||2;
   const SCALE=1.5; // 超清放大
   const PAD=20;
-  const TITLE_H=72, INFO_H=188, SUBHDR_H=38, HEADER_H=64, ROW_H=33, FOOTER_H=46;
+  const TITLE_H=72, INFO_H=158, SUBHDR_H=38, HEADER_H=64, ROW_H=33, FOOTER_H=46;
   const colW=[44,42,86,118,90,84,78,96,102,62]; // 10列宽
   const totalW=colW.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
@@ -292,10 +313,8 @@ function downloadImage(){
   };
   let y=PAD;
 
-  // 1) 标题栏（蓝色渐变）
-  const tg=ctx.createLinearGradient(PAD,y,PAD,y+TITLE_H);
-  tg.addColorStop(0,C.titleGrad[0]); tg.addColorStop(.5,C.titleGrad[1]); tg.addColorStop(1,C.titleGrad[2]);
-  ctx.fillStyle=tg; ctx.fillRect(PAD,y,totalW,TITLE_H);
+  // 1) 标题栏（深蓝，与在线测算页一致）
+  ctx.fillStyle=C.tableHeader; ctx.fillRect(PAD,y,totalW,TITLE_H);
   ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.font='bold 27px '+FAM;
   ctx.fillText('宏泰世家（分红型）理财计划', PAD+totalW/2, y+TITLE_H/2-12);
@@ -314,17 +333,17 @@ function downloadImage(){
   // 左：公司介绍
   ctx.fillStyle=C.accentDark; ctx.font='bold 20px '+FAM;
   ctx.fillText('公司介绍', PAD+14, infoY+10);
-  ctx.fillStyle=C.textDark; ctx.font='13px '+FAM;
+  ctx.fillStyle=C.textDark; ctx.font='13.5px '+FAM;
   ['· 2011年国内首家A+H股同步上市',
    '· 连续多年入围财富福布斯世界500强，连续3年入围',
    '· 惠誉国际信用评级A级（强劲），穆迪财务实力评级A3级',
    '· 年化综合投资收益率为8.5%，近十年平均投资收益率5.4%',
    '· 由全球最大的国家主权基金[中投公司]直管，最大股东：中央汇金',
-   '· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*15));
+   '· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*16));
   // 右：产品亮点（自动换行）
   ctx.fillStyle=C.accentDark; ctx.font='bold 20px '+FAM;
   ctx.fillText('产品亮点', midX+14, infoY+10);
-  ctx.fillStyle=C.textDark; ctx.font='12px '+FAM;
+  ctx.fillStyle=C.textDark; ctx.font='12.5px '+FAM;
   const productLines=[];
   const maxProductW=totalW/2-28;
   ['1. 收益稳健：保额以年1.75%复利+分红不低于70%盈余分配',
@@ -347,7 +366,7 @@ function downloadImage(){
      }
      if(line) productLines.push(line);
    });
-  productLines.forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*14));
+  productLines.forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*15));
 
   // 3) 子标题栏（含基本保额）
   y+=INFO_H;
@@ -432,15 +451,20 @@ function downloadImage(){
     });
   });
 
-  // 6) 前5年收益率列显示"储备期"
-  const reserveRows=dlRows.filter(r=>r.reserve);
-  ctx.fillStyle=C.textGray; ctx.font='bold 12px '+FAM;
-  ctx.textAlign='center'; ctx.textBaseline='middle';
-  reserveRows.forEach((r,idx)=>{
-    const ry=rowY0+idx*ROW_H;
+  // 6) 前5年收益率列显示"储备期"（合并单元格居中）
+  let reserveStartIdx=-1, reserveCount=0;
+  dlRows.forEach((r,idx)=>{ if(r.reserve){ if(reserveStartIdx===-1) reserveStartIdx=idx; reserveCount++; } });
+  if(reserveStartIdx>=0&&reserveCount>0){
+    const ry0=rowY0+reserveStartIdx*ROW_H;
+    const blockH=reserveCount*ROW_H;
     const rcX=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
-    ctx.fillText('储备期', rcX+colW[9]/2, ry+ROW_H/2);
-  });
+    ctx.fillStyle=C.reserveBg; ctx.fillRect(rcX,ry0,colW[9],blockH);
+    ctx.strokeStyle=C.reserveBorder; ctx.lineWidth=1;
+    ctx.strokeRect(rcX+.5,ry0+.5,colW[9]-1,blockH-1);
+    ctx.fillStyle=C.textGray; ctx.font='bold 12px '+FAM;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('储备期', rcX+colW[9]/2, ry0+blockH/2);
+  }
 
   // 7) 收益率列（非投资期行）
   for(let i=reserveRows.length;i<dlRows.length;i++){
