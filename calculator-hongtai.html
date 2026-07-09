@@ -226,7 +226,8 @@ async function generate(){
       else cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
       // 收益率
       const rv=row.rate_raw;
-      if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
+      if(isReserve) cells+=`<td style="color:#64748B;font-weight:700;">储备期</td>`;
+      else if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
       else cells+=`<td></td>`;
       tr.innerHTML=cells;
       body.appendChild(tr);
@@ -265,12 +266,12 @@ function downloadImage(){
   const DPR=window.devicePixelRatio||2;
   const SCALE=1.5; // 超清放大
   const PAD=20;
-  const TITLE_H=72, INFO_H=168, VIP_H=44, SUBHDR_H=38, HEADER_H=64, ROW_H=33, FOOTER_H=46;
+  const TITLE_H=72, INFO_H=188, SUBHDR_H=38, HEADER_H=64, ROW_H=33, FOOTER_H=46;
   const colW=[44,42,86,118,90,84,78,96,102,62]; // 10列宽
   const totalW=colW.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
-  const canvasH=PAD+TITLE_H+INFO_H+VIP_H+SUBHDR_H+tableH+FOOTER_H+PAD;
+  const canvasH=PAD+TITLE_H+INFO_H+SUBHDR_H+tableH+FOOTER_H+PAD;
 
   const canvas=document.getElementById('renderCanvas');
   canvas.width=canvasW*SCALE*DPR; canvas.height=canvasH*SCALE*DPR;
@@ -320,36 +321,43 @@ function downloadImage(){
    '· 年化综合投资收益率为8.5%，近十年平均投资收益率5.4%',
    '· 由全球最大的国家主权基金[中投公司]直管，最大股东：中央汇金',
    '· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*15));
-  // 右：产品亮点
+  // 右：产品亮点（自动换行）
   ctx.fillStyle=C.accentDark; ctx.font='bold 20px '+FAM;
   ctx.fillText('产品亮点', midX+14, infoY+10);
-  ctx.fillStyle=C.textDark; ctx.font='13px '+FAM;
+  ctx.fillStyle=C.textDark; ctx.font='12px '+FAM;
+  const productLines=[];
+  const maxProductW=totalW/2-28;
   ['1. 收益稳健：保额以年1.75%复利+分红不低于70%盈余分配',
    '2. 身故赔付：身故或全残保障',
    '3. 资金灵活：可减保，或贷现金价值80%',
    '4. 定向传承：指定受益人及份额，避免遗产纠纷',
    '5. 安全属性："保底+分红"双轮驱动，锁定利率，对抗下行',
-   '6. 额外身价保障：客运列车及航空意外伤害身故或全残额外赔付1.5倍基本保额'].forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*15));
+   '6. 额外身价保障：客运列车及航空意外伤害身故或全残额外赔付1.5倍基本保额'].forEach((t)=>{
+     let line='', k=0;
+     while(k<t.length){
+       const ch=t[k];
+       const test=line+ch;
+       if(ctx.measureText(test).width>maxProductW&&line!==''){
+         productLines.push(line);
+         line=ch;
+       } else {
+         line=test;
+       }
+       k++;
+     }
+     if(line) productLines.push(line);
+   });
+  productLines.forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*14));
 
-  // 3) VIP参数行
+  // 3) 子标题栏（含基本保额）
   y+=INFO_H;
-  const paramY=y;
-  ctx.fillStyle=C.paramBg; ctx.fillRect(PAD,paramY,totalW,VIP_H);
-  ctx.strokeStyle=C.lineColor; ctx.lineWidth=.5; ctx.strokeRect(PAD+.5,paramY+.5,totalW-.5,VIP_H-.5);
-  ctx.fillStyle=C.textDark; ctx.font='bold 14px '+FAM;
-  ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText(`VIP投保人 | ${genderLabel} | ${age}岁 | ${termLabel} | 年交 ${fmt(premium)}元 | 基本保额 ${fmt(sumAssured)}元 | 终身 | 交清增额`,
-    PAD+totalW/2, paramY+VIP_H/2);
-
-  // 4) 子标题栏
-  y+=VIP_H;
   const subY=y;
   ctx.fillStyle=C.subHeader; ctx.fillRect(PAD,subY,totalW,SUBHDR_H);
-  ctx.fillStyle='#fff'; ctx.font='bold 19px '+FAM;
+  ctx.fillStyle='#fff'; ctx.font='bold 17px '+FAM;
   ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText('利 益 演 示 表', PAD+totalW/2, subY+SUBHDR_H/2);
+  ctx.fillText(`利 益 演 示 表（基本保险金额：${fmt(sumAssured)}元）`, PAD+totalW/2, subY+SUBHDR_H/2);
 
-  // 5) 表头
+  // 4) 表头
   y+=SUBHDR_H;
   const tableX=PAD, tableTop=y;
   ctx.fillStyle=C.tableHeader; ctx.fillRect(tableX,tableTop,totalW,HEADER_H);
@@ -375,7 +383,7 @@ function downloadImage(){
     hx+=colW2;
   });
 
-  // 6) 数据行
+  // 5) 数据行
   const rowY0=tableTop+HEADER_H;
   ctx.lineWidth=0.5;
   dlRows.forEach((r,idx)=>{
@@ -384,17 +392,11 @@ function downloadImage(){
     ctx.fillRect(tableX,ry,totalW,ROW_H);
     ctx.strokeStyle=C.lineColor;
     for(let j=1;j<10;j++){
-      if(r.reserve && j===9) continue;
       const vx=tableX+colW.slice(0,j).reduce((a,b)=>a+b,0);
       ctx.beginPath(); ctx.moveTo(vx,ry); ctx.lineTo(vx,ry+ROW_H); ctx.stroke();
     }
     ctx.beginPath();
-    if(r.reserve){
-      const lineEnd=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
-      ctx.moveTo(tableX,ry+ROW_H); ctx.lineTo(lineEnd,ry+ROW_H);
-    } else {
-      ctx.moveTo(tableX,ry+ROW_H); ctx.lineTo(tableX+totalW,ry+ROW_H);
-    }
+    ctx.moveTo(tableX,ry+ROW_H); ctx.lineTo(tableX+totalW,ry+ROW_H);
     ctx.stroke();
     const cells=[
       {v:r.yr, c:C.textDark, f:'bold 16px '+FAM, a:'c'},
@@ -430,10 +432,17 @@ function downloadImage(){
     });
   });
 
-  // 7) 前5年收益率列留空（不画投资期合并单元格）
+  // 6) 前5年收益率列显示"储备期"
   const reserveRows=dlRows.filter(r=>r.reserve);
+  ctx.fillStyle=C.textGray; ctx.font='bold 12px '+FAM;
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  reserveRows.forEach((r,idx)=>{
+    const ry=rowY0+idx*ROW_H;
+    const rcX=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
+    ctx.fillText('储备期', rcX+colW[9]/2, ry+ROW_H/2);
+  });
 
-  // 8) 收益率列（非投资期行）
+  // 7) 收益率列（非投资期行）
   for(let i=reserveRows.length;i<dlRows.length;i++){
     const r=dlRows[i], ry=rowY0+i*ROW_H, rcX=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
     if(r.rate!==null&&r.rate!==undefined&&typeof r.rate==='number'){
@@ -443,7 +452,7 @@ function downloadImage(){
     }
   }
 
-  // 9) 页脚声明
+  // 8) 页脚声明
   const footY=rowY0+dlRows.length*ROW_H+8;
   ctx.fillStyle=C.textMuted; ctx.font='11px '+FAM;
   ctx.textAlign='center'; ctx.textBaseline='top';
