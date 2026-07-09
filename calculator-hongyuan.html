@@ -302,11 +302,11 @@ tbody tr:hover { background: #EFF6FF; }
     <h3>产品特点</h3>
     <div class="detail-content">
       <p><strong>双轨增值，收益稳健</strong></p>
-      <p>依托央企经营成果参与保单红利分配，红利若不领取可进入累计生息账户实现二次增值（当前账户利率 2.5%）；同时保单现金价值增长速度较快，资产长期稳步向上，收益结构清晰可靠。</p>
+      <p>依托央企红利分配，红利可进入累计生息账户二次增值（2.5%）；现金价值稳步增长，收益清晰可靠。</p>
       <p><strong>领取灵活，资金高效</strong></p>
-      <p>年金领取年龄可按需选择（女性支持 55 岁起领，全人群可选 60/65/70 岁领取），月领、年领方式可随时调整，持续提供充足养老现金流；产品支持保单贷款功能，资金周转灵活，对 50 周岁以上客群适配友好。</p>
+      <p>女性55岁起领，可选60/65/70岁，月领年领可调；支持保单贷款，适配50岁以上客群。</p>
       <p><strong>属性多元，兼顾传承</strong></p>
-      <p>以持续稳定的养老现金流为核心功能，同时保单现金价值具备定向传承属性，可实现财富跨代传递，一份保单同时覆盖养老储备与资产传承双重需求。</p>
+      <p>稳定养老现金流为核心，现金价值具备定向传承属性，一单覆盖养老与传承。</p>
     </div>
   </div>
 
@@ -821,9 +821,9 @@ function downloadImage() {
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
       ctx.fillText('产品特点', rx+12, infoY+24);
       const prodSections = [
-        {title:'双轨增值，收益稳健', text:'依托央企经营成果参与保单红利分配，红利若不领取可进入累计生息账户实现二次增值（当前账户利率 2.5%）；同时保单现金价值增长速度较快，资产长期稳步向上，收益结构清晰可靠。'},
-        {title:'领取灵活，资金高效', text:'年金领取年龄可按需选择（女性支持 55 岁起领，全人群可选 60/65/70 岁领取），月领、年领方式可随时调整，持续提供充足养老现金流；产品支持保单贷款功能，资金周转灵活，对 50 周岁以上客群适配友好。'},
-        {title:'属性多元，兼顾传承', text:'以持续稳定的养老现金流为核心功能，同时保单现金价值具备定向传承属性，可实现财富跨代传递，一份保单同时覆盖养老储备与资产传承双重需求。'}
+        {title:'双轨增值，收益稳健', text:'依托央企红利分配，红利可进入累计生息账户二次增值（2.5%）；现金价值稳步增长，收益清晰可靠。'},
+        {title:'领取灵活，资金高效', text:'女性55岁起领，可选60/65/70岁，月领年领可调；支持保单贷款，适配50岁以上客群。'},
+        {title:'属性多元，兼顾传承', text:'稳定养老现金流为核心，现金价值具备定向传承属性，一单覆盖养老与传承。'}
       ];
       let prodY = infoY + 44;
       const textMaxW = infoColW - 24;
@@ -831,9 +831,9 @@ function downloadImage() {
         ctx.fillStyle = C.subHeader; ctx.font = 'bold 13px "PingFang SC",sans-serif';
         ctx.fillText(sec.title, rx+12, prodY);
         prodY += 16;
-        ctx.fillStyle = C.textGray; ctx.font = '12px "PingFang SC",sans-serif';
-        const lines = wrapText(sec.text, rx+12, prodY, textMaxW, 15);
-        prodY += lines * 15 + 6;
+        ctx.fillStyle = C.textGray; ctx.font = '11.5px "PingFang SC",sans-serif';
+        const lines = wrapText(sec.text, rx+12, prodY, textMaxW, 14);
+        prodY += lines * 14 + 4;
       });
 
       // ---- 子标题栏 ----
