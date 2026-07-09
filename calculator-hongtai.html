@@ -86,8 +86,8 @@
       <div class="field">
         <label>显示方式</label>
         <select id="displayMode">
+          <option value="after60" selected>60岁后每隔5年</option>
           <option value="all">全部年度</option>
-          <option value="after60">60岁后每隔5年</option>
         </select>
       </div>
       <div class="field">
@@ -284,7 +284,7 @@ function downloadImage(){
   const FAM='"PingFang SC","Microsoft YaHei",sans-serif';
   const C={
     titleGrad:['#1E3A5F','#2563EB','#1E40AF'],
-    companyBg:'#EFF6FF', productBg:'#FFF7ED', paramBg:'#DBEAFE',
+    companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#DBEAFE',
     subHeader:'#1D4ED8', tableHeader:'#1E3A5F',
     rowWhite:'#FFFFFF', rowAlt:'#F0F9FF',
     reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
@@ -322,7 +322,7 @@ function downloadImage(){
    '· 惠誉国际信用评级A级（强劲），穆迪财务实力评级A3级',
    '· 年化综合投资收益率为8.5%，近十年平均投资收益率5.4%',
    '· 由全球最大的国家主权基金[中投公司]直管，最大股东：中央汇金',
-   '· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*13));
+   '· 公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*12));
   // 右：产品亮点
   ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
   ctx.fillText('产品亮点', midX+14, infoY+12);

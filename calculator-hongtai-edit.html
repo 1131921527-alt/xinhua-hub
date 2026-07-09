@@ -160,8 +160,8 @@
       <div class="field">
         <label>显示方式</label>
         <select id="displayMode">
+          <option value="after60" selected>60岁后每隔5年</option>
           <option value="all">全部年度</option>
-          <option value="after60">60岁后每隔5年</option>
         </select>
       </div>
       <div class="field">
@@ -360,7 +360,7 @@ function downloadImage(){
   const FAM='"PingFang SC","Microsoft YaHei",sans-serif';
   const C={
     titleGrad:['#1E3A5F','#2563EB','#1E40AF'],
-    companyBg:'#EFF6FF', productBg:'#FFF7ED', paramBg:'#DBEAFE',
+    companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#DBEAFE',
     subHeader:'#1D4ED8', tableHeader:'#1E3A5F',
     rowWhite:'#FFFFFF', rowAlt:'#F0F9FF',
     reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
@@ -392,7 +392,7 @@ function downloadImage(){
   ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
   ctx.fillText(document.getElementById('ext-company-title').textContent.trim(), PAD+14, infoY+12);
   ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
-  document.getElementById('ext-company-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*13));
+  document.getElementById('ext-company-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*12));
   ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
   ctx.fillText(document.getElementById('ext-product-title').textContent.trim(), midX+14, infoY+12);
   ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
