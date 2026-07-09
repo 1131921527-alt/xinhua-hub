@@ -43,6 +43,11 @@
   .r-good{color:var(--good);} .r-warn{color:var(--warn);}
   .note{margin:16px 2px; padding:13px 15px; background:#FFF7ED; border:1px solid #FED7AA; border-radius:12px; font-size:12px; color:#9A3412; line-height:1.6;}
   .note b{color:#7C2D12;}
+  .guide{margin:12px 2px 16px;}
+  .guide a{display:flex; flex-wrap:wrap; align-items:center; gap:6px; padding:12px 14px; background:var(--blue-l); border:1px solid #BFDBFE; border-radius:12px; text-decoration:none; color:var(--blue-d); font-size:13px; line-height:1.5;}
+  .guide a b{font-weight:700;}
+  .guide a span{flex:1; color:var(--ink);}
+  .guide a svg{flex:none;}
   .err{padding:30px; text-align:center; color:var(--sub); font-size:14px;}
   footer{text-align:center; font-size:11px; color:var(--sub); margin-top:20px; padding:0 16px;}
 </style>
@@ -68,6 +73,13 @@
     </div>
   </div>
   <div class="count" id="cnt"></div>
+  <div class="guide" id="guide">
+    <a href="https://www.newchinalife.com/node/2360" target="_blank" rel="noopener">
+      <b>🔍 官网查询入口</b>
+      <span>想查更多产品或历史年份？点此直接打开新华保险官网「红利实现率」披露页，在页面左上角搜索产品名称即可。</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
   <div id="list"></div>
   <div class="note" id="noteBox"></div>
   <footer>本页红利实现率数据同步自新华保险官网公开信息披露，仅供产品展示与学习参考，不构成任何销售建议或收益承诺。</footer>

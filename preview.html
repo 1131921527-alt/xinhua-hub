@@ -442,6 +442,8 @@
   const isArchive = archiveTypes.includes(ext) || archiveTypes.includes(type);
   const hasText = hasTextVersion(title);
 
+  const isHtml = ['html','htm'].includes(ext) || type === 'link' || file.endsWith('.html') || file.endsWith('.htm');
+
   // 获取文件绝对URL（用于在线预览服务）
   function getAbsoluteUrl(relUrl) {
     try { return new URL(relUrl, window.location.href).href; }
@@ -544,6 +546,14 @@
       fileSizeEl.textContent = sizeStr;
       fileSizeEl.style.display = 'block';
     }
+  } else if (isHtml) {
+    // HTML 网页文件 → iframe 直接预览
+    viewer.style.display = 'block';
+    imgViewer.style.display = 'none';
+    viewer.src = file;
+    document.querySelector('.loading-text').textContent = '正在加载网页...';
+    viewer.onload = () => { hideLoading(); };
+    setTimeout(hideLoading, 8000);
   } else {
     // 其他类型也走下载
     hideLoading();
