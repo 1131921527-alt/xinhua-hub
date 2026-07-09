@@ -137,6 +137,15 @@
   }
   .tab:active { transform: scale(0.95); }
 
+  /* 分类标签横滑：桌面拖拽 + 两侧渐隐提示 */
+  .tabs { cursor: grab; }
+  .tabs.dragging { cursor: grabbing; }
+  .tabs-wrap { position: relative; }
+  .tabs-wrap::before,
+  .tabs-wrap::after { content:''; position:absolute; top:0; bottom:0; width:22px; z-index:2; pointer-events:none; }
+  .tabs-wrap::before { left:0; background: linear-gradient(to right, var(--bg), rgba(244,247,251,0)); }
+  .tabs-wrap::after  { right:0; background: linear-gradient(to left,  var(--bg), rgba(244,247,251,0)); }
+
   /* Content */
   .content { padding: 8px 16px 20px; }
 
@@ -632,7 +641,7 @@
   </div>
 </div>
 
-<div class="tabs" id="tabs"></div>
+<div class="tabs-wrap"><div class="tabs" id="tabs"></div></div>
 
 <div class="content" id="content">
   <div class="loading">加载中…</div>
@@ -1100,6 +1109,26 @@ window.addEventListener('scroll', function() {
     btn.classList.remove('show');
   }
 });
+
+// 分类标签横滑：桌面鼠标拖拽 + 滚轮横滑 + 拖拽后屏蔽误点击
+(function(){
+  const el=document.getElementById('tabs');
+  if(!el) return;
+  let down=false, startX=0, startScroll=0, moved=false;
+  el.addEventListener('mousedown', function(e){ down=true; startX=e.pageX; startScroll=el.scrollLeft; moved=false; el.classList.add('dragging'); });
+  window.addEventListener('mouseup', function(){ down=false; el.classList.remove('dragging'); });
+  el.addEventListener('mousemove', function(e){
+    if(!down) return;
+    e.preventDefault();
+    const dx=e.pageX-startX;
+    el.scrollLeft=startScroll-dx;
+    if(Math.abs(dx)>5) moved=true;
+  });
+  el.addEventListener('click', function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); moved=false; } }, true);
+  el.addEventListener('wheel', function(e){
+    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ el.scrollLeft+=e.deltaY; e.preventDefault(); }
+  }, {passive:false});
+})();
 
 // Init
 loadData();
