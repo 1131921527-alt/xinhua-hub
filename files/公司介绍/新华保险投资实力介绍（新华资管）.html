@@ -2,117 +2,196 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>新华保险投资实力介绍（新华资管）.pptx · 在线浏览</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>新华保险投资实力 · 新华保险资料库</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:#0F172A;color:#1E293B;overflow:hidden;}
-  .topbar{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(135deg,#1D4ED8,#2563EB);color:#fff;}
-  .topbar a.back{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;}
-  .topbar .t{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .topbar .cnt{font-size:13px;opacity:.9;white-space:nowrap;}
-  .stage{position:absolute;top:52px;left:0;right:0;bottom:96px;overflow:hidden;}
-  .slides{display:flex;height:100%;transition:transform .35s ease;}
-  .slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:14px;}
-  .slide-inner{width:100%;max-width:760px;background:#fff;border-radius:16px;padding:26px 22px;max-height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:0 10px 40px rgba(0,0,0,.25);}
-  .slide-title{font-size:21px;font-weight:800;color:#1D4ED8;margin-bottom:14px;line-height:1.4;}
-  .bullets{list-style:none;}
-  .bullets li{position:relative;padding:7px 0 7px 20px;font-size:16px;line-height:1.6;border-bottom:1px solid #F1F5F9;}
-  .bullets li:before{content:'';position:absolute;left:4px;top:16px;width:7px;height:7px;border-radius:50%;background:#2563EB;}
-  .slide-img{margin:12px 0;}
-  .slide-img img{width:100%;border-radius:10px;display:block;}
-  .dots{position:fixed;left:0;right:0;bottom:54px;z-index:30;display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:0 20px;}
-  .dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .2s;}
-  .dots span.on{background:#fff;width:18px;border-radius:4px;}
-  .bottombar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(15,23,42,.96);}
-  .bottombar button{flex:1;padding:11px;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;}
-  .bottombar .prev{background:#334155;color:#fff;}
-  .bottombar .next{background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;}
-  .bottombar .dl{background:#16A34A;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center;}
-  .bottombar button:active{transform:scale(.97);}
+:root{
+  --blue-900:#1E3A8A; --blue-800:#1E40AF; --blue-700:#1D4ED8;
+  --blue-600:#2563EB; --blue-500:#3B82F6; --blue-300:#93C5FD;
+  --blue-100:#DBEAFE; --blue-50:#EFF6FF;
+  --ink:#0F172A; --ink-2:#334155; --ink-3:#64748B; --ink-4:#94A3B8;
+  --white:#FFFFFF; --line:#E6EDF7; --line-2:#DBE6F5;
+  --shadow:0 10px 30px rgba(30,58,138,.10); --shadow-sm:0 4px 14px rgba(30,58,138,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F4F8FE;color:var(--ink);line-height:1.7;word-break:break-word;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+
+/* 顶栏 */
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:linear-gradient(120deg,var(--blue-900),var(--blue-600));color:#fff;
+  box-shadow:0 4px 18px rgba(30,58,138,.25);}
+.topbar .back{font-size:13px;opacity:.92;white-space:nowrap;padding:6px 8px;border-radius:8px;}
+.topbar .back:active{background:rgba(255,255,255,.15);}
+.topbar .t{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .clock{font-size:12px;font-variant-numeric:tabular-nums;opacity:.95;white-space:nowrap;
+  background:rgba(255,255,255,.14);padding:5px 9px;border-radius:20px;}
+.topbar .dl{font-size:13px;font-weight:600;white-space:nowrap;background:#fff;color:var(--blue-700);
+  padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;cursor:pointer;border:none;}
+.topbar .dl:active{transform:scale(.96);}
+
+/* 子导航 */
+.subnav{position:sticky;top:53px;z-index:55;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;
+  display:flex;gap:6px;padding:8px 12px;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{height:0;}
+.subnav a{font-size:12.5px;color:var(--ink-2);white-space:nowrap;padding:6px 11px;border-radius:18px;
+  background:var(--blue-50);border:1px solid var(--line);}
+.subnav a:active{background:var(--blue-100);}
+
+/* 捕获区 */
+#capture{background:#F4F8FE;padding-bottom:10px;}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,#1E3A8A 0%,#1D4ED8 55%,#2563EB 100%);
+  padding:40px 20px 46px;}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(38px);opacity:.45;}
+.hero .b1{width:230px;height:230px;background:#60A5FA;top:-70px;right:-50px;}
+.hero .b2{width:180px;height:180px;background:#1E40AF;bottom:-70px;left:-40px;}
+.hero .inner{position:relative;max-width:1000px;margin:0 auto;}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:1px;background:rgba(255,255,255,.16);
+  padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.hero h1{font-size:27px;font-weight:800;line-height:1.3;letter-spacing:.5px;}
+.hero .sub{margin-top:10px;font-size:15px;opacity:.92;max-width:680px;}
+.hero .badge{margin-top:18px;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  padding:9px 14px;border-radius:12px;font-size:13px;}
+.hero .badge b{font-size:15px;}
+
+/* 通用容器 */
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px;}
+.sec{padding:30px 0 6px;}
+.sec-head{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+.sec-head .ic{width:38px;height:38px;border-radius:11px;background:var(--blue-100);
+  color:var(--blue-700);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;}
+.sec-head h2{font-size:20px;font-weight:800;color:var(--ink);}
+.sec-head .en{font-size:12px;color:var(--ink-4);font-weight:600;letter-spacing:.5px;}
+.lead{color:var(--ink-2);font-size:15px;margin-bottom:16px;}
+
+/* 卡片网格 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;
+  box-shadow:var(--shadow-sm);transition:transform .15s;}
+.card:hover{transform:translateY(-3px);}
+.card .ct{font-size:16px;font-weight:800;color:var(--blue-800);margin-bottom:6px;}
+.card .cd{font-size:13.5px;color:var(--ink-2);line-height:1.6;}
+.card .pill{display:inline-block;margin-top:10px;font-size:12px;color:var(--blue-700);
+  background:var(--blue-50);border:1px solid var(--line-2);padding:4px 10px;border-radius:14px;}
+
+/* 数据条 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:6px 0 4px;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+.stat:before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue-600),var(--blue-500));}
+.stat .num{font-size:26px;font-weight:800;color:var(--blue-700);font-variant-numeric:tabular-nums;line-height:1.2;}
+.stat .num small{font-size:14px;font-weight:700;}
+.stat .lb{margin-top:6px;font-size:13px;color:var(--ink-2);}
+.stat .sb{margin-top:2px;font-size:11.5px;color:var(--ink-4);}
+
+/* 表格 */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0;border-radius:14px;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+table.tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px;background:#fff;}
+table.tbl thead th{background:linear-gradient(120deg,var(--blue-800),var(--blue-600));color:#fff;
+  font-weight:700;padding:11px 12px;text-align:left;white-space:nowrap;font-size:13px;}
+table.tbl tbody td{padding:10px 12px;border-top:1px solid var(--line);color:var(--ink-2);vertical-align:top;}
+table.tbl tbody tr:nth-child(even){background:var(--blue-50);}
+table.tbl tbody tr.hl{background:var(--blue-100);}
+table.tbl tbody tr.hl td{color:var(--blue-800);font-weight:600;}
+table.tbl td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+table.tbl th.r{text-align:right;}
+.tbl-cap{font-size:12.5px;color:var(--ink-4);margin:8px 2px 0;}
+
+/* 双列键值表 */
+table.kv{border-collapse:collapse;width:100%;font-size:14px;background:#fff;border-radius:14px;
+  overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+table.kv td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;}
+table.kv td.k{width:34%;color:var(--blue-800);font-weight:700;background:var(--blue-50);}
+table.kv td.v{color:var(--ink-2);}
+
+/* 提示框 */
+.callout{border-radius:14px;padding:15px 16px;margin:14px 0;font-size:14px;line-height:1.7;
+  display:flex;gap:12px;align-items:flex-start;}
+.callout .ci{font-size:18px;flex:none;line-height:1.4;}
+.callout.info{background:var(--blue-50);border:1px solid var(--line-2);color:var(--ink-2);}
+.callout.key{background:var(--blue-100);border:1px solid var(--blue-300);color:var(--blue-800);font-weight:600;}
+.callout.warn{background:#FFF7ED;border:1px solid #FED7AA;color:#9A3412;}
+
+/* 步骤 */
+.steps{counter-reset:s;margin:8px 0;}
+.steps .st{position:relative;padding:12px 14px 12px 52px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow-sm);}
+.steps .st:before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:12px;
+  width:28px;height:28px;border-radius:50%;background:var(--blue-600);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:14px;}
+.steps .st b{color:var(--blue-800);}
+
+/* FAQ */
+.faq{margin:8px 0;}
+.faq .q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:10px;
+  box-shadow:var(--shadow-sm);}
+.faq .q .qt{font-weight:800;color:var(--blue-800);font-size:14.5px;margin-bottom:6px;}
+.faq .q .qa{color:var(--ink-2);font-size:13.5px;}
+
+/* 页脚 */
+.foot{margin-top:26px;background:linear-gradient(120deg,var(--blue-900),var(--blue-700));
+  color:#fff;padding:26px 20px 34px;text-align:center;}
+.foot .slogan{font-size:17px;font-weight:800;letter-spacing:1px;}
+.foot .slogan small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:4px;letter-spacing:0;}
+.foot .disc{margin-top:14px;font-size:11.5px;line-height:1.7;opacity:.82;max-width:720px;margin-left:auto;margin-right:auto;}
+
+@media (max-width:560px){
+  .hero h1{font-size:22px;}
+  .sec-head h2{font-size:18px;}
+  .topbar .clock{display:none;}
+  table.tbl{min-width:520px;}
+}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-  <div class="topbar">
-    <a class="back" href="../../index.html">← 返回</a>
-    <div class="t">新华保险投资实力介绍（新华资管）.pptx</div>
-    <div class="cnt"><span id="cur">1</span>/7</div>
-  </div>
-  <div class="stage"><div class="slides" id="slides">
-
-        <section class="slide" data-idx="1">
-          <div class="slide-inner">
-            <h2 class="slide-title">新华保险投资实力与成果展示</h2>
-            <ul class="bullets"><li>专业投资 · 稳健增值 · 服务实体</li><li>专业研判 科学配置</li><li>汇聚资深投研团队，覆盖全市场资产类别，构建多元配置模型，以专业视角精准捕捉市场机遇，实现资产的科学布局。</li><li>严控风险 保值增值</li><li>坚守风险底线思维，建立全方位风控体系，在安全边际内追求长期可持续的绝对收益，守护客户资产价值稳定增长。</li><li>聚焦战略 赋能实体</li><li>响应国家政策号召，加大对实体经济支持力度，将保险资金的长期优势转化为服务国家战略、推动社会发展的源动力。</li><li>新华资产 | 做值得信赖的资产管理专家</li></ul>
-            <div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img1.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img2.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img3.png" alt=""></div>
-          </div>
-        </section>
-
-        <section class="slide" data-idx="2">
-          <div class="slide-inner">
-            <h2 class="slide-title">穿越周期的投资业绩</h2>
-            <ul class="bullets"><li>01 长期价值积淀：稳健与超额并重</li><li>固收投资 · 穿越牛熊 (2012-2024)</li><li>+30%</li><li>净值涨幅大幅跑赢公募基金指数，配置盘年化收益稳定在5.6%，为组合提供坚实安全垫。</li><li>港股投资 · 极致选股能力</li><li>10倍+</li><li>7人精锐团队管理700亿持仓，持续跑赢恒生指数。代表案例：泡泡玛特单票盈利约50亿。</li><li>02 近期业绩突破：规模与收益双升</li><li>2024年度 · 创历史新高</li><li>8.5%</li><li>综合投资收益率创历史峰值，远超年初4.5%目标。总收益率5.8%，管理资产规模突破1.6万亿。</li><li>2025上半年 · 行业领跑</li><li>6.3%</li><li>年化综合收益率稳健上行，总投资收益率5.9%。规模超1.7万亿，A股投资组合涨幅位居行业第一。</li></ul>
-            <div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img4.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img5.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img6.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img7.png" alt=""></div>
-          </div>
-        </section>
-
-        <section class="slide" data-idx="3">
-          <div class="slide-inner">
-            <h2 class="slide-title">2024年投资操作亮点</h2>
-            <ul class="bullets"><li>01 债券投资：精准波段，稳享红利</li><li>上半年止盈落袋 · 下半年加仓蓄力</li><li>精准预判市场节奏，上半年在高位果断卖出锁定收益；下半年紧抓利率下行窗口大幅加仓，充分享受债市牛市红利，为组合构建坚实的稳健收益底盘。</li><li>02 A股权益：逆向择时，把握拐点</li><li>2700点低位加仓 · 924行情后逆向减仓</li><li>在市场情绪低迷的2700点区域持续吸筹，在924行情脉冲及国庆首日精准逆向减仓，凸显专业机构对市场节奏的敏锐洞察与风控能力。</li><li>03 OCI高股息：规模激增，锁定分红</li><li>规模增幅 470.6% (53.7亿 → 306.4亿)</li><li>战略布局高股息优质标的，持仓规模实现跨越式增长，从年初的53.7亿元跃升至年末306.4亿元，通过锁定长期稳定的分红收益，为组合提供安全边际。</li><li>04 基金投资：超额收益，领跑市场</li><li>全年收益 12.03% · 超额收益 8.03%</li><li>通过优选基金与科学配置，全年斩获12.03%的收益率，超额收益达8.03%，大幅跑赢市场基准指数，充分验证了专业投研与资产配置的核心价值。</li></ul>
-            <div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img8.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img9.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img10.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img11.png" alt=""></div>
-          </div>
-        </section>
-
-        <section class="slide" data-idx="4">
-          <div class="slide-inner">
-            <h2 class="slide-title">投资理念与资产配置</h2>
-            <ul class="bullets"><li>01 长期价值导向</li><li>坚守长期投资与价值投资本源，摒弃短期波段操作思维。锚定资产长期增值目标，忽视市场短期噪音干扰，以时间换空间，实现财富稳健积累。</li><li>02 宏观与产业双轮驱动</li><li>深化宏观政策研判与行业景气度分析，构建“宏观-中观-微观”立体研究框架。前瞻性把握经济周期与产业趋势，为资产配置提供坚实的逻辑支撑。</li><li>03 多元策略绝对收益</li><li>丰富投资品种与策略工具箱，追求非方向性、低波动的绝对收益。通过多资产、多策略的分散配置，平滑组合净值波动，力争穿越牛熊。</li><li>资产配置结构分布概览</li><li>债券打底（50%）：压舱石与现金流</li><li>持续增配30年/50年超长期利率债，锁定长期稳定的票息收益，构建组合的安全垫，有效抵御权益市场波动风险。</li><li>多元增强（38.4%）：拓宽收益来源</li><li>布局公募REITs、量化对冲、私募股权等另类资产，利用非相关性收益分散风险，提升组合的抗周期能力与收益弹性。</li><li>权益点缀（11.6%）：高股息价值锚</li><li>以高股息、低估值的优质蓝筹股为主，长期持有分享企业分红与业绩增长，在控制波动的前提下增厚组合收益。</li></ul>
-            <div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img12.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img13.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img14.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img15.png" alt=""></div>
-          </div>
-        </section>
-
-        <section class="slide" data-idx="5">
-          <div class="slide-inner">
-            <h2 class="slide-title">标杆案例：鸿鹄基金——险资入市典范</h2>
-            <ul class="bullets"><li>01 基金概况：改革试点里程碑</li><li>国内首只险资私募证券投资基金，是保险资金长期投资改革的首个试点项目。由新华保险与中国人寿两大险企联合发起，三期累计总规模超1100亿元，其中新华保险合计出资462.5亿元，彰显险资长期价值投资的坚定决心。</li><li>02 核心投向：高股息国计民生蓝筹</li><li>伊利股份消费龙头</li><li>陕西煤业能源基石</li><li>中国电信数字基建</li><li>中国石化石化巨擘</li><li>中国石油能源保障</li><li>中国神华煤炭龙头</li><li>03 2025上半年业绩表现</li><li>上半年总营收</li><li>12.03亿元</li><li>上半年净利润</li><li>9.68亿元</li><li>04 行业标杆与深远影响</li><li>监管认可：获国家金融监督管理总局高度肯定，成为改革标杆样本。</li><li>长钱示范：践行“长钱长投”理念，引导中长期资金入市，稳定市场预期。</li><li>价值引领：聚焦分红稳定的核心资产，推动市场回归价值投资本源。</li></ul>
-            <div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img16.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img17.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img18.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img19.png" alt=""></div>
-          </div>
-        </section>
-
-        <section class="slide" data-idx="6">
-          <div class="slide-inner">
-            <h2 class="slide-title">多元布局：服务实体与价值创造</h2>
-            <ul class="bullets"><li>01 硬科技 · 核心突围</li><li>智集芯基金：半导体基石</li><li>新华出资10亿元，战略投资上海集成电路基金，深度绑定芯片设计、制造及材料全产业链，助力国产替代攻坚。</li><li>中科创星：早期硬核孵化</li><li>聚焦新材料、新能源与光电芯片等前沿赛道，挖掘具备核心技术壁垒的初创企业，通过“孵化+投资”模式培育科技独角兽，抢占未来产业高地。</li><li>02 另类投资 · 稳健增值</li><li>中石油管道：能源基建标杆</li><li>85亿战略投入，全周期回报达170.44%，年化收益6.6%。依托国家能源战略，实现现金流稳定与资产长期保值。</li><li>中国银联：金融基建红利</li><li>斩获2.52倍投资回报，年化收益14.27%。卡位支付清算核心枢纽，共享数字经济与消费升级带来的长期红利。</li><li>芬兰光刻胶：技术破局</li><li>落地海宁建设生产基地，破解“卡脖子”材料难题，填补国内高端光刻胶产能空白，兼具战略价值与市场潜力。</li><li>03 高股息 · 现金赋能</li><li>核心资产矩阵：产业+金融</li><li>• 医药：上海医药、国药股份（医疗资源协同）• 金融：海通证券、杭州银行（资本整合互补）• 公用：北控水务（民生刚需，稳定现金流）</li><li>战略价值：分红与治理并重</li><li>不仅获取稳定的分红现金流，更通过股东席位参与公司治理，推动产业资源协同、业务整合与价值重估，实现财务回报与战略布局的双赢。</li><li>以多元化的资产配置穿越经济周期，在服务实体经济发展的同时，实现资本的稳健增值与长期价值创造。</li></ul>
-            <div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img20.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img21.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img22.png" alt=""></div>
-          </div>
-        </section>
-
-        <section class="slide" data-idx="7">
-          <div class="slide-inner">
-            <h2 class="slide-title">做中国资本市场的长期资本、耐心资本</h2>
-            <ul class="bullets"><li>专业投研能力</li><li>构建“宏观+行业+个股”的深度投研体系，以严谨的研究逻辑驱动投资决策。依托专业团队挖掘长期价值，为资产配置的科学性与前瞻性提供坚实支撑。</li><li>穿越周期业绩</li><li>坚守长期投资理念，在市场波动中保持定力。通过多元化资产配置平滑风险，实现保险资金的稳健增值，持续交出经得起时间检验的长期业绩答卷。</li><li>服务国家战略</li><li>锚定国家发展方向，积极投身实体经济与重大战略建设。将保险资金的规模优势转化为服务大局的动力，在助力经济高质量发展中彰显金融央企的责任与担当。</li><li>新华保险 · 新华资产</li></ul>
-            <div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img23.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img24.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img25.png" alt=""></div><div class="slide-img"><img src="新华保险投资实力介绍（新华资管）_files/img26.png" alt=""></div>
-          </div>
-        </section>
-  </div></div>
-  <div class="dots" id="dots"></div>
-  <div class="bottombar">
-    <button class="prev" onclick="go(-1)">‹ 上一页</button>
-    <button class="next" onclick="go(1)">下一页 ›</button>
-    <a class="dl" href="新华保险投资实力介绍（新华资管）.pptx" download="新华保险投资实力介绍（新华资管）.pptx">⬇ 下载原文件</a>
-  </div>
+<input type="hidden" id="pageName" value="新华保险投资实力">
+<div class="topbar">
+  <a class="back" href="../../index.html">← 返回</a>
+  <div class="t">新华保险投资实力</div>
+  <div class="clock"><span id="clockText">--</span></div>
+  <button class="dl" id="dlBtn" onclick="downloadImage()">⬇ 下载图片</button>
+</div>
+<nav class="subnav"><div class="wrap" style="display:flex;gap:6px;padding:0;"><a href="#core">核心数据</a><a href="#cycle">穿越周期</a><a href="#op24">2024操作</a><a href="#fund">鸿鹄基金</a><a href="#alt">硬科技与另类</a></div></nav>
+<div id="capture">
+  <header class="hero"><span class="blob b1"></span><span class="blob b2"></span>
+    <div class="inner"><span class="tag">新华资管 · 投资实力</span><h1>新华保险 · 投资实力介绍</h1><div class="sub">穿越周期 · 稳健增值 · 长期主义 —— 新华资产管理公司</div><div class="badge">🏦 <b>管理资产 1.6 万亿</b>&nbsp; · &nbsp; 2024 总投资收益率 5.8% · 综合收益率 8.5%</div></div>
+  </header>
+  <section class="sec" id="core"><div class="wrap"><div class="sec-head"><div class="ic">🔢</div><div><h2>核心数据</h2><div class="en">KEY FIGURES</div></div></div><div class="stats"><div class="stat"><div class="num">1.6&lt;small&gt;万亿&lt;/small&gt;</div><div class="lb">受托管理资产规模</div><div class="sb">稳健增长</div></div><div class="stat"><div class="num">5.8&lt;small&gt;%&lt;/small&gt;</div><div class="lb">2024 年总投资收益率</div><div class="sb">同比提升 4 个百分点</div></div><div class="stat"><div class="num">8.5&lt;small&gt;%&lt;/small&gt;</div><div class="lb">2024 年综合投资收益率</div><div class="sb">居行业前列</div></div><div class="stat"><div class="num">+30&lt;small&gt;%&lt;/small&gt;</div><div class="lb">固收+策略超额收益</div><div class="sb">跑赢同类公募</div></div><div class="stat"><div class="num">10&lt;small&gt;倍+&lt;/small&gt;</div><div class="lb">港股持仓代表（泡泡玛特）</div><div class="sb">持仓约 50 亿元</div></div></div></div></section><section class="sec" id="cycle"><div class="wrap"><div class="sec-head"><div class="ic">📊</div><div><h2>穿越周期的投资业绩</h2><div class="en">ALL-WEATHER PERFORMANCE</div></div></div><p class="lead">新华资管以「固收为基、权益增强、多元配置」的策略穿越市场周期，在债市、港股与另类资产上均取得亮眼成绩。</p><div class="grid"><div class="card"><div class="ct">固收+ 稳健领跑</div><div class="cd">固收+策略取得约 30% 超额收益，显著跑赢同类公募基金，构筑组合压舱石。</div><span class="pill">固收打底</span></div><div class="card"><div class="ct">港股挖掘十倍股</div><div class="cd">前瞻布局港股优质标的，泡泡玛特持仓约 50 亿元，区间涨幅超 10 倍。</div><span class="pill">权益增强</span></div><div class="card"><div class="ct">2024 综合收益率 8.5%</div><div class="cd">在利率下行与波动加剧的环境中，全年综合投资收益率达 8.5%。</div><span class="pill">收益领先</span></div><div class="card"><div class="ct">管理资产 1.6 万亿</div><div class="cd">受托管理资产规模约 1.6 万亿元，长期资金属性鲜明。</div><span class="pill">规模雄厚</span></div></div></div></section><section class="sec" id="op24"><div class="wrap"><div class="sec-head"><div class="ic">🎯</div><div><h2>2024 年关键操作</h2><div class="en">2024 TACTICS</div></div></div><p class="lead">把握市场节奏，在波动中优化仓位与结构。</p><div class="steps"><div class="st"><b>债券波段操作</b>：通过久期与品种轮动，增厚固收组合收益。</div><div class="st"><b>低位加仓权益</b>：在沪指约 2,700 点附近主动加仓，布局估值修复机会。</div><div class="st"><b>红利与成长均衡</b>：高股息提供安全垫，优质成长贡献弹性。</div></div></div></section><section class="sec" id="fund"><div class="wrap"><div class="sec-head"><div class="ic">🚀</div><div><h2>鸿鹄基金 · 长期资金入市</h2><div class="en">HONGHU FUND</div></div></div><p class="lead">鸿鹄基金由国寿与新华共同发起，是长期资金入市试点私募基金；首支规模 500 亿元，三期累计规模超 1,100 亿元，新华保险计划出资共 462.5 亿元，投向高股息蓝筹与战略性新兴产业。</p><div class="callout key"><span class="ci">💡</span><div>长期、价值、稳健 —— 鸿鹄基金体现险资「做时间的朋友」的配置理念，为产品分红提供坚实的底层资产支撑。</div></div></div></section><section class="sec" id="alt"><div class="wrap"><div class="sec-head"><div class="ic">🔬</div><div><h2>硬科技与另类投资</h2><div class="en">TECH &amp; ALTERNATIVES</div></div></div><p class="lead">在一级市场与另类资产上前瞻卡位，获取穿越周期的超额回报。</p><div class="grid"><div class="card"><div class="ct">硬科技布局</div><div class="cd">通过智集芯、中科创星等平台布局半导体与硬科技赛道，分享科创红利。</div><span class="pill">科创赛道</span></div><div class="card"><div class="ct">中石油管道</div><div class="cd">入股中石油管道等基础设施资产，项目回报达 170.44%。</div><span class="pill">基础设施</span></div><div class="card"><div class="ct">中国银联</div><div class="cd">投资中国银联，实现 2.52 倍回报（内部收益率 14.27%）。</div><span class="pill">金融科技</span></div></div></div></section>
+  <div class="foot"><div class="slogan">新华保险 保得长久 保得美好<small>NCI 新华保险 · A+H 上市 ·  Fortune 世界500强</small></div><div class="disc">本资料为内部培训与学习交流使用，内容依据公开培训材料整理重构，仅供理解参考，不构成任何投资建议或收益承诺；具体保险责任、利益演示及减保规则等均以产品条款、保险合同及监管披露为准。分红型产品红利为非保证收益。</div></div>
+</div>
 <script>
-  const slidesEl=document.getElementById('slides');const total=7;let cur=0;
-  const dotsWrap=document.getElementById('dots');
-  for(let i=0;i<total;i++){const s=document.createElement('span');if(i===0)s.className='on';dotsWrap.appendChild(s);}
-  function render(){slidesEl.style.transform='translateX('+(-cur*100)+'%)';document.getElementById('cur').textContent=cur+1;dotsWrap.querySelectorAll('span').forEach((d,i)=>d.classList.toggle('on',i===cur));}
-  function go(d){cur=Math.max(0,Math.min(total-1,cur+d));render();}
-  let sx=0,moving=false;
-  slidesEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;moving=true;},{passive:true});
-  slidesEl.addEventListener('touchend',e=>{if(!moving)return;moving=false;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?1:-1);},{passive:true});
-  render();
+(function(){
+  // 实时时钟
+  var clk=document.getElementById('clockText');
+  function tick(){
+    var n=new Date(),p=function(x){return (x<10?'0':'')+x;};
+    if(clk) clk.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+n.getHours()+'点'+p(n.getMinutes())+'分'+p(n.getSeconds())+'秒';
+    setTimeout(tick,1000);
+  }
+  tick();
+  // 下载图片
+  window.downloadImage=function(){
+    var el=document.getElementById('capture');
+    var btn=document.getElementById('dlBtn');
+    if(!window.html2canvas){alert('图片组件未加载，请联网后重试');return;}
+    if(btn){btn.textContent='生成中…';btn.disabled=true;}
+    html2canvas(el,{scale:2,backgroundColor:'#F4F8FE',useCORS:true,logging:false}).then(function(c){
+      var a=document.createElement('a');
+      a.download=(document.getElementById('pageName')?document.getElementById('pageName').value:'xinhua')+'.png';
+      a.href=c.toDataURL('image/png');a.click();
+      if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}
+    }).catch(function(e){alert('生成失败：'+(e&&e.message?e.message:e));if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}});
+  };
+})();
 </script>
 </body>
 </html>
