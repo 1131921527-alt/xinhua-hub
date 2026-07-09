@@ -49,10 +49,82 @@
   .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);align-items:center;justify-content:center;z-index:98;}
   .overlay.show{display:flex;}
   .overlay div{background:#fff;padding:22px 34px;border-radius:12px;font-size:16px;font-weight:600;}
+
+  /* 编辑模式专用样式 */
+  .edit-banner{background:linear-gradient(135deg,#7C3AED,#2563EB);color:#fff;border-radius:12px;padding:14px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .edit-banner strong{font-size:16px;}
+  .edit-banner .btn-save{background:#fff;color:#2563EB;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:14px;}
+  .edit-banner .btn-save:hover{background:#F3F4F6;}
+  [contenteditable="true"]{outline:none;}
+  [contenteditable="true"]:hover,[contenteditable="true"]:focus{background:rgba(37,99,235,0.08);box-shadow:0 0 0 2px rgba(37,99,235,0.35);border-radius:4px;}
+  th[contenteditable="true"]:hover,th[contenteditable="true"]:focus{background:#475569;}
+  .edit-section{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .edit-section h2{font-size:16px;color:#1E3A5F;margin-bottom:12px;}
+  .edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .edit-field{display:flex;flex-direction:column;gap:4px;}
+  .edit-field label{font-size:12px;color:#64748B;font-weight:600;}
+  .edit-field div{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 10px;font-size:14px;min-height:34px;}
+  .edit-field textarea{width:100%;min-height:80px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 10px;font-size:14px;font-family:inherit;resize:vertical;}
+
 </style>
 </head>
 <body>
 <div class="wrap">
+
+<!-- 编辑模式：导出图文案区（可折叠，也可直接编辑） -->
+<div class="edit-banner">
+  <div>
+    <strong>📝 编辑模式</strong> &nbsp; 蓝色高亮区域可直接修改文字，改完点「生成利益演示」或「下载理财计划书图片」看效果。
+  </div>
+  <button class="btn-save" onclick="downloadFinalHtml()">⬇ 保存最终版本</button>
+</div>
+
+<div class="edit-section" id="editPanel">
+  <h2>导出图文案编辑区</h2>
+  <div class="edit-grid">
+    <div class="edit-field">
+      <label>导出图标题</label>
+      <div id="ext-title" contenteditable="true">宏泰世家（分红型）理财计划</div>
+    </div>
+    <div class="edit-field">
+      <label>导出图副标题</label>
+      <div id="ext-subtitle" contenteditable="true">新华保险 · 分红型终身寿险（交清增额 · 红利演示）</div>
+    </div>
+    <div class="edit-field">
+      <label>公司介绍标题</label>
+      <div id="ext-company-title" contenteditable="true">公司介绍</div>
+    </div>
+    <div class="edit-field">
+      <label>产品特点标题</label>
+      <div id="ext-product-title" contenteditable="true">产品特点</div>
+    </div>
+    <div class="edit-field" style="grid-column:1/3">
+      <label>公司介绍内容（每行一句，保持前面的「·」）</label>
+      <textarea id="ext-company-bullets">· 成立于1996年9月，人民大会堂签章
+· 中央汇金与中农工建4大银行同属大股东
+· 全国性大型寿险公司（A+H股上市）
+· 全球品牌价值2000强企业</textarea>
+    </div>
+    <div class="edit-field" style="grid-column:1/3">
+      <label>产品特点内容（每行一句，保持前面的「·」）</label>
+      <textarea id="ext-product-bullets">· 保险期间：终身
+· 投保年龄：男63-73岁 / 女30-57岁
+· 交费方式：趸交 / 3年 / 5年交
+· 红利领取：交清增额分红
+· 身故保障：160%已交保费或现金价值较高者
+· 意外身故：额外赔付一倍</textarea>
+    </div>
+    <div class="edit-field">
+      <label>演示表小标题</label>
+      <div id="ext-subheader" contenteditable="true">利 益 演 示 表</div>
+    </div>
+    <div class="edit-field">
+      <label>页脚声明</label>
+      <div id="ext-footer" contenteditable="true">本演示基于交清增额红利领取方式，利益演示仅供参考，不作为保险合同组成部分，具体以保险合同为准。</div>
+    </div>
+  </div>
+</div>
+
   <div class="title-bar">
     <h1>宏泰世家（分红型）终身寿险 · 利益演示计算器</h1>
     <p>新华保险 · 分红型终身寿险。输入被保人信息，自动演算各保单年度现金价值、红利、交清增额等利益。前5年为投资期。</p>
@@ -109,24 +181,12 @@
     </div>
     <div class="table-scroll">
       <table id="resultTable">
-        <thead>
-          <tr>
-            <th rowspan="2">保单年度</th>
-            <th rowspan="2">年龄<br>（年末）</th>
-            <th rowspan="2">当年保费<br>（年初）</th>
-            <th rowspan="2">客运列车及航空<br>意外身故或全残<br>保险金</th>
-            <th rowspan="2">保证身价<br>保险金</th>
-            <th colspan="2">红利利益演示</th>
-            <th colspan="2">生存总利益（年末）</th>
-            <th rowspan="2">当年<br>收益率</th>
-          </tr>
-          <tr>
-            <th>预期身价<br>保险金</th>
-            <th>红利现价</th>
-            <th>现金价值<br>（保证部分）</th>
-            <th>现金价值<br>（保证+红利）</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th contenteditable="true">保单年度</th><th contenteditable="true">年龄<br/>（年末）</th><th contenteditable="true">当年保费<br/>（年初）</th>
+          <th contenteditable="true">保单年度及现金价值<br/>减保金额/保险金</th><th contenteditable="true">保证价值<br/>保险金</th>
+          <th contenteditable="true">累计红利演示<br/>/保险金</th><th contenteditable="true">红利<br/>购买价</th>
+          <th contenteditable="true">生存总利益<br/>（年末）保单价值<br/>（退保游分）（保证+红利）</th><th contenteditable="true">满年龄<br/>收益率</th>
+        </tr></thead>
         <tbody id="resultBody"></tbody>
       </table>
     </div>
@@ -167,15 +227,13 @@ function getRows(){
   const premium=parseInt(document.getElementById('premium').value)||500000;
   const base=500000;
   const scale=premium/base;
-  // 深拷贝并缩放金额字段（官方数据基准：女49岁/3年交/50万）
+  // 深拷贝并缩放金额字段
   return HONGTAI_DATA.map(r=>({
     yr:r.yr, age:r.age,
     prem: Math.round((r.prem||0)*scale),
-    exempt: Math.round((r.exempt||0)*scale),
-    guar_amt: Math.round((r.guar_amt||0)*scale),
     exp_amt: Math.round((r.exp_amt||0)*scale),
+    guar_amt: Math.round((r.guar_amt||0)*scale),
     div_pv: Math.round((r.div_pv||0)*scale),
-    cv_guar: Math.round((r.cv_guar||0)*scale),
     cv_total: Math.round((r.cv_total||0)*scale),
     rate_raw: r.rate_raw
   }));
@@ -207,7 +265,7 @@ async function generate(){
     const reserveYears=5;
     rows.forEach(row=>{
       const yr=row.yr;
-      const curAge=age+yr; // 年龄（年末）= 投保年龄 + 保单年度
+      const curAge=age+yr-1;
       const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
       if(skip) return;
       const tr=document.createElement('tr');
@@ -215,14 +273,11 @@ async function generate(){
       const isPayback=yr===5;
       let cells=`<td>${yr}</td><td>${curAge}</td>`;
       cells+=`<td>${row.prem>0?fmt(row.prem):'-'}</td>`;
-      cells+=`<td>${fmt(row.exempt)}</td>`;
-      cells+=`<td>${fmt(row.guar_amt)}</td>`;
       cells+=`<td>${fmt(row.exp_amt)}</td>`;
+      cells+=`<td>${fmt(row.guar_amt)}</td>`;
       cells+=`<td>${row.div_pv>0?fmt(row.div_pv):'-'}</td>`;
-      // 生存总利益 - 保证部分
-      if(isPayback) cells+=`<td class="col-cv cell-hl">${fmt(row.cv_guar)}</td>`;
-      else cells+=`<td class="col-cv">${fmt(row.cv_guar)}</td>`;
-      // 生存总利益 - 保证+红利
+      cells+=`<td>${row.div_pv>0?fmt(row.div_pv):'-'}</td>`;
+      // 生存总利益
       if(isPayback) cells+=`<td class="col-cv cell-hl">${fmt(row.cv_total)}</td>`;
       else cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
       // 收益率/投资期
@@ -255,13 +310,13 @@ function downloadImage(){
   const dlRows=[];
   rows.forEach(row=>{
     const yr=row.yr;
-    const curAge=age+yr;
+    const curAge=age+yr-1;
     const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
     if(skip) return;
     dlRows.push({
       yr, age:curAge,
-      prem: row.prem, exempt: row.exempt, guar: row.guar_amt,
-      exp: row.exp_amt, div: row.div_pv, cv_guar: row.cv_guar, cv: row.cv_total,
+      prem: row.prem, exp: row.exp_amt, guar: row.guar_amt,
+      div: row.div_pv, cv: row.cv_total,
       rate: row.rate_raw,
       reserve: yr<=reserveYears, payback: yr===5
     });
@@ -269,8 +324,8 @@ function downloadImage(){
 
   const DPR=window.devicePixelRatio||2;
   const PAD=20;
-  const TITLE_H=72, INFO_H=168, VIP_H=44, SUBHDR_H=38, HEADER_H=64, ROW_H=33, FOOTER_H=46;
-  const colW=[44,42,86,118,90,84,78,96,102,62]; // 10列宽
+  const TITLE_H=72, INFO_H=168, VIP_H=44, SUBHDR_H=38, HEADER_H=52, ROW_H=33, FOOTER_H=46;
+  const colW=[44,42,92,108,92,92,76,104,64]; // 9列宽
   const totalW=colW.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
@@ -301,9 +356,9 @@ function downloadImage(){
   ctx.fillStyle=tg; ctx.fillRect(PAD,y,totalW,TITLE_H);
   ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.font='bold 27px '+FAM;
-  ctx.fillText('宏泰世家（分红型）理财计划', PAD+totalW/2, y+TITLE_H/2-12);
+  ctx.fillText(document.getElementById('ext-title').textContent.trim(), PAD+totalW/2, y+TITLE_H/2-12);
   ctx.font='13px '+FAM;
-  ctx.fillText('新华保险 · 分红型终身寿险（交清增额 · 红利演示）', PAD+totalW/2, y+TITLE_H/2+18);
+  ctx.fillText(document.getElementById('ext-subtitle').textContent.trim(), PAD+totalW/2, y+TITLE_H/2+18);
 
   // 2) 双栏信息区
   y+=TITLE_H;
@@ -315,23 +370,15 @@ function downloadImage(){
   ctx.beginPath(); ctx.moveTo(midX,infoY); ctx.lineTo(midX,infoY+INFO_H); ctx.stroke();
   ctx.textAlign='left'; ctx.textBaseline='top';
   // 左：公司介绍
-  ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
-  ctx.fillText('公司介绍', PAD+14, infoY+12);
-  ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
-  ['· 成立于1996年9月，人民大会堂签章',
-   '· 中央汇金与中农工建4大银行同属大股东',
-   '· 全国性大型寿险公司（A+H股上市）',
-   '· 全球品牌价值2000强企业'].forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+42+i*13));
+  ctx.fillStyle=C.accentDark; ctx.font='bold 16px '+FAM;
+  ctx.fillText(document.getElementById('ext-company-title').textContent.trim(), PAD+14, infoY+12);
+  ctx.fillStyle=C.textDark; ctx.font='12.5px '+FAM;
+  document.getElementById('ext-company-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, PAD+14, infoY+38+i*15));
   // 右：产品特点
-  ctx.fillStyle=C.accentDark; ctx.font='bold 18px '+FAM;
-  ctx.fillText('产品特点', midX+14, infoY+12);
-  ctx.fillStyle=C.textDark; ctx.font='11px '+FAM;
-  ['· 保险期间：终身',
-   '· 投保年龄：男63-73岁 / 女30-57岁',
-   '· 交费方式：趸交 / 3年 / 5年交',
-   '· 红利领取：交清增额分红',
-   '· 身故保障：160%已交保费或现金价值较高者',
-   '· 意外身故：额外赔付一倍'].forEach((t,i)=>ctx.fillText(t, midX+14, infoY+42+i*12));
+  ctx.fillStyle=C.accentDark; ctx.font='bold 16px '+FAM;
+  ctx.fillText(document.getElementById('ext-product-title').textContent.trim(), midX+14, infoY+12);
+  ctx.fillStyle=C.textDark; ctx.font='12.5px '+FAM;
+  document.getElementById('ext-product-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean).forEach((t,i)=>ctx.fillText(t, midX+14, infoY+38+i*14));
 
   // 3) VIP参数行
   y+=INFO_H;
@@ -349,24 +396,15 @@ function downloadImage(){
   ctx.fillStyle=C.subHeader; ctx.fillRect(PAD,subY,totalW,SUBHDR_H);
   ctx.fillStyle='#fff'; ctx.font='bold 19px '+FAM;
   ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText('利 益 演 示 表', PAD+totalW/2, subY+SUBHDR_H/2);
+  ctx.fillText(document.getElementById('ext-subheader').textContent.trim(), PAD+totalW/2, subY+SUBHDR_H/2);
 
   // 5) 表头
   y+=SUBHDR_H;
   const tableX=PAD, tableTop=y;
   ctx.fillStyle=C.tableHeader; ctx.fillRect(tableX,tableTop,totalW,HEADER_H);
-  const headers=[
-    ['保单年度'],
-    ['年龄','（年末）'],
-    ['当年保费','（年初）'],
-    ['客运列车及航空','意外身故或全残','保险金'],
-    ['保证身价','保险金'],
-    ['预期身价','保险金'],
-    ['红利现价'],
-    ['现金价值','（保证部分）'],
-    ['现金价值','（保证+红利）'],
-    ['当年','收益率']
-  ];
+  const headers=Array.from(document.querySelectorAll('#resultTable thead th')).map(th=>{
+    return th.innerHTML.split(/<br\s*\/?>/i).map(s=>s.replace(/<[^>]+>/g,'').trim()).filter(Boolean);
+  });
   ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.font='bold 12.5px '+FAM;
   let hx=tableX;
@@ -385,14 +423,14 @@ function downloadImage(){
     ctx.fillStyle = r.payback ? C.paybackBg : (idx%2===0?C.rowWhite:C.rowAlt);
     ctx.fillRect(tableX,ry,totalW,ROW_H);
     ctx.strokeStyle=C.lineColor;
-    for(let j=1;j<10;j++){
-      if(r.reserve && j===9) continue;
+    for(let j=1;j<9;j++){
+      if(r.reserve && j===8) continue;
       const vx=tableX+colW.slice(0,j).reduce((a,b)=>a+b,0);
       ctx.beginPath(); ctx.moveTo(vx,ry); ctx.lineTo(vx,ry+ROW_H); ctx.stroke();
     }
     ctx.beginPath();
     if(r.reserve){
-      const lineEnd=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
+      const lineEnd=tableX+colW.slice(0,8).reduce((a,b)=>a+b,0);
       ctx.moveTo(tableX,ry+ROW_H); ctx.lineTo(lineEnd,ry+ROW_H);
     } else {
       ctx.moveTo(tableX,ry+ROW_H); ctx.lineTo(tableX+totalW,ry+ROW_H);
@@ -402,23 +440,15 @@ function downloadImage(){
       {v:r.yr, c:C.textDark, f:'bold 16px '+FAM, a:'c'},
       {v:r.age, c:C.textGray, f:'15px '+FAM, a:'c'},
       {v:r.prem>0?fmt(r.prem):'-', c:C.textGray, f:'14px '+FAM, a:'r'},
-      {v:fmt(r.exempt), c:C.textDark, f:'14px '+FAM, a:'r'},
-      {v:fmt(r.guar), c:C.textDark, f:'14px '+FAM, a:'r'},
       {v:fmt(r.exp), c:C.textDark, f:'14px '+FAM, a:'r'},
+      {v:fmt(r.guar), c:C.textDark, f:'14px '+FAM, a:'r'},
+      {v:r.div>0?fmt(r.div):'-', c:C.textLight, f:'14px '+FAM, a:'r'},
       {v:r.div>0?fmt(r.div):'-', c:C.textLight, f:'14px '+FAM, a:'r'}
     ];
-    // 第8列：现金价值（保证部分）— 第5年高亮
+    // 第8列：生存总利益（第5年高亮）
     if(r.payback){
-      const cvGuarX=tableX+colW.slice(0,7).reduce((a,b)=>a+b,0);
-      ctx.fillStyle=C.paybackBg; ctx.fillRect(cvGuarX,ry,colW[7],ROW_H);
-      cells.push({v:fmt(r.cv_guar), c:C.accentDark, f:'bold 15px '+FAM, a:'r'});
-    } else {
-      cells.push({v:fmt(r.cv_guar), c:C.accentBlue, f:'bold 15px '+FAM, a:'r'});
-    }
-    // 第9列：现金价值（保证+红利）— 第5年高亮
-    if(r.payback){
-      const cvTotalX=tableX+colW.slice(0,8).reduce((a,b)=>a+b,0);
-      ctx.fillStyle=C.paybackBg; ctx.fillRect(cvTotalX,ry,colW[8],ROW_H);
+      const cvColX=tableX+colW.slice(0,7).reduce((a,b)=>a+b,0);
+      ctx.fillStyle=C.paybackBg; ctx.fillRect(cvColX,ry,colW[7],ROW_H);
       cells.push({v:fmt(r.cv), c:C.accentDark, f:'bold 16px '+FAM, a:'r'});
     } else {
       cells.push({v:fmt(r.cv), c:C.accentBlue, f:'bold 15px '+FAM, a:'r'});
@@ -436,21 +466,21 @@ function downloadImage(){
   // 7) 投资期合并单元格（最右列）
   const reserveRows=dlRows.filter(r=>r.reserve);
   if(reserveRows.length>0){
-    const y0=rowY0, blockH=reserveRows.length*ROW_H, colX=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
-    ctx.fillStyle=C.reserveBg; ctx.fillRect(colX,y0,colW[9],blockH);
-    ctx.strokeStyle=C.reserveBorder; ctx.lineWidth=1; ctx.strokeRect(colX+.5,y0+.5,colW[9]-1,blockH-1);
+    const y0=rowY0, blockH=reserveRows.length*ROW_H, colX=tableX+colW.slice(0,8).reduce((a,b)=>a+b,0);
+    ctx.fillStyle=C.reserveBg; ctx.fillRect(colX,y0,colW[8],blockH);
+    ctx.strokeStyle=C.reserveBorder; ctx.lineWidth=1; ctx.strokeRect(colX+.5,y0+.5,colW[8]-1,blockH-1);
     ctx.fillStyle=C.textMuted; ctx.font='bold 16px '+FAM;
     ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('投资期', colX+colW[9]/2, y0+blockH/2);
+    ctx.fillText('投资期', colX+colW[8]/2, y0+blockH/2);
   }
 
   // 8) 收益率列（非投资期行）
   for(let i=reserveRows.length;i<dlRows.length;i++){
-    const r=dlRows[i], ry=rowY0+i*ROW_H, rcX=tableX+colW.slice(0,9).reduce((a,b)=>a+b,0);
+    const r=dlRows[i], ry=rowY0+i*ROW_H, rcX=tableX+colW.slice(0,8).reduce((a,b)=>a+b,0);
     if(r.rate!==null&&r.rate!==undefined&&typeof r.rate==='number'){
       ctx.fillStyle=C.rateRed; ctx.font='bold 13px '+FAM;
       ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText((r.rate*100).toFixed(2)+'%', rcX+colW[9]/2, ry+ROW_H/2);
+      ctx.fillText((r.rate*100).toFixed(2)+'%', rcX+colW[8]/2, ry+ROW_H/2);
     }
   }
 
@@ -458,7 +488,7 @@ function downloadImage(){
   const footY=rowY0+dlRows.length*ROW_H+8;
   ctx.fillStyle=C.textMuted; ctx.font='11px '+FAM;
   ctx.textAlign='center'; ctx.textBaseline='top';
-  ctx.fillText('本演示基于交清增额红利领取方式，利益演示仅供参考，不作为保险合同组成部分，具体以保险合同为准。',
+  ctx.fillText(document.getElementById('ext-footer').textContent.trim(),
     PAD+totalW/2, footY);
 
   const dataUrl=canvas.toDataURL('image/png');
@@ -467,6 +497,24 @@ function downloadImage(){
   a.download=`宏泰世家分红型理财计划_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
   document.body.appendChild(a); a.click(); a.remove();
   showToast('计划书已下载 ✅');
+}
+
+
+// 保存最终版本：移除编辑UI和contenteditable，生成不可编辑的 calculator-hongtai.html
+function downloadFinalHtml(){
+  const html=document.documentElement.outerHTML;
+  // 去掉编辑banner和编辑面板
+  let final=html.replace(/<div class="edit-banner"[\s\S]*?<\/div><\/div>/,'');
+  final=final.replace(/<div class="edit-section" id="editPanel"[\s\S]*?<\/div><!-- 编辑模式[^>]*>/,'');
+  // 移除 contenteditable 属性
+  final=final.replace(/ contenteditable="true"/g,'');
+  final=final.replace(/<title>[^<]*<\/title>/,'<title>宏泰世家（分红型）利益演示计算器<\/title>');
+  const blob=new Blob(['<!DOCTYPE html>\n'+final],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='calculator-hongtai.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  showToast('最终版本已下载 ✅');
 }
 
 // 初始化

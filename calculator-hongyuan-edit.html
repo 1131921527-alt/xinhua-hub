@@ -269,6 +269,22 @@ tbody tr:hover { background: #EFF6FF; }
 #renderCanvas { display: none; }
 
 @media (min-width: 768px) { .container { padding: 20px 24px; } }
+
+  .edit-banner{background:linear-gradient(135deg,#7C3AED,#2563EB);color:#fff;border-radius:12px;padding:14px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .edit-banner strong{font-size:16px;}
+  .edit-banner .btn-save{background:#fff;color:#2563EB;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:14px;}
+  .edit-banner .btn-save:hover{background:#F3F4F6;}
+  [contenteditable="true"]{outline:none;}
+  [contenteditable="true"]:hover,[contenteditable="true"]:focus{background:rgba(37,99,235,0.08);box-shadow:0 0 0 2px rgba(37,99,235,0.35);border-radius:4px;}
+  th[contenteditable="true"]:hover,th[contenteditable="true"]:focus{outline:2px solid #2563EB;outline-offset:-2px;}
+  .edit-section{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .edit-section h2{font-size:16px;color:#1E3A5F;margin-bottom:12px;}
+  .edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .edit-field{display:flex;flex-direction:column;gap:4px;}
+  .edit-field label{font-size:12px;color:#64748B;font-weight:600;}
+  .edit-field div[contenteditable]{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 10px;font-size:14px;min-height:34px;}
+  .edit-field textarea{width:100%;min-height:80px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 10px;font-size:14px;font-family:inherit;resize:vertical;}
+
 </style>
 </head>
 <body>
@@ -283,6 +299,30 @@ tbody tr:hover { background: #EFF6FF; }
 </div>
 
 <div class="container">
+<!-- EDIT_START -->
+<div class="edit-banner"><div><strong>📝 编辑模式</strong> &nbsp; 修改下方文案后，点「生成利益演示」或「下载计划书图片」看效果。</div><button class="btn-save" onclick="downloadFinalHtml()">⬇ 保存最终版本</button></div>
+<div class="edit-section" id="editPanel"><h2>导出图文案编辑区</h2><div class="edit-grid">
+    <div class="edit-field"><label>导出图标题</label><div id="ext-title" contenteditable="true">S02 宏愿人生养老年金保险（分红型）</div></div>
+    <div class="edit-field"><label>副标题（动态）</label><div style="color:#94A3B8;font-style:italic;">由参数自动生成</div></div>
+    <div class="edit-field"><label>公司背景标题</label><div id="ext-company-title" contenteditable="true">公司背景</div></div>
+    <div class="edit-field"><label>产品特点标题</label><div id="ext-product-title" contenteditable="true">产品特点</div></div>
+    <div class="edit-field" style="grid-column:1/3"><label>公司背景内容（每行一句）</label><textarea id="ext-company-bullets">成立1996年9月人民大会堂
+中央汇金(中农工建4行同属大股东)
+全国性大型寿险公司 全球2000强
+A+H股同步上市
+惠誉A级 穆迪A2级</textarea></div>
+    <div class="edit-field" style="grid-column:1/3"><label>产品特点内容（每行一句）</label><textarea id="ext-product-bullets">投保年龄 30天-69岁
+交费线 18-64岁 5万起
+领取线 18-59周岁 3年交2万7起
+养老年金 60周岁起领终身
+分红≥70%盈余 累积生息
+可减保 可贷现价80%</textarea></div>
+    <div class="edit-field"><label>演示表小标题</label><div id="ext-subheader" contenteditable="true">利 益 演 示 表</div></div>
+    <div class="edit-field" style="grid-column:1/3"><label>页脚声明</label><textarea id="ext-footer1">本计划书数据源自官方演算表，仅供参考。具体利益以保险合同条款和正式计划书为准。</textarea></div>
+    <div class="edit-field" style="grid-column:1/3"><label>页脚声明（第二行）</label><textarea id="ext-footer2">红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。</textarea></div>
+  </div>
+</div>
+<!-- EDIT_END -->
 
   <!-- 公司介绍 -->
   <div class="company-intro">
@@ -391,16 +431,16 @@ tbody tr:hover { background: #EFF6FF; }
         <table id="resultTable">
           <thead>
             <tr>
-              <th>保单<br>年度</th>
-              <th>年龄</th>
-              <th>年交保额</th>
-              <th>累计保额</th>
-              <th>当年<br>年金</th>
-              <th>累计<br>年金</th>
-              <th>身故或全残<br>保险金</th>
-              <th>现金<br>价值</th>
-              <th>生存<br>总利益</th>
-              <th>总收益与<br>年收益率</th>
+              <th contenteditable="true" contenteditable="true">保单<br>年度</th>
+              <th contenteditable="true" contenteditable="true">年龄</th>
+              <th contenteditable="true" contenteditable="true">年交保额</th>
+              <th contenteditable="true" contenteditable="true">累计保额</th>
+              <th contenteditable="true" contenteditable="true">当年<br>年金</th>
+              <th contenteditable="true" contenteditable="true">累计<br>年金</th>
+              <th contenteditable="true" contenteditable="true">身故或全残<br>保险金</th>
+              <th contenteditable="true" contenteditable="true">现金<br>价值</th>
+              <th contenteditable="true" contenteditable="true">生存<br>总利益</th>
+              <th contenteditable="true" contenteditable="true">总收益与<br>年收益率</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -697,7 +737,7 @@ function downloadImage() {
       };
 
       // ---- 表格列定义（11 列，匹配截图格式）----
-      const COLS = ['保单\n年度','年龄','年交保费','累计保费','当年金','累积年金','身故或全残\n保险金','现金价值','生存总利益','总收益与\n年回报','储备期'];
+      const COLS=Array.from(document.querySelectorAll('#resultTable thead th')).map(th=>th.innerHTML.replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').trim());
       const colWidths = [50,46,78,78,66,78,90,82,92,86,80];
       const totalW = colWidths.reduce((a,b)=>a+b,0);
       const rowH = 42, headerH = 68, titleH = 80, infoH = 150, paramH = 52, subHdrH = 40, footerH = 44, pad = 22;
@@ -763,7 +803,7 @@ function downloadImage() {
       ctx.fillStyle = grad;ctx.fillRect(0,0,canvasW,titleH);
       ctx.fillStyle = '#FFFFFF';ctx.textAlign = 'center';
       ctx.font = 'bold 26px "PingFang SC","Microsoft YaHei",sans-serif';
-      ctx.fillText('S02 宏愿人生养老年金保险（分红型）', canvasW/2, 36);
+      ctx.fillText(document.getElementById('ext-title').textContent.trim(), canvasW/2, 36);
       ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
       ctx.fillText(`利益演示 · 被保人 ${insuredName} · 年金起领${startAge}周岁`, canvasW/2, 62);
 
@@ -773,14 +813,8 @@ function downloadImage() {
       ctx.fillStyle = C.companyBg; rr(pad, infoY, infoColW, infoH-4, 6);
       ctx.fillStyle = C.subHeader; ctx.textAlign = 'left';
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
-      ctx.fillText('公司背景', pad+12, infoY+24);
-      const compLines = [
-        '成立1996年9月人民大会堂',
-        '中央汇金(中农工建4行同属大股东)',
-        '全国性大型寿险公司 全球2000强',
-        'A+H股同步上市',
-        '惠誉A级 穆迪A2级'
-      ];
+      ctx.fillText(document.getElementById('ext-company-title').textContent.trim(), pad+12, infoY+24);
+      const compLines = document.getElementById('ext-company-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean);
       ctx.fillStyle = C.textGray; ctx.font = '14px "PingFang SC",sans-serif';
       compLines.forEach((l,i)=>ctx.fillText(l, pad+12, infoY+46+i*17));
 
@@ -789,15 +823,8 @@ function downloadImage() {
       ctx.fillStyle = C.productBg; rr(rx, infoY, infoColW, infoH-4, 6);
       ctx.fillStyle = C.subHeader; ctx.textAlign = 'left';
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
-      ctx.fillText('产品特点', rx+12, infoY+24);
-      const prodLines = [
-        '投保年龄 30天-69岁',
-        '交费线 18-64岁 5万起',
-        '领取线 18-59周岁 3年交2万7起',
-        '养老年金 60周岁起领终身',
-        '分红≥70%盈余 累积生息',
-        '可减保 可贷现价80%'
-      ];
+      ctx.fillText(document.getElementById('ext-product-title').textContent.trim(), rx+12, infoY+24);
+      const prodLines = document.getElementById('ext-product-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean);
       ctx.fillStyle = C.textGray; ctx.font = '14px "PingFang SC",sans-serif';
       prodLines.forEach((l,i)=>ctx.fillText(l, rx+12, infoY+46+i*17));
 
@@ -812,7 +839,7 @@ function downloadImage() {
       ctx.fillStyle = C.subHeader; ctx.fillRect(pad, sHdrY, canvasW-pad*2, subHdrH);
       ctx.fillStyle = '#FFFFFF'; ctx.textAlign = 'center';
       ctx.font = 'bold 20px "PingFang SC",sans-serif';
-      ctx.fillText('利 益 演 示 表', canvasW/2, sHdrY+27);
+      ctx.fillText(document.getElementById('ext-subheader').textContent.trim(), canvasW/2, sHdrY+27);
 
       // ---- 表头 ----
       const tblX = pad;
@@ -916,8 +943,8 @@ function downloadImage() {
       ctx.fillStyle = C.textMuted; ctx.textAlign = 'center';
       ctx.font = '12px "PingFang SC",sans-serif';
       ctx.textBaseline = 'alphabetic';
-      ctx.fillText('本计划书数据源自官方演算表，仅供参考。具体利益以保险合同条款和正式计划书为准。', canvasW/2, footerY+4);
-      ctx.fillText('红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。', canvasW/2, footerY+20);
+      ctx.fillText(document.getElementById('ext-footer1').textContent.trim(), canvasW/2, footerY+4);
+      ctx.fillText(document.getElementById('ext-footer2').textContent.trim(), canvasW/2, footerY+20);
 
       // ---- 导出（toDataURL）----
       const fname = `S02宏愿人生_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
@@ -960,6 +987,19 @@ document.getElementById('age').addEventListener('keydown', e=>{if(e.key==='Enter
 
 // Init gender sync
 (function(){const b=document.querySelector('.gender-btn.active');if(b)currentGender=parseInt(b.dataset.value);})();
+
+function downloadFinalHtml(){
+  const html=document.documentElement.outerHTML;
+  let final=html.replace(/<!-- EDIT_START -->[\s\S]*?<!-- EDIT_END -->/,'');
+  final=final.replace(/ contenteditable="true"/g,'');
+  final=final.replace(/<title>[^<]*<\/title>/,'<title>S02 宏愿人生养老年金保险（分红型）· 利益演示计算器<\/title>');
+  const blob=new Blob(['<!DOCTYPE html>\n'+final],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='calculator-hongyuan.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  showToast('最终版本已下载 ✅');
+}
 </script>
 
 </body>

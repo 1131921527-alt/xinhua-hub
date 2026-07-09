@@ -56,6 +56,36 @@
   .note b{color:#7C2D12;}
   footer{text-align:center; font-size:11px; color:var(--sub); margin-top:22px; padding:0 16px;}
   .pill{display:inline-block; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:20px; font-size:11px; margin-top:10px;}
+  /* ===== 利益演示表配图 ===== */
+  .demo-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:8px;}
+  .colmap{width:100%; border-collapse:collapse; font-size:10.5px; min-width:580px;}
+  .colmap th,.colmap td{border:1px solid #E2E8F0;}
+  .colmap td.gA{background:#DBEAFE; color:#1E40AF; text-align:center; font-weight:700; font-size:10.5px; padding:7px 2px; line-height:1.3;}
+  .colmap td.gB{background:#E2E8F0; color:#64748B; text-align:center; font-weight:700; font-size:10.5px; padding:7px 2px; line-height:1.3;}
+  .colmap td.gC{background:#DCFCE7; color:#166534; text-align:center; font-weight:700; font-size:10.5px; padding:7px 2px; line-height:1.3;}
+  .colmap th{padding:8px 3px; text-align:center; font-weight:600; line-height:1.35; vertical-align:top; font-size:10px; background:#fff;}
+  .colmap th.cA{background:#EFF6FF; color:#1E40AF;}
+  .colmap th.cB{background:#F8FAFC; color:#94A3B8;}
+  .colmap th.cC{background:#F0FDF4; color:#166534;}
+  .colmap th.hl{box-shadow:inset 0 0 0 2.5px #F59E0B; background:#FFFBEB !important; color:#92400E;}
+  .cbadge{display:inline-block; width:17px; height:17px; line-height:17px; border-radius:50%; background:#2563EB; color:#fff; font-size:11px; font-weight:700; margin-top:3px;}
+  .demo-tbl{width:100%; border-collapse:collapse; font-size:12px; min-width:540px;}
+  .demo-tbl th{padding:8px 5px; text-align:center; font-weight:700; font-size:11px; border-bottom:2.5px solid #1E40AF; white-space:nowrap;}
+  .demo-tbl td{padding:9px 5px; text-align:center; border-bottom:1px solid #E2E8F0; font-size:12.5px;}
+  .demo-tbl th.c1{background:#EFF6FF; color:#1E40AF;}
+  .demo-tbl th.c2,.demo-tbl th.c3,.demo-tbl th.c4{background:#F0FDF4; color:#166534;}
+  .demo-tbl th.csum{background:#FEF3C7; color:#92400E;}
+  .demo-tbl td.c1{background:#EFF6FF; font-weight:600; color:#1E40AF;}
+  .demo-tbl td.c2,.demo-tbl td.c3,.demo-tbl td.c4{background:#F0FDF4; font-weight:600; color:#166534;}
+  .demo-tbl td.csum{background:#FEF3C7; font-weight:700; color:#92400E;}
+  .demo-tbl tr.hl-row td{background:#FFFBEB;}
+  .demo-tbl tr.hl-row td.c1{background:#FEF3C7;}
+  .demo-tbl tr.hl-row td.c2,.demo-tbl tr.hl-row td.c3,.demo-tbl tr.hl-row td.c4{background:#FEF3C7;}
+  .demo-tbl tr.hl-row td.csum{background:#F59E0B; color:#fff;}
+  .legend{display:flex; gap:10px; flex-wrap:wrap; margin:10px 4px 0; font-size:11.5px;}
+  .legend span{display:flex; align-items:center; gap:4px;}
+  .legend .dot{width:12px; height:12px; border-radius:3px; display:inline-block;}
+  .scroll-hint{font-size:11px; color:#94A3B8; text-align:right; margin:4px 2px 0;}
 </style>
 </head>
 <body>
@@ -82,8 +112,111 @@
 
   <!-- 一张图看懂利益演示表 -->
   <div class="sec-title"><span class="bar"></span>📖 一张图看懂利益演示表</div>
-  <div class="card">
-    <p style="margin:0;font-size:14px;color:#334155;">该利益演示表针对一款分红型增额终身寿险产品，以投保示例（40岁男性、年交10万、3年交）展示保单在不同年度的现金价值与保障增长情况。表格分为三大板块，五个角标分别指向关键数据列：</p>
+
+  <!-- 列结构总览 -->
+  <div class="card" style="padding:13px 10px;">
+    <div style="font-size:13px;font-weight:700;color:#1E40AF;margin:0 6px 8px;">利益演示表 · 13列结构总览</div>
+    <div class="demo-wrap">
+      <table class="colmap">
+        <thead>
+          <tr>
+            <td class="gA" colspan="5">A · 基本保险金额利益演示<br><span style="font-weight:400;font-size:9px;">（保证部分）</span></td>
+            <td class="gB" colspan="4">B · 保证利益演示<br><span style="font-weight:400;font-size:9px;">（⑤ 全部为 0）</span></td>
+            <td class="gC" colspan="4">C · 红利利益演示<br><span style="font-weight:400;font-size:9px;">（交清增额·非保证）</span></td>
+          </tr>
+          <tr>
+            <th class="cA">1<br>保单<br>年度</th>
+            <th class="cA">2<br>年龄</th>
+            <th class="cA">3<br>当年<br>保费</th>
+            <th class="cA">4<br>累计<br>保费</th>
+            <th class="cA hl">5<br>基本保额<br>现金价值<div class="cbadge">①</div></th>
+            <th class="cB">6<br>年度<br>红利</th>
+            <th class="cB">7<br>累积<br>红利</th>
+            <th class="cB">8<br>红利<br>现价</th>
+            <th class="cB">9<br>生存<br>总利益</th>
+            <th class="cC hl">10<br>年度交清<br>增额保额<div class="cbadge">②</div></th>
+            <th class="cC hl">11<br>累积交清<br>增额保额<div class="cbadge">③</div></th>
+            <th class="cC">12<br>交清增额<br>身故保险金</th>
+            <th class="cC hl">13<br>交清增额<br>现金价值<div class="cbadge">④</div></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="scroll-hint">← 左右滑动查看完整表格 →</div>
+    <div class="legend">
+      <span><span class="dot" style="background:#DBEAFE;"></span>板块A·保证（写入合同）</span>
+      <span><span class="dot" style="background:#E2E8F0;"></span>板块B·保证红利（本产品=0）</span>
+      <span><span class="dot" style="background:#DCFCE7;"></span>板块C·非保证红利（交清增额）</span>
+      <span><span class="dot" style="background:#FEF3C7;border:1.5px solid #F59E0B;"></span>角标列</span>
+    </div>
+  </div>
+
+  <!-- 关键数据示例 -->
+  <div class="card" style="padding:13px 10px;">
+    <div style="font-size:13px;font-weight:700;color:#1E40AF;margin:0 6px 8px;">关键数据示例 <span style="font-weight:400;font-size:11px;color:#64748B;">（40岁男性·年交10万·3年交·基本保额271,200元）</span></div>
+    <div class="demo-wrap">
+      <table class="demo-tbl">
+        <thead>
+          <tr>
+            <th>保单<br>年度</th>
+            <th>累计<br>保费</th>
+            <th class="c1">① 基本保额<br>现价（保证）</th>
+            <th class="c2">② 年度交清<br>增额保额</th>
+            <th class="c3">③ 累积交清<br>增额保额</th>
+            <th class="c4">④ 交清增额<br>现金价值</th>
+            <th class="csum">①+④<br>生存总利益</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>第1年</td><td>100,000</td>
+            <td class="c1">29,300</td>
+            <td class="c2">987</td>
+            <td class="c3">987</td>
+            <td class="c4">489</td>
+            <td class="csum">29,789</td>
+          </tr>
+          <tr>
+            <td>第2年</td><td>200,000</td>
+            <td class="c1">—</td>
+            <td class="c2">2,184</td>
+            <td class="c3">3,171</td>
+            <td class="c4">—</td>
+            <td class="csum">—</td>
+          </tr>
+          <tr>
+            <td>第3年</td><td>300,000</td>
+            <td class="c1">—</td>
+            <td class="c2">3,372</td>
+            <td class="c3">6,543</td>
+            <td class="c4">—</td>
+            <td class="csum">—</td>
+          </tr>
+          <tr>
+            <td>第10年</td><td>300,000</td>
+            <td class="c1">321,000</td>
+            <td class="c2">—</td>
+            <td class="c3">31,218</td>
+            <td class="c4">36,494</td>
+            <td class="csum">357,494</td>
+          </tr>
+          <tr class="hl-row">
+            <td>第65年</td><td>300,000</td>
+            <td class="c1">823,200</td>
+            <td class="c2">6,954</td>
+            <td class="c3">313,310</td>
+            <td class="c4">950,990</td>
+            <td class="csum">1,774,190</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="scroll-hint">← 左右滑动查看完整表格 →</div>
+    <div style="font-size:11.5px;color:#64748B;margin:8px 6px 0;line-height:1.6;">
+      <b>怎么看：</b>① 是保证部分（写入合同），④ 是红利累积后的现金价值（非保证）。客户退保拿到 <b>①+④</b>。<br>
+      ② ③ 是过程数据（保额概念，不是现价），帮助理解红利如何逐年转化为增额保险。<br>
+      ⑤ 对应板块B（第6-9列），本产品采用交清增额方式，保证利益演示全部为 0。
+    </div>
   </div>
 
   <!-- 五个角标详细解读 -->

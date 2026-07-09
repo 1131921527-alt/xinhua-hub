@@ -341,6 +341,20 @@
     transform: translateX(-50%) translateY(0);
   }
 
+  /* Download section divider */
+  .download-divider {
+    margin: 14px 0 8px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: #F1F5F9;
+    border-radius: 8px;
+    border: 1px dashed #CBD5E1;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
   /* Disclaimer */
   .disclaimer {
     text-align: center;
@@ -826,6 +840,10 @@ function renderContent(query) {
   
   if (!DATA) return;
   
+  // Electronic types = online/interactive versions; everything else = file download
+  const ELECTRONIC_TYPES = ['calculator','clause','card','dividend','link','contract'];
+  function isDownload(type) { return !ELECTRONIC_TYPES.includes(type); }
+  
   let categories = DATA.categories;
   if (activeCategory !== 'all') {
     categories = categories.filter(c => c.id === activeCategory);
@@ -852,12 +870,26 @@ function renderContent(query) {
     
     if (items.length === 0) return;
     
+    // Sort: electronic versions first, file downloads last (preserve original order within each group)
+    items = items.slice().sort((a, b) => {
+      const aDl = isDownload(a.type);
+      const bDl = isDownload(b.type);
+      if (aDl && !bDl) return 1;
+      if (!aDl && bDl) return -1;
+      return 0;
+    });
+    
     totalItems += items.length;
     
     html += `<div class="category-section">`;
     html += `<div class="category-title">${cat.icon} ${cat.name} <span class="count">${items.length}</span></div>`;
     
-    items.forEach(item => {
+    items.forEach((item, idx) => {
+      // Insert divider before first download item (only if there are electronic items before it)
+      if (isDownload(item.type) && idx > 0 && !isDownload(items[idx - 1].type)) {
+        html += `<div class="download-divider">📂 原始文件下载</div>`;
+      }
+      
       const tc = getTypeConfig(item.type);
       const isCalc = item.type === 'calculator' || item.type === 'clause' || item.type === 'dividend' || item.type === 'card';
       const isExternal = item.url.startsWith('http://') || item.url.startsWith('https://');
@@ -938,23 +970,23 @@ function renderVIPOverview() {
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px;text-align:center;">
           <div class="vip-star-cell">
             <div class="vip-stars">★</div><div class="vip-star-label">一星</div>
-            <div class="vip-star-range">1~5万</div>
+            <div class="vip-star-range">10万~50万</div>
           </div>
           <div class="vip-star-cell">
             <div class="vip-stars">★★</div><div class="vip-star-label">二星</div>
-            <div class="vip-star-range">5~10万</div>
+            <div class="vip-star-range">50万~100万</div>
           </div>
           <div class="vip-star-cell">
             <div class="vip-stars">★★★</div><div class="vip-star-label">三星</div>
-            <div class="vip-star-range">10~20万</div>
+            <div class="vip-star-range">100万~200万</div>
           </div>
           <div class="vip-star-cell vip-star-cell-active">
             <div class="vip-stars">★★★★</div><div class="vip-star-label" style="color:#2563EB;">四星</div>
-            <div class="vip-star-range" style="color:#3B82F6;font-weight:600;">20~30万</div>
+            <div class="vip-star-range" style="color:#3B82F6;font-weight:600;">200万~300万</div>
           </div>
           <div class="vip-star-cell vip-star-cell-active" style="border-color:#2563EB;background:#DBEAFE;">
             <div class="vip-stars">★★★★★</div><div class="vip-star-label" style="color:#1D4ED8;">五星</div>
-            <div class="vip-star-range" style="color:#1D4ED8;font-weight:600;">30万+</div>
+            <div class="vip-star-range" style="color:#1D4ED8;font-weight:600;">300万+</div>
           </div>
         </div>
         <p style="margin-top:8px;font-size:11px;color:#64748B;">📌 四星/五星 = 爱康国宾体检（每年1次·限本人·终身有效）</p>
