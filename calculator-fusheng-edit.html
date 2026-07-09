@@ -31,8 +31,11 @@
   #paramBar{display:none;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
   #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--blue);}
   .table-scroll{overflow-x:auto;}
-  table{width:100%;border-collapse:collapse;font-size:15px;min-width:720px;}
+  table{width:100%;border-collapse:collapse;font-size:15px;min-width:860px;}
   thead th{background:var(--headerbg);color:#fff;padding:11px 10px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
+  thead th[colspan],thead th[rowspan]{vertical-align:middle;}
+  thead tr.group-header th{background:#334155;}
+  thead tr.sub-header th{background:#475569;}
   tbody td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);}
   
   tbody tr:nth-child(even){background:var(--rowalt);}
@@ -64,6 +67,17 @@
   .edit-field div[contenteditable]{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 10px;font-size:14px;min-height:34px;}
   .edit-field textarea{width:100%;min-height:80px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 10px;font-size:14px;font-family:inherit;resize:vertical;}
 
+  @media (max-width:768px){
+    body{padding:10px;}
+    .title-bar h1{font-size:18px;}
+    .form-row{flex-direction:column;align-items:stretch;}
+    .field{width:100%;}
+    input,select{width:100%;}
+    table{font-size:13px;min-width:760px;}
+    thead th{font-size:12px;padding:9px 4px;}
+    tbody td{padding:8px 4px;}
+    .edit-banner{flex-direction:column;align-items:flex-start;}
+  }
 </style>
 </head>
 <body>
@@ -94,7 +108,7 @@
 <!-- EDIT_END -->
   <div class="title-bar">
     <h1>福盛世家（添翼版）终身寿险 · 利益演示计算器</h1>
-    <p>新华保险 · 终身寿险（非分红型）。输入被保人信息，自动演算各保单年度现金价值、基本保额等利益。前5年为储备期。</p>
+    <p>新华保险 · 终身寿险（非分红型）。输入被保人信息，自动演算各保单年度现金价值、身价保障（身故/全残、特定公共交通意外）等利益。前5年为储备期。</p>
   </div>
 
   <div class="card">
@@ -148,10 +162,15 @@
     </div>
     <div class="table-scroll">
       <table id="resultTable">
-        <thead><tr>
-          <th contenteditable="true" contenteditable="true">保单年度</th><th contenteditable="true" contenteditable="true">年龄</th><th contenteditable="true" contenteditable="true">当年保费</th><th contenteditable="true" contenteditable="true">累计保费</th>
-          <th contenteditable="true" contenteditable="true">现金价值</th><th contenteditable="true" contenteditable="true">基本保额</th><th contenteditable="true" contenteditable="true">阶段</th>
-        </tr></thead>
+        <thead>
+          <tr class="group-header">
+            <th contenteditable="true" rowspan="2">保单年度</th><th contenteditable="true" rowspan="2">年龄</th><th contenteditable="true" rowspan="2">当年保费</th><th contenteditable="true" rowspan="2">累计保费</th>
+            <th contenteditable="true" colspan="2">身价保障</th><th contenteditable="true" rowspan="2">现金价值</th><th contenteditable="true" rowspan="2">阶段</th>
+          </tr>
+          <tr class="sub-header">
+            <th contenteditable="true">一般身故/全残</th><th contenteditable="true">特定公共交通意外</th>
+          </tr>
+        </thead>
         <tbody id="resultBody"></tbody>
       </table>
     </div>
@@ -223,7 +242,7 @@ async function generate(){
     });
     let reserveCellRendered=false;
     years.forEach((row,idx)=>{
-      const yr=row[0], prem=row[1], cum=row[2], cash=row[3], sa=row[4];
+      const yr=row[0], prem=row[1], cum=row[2], cash=row[3];
       const curAge=age+yr-1;
       const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
       if(skip) return;
@@ -234,8 +253,14 @@ async function generate(){
         reserveCell=`<td class="rate-reserve" rowspan="${reserveRowCount}">储备期</td>`;
         reserveCellRendered=true;
       }
+      // 基本保额按2%年复利递增；身价保障按监管规则演示
+      const currentSA=Math.round(sumAssured*Math.pow(1.02,yr-1));
+      const K=curAge<41?1.6:(curAge<=60?1.4:1.2);
+      const deathGeneral=Math.max(Math.round(cash*scale),Math.round(cum*scale*K),currentSA);
+      const deathPublic=currentSA; // 特定公共交通意外按当期保额演示
       tr.innerHTML=`<td>${yr}</td><td>${curAge}</td><td>${prem>0?fmt(prem*scale):'-'}</td><td>${fmt(cum*scale)}</td>`+
-        `<td>${fmt(cash*scale)}</td><td>${fmt(sumAssured)}</td>`+
+        `<td>${fmt(deathGeneral)}</td><td>${fmt(deathPublic)}</td>`+
+        `<td>${fmt(cash*scale)}</td>`+
         reserveCell;
       body.appendChild(tr);
     });
@@ -267,15 +292,19 @@ function downloadImage(){
     const curAge=age+yr-1;
     const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
     if(skip) return;
-    dlRows.push({yr,age:curAge,prem,cum,cash,sa:sumAssured,reserve:yr<=reserveYears});
+    const currentSA=Math.round(sumAssured*Math.pow(1.02,yr-1));
+    const K=curAge<41?1.6:(curAge<=60?1.4:1.2);
+    const deathGeneral=Math.max(Math.round(cash),Math.round(cum*K),currentSA);
+    const deathPublic=currentSA;
+    dlRows.push({yr,age:curAge,prem,cum,cash,deathGeneral,deathPublic,reserve:yr<=reserveYears});
   });
 
   // —— 画布与统一布局尺寸（参照规范 P6 / 宏泰·恒享风格）——
   const canvas=document.getElementById('renderCanvas');
   const ctx=canvas.getContext('2d');
-  const colWidths=[70,62,132,142,162,148,90];           // 7列：保单年度|年龄|当年保费|累计保费|现金价值|基本保额|储备期
+  const colWidths=[70,62,120,136,140,140,154,90];           // 8列：保单年度|年龄|当年保费|累计保费|一般身故/全残|特定公共交通意外|现金价值|储备期
   const totalW=colWidths.reduce((a,b)=>a+b,0);
-  const rowH=42, headerH=68;
+  const rowH=42, headerH=72; // 表头两行（分组头+子列头）
   const titleH=80, infoH=130, paramH=52, subHdrH=40, footerH=44, pad=22;
   const tableH=headerH+dlRows.length*rowH;
   const canvasW=totalW+pad*2;
@@ -333,19 +362,49 @@ function downloadImage(){
   ctx.fillStyle='#FFF'; ctx.font='bold 20px "PingFang SC",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText(document.getElementById('ext-subheader').textContent.trim(), canvasW/2, sHdrY+subHdrH/2);
 
-  // —— 表头（深蓝）——
+  // —— 表头（深蓝，两行：分组头 + 子列头）——
   const tblX=pad, tblY=sHdrY+subHdrH;
-  ctx.fillStyle='#1E3A5F'; ctx.fillRect(tblX,tblY,totalW,headerH);
-  const hdrs=Array.from(document.querySelectorAll('#resultTable thead th')).map(th=>th.innerHTML.replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').trim());
+  const topHeaderH=38, subHeaderH=34;
+  // 分组头
+  ctx.fillStyle='#1E3A5F'; ctx.fillRect(tblX,tblY,totalW,topHeaderH);
+  const groupHdrs=[
+    {t:'保单年度',w:colWidths[0]},
+    {t:'年龄',w:colWidths[1]},
+    {t:'当年保费',w:colWidths[2]},
+    {t:'累计保费',w:colWidths[3]},
+    {t:'身价保障',w:colWidths[4]+colWidths[5]},
+    {t:'现金价值',w:colWidths[6]},
+    {t:'储备期',w:colWidths[7]}
+  ];
   ctx.fillStyle='#FFF'; ctx.font='bold 15px "PingFang SC",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-  let cx=tblX+4; hdrs.forEach((h,i)=>{
-    ctx.fillText(h, cx+colWidths[i]/2, tblY+headerH/2);
-    cx+=colWidths[i];
+  let cx=tblX+4; groupHdrs.forEach(h=>{
+    ctx.fillText(h.t, cx+h.w/2, tblY+topHeaderH/2);
+    // 分组头分隔线
+    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=0.5; ctx.beginPath();
+    ctx.moveTo(cx+h.w,tblY); ctx.lineTo(cx+h.w,tblY+topHeaderH); ctx.stroke();
+    cx+=h.w;
+  });
+  // 分组头与子列头之间的分隔线
+  ctx.strokeStyle='rgba(255,255,255,0.35)'; ctx.lineWidth=1; ctx.beginPath();
+  ctx.moveTo(tblX,tblY+topHeaderH); ctx.lineTo(tblX+totalW,tblY+topHeaderH); ctx.stroke();
+  // 子列头
+  const subY=tblY+topHeaderH;
+  const subX0=tblX+4+colWidths[0]+colWidths[1]+colWidths[2]+colWidths[3];
+  ctx.fillStyle='#334155'; ctx.fillRect(subX0,subY,colWidths[4]+colWidths[5],subHeaderH);
+  const subHdrs=['一般身故/全残','特定公共交通意外'];
+  let subX=subX0;
+  ctx.fillStyle='#FFF'; ctx.font='bold 14px "PingFang SC",sans-serif';
+  subHdrs.forEach((h,i)=>{
+    ctx.fillText(h, subX+colWidths[4+i]/2, subY+subHeaderH/2);
+    // 子列头分隔线
+    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=0.5; ctx.beginPath();
+    ctx.moveTo(subX+colWidths[4+i],subY); ctx.lineTo(subX+colWidths[4+i],subY+subHeaderH); ctx.stroke();
+    subX+=colWidths[4+i];
   });
 
   // —— 表格数据行 ——
-  const reserveColXStart = tblX + colWidths.slice(0,6).reduce((a,b)=>a+b,0);
-  const reserveColXEnd   = reserveColXStart + colWidths[6];
+  const reserveColXStart = tblX + colWidths.slice(0,7).reduce((a,b)=>a+b,0);
+  const reserveColXEnd   = reserveColXStart + colWidths[7];
   let reserveCellX=0;
   dlRows.forEach((r,idx)=>{
     const y=tblY+headerH+idx*rowH;
@@ -366,15 +425,16 @@ function downloadImage(){
       {t:r.age,c:'#334155',f:'16px PingFang SC'},
       {t:r.prem>0?fmt(r.prem):'-',c:'#334155',f:'15px PingFang SC'},
       {t:fmt(r.cum),c:'#334155',f:'15px PingFang SC'},
+      {t:fmt(r.deathGeneral),c:'#1E3A5F',f:'bold 15px PingFang SC'},
+      {t:fmt(r.deathPublic),c:'#1E3A5F',f:'bold 15px PingFang SC'},
       {t:fmt(r.cash),c:'#1E40AF',f:'bold 16px PingFang SC'},
-      {t:fmt(r.sa),c:'#1D4ED8',f:'bold 16px PingFang SC'},
       {t:'',c:'#94A3B8',f:'15px PingFang SC'}
     ];
     let cellX=tblX+4;
     vals.forEach((v,i)=>{
       const px=cellX+colWidths[i]/2;
       ctx.fillStyle=v.c; ctx.font=v.f; ctx.textAlign='center'; ctx.textBaseline='middle';
-      if(r.reserve && i===6){ reserveCellX=px; }   // 储备期列留空，记录列中心
+      if(r.reserve && i===7){ reserveCellX=px; }   // 储备期列留空，记录列中心
       else { ctx.fillText(String(v.t), px, y+rowH/2); }
       cellX+=colWidths[i];
     });
@@ -386,9 +446,9 @@ function downloadImage(){
     const y0=tblY+headerH;
     const blockH=reserveRows.length*rowH;
     ctx.fillStyle='#F1F5F9';
-    ctx.fillRect(reserveColXStart, y0, colWidths[6], blockH);
+    ctx.fillRect(reserveColXStart, y0, colWidths[7], blockH);
     ctx.strokeStyle='#CBD5E1'; ctx.lineWidth=1;
-    ctx.strokeRect(reserveColXStart+0.5, y0+0.5, colWidths[6]-1, blockH-1);
+    ctx.strokeRect(reserveColXStart+0.5, y0+0.5, colWidths[7]-1, blockH-1);
     ctx.fillStyle='#94A3B8'; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillText('储备期', reserveCellX, y0+blockH/2);
