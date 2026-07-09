@@ -745,7 +745,7 @@ function downloadImage() {
       const COLS=Array.from(document.querySelectorAll('#resultTable thead th')).map(th=>th.innerHTML.replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').trim());
       const colWidths = [48,44,68,70,60,68,64,70,86,78,86,82];
       const totalW = colWidths.reduce((a,b)=>a+b,0);
-      const rowH = 42, headerH = 68, titleH = 80, infoH = 150, paramH = 52, subHdrH = 40, footerH = 44, pad = 22;
+      const rowH = 42, headerH = 68, titleH = 80, infoH = 200, subHdrH = 40, footerH = 44, pad = 22;
 
       // ---- 生成过滤后的数据行（与屏幕表格一致）----
       const dm = document.getElementById('displayMode').value;
@@ -784,14 +784,14 @@ function downloadImage() {
       // ---- 布局坐标 ----
       const canvasW = totalW + pad*2;
       const infoY = titleH + 4;
-      const paramY = infoY + infoH;
-      const sHdrY = paramY + paramH;
+      const sHdrY = infoY + infoH;
       const tblY = sHdrY + subHdrH;
       const tableBottom = tblY + headerH + dlRows.length * rowH;
       const footerY = tableBottom + 16;
       const canvasH = footerY + footerH;
 
-      const dpr = 2;
+      const SCALE = 1.5;
+      const dpr = (window.devicePixelRatio || 2) * SCALE;
       canvas.width = Math.round(canvasW*dpr);
       canvas.height = Math.round(canvasH*dpr);
       canvas.style.width = canvasW+'px';
@@ -822,14 +822,28 @@ function downloadImage() {
 
       // ---- 公司介绍区（左右两栏）----
       const colGap = 24, infoColW = (canvasW - pad*2 - colGap)/2;
+      // 文字换行辅助
+      function wrapText(text, x, y, maxW, lineH) {
+        const chars = text.split('');
+        let line = '', lines = [];
+        for (let i = 0; i < chars.length; i++) {
+          const test = line + chars[i];
+          if (ctx.measureText(test).width > maxW && i > 0) { lines.push(line); line = chars[i]; }
+          else line = test;
+        }
+        lines.push(line);
+        lines.forEach((l, idx) => ctx.fillText(l, x, y + idx * lineH));
+        return lines.length;
+      }
+
       // 左：公司背景
       ctx.fillStyle = C.companyBg; rr(pad, infoY, infoColW, infoH-4, 6);
       ctx.fillStyle = C.subHeader; ctx.textAlign = 'left';
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
       ctx.fillText(document.getElementById('ext-company-title').textContent.trim(), pad+12, infoY+24);
       const compLines = document.getElementById('ext-company-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean);
-      ctx.fillStyle = C.textGray; ctx.font = '14px "PingFang SC",sans-serif';
-      compLines.forEach((l,i)=>ctx.fillText(l, pad+12, infoY+46+i*17));
+      ctx.fillStyle = C.textGray; ctx.font = '13px "PingFang SC",sans-serif';
+      compLines.forEach((l,i)=>ctx.fillText(l, pad+12, infoY+44+i*16));
 
       // 右：产品特点
       const rx = pad + infoColW + colGap;
@@ -837,16 +851,21 @@ function downloadImage() {
       ctx.fillStyle = C.subHeader; ctx.textAlign = 'left';
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
       ctx.fillText(document.getElementById('ext-product-title').textContent.trim(), rx+12, infoY+24);
-      const prodLines = document.getElementById('ext-product-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean);
-      ctx.fillStyle = C.textGray; ctx.font = '14px "PingFang SC",sans-serif';
-      prodLines.forEach((l,i)=>ctx.fillText(l, rx+12, infoY+46+i*17));
-
-      // ---- 参数栏 ----
-      ctx.fillStyle = C.paramBg; ctx.fillRect(pad, paramY, canvasW-pad*2, paramH);
-      ctx.fillStyle = C.textDark; ctx.textAlign = 'center';
-      ctx.font = 'bold 14px "PingFang SC",sans-serif';
-      const paramText = `性别 ${genderLabel}  年龄 ${age}周岁  交费方式 ${termLabel}  保费 ${fmt(premium)}元  总保费 ${fmt(totalP)}元  基本保额 ${fmt(baseAmount)}元  领取方式 ${drawLabel}  至105周岁`;
-      ctx.fillText(paramText, canvasW/2, paramY+33);
+      const prodRaw = document.getElementById('ext-product-bullets').value.split('\n').map(s=>s.trim()).filter(Boolean);
+      const prodSections = [];
+      for (let i = 0; i < prodRaw.length; i += 2) {
+        prodSections.push({title: prodRaw[i] || '', text: prodRaw[i+1] || ''});
+      }
+      let prodY = infoY + 44;
+      const textMaxW = infoColW - 24;
+      prodSections.forEach((sec) => {
+        ctx.fillStyle = C.subHeader; ctx.font = 'bold 13px "PingFang SC",sans-serif';
+        ctx.fillText(sec.title, rx+12, prodY);
+        prodY += 16;
+        ctx.fillStyle = C.textGray; ctx.font = '12px "PingFang SC",sans-serif';
+        const lines = wrapText(sec.text, rx+12, prodY, textMaxW, 15);
+        prodY += lines * 15 + 6;
+      });
 
       // ---- 子标题栏 ----
       ctx.fillStyle = C.subHeader; ctx.fillRect(pad, sHdrY, canvasW-pad*2, subHdrH);

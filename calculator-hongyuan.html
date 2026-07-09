@@ -704,7 +704,7 @@ function downloadImage() {
       const COLS = ['保单\n年度','年龄','年交\n保费','累计\n保险费','当期\n年金','累积\n年金','当年\n红利','红利\n累计生息','身故或全残\n保险金','现金\n价值','生存\n总利益','总收益\n当年增速'];
       const colWidths = [48,44,68,70,60,68,64,70,86,78,86,82];
       const totalW = colWidths.reduce((a,b)=>a+b,0);
-      const rowH = 42, headerH = 68, titleH = 80, infoH = 150, paramH = 52, subHdrH = 40, footerH = 44, pad = 22;
+      const rowH = 42, headerH = 68, titleH = 80, infoH = 200, subHdrH = 40, footerH = 44, pad = 22;
 
       // ---- 生成过滤后的数据行（与屏幕表格一致）----
       const dm = document.getElementById('displayMode').value;
@@ -743,14 +743,14 @@ function downloadImage() {
       // ---- 布局坐标 ----
       const canvasW = totalW + pad*2;
       const infoY = titleH + 4;
-      const paramY = infoY + infoH;
-      const sHdrY = paramY + paramH;
+      const sHdrY = infoY + infoH;
       const tblY = sHdrY + subHdrH;
       const tableBottom = tblY + headerH + dlRows.length * rowH;
       const footerY = tableBottom + 16;
       const canvasH = footerY + footerH;
 
-      const dpr = 2;
+      const SCALE = 1.5;
+      const dpr = (window.devicePixelRatio || 2) * SCALE;
       canvas.width = Math.round(canvasW*dpr);
       canvas.height = Math.round(canvasH*dpr);
       canvas.style.width = canvasW+'px';
@@ -781,20 +781,35 @@ function downloadImage() {
 
       // ---- 公司介绍区（左右两栏）----
       const colGap = 24, infoColW = (canvasW - pad*2 - colGap)/2;
+      // 文字换行辅助
+      function wrapText(text, x, y, maxW, lineH) {
+        const chars = text.split('');
+        let line = '', lines = [];
+        for (let i = 0; i < chars.length; i++) {
+          const test = line + chars[i];
+          if (ctx.measureText(test).width > maxW && i > 0) { lines.push(line); line = chars[i]; }
+          else line = test;
+        }
+        lines.push(line);
+        lines.forEach((l, idx) => ctx.fillText(l, x, y + idx * lineH));
+        return lines.length;
+      }
+
       // 左：公司背景
       ctx.fillStyle = C.companyBg; rr(pad, infoY, infoColW, infoH-4, 6);
       ctx.fillStyle = C.subHeader; ctx.textAlign = 'left';
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
       ctx.fillText('公司背景', pad+12, infoY+24);
       const compLines = [
-        '成立1996年9月人民大会堂',
-        '中央汇金(中农工建4行同属大股东)',
-        '全国性大型寿险公司 全球2000强',
-        'A+H股同步上市',
-        '惠誉A级 穆迪A2级'
+        '*2011年国内首家A+H股同步上市',
+        '*连续多年入围财富福布斯世界500强，连续3年入围',
+        '*惠誉国际信用评级A级（强劲），穆迪财务实力评级A3级',
+        '*年化综合投资收益率为8.5%，近十年平均投资收益率5.4%',
+        '*由全球最大的国家主权基金[中投公司]直管，最大股东：中央汇金',
+        '*公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%'
       ];
-      ctx.fillStyle = C.textGray; ctx.font = '14px "PingFang SC",sans-serif';
-      compLines.forEach((l,i)=>ctx.fillText(l, pad+12, infoY+46+i*17));
+      ctx.fillStyle = C.textGray; ctx.font = '13px "PingFang SC",sans-serif';
+      compLines.forEach((l,i)=>ctx.fillText(l, pad+12, infoY+44+i*16));
 
       // 右：产品特点
       const rx = pad + infoColW + colGap;
@@ -802,23 +817,21 @@ function downloadImage() {
       ctx.fillStyle = C.subHeader; ctx.textAlign = 'left';
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
       ctx.fillText('产品特点', rx+12, infoY+24);
-      const prodLines = [
-        '投保年龄 30天-69岁',
-        '交费线 18-64岁 5万起',
-        '领取线 18-59周岁 3年交2万7起',
-        '养老年金 60周岁起领终身',
-        '分红≥70%盈余 累积生息',
-        '可减保 可贷现价80%'
+      const prodSections = [
+        {title:'双轨增值，收益稳健', text:'依托央企经营成果参与保单红利分配，红利若不领取可进入累计生息账户实现二次增值（当前账户利率 2.5%）；同时保单现金价值增长速度较快，资产长期稳步向上，收益结构清晰可靠。'},
+        {title:'领取灵活，资金高效', text:'年金领取年龄可按需选择（女性支持 55 岁起领，全人群可选 60/65/70 岁领取），月领、年领方式可随时调整，持续提供充足养老现金流；产品支持保单贷款功能，资金周转灵活，对 50 周岁以上客群适配友好。'},
+        {title:'属性多元，兼顾传承', text:'以持续稳定的养老现金流为核心功能，同时保单现金价值具备定向传承属性，可实现财富跨代传递，一份保单同时覆盖养老储备与资产传承双重需求。'}
       ];
-      ctx.fillStyle = C.textGray; ctx.font = '14px "PingFang SC",sans-serif';
-      prodLines.forEach((l,i)=>ctx.fillText(l, rx+12, infoY+46+i*17));
-
-      // ---- 参数栏 ----
-      ctx.fillStyle = C.paramBg; ctx.fillRect(pad, paramY, canvasW-pad*2, paramH);
-      ctx.fillStyle = C.textDark; ctx.textAlign = 'center';
-      ctx.font = 'bold 14px "PingFang SC",sans-serif';
-      const paramText = `性别 ${genderLabel}  年龄 ${age}周岁  交费方式 ${termLabel}  保费 ${fmt(premium)}元  总保费 ${fmt(totalP)}元  基本保额 ${fmt(baseAmount)}元  领取方式 ${drawLabel}  至105周岁`;
-      ctx.fillText(paramText, canvasW/2, paramY+33);
+      let prodY = infoY + 44;
+      const textMaxW = infoColW - 24;
+      prodSections.forEach((sec) => {
+        ctx.fillStyle = C.subHeader; ctx.font = 'bold 13px "PingFang SC",sans-serif';
+        ctx.fillText(sec.title, rx+12, prodY);
+        prodY += 16;
+        ctx.fillStyle = C.textGray; ctx.font = '12px "PingFang SC",sans-serif';
+        const lines = wrapText(sec.text, rx+12, prodY, textMaxW, 15);
+        prodY += lines * 15 + 6;
+      });
 
       // ---- 子标题栏 ----
       ctx.fillStyle = C.subHeader; ctx.fillRect(pad, sHdrY, canvasW-pad*2, subHdrH);
