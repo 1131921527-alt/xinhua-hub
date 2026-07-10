@@ -185,6 +185,19 @@
       ]
     },
     {
+      "id": "sales-qa",
+      "name": "产品答疑",
+      "icon": "💬",
+      "items": [
+        {
+          "name": "产品销售话术 · QA答疑手册",
+          "type": "card",
+          "description": "MDRT级客户答疑话术 · 7款在售产品全覆盖 · 通用问题+分产品QA+异议处理速查+组合方案",
+          "url": "sales-qa.html"
+        }
+      ]
+    },
+    {
       "id": "product-intro",
       "name": "产品介绍",
       "icon": "📖",
@@ -194,19 +207,6 @@
           "type": "card",
           "description": "宏御世家分红型增额终身寿险知识问答，微信直读文字版",
           "url": "card-hongyu.html"
-        }
-      ]
-    },
-    {
-      "id": "sales-qa",
-      "name": "销售话术",
-      "icon": "💬",
-      "items": [
-        {
-          "name": "产品销售话术 · QA答疑手册",
-          "type": "card",
-          "description": "MDRT级客户答疑话术 · 7款在售产品全覆盖 · 通用问题+分产品QA+异议处理速查+组合方案",
-          "url": "sales-qa.html"
         }
       ]
     },
