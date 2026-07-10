@@ -22,12 +22,10 @@
   .sec-title .bar{width:4px; height:18px; background:var(--blue); border-radius:3px; display:inline-block;}
   .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:15px 16px; margin-bottom:12px;
     box-shadow:0 1px 3px rgba(15,23,42,.04);}
-  /* 产品要素表 */
   table.kv{width:100%; border-collapse:collapse; font-size:14px;}
   table.kv th,table.kv td{padding:10px 12px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top;}
   table.kv th{width:96px; background:var(--blue-l); color:var(--blue-d); font-weight:600; white-space:nowrap;}
   table.kv tr:last-child th,table.kv tr:last-child td{border-bottom:none;}
-  /* 角标卡片 */
   .mark{display:flex; gap:13px; background:var(--card); border:1px solid var(--line); border-radius:14px;
     padding:14px 15px; margin-bottom:11px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
   .mark.key{border-color:#BFD3FE; background:linear-gradient(180deg,#F5F9FF,#fff);}
@@ -35,40 +33,19 @@
     display:flex; align-items:center; justify-content:center; font-size:19px; font-weight:700;}
   .mark.key .mark-badge{background:var(--blue-d); box-shadow:0 0 0 4px rgba(37,99,235,.15);}
   .mark-body{flex:1; min-width:0;}
-  .mark-body h3{margin:2px 0 7px; font-size:15.5px; font-weight:700; color:var(--ink);}
-  .mark-body p{margin:0 0 7px; font-size:14px; color:#334155;}
-  .mark-body ul{margin:6px 0 0; padding-left:18px;}
-  .mark-body li{font-size:13.5px; color:#475569; margin-bottom:3px;}
+  .mark-body h3{margin:2px 0 5px; font-size:15.5px; font-weight:700; color:var(--ink);}
+  .mark-body p{margin:0; font-size:14px; color:#334155;}
   .mark-body .tag{display:inline-block; font-size:11px; color:var(--blue-d); background:var(--blue-l);
-    padding:1px 8px; border-radius:10px; margin-bottom:6px;}
-  /* 核心结论 callout */
+    padding:1px 8px; border-radius:10px; margin-bottom:4px;}
   .callout{background:linear-gradient(135deg,#1E40AF,#2563EB); color:#fff; border-radius:14px; padding:16px 17px; margin:14px 0;}
   .callout .t{font-size:15px; font-weight:700; margin-bottom:6px;}
   .callout .b{font-size:13.5px; opacity:.95; line-height:1.7;}
-  /* Q&A */
-  .qa{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:0; margin-bottom:12px; overflow:hidden; box-shadow:0 1px 3px rgba(15,23,42,.04);}
-  .qa .q{background:var(--blue-l); color:var(--blue-d); font-weight:700; font-size:14.5px; padding:12px 15px;}
-  .qa .a{padding:13px 15px; font-size:14px; color:#334155; line-height:1.8;}
-  .qa .a b{color:var(--ink);}
-  /* disclaimer */
   .note{margin:18px 2px 4px; padding:13px 15px; background:#FFF7ED; border:1px solid #FED7AA; border-radius:12px;
     font-size:12.5px; color:#9A3412; line-height:1.7;}
   .note b{color:#7C2D12;}
   footer{text-align:center; font-size:11px; color:var(--sub); margin-top:22px; padding:0 16px;}
   .pill{display:inline-block; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:20px; font-size:11px; margin-top:10px;}
-  /* ===== 利益演示表配图 ===== */
   .demo-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:8px;}
-  .colmap{width:100%; border-collapse:collapse; font-size:10.5px; min-width:580px;}
-  .colmap th,.colmap td{border:1px solid #E2E8F0;}
-  .colmap td.gA{background:#DBEAFE; color:#1E40AF; text-align:center; font-weight:700; font-size:10.5px; padding:7px 2px; line-height:1.3;}
-  .colmap td.gB{background:#E2E8F0; color:#64748B; text-align:center; font-weight:700; font-size:10.5px; padding:7px 2px; line-height:1.3;}
-  .colmap td.gC{background:#DCFCE7; color:#166534; text-align:center; font-weight:700; font-size:10.5px; padding:7px 2px; line-height:1.3;}
-  .colmap th{padding:8px 3px; text-align:center; font-weight:600; line-height:1.35; vertical-align:top; font-size:10px; background:#fff;}
-  .colmap th.cA{background:#EFF6FF; color:#1E40AF;}
-  .colmap th.cB{background:#F8FAFC; color:#94A3B8;}
-  .colmap th.cC{background:#F0FDF4; color:#166534;}
-  .colmap th.hl{box-shadow:inset 0 0 0 2.5px #F59E0B; background:#FFFBEB !important; color:#92400E;}
-  .cbadge{display:inline-block; width:17px; height:17px; line-height:17px; border-radius:50%; background:#2563EB; color:#fff; font-size:11px; font-weight:700; margin-top:3px;}
   .demo-tbl{width:100%; border-collapse:collapse; font-size:12px; min-width:540px;}
   .demo-tbl th{padding:8px 5px; text-align:center; font-weight:700; font-size:11px; border-bottom:2.5px solid #1E40AF; white-space:nowrap;}
   .demo-tbl td{padding:9px 5px; text-align:center; border-bottom:1px solid #E2E8F0; font-size:12.5px;}
@@ -82,9 +59,6 @@
   .demo-tbl tr.hl-row td.c1{background:#FEF3C7;}
   .demo-tbl tr.hl-row td.c2,.demo-tbl tr.hl-row td.c3,.demo-tbl tr.hl-row td.c4{background:#FEF3C7;}
   .demo-tbl tr.hl-row td.csum{background:#F59E0B; color:#fff;}
-  .legend{display:flex; gap:10px; flex-wrap:wrap; margin:10px 4px 0; font-size:11.5px;}
-  .legend span{display:flex; align-items:center; gap:4px;}
-  .legend .dot{width:12px; height:12px; border-radius:3px; display:inline-block;}
   .scroll-hint{font-size:11px; color:#94A3B8; text-align:right; margin:4px 2px 0;}
 </style>
 </head>
@@ -105,55 +79,15 @@
       <tr><th>产品名称</th><td>新华人寿·宏御世家（分红型增额终身寿险）</td></tr>
       <tr><th>投保示例</th><td>40周岁男性，年交保费10万元，交费期3年，基本保险金额 271,200 元</td></tr>
       <tr><th>保证部分</th><td>固定保底利率 <b>1.75%</b>（写入合同）</td></tr>
-      <tr><th>分红部分</th><td>以预定利率 3.5% 演示，分红收益 ≈ 1.225%（3.5%−1.75%=1.75%，1.75%×0.7≈1.225%）</td></tr>
-      <tr><th>红利领取方式</th><td>交清增额（以红利趸缴购买增额保险，保额逐年递增）</td></tr>
+      <tr><th>分红部分</th><td>以预定利率 3.5% 演示，分红收益 ≈ 1.225%</td></tr>
+      <tr><th>红利领取方式</th><td>交清增额（红利趸缴购买增额保险，保额逐年递增）</td></tr>
     </table>
   </div>
 
-  <!-- 一张图看懂利益演示表 -->
-  <div class="sec-title"><span class="bar"></span>📖 一张图看懂利益演示表</div>
-
-  <!-- 列结构总览 -->
-  <div class="card" style="padding:13px 10px;">
-    <div style="font-size:13px;font-weight:700;color:#1E40AF;margin:0 6px 8px;">利益演示表 · 13列结构总览</div>
-    <div class="demo-wrap">
-      <table class="colmap">
-        <thead>
-          <tr>
-            <td class="gA" colspan="5">A · 基本保险金额利益演示<br><span style="font-weight:400;font-size:9px;">（保证部分）</span></td>
-            <td class="gB" colspan="4">B · 保证利益演示<br><span style="font-weight:400;font-size:9px;">（⑤ 全部为 0）</span></td>
-            <td class="gC" colspan="4">C · 红利利益演示<br><span style="font-weight:400;font-size:9px;">（交清增额·非保证）</span></td>
-          </tr>
-          <tr>
-            <th class="cA">1<br>保单<br>年度</th>
-            <th class="cA">2<br>年龄</th>
-            <th class="cA">3<br>当年<br>保费</th>
-            <th class="cA">4<br>累计<br>保费</th>
-            <th class="cA hl">5<br>基本保额<br>现金价值<div class="cbadge">①</div></th>
-            <th class="cB">6<br>年度<br>红利</th>
-            <th class="cB">7<br>累积<br>红利</th>
-            <th class="cB">8<br>红利<br>现价</th>
-            <th class="cB">9<br>生存<br>总利益</th>
-            <th class="cC hl">10<br>年度交清<br>增额保额<div class="cbadge">②</div></th>
-            <th class="cC hl">11<br>累积交清<br>增额保额<div class="cbadge">③</div></th>
-            <th class="cC">12<br>交清增额<br>身故保险金</th>
-            <th class="cC hl">13<br>交清增额<br>现金价值<div class="cbadge">④</div></th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <div class="scroll-hint">← 左右滑动查看完整表格 →</div>
-    <div class="legend">
-      <span><span class="dot" style="background:#DBEAFE;"></span>板块A·保证（写入合同）</span>
-      <span><span class="dot" style="background:#E2E8F0;"></span>板块B·保证红利（本产品=0）</span>
-      <span><span class="dot" style="background:#DCFCE7;"></span>板块C·非保证红利（交清增额）</span>
-      <span><span class="dot" style="background:#FEF3C7;border:1.5px solid #F59E0B;"></span>角标列</span>
-    </div>
-  </div>
-
   <!-- 关键数据示例 -->
+  <div class="sec-title"><span class="bar"></span>关键数据示例</div>
   <div class="card" style="padding:13px 10px;">
-    <div style="font-size:13px;font-weight:700;color:#1E40AF;margin:0 6px 8px;">关键数据示例 <span style="font-weight:400;font-size:11px;color:#64748B;">（40岁男性·年交10万·3年交·基本保额271,200元）</span></div>
+    <div style="font-size:13px;font-weight:700;color:#1E40AF;margin:0 6px 8px;">40岁男性 · 年交10万 · 3年交 · 基本保额271,200元</div>
     <div class="demo-wrap">
       <table class="demo-tbl">
         <thead>
@@ -211,86 +145,46 @@
         </tbody>
       </table>
     </div>
-    <div class="scroll-hint">← 左右滑动查看完整表格 →</div>
-    <div style="font-size:11.5px;color:#64748B;margin:8px 6px 0;line-height:1.6;">
-      <b>怎么看：</b>① 是保证部分（写入合同），④ 是红利累积后的现金价值（非保证）。客户退保拿到 <b>①+④</b>。<br>
-      ② ③ 是过程数据（保额概念，不是现价），帮助理解红利如何逐年转化为增额保险。<br>
-      ⑤ 对应板块B（第6-9列），本产品采用交清增额方式，保证利益演示全部为 0。
-    </div>
+    <div class="scroll-hint">← 左右滑动查看 →</div>
   </div>
 
-  <!-- 五个角标详细解读 -->
-  <div class="sec-title"><span class="bar"></span>五个角标详细解读</div>
+  <!-- 五个角标解读 -->
+  <div class="sec-title"><span class="bar"></span>五个角标解读</div>
 
   <div class="mark key">
     <div class="mark-badge">①</div>
     <div class="mark-body">
-      <h3>基本保险金额对应的现金价值</h3>
-      <p>这是保单中写入合同的保证部分，对应表格第 5 列。无论保险公司分红业务经营情况如何，这部分现金价值都是确定给付的。退保时，首先要看这列的数值。以本投保示例为例：</p>
-      <ul>
-        <li>第 1 年：29,300 元（早期退保损失较大）</li>
-        <li>第 2 年：102,100 元</li>
-        <li>第 3 年：240,700 元</li>
-        <li>第 10 年：321,000 元（已超过总保费 30 万）</li>
-        <li>第 65 年：823,200 元</li>
-      </ul>
-      <p style="margin-top:6px;color:#64748B;">注意：此列数据不含任何红利收益，是纯粹的保证部分。</p>
+      <h3>基本保额现金价值（保证）</h3>
+      <p>写入合同的确定给付部分，退保首先看这列。不含任何红利。<br>
+      第1年 29,300 → 第10年 321,000 → 第65年 823,200</p>
     </div>
   </div>
 
   <div class="mark">
     <div class="mark-badge">②</div>
     <div class="mark-body">
-      <span class="tag">红利 · 年度</span>
-      <h3>年度交清增额基本保险金额</h3>
-      <p>对应演示表第 10 列，是每年红利分配后，用当年的红利作为一次性保费（趸缴）购买的那份增额保险的"基本保额"。通俗理解：每年保险公司说"今年您分红了 X 元"，这笔钱您没拿现金，而是直接折成保费，买了一份小额的终身寿险。这份小保单的基本保额就是"年度交清增额基本保险金额"。以演示表为例：</p>
-      <ul>
-        <li>第 1 年：987 元</li>
-        <li>第 2 年：2,184 元</li>
-        <li>第 3 年：3,372 元</li>
-        <li>第 10 年：3,642 元</li>
-        <li>……</li>
-        <li>第 65 年：6,954 元</li>
-      </ul>
-      <p style="margin-top:6px;color:#64748B;">每年数值不同，取决于当年分红的多少。</p>
+      <span class="tag">红利·年度</span>
+      <h3>年度交清增额保额</h3>
+      <p>每年红利折成趸缴保费买的小保单"基本保额"。第1年 987 → 第10年 3,642 → 第65年 6,954</p>
     </div>
   </div>
 
   <div class="mark">
     <div class="mark-badge">③</div>
     <div class="mark-body">
-      <span class="tag">红利 · 累积</span>
-      <h3>累积交清增额基本保险金额</h3>
-      <p>对应演示表第 11 列，是历年所有的 ②（年度交清增额基本保险金额）累加在一起的总和。通俗理解：就像往储蓄罐里每年投一枚硬币，"累积交清增额"就是罐子里所有硬币加起来的总额。以演示表为例：</p>
-      <ul>
-        <li>第 1 年累积 = 987 元（= 第 1 年新增）</li>
-        <li>第 2 年累积 = 3,171 元（= 第 1 年 987 + 第 2 年新增 2,184）</li>
-        <li>第 10 年累积 = 31,218 元</li>
-        <li>第 65 年累积 = 313,310 元</li>
-      </ul>
-      <p style="margin-top:6px;color:#64748B;">随着时间推移，累积保额越来越大，到第 65 年红利增额累积保额已超过基本保额（271,200 元）。</p>
+      <span class="tag">红利·累积</span>
+      <h3>累积交清增额保额</h3>
+      <p>历年②累加总和。第1年 987 → 第10年 31,218 → 第65年 313,310（已超基本保额271,200）</p>
     </div>
   </div>
 
   <div class="mark key">
     <div class="mark-badge">④</div>
     <div class="mark-body">
-      <span class="tag">红利 · 现价</span>
-      <h3>交清增额保险对应的现金价值</h3>
-      <p>对应演示表第 13 列，是所有交清增额保单各自独立增长的现金价值的总和。</p>
-      <p style="margin-top:4px;"><b>关键区分：②③ 是"保额"概念，④ 是"现价"概念</b></p>
-      <ul>
-        <li>保额（②/③）：买进去时约定的赔付标准线</li>
-        <li>现价（④）：退保时能拿到的钱，每年独立复利增长</li>
-      </ul>
-      <p style="margin-top:6px;">每一份交清增额保单都有独立的现价曲线：</p>
-      <ul>
-        <li>第 1 年买的那份（987 元保额），第 1 年现价才 489 元（&lt; 保额，正常）</li>
-        <li>第 2 年累积保额（③）= 3,171 元，对应现价（④）= 2,162 元</li>
-        <li>第 3 年累积保额（③）= 6,543 元，对应现价（④）= 5,677 元</li>
-        <li>到第 10 年时：累积保额（③）= 31,218 元，对应现价（④）= 36,494 元</li>
-        <li>现价已经超过保额，因为早年买的"老保单"现价涨上来了</li>
-      </ul>
+      <span class="tag">红利·现价</span>
+      <h3>交清增额现金价值</h3>
+      <p>所有交清增额保单各自独立增长的现价总和。<b>②③是保额概念，④是现价概念。</b><br>
+      第1年 489 → 第10年 36,494（超保额）→ 第65年 950,990</p>
     </div>
   </div>
 
@@ -298,58 +192,26 @@
     <div class="mark-badge">⑤</div>
     <div class="mark-body">
       <span class="tag">监管说明</span>
-      <h3>为什么红利保证部分可以是 0？</h3>
-      <p>对应演示表第 6–9 列（保证利益演示板块），此处全部为 0。这是因为：</p>
-      <p style="margin-top:4px;"><b>分红型产品的"保证利益"与"红利利益"是分开演示的</b></p>
-      <ul>
-        <li>保证利益演示中，只展示合同确定保证的部分（不含任何红利预期）。而本演示采用的是"交清增额"红利领取方式，红利部分全部在 ③（红利利益演示）中展示，保证利益部分自然为 0。</li>
-      </ul>
-      <p style="margin-top:6px;"><b>中国银保监会监管要求</b></p>
-      <ul>
-        <li>根据监管规定，保险公司在进行利益演示时，必须将保证利益和红利利益分开展示，且明确标注红利为非保证收益。</li>
-      </ul>
-      <p style="margin-top:6px;"><b>红利水平在特定年份确实可能为 0</b></p>
-      <ul>
-        <li>根据产品条款："保单红利是不确定的。""在某些年度红利可能为零。"这意味着：</li>
-        <li>保险公司分红业务的经营状况直接影响年度红利分配</li>
-        <li>如果投资收益不达预期，当年分红可能为 0</li>
-        <li>但这不影响合同保证部分的现金价值和保障责任</li>
-      </ul>
-      <p style="margin-top:8px;color:var(--warn);">⚠️ 重要提示：表中的红利利益数据仅为演示，实际分红取决于保险公司分红保险业务的实际经营状况，不构成对未来的承诺。</p>
+      <h3>保证部分为何为0？</h3>
+      <p>交清增额方式下红利全部在C板块展示，保证利益自然为0。监管要求保证/红利分开演示。条款明确：红利不确定，某些年度可能为0。</p>
     </div>
   </div>
 
   <!-- 核心结论 -->
   <div class="callout">
-    <div class="t">💡 核心结论：客户最终拿到的钱 = ① + ④</div>
+    <div class="t">💡 核心结论：客户拿到 = ① + ④</div>
     <div class="b">
-      退保时：总现金价值 = ①基本保险金额现金价值 + ④交清增额保险对应的现金价值<br>
-      身故/全残理赔时：总保险金 = ①身故/全残保险金 + ④交清增额对应的身故/全残保险金<br>
-      ②③⑤ 为过程性数据，帮助理解红利如何转化为保额增长。
-    </div>
-  </div>
-
-  <!-- Q&A -->
-  <div class="sec-title"><span class="bar"></span>常见问答</div>
-  <div class="qa">
-    <div class="q">Q：客户最终拿到的钱是哪几部分？</div>
-    <div class="a">
-      答：客户最终拿到的钱 = <b>① + ④</b><br><br>
-      <b>退保（拿现金价值）：</b><br>
-      总现金价值 = ①基本保险金额现金价值 + ④交清增额保险对应的现金价值<br>
-      以第 65 年为例：823,200 + 950,990 = <b>1,774,190 元</b><br><br>
-      <b>身故/全残理赔：</b><br>
-      总保险金 = ①身故/全残保险金 + ④交清增额对应的身故/全残保险金<br>
-      以第 65 年为例：823,200 + 950,992 = <b>1,774,192 元</b><br><br>
-      ②③⑤ 为辅助理解数据，不直接构成客户最终收益。
+      退保：总现金价值 = ①基本保额现价 + ④交清增额现价（第65年：823,200 + 950,990 = 1,774,190）<br>
+      身故/全残：总保险金 = ①身故保险金 + ④交清增额身故保险金<br>
+      ②③⑤为过程数据，不直接构成客户收益。
     </div>
   </div>
 
   <div class="note">
-    <b>免责声明：</b>以上为红利利益演示数据，实际红利为非保证收益，取决于保险公司实际经营情况。本页内容仅供产品学习与展示参考，不构成任何销售建议或对未来收益的承诺。
+    <b>免责声明：</b>以上为红利利益演示数据，实际红利为非保证收益，取决于保险公司实际经营情况。本页内容仅供产品学习参考，不构成销售建议或对未来收益的承诺。
   </div>
 
-  <!-- Word原文·利益演示表（高保真留档） -->
+  <!-- 原始利益演示表 -->
   <div class="sec-title"><span class="bar"></span>原始利益演示表</div>
   <div class="card" style="padding:12px; text-align:center;">
     <img src="images/hongyu-card-overview.jpeg" alt="宏御世家终身寿险（分红型）利益演示表" style="width:100%; height:auto; border-radius:8px; display:block;" />

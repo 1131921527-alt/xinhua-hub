@@ -198,6 +198,19 @@
       ]
     },
     {
+      "id": "sales-qa",
+      "name": "销售话术",
+      "icon": "💬",
+      "items": [
+        {
+          "name": "产品销售话术 · QA答疑手册",
+          "type": "card",
+          "description": "MDRT级客户答疑话术 · 7款在售产品全覆盖 · 通用问题+分产品QA+异议处理速查+组合方案",
+          "url": "sales-qa.html"
+        }
+      ]
+    },
+    {
       "id": "product-compare",
       "name": "产品对比",
       "icon": "⚖️",

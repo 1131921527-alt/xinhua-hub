@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>产品销售话术 · QA答疑 · 新华保险资料库</title>
+<style>
+  :root{
+    --blue:#2563EB; --blue-d:#1E40AF; --blue-l:#EFF6FF;
+    --blue-dd:#1E3A8A; --blue-100:#DBEAFE;
+    --ink:#0F172A; --sub:#64748B; --line:#E2E8F0; --bg:#F4F7FB;
+    --good:#16A34A; --good-l:#F0FDF4; --warn:#D97706; --warn-l:#FFF7ED;
+    --card:#FFFFFF; --accent:#7C3AED; --accent-l:#F5F3FF;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.75; padding:0 0 60px;}
+  header{background:linear-gradient(135deg,var(--blue-dd),var(--blue)); color:#fff; padding:28px 18px 24px;}
+  header a.back{color:#fff; opacity:.85; font-size:13px; text-decoration:none; display:inline-block; margin-bottom:10px;}
+  header h1{margin:0; font-size:22px; font-weight:800; letter-spacing:.5px;}
+  header .sub{margin-top:7px; font-size:13px; opacity:.92;}
+  .pill{display:inline-block; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:20px; font-size:11px; margin-top:10px;}
+  .wrap{max-width:760px; margin:0 auto; padding:16px 14px 0;}
+
+  /* 导航 */
+  .nav{display:flex; gap:6px; overflow-x:auto; padding:8px 0; margin-bottom:4px; -webkit-overflow-scrolling:touch;}
+  .nav::-webkit-scrollbar{height:0;}
+  .nav a{font-size:12.5px; color:var(--blue-d); background:var(--blue-l); border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; white-space:nowrap; text-decoration:none; flex:none;}
+  .nav a:active{background:var(--blue-100);}
+
+  /* 区块标题 */
+  .sec-title{font-size:18px; font-weight:800; margin:26px 4px 14px; display:flex; align-items:center; gap:8px;}
+  .sec-title .bar{width:4px; height:20px; background:var(--blue); border-radius:3px; display:inline-block;}
+  .sec-title .cnt{font-size:12px; font-weight:600; color:var(--sub); background:var(--blue-l); padding:2px 8px; border-radius:10px;}
+
+  /* 产品标签 */
+  .prod-tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
+    padding:4px 10px; border-radius:8px; margin-bottom:10px;}
+  .prod-tag.hongyu{background:#EFF6FF; color:#1E40AF;}
+  .prod-tag.hongtai{background:#F0FDF4; color:#166534;}
+  .prod-tag.fusheng{background:#FFF7ED; color:#9A3412;}
+  .prod-tag.hongyuan{background:#F5F3FF; color:#6D28D9;}
+  .prod-tag.hengxiang{background:#FDF4FF; color:#9D174D;}
+  .prod-tag.huacai{background:#ECFEFF; color:#155E75;}
+  .prod-tag.hongkun{background:#FFFBEB; color:#92400E;}
+  .prod-tag.general{background:#F1F5F9; color:#334155;}
+
+  /* QA卡片 */
+  .qa{background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:12px;
+    overflow:hidden; box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .qa .q{display:flex; gap:10px; padding:13px 15px; background:var(--blue-l); cursor:pointer;
+    align-items:flex-start; -webkit-user-select:none; user-select:none;}
+  .qa .q .qi{flex:none; width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;}
+  .qa .q .qt{flex:1; font-size:14.5px; font-weight:700; color:var(--blue-d); line-height:1.6;}
+  .qa .q .arrow{flex:none; color:var(--sub); font-size:14px; transition:transform .2s; margin-top:3px;}
+  .qa.open .q .arrow{transform:rotate(180deg);}
+  .qa .a{display:none; padding:14px 15px; font-size:14px; color:#334155; line-height:1.85;}
+  .qa.open .a{display:block;}
+  .qa .a b{color:var(--ink);}
+  .qa .a .hl{color:var(--blue-d); font-weight:700;}
+  .qa .a .tip{display:block; margin-top:8px; padding:8px 12px; background:var(--good-l); border-radius:8px;
+    font-size:13px; color:#166534; border-left:3px solid var(--good);}
+  .qa .a .warn{display:block; margin-top:8px; padding:8px 12px; background:var(--warn-l); border-radius:8px;
+    font-size:13px; color:#9A3412; border-left:3px solid var(--warn);}
+
+  /* 产品概览卡 */
+  .prod-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px;
+    margin-bottom:14px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .prod-card h3{margin:0 0 8px; font-size:16px; font-weight:800;}
+  .prod-card .feat{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;}
+  .prod-card .feat span{font-size:11.5px; padding:3px 8px; border-radius:6px; background:var(--blue-l); color:var(--blue-d); font-weight:600;}
+  .prod-card .who{font-size:13.5px; color:var(--sub); margin:0;}
+  .prod-card .vs{font-size:13px; color:#334155; margin:8px 0 0; padding:10px 12px; background:var(--bg); border-radius:8px;}
+
+  /* callout */
+  .callout{background:linear-gradient(135deg,#1E40AF,#2563EB); color:#fff; border-radius:14px; padding:16px 17px; margin:14px 0;}
+  .callout .t{font-size:15px; font-weight:700; margin-bottom:6px;}
+  .callout .b{font-size:13.5px; opacity:.95; line-height:1.7;}
+
+  /* 免责 */
+  .note{margin:18px 2px 4px; padding:13px 15px; background:var(--warn-l); border:1px solid #FED7AA; border-radius:12px;
+    font-size:12.5px; color:#9A3412; line-height:1.7;}
+  .note b{color:#7C2D12;}
+
+  footer{text-align:center; font-size:11px; color:var(--sub); margin-top:22px; padding:0 16px;}
+
+  /* 异议处理卡片 */
+  .obj{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-bottom:12px;
+    box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .obj .oq{font-size:14.5px; font-weight:700; color:#DC2626; margin-bottom:8px; display:flex; gap:8px; align-items:flex-start;}
+  .obj .oq .oi{flex:none; width:24px; height:24px; border-radius:50%; background:#FEE2E2; color:#DC2626;
+    display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700;}
+  .obj .oa{font-size:14px; color:#334155; line-height:1.85; padding-left:32px;}
+  .obj .oa b{color:var(--blue-d);}
+
+  @media(max-width:560px){
+    header h1{font-size:19px;}
+    .sec-title{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← 返回资料库</a>
+  <h1>产品销售话术 · QA答疑手册</h1>
+  <div class="sub">MDRT级客户答疑话术 · 7款在售产品全覆盖 · 异议处理速查</div>
+  <span class="pill">银行渠道实战版 · 招行私行适配</span>
+</header>
+
+<div class="wrap">
+  <div class="nav">
+    <a href="#general">通用问题</a>
+    <a href="#hongyu">宏御世家</a>
+    <a href="#hongtai">宏泰世家</a>
+    <a href="#fusheng">福盛世家</a>
+    <a href="#hongyuan">宏愿人生</a>
+    <a href="#hengxiang">恒享人生</a>
+    <a href="#huacai">华彩鎏金</a>
+    <a href="#hongkun">宏坤人生</a>
+    <a href="#objection">异议处理</a>
+    <a href="#combo">组合方案</a>
+  </div>
+
+  <!-- ===== 通用问题 ===== -->
+  <div class="sec-title" id="general"><span class="bar"></span>通用问题<span class="cnt">8问</span></div>
+  <span class="prod-tag general">适用于所有在售产品</span>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">分红是确定的吗？万一分红为零怎么办？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>分红不是确定的。</b>分红型产品的红利取决于保险公司分红业务的实际经营状况，条款明确写明"红利不确定，某些年度可能为零"。<br><br>
+      <b>但分两层看：</b><br>
+      <span class="hl">① 保证部分（1.75%保底）</span>——写入合同，无论分红如何，这部分现金价值确定给付。<br>
+      <span class="hl">② 红利部分</span>——额外加成，非保证。但新华保险近5年分红实现率均值 <b>156.1%</b>，行业第一；2024年 <b>79%</b> 的产品实现率≥100%。<br><br>
+      话术要点：<b>"保底兜底，分红锦上添花。新华实现率行业第一，分红为零的概率极低，但即使为零，保底部分依然有效。"</b>
+      <div class="tip">实战话术：客户问"分红会不会为零"，回答："理论上可能，但新华连续5年实现率超100%，2024年79%的产品达标。而且就算分红为零，您合同里的保底现价一分不少。"</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">退保会亏吗？多久能拿回本金？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>早期退保会有损失，具体回本时间因产品而异：</b><br>
+      <span class="hl">宏御世家</span>：3年交，第4年回本（红利演示）<br>
+      <span class="hl">宏泰世家</span>：3年交，第5年覆盖总保费<br>
+      <span class="hl">福盛世家</span>：3年交，约第4-5年回本（固定利益）<br>
+      <span class="hl">宏愿人生</span>：3年交，第5年超所交保费<br><br>
+      以宏御为例：3年交30万，第1年现价仅29,300，第3年240,700。如果第1年退保，亏损超过97%。<br>
+      <b>核心逻辑：这类产品是长期资产配置工具，不是短期理财。适合5年以上不用的钱。</b>
+      <div class="warn">提醒客户：如果3年内要用这笔钱，不建议买增额终身寿。短期资金请配置存款或短期理财。</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">和银行大额存单/理财比，有什么优势？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>四个维度的本质区别：</b><br><br>
+      <b>1. 锁定期：</b>大额存单最长3年，到期后利率随行就市；增额寿锁定终身利率，利率下行周期中这是稀缺能力。<br>
+      <b>2. 计息方式：</b>银行存款/理财是<span class="hl">单利</span>，保险是<span class="hl">复利</span>。30年下来复利比单利多出20%以上。<br>
+      <b>3. 保障功能：</b>保险含身故/全残保障，存单没有。客户万一发生意外，保险赔付远超已交保费。<br>
+      <b>4. 财富传承：</b>保险可指定受益人，定向传承，无需公证，避免家庭纠纷。存单需要走遗产继承流程。<br><br>
+      话术要点：<b>"不是替代存单，是补充。存单管短期，保险管长期。您的资产配置里需要有锁定终身利率的工具。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">交清增额是什么意思？为什么要选这种方式？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>交清增额 = 每年分红不发现金，而是用红利当保费买一份小额终身寿险。</b><br><br>
+      举个例子：宏御第1年分红约489元，这笔钱不给你现金，而是买了一份987元保额的小保单"挂"在主险上。第二年又买一份，第三年再买一份……每年累积，保额越滚越大。<br><br>
+      <b>为什么选交清增额而不是现金分红？</b><br>
+      <span class="hl">现金分红</span>：每年拿几百块钱现金，花掉了就没了，无法复利增长。<br>
+      <span class="hl">交清增额</span>：红利复利增长，长期效果远超现金分红。第65年交清增额现价可达95万（宏演示例）。<br><br>
+      话术：<b>"交清增额就是让红利帮你自动加保，不需要你额外掏钱，复利滚动，时间越长效果越明显。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">能减保吗？急需用钱怎么办？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>可以减保。</b>减保相当于部分退保，拿回一部分现金价值，剩余部分继续按合同增长。<br><br>
+      <b>减保规则要点：</b><br>
+      · 每年减保金额不超过基本保额的20%（具体以条款为准）<br>
+      · 减保后剩余现价继续复利增长<br>
+      · 减保不影响保证部分的增长<br><br>
+      <b>资金灵活性方案：</b><br>
+      ① 减保取现——适合中等额度需求<br>
+      ② 保单贷款——可贷现金价值的80%，通常半年内还清，不影响保单效力<br>
+      ③ 全部退保——最后手段，早期退保有损失<br><br>
+      话术：<b>"回本后减保灵活，相当于一个活期账户。但建议持有时间越长越好，让复利充分跑。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">身故怎么赔？赔多少？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>分红型增额终身寿（宏御/宏泰）：</b><br>
+      身故保险金 = ① 基本保额对应的身故金 + ④ 交清增额对应的身故金<br>
+      随着交清增额逐年累积，身故保额也逐年递增。<br><br>
+      <b>固定增额终身寿（福盛）：</b><br>
+      身故保险金按合同约定的比例给付，含特定公共交通意外额外赔付。<br><br>
+      <b>年金险（宏愿/恒享/华彩/宏坤）：</b><br>
+      身故保险金 = 已交保费减去已领年金，或现金价值，取大者（具体以条款为准）。<br><br>
+      <span class="tip">核心卖点：增额终身寿的身故保额随时间增长，越长寿保障越高。传统重疾险保额固定，增额寿不一样。</span>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">犹豫期多久？等待期多久？健康告知严吗？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>犹豫期：15天。</b>收到合同后15天内退保，全额退还已交保费（扣10元工本费）。<br><br>
+      <b>等待期：90天。</b>（具体以条款为准）等待期内非意外身故，退还已交保费。<br><br>
+      <b>健康告知：</b>增额终身寿的健康告知相对重疾险宽松，但仍需如实告知。常见问询包括：近2年住院/手术史、重大疾病史、体检异常等。<br><br>
+      <span class="warn">注意：银行渠道投保时，客户需在手机银行上完成健康告知，务必提醒客户如实填写，否则影响理赔。</span>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">新华保险实力怎么样？分红靠得住吗？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>新华保险核心数据：</b><br>
+      · <span class="hl">A+H股上市</span>，Fortune世界500强<br>
+      · 近5年分红实现率均值 <span class="hl">156.1%</span>，行业第一<br>
+      · 2024年 <span class="hl">79%</span> 的产品分红实现率≥100%<br>
+      · 2025年1-9月总投资收益率 <span class="hl">8.6%</span>，领先主要同业<br>
+      · A股近一年涨幅 <span class="hl">+93.84%</span>，H股 <span class="hl">+242.08%</span>，均大幅领先同业<br>
+      · 股票配置比例11.6%，权益弹性充足<br><br>
+      <b>分红靠得住的逻辑：</b>新华投资收益高→可分配盈余多→分红空间大→实现率高。监管规定可分配盈余的≥70%给客户，投资端实力直接决定分红水平。<br><br>
+      话术：<b>"新华不是小公司，是A+H上市的央企背景。投资收益率行业第一，分红实现率行业第一，这两项数据比任何宣传都有说服力。"</b>
+    </div>
+  </div>
+
+  <!-- ===== 宏御世家 ===== -->
+  <div class="sec-title" id="hongyu"><span class="bar"></span>宏御世家 S11<span class="cnt">5问</span></div>
+  <span class="prod-tag hongyu">分红型增额终身寿 · 现价超高</span>
+
+  <div class="prod-card">
+    <h3>宏御世家 · 一句话定位</h3>
+    <div class="feat">
+      <span>1.75%保底+分红</span><span>3年交4年回本</span><span>老七家现价前三</span><span>1.2%分红稳健</span><span>交清增额复利</span>
+    </div>
+    <p class="who">适合客户：追求现价最大化、看重长期复利、有5年以上资金规划的中高净值客户。</p>
+  </div>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏御最大卖点是什么？怎么跟客户讲？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>三个核心卖点：</b><br><br>
+      <b>① 现价超高</b>——老七家同业前三。同样交30万，宏御的现金价值在同类产品里排名靠前，退保拿到的钱更多。<br>
+      <b>② 回本快</b>——3年交第4年回本（红利演示）。很多同业产品要5-6年才回本。<br>
+      <b>③ 分红稳健</b>——1.2%分红演示水平，稳健靠谱。新华近5年实现率均值156.1%，不是画饼。<br><br>
+      话术：<b>"宏御就是新华增额寿的天花板——现价高、回本快、分红稳。您交3年，第4年就回本，之后每一年都在赚。时间越长，复利效果越明显。30万交进去，65年后生存总利益177万。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏御和宏泰怎么选？有什么区别？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>核心区别：</b><br><br>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <tr style="background:#EFF6FF;"><td style="padding:8px;font-weight:700;color:#1E40AF;"></td><td style="padding:8px;font-weight:700;color:#1E40AF;">宏御 S11</td><td style="padding:8px;font-weight:700;color:#166534;">宏泰 S03</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">现价水平</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>更高</b></td><td style="padding:8px;border-top:1px solid #E2E8F0;">同档靠前</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">回本速度</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>4年</b></td><td style="padding:8px;border-top:1px solid #E2E8F0;">5年</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">交通意外保障</td><td style="padding:8px;border-top:1px solid #E2E8F0;">无</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>有</b></td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">起售门槛</td><td style="padding:8px;border-top:1px solid #E2E8F0;">2万</td><td style="padding:8px;border-top:1px solid #E2E8F0;">3万</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">最高投保年龄(女)</td><td style="padding:8px;border-top:1px solid #E2E8F0;">69岁</td><td style="padding:8px;border-top:1px solid #E2E8F0;">67岁</td></tr>
+      </table>
+      <br>
+      <b>选择建议：</b><br>
+      · 看重现价最大化、回本速度 → <span class="hl">选宏御</span><br>
+      · 看重综合保障（含交通意外）→ <span class="hl">选宏泰</span><br>
+      · 预算有限 → 宏御起售2万更低<br><br>
+      话术：<b>"追求现价选宏御，追求保障选宏泰。如果客户经常出差、开车，宏泰的交通意外保障是加分项。如果纯看收益，宏御更优。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">1.75%保底+分红，到底能拿多少钱？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>以40岁男性、3年交10万/年、基本保额271,200元为例：</b><br><br>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <tr style="background:#EFF6FF;"><td style="padding:8px;font-weight:700;color:#1E40AF;">保单年度</td><td style="padding:8px;font-weight:700;color:#1E40AF;">①保证现价</td><td style="padding:8px;font-weight:700;color:#166534;">④红利现价</td><td style="padding:8px;font-weight:700;color:#92400E;">①+④总利益</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">第1年</td><td style="padding:8px;border-top:1px solid #E2E8F0;">29,300</td><td style="padding:8px;border-top:1px solid #E2E8F0;">489</td><td style="padding:8px;border-top:1px solid #E2E8F0;">29,789</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">第3年</td><td style="padding:8px;border-top:1px solid #E2E8F0;">240,700</td><td style="padding:8px;border-top:1px solid #E2E8F0;">5,677</td><td style="padding:8px;border-top:1px solid #E2E8F0;">246,377</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">第10年</td><td style="padding:8px;border-top:1px solid #E2E8F0;">321,000</td><td style="padding:8px;border-top:1px solid #E2E8F0;">36,494</td><td style="padding:8px;border-top:1px solid #E2E8F0;">357,494</td></tr>
+        <tr style="background:#FFFBEB;"><td style="padding:8px;border-top:1px solid #E2E8F0;font-weight:700;">第65年</td><td style="padding:8px;border-top:1px solid #E2E8F0;font-weight:700;">823,200</td><td style="padding:8px;border-top:1px solid #E2E8F0;font-weight:700;">950,990</td><td style="padding:8px;border-top:1px solid #E2E8F0;font-weight:700;color:#92400E;">1,774,190</td></tr>
+      </table>
+      <br>
+      <b>解读：</b>30万交进去，10年后35.7万，65年后177万。其中保证部分82万（确定给付），红利部分95万（非保证但新华实现率行业第一）。<br><br>
+      话术：<b>"30万变177万，其中82万是合同保证的，95万是分红预期的。就算分红打个折，也远超存款收益。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">为什么宏御现价比别的公司高？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>底层逻辑：投资实力决定现价水平。</b><br><br>
+      新华保险2025年1-9月总投资收益率 <span class="hl">8.6%</span>，领先主要同业（平安3.1%、太保5.2%、国寿6.4%）。投资收益高→可分配盈余多→分红空间大→现价增长快。<br><br>
+      而且新华股票配置比例11.6%，权益弹性充足，在牛市中收益弹性更大。<br><br>
+      话术：<b>"现价高低不是保险公司定的，是投资能力决定的。新华投资收益率行业第一，所以能给客户的现价也最高。这不是宣传话术，是年报数据。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">客户说"我想再看看别家的"，怎么接？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>三步应对：</b><br><br>
+      <b>第一步：认可。</b>"您比较是应该的，买保险是大决策。"<br><br>
+      <b>第二步：给比较维度。</b>"您比的时候看三个数：① 同样保费下的现金价值谁高；② 几年回本；③ 分红实现率多少。这三个数新华都不输。"<br><br>
+      <b>第三步：亮数据。</b>"新华近5年分红实现率均值156.1%，行业第一。2025年总投资收益率8.6%，也是第一。同档横评我们的现价排前三。您看完数据再做决定。"<br><br>
+      <span class="tip">可以现场打开在线演算器，输入客户年龄/金额，直接生成对比数据。用数据说话比嘴说强一百倍。</span>
+    </div>
+  </div>
+
+  <!-- ===== 宏泰世家 ===== -->
+  <div class="sec-title" id="hongtai"><span class="bar"></span>宏泰世家 S03<span class="cnt">4问</span></div>
+  <span class="prod-tag hongtai">分红型增额终身寿 · 含交通意外保障</span>
+
+  <div class="prod-card">
+    <h3>宏泰世家 · 一句话定位</h3>
+    <div class="feat">
+      <span>1.75%保底+分红</span><span>3年交5年覆盖保费</span><span>同档现价靠前</span><span>含交通意外保障</span><span>1.2%分红稳健</span>
+    </div>
+    <p class="who">适合客户：看重综合保障（含意外）、经常出差/通勤的中产客户，追求确定性与长期复利。</p>
+    <div class="vs">与宏御的区别：现价略低于宏御，但多了交通意外保障。适合"既要收益又要保障"的客户。</div>
+  </div>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏泰的交通意外保障具体是什么？赔多少？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>特定公共交通工具意外身故/全残保障。</b><br><br>
+      在基本保险金额的身故/全残保险金基础上，额外给付特定公共交通工具意外身故/全残保险金。具体赔付规则以条款为准。<br><br>
+      <b>什么算"特定公共交通工具"：</b>通常包括公交、轨道交通（地铁/高铁/火车）、民航客机等公共运营车辆（具体以条款定义为准）。<br><br>
+      话术：<b>"宏泰相当于增额寿+交通意外险二合一。您平时坐地铁、坐高铁、坐飞机，都有额外保障。不需要单独再买意外险了。"</b>
+      <div class="warn">注意：具体交通工具范围和赔付比例以条款为准，向客户讲解时务必引用条款原文，不要自己编。</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏泰的分红水平怎么样？靠谱吗？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>1.2%分红演示水平，稳健靠谱、容易达成。</b><br><br>
+      宏泰和宏御一样，都是1.75%保底+1.2%分红演示（预定利率3.5%）。<br><br>
+      新华近5年分红实现率均值 <span class="hl">156.1%</span>，意味着实际分红普遍超过演示水平。2024年79%的产品实现率≥100%。<br><br>
+      话术：<b>"1.2%的分红演示不是随便写的，是有历史数据支撑的。新华连续5年实现率超100%，实际分红大概率不低于演示值。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏泰适合什么类型的客户？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>四类客户特别适合：</b><br><br>
+      <b>① 经常出差的商务人士</b>——交通意外保障是刚需<br>
+      <b>② 通勤距离长的上班族</b>——每天地铁/公交，意外风险暴露大<br>
+      <b>③ 想一份保单搞定储蓄+保障</b>——不想单独买意外险<br>
+      <b>④ 看重确定性+长期复利</b>——3年交5年覆盖保费，稳健不冒进<br><br>
+      话术：<b>"如果您经常出差，宏泰比宏御更合适。现价差距不大，但多了一份交通意外保障。相当于增额寿+意外险，一份钱两份保障。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏泰和宏御现价差多少？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>差距不大，宏御略高。</b>同档横评（50岁女、100万×3年），新华两款产品现价各阶段均处于行业前列，宏御略高于宏泰。<br><br>
+      <b>选择逻辑：</b><br>
+      · 纯看收益 → 宏御<br>
+      · 收益+意外保障 → 宏泰<br>
+      · 预算2万起 → 宏御（起售更低）<br>
+      · 预算3万起 → 两款都行<br><br>
+      话术：<b>"两款产品现价差距在个位数百分比以内，但宏泰多了交通意外。如果您差旅多，宏泰性价比更高。如果纯看数字，宏御赢。"</b>
+    </div>
+  </div>
+
+  <!-- ===== 福盛世家 ===== -->
+  <div class="sec-title" id="fusheng"><span class="bar"></span>福盛世家添翼版 G14<span class="cnt">4问</span></div>
+  <span class="prod-tag fusheng">2.0%固定增额终身寿 · 确定给付</span>
+
+  <div class="prod-card">
+    <h3>福盛世家 · 一句话定位</h3>
+    <div class="feat">
+      <span>固定2.0%增额</span><span>利益写入合同</span><span>3年交4年回本</span><span>含交通意外</span><span>零不确定性</span>
+    </div>
+    <p class="who">适合客户：完全不想承担任何不确定性、要求"所见即所得"的保守型客户。</p>
+    <div class="vs">与宏御的区别：福盛2.0%固定确定给付，宏御1.75%保底+分红（预期更高但有不确定性）。保守选福盛，进取选宏御。</div>
+  </div>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">福盛是固定的还是分红的？收益确定吗？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>固定2.0%增额，100%确定给付，写入合同。</b><br><br>
+      福盛不是分红型产品，没有分红不确定性。合同里写多少就是多少，所见即所得。现金价值每年按2.0%递增，白纸黑字写在合同里。<br><br>
+      话术：<b>"福盛就是'写死在合同里'的产品。演示表上的数字，就是您退保时拿到的数字，一分不多一分不少。不想操心分红高低的，选这个。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">福盛和宏御怎么选？固定2%和保底1.75%+分红哪个好？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>核心区别：</b><br><br>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <tr style="background:#EFF6FF;"><td style="padding:8px;"></td><td style="padding:8px;font-weight:700;color:#1E40AF;">宏御 S11</td><td style="padding:8px;font-weight:700;color:#9A3412;">福盛 G14</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">保底利率</td><td style="padding:8px;border-top:1px solid #E2E8F0;">1.75%</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>2.0%</b></td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">分红</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>有（1.2%演示）</b></td><td style="padding:8px;border-top:1px solid #E2E8F0;">无</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">长期收益</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>更高</b>（保底+分红）</td><td style="padding:8px;border-top:1px solid #E2E8F0;">中等（纯固定）</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">确定性</td><td style="padding:8px;border-top:1px solid #E2E8F0;">保底确定，分红非保证</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>100%确定</b></td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">交通意外</td><td style="padding:8px;border-top:1px solid #E2E8F0;">无</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>有</b></td></tr>
+      </table>
+      <br>
+      <b>选择逻辑：</b><br>
+      · 保守客户（"我就要确定的"）→ <span class="hl">福盛</span><br>
+      · 进取客户（"我愿意接受一点不确定性换更高收益"）→ <span class="hl">宏御</span><br>
+      · 想要交通意外 → <span class="hl">福盛</span><br><br>
+      话术：<b>"福盛2%写死在合同里，一分不动。宏御1.75%保底+分红，长期看可能更高但分红不保证。您如果受不了任何波动，选福盛；如果相信新华的投资实力，选宏御。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">福盛的意外保障和宏泰的有什么区别？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>两者都含特定公共交通工具意外身故/全残保障，但产品形态不同：</b><br><br>
+      <span class="hl">宏泰</span>：分红型，意外保障+分红增额，长期现价有分红加成<br>
+      <span class="hl">福盛</span>：固定型，意外保障+固定2%增额，利益100%确定<br><br>
+      如果客户同时看重意外保障和确定性，福盛更合适。如果看重意外保障+更高收益预期，宏泰更合适。
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">2.0%固定增额，听起来不高啊？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>2.0%是复利，不是单利。而且这是终身锁定的确定利率。</b><br><br>
+      对比一下：<br>
+      · 3年期大额存单：单利1.5%-2.0%，3年后到期利率可能更低<br>
+      · 国债：单利2.0%-2.5%，但最长3-5年<br>
+      · 福盛：复利2.0%，终身锁定，写入合同<br><br>
+      <b>复利 vs 单利的差距：</b>30万按2%复利30年=54.4万，按2%单利30年=48万。差6.4万。<br><br>
+      话术：<b>"2%复利看着不高，但它是终身锁定的。您现在银行存款利率多少？明年可能更低。福盛锁定一辈子，利率下行周期里这是最稀缺的东西。"</b>
+      <div class="tip">配合利率下行趋势图讲解效果更好。可以提一下2020年3年期大额存单还有4%，现在不到2%。</div>
+    </div>
+  </div>
+
+  <!-- ===== 宏愿人生 ===== -->
+  <div class="sec-title" id="hongyuan"><span class="bar"></span>宏愿人生 S02<span class="cnt">3问</span></div>
+  <span class="prod-tag hongyuan">分红型养老年金 · 50岁+利好</span>
+
+  <div class="prod-card">
+    <h3>宏愿人生 · 一句话定位</h3>
+    <div class="feat">
+      <span>分红养老年金</span><span>70岁起领</span><span>3年交5年超保费</span><span>面向50岁+</span><span>终身领取</span>
+    </div>
+    <p class="who">适合客户：50岁以上、希望把一笔资金转化为终身养老现金流的中高净值客户。</p>
+  </div>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏愿人生适合什么客户？几岁开始领钱？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>面向50岁以上客户，70岁开始领取年金，终身领取。</b><br><br>
+      最高投保年龄69周岁（70岁起领），交费方式支持趸交/3年/5年/10年交。<br><br>
+      <b>适合场景：</b><br>
+      · 50-60岁客户，手头有一笔资金，想转化为退休后的现金流<br>
+      · 给父母买养老补充——子女出资，父母70岁起每年领钱<br>
+      · 担心"人活着钱没了"的长寿风险<br><br>
+      话术：<b>"50岁买，70岁开始每年领钱，领一辈子。分红还能额外加成，对冲通胀。比存银行好——银行花完就没了，这个领到老。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏愿的分红怎么体现？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>分红以交清增额方式增加保额，间接提升年金领取水平。</b><br><br>
+      每年分红不发现金，而是购买增额保险，累积保额逐年增长。到70岁开始领取时，实际领取的年金 = 基本年金 + 分红增额对应的年金。<br><br>
+      话术：<b>"分红帮您自动加保，到领钱的时候，每年领的比演示的多。新华实现率行业第一，分红大概率不低于演示。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏愿和恒享怎么选？分红年金和固定年金哪个好？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>核心区别：</b><br><br>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <tr style="background:#F5F3FF;"><td style="padding:8px;"></td><td style="padding:8px;font-weight:700;color:#6D28D9;">宏愿 S02</td><td style="padding:8px;font-weight:700;color:#9D174D;">恒享 G23</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">类型</td><td style="padding:8px;border-top:1px solid #E2E8F0;">分红型</td><td style="padding:8px;border-top:1px solid #E2E8F0;">固定型</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">年金领取</td><td style="padding:8px;border-top:1px solid #E2E8F0;">70岁起领</td><td style="padding:8px;border-top:1px solid #E2E8F0;">第6年起领</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">年金金额</td><td style="padding:8px;border-top:1px solid #E2E8F0;">基本年金+分红加成</td><td style="padding:8px;border-top:1px solid #E2E8F0;">总保费×2%（固定）</td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">确定性</td><td style="padding:8px;border-top:1px solid #E2E8F0;">基本年金确定，分红非保证</td><td style="padding:8px;border-top:1px solid #E2E8F0;"><b>100%确定</b></td></tr>
+        <tr><td style="padding:8px;border-top:1px solid #E2E8F0;">适合年龄</td><td style="padding:8px;border-top:1px solid #E2E8F0;">50-69岁</td><td style="padding:8px;border-top:1px solid #E2E8F0;">最高80岁</td></tr>
+      </table>
+      <br>
+      <b>选择逻辑：</b><br>
+      · 想要更高收益预期、能接受分红不确定性 → <span class="hl">宏愿</span><br>
+      · 想要100%确定、越早领钱越好 → <span class="hl">恒享</span>（第6年起领，不用等到70岁）<br>
+      · 年龄较大（70+）→ <span class="hl">恒享</span>（最高投保80岁）
+    </div>
+  </div>
+
+  <!-- ===== 恒享人生 ===== -->
+  <div class="sec-title" id="hengxiang"><span class="bar"></span>恒享人生 G23<span class="cnt">3问</span></div>
+  <span class="prod-tag hengxiang">固定年金险 · 利益简单明了</span>
+
+  <div class="prod-card">
+    <h3>恒享人生 · 一句话定位</h3>
+    <div class="feat">
+      <span>固定年金</span><span>第6年起领</span><span>年金=总保费2%</span><span>现价覆盖保费</span><span>最高投保80岁</span>
+    </div>
+    <p class="who">适合客户：追求简单确定、想尽早领钱（不想等到70岁）、年龄较大（60-80岁）的客户。</p>
+  </div>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">恒享的年金是多少？怎么算？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>年金 = 总保费 × 2%，每年领取，终身领取。</b><br><br>
+      以40岁、3年交10万/年、总保费30万为例：<br>
+      · 第6个保单周年日起，每年领 <span class="hl">6,000元</span><br>
+      · 领到终身（100岁领60年 = 36万）<br>
+      · 现金价值持续覆盖总保费（随时可退保拿回本金）<br><br>
+      <b>利益简单到不需要解释：</b>交30万，每年领6,000，领一辈子，本金还在。<br><br>
+      话术：<b>"恒享是最简单的产品——交30万，每年领6千，领一辈子，本金随时可以拿回来。不用算分红、不用看演示表，所见即所得。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">恒享为什么没有分红？固定年金会不会吃亏？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>恒享定位就是"简单确定"，不追求高分红，追求100%确定给付。</b><br><br>
+      <b>不一定吃亏：</b><br>
+      · 分红型年金如果分红为零，实际领取可能低于恒享<br>
+      · 恒享第6年就开始领，宏愿要等到70岁——早领10-20年<br>
+      · 恒享最高投保80岁，宏愿最高69岁——老年客户只能选恒享<br><br>
+      话术：<b>"恒享没有分红，但第6年就开始领钱，不用等到70岁。而且100%确定，不用操心分红高低。适合'我就要简单明了'的客户。"</b>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">恒享适合什么年龄的客户买？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>最高投保年龄80岁，是所有产品里年龄覆盖最广的。</b><br><br>
+      <b>典型场景：</b><br>
+      · 60岁退休客户——第6年66岁开始领钱，补充退休金<br>
+      · 70岁客户——第6年76岁开始领，对抗长寿风险<br>
+      · 给80岁父母买——其他产品投不了，恒享可以<br><br>
+      话术：<b>"父母70、80岁了想买保险别的产品投不了，恒享可以。交完第6年就开始领钱，给老人一个稳定的现金流。"</b>
+    </div>
+  </div>
+
+  <!-- ===== 华彩鎏金 ===== -->
+  <div class="sec-title" id="huacai"><span class="bar"></span>华彩鎏金 S24<span class="cnt">2问</span></div>
+  <span class="prod-tag huacai">分红型年金保险 · 灵活领取</span>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">华彩鎏金是什么类型的产品？和宏愿有什么区别？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>华彩鎏金是分红型年金保险，和宏愿一样是分红年金，但领取规则和目标客群有差异。</b><br><br>
+      <b>与宏愿的主要区别：</b><br>
+      · 华彩鎏金领取方式更灵活（具体以条款为准）<br>
+      · 宏愿明确面向50岁以上、70岁起领<br>
+      · 华彩鎏金适合更广泛的年龄层<br><br>
+      <b>选择建议：</b>如果客户明确是养老规划、50岁以上，宏愿更精准。如果客户需要灵活领取、年龄偏年轻，华彩鎏金更合适。<br><br>
+      具体产品规则请参考<a href="clause-huacai.html" style="color:var(--blue);">华彩鎏金条款文字版</a>。
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">华彩鎏金的分红怎么算？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>分红型产品，红利非保证。</b>分红方式以交清增额为主，具体规则以条款为准。<br><br>
+      新华保险近5年分红实现率均值156.1%，行业第一，分红水平有历史数据支撑。<br><br>
+      话术：<b>"华彩鎏金的分红和宏御宏泰一样，都是新华分红池子里的钱。新华实现率行业第一，分红靠谱。"</b>
+    </div>
+  </div>
+
+  <!-- ===== 宏坤人生 ===== -->
+  <div class="sec-title" id="hongkun"><span class="bar"></span>宏坤人生 S06<span class="cnt">2问</span></div>
+  <span class="prod-tag hongkun">分红型养老年金 · 支持年领/月领</span>
+
+  <div class="qa open">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏坤人生和宏愿人生都是分红养老年金，怎么选？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>两款都是分红型养老年金，但定位有差异：</b><br><br>
+      <span class="hl">宏愿 S02</span>：明确面向50岁以上，70岁起领，3年交5年超保费<br>
+      <span class="hl">宏坤 S06</span>：支持年领/月领切换，13列完整利益演示，灵活度更高<br><br>
+      <b>选择建议：</b><br>
+      · 明确是养老规划、50岁以上 → 宏愿<br>
+      · 需要月领（按月领养老金） → 宏坤<br>
+      · 追求领取灵活性 → 宏坤<br><br>
+      可以现场打开两款演算器对比数据，用数字说话。
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="this.parentElement.classList.toggle('open')">
+      <div class="qi">Q</div><div class="qt">宏坤的月领和年领有什么区别？</div><div class="arrow">▼</div>
+    </div>
+    <div class="a">
+      <b>年领：每年领一次，金额较大；月领：每月领一次，金额较小但更频繁。</b><br><br>
+      月领相当于把年领金额拆成12个月发放，适合需要每月补充生活费的客户。年领适合不依赖月度现金流的客户。<br><br>
+      话术：<b>"如果您退休后需要每月有钱花，选月领，就像领工资一样。如果不急用钱，选年领，一年拿一笔大的。"</b>
+    </div>
+  </div>
+
+  <!-- ===== 异议处理 ===== -->
+  <div class="sec-title" id="objection"><span class="bar"></span>异议处理速查<span class="cnt">8条</span></div>
+  <span class="prod-tag general">客户说"不"时怎么接</span>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>收益太低了，不如买基金/炒股</div>
+    <div class="oa">
+      <b>"基金和保险不是替代关系，是互补关系。"</b><br>
+      基金有波动风险，2024年很多基金还亏着。保险锁定终身利率，复利增长，还有身故保障。<br>
+      资产配置的逻辑：高风险高收益的钱放基金，确定保底的钱放保险。两类工具各管各的事。<br><br>
+      <b>一句话接：</b>"您买基金是博收益，买保险是兜底。基金亏了你认不认？保险不会让你亏。"
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>锁定期太长了，我的钱动不了</div>
+    <div class="oa">
+      <b>"不是动不了，是5年以内别动。"</b><br>
+      宏御3年交4年回本，回本后减保灵活。而且保单贷款可以贷现金价值的80%，半年内还清就行，不影响保单效力。<br><br>
+      <b>一句话接：</b>"4年回本，之后随时减保或贷款取现。只要您3年内不急用这笔钱，就没问题。"
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>分红不确定，我不放心</div>
+    <div class="oa">
+      <b>"保底部分确定，分红是额外加成。"</b><br>
+      1.75%保底写入合同，就算分红为零，保底现价一分不少。而且新华近5年分红实现率均值156.1%，行业第一。分红为零的概率极低。<br><br>
+      <b>一句话接：</b>"最差情况就是分红为零，您拿保底。但新华5年实现率都超100%，最差情况几乎不会发生。"
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>我已经有保险了，不需要再买</div>
+    <div class="oa">
+      <b>"您已有的是什么保险？重疾？医疗？那是保障型，不是储蓄型。"</b><br>
+      增额终身寿是资产配置工具，和重疾险/医疗险功能完全不同。重疾险管"病了有钱治"，增额寿管"钱生钱+传承"。<br><br>
+      <b>一句话接：</b>"您已有的保险是管病的，这个是管钱的。两回事，不冲突。"
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>利率还会涨的，我不急</div>
+    <div class="oa">
+      <b>"利率趋势是下行的，不是上涨。"</b><br>
+      2020年3年大额存单4%+，2025年不到2%。10年期国债收益率从3.3%降到1.6%。全球降息周期，利率大概率继续走低。<br>
+      锁定现在的利率=锁定未来的收益。等利率再降，想锁也锁不了了。<br><br>
+      <b>一句话接：</b>"2020年存单4%，现在不到2%。您觉得明年会涨回去吗？趁现在还能锁2%，先锁住。"
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>我年纪太大了，买不了了吧</div>
+    <div class="oa">
+      <b>"新华产品线年龄覆盖到80岁，总有适合的。"</b><br>
+      宏御最高投保69岁（女），宏泰67岁，福盛72岁，宏愿69岁，恒享<b>80岁</b>。<br><br>
+      <b>一句话接：</b>"您多大？恒享80岁都能买。交完第6年就开始领钱，不挑年龄。"
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>我回去跟家人商量商量</div>
+    <div class="oa">
+      <b>"应该的。我给您发个在线演算器链接，您直接输入年龄和金额，自己算。"</b><br>
+      不要逼单。把在线演算器链接发给客户，让数据说话。客户自己算出来的数字比你说的更有说服力。<br><br>
+      <b>一句话接：</b>"没问题，这是演算器链接（发calculator-*.html），您输年龄和金额就能看收益。看完有问题随时找我。"
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oq"><div class="oi">!</div>别的保险公司收益更高啊</div>
+    <div class="oa">
+      <b>"收益高不等于拿得到。看两个数：分红实现率和投资收益率。"</b><br>
+      新华近5年分红实现率均值156.1%（行业第一），2025年总投资收益率8.6%（行业第一）。<br>
+      别的公司演示收益再高，实现率达不到也白搭。新华是演示不夸张+实现率超高。<br><br>
+      <b>一句话接：</b>"演示收益谁都能写，关键看能不能兑现。新华实现率行业第一，写多少给多少。别的公司演示高，实现率多少？查一下就知道了。"
+    </div>
+  </div>
+
+  <!-- ===== 组合方案 ===== -->
+  <div class="sec-title" id="combo"><span class="bar"></span>组合方案建议<span class="cnt">3套</span></div>
+
+  <div class="callout">
+    <div class="t">💡 组合销售思路</div>
+    <div class="b">单一产品解决单一问题，组合方案解决完整需求。根据客户画像推荐组合，提升件均保费。</div>
+  </div>
+
+  <div class="prod-card">
+    <h3>方案一：中产家庭资产压舱石</h3>
+    <div class="feat">
+      <span>宏御 S11</span><span>3年交</span><span>10-50万/年</span>
+    </div>
+    <p class="who">35-50岁中产，手头有50-150万闲置资金，想锁定长期利率+复利增长+身故保障。</p>
+    <div class="vs"><b>话术：</b>"您这笔钱5年以上不动，放宏御里4年回本，之后复利跑。利率下行周期里，这是最稳的压舱石。"</div>
+  </div>
+
+  <div class="prod-card">
+    <h3>方案二：退休养老双保险</h3>
+    <div class="feat">
+      <span>宏御 S11</span><span>+ 恒享 G23</span><span>或 宏愿 S02</span>
+    </div>
+    <p class="who">45-60岁准退休人群，既需要资产增值，又需要退休后稳定现金流。</p>
+    <div class="vs"><b>话术：</b>"宏御管增值——钱在里面复利跑；恒享管养老——第6年开始每年领钱。一个管增长，一个管花钱，各司其职。"</div>
+  </div>
+
+  <div class="prod-card">
+    <h3>方案三：高净值客户财富传承</h3>
+    <div class="feat">
+      <span>宏御 S11</span><span>大额趸交/3年交</span><span>+ 指定受益人</span>
+    </div>
+    <p class="who">50岁以上高净值客户，有财富传承需求，希望定向传承、免遗产纠纷。</p>
+    <div class="vs"><b>话术：</b>"宏御指定受益人，身故金直接给到指定的人，不需要公证、不走遗产流程。30万变177万，定向传承给下一代。比遗嘱简单，比信托门槛低。"</div>
+  </div>
+
+  <div class="note">
+    <b>免责声明：</b>以上话术仅供银行渠道销售人员内部学习参考，不构成对客户的收益承诺或销售建议。分红型产品红利为非保证收益，实际分红取决于保险公司分红业务的实际经营状况。具体保险责任、利益演示、减保规则等均以产品条款和保险合同为准。销售时务必向客户充分提示分红不确定性风险。
+  </div>
+
+  <footer>新华保险资料库 · 产品销售话术QA答疑手册 ｜ 银行渠道实战版 ｜ 内部学习资料</footer>
+</div>
+
+<script>
+// 自动展开第一个QA
+document.querySelectorAll('.qa').forEach(function(el){
+  var q=el.querySelector('.q');
+  if(q) q.addEventListener('click',function(){el.classList.toggle('open');});
+});
+// 导航点击平滑滚动
+document.querySelectorAll('.nav a').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var target=document.querySelector(a.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
