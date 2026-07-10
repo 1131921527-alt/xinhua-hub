@@ -949,6 +949,19 @@ function renderTabs() {
 }
 
 function selectCategory(catId) {
+  // 单item分类直接跳转（去掉二级菜单）
+  if (catId !== 'all' && DATA && DATA.categories) {
+    const cat = DATA.categories.find(c => c.id === catId);
+    if (cat && cat.items && cat.items.length === 1) {
+      const onlyItem = cat.items[0];
+      // 仅当该item是页面类型（card/link/calculator等）才跳转，文件下载类不跳
+      const PAGE_TYPES = ['card','link','calculator','dividend','contract'];
+      if (PAGE_TYPES.includes(onlyItem.type) && onlyItem.url) {
+        window.location.href = onlyItem.url;
+        return;
+      }
+    }
+  }
   activeCategory = catId;
   document.querySelectorAll('.tab').forEach(t => {
     t.classList.toggle('active', t.dataset.cat === catId);
