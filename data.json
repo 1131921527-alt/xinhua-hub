@@ -89,14 +89,14 @@
       "items": [
         {
           "name": "新华尊/新华瑞 · 增值服务总览",
-          "type": "calculator",
+          "type": "card",
           "description": "新华尊高客权益 + 新华瑞标保权益 + 和睦家医疗体检（深分7月新增） | 权益一览图 + 小程序码 + 使用流程 + 服务项目 + 体检套餐",
           "url": "zengzhi.html",
           "subsection": "新华尊/新华瑞"
         },
         {
           "name": "居家养老 · 3000分护理包（供应商）",
-          "type": "calculator",
+          "type": "card",
           "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供",
           "url": "jujia.html",
           "subsection": "居家服务"
@@ -194,12 +194,6 @@
           "type": "card",
           "description": "宏御世家分红型增额终身寿险知识问答，微信直读文字版",
           "url": "card-hongyu.html"
-        },
-        {
-          "name": "宏御世家 · 知识问答卡片（Word原文）",
-          "type": "doc",
-          "description": "知识问答卡片 Word 原文档 · 在线浏览（无需下载）",
-          "url": "files/产品介绍/新华宏御世家_知识问答卡片 (6).html"
         }
       ]
     },
