@@ -9,18 +9,18 @@
 <title>宏愿人生养老年金（分红型）· 利益演示计算器</title>
 <style>
 :root {
-  --primary: #1D4ED8;
-  --primary-light: #DBEAFE;
+  --primary: #B45309;
+  --primary-light: #FEF3C7;
   --bg: #F8FAFC;
   --card: #FFFFFF;
   --text: #1E293B;
   --text2: #64748B;
   --text3: #94A3B8;
   --border: #E2E8F0;
-  --blue-accent: #2563EB;
-  --red: #2563EB;
-  --blue-dark: #1E40AF;
-  --red-highlight: #EF4444;
+  --blue-accent: #D97706;
+  --red: #D97706;
+  --blue-dark: #92400E;
+  --red-highlight: #B45309;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -201,17 +201,19 @@ body {
   border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); margin-bottom: 14px;
 }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 900px; }
+table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 1100px; }
 thead th {
-  background: #F1F5F9; padding: 8px 6px; font-size: 12px; font-weight: 600;
-  color: var(--text2); text-align: center; white-space: nowrap;
-  border-bottom: 2px solid var(--border); position: sticky; top: 0;
+  background: #78350F; padding: 12px 8px; font-size: 16px; font-weight: 700;
+  color: #fff; text-align: center; white-space: nowrap;
+  border-bottom: 2px solid #78350F; position: sticky; top: 0;
 }
 tbody td {
-  padding: 7px 6px; text-align: center; border-bottom: 1px solid #F1F5F9; white-space: nowrap;
+  padding: 10px 8px; text-align: center; border-bottom: 1px solid #E2E8F0; white-space: nowrap;
+  font-size: 16px;
 }
-tbody tr:nth-child(even) { background: #F8FAFC; }
-tbody tr:hover { background: #EFF6FF; }
+tbody tr.row-5y { background: #FEF3C7; }
+tbody tr.row-last { background: #FDE68A; }
+tbody tr:hover:not(.row-5y):not(.row-last) { background: #FEF3C7; }
 .col-num { font-weight: 600; color: var(--text); }
 .col-guarantee { color: var(--primary); font-weight: 500; }
 .col-paidup { color: var(--blue-accent); font-weight: 500; }
@@ -219,9 +221,18 @@ tbody tr:hover { background: #EFF6FF; }
 .col-rate { font-weight: 600; }
 .rate-up { color: var(--blue-accent); }
 .rate-reserve { color: var(--text3); }
-.row-highlight { background: #DBEAFE !important; }
-.row-highlight td { color: #1E40AF !important; font-weight: 700 !important; }
-.row-highlight td.col-num, .row-highlight td:nth-child(2) { color: #1E3A5F !important; }
+.side-label {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #78350F;
+  text-align: center;
+  padding: 16px 6px;
+  background: #FEF3C7;
+  border: 1px solid #FCD34D;
+}
 
 /* Download bar */
 .download-bar { display: flex; gap: 10px; margin-bottom: 18px; }
@@ -279,7 +290,7 @@ tbody tr:hover { background: #EFF6FF; }
     返回资料库
   </a>
   <h1>宏愿人生 养老年金保险（分红型） 利益演示</h1>
-  <p>S02 · 利益演示计算器 · 数据源自官方演算表</p>
+  <p>利益演示计算器 · 数据源自官方演算表</p>
 </div>
 
 <div class="container">
@@ -330,7 +341,7 @@ tbody tr:hover { background: #EFF6FF; }
       </div>
       <div class="form-group">
         <label>投保年龄（周岁）</label>
-        <input type="number" id="age" value="57" min="0" max="69" placeholder="30~69">
+        <input type="number" id="age" value="46" min="0" max="69" placeholder="30~69">
       </div>
       <div class="form-group">
         <label>交费方式</label>
@@ -343,11 +354,11 @@ tbody tr:hover { background: #EFF6FF; }
       </div>
       <div class="form-group">
         <label>年金起领年龄</label>
-        <input type="number" id="startAge" value="60" min="50" max="75" placeholder="如60">
+        <input type="number" id="startAge" value="55" min="50" max="75" placeholder="如55">
       </div>
       <div class="form-group">
         <label>年交保费（元）</label>
-        <input type="number" id="premium" value="300000" min="10000" step="10000" placeholder="最低1万整数倍">
+        <input type="number" id="premium" value="500000" min="10000" step="10000" placeholder="最低1万整数倍">
       </div>
       <div class="form-group">
         <label>领取方式</label>
@@ -356,16 +367,8 @@ tbody tr:hover { background: #EFF6FF; }
           <option value="month">月领</option>
         </select>
       </div>
-      <div class="form-group full">
-        <label>表格显示方式</label>
-        <select id="displayMode">
-          <option value="all">每年都显示</option>
-          <option value="after50">50岁后每隔5年</option>
-          <option value="after60" selected>60岁后每隔5年</option>
-        </select>
-      </div>
     </div>
-    <button class="btn-generate" id="btnGenerate" onclick="generate()">📊 生成利益演示</button>
+    <button class="btn-generate" id="btnGenerate" onclick="generate()">生成利益演示</button>
   </div>
 
   <!-- Results -->
@@ -379,8 +382,8 @@ tbody tr:hover { background: #EFF6FF; }
     </div>
 
     <div class="download-bar">
-      <button class="btn-download btn-dl-primary" onclick="downloadImage()">📥 下载计划书图片</button>
-      <button class="btn-download btn-dl-secondary" onclick="copyTable()">📋 复制表格数据</button>
+      <button class="btn-download btn-dl-primary" onclick="downloadImage()">下载计划书图片</button>
+      <button class="btn-download btn-dl-secondary" onclick="copyTable()">复制表格数据</button>
     </div>
     <div class="table-wrap">
       <div class="table-scroll">
@@ -408,9 +411,8 @@ tbody tr:hover { background: #EFF6FF; }
   </div>
 
   <div class="disclaimer">
-    ⚠️ 本计算器数据源自官方演算表，仅供参考<br>
-    具体利益以保险合同条款和正式计划书为准<br>
-    红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值
+    本页面及演示说明仅供内部保险从业人员学习、交流使用，数据仅供参考，<br>
+    数据中含分红部分是不确定的，详细内容具体应以保单条款及保险合同为准。
   </div>
 
 </div>
@@ -516,28 +518,27 @@ async function generate() {
     const startAge = parseInt(document.getElementById('startAge').value) || 60;
     const drawMode = document.getElementById('drawMode').value;
     
-    if (isNaN(age) || age < 30 || age > 69) { showError('投保年龄须在30~69周岁之间'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
-    if (isNaN(startAge) || startAge < 50 || startAge > 75) { showError('年金起领年龄须在50~75周岁之间'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
-    if (isNaN(premium) || premium < 10000) { showError('年交保费最低10,000元'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
+    if (isNaN(age) || age < 30 || age > 69) { showError('投保年龄须在30~69周岁之间'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
+    if (isNaN(startAge) || startAge < 50 || startAge > 75) { showError('年金起领年龄须在50~75周岁之间'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
+    if (isNaN(premium) || premium < 10000) { showError('年交保费最低10,000元'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
     const maxAgeMap = { 1: 65, 3: 65, 5: 65, 10: 60 };
-    if (age > (maxAgeMap[term]||65)) { showError(`该交费方式最高投保年龄为${maxAgeMap[term]||65}周岁`); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
+    if (age > (maxAgeMap[term]||65)) { showError(`该交费方式最高投保年龄为${maxAgeMap[term]||65}周岁`); btn.disabled=false; btn.textContent='生成利益演示'; return; }
     
     // 缩放计算
     const scale = premium / HY_BASE.prem;
     const ageOffset = age - HY_BASE.age;
     const genderLabel = currentGender === 0 ? '男' : '女';
-    const termLabel = {1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
+    const termLabel = {1:'趸交',3:'缴3年',5:'缴5年',10:'缴10年'}[term];
     const totalPremium = premium * (term === 1 ? 1 : term);
     
     document.getElementById('paramBar').innerHTML = `
-      <span>${genderLabel}</span> ·
-      <span>${age}周岁</span> ·
-      <span>${termLabel}</span> ·
-      <span>保费 ${fmt(premium)} 元</span> ·
-      <span>总保费 ${fmt(totalPremium)} 元</span>`;
+      <strong style="color:#78350F;font-size:17px;">${age}岁${genderLabel}士</strong> ·
+      <strong style="color:#78350F;font-size:17px;">每年${fmt(premium)}</strong> ·
+      <strong style="color:#78350F;font-size:17px;">${termLabel}</strong> ·
+      <strong style="color:#78350F;font-size:17px;">${startAge}岁开始领</strong> ·
+      <span style="color:#64748B;">分红养老年金</span>`;
     
     const tbody = document.getElementById('resultBody');
-    const displayMode = document.getElementById('displayMode').value;
     const paymentYears = term === 1 ? 1 : term;
     
     // 计算基本保额（年金起领当年年金）
@@ -567,26 +568,12 @@ async function generate() {
     `;
     
     let html = '';
-    let reserveCellRendered = false;
-    let reserveRowCount = 0;
-    
-    // 只统计实际显示的储备期行数（排除被displayMode跳过的行）
-    for (let i = 0; i < HY_DATA.length; i++) {
-      if (HY_DATA[i][0] > paymentYears + 2) break;
-      const ca = HY_DATA[i][1] + ageOffset;
-      const sk = (displayMode==='after50' && ca>50 && (ca-50)%5!==0) || (displayMode==='after60' && ca>60 && (ca-60)%5!==0);
-      if (!sk) reserveRowCount++;
-    }
     
     for (let idx = 0; idx < HY_DATA.length; idx++) {
       const row = HY_DATA[idx];
       const yr = row[0];
       const baseAge = row[1];
       const currentAge = baseAge + ageOffset;
-      
-      const skip = (displayMode==='after50' && currentAge>50 && (currentAge-50)%5!==0) ||
-                    (displayMode==='after60' && currentAge>60 && (currentAge-60)%5!==0);
-      if (skip) continue;
       
       // 按比例缩放金额字段
       const aPrem = Math.round(row[2]*scale);       // 年交保费
@@ -600,7 +587,6 @@ async function generate() {
       const surv = Math.round(row[10]*scale);          // 生存总利益
 
       let rateStr = row[11];
-      // 末行（如105岁）原始数据未存增速时，用生存总利益同比上一保单年度补算（比例与保费缩放无关）
       if ((rateStr === undefined || rateStr === null || rateStr === '') && idx > 0) {
         const prevSurv = HY_DATA[idx-1][10];
         if (prevSurv > 0) {
@@ -608,20 +594,38 @@ async function generate() {
           rateStr = g.toFixed(2) + '%';
         }
       }
+      // 缴费期合并"缴费期分X年投入"
+      const isPayYear = yr <= paymentYears;
+      const isFirstPay = yr === 1;
       let rateCell;
-      if (yr <= paymentYears + 2) {
-        if (!reserveCellRendered && reserveRowCount > 0) {
-          rateCell = `<td class="col-rate rate-reserve" rowspan="${reserveRowCount}" style="vertical-align:middle;text-align:center;font-size:14px;letter-spacing:2px;color:#94A3B8;">储备期</td>`;
-          reserveCellRendered = true;
-        } else rateCell = '';
+      if (isPayYear) {
+        if (isFirstPay) {
+          const payText = paymentYears === 1 ? '趸交' : `缴费期分${paymentYears}年投入`;
+          rateCell = `<td class="col-rate rate-reserve" rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;">${payText}</td>`;
+        } else {
+          rateCell = '';
+        }
       } else if (rateStr && rateStr !== '') {
         rateCell = `<td class="col-rate rate-up">${rateStr}</td>`;
-      } else rateCell = `<td class="col-rate">-</td>`;
+      } else {
+        rateCell = `<td class="col-rate">-</td>`;
+      }
       
-      // 第5年标红高亮
-      const isHighlight = (yr === 5);
+      // 每5年高亮 + 末年高亮
+      const is5y = yr >= 5 && yr % 5 === 0;
+      const isLast = (idx === HY_DATA.length - 1);
+      const rowClass = isLast ? 'row-last' : (is5y ? 'row-5y' : '');
       
-      html += `<tr${isHighlight?' class="row-highlight"':''}>
+      // 左侧竖排标签
+      let sideLabelCell = '';
+      if (yr === 1) {
+        sideLabelCell = `<td class="side-label" rowspan="${paymentYears}">不再缴费</td>`;
+      } else if (yr === paymentYears + 1) {
+        const longTermRowspan = HY_DATA.length - paymentYears;
+        sideLabelCell = `<td class="side-label" rowspan="${longTermRowspan}">长期收益<br>安全稳健<br>条款明确</td>`;
+      }
+      
+      html += `<tr class="${rowClass}">
         <td class="col-num">${yr}</td>
         <td>${currentAge}</td>
         <td>${aPrem > 0 ? fmt(aPrem) : '-'}</td>
@@ -634,6 +638,7 @@ async function generate() {
         <td class="col-paidup">${fmt(cv)}</td>
         <td class="col-total">${fmt(surv)}</td>
         ${rateCell}
+        ${sideLabelCell}
       </tr>`;
     }
     
@@ -644,7 +649,7 @@ async function generate() {
   } catch(e) {
     showError('计算出错：' + e.message);
   } finally {
-    btn.disabled = false; btn.textContent = '📊 生成利益演示';
+    btn.disabled = false; btn.textContent = '生成利益演示';
   }
 }
 
@@ -712,12 +717,9 @@ function downloadImage() {
       const rowH = 42, headerH = 68, titleH = 80, infoH = 200, subHdrH = 40, footerH = 44, pad = 22;
 
       // ---- 生成过滤后的数据行（与屏幕表格一致）----
-      const dm = document.getElementById('displayMode').value;
       const dlRows = [];
       for (let j = 0; j < HY_DATA.length; j++) {
         const r = HY_DATA[j], ca = r[1] + ageOffset;
-        const sk = (dm==='after50' && ca>50 && (ca-50)%5!==0) || (dm==='after60' && ca>60 && (ca-60)%5!==0);
-        if (sk) continue;
         const dividend = Math.round(r[6]*scale);
         const dividendCum = Math.round(r[7]*scale);
         let rt = r[11];

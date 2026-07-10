@@ -213,29 +213,44 @@ body {
   border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); margin-bottom: 14px;
 }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-table { width: 100%; border-collapse: collapse; font-size: 17px; min-width: 1400px; }
+table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 1400px; }
 thead th {
-  background: #F1F5F9; padding: 12px 8px; font-size: 16px; font-weight: 600;
-  color: var(--text2); text-align: center; white-space: nowrap;
-  border-bottom: 2px solid var(--border); position: sticky; top: 0;
+  background: #1E3A8A; padding: 12px 8px; font-size: 16px; font-weight: 700;
+  color: #fff; text-align: center; white-space: nowrap;
+  border-bottom: 2px solid #1E3A8A; position: sticky; top: 0;
 }
 tbody td {
-  padding: 11px 8px; text-align: center; border-bottom: 1px solid #F1F5F9; white-space: nowrap;
+  padding: 10px 8px; text-align: center; border-bottom: 1px solid #E2E8F0; white-space: nowrap;
+  font-size: 16px;
 }
-tbody tr:nth-child(even) { background: #F8FAFC; }
-tbody tr:hover { background: #EFF6FF; }
+tbody tr.row-5y { background: #DBEAFE; }
+tbody tr.row-last { background: #BFDBFE; }
+tbody tr:hover:not(.row-5y):not(.row-last) { background: #EFF6FF; }
 .col-num { font-weight: 600; color: var(--text); }
 .col-cv { color: var(--blue-accent); font-weight: 500; }
 .col-dividend { color: var(--blue-accent); font-weight: 500; }
 .col-survival { color: var(--blue-dark); font-weight: 600; }
 .col-death { color: var(--primary); font-weight: 500; }
 .col-rate { color: var(--text); }
-.rate-reserve { background: #F1F5F9; color: #94A3B8 !important; font-size: 14px; letter-spacing: 2px; font-weight: 600; }
-.row-highlight { background: #DBEAFE !important; }
-.row-highlight td { color: #1E40AF !important; font-weight: 700 !important; }
-.row-highlight td.col-num, .row-highlight td:nth-child(2) { color: #1E3A5F !important; }
-.row-maturity { background: #DBEAFE !important; }
-.row-maturity td { color: #1E40AF !important; font-weight: 700 !important; }
+.rate-reserve { color: #94A3B8 !important; font-weight: 600; }
+.side-label {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1E3A8A;
+  text-align: center;
+  padding: 16px 6px;
+  background: #DBEAFE;
+  border: 1px solid #93C5FD;
+}
+@media (max-width: 768px) {
+  table { font-size: 12px; min-width: 1000px; }
+  thead th { font-size: 12px; padding: 8px 4px; }
+  tbody td { padding: 7px 4px; font-size: 12px; }
+  .side-label { font-size: 12px; letter-spacing: 4px; padding: 8px 3px; }
+}
 
 /* Download bar */
 .download-bar { display: flex; gap: 10px; margin-bottom: 18px; }
@@ -293,7 +308,7 @@ tbody tr:hover { background: #EFF6FF; }
     返回资料库
   </a>
   <h1>华彩鎏金 年金保险（分红型） 利益演示</h1>
-  <p>S24 · 利益演示计算器 · 数据源自官方演算表</p>
+  <p>利益演示计算器 · 数据源自官方演算表</p>
 </div>
 
 <div class="container">
@@ -346,7 +361,7 @@ tbody tr:hover { background: #EFF6FF; }
       </div>
       <div class="form-group">
         <label>投保年龄（周岁）</label>
-        <input type="number" id="age" value="35" min="0" max="72" placeholder="0~72">
+        <input type="number" id="age" value="40" min="0" max="72" placeholder="0~72">
       </div>
       <div class="form-group">
         <label>被保险人姓名</label>
@@ -374,28 +389,14 @@ tbody tr:hover { background: #EFF6FF; }
       </div>
       <div class="form-group">
         <label>年交保费（元）</label>
-        <input type="number" id="premium" value="100000" min="20000" step="10000" placeholder="期交最低2万">
-      </div>
-      <div class="form-group">
-        <label>红利领取方式</label>
-        <select id="dividendMode">
-          <option value="累积生息" selected>累积生息</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>累积生息利率（%）</label>
-        <input type="number" id="dividendRate" value="2.5" step="0.1" min="0" max="10" placeholder="默认2.5%">
+        <input type="number" id="premium" value="1000000" min="20000" step="10000" placeholder="期交最低2万">
       </div>
       <div class="form-group full">
-        <label>表格显示方式</label>
-        <select id="displayMode">
-          <option value="all">每年都显示</option>
-          <option value="after60" selected>60岁后每隔5年</option>
-          <option value="after70">70岁后每隔5年</option>
-        </select>
+        <label>累计生息利率（%）</label>
+        <input type="number" id="dividendRate" value="2.5" step="0.1" min="0" max="10" placeholder="默认2.5%">
       </div>
     </div>
-    <button class="btn-generate" id="btnGenerate" onclick="generate()">📊 生成利益演示</button>
+    <button class="btn-generate" id="btnGenerate" onclick="generate()">生成利益演示</button>
   </div>
 
   <!-- Results -->
@@ -409,8 +410,8 @@ tbody tr:hover { background: #EFF6FF; }
     </div>
 
     <div class="download-bar">
-      <button class="btn-download btn-dl-primary" onclick="downloadImage()">📥 下载计划书图片</button>
-      <button class="btn-download btn-dl-secondary" onclick="copyTable()">📋 复制表格数据</button>
+      <button class="btn-download btn-dl-primary" onclick="downloadImage()">下载计划书图片</button>
+      <button class="btn-download btn-dl-secondary" onclick="copyTable()">复制表格数据</button>
     </div>
     <div class="table-wrap">
       <div class="table-scroll">
@@ -439,9 +440,8 @@ tbody tr:hover { background: #EFF6FF; }
   </div>
 
   <div class="disclaimer">
-    ⚠️ 本计算器数据源自官方演算表，仅供参考<br>
-    具体利益以保险合同条款和正式计划书为准<br>
-    红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值<br>
+    本页面及演示说明仅供内部保险从业人员学习、交流使用，数据仅供参考，<br>
+    数据中含分红部分是不确定的，详细内容具体应以保单条款及保险合同为准。<br>
     假设红利领取方式为累积生息
   </div>
 
@@ -571,26 +571,26 @@ async function generate() {
     const dividendMode = document.getElementById('dividendMode').value;
     const dividendRate = parseFloat(document.getElementById('dividendRate').value) || 2.5;
 
-    if (isNaN(age) || age < 0 || age > 72) { showError('投保年龄须在0~72周岁之间'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
-    if (isNaN(premium) || premium < (term === 1 ? 50000 : 20000)) { showError(term===1 ? '趸交保费最低50,000元' : '期交保费最低20,000元'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
+    if (isNaN(age) || age < 0 || age > 72) { showError('投保年龄须在0~72周岁之间'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
+    if (isNaN(premium) || premium < (term === 1 ? 50000 : 20000)) { showError(term===1 ? '趸交保费最低50,000元' : '期交保费最低20,000元'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
     const maxAgeMap = { 1: 64, 3: 59, 5: 59, 10: 59 };
-    if (term !== 1 && age > (maxAgeMap[term]||59)) { showError(`期交${term}年最高投保年龄为${maxAgeMap[term]}周岁`); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
-    if (term === 1 && age > 64) { showError('趸交线上最高投保年龄为64周岁'); btn.disabled=false; btn.textContent='📊 生成利益演示'; return; }
+    if (term !== 1 && age > (maxAgeMap[term]||59)) { showError(`期交${term}年最高投保年龄为${maxAgeMap[term]}周岁`); btn.disabled=false; btn.textContent='生成利益演示'; return; }
+    if (term === 1 && age > 64) { showError('趸交线上最高投保年龄为64周岁'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
 
     // 缩放计算
     const scale = premium / HC_BASE.prem;
     const ageOffset = age - HC_BASE.age;
     const genderLabel = currentGender === 0 ? '男' : '女';
-    const termLabel = {1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
+    const termLabel = {1:'趸交',3:'缴3年',5:'缴5年',10:'缴10年'}[term];
     const totalPremium = premium * (term === 1 ? 1 : term);
+    const startAge = age + 5;  // 华彩第5年开始领
 
     document.getElementById('paramBar').innerHTML = `
-      <span>${genderLabel}</span> ·
-      <span>${age}周岁</span> ·
-      <span>${termLabel}</span> ·
-      <span>保费 ${fmt(premium)} 元</span> ·
-      <span>总保费 ${fmt(totalPremium)} 元</span> ·
-      <span>红利${dividendMode} ${dividendRate}%</span>`;
+      <strong style="color:#1E3A8A;font-size:17px;">${age}岁${genderLabel}士</strong> ·
+      <strong style="color:#1E3A8A;font-size:17px;">每年${fmt(premium)}</strong> ·
+      <strong style="color:#1E3A8A;font-size:17px;">${termLabel}</strong> ·
+      <strong style="color:#1E3A8A;font-size:17px;">${startAge}岁开始领</strong> ·
+      <span style="color:#64748B;">分红养老年金</span>`;
 
     const tbody = document.getElementById('resultBody');
     const displayMode = document.getElementById('displayMode').value;
@@ -633,53 +633,52 @@ async function generate() {
 
     let html = '';
 
-    // 储备期：前5年统一标注
-    const reserveYears = 5;
-    let reserveRowCount = 0;
-    for (let i = 0; i < HC_DATA.length; i++) {
-      if (HC_DATA[i][0] > reserveYears) break;
-      const ca0 = HC_DATA[i][1] + ageOffset;
-      const sk = (displayMode==='after60' && ca0>60 && (ca0-60)%5!==0) || (displayMode==='after70' && ca0>70 && (ca0-70)%5!==0);
-      if (!sk) reserveRowCount++;
-    }
-    let reserveCellRendered = false;
-
     for (let idx = 0; idx < HC_DATA.length; idx++) {
       const row = HC_DATA[idx];
       const yr = row[0];
       const baseAge = row[1];
       const currentAge = baseAge + ageOffset;
 
-      const skip = (displayMode==='after60' && currentAge>60 && (currentAge-60)%5!==0) ||
-                    (displayMode==='after70' && currentAge>70 && (currentAge-70)%5!==0);
-      if (skip) continue;
-
       // 按比例缩放金额字段
-      const currPrem = Math.round(row[2]*scale);       // 当年保险费
-      const cumPrem = Math.round(row[3]*scale);         // 累计保险费
-      const aAnn = row[4]>0 ? Math.round(row[4]*scale) : 0;   // 关爱金/年金
-      const cAnn = Math.round(row[5]*scale);           // 累计关爱金/年金
-      const maturity = row[6]>0 ? Math.round(row[6]*scale) : 0; // 满期生存保险金
-      const death = Math.round(row[7]*scale);          // 身故保险金
-      const cv = Math.round(row[8]*scale);             // 现金价值
-      const cumDiv = Math.round(row[9]*scale);         // 累积红利
-      const survDiv = Math.round(row[10]*scale);       // 生存总利益(红利)
-      const deathDiv = Math.round(row[11]*scale);      // 身故总利益(红利)
+      const currPrem = Math.round(row[2]*scale);
+      const cumPrem = Math.round(row[3]*scale);
+      const aAnn = row[4]>0 ? Math.round(row[4]*scale) : 0;
+      const cAnn = Math.round(row[5]*scale);
+      const maturity = row[6]>0 ? Math.round(row[6]*scale) : 0;
+      const death = Math.round(row[7]*scale);
+      const cv = Math.round(row[8]*scale);
+      const cumDiv = Math.round(row[9]*scale);
+      const survDiv = Math.round(row[10]*scale);
+      const deathDiv = Math.round(row[11]*scale);
 
-      // 第5年(关爱金)和最后一年(满期)标红高亮
-      const isHighlight = (yr === 5);
-      const isMaturity = (yr === 70);
-      const rowClass = isMaturity ? ' class="row-maturity"' : (isHighlight ? ' class="row-highlight"' : '');
+      // 每5年高亮 + 末年高亮
+      const is5y = yr >= 5 && yr % 5 === 0;
+      const isLast = (idx === HC_DATA.length - 1);
+      const rowClass = isLast ? 'row-last' : (is5y ? 'row-5y' : '');
 
+      // 缴费期合并"缴费期分X年投入" (放最后阶段列)
+      const isPayYear = yr <= paymentYears;
+      const isFirstPay = yr === 1;
       let rateCell = '';
-      if (yr <= reserveYears) {
-        if (!reserveCellRendered && reserveRowCount > 0) {
-          rateCell = `<td class="col-rate rate-reserve" rowspan="${reserveRowCount}" style="vertical-align:middle;text-align:center;font-size:14px;letter-spacing:2px;color:#94A3B8;">储备期</td>`;
-          reserveCellRendered = true;
+      if (isPayYear) {
+        if (isFirstPay) {
+          const payText = paymentYears === 1 ? '趸交' : `缴费期分${paymentYears}年投入`;
+          rateCell = `<td class="col-rate rate-reserve" rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;">${payText}</td>`;
         }
+      } else {
+        rateCell = `<td class="col-rate">-</td>`;
       }
 
-      html += `<tr${rowClass}>
+      // 左侧竖排标签
+      let sideLabelCell = '';
+      if (yr === 1) {
+        sideLabelCell = `<td class="side-label" rowspan="${paymentYears}">不再缴费</td>`;
+      } else if (yr === paymentYears + 1) {
+        const longTermRowspan = HC_DATA.length - paymentYears;
+        sideLabelCell = `<td class="side-label" rowspan="${longTermRowspan}">长期收益<br>安全稳健<br>条款明确</td>`;
+      }
+
+      html += `<tr class="${rowClass}">
         <td class="col-num">${yr}</td>
         <td>${currentAge}</td>
         <td>${currPrem > 0 ? fmt(currPrem) : '-'}</td>
@@ -693,6 +692,7 @@ async function generate() {
         <td class="col-survival">${fmt(survDiv)}</td>
         <td class="col-death">${fmt(deathDiv)}</td>
         ${rateCell}
+        ${sideLabelCell}
       </tr>`;
     }
 
@@ -703,7 +703,7 @@ async function generate() {
   } catch(e) {
     showError('计算出错：' + e.message);
   } finally {
-    btn.disabled = false; btn.textContent = '📊 生成利益演示';
+    btn.disabled = false; btn.textContent = '生成利益演示';
   }
 }
 
@@ -758,12 +758,10 @@ function downloadImage() {
       ];
 
       // ===== 构建展示行（与 generate 一致 + 派生红利列） =====
-      const dlOff=age-HC_BASE.age, dm=document.getElementById('displayMode').value, dlRows=[];
+      const dlOff=age-HC_BASE.age, dlRows=[];
       let prevCumDiv=0;
       for(let j=0;j<HC_DATA.length;j++){
         const r=HC_DATA[j], ca=r[1]+dlOff;
-        const sk=(dm==='after60'&&ca>60&&(ca-60)%5!==0)||(dm==='after70'&&ca>70&&(ca-70)%5!==0);
-        if(sk)continue;
         const cumDiv=Math.round(r[9]*scale);
         const annualDiv=Math.round(cumDiv-prevCumDiv);
         prevCumDiv=cumDiv;

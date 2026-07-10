@@ -6,14 +6,14 @@
 <title>恒享人生年金保险 · 利益演示计算器</title>
 <style>
   :root{
-    --blue:#1E3A5F; --blue2:#2C5282; --gray:#64748B; --graybg:#F1F5F9;
-    --headerbg:#334155; --rowalt:#F0F9FF; --line:#E2E8F0; --accent:#2563EB;
-    --cv:#2563EB; --surv:#1D4ED8; --ann:#7C3AED;
+    --brown:#78350F; --brown2:#92400E; --gray:#64748B; --graybg:#FEF3C7;
+    --line:#E2E8F0; --accent:#B45309;
+    --cv:#B45309; --surv:#92400E; --ann:#D97706;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
   .wrap{max-width:1140px;margin:0 auto;}
-  .title-bar{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;}
+  .title-bar{background:linear-gradient(135deg,var(--brown),var(--brown2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;}
   .title-bar h1{font-size:22px;font-weight:700;}
   .title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
   .card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
@@ -22,25 +22,27 @@
   .field label{font-size:13px;color:var(--gray);font-weight:600;}
   .gender-group{display:flex;gap:8px;}
   .gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;color:var(--gray);}
-  .gender-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .gender-btn.active{background:var(--brown);color:#fff;border-color:var(--brown);}
   input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:140px;}
   .btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
-  .btn:hover{background:#1D4ED8;}
+  .btn:hover{background:#92400E;}
   .btn:disabled{opacity:.6;cursor:not-allowed;}
   .btn-dl{background:#059669;margin-left:10px;}
   .btn-dl:hover{background:#047857;}
   #paramBar{display:none;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
-  #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--blue);}
+  #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--brown);}
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:980px;}
-  thead th{background:var(--headerbg);color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
+  thead th{background:#78350F;color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
   tbody td{padding:9px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
-  
-  tbody tr:nth-child(even){background:var(--rowalt);}
+  tbody tr.row-5y{background:#FEF3C7;}
+  tbody tr.row-last{background:#FDE68A;}
+  tbody tr.row-5y td, tbody tr.row-last td{background:transparent;}
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
   .col-ann{color:var(--ann);}
-  .rate-reserve{background:#F1F5F9 !important;color:#94A3B8;font-weight:700;text-align:center;vertical-align:middle;}
+  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#78350F;text-align:center;padding:10px 4px;background:#FEF3C7;border:1px solid #D97706;}
+  .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 22px;border-radius:24px;opacity:0;transition:.3s;font-size:14px;z-index:99;}
@@ -67,13 +69,13 @@
       <div class="field">
         <label>性别</label>
         <div class="gender-group">
-          <div class="gender-btn active" data-value="0" onclick="selectGender(this)">男</div>
-          <div class="gender-btn" data-value="1" onclick="selectGender(this)">女</div>
+          <div class="gender-btn" data-value="0" onclick="selectGender(this)">男</div>
+          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">女</div>
         </div>
       </div>
       <div class="field">
         <label>投保年龄（周岁）</label>
-        <input id="age" type="number" value="40" min="0" max="80">
+        <input id="age" type="number" value="46" min="0" max="80">
       </div>
       <div class="field">
         <label>交费方式</label>
@@ -86,21 +88,14 @@
       </div>
       <div class="field">
         <label>年交保费（元）</label>
-        <input id="premium" type="number" value="100000" min="1000" step="1000">
-      </div>
-      <div class="field">
-        <label>显示方式</label>
-        <select id="displayMode">
-          <option value="after60" selected>60岁后每隔5年</option>
-          <option value="all">全部年度</option>
-        </select>
+        <input id="premium" type="number" value="500000" min="1000" step="1000">
       </div>
       <div class="field">
         <label>&nbsp;</label>
-        <button class="btn" id="btnGenerate" onclick="generate()">📊 生成利益演示</button>
+        <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
       </div>
     </div>
-    <div class="tip">年交保费为1,000元整数倍；一次交清最低10,000元。保障至105周岁。</div>
+    <div class="tip">默认演示：女46周岁 / 3年交 / 年交50万元 / 52岁开始领取。非分红型，保证利益写入合同。</div>
   </div>
 
   <div class="err" id="errorMsg"></div>
@@ -108,20 +103,24 @@
 
   <div class="card">
     <div style="display:flex;align-items:center;margin-bottom:10px;">
-      <button class="btn btn-dl" onclick="downloadImage()">⬇ 下载演算图片</button>
-      <span class="tip" style="margin:0 0 0 12px;">图片含完整演算表，前5年标注"储备期"</span>
+      <button class="btn btn-dl" onclick="downloadImage()">下载演算图片</button>
+      <span class="tip" style="margin:0 0 0 12px;">导出含完整演算表的计划书图片</span>
     </div>
     <div class="table-scroll">
       <table id="resultTable">
         <thead><tr>
           <th>保单年度</th><th>年龄</th><th>当年保费</th><th>累计保费</th>
           <th>关爱金<br>年金</th><th>累计关爱金<br>年金</th><th>满期生存<br>保险金</th>
-          <th>身故<br>保险金</th><th>现金价值</th><th>生存总利益<br>(年末)</th><th>阶段</th>
+          <th>身故<br>保险金</th><th>现金价值</th><th>生存总利益<br>(年末)</th>
         </tr></thead>
         <tbody id="resultBody"></tbody>
       </table>
     </div>
   </div>
+</div>
+<div style="text-align:center;padding:16px;font-size:12px;color:#64748B;line-height:1.8;">
+  本页面及演示说明仅供内部保险从业人员学习、交流使用，数据仅供参考，<br>
+  具体应以保单条款及保险合同为准。
 </div>
 
 <canvas id="renderCanvas"></canvas>
@@ -130,7 +129,7 @@
 
 <script src="hengxiang_calcdata.js"></script>
 <script>
-let currentGender = 0;
+let currentGender = 1; // 默认女
 
 function selectGender(el){
   document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
@@ -158,65 +157,92 @@ async function generate(){
     const age=parseInt(document.getElementById('age').value);
     const term=parseInt(document.getElementById('term').value);
     const premium=parseInt(document.getElementById('premium').value);
-    if(isNaN(age)||age<0||age>80){showError('投保年龄须在0~80周岁');btn.disabled=false;btn.textContent='📊 生成利益演示';return;}
-    if(isNaN(premium)||premium<(term===1?10000:1000)||premium%1000!==0){showError('保费须为1,000元整数倍（一次交清最低10,000元）');btn.disabled=false;btn.textContent='📊 生成利益演示';return;}
+    if(isNaN(age)||age<0||age>80){showError('投保年龄须在0~80周岁');btn.disabled=false;btn.textContent='生成利益演示';return;}
+    if(isNaN(premium)||premium<(term===1?10000:1000)||premium%1000!==0){showError('保费须为1,000元整数倍（一次交清最低10,000元）');btn.disabled=false;btn.textContent='生成利益演示';return;}
     const maxAgeMap={0:{1:80,3:77,5:75,10:70},1:{1:80,3:77,5:75,10:70}};
     const maxAge=(maxAgeMap[currentGender]&&maxAgeMap[currentGender][term])||70;
-    if(age>maxAge){showError(`该交费方式最高投保年龄为${maxAge}周岁`);btn.disabled=false;btn.textContent='📊 生成利益演示';return;}
+    if(age>maxAge){showError(`该交费方式最高投保年龄为${maxAge}周岁`);btn.disabled=false;btn.textContent='生成利益演示';return;}
 
     const key=`${currentGender}_${age}_${term}`;
     const entry=CALC_DATA_INLINE[key];
-    if(!entry){showError('未找到该参数组合的数据，请检查输入');btn.disabled=false;btn.textContent='📊 生成利益演示';return;}
+    if(!entry){showError('未找到该参数组合的数据，请检查输入');btn.disabled=false;btn.textContent='生成利益演示';return;}
 
     const scale=premium/1000;
     const sumAssured=Math.round(entry.E*scale);
     const years=entry.y;
     const genderLabel=currentGender===0?'男':'女';
     const termLabel={1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
+    // 找到首次领取年龄（第一笔年金>0的年度）
+    let annStartAge='';
+    for(const row of years){ if(row[3]>0){ annStartAge=age+row[0]-1; break; } }
     document.getElementById('paramBar').style.display='flex';
     document.getElementById('paramBar').innerHTML=
-      `<span>${genderLabel}</span><span>${age}周岁</span><span>${termLabel}</span><span>年交 ${fmt(premium)}元</span><span>基本保额 ${fmt(sumAssured)}元</span>`;
+      `<strong style="color:#78350F;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#78350F;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#78350F;font-size:16px;">${termLabel}</strong>`+
+      (annStartAge?`<span style="color:#64748B;">${annStartAge}岁开始领</span>`:'');
 
-    const dlMode=document.getElementById('displayMode').value;
     const body=document.getElementById('resultBody');
     body.innerHTML='';
-    const reserveYears=5;
-    let reserveRowCount=0;
-    years.forEach(row=>{
-      const yr=row[0]; const curAge=age+yr-1;
-      const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
-      if(!skip && yr<=reserveYears) reserveRowCount++;
-    });
-    let reserveCellRendered=false;
+    const paymentYears=term;
+    const maxYear=years.length;
+    let isFirstPay=true;
+
+    // 4段侧标：缴费期 / 不再缴费 / 长期收益 / 安全稳健
+    // 段1: yr 1~term (缴费期)
+    // 段2: yr term+1 ~ term+5 (不再缴费)
+    // 段3: yr term+6 ~ maxYear-5 (长期收益)
+    // 段4: yr maxYear-4 ~ maxYear (安全稳健+条款明确)
+    const seg1End=paymentYears;
+    const seg2End=paymentYears+5;
+    const seg3End=maxYear-5;
+    const seg4End=maxYear;
+
     years.forEach((row,idx)=>{
       const yr=row[0], prem=row[1], cum=row[2], ann=row[3], annCum=row[4], mat=row[5], death=row[6], cv=row[7], surv=row[8];
       const curAge=age+yr-1;
-      const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
-      if(skip) return;
+      const isPayYear=yr<=paymentYears;
+      const is5y=yr>=5 && yr%5===0;
+      const isLast=(idx===years.length-1);
+      const rowClass=isLast?'row-last':(is5y?'row-5y':'');
       const tr=document.createElement('tr');
-      const isReserve=yr<=reserveYears;
-      let reserveCell='';
-      if(isReserve && !reserveCellRendered){
-        reserveCell=`<td class="rate-reserve" rowspan="${reserveRowCount}">储备期</td>`;
-        reserveCellRendered=true;
+      if(rowClass) tr.className=rowClass;
+
+      let cells=`<td>${yr}</td><td>${curAge}</td>`;
+      // 当年保费 - 缴费期合并
+      if(isFirstPay){
+        if(paymentYears>1){
+          cells+=`<td class="pay-merge" rowspan="${paymentYears}">${fmt(prem*scale)}<br><span style="font-size:11px;color:#94A3B8;">缴费期分${paymentYears}年投入</span></td>`;
+        } else {
+          cells+=`<td>${fmt(prem*scale)}</td>`;
+        }
+        isFirstPay=false;
+      } else if(!isPayYear){
+        cells+=`<td>-</td>`;
       }
-      tr.innerHTML=`<td>${yr}</td><td>${curAge}</td>`+
-        `<td>${prem>0?fmt(prem*scale):'-'}</td><td>${fmt(cum*scale)}</td>`+
-        `<td class="col-ann">${ann>0?fmt(ann*scale):'-'}</td><td class="col-ann">${fmt(annCum*scale)}</td>`+
-        `<td>${mat>0?fmt(mat*scale):'-'}</td><td>${fmt(death*scale)}</td>`+
-        `<td class="col-cv">${fmt(cv*scale)}</td><td class="col-surv">${fmt(surv*scale)}</td>`+
-        reserveCell;
+      cells+=`<td>${fmt(cum*scale)}</td>`;
+      cells+=`<td class="col-ann">${ann>0?fmt(ann*scale):'-'}</td><td class="col-ann">${fmt(annCum*scale)}</td>`;
+      cells+=`<td>${mat>0?fmt(mat*scale):'-'}</td><td>${fmt(death*scale)}</td>`;
+      cells+=`<td class="col-cv">${fmt(cv*scale)}</td><td class="col-surv">${fmt(surv*scale)}</td>`;
+      // 侧标
+      if(yr===1){
+        cells+=`<td class="side-label" rowspan="${seg1End}">不再缴费</td>`;
+      } else if(yr===seg1End+1 && seg2End>seg1End){
+        cells+=`<td class="side-label" rowspan="${seg2End-seg1End}">长期收益</td>`;
+      } else if(yr===seg2End+1 && seg3End>seg2End){
+        cells+=`<td class="side-label" rowspan="${seg3End-seg2End}">安全稳健</td>`;
+      } else if(yr===seg3End+1 && seg4End>seg3End){
+        cells+=`<td class="side-label" rowspan="${seg4End-seg3End}">条款明确</td>`;
+      }
+      tr.innerHTML=cells;
       body.appendChild(tr);
     });
   }catch(e){showError('生成出错：'+e.message);}
-  btn.disabled=false; btn.textContent='📊 生成利益演示';
+  btn.disabled=false; btn.textContent='生成利益演示';
 }
 
 function downloadImage(){
   const age=parseInt(document.getElementById('age').value);
   const term=parseInt(document.getElementById('term').value);
   const premium=parseInt(document.getElementById('premium').value);
-  const dlMode=document.getElementById('displayMode').value;
   const key=`${currentGender}_${age}_${term}`;
   const entry=CALC_DATA_INLINE[key];
   if(!entry){showToast('请先生成表格');return;}
@@ -235,8 +261,6 @@ function downloadImage(){
   years.forEach(row=>{
     const yr=row[0],prem=row[1],ann=row[3],mat=row[5],death=row[6],cv=row[7],surv=row[8];
     const curAge=age+yr-1;
-    const skip=(dlMode==='after60'&&curAge>60&&(curAge-60)%5!==0);
-    if(skip) return;
     dlRows.push({yr,age:curAge,prem:prem*scale,ann:ann*scale,mat:mat*scale,cv:cv*scale,surv:surv*scale,death:death*scale,reserve:yr<=reserveYears});
   });
 
@@ -278,7 +302,7 @@ function downloadImage(){
   ctx.fillStyle=tg; ctx.fillRect(0,0,canvasW,TITLE_H);
   ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillStyle='#FFFFFF'; ctx.font='bold 26px "PingFang SC","Microsoft YaHei",sans-serif';
-  ctx.fillText('G23 恒享人生保险利益演示', canvasW/2, 32);
+  ctx.fillText('恒享人生保险利益演示', canvasW/2, 32);
   ctx.font='14px "PingFang SC","Microsoft YaHei",sans-serif';
   ctx.fillText('新华保险 · 年金保险（非分红型）· 保障至105周岁', canvasW/2, 60);
 
@@ -399,9 +423,10 @@ function downloadImage(){
   document.body.appendChild(a); a.click(); a.remove();
   showToast('计划书已下载');
 }
+
+// 初始化
+try{generate();}catch(e){console.error('init:',e);var _b=document.getElementById('btnGenerate');if(_b){_b.disabled=false;_b.textContent='生成利益演示';}}
 </script>
 
-<style>#xd-disclaimer{position:fixed;left:8px;bottom:6px;max-width:330px;font-size:10.5px;line-height:1.45;color:#94A3B8;background:rgba(255,255,255,.55);padding:4px 8px;border-radius:6px;z-index:50;pointer-events:none;backdrop-filter:blur(2px);}@media(max-width:640px){#xd-disclaimer{max-width:62vw;font-size:9.5px;bottom:4px;left:6px;}}</style>
-<div id="xd-disclaimer">⚠ 本页利益演示基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
 </body>
 </html>

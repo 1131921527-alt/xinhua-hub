@@ -194,39 +194,63 @@ table {
   min-width: 1050px;
 }
 thead th {
-  background: #F1F5F9;
+  background: #1E3A8A;
   padding: 14px 10px;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
-  color: var(--text2);
+  color: #fff;
   text-align: center;
   white-space: nowrap;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid #1E3A8A;
   position: sticky;
   top: 0;
 }
-tbody td {
-  padding: 12px 10px;
-  text-align: center;
-  border-bottom: 1px solid #F1F5F9;
-  white-space: nowrap;
+thead th.th-sub {
+  background: #FFFFFF;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  border-top: 1px solid var(--border);
 }
-tbody tr:nth-child(even) { background: #F8FAFC; }
+tbody td {
+  padding: 10px 10px;
+  text-align: center;
+  border-bottom: 1px solid #E2E8F0;
+  white-space: nowrap;
+  font-size: 18px;
+}
+/* 每5年高亮 - 仿标准版截图 */
+tbody tr.row-5y { background: #DBEAFE; }
 tbody tr:hover { background: #EFF6FF; }
+tbody tr.row-5y:hover { background: #BFDBFE; }
+tbody tr.row-last { background: #BFDBFE; }
 .col-num { font-weight: 600; color: var(--text); }
 .col-guarantee { color: var(--primary); font-weight: 500; }
 .col-paidup { color: var(--blue-accent); font-weight: 500; }
 .col-total { color: var(--blue-dark); font-weight: 600; }
-.col-total.highlight-4th { font-weight: 800; color: #1E40AF; background: #DBEAFE; border-radius: 6px; }
 .col-rate { font-weight: 600; }
 .rate-up { color: var(--blue-accent); }
 .rate-reserve { color: var(--text3); }
+/* 左侧竖排标签（仿标准版） */
+.side-label {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1E3A8A;
+  text-align: center;
+  padding: 16px 6px;
+  background: #DBEAFE;
+  border: 1px solid #93C5FD;
+}
 
 /* Mobile compact table to show full view like hongtai */
 @media (max-width: 768px) {
   table { font-size: 13px; min-width: 720px; }
   thead th { font-size: 12px; padding: 8px 4px; }
-  tbody td { padding: 7px 4px; }
+  tbody td { padding: 7px 4px; font-size: 12px; }
+  .side-label { font-size: 12px; letter-spacing: 4px; padding: 8px 3px; }
 }
 
 /* Download bar */
@@ -352,13 +376,13 @@ tbody tr:hover { background: #EFF6FF; }
 
   <!-- Form -->
   <div class="form-card">
-    <h3>📋 输入演示参数</h3>
+    <h3>输入演示参数</h3>
     <div class="form-grid">
       <div class="form-group">
         <label>性别</label>
         <div class="gender-group" id="genderGroup">
-          <div class="gender-btn" data-value="0" onclick="selectGender(this)">👨 男</div>
-          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">👩 女</div>
+          <div class="gender-btn" data-value="0" onclick="selectGender(this)">男</div>
+          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">女</div>
         </div>
       </div>
       <div class="form-group">
@@ -378,38 +402,30 @@ tbody tr:hover { background: #EFF6FF; }
         <label>年交保费（元）</label>
         <input type="number" id="premium" value="1000000" min="1000" step="1000" placeholder="最低1000元整数倍">
       </div>
-      <div class="form-group">
-        <label>表格显示方式</label>
-        <select id="displayMode">
-          <option value="all">每年都显示</option>
-          <option value="after50">50岁后每隔5年</option>
-          <option value="after60" selected>60岁后每隔5年</option>
-        </select>
-      </div>
     </div>
-    <button class="btn-generate" id="btnGenerate" onclick="generate()">📊 生成利益演示</button>
+    <button class="btn-generate" id="btnGenerate" onclick="generate()">生成利益演示</button>
   </div>
 
   <!-- Results -->
   <div class="results" id="results">
     <div class="param-bar" id="paramBar"></div>
     <div class="download-bar">
-      <button class="btn-download btn-dl-primary" onclick="downloadImage()">📥 下载计划书图片</button>
-      <button class="btn-download btn-dl-secondary" onclick="copyTable()">📋 复制表格数据</button>
+      <button class="btn-download btn-dl-primary" onclick="downloadImage()">下载计划书图片</button>
+      <button class="btn-download btn-dl-secondary" onclick="copyTable()">复制表格数据</button>
     </div>
     <div class="table-wrap">
       <div class="table-scroll">
         <table id="resultTable">
           <thead>
             <tr>
-              <th>保单年度</th>
-              <th>年龄(年初)</th>
-              <th>当年保险费<br>(年初)</th>
-              <th>累计保险费</th>
-              <th>现金价值<br>(保证)</th>
-              <th>累计红利现价<br>(交清增额)</th>
-              <th>生存总利益<br>(保证+累计红利)</th>
-              <th>生存总利益<br>年增长率</th>
+              <th>保单<br>年度</th>
+              <th>年龄<br>年末</th>
+              <th>当期保费</th>
+              <th>保证利益<br>现金价值</th>
+              <th>红利现价</th>
+              <th>预期生存<br>总利益</th>
+              <th>总利益<br>增长额</th>
+              <th>总利益<br>年增长率</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -419,9 +435,8 @@ tbody tr:hover { background: #EFF6FF; }
   </div>
 
   <div class="disclaimer">
-    ⚠️ 本计算器数据源自官方演算表，仅供参考<br>
-    具体利益以保险合同条款和正式计划书为准<br>
-    红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值
+    本页面及演示说明仅供内部保险从业人员学习、交流使用，数据仅供参考，<br>
+    数据中含分红部分是不确定的，详细内容具体应以保单条款及保险合同为准。
   </div>
 
 </div>
@@ -539,21 +554,19 @@ async function generate() {
     const scale = premium / 1000;
     const sumAssured = Math.round(E * scale);
     
-    // Build param bar
-    const genderLabel = currentGender === 0 ? '男' : '女';
-    const termLabel = {1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
+    // Build param bar - 仿标准版格式：40岁女士 每年100万 缴3年 分红交清增额
+    const genderLabel = currentGender === 0 ? '男士' : '女士';
+    const termLabel = {1:'趸交',3:'缴3年',5:'缴5年',10:'缴10年'}[term];
     document.getElementById('paramBar').innerHTML = `
-      <span>${genderLabel}</span> ·
-      <span>${age}周岁</span> ·
-      <span>${termLabel}</span> ·
-      <span>保费 ${fmt(premium)} 元</span> ·
-      <span>基本保额 ${fmt(sumAssured)} 元</span>
+      <strong style="color:#1E3A8A;font-size:18px;">${age}岁${genderLabel}</strong> ·
+      <strong style="color:#1E3A8A;font-size:18px;">每年${fmt(premium)}</strong> ·
+      <strong style="color:#1E3A8A;font-size:18px;">${termLabel}</strong> ·
+      <span style="color:#64748B;">分红交清增额</span>
     `;
     
     // Build table - 使用与Excel完全一致的递归公式计算K/L/N
     const tbody = document.getElementById('resultBody');
-    const displayMode = document.getElementById('displayMode').value;
-    const maxYear = Math.min(years.length, 105);
+    const maxYear = Math.min(years.length, 106);
     const paymentYears = term === 1 ? 1 : term;
     const reserveYears = paymentYears + 2;  // 储备期 = 缴费年数 + 2年
     
@@ -608,48 +621,61 @@ async function generate() {
         rateClass = r > 0 ? 'rate-up' : '';
       }
       
-      const skipDisplay = (displayMode === 'after50' && currentAge > 50 && (currentAge - 50) % 5 !== 0) ||
-                          (displayMode === 'after60' && currentAge > 60 && (currentAge - 60) % 5 !== 0);
-      
-      allRows.push({ yr, currentAge, annualPremium, cumPremiumAll, guaranteed, paidup, total, rate, rateClass, skipDisplay });
+      allRows.push({ yr, currentAge, annualPremium, cumPremiumAll, guaranteed, paidup, total, rate, rateClass });
       
       prevTotal = total;
       prevO = O;
     }
     
-    // 第二遍：生成HTML，储备期单元格合并居中
-    let html = '';
-    let reserveCellRendered = false;
-    let reserveRowCount = 0;
-    for (let i = 0; i < allRows.length && allRows[i].yr <= reserveYears; i++) {
-      if (!allRows[i].skipDisplay) reserveRowCount++;
-    }
-    
     for (let i = 0; i < allRows.length; i++) {
       const r = allRows[i];
-      if (r.skipDisplay) continue;
       
-      let rateCell;
-      if (r.yr <= reserveYears) {
-        if (!reserveCellRendered && reserveRowCount > 0) {
-          rateCell = `<td class="col-rate rate-reserve" rowspan="${reserveRowCount}" style="vertical-align:middle;text-align:center;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:4px;padding:8px 4px;">储备期</td>`;
-          reserveCellRendered = true;
+      // 标准版：缴费期不合并行，只合并"总利益增长额"和"年增长率"两列
+      const isPayYear = r.yr <= paymentYears;
+      const isFirstPayYear = r.yr === 1;
+      
+      // 每5年高亮 + 末年高亮
+      const is5y = r.yr >= 5 && r.yr % 5 === 0;
+      const isLast = (i === allRows.length - 1) || (r.yr === maxYear);
+      const rowClass = isLast ? 'row-last' : (is5y ? 'row-5y' : '');
+      
+      // 总利益增长额 / 年增长率 - 缴费期合并
+      let totalGrowthCell, rateCell;
+      if (isPayYear) {
+        if (isFirstPayYear) {
+          const payText = paymentYears === 1 ? '趸交' : `缴费期分${paymentYears}年投入`;
+          totalGrowthCell = `<td rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;color:#94A3B8;">${payText}</td>`;
+          rateCell = `<td rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;color:#94A3B8;">${payText}</td>`;
         } else {
-          rateCell = '';  // 被rowspan覆盖
+          totalGrowthCell = '';  // 被rowspan
+          rateCell = '';  // 被rowspan
         }
       } else {
+        totalGrowthCell = `<td>${fmt(r.total - (i > 0 ? allRows[i-1].total : 0))}</td>`;
         rateCell = `<td class="col-rate ${r.rateClass}">${r.rate}</td>`;
       }
       
-      html += `<tr>
+      // 左侧竖排标签
+      let sideLabelCell = '';
+      if (r.yr === 1) {
+        // 缴费期开始位置显示标签
+        sideLabelCell = `<td class="side-label" rowspan="${paymentYears}">不再缴费</td>`;
+      } else if (r.yr === paymentYears + 1) {
+        // 缴费期结束后显示"长期收益"
+        const longTermRowspan = maxYear - paymentYears;
+        sideLabelCell = `<td class="side-label" rowspan="${longTermRowspan}">长期收益</td>`;
+      }
+      
+      html += `<tr class="${rowClass}">
         <td class="col-num">${r.yr}</td>
         <td>${r.currentAge}</td>
         <td>${r.annualPremium > 0 ? fmt(r.annualPremium) : '-'}</td>
-        <td>${fmt(r.cumPremiumAll)}</td>
         <td class="col-guarantee">${fmt(r.guaranteed)}</td>
         <td class="col-paidup">${fmt(r.paidup)}</td>
-        <td class="col-total ${r.yr === 4 ? 'highlight-4th' : ''}">${fmt(r.total)}</td>
+        <td class="col-total">${fmt(r.total)}</td>
+        ${totalGrowthCell}
         ${rateCell}
+        ${sideLabelCell}
       </tr>`;
     }
     
