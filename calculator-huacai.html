@@ -5,422 +5,179 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>华彩鎏金年金保险（分红型）· 利益演示计算器</title>
 <style>
-:root {
-  --primary: #1D4ED8;
-  --primary-light: #DBEAFE;
-  --bg: #F8FAFC;
-  --card: #FFFFFF;
-  --text: #1E293B;
-  --text2: #64748B;
-  --text3: #94A3B8;
-  --border: #E2E8F0;
-  --blue-accent: #2563EB;
-  --red: #2563EB;
-  --blue-dark: #1E40AF;
-  --red-highlight: #EF4444;
+:root{
+  --blue:#1E3A5F; --blue2:#2C5282; --gray:#64748B; --graybg:#F1F5F9;
+  --headerbg:#1E3A8A; --rowalt:#F0F9FF; --line:#E2E8F0; --accent:#1D4ED8;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Header */
-.header {
-  background: linear-gradient(135deg, #1E3A5F, #2C5282);
-  color: #fff;
-  padding: 22px 16px 18px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 0 0 12px 12px;
-}
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: -40px; right: -30px;
-  width: 160px; height: 160px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 50%;
-}
-.header h1 { font-size:20px; font-weight:700; position:relative; z-index:1; }
-.header p { font-size:13px; opacity:0.75; margin-top:4px; position:relative; z-index:1; }
-.header .back {
-  display:inline-flex; align-items:center; gap:4px;
-  color: rgba(255,255,255,0.8); text-decoration:none;
-  font-size:14px; margin-bottom:8px; position:relative; z-index:1;
-}
-.header .back:hover { color: #fff; }
-
-/* Container */
-.container { max-width:720px; margin:0 auto; padding:16px; }
-
-/* Company Intro */
-.company-intro {
-  background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
-  border-radius: 14px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  border: 1px solid #BBF7D0;
-}
-.company-intro h3 { font-size: 15px; font-weight: 700; color: #166534; margin-bottom: 10px; }
-.intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 14px; }
-.intro-item { font-size: 12.5px; color: #334155; line-height: 1.5; }
-
-/* Product Detail */
-.product-detail {
-  background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
-  border-radius: 14px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  border: 1px solid #FED7AA;
-}
-.product-detail h3 { font-size: 15px; font-weight: 700; color: #9A3412; margin-bottom: 8px; }
-.detail-content p { font-size: 14px; color: #1E293B; margin-bottom: 6px; font-weight: 600; }
-.detail-content ul { list-style: none; padding: 0; margin: 0; }
-.detail-content li {
-  font-size: 13px; color: #475569; line-height: 1.75;
-  padding-left: 12px; position: relative;
-}
-.detail-content li::before { content: '▸'; position: absolute; left: 0; color: #EA580C; font-weight: bold; }
-
-/* Product Highlights */
-.product-info {
-  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
-  border-radius: 14px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  border: 1px solid #BFDBFE;
-}
-.product-info h3 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-.product-info .highlights { display: flex; flex-wrap: wrap; gap: 4px; }
-.product-info .hl-tag {
-  font-size: 12px; background: #fff; color: var(--primary);
-  padding: 3px 8px; border-radius: 4px; font-weight: 500;
-}
-
-/* Form Card */
-.form-card {
-  background: var(--card); border-radius: 14px; padding: 20px;
-  margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); border: 1px solid var(--border);
-}
-.form-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--primary); display: flex; align-items: center; gap: 6px; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.form-group { display: flex; flex-direction: column; gap: 4px; }
-.form-group.full { grid-column: 1 / -1; }
-.form-group label { font-size: 13px; font-weight: 600; color: var(--text2); }
-.form-group input, .form-group select {
-  padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px;
-  font-size: 15px; color: var(--text); background: #F8FAFC;
-  outline: none; transition: border-color 0.2s; font-family: inherit;
-}
-.form-group input:focus, .form-group select:focus { border-color: var(--primary); background: #fff; }
-
-/* Gender */
-.gender-group { display: flex; gap: 8px; }
-.gender-btn {
-  flex: 1; text-align: center; padding: 10px; border: 1.5px solid var(--border);
-  border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer;
-  background: #F8FAFC; transition: all 0.2s; user-select: none; color: var(--text);
-}
-.gender-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-
-/* Generate Button */
-.btn-generate {
-  width: 100%; padding: 12px;
-  background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #fff;
-  border: none; border-radius: 10px; font-size: 18px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s; margin-top: 4px;
-}
-.btn-generate:active { transform: scale(0.97); }
-.btn-generate:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* Results */
-.results { display: none; }
-.results.show { display: block; }
-
-.param-bar {
-  background: var(--card); border-radius: 14px; padding: 12px 16px;
-  margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 12px;
-  font-size: 14px; color: var(--text2); border: 1px solid var(--border);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-.param-bar span { font-weight: 600; color: var(--text); }
-
-/* 投保索引卡 */
-.index-card {
-  background: #1D4ED8;
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 14px;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.25);
-}
-.index-card h4 {
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 14px;
-  letter-spacing: 1px;
-}
-.index-section {
-  background: rgba(255,255,255,0.12);
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 13px;
-}
-.index-section:last-child { margin-bottom: 0; }
-.index-section-title {
-  font-weight: 700;
-  margin-bottom: 8px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-.index-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-}
-.index-item {
-  background: rgba(255,255,255,0.08);
-  border-radius: 6px;
-  padding: 8px 6px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.index-item .label {
-  font-size: 11px;
-  opacity: 0.85;
-  margin-bottom: 4px;
-}
-.index-item .value {
-  font-size: 14px;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 480px) {
-  .index-grid { grid-template-columns: 1fr 1fr; }
-}
-
-/* Table */
-.table-wrap {
-  background: var(--card); border-radius: 14px; overflow: hidden;
-  border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); margin-bottom: 14px;
-}
-.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 1400px; }
-thead th {
-  background: #1E3A8A; padding: 12px 8px; font-size: 16px; font-weight: 700;
-  color: #fff; text-align: center; white-space: nowrap;
-  border-bottom: 2px solid #1E3A8A; position: sticky; top: 0;
-}
-tbody td {
-  padding: 10px 8px; text-align: center; border-bottom: 1px solid #E2E8F0; white-space: nowrap;
-  font-size: 16px;
-}
-tbody tr.row-5y { background: #DBEAFE; }
-tbody tr.row-last { background: #BFDBFE; }
-tbody tr:hover:not(.row-5y):not(.row-last) { background: #EFF6FF; }
-.col-num { font-weight: 600; color: var(--text); }
-.col-cv { color: var(--blue-accent); font-weight: 500; }
-.col-dividend { color: var(--blue-accent); font-weight: 500; }
-.col-survival { color: var(--blue-dark); font-weight: 600; }
-.col-death { color: var(--primary); font-weight: 500; }
-.col-rate { color: var(--text); }
-.rate-reserve { color: #94A3B8 !important; font-weight: 600; }
-.side-label {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  letter-spacing: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #1E3A8A;
-  text-align: center;
-  padding: 16px 6px;
-  background: #DBEAFE;
-  border: 1px solid #93C5FD;
-}
-@media (max-width: 768px) {
-  table { font-size: 12px; min-width: 1000px; }
-  thead th { font-size: 12px; padding: 8px 4px; }
-  tbody td { padding: 7px 4px; font-size: 12px; }
-  .side-label { font-size: 12px; letter-spacing: 4px; padding: 8px 3px; }
-}
-
-/* Download bar */
-.download-bar { display: flex; gap: 10px; margin-bottom: 18px; }
-.btn-download {
-  flex: 1; padding: 12px; border-radius: 10px; font-size: 15px;
-  font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s; border: none;
-}
-.btn-download:active { transform: scale(0.97); }
-.btn-dl-primary { background: var(--primary); color: #fff; }
-.btn-dl-secondary { background: var(--card); color: var(--text); border: 1.5px solid var(--border); }
-
-/* Loading */
-.loading-overlay {
-  display: none; position: fixed; top:0; left:0; right:0; bottom:0;
-  background: rgba(255,255,255,0.85); z-index: 1000;
-  justify-content: center; align-items: center;
-}
-.loading-overlay.show { display: flex; }
-.spinner {
-  width: 36px; height: 36px; border: 3px solid var(--border);
-  border-top-color: var(--primary); border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Error */
-.error-msg {
-  background: #DBEAFE; border: 1px solid #93C5FD; border-radius: 10px;
-  padding: 14px 16px; color: #1E40AF; font-size: 13px; display: none; margin-bottom: 12px;
-}
-.error-msg.show { display: block; }
-
-/* Toast */
-.toast {
-  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-  background: rgba(30,41,59,0.9); color: #fff; padding: 10px 20px;
-  border-radius: 8px; font-size: 13px; z-index: 200;
-  opacity: 0; transition: opacity 0.3s; pointer-events: none;
-}
-.toast.show { opacity: 1; }
-
-/* Disclaimer */
-.disclaimer { text-align: center; padding: 18px 16px; font-size: 12px; color: var(--text3); line-height: 1.8; }
-
-#renderCanvas { display: none; }
-
-@media (min-width: 768px) { .container { padding: 20px 24px; } }
-</style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
+.wrap{max-width:1080px;margin:0 auto;}
+.title-bar{background:linear-gradient(135deg,#1E3A5F,#2C5282);color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;}
+.title-bar h1{font-size:22px;font-weight:700;}
+.title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
+.card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field label{font-size:13px;color:var(--gray);font-weight:600;}
+.gender-group{display:flex;gap:8px;}
+.gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;color:var(--gray);}
+.gender-btn.active{background:#1E3A5F;color:#fff;border-color:#1E3A5F;}
+input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:140px;}
+.btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#1D4ED8;}
+.btn:disabled{opacity:.6;cursor:not-allowed;}
+.btn-dl{background:#059669;margin-left:10px;}
+.btn-dl:hover{background:#047857;}
+.btn-dl-secondary{background:#64748B;margin-left:10px;}
+.btn-dl-secondary:hover{background:#475569;}
+#paramBar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
+#paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:#1E3A8A;}
+.table-scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;}
+thead th{background:#1E3A8A;color:#fff;padding:11px 8px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
+tbody td{padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+tbody tr.row-5y{background:#DBEAFE;}
+tbody tr.row-last{background:#BFDBFE;}
+tbody tr.row-5y td,tbody tr.row-last td{background:transparent;}
+tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
+.col-cv{font-weight:800;color:#1E3A8A;}
+.col-rate{color:#1D4ED8;font-weight:700;}
+.col-guarantee{color:#1E3A8A;font-weight:600;}
+.col-paidup{color:#1D4ED8;font-weight:600;}
+.col-total{color:#1E3A8A;font-weight:700;}
+.col-dividend{color:#1D4ED8;font-weight:600;}
+.col-survival{color:#1E3A8A;font-weight:700;}
+.col-death{color:#334155;font-weight:600;}
+.col-num{font-weight:600;color:#1E293B;}
+.rate-reserve{color:#94A3B8;font-weight:700;}
+.rate-up{color:#1D4ED8;}
+.side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E3A8A;text-align:center;padding:10px 4px;background:#DBEAFE;border:1px solid #93C5FD;}
+.pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
+.reserve-cell{background:#F5F5F5 !important;color:#888;font-weight:800;text-align:center;vertical-align:middle;}
+.err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
+.err.show{display:block;}
+.tip{font-size:12px;color:var(--gray);margin-top:8px;}
+.dl-bar{display:flex;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
+.dl-bar .tip{margin:0 0 0 12px;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);align-items:center;justify-content:center;z-index:98;}
+.overlay.show{display:flex;}
+.overlay div{background:#fff;padding:22px 34px;border-radius:12px;font-size:16px;font-weight:600;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 22px;border-radius:24px;opacity:0;transition:.3s;font-size:14px;z-index:99;}
+.toast.show{opacity:1;}
+#renderCanvas{display:none;}
+@media (max-width:768px){
+  .btn{padding:13px 18px;font-size:15px;min-height:46px;}
+  .dl-bar{flex-direction:column;align-items:stretch !important;}
+  .btn-dl,.btn-dl-secondary{margin-left:0 !important;width:100%;}
+  .dl-bar .tip{margin:8px 0 0 0 !important;}
+  .form-row{flex-direction:column;align-items:stretch;}
+  .field{width:100%;}
+  input,select{width:100%;}
+  .gender-btn{flex:1;text-align:center;}
+}</style>
 </head>
 <body>
+<div class="wrap">
+  <div class="title-bar">
+    <h1>华彩鎏金年金保险（分红型）· 利益演示计算器</h1>
+    <p>新华保险 · 分红型年金。输入被保人信息，自动演算各保单年度关爱金、满期金、现金价值、红利等利益。</p>
+  </div>
 
-<div class="header">
-  <a href="index.html" class="back">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-    返回资料库
-  </a>
-  <h1>华彩鎏金 年金保险（分红型） 利益演示</h1>
-  <p>利益演示计算器 · 数据源自官方演算表</p>
-</div>
-
-<div class="container">
-
-  <!-- Error -->
-  <div class="error-msg" id="errorMsg"></div>
-
-  <!-- Form -->
-  <div class="form-card">
-    <div class="form-grid">
-      <div class="form-group">
+  <div class="card">
+    <div class="form-row">
+      <div class="field">
         <label>性别</label>
-        <div class="gender-group" id="genderGroup">
+        <div class="gender-group">
           <div class="gender-btn" data-value="0" onclick="selectGender(this)">男</div>
           <div class="gender-btn active" data-value="1" onclick="selectGender(this)">女</div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="field">
         <label>投保年龄（周岁）</label>
-        <input type="number" id="age" value="40" min="0" max="72" placeholder="0~72">
+        <input id="age" type="number" value="40" min="0" max="72">
       </div>
-      <div class="form-group">
-        <label>被保险人姓名</label>
-        <input type="text" id="insuredName" value="vip" placeholder="请输入被保险人姓名">
-      </div>
-      <div class="form-group">
-        <label>联系电话</label>
-        <input type="text" id="phone" value="18001120000" placeholder="请输入联系电话">
-      </div>
-      <div class="form-group">
+      <div class="field">
         <label>交费方式</label>
         <select id="term">
-          <option value="1">一次交清（趸交）</option>
+          <option value="1">一次交清</option>
           <option value="3" selected>3年交</option>
           <option value="5">5年交</option>
           <option value="10">10年交</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>是否个人养老金账户投保</label>
-        <select id="pensionAccount">
-          <option value="否" selected>否</option>
-          <option value="是">是</option>
-        </select>
-      </div>
-      <div class="form-group">
+      <div class="field">
         <label>年交保费（元）</label>
-        <input type="number" id="premium" value="1000000" min="20000" step="10000" placeholder="期交最低2万">
+        <input id="premium" type="number" value="1000000" min="1000" step="1000">
       </div>
-      <div class="form-group full">
-        <label>累计生息利率（%）</label>
-        <input type="number" id="dividendRate" value="2.5" step="0.1" min="0" max="10" placeholder="默认2.5%">
+      <div class="field">
+        <label>被保人姓名</label>
+        <input id="insuredName" type="text" value="小新">
       </div>
-    </div>
-    <button class="btn-generate" id="btnGenerate" onclick="generate()">生成利益演示</button>
+      <div class="field">
+        <label>联系电话</label>
+        <input id="phone" type="text" value="18001120000">
+      </div>
+      <div class="field">
+        <label>个人养老金账户</label>
+        <select id="pensionAccount"><option value="否" selected>否</option><option value="是">是</option></select>
+      </div>
+      <div class="field">
+        <label>红利领取方式</label>
+        <select id="dividendMode"><option value="累积生息" selected>累积生息</option><option value="现金领取">现金领取</option></select>
+      </div>
+      <div class="field">
+        <label>累积生息利率(%)</label>
+        <input id="dividendRate" type="number" value="2.5" step="0.1" min="0" max="10">
+      </div>
+      <div class="field">
+        <label>&nbsp;</label>
+        <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
+      </div>    </div>
+    <div class="tip">默认演示：女40周岁 / 3年交 / 年交100万。红利按累积生息方式演示。</div>
   </div>
 
-  <!-- Results -->
-  <div class="results" id="results">
-    <div class="param-bar" id="paramBar"></div>
+  <div class="err" id="errorMsg"></div>
+  <div id="paramBar"></div>
 
-    <!-- 投保索引 -->
-    <div class="index-card" id="indexCard">
-      <h4>华彩鎏金年金保险（分红型）· 投保索引</h4>
-      <div id="indexContent"></div>
+  <div class="card">
+    <div class="dl-bar">
+      <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
+      <button class="btn btn-dl-secondary" onclick="copyTable()">复制表格数据</button>
+      <span class="tip">导出效果图同款版式；表格点进来自动展开，无需额外点击。</span>
     </div>
-
-    <div class="download-bar">
-      <button class="btn-download btn-dl-primary" onclick="downloadImage()">下载计划书图片</button>
-      <button class="btn-download btn-dl-secondary" onclick="copyTable()">复制表格数据</button>
-    </div>
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table id="resultTable">
-          <thead>
-            <tr>
-              <th>保单<br>年度</th>
-              <th>年龄</th>
-              <th>当年<br>保险费</th>
-              <th>累计<br>保险费</th>
-              <th>关爱金<br>年金</th>
-              <th>累计关爱金<br>年金</th>
-              <th>满期生存<br>保险金</th>
-              <th>身故<br>保险金</th>
-              <th>现金<br>价值</th>
-              <th>累积<br>红利</th>
-              <th>生存总利益<br>(红利演示)</th>
-              <th>身故总利益<br>(红利演示)</th>
-              <th>阶段</th>
-            </tr>
-          </thead>
-          <tbody id="resultBody"></tbody>
-        </table>
-      </div>
+    <div class="table-scroll">
+      <table id="resultTable">
+        <thead>
+          <tr>
+            <th></th>
+            <th>保单<br>年度</th>
+            <th>年龄</th>
+            <th>当年<br>保险费</th>
+            <th>累计<br>保险费</th>
+            <th>关爱金<br>年金</th>
+            <th>累计关爱金<br>年金</th>
+            <th>满期生存<br>保险金</th>
+            <th>身故<br>保险金</th>
+            <th>现金<br>价值</th>
+            <th>累积<br>红利</th>
+            <th>生存总利益<br>（红利演示）</th>
+            <th>身故总利益<br>（红利演示）</th>
+            <th>阶段</th>
+          </tr>
+        </thead>        <tbody id="resultBody"></tbody>
+      </table>
     </div>
   </div>
-
-  <div class="disclaimer">
-    本页面及演示说明仅供内部保险从业人员学习、交流使用，数据仅供参考，<br>
-    数据中含分红部分是不确定的，详细内容具体应以保单条款及保险合同为准。<br>
-    假设红利领取方式为累积生息
-  </div>
-
 </div>
 
-<!-- Loading -->
-<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-<!-- Canvas -->
+<div style="text-align:center;padding:16px;font-size:12px;color:#64748B;line-height:1.8;">
+  本页面及演示说明仅供内部保险从业人员学习、交流使用，数据仅供参考，<br>
+  数据中含分红部分是不确定的，详细内容具体应以保单条款及保险合同为准。
+</div>
+
 <canvas id="renderCanvas"></canvas>
+<div class="overlay" id="loadingOverlay"><div>生成中...</div></div>
+<div class="toast" id="toast"></div>
 
 <script>
 // ===== 华彩鎏金完整数据 (基准: 35岁女, 3年交, 10万/年, 基本保险金额1030元) =====
@@ -553,7 +310,7 @@ async function generate() {
     const totalPremium = premium * (term === 1 ? 1 : term);
     const startAge = age + 5;  // 华彩第5年开始领
 
-    document.getElementById('paramBar').innerHTML = `
+    const pb=document.getElementById('paramBar'); pb.style.display='flex'; pb.innerHTML = `
       <strong style="color:#1E3A8A;font-size:17px;">${age}岁${genderLabel}士</strong> ·
       <strong style="color:#1E3A8A;font-size:17px;">每年${fmt(premium)}</strong> ·
       <strong style="color:#1E3A8A;font-size:17px;">${termLabel}</strong> ·
@@ -561,43 +318,11 @@ async function generate() {
       <span style="color:#64748B;">分红养老年金</span>`;
 
     const tbody = document.getElementById('resultBody');
-    const displayMode = document.getElementById('displayMode').value;
     const paymentYears = term === 1 ? 1 : term;
 
     // 基本保险金额：第5年关爱金/年金
     const baseAmount = Math.round(HC_DATA[4][4] * scale);
 
-    // 填充投保索引
-    document.getElementById('indexContent').innerHTML = `
-      <div class="index-section">
-        <div class="index-section-title">寿险顾问基本信息</div>
-        <div class="index-grid">
-          <div class="index-item"><div class="label">姓名</div><div class="value">小新</div></div>
-          <div class="index-item"><div class="label">联系电话</div><div class="value">${phone}</div></div>
-        </div>
-      </div>
-      <div class="index-section">
-        <div class="index-section-title">被保险人基本信息</div>
-        <div class="index-grid">
-          <div class="index-item"><div class="label">是否个人养老金账户投保</div><div class="value">${pensionAccount}</div></div>
-          <div class="index-item"><div class="label">姓名</div><div class="value">${insuredName}</div></div>
-          <div class="index-item"><div class="label">性别</div><div class="value">${genderLabel}</div></div>
-          <div class="index-item"><div class="label">投保年龄</div><div class="value">${age}周岁</div></div>
-        </div>
-      </div>
-      <div class="index-section">
-        <div class="index-section-title">产品信息</div>
-        <div class="index-grid">
-          <div class="index-item"><div class="label">产品名称</div><div class="value">华彩鎏金年金保险（分红型）</div></div>
-          <div class="index-item"><div class="label">基本保险金额</div><div class="value">${fmt(baseAmount)}元</div></div>
-          <div class="index-item"><div class="label">保险期间</div><div class="value">至105周岁</div></div>
-          <div class="index-item"><div class="label">交费方式</div><div class="value">${termLabel}</div></div>
-          <div class="index-item"><div class="label">保费</div><div class="value">${fmt(premium)}元</div></div>
-          <div class="index-item"><div class="label">红利领取方式</div><div class="value">${dividendMode}</div></div>
-          <div class="index-item"><div class="label">累积生息利率</div><div class="value">${dividendRate}%</div></div>
-        </div>
-      </div>
-    `;
 
     let html = '';
 
@@ -647,6 +372,7 @@ async function generate() {
       }
 
       html += `<tr class="${rowClass}">
+        ${sideLabelCell}
         <td class="col-num">${yr}</td>
         <td>${currentAge}</td>
         <td>${currPrem > 0 ? fmt(currPrem) : '-'}</td>
@@ -660,14 +386,11 @@ async function generate() {
         <td class="col-survival">${fmt(survDiv)}</td>
         <td class="col-death">${fmt(deathDiv)}</td>
         ${rateCell}
-        ${sideLabelCell}
       </tr>`;
     }
 
     tbody.innerHTML = html;
-    document.getElementById('results').classList.add('show');
     document.getElementById('errorMsg').classList.remove('show');
-    document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
   } catch(e) {
     showError('计算出错：' + e.message);
   } finally {
@@ -909,9 +632,5 @@ document.getElementById('age').addEventListener('keydown', e=>{if(e.key==='Enter
 // Auto-generate on page load
 setTimeout(()=>{try{generate();}catch(e){console.error('init:',e);}},100);
 </script>
-
-
-<style>#xd-disclaimer{position:fixed;left:8px;bottom:6px;max-width:330px;font-size:10.5px;line-height:1.45;color:#94A3B8;background:rgba(255,255,255,.55);padding:4px 8px;border-radius:6px;z-index:50;pointer-events:none;backdrop-filter:blur(2px);}@media(max-width:640px){#xd-disclaimer{max-width:62vw;font-size:9.5px;bottom:4px;left:6px;}}</style>
-<div id="xd-disclaimer">⚠ 本页利益演示基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
 </body>
 </html>
