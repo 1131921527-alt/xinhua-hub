@@ -216,15 +216,21 @@
     font-size: 20px;
     flex-shrink: 0;
   }
-  .icon-pdf    { background: #FEF2F2; }
-  .icon-ppt    { background: #FFF7ED; }
-  .icon-excel  { background: #F0FDF4; }
-  .icon-doc    { background: #EFF6FF; }
-  .icon-contract { background: #FEF3C7; }
-  .icon-link   { background: #EFF6FF; }
-  .icon-image  { background: #FDF4FF; }
-  .icon-video  { background: #FFF1F2; }
-  .icon-default{ background: #F1F5F9; }
+  .icon-pdf    { background: #FEF2F2; color: #DC2626; }
+  .icon-ppt    { background: #FFF7ED; color: #EA580C; }
+  .icon-excel  { background: #F0FDF4; color: #16A34A; }
+  .icon-doc    { background: #EFF6FF; color: #2563EB; }
+  .icon-contract { background: #FEF3C7; color: #9333EA; }
+  .icon-link   { background: #EFF6FF; color: #2563EB; }
+  .icon-image  { background: #FDF4FF; color: #DB2777; }
+  .icon-video  { background: #FFF1F2; color: #E11D48; }
+  .icon-calculator { background: #ECFEFF; color: #0891B2; }
+  .icon-clause  { background: #FAF5FF; color: #9333EA; }
+  .icon-dividend{ background: #F0FDF4; color: #16A34A; }
+  .icon-card    { background: #FEFCE8; color: #CA8A04; }
+  .icon-default { background: #F1F5F9; color: #64748B; }
+  .card-icon svg { width: 22px; height: 22px; }
+  .tab svg, .category-title svg { width: 18px; height: 18px; vertical-align: -3px; }
 
   .card-body { flex: 1; min-width: 0; }
   .card-name {
@@ -827,20 +833,54 @@ window.open = function(url, target, features) {
   return _origOpen.call(this, url, target, features);
 };
 
+// ===== 扁平化 SVG 图标系统 =====
+const ICONS = {
+  pdf:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg>',
+  ppt:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v12H3z"/><path d="M3 16v4h18v-4"/><path d="M7 20v2M17 20v2"/><path d="M9.5 7.5h5v3a2.5 2.5 0 0 1-5 0z"/><path d="M12 10.5V12"/></svg>',
+  excel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>',
+  doc:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 14 2 2 4-4"/></svg>',
+  contract:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/><circle cx="17" cy="18" r="2.2" fill="currentColor" stroke="none"/></svg>',
+  link:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
+  image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>',
+  video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m22 8-6 4 6 4z" fill="currentColor" stroke="none"/></svg>',
+  calculator:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="0.5"/><path d="M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></svg>',
+  clause:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4a2 2 0 0 1 2-2h12v18H6a2 2 0 0 0-2 2z"/><path d="M18 2a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6"/><path d="M8 7h6M8 11h5"/></svg>',
+  dividend:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 2 5-7"/><path d="M18 6h2v2"/></svg>',
+  card:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 2a6 6 0 0 0-4 10c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg>',
+  default:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>'
+};
+// 分类图标：按 category.id 映射（内联主题色，tab/标题通用）
+const CAT_ICONS = {
+  'company-intro': '<svg viewBox="0 0 24 24" fill="none" stroke="#1B5E99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v16"/><path d="M13 21V9a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v12"/><path d="M8 8h2M8 12h2M16 12h1M16 16h1"/></svg>',
+  'calculators': '<svg viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><rect x="8" y="5" width="8" height="3" rx="0.5"/><path d="M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></svg>',
+  'vip-service': '<svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2-9 4 3 3-5 3 5 4-3 2 9z"/><path d="M3 17v2h18v-2"/><circle cx="12" cy="6" r="1" fill="#D97706" stroke="none"/></svg>',
+  'workflow': '<svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>',
+  'product-intro': '<svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  'product-compare': '<svg viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 21h14"/><path d="M7 4h10"/><path d="m5 8-2 6a4 4 0 0 0 6 0z"/><path d="m19 8-2 6a4 4 0 0 0 6 0z"/></svg>',
+  'product-rules': '<svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 17 3l4 4L7 21z"/><path d="m6 14 2 2M9 11l2 2M12 8l2 2"/></svg>',
+  'templates': '<svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 11h6M9 15h4"/><path d="m15 15 2 2 3-3"/></svg>',
+  'contracts': '<svg viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/><circle cx="17" cy="18" r="2.2" fill="#9333EA" stroke="none"/></svg>',
+  'dividend': '<svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1.5 3h-3z"/><path d="M8 6h8l3.5 7a8.5 8.5 0 0 1-15 0z"/><path d="M12 13v3M10.5 15h3"/></svg>',
+  'bonusrate': '<svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 2 5-7"/><path d="M18 6h2v2"/></svg>',
+  'excel-tables': '<svg viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>'
+};
+function catIcon(catId){ return CAT_ICONS[catId] || ICONS.default; }
+function typeIcon(key){ return ICONS[key] || ICONS.default; }
+
 const TYPE_CONFIG = {
-  pdf:    { icon: '📄', label: 'PDF',   class: 'icon-pdf' },
-  ppt:    { icon: '📽️', label: 'PPT',   class: 'icon-ppt' },
-  excel:  { icon: '📈', label: 'Excel', class: 'icon-excel' },
-  contract:{ icon: '📜', label: '合同',  class: 'icon-contract' },
-  link:   { icon: '🔗', label: '链接',  class: 'icon-link' },
-  image:  { icon: '🖼️', label: '图片',  class: 'icon-image' },
-  video:  { icon: '🎬', label: '视频',  class: 'icon-video' },
-  doc:    { icon: '📝', label: 'Word',  class: 'icon-doc' },
-  calculator: { icon: '🧮', label: '计算器', class: 'icon-link' },
-  clause: { icon: '📜', label: '条款',  class: 'icon-link' },
-  dividend: { icon: '📊', label: '红利实现率', class: 'icon-link' },
-  card:    { icon: '💡', label: '知识卡', class: 'icon-link' },
-  default:{ icon: '📁', label: '文件',  class: 'icon-default' }
+  pdf:    { iconKey: 'pdf',   label: 'PDF',   class: 'icon-pdf' },
+  ppt:    { iconKey: 'ppt',   label: 'PPT',   class: 'icon-ppt' },
+  excel:  { iconKey: 'excel', label: 'Excel', class: 'icon-excel' },
+  contract:{ iconKey: 'contract', label: '合同', class: 'icon-contract' },
+  link:   { iconKey: 'link',  label: '链接',  class: 'icon-link' },
+  image:  { iconKey: 'image', label: '图片',  class: 'icon-image' },
+  video:  { iconKey: 'video', label: '视频',  class: 'icon-video' },
+  doc:    { iconKey: 'doc',   label: 'Word',  class: 'icon-doc' },
+  calculator: { iconKey: 'calculator', label: '计算器', class: 'icon-calculator' },
+  clause: { iconKey: 'clause', label: '条款',  class: 'icon-clause' },
+  dividend: { iconKey: 'dividend', label: '红利实现率', class: 'icon-dividend' },
+  card:    { iconKey: 'card', label: '知识卡', class: 'icon-card' },
+  default:{ iconKey: 'default', label: '文件', class: 'icon-default' }
 };
 
 function getTypeConfig(type) {
@@ -890,7 +930,7 @@ function renderTabs() {
   let html = `<div class="tab active" data-cat="all" onclick="selectCategory('all')">全部</div>`;
   DATA.categories.forEach(cat => {
     const count = (cat.items || []).length;
-    html += `<div class="tab" data-cat="${cat.id}" onclick="selectCategory('${cat.id}')">${cat.icon} ${cat.name}</div>`;
+    html += `<div class="tab" data-cat="${cat.id}" onclick="selectCategory('${cat.id}')">${catIcon(cat.id)} ${cat.name}</div>`;
   });
   tabs.innerHTML = html;
 }
@@ -951,7 +991,7 @@ function renderContent(query) {
     totalItems += items.length;
     
     html += `<div class="category-section">`;
-    html += `<div class="category-title">${cat.icon} ${cat.name} <span class="count">${items.length}</span></div>`;
+    html += `<div class="category-title">${catIcon(cat.id)} ${cat.name} <span class="count">${items.length}</span></div>`;
     
     // Check if items have sub-sections
     const hasSubsections = items.some(item => item.subsection);
@@ -968,7 +1008,7 @@ function renderContent(query) {
       });
       sorted.forEach((item, idx) => {
         if (isDownload(item.type) && idx > 0 && !isDownload(sorted[idx - 1].type)) {
-          html += `<div class="download-divider">📂 原始文件下载</div>`;
+          html += `<div class="download-divider"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> 原始文件下载</div>`;
         }
         const tc = getTypeConfig(item.type);
         const isCalc = item.type === 'calculator' || item.type === 'clause' || item.type === 'dividend' || item.type === 'card';
@@ -988,7 +1028,7 @@ function renderContent(query) {
         }
         html += `
           <div class="card" onclick="${onclick}">
-            <div class="card-icon ${tc.class}">${tc.icon}</div>
+            <div class="card-icon ${tc.class}">${typeIcon(tc.iconKey)}</div>
             <div class="card-body">
               <div class="card-name">${item.name}</div>
               ${item.description ? `<div class="card-desc">${item.description}</div>` : ''}
