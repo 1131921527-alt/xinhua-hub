@@ -29,11 +29,12 @@ body {
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, #2563EB, #1D4ED8, #1E40AF);
+  background: linear-gradient(135deg, #1E3A5F, #2C5282);
   color: #fff;
-  padding: 40px 16px 28px;
+  padding: 22px 16px 18px;
   position: relative;
   overflow: hidden;
+  border-radius: 0 0 12px 12px;
 }
 .header::after {
   content: '';
@@ -357,26 +358,11 @@ tbody tr.row-last { background: #BFDBFE; }
 
 <div class="container">
 
-  <!-- Product Info -->
-  <div class="product-info">
-    <h3>产品亮点</h3>
-    <div class="highlights">
-      <span class="hl-tag">保额1.75%复利</span>
-      <span class="hl-tag">分红≥70%盈余</span>
-      <span class="hl-tag">身故全残保障</span>
-      <span class="hl-tag">可减保</span>
-      <span class="hl-tag">可贷现价80%</span>
-      <span class="hl-tag">定向传承</span>
-      <span class="hl-tag">保底+分红</span>
-    </div>
-  </div>
-
   <!-- Error -->
   <div class="error-msg" id="errorMsg"></div>
 
   <!-- Form -->
   <div class="form-card">
-    <h3>输入演示参数</h3>
     <div class="form-grid">
       <div class="form-group">
         <label>性别</label>
@@ -517,13 +503,13 @@ async function generate() {
     if (isNaN(age) || age < 0 || age > 69) {
       showError('投保年龄须在0~69周岁之间');
       btn.disabled = false;
-      btn.textContent = '📊 生成利益演示';
+      btn.textContent = '生成利益演示';
       return;
     }
     if (isNaN(premium) || premium < 1000 || premium % 1000 !== 0) {
       showError('年交保费最低1,000元，且应为1,000元整数倍');
       btn.disabled = false;
-      btn.textContent = '📊 生成利益演示';
+      btn.textContent = '生成利益演示';
       return;
     }
     
@@ -536,7 +522,7 @@ async function generate() {
     if (age > maxAge) {
       showError(`该交费方式最高投保年龄为${maxAge}周岁`);
       btn.disabled = false;
-      btn.textContent = '📊 生成利益演示';
+      btn.textContent = '生成利益演示';
       return;
     }
     
@@ -545,7 +531,7 @@ async function generate() {
     if (!entry) {
       showError(`未找到该参数组合的数据，请检查输入`);
       btn.disabled = false;
-      btn.textContent = '📊 生成利益演示';
+      btn.textContent = '生成利益演示';
       return;
     }
     
@@ -690,7 +676,7 @@ async function generate() {
     showError('计算出错：' + e.message);
   } finally {
     btn.disabled = false;
-    btn.textContent = '📊 生成利益演示';
+    btn.textContent = '生成利益演示';
   }
 }
 
@@ -903,7 +889,7 @@ function downloadImage() {
       const dlYears = dlEntry ? dlEntry.y : [];
       const dlPayYears = term === 1 ? 1 : term;
       const dlReserveYears = dlPayYears + 2;
-      const dlDisplayMode = document.getElementById('displayMode').value;
+      const dlDisplayMode = 'all';
       const dlMaxYear = Math.min(dlYears.length, 105);
 
       let dlCumK = 0, dlPrevO = null, dlPrevTotal = null, dlCumPrem = 0;
@@ -1129,13 +1115,18 @@ document.getElementById('age').addEventListener('keydown', function(e) {
 // Preload data
 loadData();
 
-// 初始化：同步 currentGender 与默认选中按钮
+// Init gender sync
 (function() {
   const activeBtn = document.querySelector('.gender-btn.active');
   if (activeBtn) {
     currentGender = parseInt(activeBtn.dataset.value);
   }
 })();
+
+// Auto-generate on page load
+setTimeout(() => {
+  try { generate(); } catch(e) { console.error('init:', e); }
+}, 100);
 </script>
 
 

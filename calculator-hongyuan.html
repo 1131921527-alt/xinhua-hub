@@ -33,11 +33,12 @@ body {
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, #2563EB, #1D4ED8, #1E40AF);
+  background: linear-gradient(135deg, #78350F, #92400E);
   color: #fff;
-  padding: 40px 16px 28px;
+  padding: 22px 16px 18px;
   position: relative;
   overflow: hidden;
+  border-radius: 0 0 12px 12px;
 }
 .header::after {
   content: '';
@@ -295,44 +296,17 @@ tbody tr:hover:not(.row-5y):not(.row-last) { background: #FEF3C7; }
 
 <div class="container">
 
-  <!-- 公司介绍 -->
-  <div class="company-intro">
-    <h3>🏢 公司介绍</h3>
-    <div class="intro-grid">
-      <div class="intro-item">*2011年国内首家A+H股同步上市</div>
-      <div class="intro-item">*连续多年入围财富福布斯世界500强，连续3年入围</div>
-      <div class="intro-item">*惠誉国际信用评级A级（强劲），穆迪财务实力评级A3级</div>
-      <div class="intro-item">*年化综合投资收益率为8.5%，近十年平均投资收益率5.4%</div>
-      <div class="intro-item">*由全球最大的国家主权基金[中投公司]直管，最大股东：中央汇金</div>
-      <div class="intro-item">*公司实力：总资产1.69万亿元，2024年综合偿付能力充足率217%</div>
-    </div>
-  </div>
-
-  <!-- 产品亮点 -->
-  <div class="product-info">
-    <h3>产品特点</h3>
-    <div class="detail-content">
-      <p><strong>双轨增值，收益稳健</strong></p>
-      <p>依托央企红利分配，红利可进入累计生息账户二次增值（2.5%）；现金价值稳步增长，收益清晰可靠。</p>
-      <p><strong>领取灵活，资金高效</strong></p>
-      <p>女性55岁起领，可选60/65/70岁，月领年领可调；支持保单贷款，适配50岁以上客群。</p>
-      <p><strong>属性多元，兼顾传承</strong></p>
-      <p>稳定养老现金流为核心，现金价值具备定向传承属性，一单覆盖养老与传承。</p>
-    </div>
-  </div>
-
   <!-- Error -->
   <div class="error-msg" id="errorMsg"></div>
 
   <!-- Form -->
   <div class="form-card">
-    <h3>📋 输入演示参数</h3>
     <div class="form-grid">
       <div class="form-group">
         <label>性别</label>
         <div class="gender-group" id="genderGroup">
-          <div class="gender-btn" data-value="0" onclick="selectGender(this)">👨 男</div>
-          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">👩 女</div>
+          <div class="gender-btn" data-value="0" onclick="selectGender(this)">男</div>
+          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">女</div>
         </div>
       </div>
       <div class="form-group">
@@ -993,6 +967,9 @@ document.getElementById('age').addEventListener('keydown', e=>{if(e.key==='Enter
 
 // Init gender sync
 (function(){const b=document.querySelector('.gender-btn.active');if(b)currentGender=parseInt(b.dataset.value);})();
+
+// Auto-generate on page load
+setTimeout(()=>{try{generate();}catch(e){console.error('init:',e);}},100);
 </script>
 
 

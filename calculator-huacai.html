@@ -30,11 +30,12 @@ body {
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, #2563EB, #1D4ED8, #1E40AF);
+  background: linear-gradient(135deg, #1E3A5F, #2C5282);
   color: #fff;
-  padding: 40px 16px 28px;
+  padding: 22px 16px 18px;
   position: relative;
   overflow: hidden;
+  border-radius: 0 0 12px 12px;
 }
 .header::after {
   content: '';
@@ -313,50 +314,17 @@ tbody tr:hover:not(.row-5y):not(.row-last) { background: #EFF6FF; }
 
 <div class="container">
 
-  <!-- 公司介绍 -->
-  <div class="company-intro">
-    <h3>🏢 公司介绍</h3>
-    <div class="intro-grid">
-      <div class="intro-item">📅 成立日期：1996年9月人民大会堂签章</div>
-      <div class="intro-item">🏦 主要股东：中央汇金（与中农工建4大银行同属一个大股东）</div>
-      <div class="intro-item">💰 总资产：接近1.9万亿元 · 综合偿付能力210%</div>
-      <div class="intro-item">📈 总投资收益率：6.6%，居行业前列</div>
-      <div class="intro-item">🏆 全国性大型寿险公司，国有控股上市险企（A+H股同步上市）</div>
-      <div class="intro-item">⭐ 全球最具价值保险品牌100强，国内主流大型险企（老六家之一）</div>
-      <div class="intro-item">📊 《福布斯》全球上市公司2000强 · 《财富》中国500强</div>
-      <div class="intro-item">🌍 连续九年获惠誉财务实力评级A级、穆迪A2级</div>
-    </div>
-  </div>
-
-  <!-- 产品亮点 -->
-  <div class="product-info">
-    <h3>产品亮点</h3>
-    <div class="highlights">
-      <span class="hl-tag">年金给付</span>
-      <span class="hl-tag">分红累积生息</span>
-      <span class="hl-tag">第5年关爱金</span>
-      <span class="hl-tag">第6年起年金</span>
-      <span class="hl-tag">满期返保费</span>
-      <span class="hl-tag">身故保障</span>
-      <span class="hl-tag">可减保</span>
-      <span class="hl-tag">可贷现价80%</span>
-      <span class="hl-tag">至105周岁</span>
-      <span class="hl-tag">规划性强</span>
-    </div>
-  </div>
-
   <!-- Error -->
   <div class="error-msg" id="errorMsg"></div>
 
   <!-- Form -->
   <div class="form-card">
-    <h3>📋 输入演示参数</h3>
     <div class="form-grid">
       <div class="form-group">
         <label>性别</label>
         <div class="gender-group" id="genderGroup">
-          <div class="gender-btn" data-value="0" onclick="selectGender(this)">👨 男</div>
-          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">👩 女</div>
+          <div class="gender-btn" data-value="0" onclick="selectGender(this)">男</div>
+          <div class="gender-btn active" data-value="1" onclick="selectGender(this)">女</div>
         </div>
       </div>
       <div class="form-group">
@@ -937,6 +905,9 @@ document.getElementById('age').addEventListener('keydown', e=>{if(e.key==='Enter
 
 // Init gender sync
 (function(){const b=document.querySelector('.gender-btn.active');if(b)currentGender=parseInt(b.dataset.value);})();
+
+// Auto-generate on page load
+setTimeout(()=>{try{generate();}catch(e){console.error('init:',e);}},100);
 </script>
 
 
