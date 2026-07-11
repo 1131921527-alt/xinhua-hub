@@ -12,6 +12,7 @@
   --ink:#0F172A; --ink-2:#334155; --ink-3:#64748B; --ink-4:#94A3B8;
   --white:#FFFFFF; --line:#E6EDF7; --line-2:#DBE6F5;
   --shadow:0 10px 30px rgba(30,58,138,.10); --shadow-sm:0 4px 14px rgba(30,58,138,.08);
+  --gold:#D97706; --gold-bg:#FFF7ED; --green:#16A34A; --green-bg:#F0FDF4;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;}
@@ -19,7 +20,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
   background:#F4F8FE;color:var(--ink);line-height:1.7;word-break:break-word;-webkit-font-smoothing:antialiased;}
 a{color:inherit;text-decoration:none;}
 
-/* 顶栏 */
 .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
   padding:10px 16px;background:linear-gradient(120deg,var(--blue-900),var(--blue-600));color:#fff;
   box-shadow:0 4px 18px rgba(30,58,138,.25);}
@@ -32,7 +32,6 @@ a{color:inherit;text-decoration:none;}
   padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;cursor:pointer;border:none;}
 .topbar .dl:active{transform:scale(.96);}
 
-/* 子导航 */
 .subnav{position:sticky;top:53px;z-index:55;background:rgba(255,255,255,.92);
   backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;
   display:flex;gap:6px;padding:8px 12px;-webkit-overflow-scrolling:touch;}
@@ -41,10 +40,8 @@ a{color:inherit;text-decoration:none;}
   background:var(--blue-50);border:1px solid var(--line);}
 .subnav a:active{background:var(--blue-100);}
 
-/* 捕获区 */
 #capture{background:#F4F8FE;padding-bottom:10px;}
 
-/* Hero */
 .hero{position:relative;overflow:hidden;color:#fff;
   background:linear-gradient(135deg,#1E3A8A 0%,#1D4ED8 55%,#2563EB 100%);
   padding:40px 20px 46px;}
@@ -61,7 +58,6 @@ a{color:inherit;text-decoration:none;}
   padding:9px 14px;border-radius:12px;font-size:13px;}
 .hero .badge b{font-size:15px;}
 
-/* 通用容器 */
 .wrap{max-width:1000px;margin:0 auto;padding:0 16px;}
 .sec{padding:30px 0 6px;}
 .sec-head{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
@@ -71,7 +67,6 @@ a{color:inherit;text-decoration:none;}
 .sec-head .en{font-size:12px;color:var(--ink-4);font-weight:600;letter-spacing:.5px;}
 .lead{color:var(--ink-2);font-size:15px;margin-bottom:16px;}
 
-/* 卡片网格 */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
 .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;
   box-shadow:var(--shadow-sm);transition:transform .15s;}
@@ -81,7 +76,16 @@ a{color:inherit;text-decoration:none;}
 .card .pill{display:inline-block;margin-top:10px;font-size:12px;color:var(--blue-700);
   background:var(--blue-50);border:1px solid var(--line-2);padding:4px 10px;border-radius:14px;}
 
-/* 数据条 */
+.prod-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;
+  box-shadow:var(--shadow-sm);margin-bottom:14px;border-left:5px solid var(--blue-600);}
+.prod-card .ph{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+.prod-card .pn{font-size:18px;font-weight:800;color:var(--blue-800);}
+.prod-card .pc{font-size:12px;color:var(--blue-700);background:var(--blue-50);
+  padding:2px 8px;border-radius:6px;font-weight:600;font-variant-numeric:tabular-nums;}
+.prod-card .pt{font-size:12px;color:var(--ink-4);}
+.prod-card .ps{font-size:13.5px;color:var(--ink-2);line-height:1.7;margin-top:8px;}
+.prod-card .pf{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:6px 0 4px;}
 .stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;
   box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
@@ -91,7 +95,6 @@ a{color:inherit;text-decoration:none;}
 .stat .lb{margin-top:6px;font-size:13px;color:var(--ink-2);}
 .stat .sb{margin-top:2px;font-size:11.5px;color:var(--ink-4);}
 
-/* 表格 */
 .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0;border-radius:14px;
   border:1px solid var(--line);box-shadow:var(--shadow-sm);}
 table.tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px;background:#fff;}
@@ -105,22 +108,29 @@ table.tbl td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:no
 table.tbl th.r{text-align:right;}
 .tbl-cap{font-size:12.5px;color:var(--ink-4);margin:8px 2px 0;}
 
-/* 双列键值表 */
+table.benefit-tbl{font-size:12px;min-width:680px;}
+table.benefit-tbl thead th{padding:9px 8px;font-size:11.5px;line-height:1.3;text-align:right;white-space:normal;}
+table.benefit-tbl thead th:first-child,table.benefit-tbl td:first-child{text-align:center;}
+table.benefit-tbl tbody td{padding:7px 8px;font-variant-numeric:tabular-nums;text-align:right;}
+table.benefit-tbl tbody tr.cover{background:#FEF3C7;}
+table.benefit-tbl tbody tr.cover td{color:#92400E;font-weight:700;}
+table.benefit-tbl tbody tr.peak{background:var(--green-bg);}
+table.benefit-tbl tbody tr.peak td{color:#166534;font-weight:700;}
+
 table.kv{border-collapse:collapse;width:100%;font-size:14px;background:#fff;border-radius:14px;
   overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);}
 table.kv td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;}
 table.kv td.k{width:34%;color:var(--blue-800);font-weight:700;background:var(--blue-50);}
 table.kv td.v{color:var(--ink-2);}
 
-/* 提示框 */
 .callout{border-radius:14px;padding:15px 16px;margin:14px 0;font-size:14px;line-height:1.7;
   display:flex;gap:12px;align-items:flex-start;}
 .callout .ci{font-size:18px;flex:none;line-height:1.4;}
 .callout.info{background:var(--blue-50);border:1px solid var(--line-2);color:var(--ink-2);}
 .callout.key{background:var(--blue-100);border:1px solid var(--blue-300);color:var(--blue-800);font-weight:600;}
 .callout.warn{background:#FFF7ED;border:1px solid #FED7AA;color:#9A3412;}
+.callout.ok{background:var(--green-bg);border:1px solid #BBF7D0;color:#166534;}
 
-/* 步骤 */
 .steps{counter-reset:s;margin:8px 0;}
 .steps .st{position:relative;padding:12px 14px 12px 52px;background:#fff;border:1px solid var(--line);
   border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow-sm);}
@@ -129,14 +139,22 @@ table.kv td.v{color:var(--ink-2);}
   display:flex;align-items:center;justify-content:center;font-size:14px;}
 .steps .st b{color:var(--blue-800);}
 
-/* FAQ */
-.faq{margin:8px 0;}
-.faq .q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:10px;
-  box-shadow:var(--shadow-sm);}
-.faq .q .qt{font-weight:800;color:var(--blue-800);font-size:14.5px;margin-bottom:6px;}
-.faq .q .qa{color:var(--ink-2);font-size:13.5px;}
+.cmp-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:8px;margin-top:8px;}
+.cmp-row > div{padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:10px;font-size:13px;}
+.cmp-row .c1{color:var(--ink-3);font-weight:600;background:var(--blue-50);}
+.cmp-row .c1.win{color:#fff;background:linear-gradient(135deg,var(--blue-700),var(--blue-500));}
 
-/* 页脚 */
+.case{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:14px 0;
+  box-shadow:var(--shadow-sm);border-left:5px solid var(--gold);}
+.case .ch{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.case .ct2{font-size:13px;color:var(--ink-3);margin-bottom:12px;}
+.case .hl{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:14px;}
+.case .hl > div{background:var(--gold-bg);border:1px solid #FED7AA;border-radius:10px;padding:10px;text-align:center;}
+.case .hl .n{font-size:18px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;}
+.case .hl .l{font-size:11.5px;color:#9A3412;margin-top:2px;}
+
+.fund-table{font-size:12.5px;min-width:480px;}
+
 .foot{margin-top:26px;background:linear-gradient(120deg,var(--blue-900),var(--blue-700));
   color:#fff;padding:26px 20px 34px;text-align:center;}
 .foot .slogan{font-size:17px;font-weight:800;letter-spacing:1px;}
@@ -148,6 +166,8 @@ table.kv td.v{color:var(--ink-2);}
   .sec-head h2{font-size:18px;}
   .topbar .clock{display:none;}
   table.tbl{min-width:520px;}
+  .case .hl{grid-template-columns:repeat(2,1fr);}
+  .cmp-row{grid-template-columns:1fr;}
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -160,17 +180,391 @@ table.kv td.v{color:var(--ink-2);}
   <div class="clock"><span id="clockText">--</span></div>
   <button class="dl" id="dlBtn" onclick="downloadImage()">⬇ 下载图片</button>
 </div>
-<nav class="subnav"><div class="wrap" style="display:flex;gap:6px;padding:0;"><a href="#overview">产品总览</a><a href="#hongtai">宏泰</a><a href="#hongyu">宏御</a><a href="#fusheng">福盛世家</a><a href="#hongyuan">宏愿</a><a href="#hengxiang">恒享</a><a href="#honghu">鸿鹄基金</a><a href="#rate">分红实力</a></div></nav>
+<nav class="subnav"><div class="wrap" style="display:flex;gap:6px;padding:0;"><a href="#strength">看公司</a><a href="#overview">5款产品</a><a href="#hongtai">宏泰</a><a href="#hongyu">宏御</a><a href="#fusheng">福盛</a><a href="#hongyuan">宏愿</a><a href="#hengxiang">恒享</a><a href="#compare">同业对比</a><a href="#fund">鸿鹄</a><a href="#holdings">举牌</a><a href="#industry">行业地位</a><a href="#dividend">分红</a><a href="#qa">客户答疑</a></div></nav>
 <div id="capture">
   <header class="hero"><span class="blob b1"></span><span class="blob b2"></span>
-    <div class="inner"><span class="tag">内部培训 · 2026年4月</span><h1>新华保险 · 2026 在售产品培训</h1><div class="sub">五大主力产品解读 · 鸿鹄基金长期资金布局 · 分红实现率与投资收益全景</div><div class="badge">📌 <b>5 款主力</b>&nbsp; 分红 / 固定 / 养老年金 &nbsp;·&nbsp; 现价稳健 · 央企背书</div></div>
-  </header>
-  <section class="sec" id="overview"><div class="wrap"><div class="sec-head"><div class="ic">📊</div><div><h2>产品总览</h2><div class="en">PRODUCT OVERVIEW</div></div></div><p class="lead">2026 年在售五大主力产品，覆盖分红增额、固定增额与养老年金三大形态，满足不同客户的长期资金规划需求。</p><div class="grid"><div class="card"><div class="ct">宏泰世家 S03</div><div class="cd">分红型增额终身寿。三年交 5 年覆盖总保费，1.2% 分红稳健靠谱，同档类型产品现价靠前。</div><span class="pill">分红增额 · 现价靠前</span></div><div class="card"><div class="ct">宏御世家 S11</div><div class="cd">分红型增额终身寿。现价超高、老七家前三，3 年交 4 年回本，1.2% 分红稳健。</div><span class="pill">老七家现价前三 · 4年回本</span></div><div class="card"><div class="ct">福盛世家添翼版 G24</div><div class="cd">2.0% 固定增额终身寿。利益确定写入合同，3 年交 4 年回本，含特定公共交通意外险。</div><span class="pill">固定2% · 确定给付</span></div><div class="card"><div class="ct">宏愿人生 S02</div><div class="cd">分红型养老年金。面向 50 岁以上客户，70 岁起领年金，3 年交 5 年超所交保费。</div><span class="pill">分红养老 · 50岁+利好</span></div><div class="card"><div class="ct">恒享人生 G23</div><div class="cd">固定年金险。现价覆盖总保费，年金为总保费的 2%，利益简单明了（固收型）。</div><span class="pill">固定年金 · 利益简单</span></div></div><div class="tbl-scroll"><table class="tbl"><thead><tr><th class="">产品</th><th class="">代码</th><th class="">男最高投保年龄(趸/3/5/10年)</th><th class="">女最高投保年龄</th><th class="">3年交起售</th><th class="">产品形态与特点</th></tr></thead><tbody><tr><td class="">宏泰世家（分红增额终身寿）</td><td class="">S03</td><td class="">64/63/62/60</td><td class="">67/67/66/64</td><td class="">3万</td><td class="">三年交5年覆盖总保费；1.2%分红稳健；同档现价靠前</td></tr><tr><td class="">宏御世家（分红增额终身寿）</td><td class="">S11</td><td class="">65/65/64/61</td><td class="">69/69/68/64</td><td class="">2万</td><td class="">现价超高老七家前三；3年交4年回本；1.2%分红</td></tr><tr><td class="">福盛世家添翼版（2.0%固定增额）</td><td class="">G24</td><td class="">68/68/67/65</td><td class="">72/72/70/65</td><td class="">2万</td><td class="">固定2%增额；3年交4年回本；含特定公共交通意外险</td></tr><tr><td class="">恒享人生年金（固定年金）</td><td class="">G23</td><td class="">80/77/75/70</td><td class="">—</td><td class="">2万</td><td class="">现价覆盖总保费；年金=总保费2%；利益简单(固收)</td></tr><tr><td class="">宏愿人生养老年金（分红）</td><td class="">S02</td><td class="">最高69（70岁领年金）</td><td class="">最高69</td><td class="">3万</td><td class="">分红养老年金；50岁以上利好；3年交5年超保费</td></tr></tbody></table></div><div class="tbl-cap">线上投保年龄统一：趸交 64 周岁，期缴 59 周岁。</div></div></section><section class="sec" id="hongtai"><div class="wrap"><div class="sec-head"><div class="ic">🛡️</div><div><h2>宏泰世家（分红型）</h2><div class="en">S03 · 分红增额终身寿</div></div></div><p class="lead">案例：宏先生，40 周岁，公司职员，希望做长期、稳定的资金规划，投保宏泰世家终身寿险（分红型）。</p><table class="kv"><tr><td class="k">交费方式</td><td class="v">3 年交</td></tr><tr><td class="k">年交保费</td><td class="v">10 万元</td></tr><tr><td class="k">基本保险金额</td><td class="v">263,700 元</td></tr><tr><td class="k">保险期间</td><td class="v">终身</td></tr><tr><td class="k">产品定位</td><td class="v">分红型增额终身寿，现价增长稳健，同档类型产品现价靠前</td></tr></table><div class="callout key"><span class="ci">💡</span><div>三年交 5 年覆盖总保费，1.2% 分红演示水平稳健靠谱、容易达成；适合看重「确定性 + 长期复利」的中产客户做资产压舱石。</div></div></div></section><section class="sec" id="hongyu"><div class="wrap"><div class="sec-head"><div class="ic">💎</div><div><h2>宏御世家（分红型）</h2><div class="en">S11 · 分红增额终身寿</div></div></div><p class="lead">案例：40 岁男性，年交 50 万、3 年交，累计保费 150 万。下表为红利利益演示下的「生存总利益」（保证现价 + 红利部分）。</p><div class="tbl-scroll"><table class="tbl"><thead><tr><th class="r">保单年度</th><th class="">年龄</th><th class="r">累计保费</th><th class="r">生存总利益(红利演示)</th><th class="r">较累计保费</th></tr></thead><tbody><tr><td class="r">1</td><td class="">40</td><td class="r">150.0万</td><td class="r">14.89万</td><td class="r">—</td></tr><tr><td class="r">3</td><td class="">42</td><td class="r">150.0万</td><td class="r">123.19万</td><td class="r">—</td></tr><tr class="hl"><td class="r">4</td><td class="">43</td><td class="r">150.0万</td><td class="r">150.84万</td><td class="r">+0.84万 ✅</td></tr><tr><td class="r">5</td><td class="">44</td><td class="r">150.0万</td><td class="r">155.18万</td><td class="r">+5.18万</td></tr><tr><td class="r">10</td><td class="">49</td><td class="r">150.0万</td><td class="r">178.75万</td><td class="r">+28.75万</td></tr><tr><td class="r">20</td><td class="">59</td><td class="r">150.0万</td><td class="r">244.21万</td><td class="r">+94.21万</td></tr><tr><td class="r">30</td><td class="">69</td><td class="r">150.0万</td><td class="r">327.41万</td><td class="r">+177.41万</td></tr><tr><td class="r">65</td><td class="">104</td><td class="r">150.0万</td><td class="r">887.10万</td><td class="r">+737.10万</td></tr></tbody></table></div><div class="tbl-cap">第 4 个保单年度末生存总利益 150.84 万，已略超累计保费 150 万，即「4 年回本」（红利演示，非保证）。</div><div class="callout key"><span class="ci">⭐</span><div>现价超高：老七家同业前列；3 年交 4 年回本；1.2% 分红演示水平稳健靠谱、容易达成。</div></div></div></section><section class="sec" id="fusheng"><div class="wrap"><div class="sec-head"><div class="ic">🌿</div><div><h2>福盛世家添翼版（固定增额）</h2><div class="en">G24 · 2.0% 固定增额终身寿</div></div></div><p class="lead">案例：福先生，50 周岁，3 年交、年交 10 万，基本保险金额 273,900 元。固定 2.0% 增额，利益确定写入合同。</p><div class="tbl-scroll"><table class="tbl"><thead><tr><th class="r">保单年度</th><th class="">年龄</th><th class="r">累计保费</th><th class="r">现金价值(年末)</th><th class="r">特定公共交通意外身故金</th></tr></thead><tbody><tr><td class="r">1</td><td class="">50</td><td class="r">30.0万</td><td class="r">4.50万</td><td class="r">27.39万</td></tr><tr><td class="r">3</td><td class="">52</td><td class="r">30.0万</td><td class="r">25.35万</td><td class="r">27.39万</td></tr><tr><td class="r">4</td><td class="">53</td><td class="r">30.0万</td><td class="r">29.59万</td><td class="r">27.39万</td></tr><tr><td class="r">5</td><td class="">54</td><td class="r">30.0万</td><td class="r">30.11万</td><td class="r">27.39万</td></tr><tr><td class="r">10</td><td class="">59</td><td class="r">30.0万</td><td class="r">32.86万</td><td class="r">27.39万</td></tr><tr><td class="r">20</td><td class="">69</td><td class="r">30.0万</td><td class="r">39.90万</td><td class="r">27.39万</td></tr><tr><td class="r">30</td><td class="">79</td><td class="r">30.0万</td><td class="r">48.64万</td><td class="r">27.39万</td></tr><tr><td class="r">50</td><td class="">99</td><td class="r">30.0万</td><td class="r">72.28万</td><td class="r">27.39万</td></tr></tbody></table></div><div class="tbl-cap">固定 2% 增额，3 年交约 4 年回本；额外含特定公共交通工具意外身故/全残保障 27.39 万（固定）。</div></div></section><section class="sec" id="hongyuan"><div class="wrap"><div class="sec-head"><div class="ic">🌟</div><div><h2>宏愿人生养老年金（分红型）</h2><div class="en">S02 · 分红养老年金</div></div></div><p class="lead">面向 50 周岁以上客户的分红型养老年金，70 岁起开始领取年金，兼顾身价保障与养老现金流。</p><table class="kv"><tr><td class="k">投保年龄</td><td class="v">最高 69 周岁（70 岁起领年金）</td></tr><tr><td class="k">交费方式</td><td class="v">趸交 / 3年 / 5年 / 10年交</td></tr><tr><td class="k">起售金额</td><td class="v">趸交5万 / 3年交3万 / 5年交1万 / 10年交1万</td></tr><tr><td class="k">产品定位</td><td class="v">分红养老年金，3 年交 5 年超所交保费</td></tr></table><div class="callout key"><span class="ci">💡</span><div>分红养老年金定位清晰：用「分红」对冲通胀、用「固定领取」锁定养老现金流，特别适合 50 岁以上、希望把一笔资金转化为终身年金的中高客。</div></div></div></section><section class="sec" id="hengxiang"><div class="wrap"><div class="sec-head"><div class="ic">💠</div><div><h2>恒享人生年金（固定）</h2><div class="en">G23 · 固定年金险</div></div></div><p class="lead">案例：40 岁，年交 10 万、3 年交，总保费 30 万。关爱金/年金自第 6 个保单周年日起领取，之后每年年金 = 总保费 2% = 6,000 元。</p><div class="tbl-scroll"><table class="tbl"><thead><tr><th class="r">保单年度</th><th class="">年龄</th><th class="r">累计保费</th><th class="r">关爱金/年金</th><th class="r">生存总利益(年末)</th></tr></thead><tbody><tr><td class="r">5</td><td class="">44</td><td class="r">30.0万</td><td class="r">—</td><td class="r">30.38万</td></tr><tr><td class="r">10</td><td class="">49</td><td class="r">30.0万</td><td class="r">0.60万</td><td class="r">33.39万</td></tr><tr><td class="r">20</td><td class="">59</td><td class="r">30.0万</td><td class="r">0.60万</td><td class="r">39.39万</td></tr><tr><td class="r">30</td><td class="">69</td><td class="r">30.0万</td><td class="r">0.60万</td><td class="r">45.39万</td></tr><tr><td class="r">50</td><td class="">89</td><td class="r">30.0万</td><td class="r">0.60万</td><td class="r">57.39万</td></tr><tr><td class="r">65</td><td class="">104</td><td class="r">30.0万</td><td class="r">0.60万</td><td class="r">66.39万</td></tr></tbody></table></div><div class="tbl-cap">固收型年金：利益简单明了，年金为总保费的 2%（6,000 元/年），现价持续覆盖总保费。</div></div></section><section class="sec" id="honghu"><div class="wrap"><div class="sec-head"><div class="ic">🚀</div><div><h2>鸿鹄基金 · 千亿级险资私募</h2><div class="en">HONGHU FUND</div></div></div><p class="lead">鸿鹄基金由中国人寿与新华保险共同发起，是长期资金入市试点的私募证券投资基金；首支规模 500 亿元，三期累计规模超 1,100 亿元，其中新华保险一、二、三期计划出资共 462.5 亿元。</p><div class="tbl-scroll"><table class="tbl"><thead><tr><th class="">上市公司</th><th class="">持股机构</th><th class="r">持股数量(万股)</th><th class="r">持股市值(万元)</th></tr></thead><tbody><tr><td class="">中国电信</td><td class="">鸿鹄基金一期</td><td class="r">76,174.22</td><td class="r">507,320</td></tr><tr><td class="">伊利股份</td><td class="">鸿鹄基金一期</td><td class="r">15,276.40</td><td class="r">416,740</td></tr><tr><td class="">陕西煤业</td><td class="">鸿鹄基金一期</td><td class="r">11,633.89</td><td class="r">232,678</td></tr><tr><td class="">中国石化</td><td class="">鸿鹄基金三期1号</td><td class="r">30,495.86</td><td class="r">161,323</td></tr><tr><td class="">大秦铁路</td><td class="">鸿鹄基金三期1号</td><td class="r">29,848.71</td><td class="r">175,809</td></tr><tr><td class="">泸州老窖</td><td class="">鸿鹄基金三期1号</td><td class="r">1,887.20</td><td class="r">248,959</td></tr><tr><td class="">中国石油</td><td class="">鸿鹄基金二期</td><td class="r">21,721.36</td><td class="r">175,074</td></tr><tr><td class="">中国神华</td><td class="">鸿鹄基金二期</td><td class="r">5,220.61</td><td class="r">200,994</td></tr><tr><td class="">国投电力</td><td class="">鸿鹄基金一期</td><td class="r">9,343.80</td><td class="r">122,030</td></tr><tr><td class="">国投电力</td><td class="">鸿鹄基金三期2号</td><td class="r">6,184.55</td><td class="r">80,770</td></tr></tbody></table></div><div class="tbl-cap">代表性持仓（部分），合计持股市值约 191 亿元；底层资产以高股息、低估值的蓝筹央企为主。</div><div class="stats"><div class="stat"><div class="num">1,100&lt;small&gt;亿+&lt;/small&gt;</div><div class="lb">鸿鹄基金三期总规模</div><div class="sb">长期资金入市试点</div></div><div class="stat"><div class="num">462.5&lt;small&gt;亿&lt;/small&gt;</div><div class="lb">新华保险出资</div><div class="sb">央企险资合力</div></div><div class="stat"><div class="num">170.44&lt;small&gt;%&lt;/small&gt;</div><div class="lb">中石油管道项目回报</div><div class="sb">另类投资标杆</div></div><div class="stat"><div class="num">2.52&lt;small&gt;X&lt;/small&gt;</div><div class="lb">中国银联投资回报</div><div class="sb">14.27% 内部收益</div></div></div><div class="callout info"><span class="ci">💡</span><div>举牌标的包括杭州银行（持股 5.84%）、上海医药、国药股份、北京控股等，体现险资「长期、价值、稳健」的配置偏好。</div></div></div></section><section class="sec" id="rate"><div class="wrap"><div class="sec-head"><div class="ic">📈</div><div><h2>分红实现率与投资实力</h2><div class="en">DIVIDEND &amp; RETURN</div></div></div><p class="lead">新华保险分红业务经营稳健，红利实现率长期位居行业前列；投资端穿越周期，取得领先同业的综合收益。</p><div class="stats"><div class="stat"><div class="num">156.1&lt;small&gt;%&lt;/small&gt;</div><div class="lb">近 5 年分红实现率均值</div><div class="sb">行业第一</div></div><div class="stat"><div class="num">79&lt;small&gt;%&lt;/small&gt;</div><div class="lb">2024 年产品实现率≥100%</div><div class="sb">分红达标产品占比</div></div><div class="stat"><div class="num">8.6&lt;small&gt;%&lt;/small&gt;</div><div class="lb">2025年1-9月总投资收益率</div><div class="sb">领先主要同业</div></div><div class="stat"><div class="num">11.6&lt;small&gt;%&lt;/small&gt;</div><div class="lb">股票投资占比</div><div class="sb">权益弹性充足</div></div></div><div class="tbl-scroll"><table class="tbl"><thead><tr><th class="">公司</th><th class="r">A股近一年涨跌幅</th><th class="r">H股近一年涨跌幅</th><th class="r">总投资收益率(25年1-9月)</th><th class="r">股票配置比例</th></tr></thead><tbody><tr class="hl"><td class="">新华保险</td><td class="r">+93.84%</td><td class="r">+242.08%</td><td class="r">8.6%</td><td class="r">11.6%</td></tr><tr><td class="">中国平安</td><td class="r">+43.01%</td><td class="r">+79.73%</td><td class="r">3.1%(上半年)</td><td class="r">10.5%</td></tr><tr><td class="">中国太保</td><td class="r">+46.71%</td><td class="r">+87.99%</td><td class="r">5.2%</td><td class="r">9.7%</td></tr><tr><td class="">中国人寿</td><td class="r">+28.53%</td><td class="r">+158.69%</td><td class="r">6.4%</td><td class="r">8.7%</td></tr><tr><td class="">中国人保</td><td class="r">+42.46%</td><td class="r">+99.70%</td><td class="r">5.4%</td><td class="r">5.4%</td></tr></tbody></table></div><div class="tbl-cap">新华保险 A/H 股近一年涨幅与总投资收益率均显著领先主要同业（数据截至 2026-01-16 前后）。</div></div></section>
-  <div class="foot"><div class="slogan">新华保险 保得长久 保得美好<small>NCI 新华保险 · A+H 上市 ·  Fortune 世界500强</small></div><div class="disc">本资料为内部培训与学习交流使用，内容依据公开培训材料整理重构，仅供理解参考，不构成任何投资建议或收益承诺；具体保险责任、利益演示及减保规则等均以产品条款、保险合同及监管披露为准。分红型产品红利为非保证收益。</div></div>
+    <div class="inner"><span class="tag">内部培训 · 2026年4月</span><h1>新华保险 · 2026 在售产品培训</h1><div class="sub">5款主力产品全解 · 鸿鹄基金长期布局 · 监管/同业/分红实现率全景</div><div class="badge">🏆 <b>老七家</b>&nbsp; A+H上市 · 500强 · 综合偿付能力 256%</div></div>
+  </header>  <section class="sec" id="strength"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏛️</div><div><h2>一、先看公司硬实力</h2><div class="en">COMPANY STRENGTH</div></div></div>
+    <p class="lead">买保险就是买一纸长期承诺。承诺靠不靠谱，先看公司的「家底」和「赚钱能力」。下面用 6 个最常被问到的指标，把新华保险的底子讲透。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">总资产 1.8 万亿</div><div class="cd">公司持有的全部资产，包括客户保费、债券、股票、固定资产等。规模越大，抗风险能力越强，谈判议价能力也越强。</div><span class="pill">A+H 上市</span></div>
+      <div class="card"><div class="ct">营业收入</div><div class="cd">"钱从哪来"。主要两块：① 卖保险的收入（已赚保费）；② 用保费投资赚到的钱（投资收益）。营收高说明业务规模大，但≠利润。</div><span class="pill">业务规模</span></div>
+      <div class="card"><div class="ct">内含价值</div><div class="cd">保险行业最核心的"真实身价"。= 调整后的净资产 + 有效业务价值（已卖保单未来利润折现到今天）。比账面净资产更能体现长期盈利能力。</div><span class="pill">真实身价</span></div>
+      <div class="card"><div class="ct">归母净利润</div><div class="cd">"股东真正赚到手的钱"。扣掉给少数股东的部分，剩下的归母公司股东。2023年87亿，2024年262亿，2025年前9月328亿，同比增长58.9%。</div><span class="pill">股东回报</span></div>
+      <div class="card"><div class="ct">投资资产规模</div><div class="cd">"拿来投资的本金有多少"。剔除自用办公楼、现金等非投资部分，专门用于配置股票、债券、基金、非标等金融产品的钱。</div><span class="pill">投资本金</span></div>
+      <div class="card"><div class="ct">总投资收益率</div><div class="cd">"用这些本金赚了多少"。含利息、股息、买卖差价、资产公允价值变动等所有综合回报。2025年1-9月年化达 8.6%，居行业前列。</div><span class="pill">赚钱效率</span></div>
+    </div>
+    <div class="callout ok"><span class="ci">✅</span><div><b>三个指标快速判断保险公司：</b>总资产看规模，内含价值看现有家底，归母净利润看当期股东回报。三个结合看，<b>又大又强</b>的新华就立得住。</div></div>
+  </div></section>  <section class="sec" id="overview"><div class="wrap">
+    <div class="sec-head"><div class="ic">📊</div><div><h2>二、5 款主力产品总览</h2><div class="en">PRODUCT OVERVIEW</div></div></div>
+    <p class="lead">2026 年在售 5 款主力产品，覆盖 <b>分红增额 / 固定增额 / 养老年金</b> 三大形态，分别满足不同客户的资金规划需求。下面每款都按 <b>「产品要素 → 保险责任 → 案例演示 → 完整利益演示表」</b> 四步法展开。</p>
+    <div class="grid">      <div class="prod-card">
+        <div class="ph"><span class="pn">宏泰世家</span><span class="pc">S03</span><span class="pt">· 分红型增额终身寿</span></div>
+        <div class="ps">三年交 5 年覆盖总保费；1.2% 分红稳健；同档现价靠前；自带交通意外保障（同业唯一）。</div>
+        <div class="pf"><span class="pill">分红增额</span><span class="pill">现价靠前</span><span class="pill">交通意外</span></div>
+      </div>      <div class="prod-card">
+        <div class="ph"><span class="pn">宏御世家</span><span class="pc">S11</span><span class="pt">· 分红型增额终身寿</span></div>
+        <div class="ps">现价超高、老七家前三；3 年交 4 年回本；1.2% 分红稳健；演示加红利第 4 年回本，第 22.8 年翻倍。</div>
+        <div class="pf"><span class="pill">老七家现价前三</span><span class="pill">4年回本</span><span class="pill">加红利翻倍22.8年</span></div>
+      </div>      <div class="prod-card">
+        <div class="ph"><span class="pn">福盛世家添翼版</span><span class="pc">G24</span><span class="pt">· 2.0% 固定增额终身寿</span></div>
+        <div class="ps">固定 2% 增额、利益确定写入合同；3 年交 4 年回本；含特定公共交通意外险。</div>
+        <div class="pf"><span class="pill">固定2%</span><span class="pill">确定给付</span><span class="pill">意外保障</span></div>
+      </div>      <div class="prod-card">
+        <div class="ph"><span class="pn">宏愿人生</span><span class="pc">S02</span><span class="pt">· 分红型养老年金</span></div>
+        <div class="ps">面向 50 岁以上客户，70 岁起领年金，年领/月领可选；3 年交 5 年超所交保费；105 岁满期返还保费。</div>
+        <div class="pf"><span class="pill">分红养老</span><span class="pill">50岁+利好</span><span class="pill">终身领取</span></div>
+      </div>      <div class="prod-card">
+        <div class="ph"><span class="pn">恒享人生</span><span class="pc">G23</span><span class="pt">· 固定年金险</span></div>
+        <div class="ps">现价覆盖总保费；年金 = 总保费 2%；第 5 年起关爱金；利益简单明了（固收型）。</div>
+        <div class="pf"><span class="pill">固定年金</span><span class="pill">利益简单</span><span class="pill">满期返还102%</span></div>
+      </div>    </div>
+    <p class="tbl-cap">线上投保年龄统一：<b>趸交 64 周岁，期缴 59 周岁</b>。下表为各产品在 <b>趸交 / 3年 / 5年 / 10年</b> 交费方式下对应的最高投保年龄。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>产品</th><th>代码</th><th>性别</th><th>趸交</th><th>3年交</th><th>5年交</th><th>10年交</th><th>3年交起售</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2"><b>宏泰世家</b><br><span style="color:var(--ink-3);font-size:12px;">分红增额终身寿</span></td><td rowspan="2">S03</td><td>男</td><td class="r">64</td><td class="r">63</td><td class="r">62</td><td class="r">60</td><td rowspan="2" class="r">3万</td></tr>
+        <tr><td>女</td><td class="r">67</td><td class="r">67</td><td class="r">66</td><td class="r">64</td></tr>
+        <tr><td rowspan="2"><b>宏御世家</b><br><span style="color:var(--ink-3);font-size:12px;">分红增额终身寿</span></td><td rowspan="2">S11</td><td>男</td><td class="r">65</td><td class="r">65</td><td class="r">64</td><td class="r">61</td><td rowspan="2" class="r">2万</td></tr>
+        <tr><td>女</td><td class="r">69</td><td class="r">69</td><td class="r">68</td><td class="r">64</td></tr>
+        <tr><td rowspan="2"><b>福盛世家添翼版</b><br><span style="color:var(--ink-3);font-size:12px;">2.0% 固定增额终身寿</span></td><td rowspan="2">G24</td><td>男</td><td class="r">68</td><td class="r">68</td><td class="r">67</td><td class="r">65</td><td rowspan="2" class="r">2万</td></tr>
+        <tr><td>女</td><td class="r">72</td><td class="r">72</td><td class="r">70</td><td class="r">65</td></tr>
+        <tr><td rowspan="2"><b>宏愿人生</b><br><span style="color:var(--ink-3);font-size:12px;">分红养老年金</span></td><td rowspan="2">S02</td><td>男</td><td colspan="4" class="r">最高 69 周岁（70 岁起领年金）</td><td rowspan="2" class="r">3万</td></tr>
+        <tr><td>女</td><td colspan="4" class="r">55 / 60 / 65 / 70 周岁起领</td></tr>
+        <tr><td rowspan="2"><b>恒享人生</b><br><span style="color:var(--ink-3);font-size:12px;">固定年金</span></td><td rowspan="2">G23</td><td>男</td><td class="r">80</td><td class="r">77</td><td class="r">75</td><td class="r">70</td><td rowspan="2" class="r">2万</td></tr>
+        <tr><td>女</td><td colspan="4" class="r">—</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>  <section class="sec" id="hongtai"><div class="wrap">
+    <div class="sec-head"><div class="ic">🛡️</div><div><h2>三、产品一 · 宏泰世家终身寿险（分红型）</h2><div class="en">HONGTAI · DIVIDEND WHOLE LIFE</div></div></div>
+    <p class="lead">S03 险种代码 · 出生满 30 日—67 周岁 · 交费方式 趸/3/5/10 年 · 保险期间终身。同业唯一自带 <b>客运列车 & 民航意外 1.5 倍基本保额</b> 保障。</p>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">① 产品基本要素</h3>
+    <div class="tbl-scroll"><table class="kv">
+      <tr><td class="k">产品名称</td><td class="v">宏泰世家终身寿险（分红型）</td></tr>
+      <tr><td class="k">险种代码</td><td class="v">S03</td></tr>
+      <tr><td class="k">投保年龄</td><td class="v">出生满 30 日 — 67 周岁（最高投保年龄为男性 64 / 女性 67）</td></tr>
+      <tr><td class="k">交费方式</td><td class="v">一次交清 / 3 年交 / 5 年交 / 10 年交</td></tr>
+      <tr><td class="k">保险期间</td><td class="v">终身</td></tr>
+      <tr><td class="k">红利领取</td><td class="v">支持现金领取 / 累积生息 / 购买交清增额</td></tr>
+      <tr><td class="k">最低保险费</td><td class="v">趸交 5万 / 3年交 3万 / 5年交 1万 / 10年交 1万</td></tr>
+      <tr><td class="k">体检 / 契调标准</td><td class="v">0-50 周岁深圳 5000 万；51-65 周岁 4000 万；66-70 周岁 2500 万；超过须契调</td></tr>
+    </table></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">② 保险责任</h3>
+    <div class="callout key"><span class="ci">🛡️</span><div><b>身故或身体全残保险金</b>：按合同约定给付基本保险金额（具体按到达年龄分档：18-40 / 41-60 / 61+）。</div></div>
+    <div class="callout warn"><span class="ci">🚄</span><div><b>客运列车及航空意外伤害身故或全残保险金（独家责任）</b>：被保险人 18-75 周岁期间，以乘客身份乘坐客运列车（含高铁、动车、地铁、磁悬浮等）或民航班机，因交通事故导致意外身故或全残，<b>额外给付基本保险金额的 1.5 倍</b>，同一被保险人累计以 <b>2000 万元</b> 为限。<b>同业竞品无此项专属责任</b>。</div></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">③ 案例演示 · 40 岁宏先生</h3>
+    <div class="case">
+      <div class="ch">📌 宏先生 40 周岁 · 公司职员 · 3 年交 10 万/年</div>
+      <div class="ct2">希望长期稳定的资金规划方式，最终为自己投保 <b>宏泰世家终身寿险（分红型）</b>，基本保险金额 <b>263,700 元</b>。</div>
+      <div class="hl">
+        <div><div class="n">第5年</div><div class="l">现价覆盖已交保费 30 万</div></div>
+        <div><div class="n">29年</div><div class="l">总收益翻倍至 60 万</div></div>
+        <div><div class="n">1.4×</div><div class="l">身故或全残金</div></div>
+        <div><div class="n">1.3×</div><div class="l">交通意外额外保障</div></div>
+      </div>
+      <p class="tbl-cap">单位：元。红利水平不保证，演示数据经取整处理。具体以保险条款和保险合同为准。</p>
+      <div class="tbl-scroll"><table class="tbl benefit-tbl">
+        <thead><tr><th>保单年度</th><th>年龄<br>(年初)</th><th>当年保费<br>(年初)</th><th>累计保费<br>(年初)</th><th>身故/全残<br>保险金(年末)</th><th>现金价值<br>(年末)</th></tr></thead>
+        <tbody>          <tr><td>1</td><td>40</td><td>100,000</td><td>100,000</td><td>263,700</td><td>30,000</td></tr>          <tr><td>2</td><td>41</td><td>100,000</td><td>200,000</td><td>263,700</td><td>130,000</td></tr>          <tr><td>3</td><td>42</td><td>100,000</td><td>300,000</td><td>263,700</td><td>254,000</td></tr>          <tr><td>4</td><td>43</td><td>0</td><td>300,000</td><td>263,700</td><td>297,000</td></tr>          <tr class="cover"><td>5</td><td>44</td><td>0</td><td>300,000</td><td>263,700</td><td>301,500</td></tr>          <tr><td>6</td><td>45</td><td>0</td><td>300,000</td><td>263,700</td><td>306,500</td></tr>          <tr><td>7</td><td>46</td><td>0</td><td>300,000</td><td>263,700</td><td>311,500</td></tr>          <tr><td>8</td><td>47</td><td>0</td><td>300,000</td><td>263,700</td><td>316,500</td></tr>          <tr><td>9</td><td>48</td><td>0</td><td>300,000</td><td>263,700</td><td>321,500</td></tr>          <tr><td>10</td><td>49</td><td>0</td><td>300,000</td><td>263,700</td><td>326,500</td></tr>          <tr><td>15</td><td>54</td><td>0</td><td>300,000</td><td>263,700</td><td>359,500</td></tr>          <tr><td>20</td><td>59</td><td>0</td><td>300,000</td><td>263,700</td><td>397,500</td></tr>          <tr><td>25</td><td>64</td><td>0</td><td>300,000</td><td>263,700</td><td>439,000</td></tr>          <tr><td>30</td><td>69</td><td>0</td><td>300,000</td><td>263,700</td><td>484,000</td></tr>          <tr><td>40</td><td>79</td><td>0</td><td>300,000</td><td>263,700</td><td>591,000</td></tr>          <tr><td>50</td><td>89</td><td>0</td><td>300,000</td><td>263,700</td><td>720,000</td></tr>          <tr><td>60</td><td>99</td><td>0</td><td>300,000</td><td>263,700</td><td>877,000</td></tr>          <tr><td>65</td><td>104</td><td>0</td><td>300,000</td><td>263,700</td><td>969,000</td></tr>        </tbody>
+      </table></div>
+    </div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">④ 同业横向对比（100 万总保费 · 3 年交）</h3>
+    <div class="callout key"><span class="ci">📈</span><div><b>3 年交费期满时</b>，宏泰世家现价近 <b>199 万</b>，<b>较同业最高水平领先超 55 万</b>，资金回笼速度与刚性兑付收益全面碾压同业（含 3.9% 预定利率定价产品）。<b>前 8 年预期生存总利益持续领跑市场</b>，兼顾灵活性与收益性。</div></div>
+    <div class="callout info"><span class="ci">💡</span><div>本次对比产品中，泰康按 3.9% 预定利率定价，新华、太平、太平洋按 3.5% 预定利率定价。<b>新华产品仍在确定性收益、前期增值上实现全面领先</b>。</div></div>
+  </div></section>  <section class="sec" id="hongyu"><div class="wrap">
+    <div class="sec-head"><div class="ic">🛡️</div><div><h2>四、产品二 · 宏御世家终身寿险（分红型）</h2><div class="en">HONGYU · DIVIDEND WHOLE LIFE</div></div></div>
+    <p class="lead">S11 险种代码 · 出生满 30 日—69 周岁 · 交费方式 趸/3/5/10 年 · <b>现价老七家前三</b>。演示加红利第 4 年回本、第 22.8 年翻倍。</p>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">① 产品基本要素</h3>
+    <div class="tbl-scroll"><table class="kv">
+      <tr><td class="k">产品名称</td><td class="v">宏御世家终身寿险（分红型）</td></tr>
+      <tr><td class="k">险种代码</td><td class="v">S11</td></tr>
+      <tr><td class="k">投保年龄</td><td class="v">出生满 30 日 — 69 周岁（最高投保年龄为男性 65 / 女性 69）</td></tr>
+      <tr><td class="k">交费方式</td><td class="v">一次交清 / 3 年交 / 5 年交 / 10 年交</td></tr>
+      <tr><td class="k">保险期间</td><td class="v">终身</td></tr>
+      <tr><td class="k">红利领取</td><td class="v">累积生息 / 购买交清增额</td></tr>
+      <tr><td class="k">最低保险费</td><td class="v">趸交 5万 / 3年交 2万 / 5年交 2万 / 10年交 2万</td></tr>
+      <tr><td class="k">体检 / 契调标准</td><td class="v">0-50 周岁深圳 5000 万；51-65 周岁 4000 万；66-70 周岁 2500 万；超过须契调</td></tr>
+    </table></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">② 保险责任</h3>
+    <div class="callout key"><span class="ci">🛡️</span><div><b>身故或身体全残保险金</b>：按合同约定给付基本保险金额（<b>不含因红利分配产生的相关利益</b>）。</div></div>
+    <div class="callout info"><span class="ci">📌</span><div>以上为方便理解，部分内容有简要摘写，<b>详细保险责任以产品条款为准</b>。</div></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">③ 案例演示 · 40 岁宏先生（红利方式：购买交清增额）</h3>
+    <div class="case">
+      <div class="ch">📌 40 岁宏先生 · 3 年交 50 万/年 · 总保费 150 万</div>
+      <div class="ct2">演示关键节点：<b>加红利第 4 年现金价值覆盖已交保费</b>，<b>第 22.8 年收益翻倍</b>。</div>
+      <div class="hl">
+        <div><div class="n">150万</div><div class="l">总保费（3年交）</div></div>
+        <div><div class="n">第4年</div><div class="l">加红利回本</div></div>
+        <div><div class="n">22.8年</div><div class="l">总收益翻倍</div></div>
+        <div><div class="n">887万</div><div class="l">65岁末身故总利益</div></div>
+      </div>
+      <p class="tbl-cap">单位：元。"身故或身体全残保险金"中的基本保险金额 <b>不含因红利分配产生的相关利益</b>。演示数据经取整处理，红利水平不保证。</p>      <div class="tbl-scroll"><table class="tbl benefit-tbl">
+        <thead>
+          <tr><th>保单 年度</th><th>年龄 （年初 ）</th><th>当年保险费 （年初 ）</th><th>累计保险费 （年初 ）</th><th>身故或身体全残 保险金（年末）</th><th>保证利益演示（年末）</th><th></th><th>红利利益演示（年末）</th><th></th><th></th><th></th><th></th><th></th></tr>
+          <tr><th></th><th></th><th></th><th></th><th></th><th>生存总利益 （保证现价）</th><th>身故或身体 全残总利益 （未加红利）</th><th>年度交清增 额基本保险 金额</th><th>累积交清增 额基本保险 金额</th><th>交清增额保 险对应的身 故或身体全 残保险金</th><th>交清增额保 险对应的现 金价值</th><th>生存总利益</th><th>身故或身 体全残总 利益</th></tr>
+        </thead>
+        <tbody>          <tr><td>1</td><td>40</td><td>500000</td><td>500000</td><td>800000</td><td>146500</td><td>800000</td><td>4934</td><td>4934</td><td>2446</td><td>2446</td><td>148946</td><td>802446</td></tr>          <tr><td>2</td><td>41</td><td>500000</td><td>1000000</td><td>1400000</td><td>510500</td><td>1400000</td><td>10918</td><td>15852</td><td>10806</td><td>10806</td><td>521306</td><td>1410806</td></tr>          <tr><td>3</td><td>42</td><td>500000</td><td>1500000</td><td>2100000</td><td>1203500</td><td>2100000</td><td>16862</td><td>32714</td><td>28386</td><td>28386</td><td>1231886</td><td>2128386</td></tr>          <tr class="cover"><td>4</td><td>43</td><td>0</td><td>1500000</td><td>2100000</td><td>1456000</td><td>2100000</td><td>17049</td><td>49763</td><td>52422</td><td>52420</td><td>1508420</td><td>2152422</td></tr>          <tr><td>5</td><td>44</td><td>0</td><td>1500000</td><td>2100000</td><td>1480000</td><td>2100000</td><td>17238</td><td>67001</td><td>71818</td><td>71818</td><td>1551818</td><td>2171818</td></tr>          <tr><td>6</td><td>45</td><td>0</td><td>1500000</td><td>2100000</td><td>1504500</td><td>2100000</td><td>17431</td><td>84432</td><td>92083</td><td>92082</td><td>1596582</td><td>2192083</td></tr>          <tr><td>7</td><td>46</td><td>0</td><td>1500000</td><td>2100000</td><td>1529000</td><td>2100000</td><td>17620</td><td>102052</td><td>113247</td><td>113247</td><td>1642247</td><td>2213247</td></tr>          <tr><td>8</td><td>47</td><td>0</td><td>1500000</td><td>2100000</td><td>1554000</td><td>2100000</td><td>17817</td><td>119869</td><td>135347</td><td>135344</td><td>1689344</td><td>2235347</td></tr>          <tr><td>9</td><td>48</td><td>0</td><td>1500000</td><td>2100000</td><td>1579500</td><td>2100000</td><td>18011</td><td>137880</td><td>158410</td><td>158410</td><td>1737910</td><td>2258410</td></tr>          <tr><td>10</td><td>49</td><td>0</td><td>1500000</td><td>2100000</td><td>1605000</td><td>2100000</td><td>18208</td><td>156088</td><td>182467</td><td>182467</td><td>1787467</td><td>2282467</td></tr>          <tr><td>11</td><td>50</td><td>0</td><td>1500000</td><td>2100000</td><td>1631000</td><td>2100000</td><td>18409</td><td>174497</td><td>207554</td><td>207547</td><td>1838547</td><td>2307554</td></tr>          <tr><td>16</td><td>55</td><td>0</td><td>1500000</td><td>2100000</td><td>1768000</td><td>2100000</td><td>19440</td><td>269609</td><td>349744</td><td>349737</td><td>2117737</td><td>2449744</td></tr>          <tr><td>21</td><td>60</td><td>0</td><td>1500000</td><td>2100000</td><td>1918500</td><td>2100000</td><td>20550</td><td>370105</td><td>523625</td><td>523625</td><td>2442125</td><td>2623625</td></tr>          <tr><td>26</td><td>65</td><td>0</td><td>1500000</td><td>2092500</td><td>2092500</td><td>2092500</td><td>21800</td><td>476552</td><td>735320</td><td>735320</td><td>2827820</td><td>2827820</td></tr>          <tr><td>31</td><td>70</td><td>0</td><td>1500000</td><td>2282000</td><td>2282000</td><td>2282000</td><td>23146</td><td>589554</td><td>992102</td><td>992101</td><td>3274101</td><td>3274102</td></tr>          <tr><td>36</td><td>75</td><td>0</td><td>1500000</td><td>2489000</td><td>2489000</td><td>2489000</td><td>24573</td><td>709532</td><td>1302204</td><td>1302204</td><td>3791204</td><td>3791204</td></tr>          <tr><td>41</td><td>80</td><td>0</td><td>1500000</td><td>2714500</td><td>2714500</td><td>2714500</td><td>26089</td><td>836906</td><td>1675151</td><td>1675151</td><td>4389651</td><td>4389651</td></tr>          <tr><td>46</td><td>85</td><td>0</td><td>1500000</td><td>2960500</td><td>2960500</td><td>2960500</td><td>27696</td><td>972134</td><td>2122169</td><td>2122169</td><td>5082669</td><td>5082669</td></tr>          <tr><td>51</td><td>90</td><td>0</td><td>1500000</td><td>3228500</td><td>3228500</td><td>3228500</td><td>29404</td><td>1115702</td><td>2656263</td><td>2656263</td><td>5884763</td><td>5884763</td></tr>          <tr><td>56</td><td>95</td><td>0</td><td>1500000</td><td>3521000</td><td>3521000</td><td>3521000</td><td>31218</td><td>1268121</td><td>3292711</td><td>3292676</td><td>6813676</td><td>6813711</td></tr>          <tr><td>61</td><td>100</td><td>0</td><td>1500000</td><td>3840000</td><td>3840000</td><td>3840000</td><td>33144</td><td>1429942</td><td>4049333</td><td>4049310</td><td>7889310</td><td>7889333</td></tr>          <tr class="peak"><td>65</td><td>104</td><td>0</td><td>1500000</td><td>4116000</td><td>4116000</td><td>4116000</td><td>34768</td><td>1566553</td><td>4754971</td><td>4754958</td><td>8870958</td><td>8870971</td></tr>        </tbody>
+      </table></div>
+    </div>
+  </div></section>  <section class="sec" id="fusheng"><div class="wrap">
+    <div class="sec-head"><div class="ic">🛡️</div><div><h2>五、产品三 · 福盛世家添翼版终身寿（2% 固定型）</h2><div class="en">FUSHENG · 2.0% FIXED WHOLE LIFE</div></div></div>
+    <p class="lead">G24 险种代码 · 出生满 30 日—72 周岁 · 交费方式 趸/3/5/10 年 · 利益确定写入合同的 <b>2% 固定增额</b> 终身寿。</p>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">① 产品基本要素</h3>
+    <div class="tbl-scroll"><table class="kv">
+      <tr><td class="k">产品名称</td><td class="v">福盛世家添翼版终身寿险</td></tr>
+      <tr><td class="k">险种代码</td><td class="v">G24（PPT 原演示 G14，已与公司核对更新为 G24）</td></tr>
+      <tr><td class="k">投保年龄</td><td class="v">出生满 30 日 — 72 周岁（不同交费方式/性别对应最高投保年龄不同）</td></tr>
+      <tr><td class="k">交费方式</td><td class="v">一次交清 / 3 年交 / 5 年交 / 10 年交</td></tr>
+      <tr><td class="k">保险期间</td><td class="v">终身</td></tr>
+      <tr><td class="k">增额比例</td><td class="v"><b>固定 2.0%</b>（利益确定写入合同，不受市场波动影响）</td></tr>
+      <tr><td class="k">最低保险费</td><td class="v">趸交 5万 / 3年交 2万 / 5年交 1万 / 10年交 1万</td></tr>
+      <tr><td class="k">契调标准</td><td class="v">趸交大于 3000 万须契调；3/5/10 年交期交大于 1000 万须契调；分单投保按累计保费计算</td></tr>
+    </table></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">② 保险责任</h3>
+    <div class="callout key"><span class="ci">🛡️</span><div><b>身故或身体全残保险金</b>：按合同约定给付基本保险金额。</div></div>
+    <div class="callout warn"><span class="ci">🚇</span><div><b>特定公共交通工具意外伤害身故或全残保险金</b>：18-75 周岁期间，以乘客身份乘坐特定公共交通工具（含高铁、动车、地铁、公交、出租车、网约车、民航等），因交通事故导致意外身故或全残，给付 <b>基本保险金额</b>，合同终止。</div></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">③ 案例演示 · 50 岁福先生</h3>
+    <div class="case">
+      <div class="ch">📌 福先生 50 周岁 · 公司职员 · 3 年交 10 万/年</div>
+      <div class="ct2">购买理由：<b>锁定利益、保障终身稳健增长、上市公司更放心</b>。基本保险金额 <b>273,900 元</b>。</div>
+      <div class="hl">
+        <div><div class="n">第5年</div><div class="l">现金价值覆盖已交保费 30 万</div></div>
+        <div><div class="n">2.0%</div><div class="l">固定增额写入合同</div></div>
+        <div><div class="n">273,900</div><div class="l">基本保险金额</div></div>
+        <div><div class="n">693,900</div><div class="l">50-75岁交通意外总赔付</div></div>
+      </div>
+      <p class="tbl-cap">单位：元。50-75 周岁期间如因特定公共交通意外身故，赔付 <b>基本保额 273,900 元 + 特定交通意外 420,000 元 = 693,900 元</b>。</p>      <div class="tbl-scroll"><table class="tbl benefit-tbl">
+        <thead><tr><th>保单 年度</th><th>当年保险费 （ 年初 ）</th><th>累计保险费 （ 年初 ）</th><th>身故或身体全残 保险金（ 年末）</th><th>特定公共交通工具意外伤害身故或身体全残 保险金</th><th>现金价值 （ 年末）</th></tr></thead>
+        <tbody>          <tr><td>1</td><td>100000</td><td>100000</td><td>140000</td><td>273900</td><td>45000</td></tr>          <tr><td>2</td><td>100000</td><td>200000</td><td>280000</td><td>273900</td><td>129500</td></tr>          <tr><td>3</td><td>100000</td><td>300000</td><td>420000</td><td>273900</td><td>253500</td></tr>          <tr><td>4</td><td>0</td><td>300000</td><td>420000</td><td>273900</td><td>295900</td></tr>          <tr class="cover"><td>5</td><td>0</td><td>300000</td><td>420000</td><td>273900</td><td>301100</td></tr>          <tr><td>6</td><td>0</td><td>300000</td><td>420000</td><td>273900</td><td>306400</td></tr>          <tr><td>7</td><td>0</td><td>300000</td><td>420000</td><td>273900</td><td>311800</td></tr>          <tr><td>8</td><td>0</td><td>300000</td><td>420000</td><td>273900</td><td>317300</td></tr>          <tr><td>9</td><td>0</td><td>300000</td><td>420000</td><td>273900</td><td>322900</td></tr>          <tr><td>10</td><td>0</td><td>300000</td><td>420000</td><td>273900</td><td>328600</td></tr>          <tr><td>15</td><td>0</td><td>300000</td><td>361405</td><td>273900</td><td>361400</td></tr>          <tr><td>20</td><td>0</td><td>300000</td><td>399021</td><td>273900</td><td>399000</td></tr>          <tr><td>25</td><td>0</td><td>300000</td><td>440551</td><td>273900</td><td>440500</td></tr>          <tr><td>30</td><td>0</td><td>300000</td><td>486404</td><td>0</td><td>486300</td></tr>          <tr><td>35</td><td>0</td><td>300000</td><td>537029</td><td>0</td><td>536900</td></tr>          <tr><td>40</td><td>0</td><td>300000</td><td>592924</td><td>0</td><td>592800</td></tr>          <tr><td>45</td><td>0</td><td>300000</td><td>654636</td><td>0</td><td>654500</td></tr>          <tr><td>50</td><td>0</td><td>300000</td><td>722771</td><td>0</td><td>722700</td></tr>          <tr><td>55</td><td>0</td><td>300000</td><td>797997</td><td>0</td><td>797900</td></tr>        </tbody>
+      </table></div>
+    </div>
+    <div class="callout info"><span class="ci">📌</span><div><b>50-75 岁交通意外保障细则</b>：以乘客身份乘坐特定公共交通工具（含高铁/动车/地铁/公交/出租车/网约车/民航），因交通事故 180 日内身故或全残，赔付 42 万元特定交通意外金 + 27.39 万元基本保额 = <b>69.39 万元</b>。</div></div>
+  </div></section>  <section class="sec" id="hongyuan"><div class="wrap">
+    <div class="sec-head"><div class="ic">🌅</div><div><h2>六、产品四 · 宏愿人生养老年金（分红型）</h2><div class="en">HONGYUAN · DIVIDEND PENSION ANNUITY</div></div></div>
+    <p class="lead">S02 险种代码 · 出生满 30 日—69 周岁 · 50+ 客户专属 · 70 岁起领终身年金 · 满期返还保费。养老规划最优解。</p>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">① 产品基本要素</h3>
+    <div class="tbl-scroll"><table class="kv">
+      <tr><td class="k">产品名称</td><td class="v">宏愿人生养老年金保险（分红型）</td></tr>
+      <tr><td class="k">险种代码</td><td class="v">S02</td></tr>
+      <tr><td class="k">投保年龄</td><td class="v">出生满 30 日 — 69 周岁</td></tr>
+      <tr><td class="k">交费方式</td><td class="v">一次交清 / 3 年交 / 5 年交 / 10 年交</td></tr>
+      <tr><td class="k">保险期间</td><td class="v">至被保险人年满 105 周岁后的首个保单周年日前一日 24 时止</td></tr>
+      <tr><td class="k">养老年金领取频率</td><td class="v">年领 / 月领（月领 = 年领 × 0.085）</td></tr>
+      <tr><td class="k">红利领取</td><td class="v">可选现金领取 / 累积生息</td></tr>
+      <tr><td class="k">养老金开始领取年龄</td><td class="v">55（女）/ 60 / 65 / 70 周岁</td></tr>
+      <tr><td class="k">最低保险费</td><td class="v">趸交 5万 / 3年交 3万 / 5年交 1万 / 10年交 1万</td></tr>
+      <tr><td class="k">体检 / 契调</td><td class="v"><b>无须体检</b>。趸交大于 3000 万须契调；3/5/10 年交期交大于 1000 万须契调</td></tr>
+    </table></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">② 保险责任</h3>
+    <div class="callout key"><span class="ci">💰</span><div><b>养老年金</b>：合同约定的每个养老年金领取日零时生存，按以下金额给付：<br>① 年领：每年金额 = <b>基本保险金额</b>；<br>② 月领：每月金额 = <b>基本保险金额 × 0.085</b>。</div></div>
+    <div class="callout key"><span class="ci">🎁</span><div><b>满期生存保险金</b>：被保险人生存至保险期间届满（105 周岁），按 <b>合同实际交纳的保险费</b> 给付满期金，合同终止。</div></div>
+    <div class="callout warn"><span class="ci">⚰️</span><div><b>身故保险金</b>：被保险人身故，按 <b>MAX（实际交纳的保险费，现金价值）</b> 给付身故金，合同终止。</div></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">③ 案例演示 · 46 岁女士 · 55 岁开始领取</h3>
+    <div class="case">
+      <div class="ch">📌 46 岁女士 · 年交 10 万 × 3 年 · 55 岁起领</div>
+      <div class="ct2">每年确定养老金领到 105 岁。第 5 年现价超保费；第 30 年年化约 3.1%；第 40 年年化约 3.3%；满期返还所有保费。</div>
+      <div class="hl">
+        <div><div class="n">第5年</div><div class="l">现价超总保费</div></div>
+        <div><div class="n">30年</div><div class="l">年化约 3.1%</div></div>
+        <div><div class="n">40年</div><div class="l">年化约 3.3%</div></div>
+        <div><div class="n">105岁</div><div class="l">满期返还保费</div></div>
+      </div>
+      <p class="tbl-cap">单位：元。累积红利的红利累积利率假设为年利率 <b>1.75%</b>，实际公布的红利累积利率水平可能高于或低于该利率。<b>红利水平不保证，在某些年度红利可能为零</b>。</p>
+      <div class="tbl-scroll"><table class="tbl benefit-tbl">
+        <thead><tr>
+          <th>保单<br>年度</th><th>年龄<br>(年初)</th><th>当年保费<br>(年初)</th><th>累计保费<br>(年初)</th><th>当年累计<br>领取年金</th><th>年累计<br>红利</th><th>分红累积<br>红利2.5%</th><th>现金价值<br>(年末)</th><th>满期生存<br>保险金(年末)</th><th>身故<br>保险金(年末)</th><th>生存<br>总利益</th>
+        </tr></thead>
+        <tbody>          <tr><td>1</td><td>47</td><td>100,000</td><td>100,000</td><td>0</td><td>943</td><td>943</td><td>49,780</td><td>0</td><td>100,000</td><td>50,723</td><td>50,723</td></tr>          <tr><td>2</td><td>48</td><td>100,000</td><td>200,000</td><td>0</td><td>3,167</td><td>4,134</td><td>112,140</td><td>0</td><td>200,000</td><td>116,297</td><td>200,000</td></tr>          <tr><td>3</td><td>49</td><td>100,000</td><td>300,000</td><td>0</td><td>3,411</td><td>7,622</td><td>217,430</td><td>0</td><td>300,000</td><td>225,089</td><td>300,000</td></tr>          <tr><td>4</td><td>50</td><td>0</td><td>300,000</td><td>0</td><td>3,470</td><td>11,286</td><td>255,630</td><td>0</td><td>300,000</td><td>266,953</td><td>300,000</td></tr>          <tr class="cover"><td>5</td><td>51</td><td>0</td><td>300,000</td><td>0</td><td>3,531</td><td>15,047</td><td>293,290</td><td>0</td><td>300,000</td><td>308,970</td><td>300,000</td></tr>          <tr><td>6</td><td>52</td><td>0</td><td>300,000</td><td>0</td><td>3,593</td><td>19,027</td><td>298,420</td><td>0</td><td>300,000</td><td>316,612</td><td>300,000</td></tr>          <tr><td>7</td><td>53</td><td>0</td><td>300,000</td><td>0</td><td>3,656</td><td>23,251</td><td>303,640</td><td>0</td><td>300,000</td><td>325,737</td><td>300,000</td></tr>          <tr><td>8</td><td>54</td><td>0</td><td>300,000</td><td>0</td><td>3,720</td><td>27,728</td><td>308,950</td><td>0</td><td>300,000</td><td>335,319</td><td>300,000</td></tr>          <tr class="cover"><td>9</td><td>55</td><td>0</td><td>300,000</td><td>5,569</td><td>3,785</td><td>30,814</td><td>308,890</td><td>0</td><td>300,000</td><td>345,273</td><td>305,569</td></tr>          <tr><td>10</td><td>56</td><td>0</td><td>300,000</td><td>5,569</td><td>3,784</td><td>35,368</td><td>308,830</td><td>0</td><td>300,000</td><td>355,336</td><td>310,569</td></tr>          <tr><td>15</td><td>60</td><td>0</td><td>300,000</td><td>5,569</td><td>3,780</td><td>59,893</td><td>308,560</td><td>0</td><td>300,000</td><td>396,750</td><td>318,569</td></tr>          <tr><td>20</td><td>65</td><td>0</td><td>300,000</td><td>5,569</td><td>3,776</td><td>81,800</td><td>308,160</td><td>0</td><td>300,000</td><td>451,301</td><td>326,669</td></tr>          <tr><td>25</td><td>70</td><td>0</td><td>300,000</td><td>5,569</td><td>3,766</td><td>105,966</td><td>307,720</td><td>0</td><td>300,000</td><td>509,324</td><td>339,569</td></tr>          <tr class="cover"><td>30</td><td>75</td><td>0</td><td>300,000</td><td>5,569</td><td>3,735</td><td>230,223</td><td>305,680</td><td>0</td><td>300,000</td><td>723,368</td><td>419,469</td></tr>          <tr><td>35</td><td>80</td><td>0</td><td>300,000</td><td>5,569</td><td>3,707</td><td>324,653</td><td>302,660</td><td>0</td><td>300,000</td><td>849,981</td><td>510,369</td></tr>          <tr class="cover"><td>40</td><td>85</td><td>0</td><td>300,000</td><td>5,569</td><td>3,622</td><td>366,475</td><td>300,970</td><td>0</td><td>300,000</td><td>866,872</td><td>594,669</td></tr>          <tr><td>45</td><td>90</td><td>0</td><td>300,000</td><td>5,569</td><td>3,700</td><td>348,587</td><td>301,540</td><td>0</td><td>300,000</td><td>884,033</td><td>681,569</td></tr>          <tr><td>50</td><td>95</td><td>0</td><td>300,000</td><td>5,569</td><td>3,687</td><td>373,708</td><td>300,360</td><td>0</td><td>300,000</td><td>919,112</td><td>767,369</td></tr>          <tr><td>55</td><td>100</td><td>0</td><td>300,000</td><td>5,569</td><td>3,671</td><td>400,069</td><td>299,000</td><td>0</td><td>300,000</td><td>955,252</td><td>854,069</td></tr>          <tr class="peak"><td>59</td><td>104</td><td>0</td><td>300,000</td><td>5,569</td><td>3,621</td><td>471,790</td><td>300,000</td><td>0</td><td>300,000</td><td>1,050,250</td><td>939,819</td></tr>        </tbody>
+      </table></div>
+      <div class="callout info"><span class="ci">💡</span><div>本案例为虚拟案例，演示数据经取整处理。红利水平不保证，在某些年度红利可能为零。<b>本演示不代表本公司对未来利益的承诺</b>，具体以保险条款和保险合同为准。</div></div>
+    </div>
+  </div></section>  <section class="sec" id="hengxiang"><div class="wrap">
+    <div class="sec-head"><div class="ic">🌟</div><div><h2>七、产品五 · 恒享人生年金保险（固定型）</h2><div class="en">HENGXIANG · FIXED ANNUITY</div></div></div>
+    <p class="lead">G23 险种代码 · 出生满 30 日—80 周岁 · <b>利益简单</b>：现价覆盖总保费、年金 = 总保费 2%、关爱金 1 次性、满期返还 102% 保费。固收型，纯安全。</p>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">① 产品基本要素</h3>
+    <div class="tbl-scroll"><table class="kv">
+      <tr><td class="k">产品名称</td><td class="v">恒享人生年金保险</td></tr>
+      <tr><td class="k">险种代码</td><td class="v">G23</td></tr>
+      <tr><td class="k">投保年龄</td><td class="v">出生满 30 日 — 80 周岁</td></tr>
+      <tr><td class="k">交费方式</td><td class="v">一次交清 / 3 年交 / 5 年交 / 10 年交</td></tr>
+      <tr><td class="k">保险期间</td><td class="v">至被保险人年满 105 周岁后的首个保单周年日前一日 24 时止</td></tr>
+      <tr><td class="k">最低保险费</td><td class="v">趸交 5万 / 3年交 2万 / 5年交 1万 / 10年交 1万</td></tr>
+      <tr><td class="k">契调标准</td><td class="v">趸交大于 3000 万须契调；3/5/10 年交期交大于 1000 万须契调</td></tr>
+    </table></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">② 关爱金领取日</h3>
+    <div class="tbl-scroll"><table class="kv">
+      <tr><td class="k">交费方式</td><td class="v">关爱金领取日</td></tr>
+      <tr><td class="k">一次交清 / 3 年交</td><td class="v">合同生效后的第 <b>6</b> 个保单周年日</td></tr>
+      <tr><td class="k">5 年交</td><td class="v">合同生效后的第 <b>7</b> 个保单周年日</td></tr>
+      <tr><td class="k">10 年交</td><td class="v">合同生效后的第 <b>11</b> 个保单周年日</td></tr>
+    </table></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">③ 保险责任</h3>
+    <div class="callout key"><span class="ci">🎁</span><div><b>关爱金</b>（一次性）：被保险人于关爱金领取日零时生存，按 <b>基本保险金额</b> 给付关爱金。<b>合同期间内仅给付 1 次</b>。</div></div>
+    <div class="callout key"><span class="ci">💰</span><div><b>年金</b>（每年）：关爱金领取日次日起至保险期间届满，每个保单周年日零时生存，按 <b>合同实际交纳保险费的 2%</b> 给付年金。</div></div>
+    <div class="callout key"><span class="ci">🎉</span><div><b>满期生存保险金</b>：生存至 105 周岁，按 <b>合同实际交纳保险费的 102%</b> 给付满期金，合同终止。</div></div>
+    <div class="callout warn"><span class="ci">⚰️</span><div><b>身故保险金</b>：被保险人身故，按 <b>MAX（实际交纳的保险费，现金价值）</b> 给付身故金，合同终止。</div></div>
+
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">④ 案例演示 · 40 岁 · 3 年交 10 万/年</h3>
+    <div class="case">
+      <div class="ch">📌 40 岁 · 3 年交 10 万/年 · 总保费 30 万</div>
+      <div class="ct2">第 6 年领关爱金；第 6 年起每年领年金 6,000 元（总保费 2%）；105 岁满期返 30.6 万（102% 保费）。</div>
+      <div class="hl">
+        <div><div class="n">第5年</div><div class="l">现价超保费 30.4 万</div></div>
+        <div><div class="n">第6年</div><div class="l">领关爱金 + 年金起领</div></div>
+        <div><div class="n">6,000/年</div><div class="l">总保费 2% 年金</div></div>
+        <div><div class="n">30.6万</div><div class="l">满期返 102% 保费</div></div>
+      </div>
+      <p class="tbl-cap">单位：元。"生存总利益" = 现金价值 + 累计关爱金/年金。"身故总利益" = 身故保险金 + 累计关爱金/年金。</p>
+      <div class="tbl-scroll"><table class="tbl benefit-tbl">
+        <thead><tr>
+          <th>保单<br>年度</th><th>年龄<br>(年初)</th><th>当年保费<br>(年初)</th><th>累计保费<br>(年初)</th><th>关爱金/<br>年金(年初)</th><th>累计关爱金/<br>年金(年初)</th><th>满期生存<br>保险金(年末)</th><th>身故<br>保险金(年末)</th><th>现金价值<br>(年末)</th><th>生存<br>总利益(年末)</th><th>身故<br>总利益(年末)</th>
+        </tr></thead>
+        <tbody>          <tr><td>1</td><td>40</td><td>100000</td><td>100000</td><td>0</td><td>0</td><td>0</td><td>100000</td><td>47780</td><td>47780</td><td>100000</td></tr>          <tr><td>2</td><td>41</td><td>100000</td><td>200000</td><td>0</td><td>0</td><td>0</td><td>200000</td><td>107980</td><td>107980</td><td>200000</td></tr>          <tr><td>3</td><td>42</td><td>100000</td><td>300000</td><td>0</td><td>0</td><td>0</td><td>300000</td><td>216170</td><td>216170</td><td>300000</td></tr>          <tr><td>4</td><td>43</td><td>0</td><td>300000</td><td>0</td><td>0</td><td>0</td><td>300000</td><td>260310</td><td>260310</td><td>300000</td></tr>          <tr class="cover"><td>5</td><td>44</td><td>0</td><td>300000</td><td>0</td><td>0</td><td>0</td><td>303830</td><td>303830</td><td>303830</td><td>303830</td></tr>          <tr class="cover"><td>6</td><td>45</td><td>0</td><td>300000</td><td>0</td><td>0</td><td>0</td><td>309910</td><td>300000</td><td>309910</td><td>309910</td></tr>          <tr><td>7</td><td>46</td><td>0</td><td>300000</td><td>9910</td><td>9910</td><td>0</td><td>306000</td><td>300000</td><td>315910</td><td>315910</td></tr>          <tr><td>8</td><td>47</td><td>0</td><td>300000</td><td>6000</td><td>15910</td><td>0</td><td>306000</td><td>300000</td><td>321910</td><td>321910</td></tr>          <tr><td>9</td><td>48</td><td>0</td><td>300000</td><td>6000</td><td>21910</td><td>0</td><td>306000</td><td>300000</td><td>327910</td><td>327910</td></tr>          <tr><td>10</td><td>49</td><td>0</td><td>300000</td><td>6000</td><td>27910</td><td>0</td><td>306000</td><td>300000</td><td>333910</td><td>333910</td></tr>          <tr><td>20</td><td>59</td><td>0</td><td>300000</td><td>6000</td><td>87910</td><td>0</td><td>306000</td><td>300000</td><td>393910</td><td>393910</td></tr>          <tr><td>30</td><td>69</td><td>0</td><td>300000</td><td>6000</td><td>147910</td><td>0</td><td>306000</td><td>300000</td><td>453910</td><td>453910</td></tr>          <tr><td>40</td><td>79</td><td>0</td><td>300000</td><td>6000</td><td>207910</td><td>0</td><td>306000</td><td>300000</td><td>513910</td><td>513910</td></tr>          <tr><td>50</td><td>89</td><td>0</td><td>300000</td><td>6000</td><td>267910</td><td>0</td><td>306000</td><td>300000</td><td>573910</td><td>573910</td></tr>          <tr><td>60</td><td>99</td><td>0</td><td>300000</td><td>6000</td><td>327910</td><td>0</td><td>306000</td><td>300000</td><td>633910</td><td>633910</td></tr>          <tr class="peak"><td>65</td><td>104</td><td>0</td><td>300000</td><td>6000</td><td>357910</td><td>306000</td><td>306000</td><td>306000</td><td>663910</td><td>663910</td></tr>        </tbody>
+      </table></div>
+      <div class="callout info"><span class="ci">💡</span><div>1. 演示数据经取整处理。<br>2. 犹豫期结束后，合同退保金 = "现金价值"。<br>3. "生存总利益" = 现金价值 + 累计关爱金/年金，每年末包含下一保单年度初的关爱金/年金（如有）。<br>4. "身故总利益" = 身故保险金 + 累计关爱金/年金。</div></div>
+    </div>
+  </div></section>  <section class="sec" id="compare"><div class="wrap">
+    <div class="sec-head"><div class="ic">⚖️</div><div><h2>八、分红终身寿主流高现价产品对比</h2><div class="en">INDUSTRY COMPARISON</div></div></div>
+    <p class="lead">分红增额终身寿是目前各家寿险主战场，下表以"覆盖保费速度 / 现金价值 / 总收益"三个核心维度对比老七家：</p>
+    <div class="cmp-row">
+      <div class="c1">覆盖已交保费速度<br>（含红利）</div>
+      <div class="c1">第 4 年<br>泰康</div>
+      <div class="c1 win">第 4 年<br>新华</div>
+    </div>
+    <div class="cmp-row" style="margin-top:8px;">
+      <div class="c1">现金价值<br>（40 年总保费 300 万）</div>
+      <div class="c1">第 1<br>泰康</div>
+      <div class="c1">第 2<br>太保</div>
+      <div class="c1 win">第 3<br>新华</div>
+    </div>
+    <div class="cmp-row" style="margin-top:8px;">
+      <div class="c1">总收益<br>（40 年总保费 300 万）</div>
+      <div class="c1">第 1<br>泰康（3.75%定价）</div>
+      <div class="c1">第 2<br>太平（3.5%定价）</div>
+      <div class="c1">第 3<br>太保（3.5%定价）</div>
+      <div class="c1 win">第 4<br>新华（3.5%定价，差距仅 1.5 万）</div>
+    </div>
+    <div class="callout info"><span class="ci">📊</span><div>注：泰康按 3.75% 预定利率演示，新华/太平/太平洋按 3.5% 演示，国寿按 2.0% 累积生息演示。<b>从预期总收益看，新华和太平几乎一样（40 年总保费 300 万，收益只差 1,500 元）；跟太保比差约 1.5 万元</b>。</div></div>
+  </div></section>  <section class="sec" id="fund"><div class="wrap">
+    <div class="sec-head"><div class="ic">🦢</div><div><h2>九、鸿鹄基金 · 险资长钱长投的标杆</h2><div class="en">HONGHU FUND · LONG-TERM EQUITY</div></div></div>
+    <div class="callout key"><span class="ci">💎</span><div><b>保险公司直接投资的首个私募证券基金 · 保险资金长期投资改革的首批试点项目</b>。2023 年末金融监管总局推动险资长期股票投资试点，由<b>中国人寿与新华保险共同发起</b>。</div></div>
+    <div class="stats">
+      <div class="stat"><div class="num">500<small>亿</small></div><div class="lb">首期试点规模</div><div class="sb">市场首支险资私募证券基金</div></div>
+      <div class="stat"><div class="num">2,220<small>亿</small></div><div class="lb">三批累计规模</div><div class="sb">8 家主要险企参与</div></div>
+      <div class="stat"><div class="num">8<small>家</small></div><div class="lb">参与机构</div><div class="sb">国寿/新华/太保/泰康/阳光/人保/平安/太平</div></div>
+      <div class="stat"><div class="num">2023<small>年</small></div><div class="lb">金融监管总局批准</div><div class="sb">险资长期股票投资试点</div></div>
+    </div>
+    <p class="lead" style="margin-top:14px;">核心策略：投资理念专注长期持有，做"耐心资本"；选股标准聚焦高股息、业绩稳定的行业龙头，<b>高股息策略提供稳定现金流，完美契合保险资金的风险收益需求</b>。</p>
+    <h3 style="font-size:15px;color:var(--blue-800);margin:14px 0 8px;">鸿鹄基金部分持仓情况</h3>
+    <p class="tbl-cap">数据来源：Wind；截至 2025 年三季度末</p>
+    <div class="tbl-scroll"><table class="tbl fund-table">
+      <thead><tr><th>上市公司</th><th>持股机构</th><th class="r">持股数量（万股）</th><th class="r">持股市值（万元）</th></tr></thead>
+      <tbody>
+        <tr><td>中国石化</td><td>鸿鹄基金三期 1 号</td><td class="r">30,495.86</td><td class="r">161,323.10</td></tr>
+        <tr><td>大秦铁路</td><td>鸿鹄基金三期 1 号</td><td class="r">29,848.71</td><td class="r">175,808.91</td></tr>
+        <tr><td>国投电力</td><td>鸿鹄基金三期 1 号</td><td class="r">9,343.80</td><td class="r">122,030.05</td></tr>
+        <tr><td>泸州老窖</td><td>鸿鹄基金三期 1 号</td><td class="r">1,887.20</td><td class="r">248,958.92</td></tr>
+        <tr><td>国投电力</td><td>鸿鹄基金三期 2 号</td><td class="r">6,184.55</td><td class="r">80,770.18</td></tr>
+        <tr><td>中国石油</td><td>鸿鹄基金二期</td><td class="r">21,721.36</td><td class="r">175,074.14</td></tr>
+        <tr><td>中国神华</td><td>鸿鹄基金二期</td><td class="r">5,220.61</td><td class="r">200,993.60</td></tr>
+        <tr><td>中国电信</td><td>鸿鹄基金一期</td><td class="r">76,174.22</td><td class="r">507,320.33</td></tr>
+        <tr><td>伊利股份</td><td>鸿鹄基金一期</td><td class="r">15,276.40</td><td class="r">416,740.25</td></tr>
+        <tr><td>陕西煤业</td><td>鸿鹄基金一期</td><td class="r">11,633.89</td><td class="r">232,677.79</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout ok"><span class="ci">🏆</span><div><b>鸿鹄基金首期成绩亮眼：</b>新华保险 2025 年半年报显示，截至 6 月 30 日鸿鹄志远一期净资产与总资产均显著增长，综合收益总额表现优异。<b>入选央视财经"金融改革"2025 年度案例</b>。</div></div>
+  </div></section>  <section class="sec"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏗️</div><div><h2>十、重大长期投资项目</h2><div class="en">MAJOR LONG-TERM INVESTMENTS</div></div></div>
+    <div class="grid">
+      <div class="card">
+        <div class="ct">中石油管道项目股权</div>
+        <div class="cd">
+          <p>2013 年 6 月，新华资产以受托新华保险资金投资中石油西一、二线西部管道项目股权投资计划。</p>
+          <p>2023 年 4 月，经财政部批准，新华保险将持有的国家管网联合管道公司股权转让至国家管网集团。</p>
+        </div>
+        <div class="stats" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+          <div class="stat" style="padding:12px 8px;"><div class="num" style="font-size:22px;">6.86<small>%</small></div><div class="lb" style="font-size:12px;">全周期累计收益</div></div>
+          <div class="stat" style="padding:12px 8px;"><div class="num" style="font-size:22px;">.44<small>%</small></div><div class="lb" style="font-size:12px;">年化收益</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">中国银联股权投资</div>
+        <div class="cd">
+          <p>2018 年，新华人寿出资成为<b>中国银联</b>股东。</p>
+          <p>截至 2024 年末，根据 KPMG 的估值评估，中国银联估值与累计分红均显著增长。</p>
+        </div>
+        <div class="stats" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+          <div class="stat" style="padding:12px 8px;"><div class="num" style="font-size:22px;">2.67<small>X</small></div><div class="lb" style="font-size:12px;">回报倍数</div></div>
+          <div class="stat" style="padding:12px 8px;"><div class="num" style="font-size:22px;">17.10<small>%</small></div><div class="lb" style="font-size:12px;">IRR（内部收益率）</div></div>
+        </div>
+      </div>
+    </div>
+  </div></section>  <section class="sec" id="holdings"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏛️</div><div><h2>十一、举牌优质上市公司</h2><div class="en">BANKRUPTCY-PROOF HOLDINGS</div></div></div>
+    <p class="lead">相关公司经营稳健、发展前景良好，与新华具备战略协同能力，<b>体现耐心资本的择股理念</b>。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">海通证券</div><div class="cd">国内头部券商，目前已与国泰君安合并为<b>国泰海通</b>。</div><span class="pill">券商龙头</span></div>
+      <div class="card"><div class="ct">上海医药</div><div class="cd">总持股比例：<b>5.68%</b><br>A 股 2.33% + 港股 4.18%</div><span class="pill">医药流通</span></div>
+      <div class="card"><div class="ct">杭州银行</div><div class="cd">总持股比例：<b>5.84%</b><br>股息率：6%</div><span class="pill">城商行 · 高股息</span></div>
+      <div class="card"><div class="ct">国药股份</div><div class="cd">总持股比例：<b>5.60%</b><br>股息率：2.5%</div><span class="pill">医药央企</span></div>
+      <div class="card"><div class="ct">北京控股</div><div class="cd">总持股比例：<b>5.48%</b><br>股息率：5.69%</div><span class="pill">公用事业</span></div>
+    </div>
+    <div class="callout info"><span class="ci">💼</span><div>新华保险股票投资占比 <b>11.6%</b>，基金投资占比 <b>7.0%</b>。在监管引导下持续增加长期股权配置，<b>为分红险提供稳定的权益收益</b>。</div></div>
+  </div></section>  <section class="sec" id="industry"><div class="wrap">
+    <div class="sec-head"><div class="ic">📈</div><div><h2>十二、5 大上市险企 · 2025 业绩对比</h2><div class="en">LISTED INSURERS · 2025</div></div></div>
+    <p class="lead">从股价、涨幅、收益率三个维度看，<b>新华保险是 2025 年 A/H 股市值修复最猛的寿险股</b>。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>指标</th><th class="r" style="color:#fff;">新华</th><th class="r">平安</th><th class="r">太保</th><th class="r">国寿</th><th class="r">人保</th></tr></thead>
+      <tbody>
+        <tr><td>A 股股价（1月16日）</td><td class="r" style="background:var(--blue-50);font-weight:700;color:var(--blue-800);">85.8</td><td class="r">66.33</td><td class="r">44.19</td><td class="r">47.52</td><td class="r">9.30</td></tr>
+        <tr><td>A 股近一年涨跌幅</td><td class="r" style="background:var(--green-bg);font-weight:700;color:#166534;">+93.84%</td><td class="r">+43.01%</td><td class="r">+46.71%</td><td class="r">+28.53%</td><td class="r">+42.46%</td></tr>
+        <tr><td>H 股近一年涨跌幅</td><td class="r" style="background:var(--green-bg);font-weight:700;color:#166534;">+242.08%</td><td class="r">+79.73%</td><td class="r">+87.99%</td><td class="r">+158.69%</td><td class="r">+99.70%</td></tr>
+        <tr><td>总投资收益率（25年1-9月）</td><td class="r" style="background:var(--blue-50);font-weight:700;color:var(--blue-800);">8.6%</td><td class="r">3.1%（上半年）</td><td class="r">5.2%</td><td class="r">6.4%</td><td class="r">5.4%</td></tr>
+        <tr><td>股票配置比例</td><td class="r" style="background:var(--blue-50);font-weight:700;color:var(--blue-800);">11.6%</td><td class="r">10.5%</td><td class="r">9.7%</td><td class="r">8.7%</td><td class="r">5.4%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout key"><span class="ci">🚀</span><div>截至 2025 年 12 月底，新华保险 A 股年内涨 <b>49%</b>，H 股年内涨 <b>131%</b>，<b>涨幅位居保险板块第一</b>。</div></div>
+  </div></section>  <section class="sec" id="dividend"><div class="wrap">
+    <div class="sec-head"><div class="ic">💎</div><div><h2>十三、分红兑现能力 · 行业第一</h2><div class="en">DIVIDEND PAYOUT</div></div></div>
+    <div class="stats">
+      <div class="stat"><div class="num">156.1<small>%</small></div><div class="lb">近 5 年平均红利实现率</div><div class="sb">42 家公司中位列第一</div></div>
+      <div class="stat"><div class="num">152<small>%</small></div><div class="lb">59 款保额分红产品<br>增额红利平均实现率</div><div class="sb">56 款达 100%</div></div>
+      <div class="stat"><div class="num">117<small>%</small></div><div class="lb">7 款在售现金分红<br>平均实现率</div><div class="sb">最高 122%</div></div>
+      <div class="stat"><div class="num">79<small>%</small></div><div class="lb">2024 年 80 款分红险<br>达成 100% 及以上的比例</div><div class="sb">老七家排名第一</div></div>
+    </div>
+    <div class="callout ok"><span class="ci">🏆</span><div><b>新华保险近 5 年平均红利实现率 156.1%</b>，在所有披露数据的公司中位列第一！2024 年披露的 80 款分红险产品中，高达 63 款（约 79%）实现 100% 及以上红利实现率，<b>在 42 家公司中排名前三，老七家中排名第一</b>，高于中英人寿、中意人寿、陆家嘴国泰。</div></div>
+  </div></section>  <section class="sec" id="qa"><div class="wrap">
+    <div class="sec-head"><div class="ci" style="width:38px;height:38px;border-radius:11px;background:var(--blue-100);color:var(--blue-700);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;">💬</div><div><h2>十四、客户答疑话术 · 5 步讲清分红险</h2><div class="en">CLIENT Q&A</div></div></div>
+    <p class="lead">"X 女士您好，您买了新华的分红险，您的钱到底去了哪里？怎么赚钱的？"用下面 5 步讲清：</p>
+    <div class="steps">
+      <div class="st"><b>第一步：您的保费进了"专用账户"</b><br>您交的保费不进公司自己的钱袋子，而是进了一个<b>独立的分红保险专用账户</b>，专款专用、单独核算。</div>
+      <div class="st"><b>第二步：保险公司拿着这些钱去投资</b><br>新华保险主要投向 3 个方向：<br>① <b>鸿鹄基金</b>：监管特批的"长钱长投"试点，规模超 2,000 亿，专买高股息行业龙头（中国石化、中国神华、陕西煤业、大秦铁路等），每年光分红就很可观。<br>② <b>长久期债券</b>：锁定长期利率，给分红提供"稳定底仓"。<br>③ <b>战略性举牌优质公司</b>：上海医药、国药股份、杭州银行、北京控股等，看好长期发展。</div>
+      <div class="st"><b>第三步：投资赚了钱，先扣除成本</b><br>投资收益出来后，先扣掉<b>保障成本、赔付支出、运营费用</b>，剩下的才是"可分配盈余"。</div>
+      <div class="st"><b>第四步：监管规定，至少 70% 的盈余必须分给客户</b><br>也就是说，公司投资赚的钱，<b>大头必须给您</b>，公司自己只能留一小部分。这是写进《分红保险精算规定》的硬要求。</div>
+      <div class="st"><b>第五步：您到手的两笔钱</b><br>① <b>保证利益</b>：写进合同的，不管投资赚多赚少，这部分一定给您。<br>② <b>非保证红利</b>：根据实际投资收益浮动。<b>新华近 5 年平均红利实现率 156.1%，行业第一</b>，2024 年 80 款产品中 79% 达成 100% 以上。</div>
+    </div>
+    <div class="callout key"><span class="ci">💡</span><div><b>一句话总结：</b>您买的不只是一份保单，而是让新华帮您做长期资产管理。<b>保证利益保底 + 红利权益上不封顶</b>，这就是分红险的真正价值。</div></div>
+  </div></section>  <div class="foot"><div class="slogan">新华保险 保得长久 保得美好<small>NCI 新华保险 · A+H 上市 ·  Fortune 世界500强</small></div><div class="disc">本资料为内部培训与学习交流使用，内容依据公开培训材料整理重构，仅供理解参考，不构成任何投资建议或收益承诺；具体保险责任、利益演示及减保规则等均以产品条款、保险合同及监管披露为准。分红型产品红利为非保证收益，过往业绩不代表未来表现。</div></div>
 </div>
 <script>
 (function(){
-  // 实时时钟
   var clk=document.getElementById('clockText');
   function tick(){
     var n=new Date(),p=function(x){return (x<10?'0':'')+x;};
@@ -178,7 +572,6 @@ table.kv td.v{color:var(--ink-2);}
     setTimeout(tick,1000);
   }
   tick();
-  // 下载图片
   window.downloadImage=function(){
     var el=document.getElementById('capture');
     var btn=document.getElementById('dlBtn');
