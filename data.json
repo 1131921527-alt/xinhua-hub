@@ -216,18 +216,6 @@
       "icon": "⚖️",
       "items": [
         {
-          "name": "招行在架产品对比分析",
-          "type": "ppt",
-          "description": "招行渠道在架产品横向对比分析 · 在线浏览（无需下载）",
-          "url": "files/产品对比/招行在架产品对比分析.html"
-        },
-        {
-          "name": "招行在架产品对比表",
-          "type": "excel",
-          "description": "招行渠道在架产品对比明细表",
-          "url": "files/产品对比/招行在架产品对比.xlsx"
-        },
-        {
           "name": "在售产品投保年龄及起售金额",
           "type": "image",
           "description": "所有在售产品的投保年龄、起售金额、形态特点汇总表",
