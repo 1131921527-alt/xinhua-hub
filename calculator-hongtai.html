@@ -336,8 +336,8 @@ function downloadImage(){
   const totalW=colW.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
-  // 紧凑模式：footer文字结束位置+小留白
-  const canvasH=PAD+TITLE_H+INFO_H+SUBHDR_H+tableH+8+16+16;   // 8=footer前距, 16=文字高(1行), 16=底留白
+  const footY=PAD+TITLE_H+INFO_H+SUBHDR_H+tableH+8;   // footer紧贴表格
+  const canvasH=footY+24;   // 1行footer文字(~14px) + 10px底留白
 
   const canvas=document.getElementById('renderCanvas');
   canvas.width=canvasW*SCALE*DPR; canvas.height=canvasH*SCALE*DPR;
@@ -522,7 +522,6 @@ function downloadImage(){
   }
 
   // 8) 页脚声明
-  const footY=rowY0+dlRows.length*ROW_H+8;
   ctx.fillStyle=C.textMuted; ctx.font='11px '+FAM;
   ctx.textAlign='center'; ctx.textBaseline='top';
   ctx.fillText('本演示基于交清增额红利领取方式，利益演示仅供参考，不作为保险合同组成部分，具体以保险合同为准。',

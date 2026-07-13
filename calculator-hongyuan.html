@@ -496,9 +496,8 @@ function downloadImage() {
       const sHdrY = infoY + infoH;
       const tblY = sHdrY + subHdrH;
       const tableBottom = tblY + headerH + dlRows.length * rowH;
-      const footerY = tableBottom + 14;
-      // 紧凑模式：2行footer文字结束+小留白
-      const canvasH = footerY + 28 + 14;   // 28=2行文字, 14=底留白
+      const footerY = tableBottom + 10;   // footer紧贴表格
+      const canvasH = footerY + 30;       // 2行footer(20px间距+4px偏移) + 10px底留白
 
       const SCALE = 2;
       const dpr = (window.devicePixelRatio || 2) * SCALE;

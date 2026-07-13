@@ -301,7 +301,7 @@ function downloadImage(){
   const totalW=colWidths.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
-  const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+tableH+24+18+14;   // 24=footer前距, 18=文字区高, 14=底留白
+  const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+tableH+10+18+10;   // 10=footer前距(紧贴), 18=1行文字高, 10=底留白
   const canvas=document.getElementById('renderCanvas');
   canvas.width=canvasW*DPR; canvas.height=canvasH*DPR;
   const ctx=canvas.getContext('2d');
@@ -423,10 +423,10 @@ function downloadImage(){
   }
 
   // 页脚声明
-  const footerY=tableY+HEADER_H+tableH;
+  const footerY=tableY+tableH+10;   // footer紧贴表格，去掉重复的HEADER_H
   ctx.fillStyle=COLORS.textMuted; ctx.font='12px "PingFang SC","Microsoft YaHei",sans-serif';
   ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText('本演示基于保证利益（非分红型），生存总利益=关爱金/年金+满期保险金+现金价值，仅供产品利益参考，具体以保险合同为准', canvasW/2, footerY+FOOTER_H/2);
+  ctx.fillText('本演示基于保证利益（非分红型），生存总利益=关爱金/年金+满期保险金+现金价值，仅供产品利益参考，具体以保险合同为准', canvasW/2, footerY+10);
 
   // 导出（toDataURL，兼容微信X5）
   const dataUrl=canvas.toDataURL('image/png');

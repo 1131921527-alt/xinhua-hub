@@ -284,7 +284,7 @@ function downloadImage(){
   const titleH=80, infoH=130, paramH=52, subHdrH=40, footerH=44, pad=22;
   const tableH=headerH+dlRows.length*rowH;
   const canvasW=totalW+pad*2;
-  const canvasH=titleH+infoH+paramH+subHdrH+tableH+22+16+14;   // 22=footer前距, 16=文字区高(1行), 14=底留白
+  const canvasH=titleH+infoH+paramH+subHdrH+tableH+10+16+10;   // 10=footer前距(紧贴), 16=1行文字高, 10=底留白
 
   const dpr=2;
   canvas.width=Math.round(canvasW*dpr); canvas.height=Math.round(canvasH*dpr);
@@ -442,7 +442,7 @@ function downloadImage(){
   }
 
   // —— 页脚声明 ——
-  const ftY=tblY+headerH+dlRows.length*rowH+22;
+  const ftY=tblY+headerH+dlRows.length*rowH+10;   // footer紧贴表格
   ctx.fillStyle='#94A3B8'; ctx.font='12px PingFang SC'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText('本计划书基于保证利益（非分红型）演算，现金价值写入合同逐年增长，仅供产品利益参考，具体以保险合同为准', canvasW/2, ftY);
 

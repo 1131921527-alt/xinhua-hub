@@ -474,9 +474,9 @@ function downloadImage() {
       
       const tableH = headerH + visibleRows.length * rowH;
       const tableY = titleH + infoH + paramH + subHeaderH;  // 表格起始Y坐标
+      const footerY = tableY + tableH + 10;   // footer紧贴表格，仅10px间距
       const canvasW = totalWidth + padding * 2;
-      // 紧凑模式：footer文字结束位置+小留白，不使用固定大padding
-      const canvasH = tableY + tableH + 24 + 36 + 16;       // 24=footer前距, 36=2行文字高, 16=底留白
+      const canvasH = footerY + 28;       // 2行footer(18px) + 10px底留白
       
       canvas.width = canvasW * 2; // Retina
       canvas.height = canvasH * 2;
@@ -735,7 +735,6 @@ function downloadImage() {
       }
       
       // ===== 6. 底部声明 =====
-      const footerY = tableY + headerH + visibleRows.length * rowH + 24;
       ctx.fillStyle = '#94A3B8';
       ctx.font = '14px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';

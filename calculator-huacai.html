@@ -478,7 +478,8 @@ function downloadImage() {
       }
 
       const canvasW=totalW+PAD*2;
-      const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+HEADER_H+dlRows.length*ROW_H+20+30+14;  // 20=footer前距, 30=2行文字高, 14=底留白
+      const ftY=tblY+HEADER_H+dlRows.length*ROW_H+10;   // footer紧贴表格
+      const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+HEADER_H+dlRows.length*ROW_H+10+30+10;  // 10=footer前距, 30=2行文字高, 10=底留白
       canvas.width=canvasW*DPR; canvas.height=canvasH*DPR;
       canvas.style.width=canvasW+'px'; canvas.style.height=canvasH+'px';
       ctx.setTransform(1,0,0,1,0,0);
@@ -616,7 +617,6 @@ function downloadImage() {
       }
 
       // ===== 页脚 =====
-      const ftY=tblY+HEADER_H+dlRows.length*ROW_H+20;
       ctx.fillStyle=COLORS.textMuted; ctx.font='12px "PingFang SC"'; ctx.textAlign='center';
       ctx.fillText('本计划书数据源自官方演算表，仅供参考，具体利益以保险合同条款和正式计划书为准。', canvasW/2, ftY);
       ctx.fillText(`红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。假设红利领取方式为${dividendMode}。`, canvasW/2, ftY+15);
