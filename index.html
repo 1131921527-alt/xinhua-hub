@@ -447,6 +447,152 @@
   }
 
   /* Responsive */
+  /* ===== 智能计划书快捷生成 ===== */
+  .ap-section {
+    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin: 0 16px 14px;
+    border: 1.5px solid #93C5FD;
+  }
+  .ap-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1E3A8A;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ap-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .ap-input-row input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid #BFDBFE;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background: #fff;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .ap-input-row input:focus { border-color: var(--primary); }
+  .ap-input-row input::placeholder { color: #94A3B8; font-size: 13px; }
+  .ap-btn {
+    padding: 10px 20px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .ap-btn:active { transform: scale(0.95); background: var(--primary-dark); }
+  .ap-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .ap-example {
+    font-size: 11px;
+    background: rgba(37,99,235,0.08);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .ap-example:active { background: rgba(37,99,235,0.18); }
+  .ap-error {
+    display: none;
+    font-size: 12px;
+    color: #DC2626;
+    margin-top: 6px;
+    padding: 6px 10px;
+    background: #FEE2E2;
+    border-radius: 6px;
+  }
+  @keyframes ap-shake {
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-8px)}
+    75%{transform:translateX(8px)}
+  }
+  /* 确认弹窗 */
+  .ap-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .ap-modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 22px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .ap-modal h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .ap-modal .ap-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .ap-modal-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #F1F5F9;
+    font-size: 14px;
+  }
+  .ap-modal-row .ap-label { color: var(--text-secondary); }
+  .ap-modal-row .ap-value { color: var(--text); font-weight: 600; }
+  .ap-modal-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .ap-modal-btns button {
+    flex: 1;
+    padding: 11px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+  }
+  .ap-modal-btns button:active { transform: scale(0.96); }
+  .ap-modal-btns .ap-confirm-btn {
+    background: var(--primary);
+    color: #fff;
+  }
+  .ap-modal-btns .ap-back-btn {
+    background: #F1F5F9;
+    color: var(--text-secondary);
+  }
+
   @media (min-width: 768px) {
     body { max-width: 640px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.05); min-height: 100vh; }
   }
@@ -735,6 +881,39 @@
   <div class="search-box">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input type="text" id="search" placeholder="搜索资料名称…">
+  </div>
+</div>
+
+<!-- 智能计划书快捷生成 -->
+<div class="ap-section">
+  <div class="ap-title">⚡ 智能计划书快捷生成</div>
+  <div class="ap-input-row">
+    <input type="text" id="aiPlannerInput" placeholder="输入示例：宏御 30岁 女 20×3" autocomplete="off">
+    <button class="ap-btn" id="aiPlannerBtn">立即生成</button>
+  </div>
+  <div class="ap-examples" id="aiPlannerExamples">
+    <span class="ap-example">宏御 30岁 女 20×3</span>
+    <span class="ap-example">宏泰 40岁 男 100万 3年交</span>
+    <span class="ap-example">宏愿 55岁 女 30×5</span>
+    <span class="ap-example">华彩 35岁 女 50万 5年交</span>
+  </div>
+  <div class="ap-error" id="apError"></div>
+</div>
+
+<!-- 确认弹窗 -->
+<div class="ap-modal-overlay" id="aiPlannerModal">
+  <div class="ap-modal">
+    <h3>确认计划书参数</h3>
+    <div class="ap-subtitle">请确认以下信息后生成计划书</div>
+    <div class="ap-modal-row"><span class="ap-label">产品</span><span class="ap-value" id="apProdName">-</span></div>
+    <div class="ap-modal-row"><span class="ap-label">客户年龄</span><span class="ap-value" id="apAge">-</span></div>
+    <div class="ap-modal-row"><span class="ap-label">客户性别</span><span class="ap-value" id="apGender">-</span></div>
+    <div class="ap-modal-row"><span class="ap-label">年交保费</span><span class="ap-value" id="apPremium">-</span></div>
+    <div class="ap-modal-row"><span class="ap-label">缴费期限</span><span class="ap-value" id="apTerm">-</span></div>
+    <div class="ap-modal-btns">
+      <button class="ap-back-btn" id="apBackBtn">返回修改</button>
+      <button class="ap-confirm-btn" id="apConfirmBtn">确认生成</button>
+    </div>
   </div>
 </div>
 
@@ -1345,6 +1524,7 @@ window.addEventListener('scroll', function() {
 // Init
 loadData();
 </script>
+<script src="ai-planner.js"></script>
 
 </body>
 </html>
