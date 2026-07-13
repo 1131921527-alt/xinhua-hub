@@ -10,7 +10,7 @@
     { names: ['华彩','华彩鎏金','s24'], file: 'calculator-huacai.html', label: '华彩鎏金', category: '分红型年金' },
     { names: ['宏坤','宏坤人生','s06'], file: 'calculator-hongkun.html', label: '宏坤人生', category: '分红型养老年金' },
     { names: ['恒享','恒享人生','g23'], file: 'calculator-hengxiang.html', label: '恒享人生', category: '非分红型年金' },
-    { names: ['福盛','福盛世家','添翼版','g24'], file: 'calculator-fusheng.html', label: '福盛世家', category: '非分红型终身寿险' }
+    { names: ['福盛','福盛世家','添翼版','g14'], file: 'calculator-fusheng.html', label: '福盛世家', category: '非分红型终身寿险' }
   ];
 
   // ─── 页面检测 ───
@@ -630,4 +630,61 @@
       showPageToast('请复制地址栏链接，在外部浏览器中打开');
     }
   }
+
+  // ========== Part 5: 60岁后显示频率过滤 ==========
+  window.filterRowsByAge = function(mode) {
+    var tbody = document.getElementById('resultBody');
+    if (!tbody) return;
+
+    var rows = tbody.querySelectorAll('tr');
+    var ageColIndex = 1;
+
+    // 自动检测年龄列
+    var thead = document.querySelector('thead tr');
+    var headers = [];
+    if (thead) {
+      headers = Array.from(thead.querySelectorAll('th, td'));
+      for (var h = 0; h < headers.length; h++) {
+        if (/年龄|周岁/.test(headers[h].textContent || '')) {
+          ageColIndex = h;
+          break;
+        }
+      }
+    }
+
+    rows.forEach(function(row) {
+      var cells = row.querySelectorAll('td');
+      if (cells.length <= ageColIndex) return;
+
+      var ageText = (cells[ageColIndex].textContent || '').trim().replace(/[^0-9]/g, '');
+      var age = parseInt(ageText);
+      if (isNaN(age)) return;
+
+      if (age < 60) {
+        row.style.display = '';
+        return;
+      }
+
+      if (mode === 'all') {
+        row.style.display = '';
+      } else if (mode === '2y') {
+        row.style.display = ((age - 60) % 2 === 0) ? '' : 'none';
+      } else if (mode === '5y') {
+        row.style.display = ((age - 60) % 5 === 0) ? '' : 'none';
+      }
+    });
+  };
+
+  window.getDisplayMode = function() {
+    var sel = document.getElementById('displayMode');
+    return sel ? sel.value : 'all';
+  };
+
+  window.setDownloadFilter = function() {
+    var origMode = window.getDisplayMode();
+    window.filterRowsByAge('5y');
+    return function() {
+      window.filterRowsByAge(origMode);
+    };
+  };
 })();

@@ -110,6 +110,14 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
         <input id="premium" type="number" value="500000" min="1000" step="1000">
       </div>
       <div class="field">
+        <label>显示密度</label>
+        <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
+          <option value="all">显示全部</option>
+          <option value="2y">60岁起每2年一行</option>
+          <option value="5y" selected>60岁起每5年一行</option>
+        </select>
+      </div>
+      <div class="field">
         <label>年金起领年龄</label>
         <input id="startAge" type="number" value="55" min="50" max="75">
       </div>
@@ -377,7 +385,9 @@ async function generate() {
     
     tbody.innerHTML = html;
     document.getElementById('errorMsg').classList.remove('show');
-  } catch(e) {
+    // 应用显示密度过滤
+    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y'); }
+      } catch(e) {
     showError('计算出错：' + e.message);
   } finally {
     btn.disabled = false; btn.textContent = '生成利益演示';
@@ -451,6 +461,8 @@ function downloadImage() {
       const dlRows = [];
       for (let j = 0; j < HY_DATA.length; j++) {
         const r = HY_DATA[j], ca = r[1] + ageOffset;
+        // 下载默认5年模式：60岁起每5年一行
+        if(ca >= 60 && (ca-60)%5 !== 0) continue;
         const dividend = Math.round(r[6]*scale);
         const dividendCum = Math.round(r[7]*scale);
         let rt = r[11];

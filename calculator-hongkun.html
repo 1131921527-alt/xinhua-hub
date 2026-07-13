@@ -98,6 +98,14 @@
         </select>
       </div>
       <div class="field">
+        <label>显示密度</label>
+        <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
+          <option value="all">显示全部</option>
+          <option value="2y">60岁起每2年一行</option>
+          <option value="5y" selected>60岁起每5年一行</option>
+        </select>
+      </div>
+      <div class="field">
         <label>&nbsp;</label>
         <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
       </div>
@@ -230,6 +238,8 @@ async function generate(){
         stageCell+sideLabelCell;
       body.appendChild(tr);
     });
+    // 应用显示密度过滤
+    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y'); }
   }catch(e){showError('生成出错：'+e.message);}
   btn.disabled=false; btn.textContent='生成利益演示';
 }
@@ -258,6 +268,8 @@ function downloadImage(){
   years.forEach(row=>{
     const yr=row[0],prem=row[1],cum=row[2],ann=row[3],annCum=row[4],mat=row[5],death=row[6],cv=row[7],cumDiv=row[9],surv=row[10],deathDiv=row[11];
     const curAge=age+yr-1;
+    // 下载默认5年模式：60岁起每5年一行
+    if(curAge>=60&&(curAge-60)%5!==0)return;
     dlRows.push({
       yr, age:curAge,
       prem:prem*scale, cum:cum*scale,

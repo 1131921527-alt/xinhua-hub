@@ -98,6 +98,14 @@
         <input id="premium" type="number" value="1000000" min="1000" step="1000">
       </div>
       <div class="field">
+        <label>显示密度</label>
+        <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
+          <option value="all">显示全部</option>
+          <option value="2y">60岁起每2年一行</option>
+          <option value="5y" selected>60岁起每5年一行</option>
+        </select>
+      </div>
+      <div class="field">
         <label>&nbsp;</label>
         <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
       </div>
@@ -231,6 +239,8 @@ async function generate(){
       tr.innerHTML=cells;
       body.appendChild(tr);
     });
+    // 应用显示密度过滤
+    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y'); }
   }catch(e){showError('生成出错：'+e.message);}
   btn.disabled=false; btn.textContent='生成利益演示';
 }
@@ -256,6 +266,8 @@ function downloadImage(){
   years.forEach(row=>{
     const yr=row[0],prem=row[1]*scale,cum=row[2]*scale,cash=row[3]*scale;
     const curAge=age+yr-1;
+    // 下载默认5年模式：60岁起每5年一行
+    if(curAge>=60&&(curAge-60)%5!==0)return;
     const currentSA=Math.round(sumAssured*Math.pow(1.02,yr-1));
     const K=curAge<41?1.6:(curAge<=60?1.4:1.2);
     const deathGeneral=Math.max(Math.round(cash),Math.round(cum*K),currentSA);

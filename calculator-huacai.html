@@ -130,6 +130,14 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
         <input id="dividendRate" type="number" value="2.5" step="0.1" min="0" max="10">
       </div>
       <div class="field">
+        <label>显示密度</label>
+        <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
+          <option value="all">显示全部</option>
+          <option value="2y">60岁起每2年一行</option>
+          <option value="5y" selected>60岁起每5年一行</option>
+        </select>
+      </div>
+      <div class="field">
         <label>&nbsp;</label>
         <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
       </div>    </div>
@@ -391,6 +399,8 @@ async function generate() {
 
     tbody.innerHTML = html;
     document.getElementById('errorMsg').classList.remove('show');
+    // 应用显示密度过滤
+    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y'); }
   } catch(e) {
     showError('计算出错：' + e.message);
   } finally {
@@ -453,6 +463,8 @@ function downloadImage() {
       let prevCumDiv=0;
       for(let j=0;j<HC_DATA.length;j++){
         const r=HC_DATA[j], ca=r[1]+dlOff;
+        // 下载默认5年模式：60岁起每5年一行
+        if(ca>=60&&(ca-60)%5!==0)continue;
         const cumDiv=Math.round(r[9]*scale);
         const annualDiv=Math.round(cumDiv-prevCumDiv);
         prevCumDiv=cumDiv;

@@ -110,6 +110,14 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
         <input id="premium" type="number" value="1000000" min="1000" step="1000">
       </div>
       <div class="field">
+        <label>显示密度</label>
+        <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
+          <option value="all">显示全部</option>
+          <option value="2y">60岁起每2年一行</option>
+          <option value="5y" selected>60岁起每5年一行</option>
+        </select>
+      </div>
+      <div class="field">
         <label>&nbsp;</label>
         <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
       </div>    </div>
@@ -385,6 +393,9 @@ async function generate() {
     tbody.innerHTML = html;
     document.getElementById('errorMsg').classList.remove('show');
     
+    // 应用显示密度过滤
+    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y'); }
+    
     
   } catch (e) {
     showError('计算出错：' + e.message);
@@ -445,6 +456,10 @@ function downloadImage() {
 
       const rows = Array.from(tbody.querySelectorAll('tr'));
       
+      // 下载图片默认5年模式：过滤掉60岁后非5年的行
+      if(typeof filterRowsByAge==='function'){ filterRowsByAge('5y'); }
+      const visibleRows = rows.filter(function(r){ return r.style.display !== 'none'; });
+      
       // ===== Layout constants (大字体) =====
       const colWidths = [85, 70, 110, 130, 140, 140, 140, 120];
       const totalWidth = colWidths.reduce((a, b) => a + b, 0);
@@ -457,7 +472,7 @@ function downloadImage() {
       const footerH = 65;
       const padding = 25;
       
-      const tableH = headerH + rows.length * rowH;
+      const tableH = headerH + visibleRows.length * rowH;
       const canvasW = totalWidth + padding * 2;
       const canvasH = titleH + infoH + paramH + subHeaderH + tableH + footerH + padding * 1.5;
       
@@ -603,7 +618,7 @@ function downloadImage() {
       const dlYears = dlEntry ? dlEntry.y : [];
       const dlPayYears = term === 1 ? 1 : term;
       const dlReserveYears = dlPayYears + 2;
-      const dlDisplayMode = 'all';
+      const dlDisplayMode = 'after60';
       const dlMaxYear = Math.min(dlYears.length, 105);
 
       let dlCumK = 0, dlPrevO = null, dlPrevTotal = null, dlCumPrem = 0;
@@ -718,7 +733,7 @@ function downloadImage() {
       }
       
       // ===== 6. 底部声明 =====
-      const footerY = tableY + headerH + rows.length * rowH + 24;
+      const footerY = tableY + headerH + visibleRows.length * rowH + 24;
       ctx.fillStyle = '#94A3B8';
       ctx.font = '14px "PingFang SC", "Microsoft YaHei", sans-serif';
       ctx.textAlign = 'center';
