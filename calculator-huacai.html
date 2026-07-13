@@ -616,7 +616,9 @@ function downloadImage() {
       a.href=dataUrl; a.download=fname;
       document.body.appendChild(a); a.click();
       setTimeout(()=>{ document.body.removeChild(a); }, 100);
-      showToast('计划书已下载'); showLoading(false);
+      showToast('计划书已下载');
+      // 浏览器打开提示
+      if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, fname); }catch(e){} } showLoading(false);
     }catch(e){ showError('图片生成失败：'+e.message); showLoading(false); }
   },200);
 }

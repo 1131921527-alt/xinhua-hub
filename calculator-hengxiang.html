@@ -422,6 +422,8 @@ function downloadImage(){
   a.href=dataUrl; a.download=`${productName}_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
   document.body.appendChild(a); a.click(); a.remove();
   showToast('计划书已下载');
+  // 浏览器打开提示
+  if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, `${productName}_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`); }catch(e){} }
 }
 
 // 初始化

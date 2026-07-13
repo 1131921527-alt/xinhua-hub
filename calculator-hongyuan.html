@@ -692,6 +692,8 @@ function downloadImage() {
         document.body.appendChild(a); a.click(); a.remove();
         showToast('计划书已下载');
         showLoading(false);
+        // 浏览器打开提示
+        if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, fname); }catch(e){} }
       } catch (e2) {
         showImagePreview(canvas, fname);
       }

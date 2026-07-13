@@ -422,6 +422,8 @@ function downloadImage(){
   a.download=`宏坤人生利益演示_${genderLabel}${age}岁${termLabel}_${drawLabel}.png`;
   document.body.appendChild(a); a.click(); a.remove();
   showToast('计划书已下载');
+  // 浏览器打开提示
+  if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, `宏坤人生利益演示_${genderLabel}${age}岁${termLabel}_${drawLabel}.png`); }catch(e){} }
 }
 
 // Auto-generate on page load

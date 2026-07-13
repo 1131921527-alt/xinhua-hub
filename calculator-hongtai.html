@@ -521,6 +521,8 @@ function downloadImage(){
   a.download=`宏泰世家分红型理财计划_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
   document.body.appendChild(a); a.click(); a.remove();
   showToast('计划书已下载 ✅');
+  // 浏览器打开提示
+  if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, `宏泰世家分红型理财计划_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`); }catch(e){} }
 }
 
 // 初始化

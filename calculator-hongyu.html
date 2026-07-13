@@ -746,6 +746,8 @@ function downloadImage() {
                 }, 200);
                 showToast('计划书图片已下载');
                 showLoading(false);
+                // 浏览器打开提示
+                if(typeof showBrowserOpenPrompt==='function'){ try{ var _bd=canvas.toDataURL('image/png');showBrowserOpenPrompt(_bd, filename); }catch(e){} }
                 blobOk = true;
               } catch(e3) {
                 showImagePreview(canvas, filename);
@@ -780,6 +782,8 @@ function downloadImage() {
           }, 100);
           showToast('计划书图片已下载');
           showLoading(false);
+          // 浏览器打开提示
+          if(typeof showBrowserOpenPrompt==='function'){ try{ var _bd2=canvas.toDataURL('image/png');showBrowserOpenPrompt(_bd2, fname); }catch(e){} }
         } catch(e2) {
           showImagePreview(canvas, fname);
         }

@@ -1,4 +1,4 @@
-/* ===== 智能计划书快捷生成 + 测算器URL参数 + 微信文案 ===== */
+/* ===== 智能计划书快捷生成 + 测算器URL参数 + 微信文案 + 浏览器打开提示 ===== */
 (function(){
   'use strict';
 
@@ -31,6 +31,7 @@
   if (isCalculator) {
     setupCalculatorParams();
     injectWeChatButton();
+    setupBrowserPrompt();  // 浏览器打开提示
   }
 
   // ========== Part 1: 智能计划书快捷生成 ==========
@@ -509,5 +510,124 @@
     t.textContent = msg;
     t.style.opacity = '1';
     setTimeout(function(){ t.style.opacity = '0'; }, 2500);
+  }
+
+  // ========== Part 4: 下载后"在浏览器中打开"提示弹窗 ==========
+  // 全局暴露，供各测算器页面的 downloadImage() 调用
+  var _pendingDataUrl = '';
+  var _pendingFileName = '';
+
+  function setupBrowserPrompt() {
+    // 创建弹窗DOM（只创建一次）
+    if (document.getElementById('browserPromptOverlay')) return;
+
+    var overlay = document.createElement('div');
+    overlay.id = 'browserPromptOverlay';
+    overlay.style.cssText =
+      'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.75);z-index:99999;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;';
+    overlay.innerHTML =
+      '<div style="background:#fff;border-radius:16px;max-width:380px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.4);">' +
+        // 标题栏
+        '<div style="background:linear-gradient(135deg,#1D4ED8,#2563EB);padding:18px 20px;text-align:center;">' +
+          '<div style="font-size:17px;font-weight:700;color:#fff;letter-spacing:0.5px;">计划书图片已生成</div>' +
+          '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">可在浏览器中打开此网页来下载文件</div>' +
+        '</div>' +
+        // 图片预览区
+        '<div style="padding:16px;text-align:center;background:#f8fafc;overflow:auto;max-height:45vh;">' +
+          '<img id="browserPromptImg" src="" alt="计划书预览" style="max-width:100%;max-height:40vh;border-radius:8px;border:1px solid #e2e8f0;" />' +
+        '</div>' +
+        // 提示文字
+        '<div style="padding:12px 20px 4px;">' +
+          '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
+            '📱 手机用户：长按上方图片可保存到相册<br/>' +
+            '🌐 如无法保存，请在浏览器中打开本页下载' +
+          '</div>' +
+        '</div>' +
+        // 按钮区
+        '<div style="padding:12px 20px 20px;display:flex;gap:10px;">' +
+          '<button id="browserPromptClose" style="flex:1;padding:13px 0;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#64748B;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">关闭</button>' +
+          '<button id="browserPromptOpenBrowser" style="flex:1.2;padding:13px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">在浏览器中打开</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+
+    // 绑定事件
+    overlay.querySelector('#browserPromptClose').addEventListener('click', hideBrowserPrompt);
+    overlay.querySelector('#browserPromptOpenBrowser').addEventListener('click', doOpenInBrowser);
+    // 点击遮罩关闭
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) hideBrowserPrompt();
+    });
+  }
+
+  /**
+   * 显示"浏览器打开提示"弹窗
+   * @param {string} dataUrl - canvas.toDataURL 生成的 base64 图片数据
+   * @param {string} filename - 文件名（用于显示和下载）
+   */
+  window.showBrowserOpenPrompt = function(dataUrl, filename) {
+    _pendingDataUrl = dataUrl;
+    _pendingFileName = filename || '理财计划书.png';
+
+    setupBrowserPrompt();
+
+    var overlay = document.getElementById('browserPromptOverlay');
+    var imgEl = document.getElementById('browserPromptImg');
+
+    if (imgEl && dataUrl) {
+      imgEl.src = dataUrl;
+    }
+    if (overlay) {
+      overlay.style.display = 'flex';
+    }
+  };
+
+  function hideBrowserPrompt() {
+    var overlay = document.getElementById('browserPromptOverlay');
+    if (overlay) overlay.style.display = 'none';
+  }
+
+  function doOpenInBrowser() {
+    if (!_pendingDataUrl) return;
+
+    try {
+      // 方法1：创建一个新窗口，写入带图片的HTML页面
+      // 在微信内置浏览器中，这通常会触发系统级"选择浏览器打开"提示
+      var newWin = window.open('', '_blank');
+      if (newWin) {
+        newWin.document.write(
+          '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+          '<title>计划书图片 - ' + _pendingFileName + '</title>' +
+          '<style>*{margin:0;padding:0;}body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f0f2f5;}img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.15);}' +
+          '.tip{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-family:-apple-system,sans-serif;}</style></head>' +
+          '<body><img src="' + _pendingDataUrl + '" alt="plan"/>' +
+          '<div class="tip">📥 长按图片保存到手机 · 或点击菜单保存</div></body></html>'
+        );
+        newWin.document.close();
+      } else {
+        // 弹窗被拦截，回退到复制链接提示
+        copyPageLinkAndTip();
+      }
+    } catch(e) {
+      console.warn('openInBrowser failed:', e);
+      copyPageLinkAndTip();
+    }
+
+    hideBrowserPrompt();
+  }
+
+  function copyPageLinkAndTip() {
+    var pageUrl = location.href.split('?')[0];
+    // 尝试复制当前URL到剪贴板
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(pageUrl).then(function() {
+        showPageToast('已复制页面链接 ✅ 请粘贴到浏览器地址栏打开');
+      }).catch(function() {
+        showPageToast('请在浏览器中打开本页：' + pageUrl.slice(0, 40) + '...');
+      });
+    } else {
+      showPageToast('请复制地址栏链接，在外部浏览器中打开');
+    }
   }
 })();
