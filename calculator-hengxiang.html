@@ -301,7 +301,7 @@ function downloadImage(){
   const totalW=colWidths.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
-  const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+tableH+FOOTER_H+PAD*2;
+  const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+tableH+24+18+14;   // 24=footer前距, 18=文字区高, 14=底留白
   const canvas=document.getElementById('renderCanvas');
   canvas.width=canvasW*DPR; canvas.height=canvasH*DPR;
   const ctx=canvas.getContext('2d');

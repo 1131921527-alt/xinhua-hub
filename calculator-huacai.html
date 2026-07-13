@@ -478,7 +478,7 @@ function downloadImage() {
       }
 
       const canvasW=totalW+PAD*2;
-      const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+HEADER_H+dlRows.length*ROW_H+FOOTER_H+PAD*2;
+      const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+HEADER_H+dlRows.length*ROW_H+20+30+14;  // 20=footer前距, 30=2行文字高, 14=底留白
       canvas.width=canvasW*DPR; canvas.height=canvasH*DPR;
       canvas.style.width=canvasW+'px'; canvas.style.height=canvasH+'px';
       ctx.setTransform(1,0,0,1,0,0);

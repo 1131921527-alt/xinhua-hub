@@ -284,7 +284,7 @@ function downloadImage(){
   const titleH=80, infoH=130, paramH=52, subHdrH=40, footerH=44, pad=22;
   const tableH=headerH+dlRows.length*rowH;
   const canvasW=totalW+pad*2;
-  const canvasH=titleH+infoH+paramH+subHdrH+tableH+footerH+pad;
+  const canvasH=titleH+infoH+paramH+subHdrH+tableH+22+16+14;   // 22=footer前距, 16=文字区高(1行), 14=底留白
 
   const dpr=2;
   canvas.width=Math.round(canvasW*dpr); canvas.height=Math.round(canvasH*dpr);

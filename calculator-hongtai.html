@@ -336,7 +336,8 @@ function downloadImage(){
   const totalW=colW.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
-  const canvasH=PAD+TITLE_H+INFO_H+SUBHDR_H+tableH+FOOTER_H+PAD;
+  // 紧凑模式：footer文字结束位置+小留白
+  const canvasH=PAD+TITLE_H+INFO_H+SUBHDR_H+tableH+8+16+16;   // 8=footer前距, 16=文字高(1行), 16=底留白
 
   const canvas=document.getElementById('renderCanvas');
   canvas.width=canvasW*SCALE*DPR; canvas.height=canvasH*SCALE*DPR;

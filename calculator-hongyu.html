@@ -469,12 +469,14 @@ function downloadImage() {
       const infoH = 160;         // 公司背景+产品特点区域
       const paramH = 60;         // 参数栏
       const subHeaderH = 45;     // "利益演示表"子标题行
-      const footerH = 65;
-      const padding = 25;
+      const footerH = 40;
+      const padding = 20;
       
       const tableH = headerH + visibleRows.length * rowH;
+      const tableY = titleH + infoH + paramH + subHeaderH;  // 表格起始Y坐标
       const canvasW = totalWidth + padding * 2;
-      const canvasH = titleH + infoH + paramH + subHeaderH + tableH + footerH + padding * 1.5;
+      // 紧凑模式：footer文字结束位置+小留白，不使用固定大padding
+      const canvasH = tableY + tableH + 24 + 36 + 16;       // 24=footer前距, 36=2行文字高, 16=底留白
       
       canvas.width = canvasW * 2; // Retina
       canvas.height = canvasH * 2;
