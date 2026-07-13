@@ -35,8 +35,8 @@
     },
     {
       "id": "calculators",
-      "name": "在线测算",
-      "icon": "🧮",
+      "name": "招商银行渠道",
+      "icon": "🏦",
       "items": [
         {
           "name": "S11 宏御世家终身寿（分红型）在线演算",
@@ -79,6 +79,37 @@
           "type": "calculator",
           "description": "固收型终身寿利益演示 → 7列完整数据 → 可下载计划书图片",
           "url": "calculator-fusheng.html"
+        }
+      ]
+    },
+    {
+      "id": "boc-calculators",
+      "name": "中国银行渠道",
+      "icon": "🏦",
+      "items": [
+        {
+          "name": "S10 宏安世家终身寿险（分红型）在线演算",
+          "type": "calculator",
+          "description": "趸交/3年/5年交，含特定公共交通意外及全残保障 → 可下载计划书图片",
+          "url": "calculator-hongan.html"
+        },
+        {
+          "name": "S12 宏禧来两全保险（分红型）在线演算",
+          "type": "calculator",
+          "description": "趸交，6/8/10年期短期两全险 → 可下载计划书图片",
+          "url": "calculator-hongxilai.html"
+        },
+        {
+          "name": "盈满鑫两全保险（分红型）在线演算",
+          "type": "calculator",
+          "description": "3年/5年交，6/8/10/15年期中短期两全险 → 可下载计划书图片",
+          "url": "calculator-yingmanxin.html"
+        },
+        {
+          "name": "新华在售产品_中国银行版",
+          "type": "excel",
+          "description": "投保年龄、起售金额、产品形态和特点汇总表（中国银行渠道）",
+          "url": "新华在售产品_中国银行版.xlsx"
         }
       ]
     },
