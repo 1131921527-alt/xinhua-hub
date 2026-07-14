@@ -126,6 +126,21 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
         <select id="drawMode"><option value="year" selected>年领</option><option value="month">月领</option></select>
       </div>
       <div class="field">
+        <label>红利处理</label>
+        <select id="divMode" onchange="onDivModeChange()">
+          <option value="default">默认领取</option>
+          <option value="cum" selected>累计生息</option>
+        </select>
+      </div>
+      <div class="field" id="rateField">
+        <label>累计生息利率</label>
+        <select id="cumRate">
+          <option value="1.75">1.75%</option>
+          <option value="2">2%</option>
+          <option value="2.5" selected>2.5%</option>
+        </select>
+      </div>
+      <div class="field">
         <label>被保人姓名</label>
         <input id="insuredName" type="text" value="VIP">
       </div>
@@ -133,7 +148,7 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
         <label>&nbsp;</label>
         <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
       </div>    </div>
-    <div class="tip">默认演示：女46周岁 / 3年交 / 年交50万 / 55岁起领。红利按累积生息方式演示。</div>
+    <div class="tip">默认演示：女46周岁 / 3年交 / 年交50万 / 55岁起领。红利按累计生息2.5%演示，可切换默认领取或修改利率。</div>
   </div>
 
   <div class="err" id="errorMsg"></div>
@@ -243,6 +258,11 @@ function selectGender(el) {
   currentGender = parseInt(el.dataset.value);
 }
 
+function onDivModeChange() {
+  const mode = document.getElementById('divMode').value;
+  document.getElementById('rateField').style.display = (mode === 'cum') ? '' : 'none';
+}
+
 function showError(msg) {
   const el = document.getElementById('errorMsg');
   el.textContent = msg; el.classList.add('show');
@@ -271,6 +291,8 @@ async function generate() {
     const insuredName = document.getElementById('insuredName').value.trim() || 'VIP';
     const startAge = parseInt(document.getElementById('startAge').value) || 60;
     const drawMode = document.getElementById('drawMode').value;
+    const divMode = document.getElementById('divMode').value;
+    const cumRate = divMode === 'cum' ? parseFloat(document.getElementById('cumRate').value) / 100 : 0.0175;
     
     if (isNaN(age) || age < 30 || age > 69) { showError('投保年龄须在30~69周岁之间'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
     if (isNaN(startAge) || startAge < 50 || startAge > 75) { showError('年金起领年龄须在50~75周岁之间'); btn.disabled=false; btn.textContent='生成利益演示'; return; }
@@ -290,7 +312,7 @@ async function generate() {
       <strong style="color:#78350F;font-size:17px;">每年${fmt(premium)}</strong> ·
       <strong style="color:#78350F;font-size:17px;">${termLabel}</strong> ·
       <strong style="color:#78350F;font-size:17px;">${startAge}岁开始领</strong> ·
-      <span style="color:#64748B;">分红养老年金</span>`;
+      <span style="color:#64748B;">${divMode==='cum' ? '红利累计生息('+(cumRate*100).toFixed(2)+'%)' : '红利默认领取'}</span>`;
     
     const tbody = document.getElementById('resultBody');
     const paymentYears = term === 1 ? 1 : term;
@@ -309,6 +331,7 @@ async function generate() {
     
     
     let html = '';
+    let cumDivRecalc = 0;
     
     for (let idx = 0; idx < HY_DATA.length; idx++) {
       const row = HY_DATA[idx];
@@ -322,10 +345,14 @@ async function generate() {
       const aAnn = row[4]>0 ? Math.round(row[4]*scale) : 0;   // 当期年金
       const cAnn = Math.round(row[5]*scale);           // 累积年金
       const dividend = Math.round(row[6]*scale);       // 当年红利
-      const dividendCum = Math.round(row[7]*scale);    // 红利累计生息
+      // 根据红利模式重新计算累计生息
+      cumDivRecalc = cumDivRecalc * (1 + cumRate) + dividend;
+      const dividendCum = Math.round(cumDivRecalc);     // 红利累计生息（重算）
       const death = Math.round(row[8]*scale);          // 身故/全残保险金
       const cv = Math.round(row[9]*scale);             // 现金价值
-      const surv = Math.round(row[10]*scale);          // 生存总利益
+      const surv = Math.round(row[10]*scale);          // 原始生存总利益
+      // 重算生存总利益 = CV + 累计生息 + 累积年金
+      const survRecalc = cv + dividendCum + cAnn;
 
       let rateStr = row[11];
       if ((rateStr === undefined || rateStr === null || rateStr === '') && idx > 0) {
@@ -378,7 +405,7 @@ async function generate() {
         <td>${fmt(dividendCum)}</td>
         <td>${fmt(death)}</td>
         <td class="col-paidup">${fmt(cv)}</td>
-        <td class="col-total">${fmt(surv)}</td>
+        <td class="col-total">${fmt(survRecalc)}</td>
         ${rateCell}
       </tr>`;
     }
@@ -424,6 +451,9 @@ function downloadImage() {
       const premium = parseInt(document.getElementById('premium').value);
       const startAge = parseInt(document.getElementById('startAge').value) || 60;
       const drawMode = document.getElementById('drawMode').value;
+      const divMode = document.getElementById('divMode').value;
+      const cumRate = divMode === 'cum' ? parseFloat(document.getElementById('cumRate').value) / 100 : 0.0175;
+      const divLabel = divMode === 'cum' ? '红利累计生息('+(cumRate*100).toFixed(2)+'%)' : '红利默认领取';
       const insuredName = (document.getElementById('insuredName').value || '').trim() || 'VIP';
       const genderLabel = currentGender === 0 ? '男' : '女';
       const termLabel = {1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
@@ -459,25 +489,34 @@ function downloadImage() {
 
       // ---- 生成过滤后的数据行（与屏幕表格一致）----
       const dlRows = [];
+      let cumDivRecalc = 0;
+      // 先计算所有非过滤行（用于survival增长率计算）
+      const allRows = [];
       for (let j = 0; j < HY_DATA.length; j++) {
-        const r = HY_DATA[j], ca = r[1] + ageOffset;
-        // 下载默认5年模式：60岁起每5年一行
-        if(ca >= 60 && (ca-60)%5 !== 0) continue;
+        const r = HY_DATA[j];
         const dividend = Math.round(r[6]*scale);
-        const dividendCum = Math.round(r[7]*scale);
-        let rt = r[11];
-        if ((rt === undefined || rt === null || rt === '') && j > 0) {
-          const ps = HY_DATA[j-1][10];
-          if (ps > 0) rt = ((r[10] - ps) / ps * 100).toFixed(2) + '%';
-        }
-        dlRows.push({
-          yr:r[0], age:ca,
+        cumDivRecalc = cumDivRecalc * (1 + cumRate) + dividend;
+        allRows.push({
+          yr:r[0], age:r[1]+ageOffset,
           aPrem:Math.round(r[2]*scale), cPrem:Math.round(r[3]*scale),
           aAnn:r[4]>0?Math.round(r[4]*scale):0, cAnn:Math.round(r[5]*scale),
-          dividend:dividend, dividendCum:dividendCum,
-          death:Math.round(r[8]*scale), cv:Math.round(r[9]*scale), surv:Math.round(r[10]*scale),
-          rate:rt, idx:j
+          dividend:dividend, dividendCum:Math.round(cumDivRecalc),
+          death:Math.round(r[8]*scale), cv:Math.round(r[9]*scale),
+          surv:Math.round(r[9]*scale) + Math.round(cumDivRecalc) + Math.round(r[5]*scale),
+          idx:j
         });
+      }
+      // 过滤：60岁起每5年一行
+      const dlRows = [];
+      for (let j = 0; j < allRows.length; j++) {
+        const r = allRows[j];
+        if(r.age >= 60 && (r.age-60)%5 !== 0) continue;
+        let rt = HY_DATA[r.idx][11];
+        if ((rt === undefined || rt === null || rt === '') && j > 0) {
+          const prev = dlRows[dlRows.length-1];
+          if (prev && prev.surv > 0) rt = ((r.surv - prev.surv) / prev.surv * 100).toFixed(2) + '%';
+        }
+        dlRows.push({...r, rate:rt});
       }
 
       // 储备期范围（前 payYears+2 行为储备期）
@@ -527,7 +566,7 @@ function downloadImage() {
       ctx.font = 'bold 26px "PingFang SC","Microsoft YaHei",sans-serif';
       ctx.fillText('宏愿人生养老年金保险（分红型）', canvasW/2, 36);
       ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
-      ctx.fillText(`利益演示 · 被保人 ${insuredName} · 年金起领${startAge}周岁`, canvasW/2, 62);
+      ctx.fillText(`利益演示 · 被保人 ${insuredName} · 年金起领${startAge}周岁 · ${divLabel}`, canvasW/2, 62);
 
       // ---- 公司介绍区（左右两栏）----
       const colGap = 24, infoColW = (canvasW - pad*2 - colGap)/2;
@@ -568,7 +607,7 @@ function downloadImage() {
       ctx.font = 'bold 17px "PingFang SC",sans-serif';
       ctx.fillText('产品特点', rx+12, infoY+24);
       const prodSections = [
-        {title:'双轨增值，收益稳健', text:'依托央企红利分配，红利可进入累计生息账户二次增值（2.5%）；现金价值稳步增长，收益清晰可靠。'},
+        {title:'双轨增值，收益稳健', text:`依托央企红利分配，红利可进入累计生息账户二次增值（${divMode==='cum' ? (cumRate*100).toFixed(2) : '1.75'}%）；现金价值稳步增长，收益清晰可靠。`},
         {title:'领取灵活，资金高效', text:'女性55岁起领，可选60/65/70岁，月领年领可调；支持保单贷款，适配50岁以上客群。'},
         {title:'属性多元，兼顾传承', text:'稳定养老现金流为核心，现金价值具备定向传承属性，一单覆盖养老与传承。'}
       ];

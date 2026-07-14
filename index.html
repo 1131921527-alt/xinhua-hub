@@ -94,6 +94,46 @@
   }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
+  /* Announcement Bar */
+  .announce-bar {
+    background: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 100%);
+    padding: 8px 20px;
+    margin-top: -20px;
+    position: relative;
+    z-index: 3;
+  }
+  .announce-inner {
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #DBEAFE;
+  }
+  .announce-inner .tag {
+    background: #F59E0B;
+    color: #1E293B;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+  .announce-inner .item {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .announce-inner .item strong {
+    color: #FDE68A;
+    font-size: 13px;
+  }
+
   /* Search */
   .search-wrap {
     background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
@@ -874,6 +914,16 @@
     <h1>新华保险 · 资料库<span style="font-size:12px;font-weight:400;opacity:0.7;margin-left:6px;">Made by 王铭泽</span></h1>
     <p>随时查 · 随时发</p>
     <div class="live-clock" id="liveClock"><span class="dot"></span><span id="clockText">--</span></div>
+  </div>
+</div>
+
+<div class="announce-bar">
+  <div class="announce-inner">
+    <span class="tag">📢 业务提醒</span>
+    <span class="item">保单贷款利率 <strong>4.25%</strong></span>
+    <span class="item">单张保单贷款上限 <strong>50万</strong></span>
+    <span class="item">贷款最长周期 <strong>6个月</strong></span>
+    <span class="item">累计生息账户利率 <strong>2.5%</strong></span>
   </div>
 </div>
 
