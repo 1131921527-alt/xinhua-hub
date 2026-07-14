@@ -22,8 +22,8 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#F8F9FA;c
 input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:150px;}
 .btn{padding:10px 24px;background:var(--wine);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
 .btn:hover{background:#7A1515;}
-.btn-dl{background:#059669;margin-left:10px;}
-.btn-dl:hover{background:#047857;}
+.btn-dl{background:var(--wine);margin-left:10px;}
+.btn-dl:hover{background:#7A1515;}
 .rate-btns{display:flex;gap:8px;}
 .rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#64748B;}
 .rate-btn.active{background:var(--wine);color:#fff;border-color:var(--wine);}
@@ -41,15 +41,22 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
 
 .top-info{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
-.info-table{flex:1;min-width:300px;border-collapse:collapse;font-size:13px;}
-.info-table th,.info-table td{border:1px solid var(--line);padding:7px 8px;text-align:center;}
-.info-table th{background:#F1F5F9;color:#334155;font-weight:700;}
-.info-table td{background:#fff;}
-.info-table td.label{background:#F8FAFC;font-weight:600;}
+.info-table{flex:1;min-width:300px;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);}
+.info-table th,.info-table td{border:1px solid var(--wine);padding:7px 8px;text-align:center;}
+.info-table th{background:var(--wine);color:#fff;font-weight:700;}
+.info-table td{background:#fff;color:#1E293B;font-weight:600;}
+.info-table td.label{background:var(--wine-bg);color:var(--wine);font-weight:700;}
 .side-stats{display:flex;flex-direction:column;gap:10px;}
-.stat-box{display:flex;align-items:center;border:1px solid var(--line);background:#fff;}
+.stat-box{display:flex;align-items:center;border:1px solid var(--wine);background:#fff;}
 .stat-box .stat-label{background:var(--wine);color:#fff;padding:8px 12px;font-size:13px;font-weight:700;white-space:nowrap;}
-.stat-box .stat-val{padding:8px 14px;font-size:14px;font-weight:700;min-width:80px;text-align:center;}
+.stat-box .stat-val{padding:8px 14px;font-size:14px;font-weight:700;min-width:80px;text-align:center;color:var(--wine);}
+
+.view-mode-btn{padding:10px 20px;background:#fff;color:var(--wine);border:1.5px solid var(--wine);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
+.view-mode-btn:hover{background:var(--wine-bg);}
+
+.row-positive td{background:#FFE4E4 !important;color:var(--wine) !important;}
+.row-positive .col-rate{background:#FFCDCD !important;}
+.row-positive .col-total{background:#FFCDCD !important;}
 
 .main-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;}
 .main-table th,.main-table td{border:1px solid #fff;padding:7px 3px;text-align:center;vertical-align:middle;}
@@ -124,6 +131,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 
   <div class="dl-bar">
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
+    <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：全部</button>
     <span class="tip">导出效果图同款版式</span>
   </div>
 
@@ -200,8 +208,10 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 <script>
 let currentGender = 1;
 let currentRate = 0.025;
+let viewMode = 'all';
 let DATA = null;
 
+const VIEW_MODE_LABELS = { all: '全部', '60': '60岁后每5年', '70': '70岁后每5年' };
 const TERM_CONFIG = {
   1: { label: '趸交', maleAge: '72', femaleAge: '68', minPrem: '20000', online: '18-64' },
   3: { label: '三年交', maleAge: '64', femaleAge: '68', minPrem: '20000', online: '18-59' },
@@ -220,6 +230,13 @@ function selectRate(el){
   document.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   currentRate = parseFloat(el.dataset.rate);
+  if(DATA) generate();
+}
+function toggleViewMode(){
+  const modes = ['all', '60', '70'];
+  const idx = modes.indexOf(viewMode);
+  viewMode = modes[(idx + 1) % modes.length];
+  document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
   if(DATA) generate();
 }
 function fmt(n){ return Math.round(n).toLocaleString('zh-CN'); }
@@ -314,11 +331,20 @@ function generate(){
   }
 
   const tbody = document.getElementById('resultBody');
-  tbody.innerHTML = rows.map(r => {
-    const yieldStr = r.yieldVal === null
-      ? '<span class="reserve-cell">投资期</span>'
-      : (r.yieldVal * 100).toFixed(2) + '%';
-    return `<tr>
+  let displayRows = rows.filter(r => {
+    if(r.yr <= term) return true;
+    if(viewMode === 'all') return true;
+    if(viewMode === '60') return r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0);
+    if(viewMode === '70') return r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0);
+    return true;
+  });
+  tbody.innerHTML = displayRows.map((r, idx) => {
+    const isPaymentRow = r.yr <= term;
+    const yieldCell = idx === 0
+      ? `<td class="col-rate" rowspan="${term}"><span class="reserve-cell">投资期</span></td>`
+      : (isPaymentRow ? '' : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`);
+    const rowClass = r.survival > totalPrem ? 'row-positive' : '';
+    return `<tr class="${rowClass}">
       <td>${r.yr}</td>
       <td>${r.ageEnd}</td>
       <td>${r.yearPrem > 0 ? fmt(r.yearPrem) : '-'}</td>
@@ -328,7 +354,7 @@ function generate(){
       <td>${fmt(r.cumDiv)}</td>
       <td>${fmt(r.cv)}</td>
       <td class="col-total">${fmt(r.survival)}</td>
-      <td class="col-rate">${yieldStr}</td>
+      ${yieldCell}
     </tr>`;
   }).join('');
 
