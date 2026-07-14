@@ -127,6 +127,7 @@ tbody tr.row-5y{background:#DBEAFE;} tbody tr.row-last{background:#BFDBFE;}
             <th>身价总利益</th>
             <th>航空意外<br>额外保额</th>
             <th>生存总利益</th>
+            <th>当年<br>收益率</th>
           </tr>
         </thead>
         <tbody id="resultBody"></tbody>
@@ -247,6 +248,12 @@ async function generate() {
       const totalBenefit = deathValue + cumDiv;
       const survival = cv + cumDiv;
 
+      // 当年收益率（年化单利）= (生存总利益 - 累计保费) / 累计保费 / 保单年度 × 100%
+      let yieldRate = '-';
+      if (cumPrem > 0 && yr > 0) {
+        yieldRate = ((survival - cumPrem) / cumPrem / yr * 100).toFixed(2) + '%';
+      }
+
       const is5y = yr >= 5 && yr % 5 === 0;
       const rowClass = is5y ? 'row-5y' : '';
 
@@ -260,6 +267,7 @@ async function generate() {
         <td class="col-total">${fmt(totalBenefit)}</td>
         <td>${fmt(aviation)}</td>
         <td class="col-total">${fmt(survival)}</td>
+        <td style="color:#B91C1C;font-weight:700;">${yieldRate}</td>
       </tr>`;
     }
 
@@ -308,7 +316,7 @@ function downloadImage() {
       filterRowsByAge('5y');
       const rows = Array.from(tbody.querySelectorAll('tr')).filter(r => r.style.display !== 'none');
 
-      const colWidths = [80, 70, 100, 110, 120, 120, 130, 120, 130];
+      const colWidths = [80, 70, 100, 110, 120, 120, 130, 120, 130, 100];
       const totalWidth = colWidths.reduce((a,b)=>a+b,0);
       const rowH = 42;
       const headerH = 70;
@@ -347,7 +355,7 @@ function downloadImage() {
       // Table header
       const tableX = padding;
       ctx.fillStyle = '#1D4ED8'; ctx.fillRect(tableX, tableY, totalWidth, headerH);
-      const headers = ['保单年度', '年龄', '当期保费', '累计保费', '现金价值', divColLabel, '身价总利益', '航空意外\n额外保额', '生存总利益'];
+      const headers = ['保单年度', '年龄', '当期保费', '累计保费', '现金价值', divColLabel, '身价总利益', '航空意外\n额外保额', '生存总利益', '当年\n收益率'];
       ctx.fillStyle = '#FFFFFF'; ctx.font = 'bold 17px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
       let x = tableX + 6;
       headers.forEach((h, i) => {
@@ -383,6 +391,12 @@ function downloadImage() {
         const totalBenefit = deathValue + cumDiv;
         const survival = cv + cumDiv;
 
+        // 当年收益率
+        let yieldRate = '-';
+        if (cumPrem > 0 && yr > 0) {
+          yieldRate = ((survival - cumPrem) / cumPrem / yr * 100).toFixed(2) + '%';
+        }
+
         const vals = [
           { t: yr, c: '#1E293B', f: 'bold 16px "PingFang SC"' },
           { t: currentAge, c: '#334155', f: '16px "PingFang SC"' },
@@ -392,7 +406,8 @@ function downloadImage() {
           { t: fmt(cumDiv), c: '#1E40AF', f: '16px "PingFang SC"' },
           { t: fmt(totalBenefit), c: '#1D4ED8', f: 'bold 17px "PingFang SC"' },
           { t: fmt(aviation), c: '#334155', f: '16px "PingFang SC"' },
-          { t: fmt(survival), c: '#1E3A5F', f: 'bold 17px "PingFang SC"' }
+          { t: fmt(survival), c: '#1E3A5F', f: 'bold 17px "PingFang SC"' },
+          { t: yieldRate, c: '#B91C1C', f: 'bold 16px "PingFang SC"' }
         ];
         let cx = tableX + 6;
         vals.forEach((v, ci) => { ctx.fillStyle = v.c; ctx.font = v.f; ctx.textAlign = 'center'; ctx.fillText(String(v.t), cx + colWidths[ci] / 2, y + rowH / 2 + 5); cx += colWidths[ci]; });
