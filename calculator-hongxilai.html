@@ -3,58 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宏禧来 两全保险（分红型）· 利益演示计算器</title>
+<title>宏禧来（分红型）理财计划 · 在线演算器</title>
+<script src="ai-planner.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-:root{ --blue:#1E3A5F; --blue2:#2C5282; --gray:#64748B; --graybg:#F1F5F9; --headerbg:#1E3A8A; --rowalt:#F0F9FF; --line:#E2E8F0; --accent:#1D4ED8; }
+:root{ --wine:#8B1A1A; --wine-light:#B83232; --wine-bg:#FFF5F5; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
-.wrap{max-width:960px;margin:0 auto;}
-.title-bar{background:linear-gradient(135deg,#1E3A5F,#2C5282);color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;}
-.title-bar h1{font-size:22px;font-weight:700;}
-.title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
-.card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#F8F9FA;color:#1E293B;padding:16px;}
+.wrap{max-width:1100px;margin:0 auto;background:#fff;padding:0 0 24px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+
+/* 输入区 */
+.input-card{background:#fff;border-radius:12px;padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
 .form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
 .field{display:flex;flex-direction:column;gap:6px;}
 .field label{font-size:13px;color:var(--gray);font-weight:600;}
 .gender-group{display:flex;gap:8px;}
-.gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;color:var(--gray);}
-.gender-btn.active{background:#1E3A5F;color:#fff;border-color:#1E3A5F;}
-input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:140px;}
-.btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
-.btn:hover{background:#1D4ED8;}
-.btn:disabled{opacity:.6;cursor:not-allowed;}
+.gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;color:#64748B;}
+.gender-btn.active{background:var(--wine);color:#fff;border-color:var(--wine);}
+input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:150px;}
+.btn{padding:10px 24px;background:var(--wine);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#7A1515;}
 .btn-dl{background:#059669;margin-left:10px;}
 .btn-dl:hover{background:#047857;}
-#paramBar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
-#paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:#1E3A8A;}
-.table-scroll{overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:14px;min-width:800px;}
-thead th{background:#1E3A8A;color:#fff;padding:11px 8px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
-tbody td{padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
-tbody tr.row-last{background:#BFDBFE;}
-.col-cv{font-weight:800;color:#1E3A8A;} .col-total{color:#1E3A8A;font-weight:700;} .col-rate{color:#1D4ED8;font-weight:700;} .col-num{font-weight:600;color:#1E293B;}
-.err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
-.err.show{display:block;}
-.tip{font-size:12px;color:var(--gray);margin-top:8px;}
-.dl-bar{display:flex;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
-.dl-bar .tip{margin:0 0 0 12px;}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);align-items:center;justify-content:center;z-index:98;}
-.overlay.show{display:flex;}
-.overlay div{background:#fff;padding:22px 34px;border-radius:12px;font-size:16px;font-weight:600;}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 22px;border-radius:24px;opacity:0;transition:.3s;font-size:14px;z-index:99;}
-.toast.show{opacity:1;}
+.rate-btns{display:flex;gap:8px;}
+.rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#64748B;}
+.rate-btn.active{background:var(--wine);color:#fff;border-color:var(--wine);}
+.tip{font-size:12px;color:#64748B;margin-top:10px;}
+.dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
+
+/* 计划书样式 */
+.plan{padding:28px 32px;background:#fff;}
+.plan-title{text-align:center;font-size:28px;font-weight:800;color:var(--wine);margin-bottom:20px;letter-spacing:1px;}
+.section{margin-bottom:18px;}
+.section-head{display:inline-flex;align-items:center;background:var(--wine);color:#fff;padding:6px 16px;font-size:16px;font-weight:700;margin-bottom:10px;}
+.section-head span{display:inline-block;width:3px;height:16px;background:#fff;margin-right:8px;}
+.section p{font-size:14px;line-height:1.8;color:#1E293B;margin:4px 0;}
+.section p strong{color:var(--wine);font-weight:700;}
+.case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
+.case-info em{font-style:normal;color:var(--wine);}
+
+/* 信息表 */
+.info-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px;}
+.info-table th,.info-table td{border:1px solid var(--line);padding:8px 10px;text-align:center;}
+.info-table th{background:#F1F5F9;color:#334155;font-weight:700;}
+.info-table td{background:#fff;}
+.info-table td.label{background:#F8FAFC;font-weight:600;}
+
+/* 主数据表 */
+.main-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;}
+.main-table th,.main-table td{border:1px solid #fff;padding:8px 4px;text-align:center;vertical-align:middle;}
+.main-table thead th{background:var(--wine);color:#fff;font-weight:700;}
+.main-table thead th.sub{background:#A52A2A;color:#fff;font-weight:600;}
+.main-table tbody tr:nth-child(even){background:#FFF8F8;}
+.main-table tbody tr:nth-child(odd){background:#fff;}
+.main-table tbody td{font-weight:600;color:#1E293B;}
+.main-table .col-maturity{background:#FFE4E4;}
+.main-table .col-total{background:#FFE4E4;color:var(--wine);}
+.main-table .col-rate{background:#FFE4E4;color:var(--wine);}
+.main-table .col-dividend{color:var(--wine);}
+.main-table .col-cum-div{color:var(--wine);}
+.main-table .col-num{color:#64748B;}
+.main-table .reserve-cell{color:#64748B;}
+
+/* 下载预览 */
 #renderCanvas{display:none;}
-@media(max-width:768px){ .btn{padding:13px 18px;font-size:15px;min-height:46px;} .dl-bar{flex-direction:column;align-items:stretch!important;} .btn-dl{margin-left:0!important;width:100%;} .dl-bar .tip{margin:8px 0 0 0!important;} .form-row{flex-direction:column;align-items:stretch;} .field{width:100%;} input,select{width:100%;} .gender-btn{flex:1;text-align:center;} }
+.err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin:0 22px 12px;font-size:14px;font-weight:600;}
+.err.show{display:block;}
+
+@media(max-width:768px){
+  .form-row{flex-direction:column;align-items:stretch;}
+  .field{width:100%;}
+  input,select{width:100%;}
+  .plan{padding:16px;}
+  .main-table{font-size:11px;}
+  .dl-bar{flex-direction:column;align-items:stretch;}
+  .btn-dl{margin:10px 0 0 0;}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="title-bar">
-    <h1>宏禧来 两全保险（分红型）· 利益演示计算器</h1>
-    <p>新华保险 · 短期两全险，一次交清。红利按累积生息方式演示，利率1.75%。</p>
-  </div>
-
-  <div class="card">
+  <div class="input-card">
     <div class="form-row">
       <div class="field">
         <label>性别</label>
@@ -65,258 +94,202 @@ tbody tr.row-last{background:#BFDBFE;}
       </div>
       <div class="field">
         <label>投保年龄（周岁）</label>
-        <input id="age" type="number" value="30" min="0" max="72">
+        <input id="age" type="number" value="40" min="0" max="72">
       </div>
       <div class="field">
         <label>保险期间</label>
         <select id="period">
           <option value="6">6年</option>
           <option value="8" selected>8年</option>
-          <option value="10">10年</option>
         </select>
       </div>
       <div class="field">
-        <label>趸交保费（元）</label>
-        <input id="premium" type="number" value="100000" min="20000" step="1000">
+        <label>一次交清保险费（元）</label>
+        <input id="premium" type="number" value="1000000" min="20000" step="1000">
+      </div>
+      <div class="field">
+        <label>演示累积生息利率</label>
+        <div class="rate-btns">
+          <div class="rate-btn" data-rate="0.0175" onclick="selectRate(this)">1.75%</div>
+          <div class="rate-btn" data-rate="0.02" onclick="selectRate(this)">2.0%</div>
+          <div class="rate-btn active" data-rate="0.025" onclick="selectRate(this)">2.5%</div>
+        </div>
       </div>
       <div class="field">
         <label>&nbsp;</label>
-        <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
+        <button class="btn" onclick="generate()">生成利益演示</button>
       </div>
     </div>
-    <div class="tip">默认演示：女30周岁 / 8年期 / 趸交10万元。最低保费2万元，且应为1,000元整数倍。</div>
+    <div class="tip">默认演示：女40周岁 / 8年期 / 趸交100万元。最低保费2万元，且应为1,000元整数倍。</div>
   </div>
 
   <div class="err" id="errorMsg"></div>
-  <div id="paramBar"></div>
 
-  <div class="card">
-    <div class="dl-bar">
-      <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
-      <span class="tip">导出效果图同款版式</span>
+  <div class="dl-bar">
+    <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
+    <span class="tip">导出效果图同款版式</span>
+  </div>
+
+  <div id="planArea" class="plan">
+    <div class="plan-title">宏禧来（分红型）理财计划</div>
+
+    <div class="section">
+      <div class="section-head"><span></span>公司介绍</div>
+      <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
+      <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
+      <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
     </div>
-    <div class="table-scroll">
-      <table id="resultTable">
-        <thead>
-          <tr>
-            <th>保单<br>年度</th>
-            <th>年龄<br>（年末）</th>
-            <th>当期保费</th>
-            <th>现金价值</th>
-            <th>年度红利</th>
-            <th>累积生息<br>1.75%</th>
-            <th>预期<br>总收益</th>
-            <th>预期<br>年化单利</th>
-            <th>备注</th>
-          </tr>
-        </thead>
-        <tbody id="resultBody"></tbody>
+
+    <div class="section">
+      <div class="section-head"><span></span>产品形态</div>
+      <p><strong>投保年龄：</strong>出生满30天至72周岁（2万元起售），线上单：18-64周岁</p>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><span></span>产品简介</div>
+      <p><strong>短期高效：</strong>一次交费即可享六/八/十年保障，对教育、退休、资金积累等需求定向规划</p>
+      <p><strong>满期给付：</strong>满期给付基本保险金额，高于所交保费，合同约定，清晰明确</p>
+      <p><strong>分红添利：</strong>共享央企经营成果，获得保单红利分配机会，锦上添花</p>
+      <p><strong>倍享关爱：</strong>同时兼顾最高1.6倍身价保障，关爱备至，幸福加持</p>
+    </div>
+
+    <div class="section">
+      <div class="case-info" id="caseInfo">VIP女士，今年40岁，购买100万8年期宏禧来(分红型)，预计满期总利益<span class="em">1209405</span>元</div>
+      <table class="info-table">
+        <tr>
+          <th>被保人</th><th>性别</th><th>年龄</th><th>一次交清保险费</th><th>保险期间</th><th>红利领取方式</th><th>演示累积生息利率</th><th>基本保额</th>
+        </tr>
+        <tr>
+          <td id="infoName">VIP</td><td id="infoGender">女</td><td id="infoAge">40周岁</td><td id="infoPremium">1000000</td>
+          <td id="infoPeriod">8年</td><td>累积生息</td><td id="infoRate">2.50%</td><td id="infoSa">1100500元</td>
+        </tr>
       </table>
+
+      <div class="table-scroll">
+        <table class="main-table" id="resultTable">
+          <thead>
+            <tr>
+              <th rowspan="2">保单<br>年度</th>
+              <th rowspan="2">当年<br>保险费</th>
+              <th rowspan="2">满期生存<br>保险金</th>
+              <th rowspan="2">身故<br>保险金</th>
+              <th colspan="2">红利利益演示（年末）</th>
+              <th rowspan="2">现金价值<br>（保证部分）</th>
+              <th rowspan="2">预期生存<br>总利益</th>
+              <th rowspan="2">预期<br>年化单利</th>
+            </tr>
+            <tr>
+              <th class="sub">年度红利</th>
+              <th class="sub">累积红利</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-<div style="text-align:center;padding:16px;font-size:12px;color:#64748B;line-height:1.8;">
-  本页面及演示说明仅供内部保险从业人员学习、交流使用，数据仅供参考，<br>
-  数据中含分红部分是不确定的，详细内容具体应以保单条款及保险合同为准。
-</div>
-
 <canvas id="renderCanvas"></canvas>
-<div class="overlay" id="loadingOverlay"><div>生成中...</div></div>
-<div class="toast" id="toast"></div>
 
 <script>
-let CALC_DATA = null;
 let currentGender = 1;
+let currentRate = 0.025;
+let DATA = null;
 
-function selectGender(el) {
+function selectGender(el){
   document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   currentGender = parseInt(el.dataset.value);
 }
+function selectRate(el){
+  document.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  currentRate = parseFloat(el.dataset.rate);
+  if(DATA) generate();
+}
+function fmt(n){ return n.toLocaleString('zh-CN'); }
+function fmtRate(n){ return (n*100).toFixed(2)+'%'; }
 
-async function loadData() {
-  if (CALC_DATA) return;
-  try { const res = await fetch('data_hongxilai.json'); CALC_DATA = await res.json(); }
-  catch(e) { showError('数据加载失败'); }
+async function loadData(){
+  const res = await fetch('data_hongxilai.json');
+  DATA = await res.json();
+  generate();
 }
 
-function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 5000); }
-function showLoading(show) { document.getElementById('loadingOverlay').classList.toggle('show', show); }
-function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2000); }
-function fmt(n) { if (n === null || n === undefined) return '-'; return Math.round(n).toLocaleString('zh-CN'); }
+function generate(){
+  if(!DATA) return loadData();
+  const age = parseInt(document.getElementById('age').value);
+  const period = parseInt(document.getElementById('period').value);
+  const premium = parseInt(document.getElementById('premium').value);
+  const errEl = document.getElementById('errorMsg');
+  errEl.classList.remove('show');
 
-async function generate() {
-  const btn = document.getElementById('btnGenerate');
-  btn.disabled = true; btn.textContent = '计算中...';
-  try {
-    await loadData();
-    const age = parseInt(document.getElementById('age').value);
-    const period = parseInt(document.getElementById('period').value);
-    const premium = parseInt(document.getElementById('premium').value);
+  if(age < 0 || age > 72){ errEl.textContent = '投保年龄超出范围（0-72周岁）'; errEl.classList.add('show'); return; }
+  if(premium < 20000){ errEl.textContent = '趸交保费最低2万元'; errEl.classList.add('show'); return; }
 
-    if (isNaN(age) || age < 0 || age > 72) { showError('投保年龄须在0~72周岁之间'); btn.disabled = false; btn.textContent = '生成利益演示'; return; }
-    if (isNaN(premium) || premium < 20000 || premium % 1000 !== 0) { showError('趸交保费最低20,000元，且应为1,000元整数倍'); btn.disabled = false; btn.textContent = '生成利益演示'; return; }
+  const scale = premium / 1000;
+  let rows = [];
+  let cumDiv = 0;
+  let maturitySa = 0;
+  for(let yr=1; yr<=period; yr++){
+    const key = `${currentGender}_${age}_${period}_${yr}`;
+    const d = DATA[key];
+    if(!d) continue;
+    const premiumRow = d.premium * scale;
+    const maturity = d.maturity * scale;
+    if(yr === period) maturitySa = maturity;
+    const death = d.death * scale;
+    const cv = d.cv * scale;
+    const annualDiv = d.annual_div * scale;
+    cumDiv = cumDiv * (1 + currentRate) + annualDiv;
+    const survival = cv + cumDiv;
+    const rate = yr > 0 && premium > 0 ? ((survival - premium) / premium / yr * 100) : 0;
+    rows.push({yr, premiumRow, maturity, death, annualDiv, cumDiv, cv, survival, rate});
+  }
 
-    const scale = premium / 1000;
-    const genderLabel = currentGender === 0 ? '男' : '女';
-    const pb = document.getElementById('paramBar'); pb.style.display = 'flex'; pb.innerHTML = `<strong style="color:#1E3A8A;font-size:18px;">${age}岁${genderLabel}</strong> · <strong style="color:#1E3A8A;font-size:18px;">趸交${fmt(premium)}</strong> · <strong style="color:#1E3A8A;font-size:18px;">${period}年期</strong>`;
+  // Update info
+  document.getElementById('infoGender').textContent = currentGender === 1 ? '女' : '男';
+  document.getElementById('infoAge').textContent = age + '周岁';
+  document.getElementById('infoPremium').textContent = fmt(premium);
+  document.getElementById('infoPeriod').textContent = period + '年';
+  document.getElementById('infoRate').textContent = fmtRate(currentRate);
+  document.getElementById('infoSa').textContent = fmt(maturitySa) + '元';
+  const last = rows[rows.length-1];
+  document.getElementById('caseInfo').innerHTML = `VIP${currentGender===1?'女士':'先生'}，今年${age}岁，购买${fmt(premium)}元${period}年期宏禧来(分红型)，预计满期总利益<span class="em" style="color:var(--wine)">${fmt(Math.round(last.survival))}</span>元`;
 
-    const tbody = document.getElementById('resultBody');
-    let html = '';
-    let cumDiv = 0;
-
-    for (let yr = 1; yr <= period; yr++) {
-      const key = `${currentGender}_${age}_${period}_${yr}`;
-      const d = CALC_DATA[key];
-      if (!d) { showError(`未找到数据: ${key}`); break; }
-
-      const currentAge = age + yr - 1;
-      const cv = d.cv * scale;
-      const div = d.cash_div * scale;
-      cumDiv = cumDiv * 1.0175 + div;
-      const total = cv + cumDiv;
-
-      let apr = '-';
-      if (yr >= 3 && total > premium) { apr = ((total / premium) ** (1 / yr) - 1) * 100; apr = apr.toFixed(2) + '%'; }
-
-      let note = '';
-      if (yr === 1) note = '静待花开';
-      else if (yr === 2) note = '复利增长';
-      else if (yr === period) note = '期满给付';
-      else note = '持续增值';
-
-      const isLast = yr === period;
-      const rowClass = isLast ? 'row-last' : '';
-
-      html += `<tr class="${rowClass}">
-        <td class="col-num">${yr}</td>
-        <td>${currentAge}</td>
-        <td>${yr === 1 ? fmt(premium) : '-'}</td>
-        <td class="col-cv">${fmt(cv)}</td>
-        <td>${fmt(div)}</td>
-        <td>${fmt(cumDiv)}</td>
-        <td class="col-total">${fmt(total)}</td>
-        <td class="col-rate">${apr}</td>
-        <td style="color:#64748B;font-size:12px;">${note}</td>
-      </tr>`;
-    }
-
-    tbody.innerHTML = html;
-    document.getElementById('errorMsg').classList.remove('show');
-  } catch (e) { showError('计算出错：' + e.message); }
-  finally { btn.disabled = false; btn.textContent = '生成利益演示'; }
+  // Render table
+  let html = '';
+  rows.forEach(r => {
+    const rateTxt = r.rate > 0 ? r.rate.toFixed(2) + '%' : '';
+    const reserve = r.rate <= 0 ? '<td class="reserve-cell">储备期</td>' : `<td class="col-rate">${rateTxt}</td>`;
+    html += `<tr>
+      <td class="col-num">${r.yr}</td>
+      <td>${fmt(Math.round(r.premiumRow))}</td>
+      <td class="col-maturity">${fmt(Math.round(r.maturity))}</td>
+      <td>${fmt(Math.round(r.death))}</td>
+      <td class="col-dividend">${fmt(Math.round(r.annualDiv))}</td>
+      <td class="col-cum-div">${fmt(Math.round(r.cumDiv))}</td>
+      <td>${fmt(Math.round(r.cv))}</td>
+      <td class="col-total">${fmt(Math.round(r.survival))}</td>
+      ${reserve}
+    </tr>`;
+  });
+  document.getElementById('resultBody').innerHTML = html;
 }
 
-function downloadImage() {
-  const tbody = document.getElementById('resultBody');
-  if (!tbody || !tbody.innerHTML) { showToast('请先生成利益演示'); return; }
-  showLoading(true);
-
-  setTimeout(() => {
-    try {
-      const canvas = document.getElementById('renderCanvas');
-      const ctx = canvas.getContext('2d');
-      const age = parseInt(document.getElementById('age').value);
-      const period = parseInt(document.getElementById('period').value);
-      const premium = parseInt(document.getElementById('premium').value);
-      const genderLabel = currentGender === 0 ? '男' : '女';
-      const scale = premium / 1000;
-
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      const colWidths = [80, 70, 100, 120, 100, 120, 120, 100, 90];
-      const totalWidth = colWidths.reduce((a,b)=>a+b,0);
-      const rowH = 40;
-      const headerH = 65;
-      const titleH = 75;
-      const paramH = 45;
-      const padding = 20;
-      const tableH = headerH + rows.length * rowH;
-      const tableY = titleH + paramH + 25;
-      const footerY = tableY + tableH + 10;
-      const canvasW = totalWidth + padding * 2;
-      const canvasH = footerY + 32;
-
-      canvas.width = canvasW * 2; canvas.height = canvasH * 2;
-      canvas.style.width = canvasW + 'px'; canvas.style.height = canvasH + 'px';
-      ctx.scale(2, 2);
-
-      ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvasW, canvasH);
-
-      const grad = ctx.createLinearGradient(0, 0, canvasW, 0);
-      grad.addColorStop(0, '#1D4ED8'); grad.addColorStop(0.5, '#2563EB'); grad.addColorStop(1, '#1E40AF');
-      ctx.fillStyle = grad; ctx.fillRect(0, 0, canvasW, titleH);
-      ctx.fillStyle = '#FFFFFF'; ctx.font = 'bold 28px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText('新华宏禧来两全保险（分红型）保险计划书', canvasW / 2, 50);
-
-      const paramY = titleH + 8;
-      ctx.fillStyle = '#DBEAFE'; ctx.fillRect(padding, paramY, canvasW - padding * 2, paramH);
-      ctx.fillStyle = '#1E293B'; ctx.font = 'bold 15px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText(`性别 ${genderLabel}  年龄 ${age}周岁  趸交保费 ${premium.toLocaleString()}元  保险期间 ${period}年`, canvasW / 2, paramY + 28);
-
-      const tableX = padding;
-      ctx.fillStyle = '#1D4ED8'; ctx.fillRect(tableX, tableY, totalWidth, headerH);
-      const headers = ['保单年度', '年龄', '当期保费', '现金价值', '年度红利', '累积生息
-1.75%', '预期总收益', '年化单利', '备注'];
-      ctx.fillStyle = '#FFFFFF'; ctx.font = 'bold 16px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
-      let x = tableX + 6;
-      headers.forEach((h, i) => { const lines = h.split('\n'); const cx = x + colWidths[i] / 2; if (lines.length === 1) ctx.fillText(lines[0], cx, tableY + headerH / 2 + 5); else { ctx.fillText(lines[0], cx, tableY + headerH / 2 - 4); ctx.fillText(lines[1], cx, tableY + headerH / 2 + 14); } x += colWidths[i]; });
-
-      let cumDiv = 0;
-      rows.forEach((row, idx) => {
-        const y = tableY + headerH + idx * rowH;
-        ctx.fillStyle = idx % 2 === 0 ? '#FFFFFF' : '#F0F9FF'; ctx.fillRect(tableX, y, totalWidth, rowH);
-        ctx.strokeStyle = '#E2E8F0'; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(tableX, y + rowH); ctx.lineTo(tableX + totalWidth, y + rowH); ctx.stroke();
-
-        const yr = parseInt(row.cells[0].textContent);
-        const currentAge = parseInt(row.cells[1].textContent);
-        const key = `${currentGender}_${age}_${period}_${yr}`;
-        const d = CALC_DATA[key]; if (!d) return;
-        const cv = d.cv * scale; const div = d.cash_div * scale;
-        cumDiv = cumDiv * 1.0175 + div; const total = cv + cumDiv;
-        let apr = '-'; if (yr >= 3 && total > premium) { apr = ((total / premium) ** (1 / yr) - 1) * 100; apr = apr.toFixed(2) + '%'; }
-        let note = ''; if (yr === 1) note = '静待花开'; else if (yr === 2) note = '复利增长'; else if (yr === period) note = '期满给付'; else note = '持续增值';
-
-        const vals = [
-          { t: yr, c: '#1E293B', f: 'bold 15px "PingFang SC"' },
-          { t: currentAge, c: '#334155', f: '15px "PingFang SC"' },
-          { t: yr === 1 ? fmt(premium) : '-', c: '#334155', f: '15px "PingFang SC"' },
-          { t: fmt(cv), c: '#2563EB', f: '15px "PingFang SC"' },
-          { t: fmt(div), c: '#1E40AF', f: '15px "PingFang SC"' },
-          { t: fmt(cumDiv), c: '#1D4ED8', f: '15px "PingFang SC"' },
-          { t: fmt(total), c: '#1E3A5F', f: 'bold 16px "PingFang SC"' },
-          { t: apr, c: '#2563EB', f: 'bold 15px "PingFang SC"' },
-          { t: note, c: '#64748B', f: '13px "PingFang SC"' }
-        ];
-        let cx = tableX + 6;
-        vals.forEach((v, ci) => { ctx.fillStyle = v.c; ctx.font = v.f; ctx.textAlign = 'center'; ctx.fillText(String(v.t), cx + colWidths[ci] / 2, y + rowH / 2 + 4); cx += colWidths[ci]; });
-      });
-
-      ctx.fillStyle = '#94A3B8'; ctx.font = '12px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText('本计划书数据源自官方演算表，仅供参考。具体利益以保险合同条款为准。', canvasW / 2, footerY + 8);
-      ctx.fillText('红利演示为预期值，实际可能高于或低于演示值。', canvasW / 2, footerY + 24);
-
-      const filename = `宏禧来_${genderLabel}${age}岁_${period}年_趸交${premium}元.png`;
-      downloadViaCanvas(canvas, filename);
-      showLoading(false);
-    } catch (e) { showError('图片生成失败：' + e.message); showLoading(false); }
-  }, 200);
+function downloadImage(){
+  const plan = document.getElementById('planArea');
+  html2canvas(plan, {scale: 2, backgroundColor: '#fff', useCORS: true}).then(canvas => {
+    const dataUrl = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = '宏禧来理财计划书.png';
+    a.click();
+  });
 }
 
-function downloadViaCanvas(canvas, filename) {
-  if (canvas.toBlob) {
-    canvas.toBlob(blob => {
-      if (blob) { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200); showToast('计划书图片已下载'); }
-      else { downloadViaDataURL(canvas, filename); }
-    }, 'image/png');
-  } else { downloadViaDataURL(canvas, filename); }
-}
-function downloadViaDataURL(canvas, filename) { const dataURL = canvas.toDataURL('image/png'); const a = document.createElement('a'); a.href = dataURL; a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => document.body.removeChild(a), 100); showToast('计划书图片已下载'); }
-
-document.getElementById('premium').addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
-document.getElementById('age').addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
-setTimeout(() => { try { generate(); } catch(e) {} }, 100);
+loadData();
 </script>
-<script src="ai-planner.js"></script>
 </body>
 </html>

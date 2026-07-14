@@ -1046,6 +1046,58 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// ===== 安全工具（防 XSS / 路径穿越 / 外链钓鱼） =====
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function escapeAttr(s) { return escapeHtml(s); }
+
+// 只允许落在 files/ 目录内的相对路径，拒绝 .. 穿越与外部协议
+function isSafeFile(f) {
+  if (typeof f !== 'string' || !f) return false;
+  if (/^https?:\/\//i.test(f) || f.startsWith('//') || f.startsWith('data:')) return false;
+  if (f.indexOf('..') !== -1 || f.indexOf('\0') !== -1) return false;
+  return f.indexOf('files/') === 0;
+}
+
+// 统一的卡片点击处理：离开前记住滚动位置 + 校验地址后再跳转
+function handleItemClick(item) {
+  if (!item || !item.url) return;
+  saveScrollPos();
+  if (item.url === '#') { alert('该功能即将上线，敬请期待！'); return; }
+  const isCalc = ['calculator','clause','dividend','card'].includes(item.type);
+  const isPage = isCalc || /\.html?$/i.test(item.url);
+  const isExternal = /^https?:\/\//i.test(item.url);
+  if (isPage) {
+    window.location.href = item.url;
+  } else if (isExternal) {
+    window.open(item.url, '_blank');
+  } else if (isSafeFile(item.url)) {
+    window.open('preview.html?file=' + encodeURIComponent(item.url) +
+                '&title=' + encodeURIComponent(item.name || '') +
+                '&type=' + encodeURIComponent(item.type || ''), '_blank');
+  } else {
+    alert('文件地址无效，请联系管理员');
+  }
+}
+
+// 卡片渲染后用事件委托绑定点击，避免把数据拼进 onclick 字符串
+function bindCardClicks() {
+  const content = document.getElementById('content');
+  if (!content) return;
+  content.querySelectorAll('.card[data-url]').forEach(function(el) {
+    const item = { url: el.dataset.url, type: el.dataset.type, name: el.dataset.name };
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function() { handleItemClick(item); });
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleItemClick(item); }
+    });
+  });
+}
+
 let DATA = null;
 let activeCategory = 'all';
 
@@ -1066,12 +1118,7 @@ window.addEventListener('focus', function() { setTimeout(restoreScrollPos, 100);
 // 页面加载时也尝试恢复
 window.addEventListener('load', function() { setTimeout(restoreScrollPos, 100); });
 
-// 包装open函数，打开前保存滚动位置
-const _origOpen = window.open;
-window.open = function(url, target, features) {
-  saveScrollPos();
-  return _origOpen.call(this, url, target, features);
-};
+// 注：滚动位置已在 handleItemClick 内调用 saveScrollPos() 保存，无需覆盖 window.open
 
 // ===== 扁平化 SVG 图标系统 =====
 const ICONS = {
@@ -1169,12 +1216,24 @@ async function loadData() {
 
 function renderTabs() {
   const tabs = document.getElementById('tabs');
-  let html = `<div class="tab active" data-cat="all" onclick="selectCategory('all')">全部</div>`;
-  DATA.categories.forEach(cat => {
-    const count = (cat.items || []).length;
-    html += `<div class="tab" data-cat="${cat.id}" onclick="selectCategory('${cat.id}')">${catIcon(cat.id)} ${cat.name}</div>`;
+  tabs.innerHTML = '';
+  const allTab = document.createElement('div');
+  allTab.className = 'tab active';
+  allTab.dataset.cat = 'all';
+  allTab.textContent = '全部';
+  allTab.addEventListener('click', function() { selectCategory('all'); });
+  tabs.appendChild(allTab);
+  DATA.categories.forEach(function(cat) {
+    const tab = document.createElement('div');
+    tab.className = 'tab';
+    tab.dataset.cat = cat.id;
+    tab.innerHTML = catIcon(cat.id);
+    const label = document.createElement('span');
+    label.textContent = ' ' + (cat.name || '');
+    tab.appendChild(label);
+    tab.addEventListener('click', function() { selectCategory(cat.id); });
+    tabs.appendChild(tab);
   });
-  tabs.innerHTML = html;
 }
 
 function selectCategory(catId) {
@@ -1186,7 +1245,7 @@ function selectCategory(catId) {
       // 仅当该item是页面类型（card/link/calculator等）才跳转，文件下载类不跳
       const PAGE_TYPES = ['card','link','calculator','dividend','contract'];
       if (PAGE_TYPES.includes(onlyItem.type) && onlyItem.url) {
-        window.location.href = onlyItem.url;
+        handleItemClick(onlyItem);
         return;
       }
     }
@@ -1266,27 +1325,12 @@ function renderContent(query) {
           html += `<div class="download-divider"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> 原始文件下载</div>`;
         }
         const tc = getTypeConfig(item.type);
-        const isCalc = item.type === 'calculator' || item.type === 'clause' || item.type === 'dividend' || item.type === 'card';
-        const isExternal = item.url.startsWith('http://') || item.url.startsWith('https://');
-        let onclick;
-        if (item.url === '#') {
-          onclick = `alert('该功能即将上线，敬请期待！')`;
-        } else if (isCalc) {
-          onclick = `location.href='${item.url}'`;
-        } else if (item.url.endsWith('.html') || item.url.endsWith('.htm')) {
-          // 已转换为在线网页（PPT/Word 转制），直接打开，无需下载
-          onclick = `location.href='${item.url}'`;
-        } else if (isExternal) {
-          onclick = `window.open('${item.url}', '_blank')`;
-        } else {
-          onclick = `window.open('preview.html?file=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.name)}&type=${item.type}', '_blank')`;
-        }
         html += `
-          <div class="card" onclick="${onclick}">
+          <div class="card" data-url="${escapeAttr(item.url)}" data-type="${escapeAttr(item.type)}" data-name="${escapeAttr(item.name)}">
             <div class="card-icon ${tc.class}">${typeIcon(tc.iconKey)}</div>
             <div class="card-body">
-              <div class="card-name">${item.name}</div>
-              ${item.description ? `<div class="card-desc">${item.description}</div>` : ''}
+              <div class="card-name">${escapeHtml(item.name)}</div>
+              ${item.description ? `<div class="card-desc">${escapeHtml(item.description)}</div>` : ''}
               <span class="card-tag">${tc.label}</span>
             </div>
             <div class="card-arrow">
@@ -1324,6 +1368,7 @@ function renderContent(query) {
   } else {
     content.innerHTML = html;
     noResults.style.display = 'none';
+    bindCardClicks();
   }
 }
 

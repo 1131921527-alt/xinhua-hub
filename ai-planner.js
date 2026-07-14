@@ -3,14 +3,22 @@
   'use strict';
 
   // ─── 产品映射表 ───
+  // params: 该测算器需要从输入中识别的参数
+  //   term      交费期限（趸交/N年交）→ 对应 id=term 的 select
+  //   period    保险期间（N年/保N年） → 对应 id=period 的 select
+  //   payMode   交费方式（N年交）      → 对应 id=payMode 的 select
+  //   annuityAge 年金起领年龄（N岁起领）→ 对应 id=annuityAge 的 select
   var PRODUCTS = [
-    { names: ['宏御','宏御世家','s11'], file: 'calculator-hongyu.html', label: '宏御世家', category: '分红型终身寿险' },
-    { names: ['宏泰','宏泰世家','s03'], file: 'calculator-hongtai.html', label: '宏泰世家', category: '分红型终身寿险' },
-    { names: ['宏愿','宏愿人生','s02'], file: 'calculator-hongyuan.html', label: '宏愿人生', category: '分红型养老年金' },
-    { names: ['华彩','华彩鎏金','s24'], file: 'calculator-huacai.html', label: '华彩鎏金', category: '分红型年金' },
-    { names: ['宏坤','宏坤人生','s06'], file: 'calculator-hongkun.html', label: '宏坤人生', category: '分红型养老年金' },
-    { names: ['恒享','恒享人生','g23'], file: 'calculator-hengxiang.html', label: '恒享人生', category: '非分红型年金' },
-    { names: ['福盛','福盛世家','添翼版','g14'], file: 'calculator-fusheng.html', label: '福盛世家', category: '非分红型终身寿险' }
+    { names: ['宏安','宏安世家','s10'], file: 'calculator-hongan.html', label: '宏安世家', category: '分红型终身寿险', params: ['term'] },
+    { names: ['宏御','宏御世家','s11'], file: 'calculator-hongyu.html', label: '宏御世家', category: '分红型终身寿险', params: ['term'] },
+    { names: ['宏泰','宏泰世家','s03'], file: 'calculator-hongtai.html', label: '宏泰世家', category: '分红型终身寿险', params: ['term'] },
+    { names: ['宏愿','宏愿人生','s02'], file: 'calculator-hongyuan.html', label: '宏愿人生', category: '分红型养老年金', params: ['term','annuityAge'] },
+    { names: ['宏禧来','s12','hongxilai'], file: 'calculator-hongxilai.html', label: '宏禧来', category: '分红型两全', params: ['period'] },
+    { names: ['盈满鑫','yingmanxin'], file: 'calculator-yingmanxin.html', label: '盈满鑫', category: '分红型两全', params: ['payMode','period'] },
+    { names: ['华彩','华彩鎏金','s24'], file: 'calculator-huacai.html', label: '华彩鎏金', category: '分红型年金', params: ['term'] },
+    { names: ['宏坤','宏坤人生','s06'], file: 'calculator-hongkun.html', label: '宏坤人生', category: '分红型养老年金', params: ['term'] },
+    { names: ['恒享','恒享人生','g23'], file: 'calculator-hengxiang.html', label: '恒享人生', category: '非分红型年金', params: ['term'] },
+    { names: ['福盛','福盛世家','添翼版','g14'], file: 'calculator-fusheng.html', label: '福盛世家', category: '非分红型终身寿险', params: ['term'] }
   ];
 
   // ─── 页面检测 ───
@@ -78,7 +86,7 @@
       }
       var result = parseInput(raw);
       if (!result.product) {
-        showPlannerError('无法识别产品名称，请使用：宏御/宏泰/宏愿/华彩/宏坤/恒享/福盛');
+        showPlannerError('无法识别产品名称，请使用：宏安/宏御/宏泰/宏愿/华彩/宏坤/恒享/福盛');
         shakeInput();
         return;
       }
@@ -97,8 +105,16 @@
         shakeInput();
         return;
       }
-      if (!result.term) {
-        showPlannerError('请提供缴费期限（如：3年交、5年交、趸交、20×3）');
+
+      // 按产品参数检查必填项
+      var params = result.product.params || ['term'];
+      var missing = params.filter(function(p) {
+        if (p === 'term') return !result.termVal;
+        return result[p] === null || result[p] === undefined;
+      });
+      if (missing.length > 0) {
+        var hints = { term: '缴费期限（如：3年交、5年交、趸交）', period: '保险期间（如：8年期、保8年）', payMode: '交费方式（如：3年交、5年交）', annuityAge: '年金起领年龄（如：60岁起领）' };
+        showPlannerError('请提供' + (hints[missing[0]] || missing[0]));
         shakeInput();
         return;
       }
@@ -131,7 +147,16 @@
       document.getElementById('apAge').textContent = result.age + '岁';
       document.getElementById('apGender').textContent = result.genderLabel;
       document.getElementById('apPremium').textContent = result.premiumDisplay;
-      document.getElementById('apTerm').textContent = result.termDisplay;
+
+      // 根据产品参数拼装展示文本
+      var displayParts = [];
+      var params = result.product.params || ['term'];
+      if (params.indexOf('term') !== -1 && result.termDisplay) displayParts.push(result.termDisplay);
+      if (params.indexOf('payMode') !== -1 && result.payMode) displayParts.push(result.payMode + '年交');
+      if (params.indexOf('period') !== -1 && result.period) displayParts.push(result.period + '年期');
+      if (params.indexOf('annuityAge') !== -1 && result.annuityAge) displayParts.push(result.annuityAge + '岁起领');
+      document.getElementById('apTerm').textContent = displayParts.join(' / ') || '-';
+
       modalEl.style.display = 'flex';
       // 存储结果供确认使用
       modalEl._result = result;
@@ -143,7 +168,16 @@
       if (!confirmed || !modalEl._result) return;
 
       var r = modalEl._result;
-      var url = r.product.file + '?age=' + r.age + '&gender=' + r.gender + '&premium=' + r.premium + '&term=' + r.termVal + '&auto=1';
+      var params = r.product.params || ['term'];
+      var url = r.product.file + '?age=' + r.age + '&gender=' + r.gender + '&premium=' + r.premium;
+      params.forEach(function(p) {
+        var val = r[p];
+        if (p === 'term') val = r.termVal; // 兼容旧字段名
+        if (val !== null && val !== undefined) {
+          url += '&' + p + '=' + val;
+        }
+      });
+      url += '&auto=1';
       window.location.href = url;
     }
 
@@ -155,7 +189,8 @@
     var s = raw.replace(/\s+/g, ' ').trim();
     var result = {
       product: null, age: null, gender: null, genderLabel: null,
-      premium: null, premiumDisplay: null, term: null, termVal: null, termDisplay: null
+      premium: null, premiumDisplay: null, term: null, termVal: null, termDisplay: null,
+      period: null, payMode: null, annuityAge: null
     };
 
     // 1. 识别产品
@@ -276,6 +311,41 @@
       }
     }
 
+    return parseExtraParams(result, s);
+  }
+
+  function parseExtraParams(result, s) {
+    if (!result.product) return result;
+    var params = result.product.params || ['term'];
+
+    // period: 保险期间，如 8年、8年期、保8年（避免与"N年交"冲突）
+    if (params.indexOf('period') !== -1 && result.period === null) {
+      var periodMatch = s.match(/(?:保|保险期间)?\s*(\d+)\s*年[期]?/);
+      if (periodMatch) {
+        var pv = parseInt(periodMatch[1]);
+        if (pv >= 1 && pv <= 50) result.period = pv;
+      }
+    }
+
+    // payMode: 交费方式（N年交），若未识别到则尝试
+    if (params.indexOf('payMode') !== -1 && result.payMode === null) {
+      if (result.termVal) {
+        result.payMode = result.termVal;
+      } else {
+        var pmMatch = s.match(/(\d+)\s*年\s*[交缴]/);
+        if (pmMatch) result.payMode = parseInt(pmMatch[1]);
+      }
+    }
+
+    // annuityAge: 年金起领年龄
+    if (params.indexOf('annuityAge') !== -1 && result.annuityAge === null) {
+      var annuityMatch = s.match(/(?:起领|开始领|领取)?\s*(\d+)\s*岁\s*(?:起领|开始领|领取)?/);
+      if (annuityMatch) {
+        var av = parseInt(annuityMatch[1]);
+        if (av >= 50 && av <= 75) result.annuityAge = av;
+      }
+    }
+
     return result;
   }
 
@@ -296,6 +366,9 @@
     var gender = parseInt(params.get('gender'));
     var premium = parseInt(params.get('premium'));
     var term = parseInt(params.get('term'));
+    var period = parseInt(params.get('period'));
+    var payMode = parseInt(params.get('payMode'));
+    var annuityAge = parseInt(params.get('annuityAge'));
 
     // 延迟执行，等页面生成函数定义好
     setTimeout(function() {
@@ -323,24 +396,11 @@
           if (premEl) premEl.value = premium;
         }
 
-        // 设置缴费期限
-        if (!isNaN(term) && term > 0) {
-          var termEl = document.getElementById('term');
-          if (termEl) {
-            var found = false;
-            for (var i = 0; i < termEl.options.length; i++) {
-              if (parseInt(termEl.options[i].value) === term) {
-                termEl.value = term;
-                found = true;
-                break;
-              }
-            }
-            if (!found) {
-              // 如果期限不在选项里，用最接近的
-              showPageError('缴费期限' + term + '年不在该产品可选范围内，已使用默认值');
-            }
-          }
-        }
+        // 设置各下拉参数（交费期限、保险期间、交费方式、年金起领年龄）
+        setSelectValue('term', term);
+        setSelectValue('period', period);
+        setSelectValue('payMode', payMode);
+        setSelectValue('annuityAge', annuityAge);
 
         // 自动生成
         if (typeof generate === 'function') {
@@ -350,6 +410,23 @@
         console.error('ai-planner: 参数设置失败', e);
       }
     }, 300);
+  }
+
+  function setSelectValue(id, val) {
+    if (isNaN(val) || val <= 0) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    var found = false;
+    for (var i = 0; i < el.options.length; i++) {
+      if (parseInt(el.options[i].value) === val) {
+        el.value = val;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      showPageError('参数' + id + '=' + val + '不在可选范围内，已使用默认值');
+    }
   }
 
   function showPageError(msg) {

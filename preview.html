@@ -351,11 +351,11 @@
           <tr><th>(岁)</th><th>(岁)</th><th>(岁)</th><th>(岁)</th></tr>
         </thead>
         <tbody>
-          <tr><td rowspan="3"><b>宏泰世家终身寿<br>（分红型）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S03</span></td><td>男</td><td>64</td><td>63</td><td>62</td><td>60</td><td rowspan="3">趸交5年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>1.2%分红现值增速管够达<br>同档竞品产品溢价前列+列车航空意外</td></tr>
+          <tr><td rowspan="3"><b>宏泰世家终身寿<br>（分红型）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S03</span></td><td>男</td><td>64</td><td>63</td><td>62</td><td>60</td><td rowspan="3">趸交5年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>1.2%分红现值增速稳健达成<br>同档竞品产品溢价前列+列车、航空意外</td></tr>
           <tr><td>女</td><td>67</td><td>67</td><td>66</td><td>64</td></tr>
           <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 3万 / 1万 / 1万</b></td></tr>
 
-          <tr><td rowspan="3"><b>宏御世家终身寿<br>（分红型）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S11</span></td><td>男</td><td>65</td><td>65</td><td>64</td><td>61</td><td rowspan="3">现价最高·老七家航价前三<br>趸交4年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>1.2%分红现值增速管够达成</td></tr>
+          <tr><td rowspan="3"><b>宏御世家终身寿<br>（分红型）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S11</span></td><td>男</td><td>65</td><td>65</td><td>64</td><td>61</td><td rowspan="3">现价最高·老七家现价前三<br>趸交4年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>1.2%分红现值增速稳健达成</td></tr>
           <tr><td>女</td><td>69</td><td>69</td><td>68</td><td>64</td></tr>
           <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 2万 / 2万 / 2万</b></td></tr>
 
@@ -363,7 +363,7 @@
           <tr><td>女</td><td colspan="4"></td></tr>
           <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 3万 / 1万 / 1万</b></td></tr>
 
-          <tr><td rowspan="3"><b>华彩鎏金年金险<br>（分红型）<br><small>1.75%固定年金 + 1.2%分红</small></b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S24</span></td><td>男</td><td>72</td><td>70</td><td>70</td><td>65</td><td rowspan="3">趸交四年覆盖总保费<br>三至五年覆盖总保费<br>现价修正快·75%即领1.2%的红利<br>按100%现算高，每年收益2.98%</td></tr>
+          <tr><td rowspan="3"><b>华彩鎏金年金险<br>（分红型）<br><small>1.75%固定年金 + 1.2%分红</small></b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S24</span></td><td>男</td><td>72</td><td>70</td><td>70</td><td>65</td><td rowspan="3">趸交四年覆盖总保费<br>三至五年覆盖总保费<br>现价回正快·75%即领1.2%的红利<br>按100%现价高，每年收益2.98%</td></tr>
           <tr><td>女</td><td></td><td></td><td></td><td></td></tr>
           <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 2万 / 1万 / 1万</b></td></tr>
 
@@ -394,6 +394,14 @@
   const file = decodeURIComponent(params.get('file') || '');
   const title = decodeURIComponent(params.get('title') || '文件预览');
   const type = (params.get('type') || '').toLowerCase();
+
+  // 安全校验：file 参数必须落在 files/ 目录内
+  function isSafeFile(f) {
+    if (typeof f !== 'string' || !f) return false;
+    if (/^https?:\/\//i.test(f) || f.startsWith('//') || f.startsWith('data:')) return false;
+    if (f.indexOf('..') !== -1 || f.indexOf('\0') !== -1) return false;
+    return f.indexOf('files/') === 0;
+  }
 
   document.getElementById('title').textContent = title;
 

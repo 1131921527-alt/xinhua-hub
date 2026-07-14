@@ -248,17 +248,12 @@ async function generate(){
       if(rowClass) tr.className=rowClass;
 
       let cells=`<td>${yr}</td><td>${curAge}</td>`;
-      // 当年保费 - 缴费期合并
-      if(isFirstPay){
-        if(paymentYears>1){
-          cells+=`<td class="pay-merge" rowspan="${paymentYears}">${fmt(row.prem||premium)}</td>`;
-        } else {
-          cells+=`<td>${fmt(row.prem||premium)}</td>`;
-        }
-      } else if(!isPayYear){
+      // 当年保费 - 缴费期各年都显示金额（不再合并）
+      if(isPayYear){
+        cells+=`<td>${fmt(row.prem||premium)}</td>`;
+      } else {
         cells+=`<td>-</td>`;
       }
-      // (此处省略的缴费期中间行被上面的rowspan合并)
       cells+=`<td>${fmt(row.exempt)}</td>`;
       cells+=`<td>${fmt(row.guar_amt)}</td>`;
       cells+=`<td>${fmt(row.exp_amt)}</td>`;
@@ -270,13 +265,10 @@ async function generate(){
       // 现金价值（保证+红利）
       if(isPayback) cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
       else cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
-      // 收益率 - 缴费期合并
-      if(isPayYear){
-        if(isFirstPay){
-          const payText=paymentYears===1?'趸交':`缴费期分${paymentYears}年投入`;
-          cells+=`<td class="pay-merge" rowspan="${paymentYears}">${payText}</td>`;
-        }
-      } else {
+      // 收益率 - 前5年合并居中显示"缴费期"，第6年起显示收益率
+      if(isFirstPay){
+        cells+=`<td class="pay-merge" rowspan="5">缴费期</td>`;
+      } else if(yr > 5){
         const rv=row.rate_raw;
         if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
         else cells+=`<td></td>`;
@@ -496,7 +488,7 @@ function downloadImage(){
     });
   });
 
-  // 6) 前5年收益率列显示"储备期"（合并单元格居中）
+  // 6) 前5年收益率列显示"缴费期"（合并单元格居中）
   let reserveStartIdx=-1, reserveCount=0;
   dlRows.forEach((r,idx)=>{ if(r.reserve){ if(reserveStartIdx===-1) reserveStartIdx=idx; reserveCount++; } });
   if(reserveStartIdx>=0&&reserveCount>0){
@@ -508,7 +500,7 @@ function downloadImage(){
     ctx.strokeRect(rcX+.5,ry0+.5,colW[9]-1,blockH-1);
     ctx.fillStyle=C.textGray; ctx.font='bold 12px '+FAM;
     ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('储备期', rcX+colW[9]/2, ry0+blockH/2);
+    ctx.fillText('缴费期', rcX+colW[9]/2, ry0+blockH/2);
   }
 
   // 7) 收益率列（非投资期行）
