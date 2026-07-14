@@ -316,22 +316,25 @@ async function generate() {
     
     const tbody = document.getElementById('resultBody');
     const paymentYears = term === 1 ? 1 : term;
-    
-    // 计算基本保额（年金起领当年年金）
-    let baseAmount = 0;
-    for (let i = 0; i < HY_DATA.length; i++) {
-      const row = HY_DATA[i];
-      const currentAge = row[1] + ageOffset;
-      if (currentAge >= startAge && row[4] > 0) {
-        baseAmount = Math.round(row[4] * scale);
-        break;
-      }
+
+    // 计算年金起始保单年度（基准数据: 57岁投, 第4年起领→隐含起领60岁）
+    const BASE_ANNUITY_START_YEAR = 4;   // 基准数据中年金首次出现的保单年度
+    const BASE_START_AGE = 60;            // 基准数据隐含的起领年龄(57+3)
+    const annuityStartYear = Math.max(startAge - age + 1, paymentYears + 1);
+    // 找基准年金金额（用于缩放）
+    let baseAnnuityAmount = 0;
+    for (let bi = 0; bi < HY_DATA.length; bi++) {
+      if (HY_DATA[bi][4] > 0) { baseAnnuityAmount = HY_DATA[bi][4]; break; }
     }
+    
+    // 计算基本保额（年金起领当年年金）— 使用基准年金金额缩放
+    const baseAmount = Math.round(baseAnnuityAmount * scale);
     const monthAmount = Math.round(baseAmount * 0.085);
     
     
     let html = '';
     let cumDivRecalc = 0;
+    let staticCumAnnuity = 0;
     
     for (let idx = 0; idx < HY_DATA.length; idx++) {
       const row = HY_DATA[idx];
@@ -342,8 +345,11 @@ async function generate() {
       // 按比例缩放金额字段
       const aPrem = Math.round(row[2]*scale);       // 年交保费
       const cPrem = Math.round(row[3]*scale);         // 累计保险费
-      const aAnn = row[4]>0 ? Math.round(row[4]*scale) : 0;   // 当期年金
-      const cAnn = Math.round(row[5]*scale);           // 累积年金
+      // 当期年金：只有到达起领年度后才显示，使用基准年金金额按比例缩放
+      const aAnn = (yr >= annuityStartYear && baseAnnuityAmount > 0) ? Math.round(baseAnnuityAmount * scale) : 0;
+      // 累积年金：从起领年开始累加
+      staticCumAnnuity += aAnn;
+      const cAnn = staticCumAnnuity;
       const dividend = Math.round(row[6]*scale);       // 当年红利
       // 根据红利模式重新计算累计生息
       cumDivRecalc = cumDivRecalc * (1 + cumRate) + dividend;
@@ -462,13 +468,13 @@ function downloadImage() {
       const totalP = premium * (term === 1 ? 1 : term);
       const drawLabel = drawMode === 'month' ? '月领' : '年领';
 
-      // 基本保额（与 generate 同口径）
-      let baseAmount = 0;
-      for (let i = 0; i < HY_DATA.length; i++) {
-        const row = HY_DATA[i];
-        const currentAge = row[1] + ageOffset;
-        if (currentAge >= startAge && row[4] > 0) { baseAmount = Math.round(row[4] * scale); break; }
+      // 基本保额（与 generate 同口径 — 使用基准年金金额缩放）
+      let baseAnnuityForDL = 0;
+      for (let bi = 0; bi < HY_DATA.length; bi++) {
+        if (HY_DATA[bi][4] > 0) { baseAnnuityForDL = HY_DATA[bi][4]; break; }
       }
+      const annuityStartYearDL = Math.max(startAge - age + 1, (term === 1 ? 1 : term) + 1);
+      const baseAmount = Math.round(baseAnnuityForDL * scale);
 
       // ---- 配色 / 常量（统一蓝白，来自 planbook-spec）----
       const C = {
@@ -492,17 +498,22 @@ function downloadImage() {
       let cumDivRecalc = 0;
       // 先计算所有非过滤行（用于survival增长率计算）
       const allRows = [];
+      let dlCumAnn = 0;
+      const dlPayYearsDL = term === 1 ? 1 : term;
       for (let j = 0; j < HY_DATA.length; j++) {
         const r = HY_DATA[j];
         const dividend = Math.round(r[6]*scale);
         cumDivRecalc = cumDivRecalc * (1 + cumRate) + dividend;
+        // 当期年金：只有到达起领年度后才显示
+        const dlAAnn = (r[0] >= annuityStartYearDL && baseAnnuityForDL > 0) ? Math.round(baseAnnuityForDL * scale) : 0;
+        dlCumAnn += dlAAnn;
         allRows.push({
           yr:r[0], age:r[1]+ageOffset,
           aPrem:Math.round(r[2]*scale), cPrem:Math.round(r[3]*scale),
-          aAnn:r[4]>0?Math.round(r[4]*scale):0, cAnn:Math.round(r[5]*scale),
+          aAnn:dlAAnn, cAnn:dlCumAnn,
           dividend:dividend, dividendCum:Math.round(cumDivRecalc),
           death:Math.round(r[8]*scale), cv:Math.round(r[9]*scale),
-          surv:Math.round(r[9]*scale) + Math.round(cumDivRecalc) + Math.round(r[5]*scale),
+          surv:Math.round(r[9]*scale) + Math.round(cumDivRecalc) + dlCumAnn,
           idx:j
         });
       }

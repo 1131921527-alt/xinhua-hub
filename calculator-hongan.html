@@ -406,7 +406,7 @@ function downloadImage() {
 
         // 当年收益率（储备期合并显示）
         let yieldRate = '-';
-        const isReserveRow = yr <= dlPayYears + 2;
+        const isReserveRow = yr <= payYears + 2;
         if (!isReserveRow && cumPrem > 0 && yr > 0) {
           yieldRate = ((survival - cumPrem) / cumPrem / yr * 100).toFixed(2) + '%';
         }
