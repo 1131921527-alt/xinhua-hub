@@ -4,3 +4,9 @@
 *_data_check.json
 node_modules/
 .workbuddy/
+package.json
+package-lock.json
+nul
+files/中行资料/suitability_enlarged.png
+files/中行资料/suitability_enlarged_segments/
+files/中行资料/segments/suitability_*.png

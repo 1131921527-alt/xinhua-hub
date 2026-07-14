@@ -34,8 +34,21 @@
       ]
     },
     {
+      "id": "sales-qa",
+      "name": "产品答疑",
+      "icon": "💬",
+      "items": [
+        {
+          "name": "产品销售话术 · QA答疑手册",
+          "type": "card",
+          "description": "MDRT级客户答疑话术 · 7款在售产品全覆盖 · 通用问题+分产品QA+异议处理速查+组合方案",
+          "url": "sales-qa.html"
+        }
+      ]
+    },
+    {
       "id": "boc-calculators",
-      "name": "中国银行渠道",
+      "name": "中行产品测算",
       "icon": "🏦",
       "items": [
         {
@@ -73,12 +86,71 @@
           "type": "card",
           "description": "原版一页通PDF + 产品形态速览 + 核心卖点解读 + 客户画像 + 话术 + 在线测算入口",
           "url": "intro-yingmanxin.html"
+        },
+        {
+          "name": "中行2026年在售产品清单",
+          "type": "card",
+          "description": "中国银行渠道2026年可销售的6款新华保险产品汇总表，含投保年龄、缴费规则、最低保费、保险期间及核心卖点",
+          "url": "boc-product-list-2026.html"
+        },
+        {
+          "name": "中行产品双录下单准备",
+          "type": "card",
+          "description": "中国银行渠道投保前双录资料核对清单：线上展示4项+手工单5项（含问题编号及投被保人不一致处理说明）",
+          "url": "boc-double-record-prep.html"
+        },
+        {
+          "name": "宏愿人生投保指引（中国银行版）",
+          "type": "card",
+          "description": "中国银行手机银行APP投保宏愿人生养老年金（分红型）全流程图解，含11步操作速览+28张步骤截图",
+          "url": "boc-hongyuan-guide.html"
+        },
+        {
+          "name": "出单前的适当性评估操作步骤",
+          "type": "card",
+          "description": "中国银行渠道投保前适当性评估12步箭头指引，含双录资料核对及手工单问题清单",
+          "url": "boc-suitability-assessment.html"
+        }
+      ]
+    },
+    {
+      "id": "vip-service",
+      "name": "增值服务",
+      "icon": "👑",
+      "items": [
+        {
+          "name": "新华尊/新华瑞 · 增值服务总览",
+          "type": "card",
+          "description": "新华尊高客权益 + 新华瑞标保权益 + 和睦家医疗体检（深分7月新增） | 权益一览图 + 小程序码 + 使用流程 + 服务项目 + 体检套餐",
+          "url": "zengzhi.html",
+          "subsection": "新华尊/新华瑞"
+        },
+        {
+          "name": "居家养老 · 3000分护理包（供应商）",
+          "type": "card",
+          "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供",
+          "url": "jujia.html",
+          "subsection": "居家服务"
+        },
+        {
+          "name": "润华松鹤颐养中心 - 介绍",
+          "type": "pdf",
+          "description": "招行全新重点合作养老项目 | 深圳福田下梅林核心区位 | 医养配套完善 | 合作保司总保费满100万锁定入住资格",
+          "url": "files/养老社区/润华松鹤一页通.pdf",
+          "subsection": "养老社区"
+        },
+        {
+          "name": "公司养老社区价格汇总表",
+          "type": "excel",
+          "description": "各养老社区价格汇总表",
+          "url": "files/养老社区/附件2：公司养老社区价格汇总表(0827).xls",
+          "subsection": "养老社区"
         }
       ]
     },
     {
       "id": "calculators",
-      "name": "招商银行渠道",
+      "name": "招行产品测算",
       "icon": "🏦",
       "items": [
         {
@@ -132,43 +204,8 @@
       ]
     },
     {
-      "id": "vip-service",
-      "name": "增值服务",
-      "icon": "👑",
-      "items": [
-        {
-          "name": "新华尊/新华瑞 · 增值服务总览",
-          "type": "card",
-          "description": "新华尊高客权益 + 新华瑞标保权益 + 和睦家医疗体检（深分7月新增） | 权益一览图 + 小程序码 + 使用流程 + 服务项目 + 体检套餐",
-          "url": "zengzhi.html",
-          "subsection": "新华尊/新华瑞"
-        },
-        {
-          "name": "居家养老 · 3000分护理包（供应商）",
-          "type": "card",
-          "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供",
-          "url": "jujia.html",
-          "subsection": "居家服务"
-        },
-        {
-          "name": "润华松鹤颐养中心 - 介绍",
-          "type": "pdf",
-          "description": "招行全新重点合作养老项目 | 深圳福田下梅林核心区位 | 医养配套完善 | 合作保司总保费满100万锁定入住资格",
-          "url": "files/养老社区/润华松鹤一页通.pdf",
-          "subsection": "养老社区"
-        },
-        {
-          "name": "公司养老社区价格汇总表",
-          "type": "excel",
-          "description": "各养老社区价格汇总表",
-          "url": "files/养老社区/附件2：公司养老社区价格汇总表(0827).xls",
-          "subsection": "养老社区"
-        }
-      ]
-    },
-    {
       "id": "workflow",
-      "name": "操作流程",
+      "name": "招行产品出单流程",
       "icon": "🔄",
       "items": [
         {
@@ -230,19 +267,6 @@
           "type": "pdf",
           "description": "招行手机银行投保新华产品常见问题解答",
           "url": "files/操作流程/招行手机银行投保常见问题（新华）.pdf"
-        }
-      ]
-    },
-    {
-      "id": "sales-qa",
-      "name": "产品答疑",
-      "icon": "💬",
-      "items": [
-        {
-          "name": "产品销售话术 · QA答疑手册",
-          "type": "card",
-          "description": "MDRT级客户答疑话术 · 7款在售产品全覆盖 · 通用问题+分产品QA+异议处理速查+组合方案",
-          "url": "sales-qa.html"
         }
       ]
     },
