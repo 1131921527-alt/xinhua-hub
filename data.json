@@ -90,8 +90,20 @@
         {
           "name": "S10 宏安世家终身寿险（分红型）在线演算",
           "type": "calculator",
-          "description": "趸交/3年/5年交，含特定公共交通意外及全残保障 → 可下载计划书图片",
+          "description": "趸交/3年/5年交，含特定公共交通意外及全残保障，红利可选累计生息(利率可调)/交清增额",
           "url": "calculator-hongan.html"
+        },
+        {
+          "name": "S02 宏愿人生养老年金（分红型）在线演算",
+          "type": "calculator",
+          "description": "养老年金利益演示 → 10列完整数据 → 可下载计划书图片",
+          "url": "calculator-hongyuan.html"
+        },
+        {
+          "name": "盈满鑫两全保险（分红型）在线演算",
+          "type": "calculator",
+          "description": "3年/5年交，6/8/10/15年期中短期两全险 → 可下载计划书图片",
+          "url": "calculator-yingmanxin.html"
         },
         {
           "name": "S12 宏禧来两全保险（分红型）在线演算",
@@ -100,10 +112,16 @@
           "url": "calculator-hongxilai.html"
         },
         {
-          "name": "盈满鑫两全保险（分红型）在线演算",
+          "name": "G23 恒享人生年金险在线演算",
           "type": "calculator",
-          "description": "3年/5年交，6/8/10/15年期中短期两全险 → 可下载计划书图片",
-          "url": "calculator-yingmanxin.html"
+          "description": "关爱金年金利益演示 → 11列完整数据 → 可下载计划书图片",
+          "url": "calculator-hengxiang.html"
+        },
+        {
+          "name": "盈满鑫 · 产品解读（一页通+MDRT解读）",
+          "type": "card",
+          "description": "原版一页通PDF + 产品形态速览 + 核心卖点解读 + 客户画像 + 话术 + 在线测算入口",
+          "url": "intro-yingmanxin.html"
         },
         {
           "name": "新华在售产品_中国银行版",

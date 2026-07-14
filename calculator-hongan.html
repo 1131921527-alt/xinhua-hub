@@ -80,6 +80,17 @@ tbody tr.row-5y{background:#DBEAFE;} tbody tr.row-last{background:#BFDBFE;}
         <input id="premium" type="number" value="1000000" min="1000" step="1000">
       </div>
       <div class="field">
+        <label>红利领取方式</label>
+        <select id="dividendMode" onchange="onDividendModeChange()">
+          <option value="cumulative" selected>累计生息</option>
+          <option value="paidup">交清增额</option>
+        </select>
+      </div>
+      <div class="field" id="rateField">
+        <label>累计生息利率（%）</label>
+        <input id="cumRate" type="number" value="2.5" min="0" max="10" step="0.1">
+      </div>
+      <div class="field">
         <label>显示密度</label>
         <select id="displayMode" onchange="filterRowsByAge(this.value)">
           <option value="all">显示全部</option>
@@ -92,7 +103,7 @@ tbody tr.row-5y{background:#DBEAFE;} tbody tr.row-last{background:#BFDBFE;}
         <button class="btn" id="btnGenerate" onclick="generate()">生成利益演示</button>
       </div>
     </div>
-    <div class="tip">默认演示：女40周岁 / 3年交 / 年交100万元。红利按累积生息方式演示，利率1.75%。</div>
+    <div class="tip">默认演示：女40周岁 / 3年交 / 年交100万元。红利按累计生息方式演示，利率2.5%。切换交清增额后利率锁定1.75%。</div>
   </div>
 
   <div class="err" id="errorMsg"></div>
@@ -112,7 +123,7 @@ tbody tr.row-5y{background:#DBEAFE;} tbody tr.row-last{background:#BFDBFE;}
             <th>当期保费</th>
             <th>累计保费</th>
             <th>现金价值</th>
-            <th>现金红利<br>累计生息</th>
+            <th id="divColHeader">现金红利<br>累计生息</th>
             <th>身价总利益</th>
             <th>航空意外<br>额外保额</th>
             <th>生存总利益</th>
@@ -141,6 +152,23 @@ function selectGender(el) {
   document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   currentGender = parseInt(el.dataset.value);
+}
+
+function onDividendModeChange() {
+  const mode = document.getElementById('dividendMode').value;
+  const rateField = document.getElementById('rateField');
+  const rateInput = document.getElementById('cumRate');
+  const colHeader = document.getElementById('divColHeader');
+  
+  if (mode === 'paidup') {
+    rateField.style.display = 'none';
+    rateInput.value = '1.75';
+    colHeader.innerHTML = '交清增额<br>累计利益';
+  } else {
+    rateField.style.display = 'flex';
+    rateInput.value = '2.5';
+    colHeader.innerHTML = '现金红利<br>累计生息';
+  }
 }
 
 async function loadData() {
@@ -186,12 +214,18 @@ async function generate() {
 
     const genderLabel = currentGender === 0 ? '男士' : '女士';
     const termLabel = {1:'趸交',3:'缴3年',5:'缴5年'}[term];
-    const pb = document.getElementById('paramBar'); pb.style.display = 'flex'; pb.innerHTML = `<strong style="color:#1E3A8A;font-size:18px;">${age}岁${genderLabel}</strong> · <strong style="color:#1E3A8A;font-size:18px;">每年${fmt(premium)}</strong> · <strong style="color:#1E3A8A;font-size:18px;">${termLabel}</strong> · <span style="color:#64748B;">分红累积生息</span>`;
+    const pb = document.getElementById('paramBar'); pb.style.display = 'flex';
+    const divMode = document.getElementById('dividendMode').value;
+    const cumRate = parseFloat(document.getElementById('cumRate').value) || 2.5;
+    const divLabel = divMode === 'paidup' ? `交清增额(1.75%)` : `累计生息(${cumRate}%)`;
+    pb.innerHTML = `<strong style="color:#1E3A8A;font-size:18px;">${age}岁${genderLabel}</strong> · <strong style="color:#1E3A8A;font-size:18px;">每年${fmt(premium)}</strong> · <strong style="color:#1E3A8A;font-size:18px;">${termLabel}</strong> · <span style="color:#64748B;">${divLabel}</span>`;
 
     const tbody = document.getElementById('resultBody');
     let html = '';
     let cumDiv = 0;
     let cumPrem = 0;
+    const cumRateVal = parseFloat(document.getElementById('cumRate').value) || 2.5;
+    const effectiveRate = 1 + cumRateVal / 100;
 
     for (let yr = 1; yr <= 106; yr++) {
       const key = `${currentGender}_${age}_${term}_${yr}`;
@@ -204,7 +238,7 @@ async function generate() {
       const sumAssured = d.sum_assured * scale;
       const aviation = d.aviation * scale;
 
-      cumDiv = cumDiv * 1.0175 + cashDiv;
+      cumDiv = cumDiv * effectiveRate + cashDiv;
       const annualPrem = yr <= payYears ? premium : 0;
       cumPrem += annualPrem;
 
@@ -265,6 +299,10 @@ function downloadImage() {
       const termLabel = {1:'一次交清',3:'3年交',5:'5年交'}[term];
       const scale = premium / 100000000;
       const payYears = term === 1 ? 1 : term;
+      const cumRateVal = parseFloat(document.getElementById('cumRate').value) || 2.5;
+      const effectiveRate = 1 + cumRateVal / 100;
+      const divMode = document.getElementById('dividendMode').value;
+      const divColLabel = divMode === 'paidup' ? '交清增额累计利益' : `现金红利累计生息(${cumRateVal}%)`;
 
       // 过滤可见行
       filterRowsByAge('5y');
@@ -301,16 +339,15 @@ function downloadImage() {
       // Param bar
       const paramY = titleH + 10;
       const totalPrem = premium * payYears;
+      const divDesc = divMode === 'paidup' ? '交清增额(1.75%)' : `累计生息(${cumRateVal}%)`;
       ctx.fillStyle = '#DBEAFE'; ctx.fillRect(padding, paramY, canvasW - padding * 2, paramH);
       ctx.fillStyle = '#1E293B'; ctx.font = 'bold 16px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText(`性别 ${genderLabel}  年龄 ${age}周岁  年缴保费 ${premium.toLocaleString()}元  缴费期限 ${termLabel}  总保费 ${totalPrem.toLocaleString()}元  保险期间 终身`, canvasW / 2, paramY + 32);
+      ctx.fillText(`性别 ${genderLabel}  年龄 ${age}周岁  年缴保费 ${premium.toLocaleString()}元  缴费期限 ${termLabel}  总保费 ${totalPrem.toLocaleString()}元  ${divDesc}  保险期间 终身`, canvasW / 2, paramY + 32);
 
       // Table header
       const tableX = padding;
       ctx.fillStyle = '#1D4ED8'; ctx.fillRect(tableX, tableY, totalWidth, headerH);
-      const headers = ['保单年度', '年龄', '当期保费', '累计保费', '现金价值', '现金红利
-累计生息', '身价总利益', '航空意外
-额外保额', '生存总利益'];
+      const headers = ['保单年度', '年龄', '当期保费', '累计保费', '现金价值', divColLabel, '身价总利益', '航空意外\n额外保额', '生存总利益'];
       ctx.fillStyle = '#FFFFFF'; ctx.font = 'bold 17px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';
       let x = tableX + 6;
       headers.forEach((h, i) => {
@@ -338,7 +375,7 @@ function downloadImage() {
         const cv = d.cv * scale;
         const cashDiv = d.cash_div * scale;
         const aviation = d.aviation * scale;
-        cumDiv = cumDiv * 1.0175 + cashDiv;
+        cumDiv = cumDiv * effectiveRate + cashDiv;
         const annualPrem = yr <= payYears ? premium : 0;
         cumPrem += annualPrem;
         const leverage = getLeverage(currentAge);
