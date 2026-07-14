@@ -22,8 +22,8 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#F8F9FA;c
 input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:150px;}
 .btn{padding:10px 24px;background:var(--wine);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
 .btn:hover{background:#7A1515;}
-.btn-dl{background:#059669;margin-left:10px;}
-.btn-dl:hover{background:#047857;}
+.btn-dl{background:var(--wine);margin-left:10px;}
+.btn-dl:hover{background:#7A1515;}
 .rate-btns{display:flex;gap:8px;}
 .rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#64748B;}
 .rate-btn.active{background:var(--wine);color:#fff;border-color:var(--wine);}
@@ -41,15 +41,15 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
 
 .top-info{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
-.info-table{flex:1;min-width:300px;border-collapse:collapse;font-size:13px;}
-.info-table th,.info-table td{border:1px solid var(--line);padding:7px 8px;text-align:center;}
-.info-table th{background:#F1F5F9;color:#334155;font-weight:700;}
-.info-table td{background:#fff;}
-.info-table td.label{background:#F8FAFC;font-weight:600;}
+.info-table{flex:1;min-width:300px;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);}
+.info-table th,.info-table td{border:1px solid var(--wine);padding:7px 8px;text-align:center;}
+.info-table th{background:var(--wine);color:#fff;font-weight:700;}
+.info-table td{background:#fff;color:#1E293B;font-weight:600;}
+.info-table td.label{background:var(--wine-bg);color:var(--wine);font-weight:700;}
 .side-stats{display:flex;flex-direction:column;gap:10px;}
-.stat-box{display:flex;align-items:center;border:1px solid var(--line);background:#fff;}
+.stat-box{display:flex;align-items:center;border:2px solid var(--wine);background:#fff;}
 .stat-box .stat-label{background:var(--wine);color:#fff;padding:8px 12px;font-size:13px;font-weight:700;white-space:nowrap;}
-.stat-box .stat-val{padding:8px 14px;font-size:14px;font-weight:700;min-width:80px;text-align:center;}
+.stat-box .stat-val{padding:8px 14px;font-size:14px;font-weight:700;min-width:80px;text-align:center;color:var(--wine);}
 
 .main-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;}
 .main-table th,.main-table td{border:1px solid #fff;padding:7px 3px;text-align:center;vertical-align:middle;}
@@ -61,6 +61,10 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .main-table .col-total{background:#FFE4E4;}
 .main-table .col-annuity{color:var(--wine);font-weight:700;}
 .main-table .reserve-cell{color:#64748B;}
+
+.row-positive td{background:#FFE4E4 !important;color:var(--wine) !important;}
+.row-positive .col-rate{background:#FFCDCD !important;}
+.row-positive .col-total{background:#FFCDCD !important;}
 
 .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin:0 22px 12px;font-size:14px;font-weight:600;}
 .err.show{display:block;}
@@ -123,9 +127,9 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
       <div class="field">
         <label>演示累积生息利率</label>
         <div class="rate-btns">
-          <div class="rate-btn active" data-rate="0.0175" onclick="selectRate(this)">1.75%</div>
+          <div class="rate-btn" data-rate="0.0175" onclick="selectRate(this)">1.75%</div>
           <div class="rate-btn" data-rate="0.02" onclick="selectRate(this)">2.0%</div>
-          <div class="rate-btn" data-rate="0.025" onclick="selectRate(this)">2.5%</div>
+          <div class="rate-btn active" data-rate="0.025" onclick="selectRate(this)">2.5%</div>
         </div>
       </div>
       <div class="field">
@@ -133,7 +137,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
         <button class="btn" onclick="generate()">生成利益演示</button>
       </div>
     </div>
-    <div class="tip">默认演示：女50周岁 / 3年交 / 年交50万元 / 55岁起领。红利按累积生息1.75%演示，可切换利率。</div>
+    <div class="tip">默认演示：女50周岁 / 3年交 / 年交50万元 / 55岁起领 / 月领。红利按累积生息2.5%演示，可切换利率。</div>
   </div>
 
   <div class="err" id="errorMsg"></div>
@@ -179,7 +183,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
         </table>
         <div class="side-stats">
           <div class="stat-box"><div class="stat-label">演示分红实现率</div><div class="stat-val">100%</div></div>
-          <div class="stat-box"><div class="stat-label">演示累积生息利率</div><div class="stat-val" id="statRate">1.75%</div></div>
+          <div class="stat-box"><div class="stat-label">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
         </div>
       </div>
 
@@ -211,7 +215,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 
 <script>
 let currentGender = 1;
-let currentRate = 0.0175;
+let currentRate = 0.025;
 let DATA = null;
 
 const TERM_CONFIG = {
@@ -315,12 +319,15 @@ function generate(){
   }
 
   const tbody = document.getElementById('resultBody');
-  tbody.innerHTML = rows.map(r => {
-    const yieldStr = r.yieldVal === null
-      ? (r.yr === 1 ? '<span class="reserve-cell">储备期</span>' : '<span class="reserve-cell">-</span>')
-      : (r.yieldVal * 100).toFixed(2) + '%';
+  const reserveYears = rows.filter(r => r.yieldVal === null).length;
+  tbody.innerHTML = rows.map((r, idx) => {
+    const isReserve = r.yieldVal === null;
+    const yieldCell = isReserve
+      ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
+      : `<td class="col-rate">${(r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     const annuityDisp = r.annuity > 0 ? r.annuity / modeFactor : 0;
-    return `<tr>
+    const rowClass = r.survival > totalPrem ? 'row-positive' : '';
+    return `<tr class="${rowClass}">
       <td>${r.yr}</td>
       <td>${r.ageEnd}</td>
       <td>${r.yearPrem > 0 ? fmt(r.yearPrem) : '-'}</td>
@@ -331,7 +338,7 @@ function generate(){
       <td>${fmt(r.death)}</td>
       <td>${fmt(r.cv)}</td>
       <td class="col-total">${fmt(r.survival)}</td>
-      <td class="col-rate">${yieldStr}</td>
+      ${yieldCell}
     </tr>`;
   }).join('');
 

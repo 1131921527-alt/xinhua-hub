@@ -23,8 +23,8 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#F8F9FA;c
 input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:150px;}
 .btn{padding:10px 24px;background:var(--wine);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
 .btn:hover{background:#7A1515;}
-.btn-dl{background:#059669;margin-left:10px;}
-.btn-dl:hover{background:#047857;}
+.btn-dl{background:var(--wine);margin-left:10px;}
+.btn-dl:hover{background:#7A1515;}
 .rate-btns{display:flex;gap:8px;}
 .rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#64748B;}
 .rate-btn.active{background:var(--wine);color:#fff;border-color:var(--wine);}
@@ -43,11 +43,11 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .case-info em{font-style:normal;color:var(--wine);}
 
 /* 信息表 */
-.info-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px;}
-.info-table th,.info-table td{border:1px solid var(--line);padding:8px 10px;text-align:center;}
-.info-table th{background:#F1F5F9;color:#334155;font-weight:700;}
-.info-table td{background:#fff;}
-.info-table td.label{background:#F8FAFC;font-weight:600;}
+.info-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px;border:2px solid var(--wine);}
+.info-table th,.info-table td{border:1px solid var(--wine);padding:8px 10px;text-align:center;}
+.info-table th{background:var(--wine);color:#fff;font-weight:700;}
+.info-table td{background:#fff;color:#1E293B;font-weight:600;}
+.info-table td.label{background:var(--wine-bg);color:var(--wine);font-weight:700;}
 
 /* 主数据表 */
 .main-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;}
@@ -64,6 +64,10 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .main-table .col-cum-div{color:var(--wine);}
 .main-table .col-num{color:#64748B;}
 .main-table .reserve-cell{color:#64748B;}
+
+.row-positive td{background:#FFE4E4 !important;color:var(--wine) !important;}
+.row-positive .col-rate{background:#FFCDCD !important;}
+.row-positive .col-total{background:#FFCDCD !important;}
 
 /* 下载预览 */
 #renderCanvas{display:none;}
@@ -260,10 +264,14 @@ function generate(){
 
   // Render table
   let html = '';
-  rows.forEach(r => {
-    const rateTxt = r.rate > 0 ? r.rate.toFixed(2) + '%' : '';
-    const reserve = r.rate <= 0 ? '<td class="reserve-cell">储备期</td>' : `<td class="col-rate">${rateTxt}</td>`;
-    html += `<tr>
+  const reserveCount = rows.filter(r => r.rate <= 0).length;
+  rows.forEach((r, idx) => {
+    const isReserve = r.rate <= 0;
+    const rateCell = isReserve
+      ? (idx === 0 ? `<td class="reserve-cell" rowspan="${reserveCount}">储备期</td>` : '')
+      : `<td class="col-rate">${r.rate.toFixed(2) + '%'}</td>`;
+    const rowClass = r.rate > 0 ? 'row-positive' : '';
+    html += `<tr class="${rowClass}">
       <td class="col-num">${r.yr}</td>
       <td>${fmt(Math.round(r.premiumRow))}</td>
       <td class="col-maturity">${fmt(Math.round(r.maturity))}</td>
@@ -272,7 +280,7 @@ function generate(){
       <td class="col-cum-div">${fmt(Math.round(r.cumDiv))}</td>
       <td>${fmt(Math.round(r.cv))}</td>
       <td class="col-total">${fmt(Math.round(r.survival))}</td>
-      ${reserve}
+      ${rateCell}
     </tr>`;
   });
   document.getElementById('resultBody').innerHTML = html;

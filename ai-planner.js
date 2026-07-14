@@ -12,7 +12,7 @@
     { names: ['宏安','宏安世家','s10'], file: 'calculator-hongan.html', label: '宏安世家', category: '分红型终身寿险', params: ['term'] },
     { names: ['宏御','宏御世家','s11'], file: 'calculator-hongyu.html', label: '宏御世家', category: '分红型终身寿险', params: ['term'] },
     { names: ['宏泰','宏泰世家','s03'], file: 'calculator-hongtai.html', label: '宏泰世家', category: '分红型终身寿险', params: ['term'] },
-    { names: ['宏愿','宏愿人生','s02'], file: 'calculator-hongyuan.html', label: '宏愿人生', category: '分红型养老年金', params: ['term','annuityAge'] },
+    { names: ['宏愿','宏愿人生','s02'], file: 'calculator-hongyuan.html', label: '宏愿人生', category: '分红型养老年金', params: ['term','annuityAge','annuityMode'] },
     { names: ['宏禧来','s12','hongxilai'], file: 'calculator-hongxilai.html', label: '宏禧来', category: '分红型两全', params: ['period'] },
     { names: ['盈满鑫','yingmanxin'], file: 'calculator-yingmanxin.html', label: '盈满鑫', category: '分红型两全', params: ['payMode','period'] },
     { names: ['华彩','华彩鎏金','s24'], file: 'calculator-huacai.html', label: '华彩鎏金', category: '分红型年金', params: ['term'] },
@@ -113,7 +113,7 @@
         return result[p] === null || result[p] === undefined;
       });
       if (missing.length > 0) {
-        var hints = { term: '缴费期限（如：3年交、5年交、趸交）', period: '保险期间（如：8年期、保8年）', payMode: '交费方式（如：3年交、5年交）', annuityAge: '年金起领年龄（如：60岁起领）' };
+        var hints = { term: '缴费期限（如：3年交、5年交、趸交）', period: '保险期间（如：8年期、保8年）', payMode: '交费方式（如：3年交、5年交）', annuityAge: '年金起领年龄（如：60岁起领）', annuityMode: '领取方式（如：月领、年领）' };
         showPlannerError('请提供' + (hints[missing[0]] || missing[0]));
         shakeInput();
         return;
@@ -155,6 +155,7 @@
       if (params.indexOf('payMode') !== -1 && result.payMode) displayParts.push(result.payMode + '年交');
       if (params.indexOf('period') !== -1 && result.period) displayParts.push(result.period + '年期');
       if (params.indexOf('annuityAge') !== -1 && result.annuityAge) displayParts.push(result.annuityAge + '岁起领');
+      if (params.indexOf('annuityMode') !== -1 && result.annuityMode) displayParts.push(result.annuityMode === 'month' ? '月领' : '年领');
       document.getElementById('apTerm').textContent = displayParts.join(' / ') || '-';
 
       modalEl.style.display = 'flex';
@@ -346,6 +347,15 @@
       }
     }
 
+    // annuityMode: 领取方式（月领/年领），默认月领
+    if (params.indexOf('annuityMode') !== -1) {
+      if (/年领/.test(s)) {
+        result.annuityMode = 'year';
+      } else {
+        result.annuityMode = 'month';
+      }
+    }
+
     return result;
   }
 
@@ -369,6 +379,7 @@
     var period = parseInt(params.get('period'));
     var payMode = parseInt(params.get('payMode'));
     var annuityAge = parseInt(params.get('annuityAge'));
+    var annuityMode = params.get('annuityMode');
 
     // 延迟执行，等页面生成函数定义好
     setTimeout(function() {
@@ -401,6 +412,12 @@
         setSelectValue('period', period);
         setSelectValue('payMode', payMode);
         setSelectValue('annuityAge', annuityAge);
+
+        // 设置领取方式（月领/年领）
+        if (annuityMode) {
+          var modeEl = document.getElementById('annuityMode');
+          if (modeEl) modeEl.value = annuityMode;
+        }
 
         // 自动生成
         if (typeof generate === 'function') {

@@ -2,3 +2,5 @@
 *_data.json
 *_data_new.js
 *_data_check.json
+node_modules/
+.workbuddy/
