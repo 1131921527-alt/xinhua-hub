@@ -89,7 +89,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
       </div>
       <div class="field">
         <label>投保年龄（周岁）</label>
-        <input id="age" type="number" value="56" min="0" max="69">
+        <input id="age" type="number" value="50" min="0" max="69">
       </div>
       <div class="field">
         <label>交费方式</label>
@@ -102,15 +102,22 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
       </div>
       <div class="field">
         <label>年交保费（元）</label>
-        <input id="premium" type="number" value="100000" min="10000" step="1000">
+        <input id="premium" type="number" value="500000" min="10000" step="1000">
       </div>
       <div class="field">
         <label>年金起领年龄</label>
         <select id="annuityAge">
-          <option value="55">55岁</option>
-          <option value="60" selected>60岁</option>
+          <option value="55" selected>55岁</option>
+          <option value="60">60岁</option>
           <option value="65">65岁</option>
           <option value="70">70岁</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>领取方式</label>
+        <select id="annuityMode">
+          <option value="month" selected>月领</option>
+          <option value="year">年领</option>
         </select>
       </div>
       <div class="field">
@@ -126,7 +133,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
         <button class="btn" onclick="generate()">生成利益演示</button>
       </div>
     </div>
-    <div class="tip">默认演示：女56周岁 / 3年交 / 年交10万元 / 60岁起领。红利按累积生息1.75%演示，可切换利率。</div>
+    <div class="tip">默认演示：女50周岁 / 3年交 / 年交50万元 / 55岁起领。红利按累积生息1.75%演示，可切换利率。</div>
   </div>
 
   <div class="err" id="errorMsg"></div>
@@ -159,7 +166,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
     </div>
 
     <div class="section">
-      <div class="case-info" id="caseInfo">VIP女士，今年56周岁，3年交、年交10万元，购买宏愿人生养老年金（分红型），60岁起领</div>
+      <div class="case-info" id="caseInfo">VIP女士，今年50周岁，3年交、年交50万元，购买宏愿人生养老年金（分红型），55岁起领</div>
       <div class="top-info">
         <table class="info-table">
           <tr>
@@ -248,6 +255,7 @@ function generate(){
   const term = parseInt(document.getElementById('term').value);
   const premium = parseInt(document.getElementById('premium').value);
   const annuityAge = parseInt(document.getElementById('annuityAge').value);
+  const annuityMode = document.getElementById('annuityMode').value;
   const errEl = document.getElementById('errorMsg');
   errEl.classList.remove('show');
 
@@ -259,6 +267,7 @@ function generate(){
   const totalPrem = premium * term;
   const annuityStartYear = annuityAge - age;
   const maxYear = 105 - age;
+  const modeFactor = annuityMode === 'month' ? 12 : 1;
   let rows = [];
   let cumDiv = 0;
   let cumAnn = 0;
@@ -295,7 +304,7 @@ function generate(){
     let yieldVal;
     if(yr === 1){
       yieldVal = null;
-    } else if(lastSurv > totalPrem){
+    } else if(yr > annuityStartYear){
       yieldVal = (survival - lastSurv) / cumPrem;
     } else {
       yieldVal = null;
@@ -310,11 +319,12 @@ function generate(){
     const yieldStr = r.yieldVal === null
       ? (r.yr === 1 ? '<span class="reserve-cell">储备期</span>' : '<span class="reserve-cell">-</span>')
       : (r.yieldVal * 100).toFixed(2) + '%';
+    const annuityDisp = r.annuity > 0 ? r.annuity / modeFactor : 0;
     return `<tr>
       <td>${r.yr}</td>
       <td>${r.ageEnd}</td>
       <td>${r.yearPrem > 0 ? fmt(r.yearPrem) : '-'}</td>
-      <td class="col-annuity">${r.annuity > 0 ? fmt(r.annuity) : '-'}</td>
+      <td class="col-annuity">${r.annuity > 0 ? fmt(annuityDisp) : '-'}</td>
       <td>${r.cumAnn > 0 ? fmt(r.cumAnn) : '-'}</td>
       <td>${fmt(r.hl)}</td>
       <td>${fmt(r.cumDiv)}</td>
@@ -334,8 +344,9 @@ function generate(){
   document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';
 
   const genderStr = currentGender === 1 ? '女士' : '先生';
+  const modeStr = annuityMode === 'month' ? '月领' : '年领';
   document.getElementById('caseInfo').textContent =
-    `VIP${genderStr}，今年${age}周岁，${cfg.label}、年交${fmt(premium)}元，购买宏愿人生养老年金（分红型），${annuityAge}岁起领`;
+    `VIP${genderStr}，今年${age}周岁，${cfg.label}、年交${fmt(premium)}元，购买宏愿人生养老年金（分红型），${annuityAge}岁起领（${modeStr}）`;
 
   updateFormText();
 }
