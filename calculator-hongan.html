@@ -249,9 +249,20 @@ async function generate() {
       const survival = cv + cumDiv;
 
       // 当年收益率（年化单利）= (生存总利益 - 累计保费) / 累计保费 / 保单年度 × 100%
-      let yieldRate = '-';
-      if (cumPrem > 0 && yr > 0) {
-        yieldRate = ((survival - cumPrem) / cumPrem / yr * 100).toFixed(2) + '%';
+      // 前 payYears+2 年为"储备期"，合并居中显示
+      const isReserveYear = yr <= reserveYears;
+      let yieldCell;
+      if (isReserveYear) {
+        if (yr === 1) {
+          yieldCell = `<td class="rate-reserve" rowspan="${reserveYears}" style="background:#F5F5F5 !important;color:#888;font-weight:800;text-align:center;vertical-align:middle;">储备期</td>`;
+        } else {
+          yieldCell = '';
+        }
+      } else {
+        if (cumPrem > 0 && yr > 0) {
+          yieldRate = ((survival - cumPrem) / cumPrem / yr * 100).toFixed(2) + '%';
+        }
+        yieldCell = `<td style="color:#B91C1C;font-weight:700;">${yieldRate}</td>`;
       }
 
       const is5y = yr >= 5 && yr % 5 === 0;
@@ -267,7 +278,7 @@ async function generate() {
         <td class="col-total">${fmt(totalBenefit)}</td>
         <td>${fmt(aviation)}</td>
         <td class="col-total">${fmt(survival)}</td>
-        <td style="color:#B91C1C;font-weight:700;">${yieldRate}</td>
+        ${yieldCell}
       </tr>`;
     }
 
@@ -368,6 +379,8 @@ function downloadImage() {
 
       // Table data
       let cumDiv = 0, cumPrem = 0;
+      let dlReserveStartIdx = -1, dlReserveCount = 0, reserveCenterX = 0;
+      const reserveColIdx = 9; // 当年收益率是第10列(索引9)
       rows.forEach((row, idx) => {
         const y = tableY + headerH + idx * rowH;
         ctx.fillStyle = idx % 2 === 0 ? '#FFFFFF' : '#F0F9FF'; ctx.fillRect(tableX, y, totalWidth, rowH);
@@ -391,9 +404,10 @@ function downloadImage() {
         const totalBenefit = deathValue + cumDiv;
         const survival = cv + cumDiv;
 
-        // 当年收益率
+        // 当年收益率（储备期合并显示）
         let yieldRate = '-';
-        if (cumPrem > 0 && yr > 0) {
+        const isReserveRow = yr <= dlPayYears + 2;
+        if (!isReserveRow && cumPrem > 0 && yr > 0) {
           yieldRate = ((survival - cumPrem) / cumPrem / yr * 100).toFixed(2) + '%';
         }
 
@@ -407,11 +421,36 @@ function downloadImage() {
           { t: fmt(totalBenefit), c: '#1D4ED8', f: 'bold 17px "PingFang SC"' },
           { t: fmt(aviation), c: '#334155', f: '16px "PingFang SC"' },
           { t: fmt(survival), c: '#1E3A5F', f: 'bold 17px "PingFang SC"' },
-          { t: yieldRate, c: '#B91C1C', f: 'bold 16px "PingFang SC"' }
+          { t: isReserveRow ? '' : yieldRate, c: isReserveRow ? '#94A3B8' : '#B91C1C', f: `bold ${isReserveRow ? '17' : '16'}px "PingFang SC"` }
         ];
         let cx = tableX + 6;
-        vals.forEach((v, ci) => { ctx.fillStyle = v.c; ctx.font = v.f; ctx.textAlign = 'center'; ctx.fillText(String(v.t), cx + colWidths[ci] / 2, y + rowH / 2 + 5); cx += colWidths[ci]; });
+        vals.forEach((v, ci) => {
+          if (isReserveRow && ci === 9) {
+            // 储备期列记录位置，稍后统一绘制
+            if (dlReserveStartIdx === -1) dlReserveStartIdx = idx;
+            dlReserveCount++;
+            reserveCenterX = cx + colWidths[ci] / 2;
+          } else {
+            ctx.fillStyle = v.c; ctx.font = v.f; ctx.textAlign = 'center'; ctx.fillText(String(v.t), cx + colWidths[ci] / 2, y + rowH / 2 + 5);
+          }
+          cx += colWidths[ci];
+        });
       });
+
+      // 储备期合并单元格
+      if (dlReserveStartIdx >= 0 && dlReserveCount > 0) {
+        const rsvX = tableX + colWidths.slice(0, reserveColIdx).reduce((a,b)=>a+b,0);
+        const rsvY = tableY + headerH + dlReserveStartIdx * rowH;
+        const rsvH = dlReserveCount * rowH;
+        const rsvW = colWidths[reserveColIdx];
+        ctx.fillStyle = '#F5F5F5';
+        ctx.fillRect(rsvX, rsvY, rsvW, rsvH);
+        ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 1;
+        ctx.strokeRect(rsvX + 0.5, rsvY + 0.5, rsvW - 1, rsvH - 1);
+        ctx.fillStyle = '#94A3B8'; ctx.font = 'bold 17px "PingFang SC", "Microsoft YaHei", sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('储备期', reserveCenterX, rsvY + rsvH / 2);
+      }
 
       // Footer
       ctx.fillStyle = '#94A3B8'; ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif'; ctx.textAlign = 'center';

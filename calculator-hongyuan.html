@@ -507,7 +507,7 @@ function downloadImage() {
         });
       }
       // 过滤：60岁起每5年一行
-      const dlRows = [];
+      dlRows.length = 0;
       for (let j = 0; j < allRows.length; j++) {
         const r = allRows[j];
         if(r.age >= 60 && (r.age-60)%5 !== 0) continue;

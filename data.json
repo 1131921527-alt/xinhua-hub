@@ -39,6 +39,12 @@
       "icon": "🏦",
       "items": [
         {
+          "name": "S10 宏安世家终身寿险（分红型）在线演算",
+          "type": "calculator",
+          "description": "趸交/3年/5年交，含特定公共交通意外及全残保障，红利可选累计生息(利率可调)/交清增额",
+          "url": "calculator-hongan.html"
+        },
+        {
           "name": "S11 宏御世家终身寿（分红型）在线演算",
           "type": "calculator",
           "description": "输入年龄/性别/金额 → 即时生成利益演示 → 可下载计划书图片",
