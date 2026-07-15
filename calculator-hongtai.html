@@ -6,16 +6,16 @@
 <title>宏泰世家（分红型）利益演示计算器</title>
 <style>
   :root{
-    --blue:#1E3A5F; --blue2:#2C5282; --gray:#64748B; --graybg:#F1F5F9;
-    --headerbg:#334155; --rowalt:#F0F9FF; --line:#E2E8F0; --accent:#2563EB;
+    --blue:#8B1A1A; --blue2:#A52A2A; --gray:#64748B; --graybg:#F1F5F9;
+    --headerbg:#475569; --rowalt:#FFF8F8; --line:#E2E8F0; --accent:#8B1A1A;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
   .wrap{max-width:1080px;margin:0 auto;}
-  .title-bar{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;}
+  .title-bar{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #7A1515;}
   .title-bar h1{font-size:22px;font-weight:700;}
   .title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
-  .card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .card{background:#fff;border:1px solid #8B1A1A;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
   .form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
   .field{display:flex;flex-direction:column;gap:6px;}
   .field label{font-size:13px;color:var(--gray);font-weight:600;}
@@ -24,7 +24,7 @@
   .gender-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
   input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:130px;}
   .btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
-  .btn:hover{background:#1D4ED8;}
+  .btn:hover{background:#8B1A1A;}
   .btn:disabled{opacity:.6;cursor:not-allowed;}
   .btn-dl{background:#8B1A1A;margin-left:10px;}
   .btn-dl:hover{background:#7A1515;}
@@ -32,15 +32,15 @@
   #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--blue);}
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;}
-  thead th{background:#1E3A8A;color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
+  thead th{background:#8B1A1A;color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
   tbody td{padding:9px 6px;text-align:center;border-bottom:1px solid var(--line);}
-  tbody tr.row-5y{background:#DBEAFE;}
-  tbody tr.row-last{background:#BFDBFE;}
+  tbody tr.row-5y{background:#FFF5F5;}
+  tbody tr.row-last{background:#FFE4E4;}
   tbody tr.row-5y td, tbody tr.row-last td { background: transparent; }
   tbody tr.row-5y:hover, tbody tr.row-last:hover { filter: brightness(0.97); }
   .col-cv{font-weight:800;color:var(--blue);}
-  .col-rate{color:#2563EB;font-weight:700;}
-  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E3A8A;text-align:center;padding:10px 4px;background:#DBEAFE;border:1px solid #93C5FD;}
+  .col-rate{color:#8B1A1A;font-weight:700;}
+  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#8B1A1A;text-align:center;padding:10px 4px;background:#FFF5F5;border:1px solid #F0C5C5;}
   .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .reserve-cell{background:#F5F5F5 !important;color:#888;font-weight:800;text-align:center;vertical-align:middle;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
@@ -216,7 +216,7 @@ async function generate(){
 
     document.getElementById('paramBar').style.display='flex';
     document.getElementById('paramBar').innerHTML=
-      `<strong style="color:#1E3A8A;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E3A8A;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E3A8A;font-size:16px;">${termLabel}</strong><span style="color:#64748B;">分红交清增额</span>`;
+      `<strong style="color:#8B1A1A;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#8B1A1A;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#8B1A1A;font-size:16px;">${termLabel}</strong><span style="color:#64748B;">分红交清增额</span>`;
 
     const rows=getRows();
     const body=document.getElementById('resultBody');
@@ -339,13 +339,13 @@ function downloadImage(){
 
   const FAM='"PingFang SC","Microsoft YaHei",sans-serif';
   const C={
-    titleGrad:['#1E3A5F','#2563EB','#1E40AF'],
-    companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#DBEAFE',
-    subHeader:'#1D4ED8', tableHeader:'#1E3A5F',
-    rowWhite:'#FFFFFF', rowAlt:'#F0F9FF',
+    titleGrad:['#8B1A1A','#8B1A1A','#1E40AF'],
+    companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#FFF5F5',
+    subHeader:'#8B1A1A', tableHeader:'#8B1A1A',
+    rowWhite:'#FFFFFF', rowAlt:'#FFF8F8',
     reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
-    textDark:'#1E293B', textGray:'#334155', textLight:'#64748B', textMuted:'#94A3B8',
-    accentBlue:'#2563EB', accentDark:'#1D4ED8', rateRed:'#DC2626',
+    textDark:'#1E293B', textGray:'#475569', textLight:'#64748B', textMuted:'#94A3B8',
+    accentBlue:'#8B1A1A', accentDark:'#8B1A1A', rateRed:'#DC2626',
     lineColor:'#E2E8F0', paybackBg:'#FFF59D', paybackBorder:'#F9D71C'
   };
   let y=PAD;

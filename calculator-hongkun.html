@@ -6,17 +6,17 @@
 <title>宏坤人生养老年金保险 · 利益演示计算器</title>
 <style>
   :root{
-    --blue:#1E3A5F; --blue2:#2C5282; --gray:#64748B; --graybg:#F1F5F9;
-    --headerbg:#334155; --rowalt:#F0F9FF; --line:#E2E8F0; --accent:#2563EB;
-    --cv:#2563EB; --surv:#1D4ED8; --div:#7C3AED;
+    --blue:#8B1A1A; --blue2:#A52A2A; --gray:#64748B; --graybg:#F1F5F9;
+    --headerbg:#475569; --rowalt:#FFF8F8; --line:#E2E8F0; --accent:#8B1A1A;
+    --cv:#8B1A1A; --surv:#8B1A1A; --div:#7C3AED;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
   .wrap{max-width:1200px;margin:0 auto;}
-  .title-bar{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;}
+  .title-bar{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #7A1515;}
   .title-bar h1{font-size:22px;font-weight:700;}
   .title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
-  .card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .card{background:#fff;border:1px solid #8B1A1A;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
   .form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
   .field{display:flex;flex-direction:column;gap:6px;}
   .field label{font-size:13px;color:var(--gray);font-weight:600;}
@@ -25,7 +25,7 @@
   .gender-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
   input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:140px;}
   .btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
-  .btn:hover{background:#1D4ED8;}
+  .btn:hover{background:#8B1A1A;}
   .btn:disabled{opacity:.6;cursor:not-allowed;}
   .btn-dl{background:#8B1A1A;margin-left:10px;}
   .btn-dl:hover{background:#7A1515;}
@@ -33,15 +33,15 @@
   #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--blue);}
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:1080px;}
-  thead th{background:#1E3A8A;color:#fff;padding:10px 6px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
+  thead th{background:#8B1A1A;color:#fff;padding:10px 6px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
   tbody td{padding:9px 5px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
-  tbody tr.row-5y{background:#DBEAFE;}
-  tbody tr.row-last{background:#BFDBFE;}
+  tbody tr.row-5y{background:#FFF5F5;}
+  tbody tr.row-last{background:#FFE4E4;}
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
   .col-div{color:var(--div);font-weight:600;}
   .col-ann{color:var(--div);}
-  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E3A8A;text-align:center;padding:10px 4px;background:#DBEAFE;border:1px solid #93C5FD;}
+  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#8B1A1A;text-align:center;padding:10px 4px;background:#FFF5F5;border:1px solid #F0C5C5;}
   .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
@@ -194,7 +194,7 @@ async function generate(){
     const startAge=age+5;  // 宏坤第5年开始领
     document.getElementById('paramBar').style.display='flex';
     document.getElementById('paramBar').innerHTML=
-      `<strong style="color:#1E3A8A;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E3A8A;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E3A8A;font-size:16px;">${termLabel}</strong><strong style="color:#1E3A8A;font-size:16px;">${startAge}岁开始领</strong><span style="color:#64748B;">领取方式 ${drawLabel}</span>`;
+      `<strong style="color:#8B1A1A;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#8B1A1A;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#8B1A1A;font-size:16px;">${termLabel}</strong><strong style="color:#8B1A1A;font-size:16px;">${startAge}岁开始领</strong><span style="color:#64748B;">领取方式 ${drawLabel}</span>`;
     document.getElementById('thAnn').innerHTML = drawMode==='month' ? '养老年金<br>祝寿金(月领)' : '养老年金<br>祝寿金(年领)';
 
     const body=document.getElementById('resultBody');
@@ -295,13 +295,13 @@ function downloadImage(){
   ctx.fillStyle='#FFFFFF'; ctx.fillRect(0,0,canvasW,canvasH);
 
   const C={
-    titleGrad:['#1D4ED8','#2563EB','#1E40AF'],
-    companyBg:'#EFF6FF', paramBg:'#DBEAFE',
-    subHeader:'#1D4ED8', tableHeader:'#1E3A5F',
-    rowWhite:'#FFFFFF', rowAlt:'#F0F9FF',
+    titleGrad:['#8B1A1A','#8B1A1A','#1E40AF'],
+    companyBg:'#EFF6FF', paramBg:'#FFF5F5',
+    subHeader:'#8B1A1A', tableHeader:'#8B1A1A',
+    rowWhite:'#FFFFFF', rowAlt:'#FFF8F8',
     reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
-    textDark:'#1E293B', textGray:'#334155', textMuted:'#94A3B8',
-    accentBlue:'#2563EB'
+    textDark:'#1E293B', textGray:'#475569', textMuted:'#94A3B8',
+    accentBlue:'#8B1A1A'
   };
 
   // ===== ① 标题栏（蓝头渐变）=====
@@ -333,7 +333,7 @@ function downloadImage(){
   leftLines.forEach((t,i)=>ctx.fillText(t, lx, infoY+48+i*16));
   // 右栏：产品特点（分隔线）
   const midX=canvasW/2;
-  ctx.strokeStyle='#BFDBFE'; ctx.lineWidth=1;
+  ctx.strokeStyle='#FFE4E4'; ctx.lineWidth=1;
   ctx.beginPath(); ctx.moveTo(midX,infoY+14); ctx.lineTo(midX,infoY+INFO_H-14); ctx.stroke();
   let rx=midX+PAD;
   ctx.fillStyle=C.textDark; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
@@ -393,8 +393,8 @@ function downloadImage(){
       {t:r.ann>0?fmt(r.ann):'-',c:'#7C3AED',f:'bold 15px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.cv),c:C.accentBlue,f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.cumDiv),c:'#7C3AED',f:'bold 15px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:fmt(r.surv),c:'#1D4ED8',f:'bold 17px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:fmt(r.deathDiv),c:'#1D4ED8',f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:fmt(r.surv),c:'#8B1A1A',f:'bold 17px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:fmt(r.deathDiv),c:'#8B1A1A',f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.death),c:C.textGray,f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.cum),c:C.textGray,f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.annCum),c:'#7C3AED',f:'bold 15px "PingFang SC","Microsoft YaHei",sans-serif'}
