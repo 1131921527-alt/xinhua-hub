@@ -94,8 +94,9 @@
         <label>显示密度</label>
         <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
           <option value="all">显示全部</option>
-          <option value="2y">60岁起每2年一行</option>
-          <option value="5y" selected>60岁起每5年一行</option>
+          <option value="5y60" selected>60岁起每5年一行</option>
+          <option value="5y70">70岁起每5年一行</option>
+          <option value="5y75">75岁起每5年一行</option>
         </select>
       </div>
       <div class="field">
@@ -244,7 +245,7 @@ async function generate(){
       body.appendChild(tr);
     });
     // 应用显示密度过滤
-    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y'); }
+    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y60'); }
   }catch(e){showError('生成出错：'+e.message);}
   btn.disabled=false; btn.textContent='生成利益演示';
 }

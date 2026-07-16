@@ -113,8 +113,9 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
         <label>显示密度</label>
         <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
           <option value="all">显示全部</option>
-          <option value="2y">60岁起每2年一行</option>
-          <option value="5y" selected>60岁起每5年一行</option>
+          <option value="5y60" selected>60岁起每5年一行</option>
+          <option value="5y70">70岁起每5年一行</option>
+          <option value="5y75">75岁起每5年一行</option>
         </select>
       </div>
       <div class="field">
@@ -394,7 +395,7 @@ async function generate() {
     document.getElementById('errorMsg').classList.remove('show');
     
     // 应用显示密度过滤
-    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y'); }
+    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y60'); }
     
     
   } catch (e) {
@@ -457,7 +458,7 @@ function downloadImage() {
       const rows = Array.from(tbody.querySelectorAll('tr'));
       
       // 下载图片默认5年模式：过滤掉60岁后非5年的行
-      if(typeof filterRowsByAge==='function'){ filterRowsByAge('5y'); }
+      if(typeof filterRowsByAge==='function'){ filterRowsByAge('5y60'); }
       const visibleRows = rows.filter(function(r){ return r.style.display !== 'none'; });
       
       // ===== Layout constants (大字体) =====

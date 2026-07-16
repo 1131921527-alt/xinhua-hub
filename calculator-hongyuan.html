@@ -29,6 +29,9 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .rate-btn.active{background:var(--wine);color:#fff;border-color:var(--wine);}
 .tip{font-size:12px;color:#64748B;margin-top:10px;}
 .dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
+.view-mode-btn{padding:10px 20px;background:#fff;color:var(--wine);border:1.5px solid var(--wine);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
+.view-mode-btn:hover{background:var(--wine-bg);}
+body.capturing .no-export{display:none !important;}
 
 .plan{padding:28px 32px;background:#fff;}
 .plan-title{text-align:center;font-size:28px;font-weight:800;color:var(--wine);margin-bottom:20px;letter-spacing:1px;}
@@ -145,6 +148,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 
   <div class="dl-bar">
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
+    <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：60岁后每5年</button>
     <span class="tip">导出效果图同款版式</span>
   </div>
 
@@ -158,7 +162,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
       <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
     </div>
 
-    <div class="section">
+    <div class="section no-export">
       <div class="section-head"><span></span>产品形态</div>
       <p id="productForm">三年交投保年龄：30天-69周岁，保险期间终身，年金起领年龄可选55/60/65/70周岁</p>
     </div>
@@ -171,7 +175,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
     </div>
 
     <div class="section">
-      <div class="case-info" id="caseInfo">VIP女士，今年50周岁，3年交、年交50万元，购买宏愿人生养老年金（分红型），55岁起领</div>
+      <div class="case-info no-export" id="caseInfo">VIP女士，今年50周岁，3年交、年交50万元，购买宏愿人生养老年金（分红型），55岁起领</div>
       <div class="top-info">
         <table class="info-table">
           <tr>
@@ -218,6 +222,17 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 let currentGender = 1;
 let currentRate = 0.025;
 let DATA = null;
+let viewMode = '60';
+
+const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
+
+function toggleViewMode(){
+  const modes = ['all', '60', '70', '75'];
+  const idx = modes.indexOf(viewMode);
+  viewMode = modes[(idx + 1) % modes.length];
+  document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
+  if(DATA) generate();
+}
 
 const TERM_CONFIG = {
   1: { label: '趸交', maxAge: 65 },
@@ -320,8 +335,15 @@ function generate(){
   }
 
   const tbody = document.getElementById('resultBody');
-  const reserveYears = rows.filter(r => r.yieldVal === null).length;
-  tbody.innerHTML = rows.map((r, idx) => {
+  let displayRows = rows.filter(r => {
+    if(viewMode === 'all') return true;
+    if(viewMode === '60') return r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0);
+    if(viewMode === '70') return r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0);
+    if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
+    return true;
+  });
+  const reserveYears = displayRows.filter(r => r.yieldVal === null).length;
+  tbody.innerHTML = displayRows.map((r, idx) => {
     const isReserve = r.yieldVal === null;
     const yieldCell = isReserve
       ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
@@ -360,13 +382,17 @@ function generate(){
 }
 
 function downloadImage(){
+  document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
   html2canvas(plan, {scale: 2, backgroundColor: '#fff', useCORS: true}).then(canvas => {
+    document.body.classList.remove('capturing');
     const dataUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = dataUrl;
     a.download = '宏愿人生理财计划书.png';
     a.click();
+  }).catch(() => {
+    document.body.classList.remove('capturing');
   });
 }
 

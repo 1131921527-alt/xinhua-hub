@@ -471,7 +471,7 @@
       var btn = document.createElement('button');
       btn.id = 'btnWeChatCopy';
       btn.className = 'btn btn-dl-secondary';
-      btn.textContent = '复制微信发送文案';
+      btn.textContent = '复制微信发送短信文案';
       btn.style.cssText = 'background:#07C160;margin-left:10px;';
       btn.onmouseover = function(){ this.style.background = '#06AD56'; };
       btn.onmouseout = function(){ this.style.background = '#07C160'; };
@@ -492,6 +492,12 @@
   }
 
   function copyWeChatText(product) {
+    // 宏安世家：使用固定短信文案
+    if (product.label === '宏安世家') {
+      var text = '【宏安世家】央企出品 固收 + 分红终身寿险\n✅ 保底年复利 1.75%，利益写入合同，终身锁定，不受利率波动影响\n✅ 年度盈余分红，演示利率 1.22%，可现金领取、可复利滚存增值\n✅ 终身身故保障 1.4-1.6 倍，额外赔付 1 倍特定公共交通意外身故金\n中央汇金、中国宝武双央企控股，3 笔投入、R2 低风险，长期资产稳健压舱石';
+      copyToClipboard(text);
+      return;
+    }
     // 读取页面当前填入的参数
     var age = document.getElementById('age');
     var premium = document.getElementById('premium');
@@ -746,6 +752,16 @@
       }
     }
 
+    if (mode === 'all') {
+      rows.forEach(function(row) { row.style.display = ''; });
+      return;
+    }
+
+    var baseAge = 60;
+    if (mode === '5y70') baseAge = 70;
+    else if (mode === '5y75') baseAge = 75;
+    else if (mode === '5y') baseAge = 60; // legacy fallback
+
     rows.forEach(function(row) {
       var cells = row.querySelectorAll('td');
       if (cells.length <= ageColIndex) return;
@@ -754,17 +770,10 @@
       var age = parseInt(ageText);
       if (isNaN(age)) return;
 
-      if (age < 60) {
+      if (age < baseAge) {
         row.style.display = '';
-        return;
-      }
-
-      if (mode === 'all') {
-        row.style.display = '';
-      } else if (mode === '2y') {
-        row.style.display = ((age - 60) % 2 === 0) ? '' : 'none';
-      } else if (mode === '5y') {
-        row.style.display = ((age - 60) % 5 === 0) ? '' : 'none';
+      } else {
+        row.style.display = ((age - baseAge) % 5 === 0) ? '' : 'none';
       }
     });
   };
@@ -776,7 +785,7 @@
 
   window.setDownloadFilter = function() {
     var origMode = window.getDisplayMode();
-    window.filterRowsByAge('5y');
+    window.filterRowsByAge('5y60');
     return function() {
       window.filterRowsByAge(origMode);
     };

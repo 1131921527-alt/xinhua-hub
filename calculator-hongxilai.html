@@ -30,6 +30,9 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .rate-btn.active{background:var(--wine);color:#fff;border-color:var(--wine);}
 .tip{font-size:12px;color:#64748B;margin-top:10px;}
 .dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
+.view-mode-btn{padding:10px 20px;background:#fff;color:var(--wine);border:1.5px solid var(--wine);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
+.view-mode-btn:hover{background:var(--wine-bg);}
+body.capturing .no-export{display:none !important;}
 
 /* 计划书样式 */
 .plan{padding:28px 32px;background:#fff;}
@@ -132,6 +135,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 
   <div class="dl-bar">
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
+    <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：60岁后每5年</button>
     <span class="tip">导出效果图同款版式</span>
   </div>
 
@@ -145,7 +149,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
       <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
     </div>
 
-    <div class="section">
+    <div class="section no-export">
       <div class="section-head"><span></span>产品形态</div>
       <p><strong>投保年龄：</strong>出生满30天至72周岁（2万元起售），线上单：18-64周岁</p>
     </div>
@@ -159,7 +163,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
     </div>
 
     <div class="section">
-      <div class="case-info" id="caseInfo">VIP女士，今年40岁，购买100万8年期宏禧来(分红型)，预计满期总利益<span class="em">1209405</span>元</div>
+      <div class="case-info no-export" id="caseInfo">VIP女士，今年40岁，购买100万8年期宏禧来(分红型)，预计满期总利益<span class="em">1209405</span>元</div>
       <table class="info-table">
         <tr>
           <th>被保人</th><th>性别</th><th>年龄</th><th>一次交清保险费</th><th>保险期间</th><th>红利领取方式</th><th>演示累积生息利率</th><th>基本保额</th>
@@ -201,6 +205,17 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 let currentGender = 1;
 let currentRate = 0.025;
 let DATA = null;
+let viewMode = '60';
+
+const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
+
+function toggleViewMode(){
+  const modes = ['all', '60', '70', '75'];
+  const idx = modes.indexOf(viewMode);
+  viewMode = modes[(idx + 1) % modes.length];
+  document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
+  if(DATA) generate();
+}
 
 function selectGender(el){
   document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
@@ -250,7 +265,8 @@ function generate(){
     cumDiv = cumDiv * (1 + currentRate) + annualDiv;
     const survival = cv + cumDiv;
     const rate = yr > 0 && premium > 0 ? ((survival - premium) / premium / yr * 100) : 0;
-    rows.push({yr, premiumRow, maturity, death, annualDiv, cumDiv, cv, survival, rate});
+    const ageEnd = age + yr;
+    rows.push({yr, ageEnd, premiumRow, maturity, death, annualDiv, cumDiv, cv, survival, rate});
   }
 
   // Update info
@@ -264,9 +280,16 @@ function generate(){
   document.getElementById('caseInfo').innerHTML = `VIP${currentGender===1?'女士':'先生'}，今年${age}岁，购买${fmt(premium)}元${period}年期宏禧来(分红型)，预计满期总利益<span class="em" style="color:var(--wine)">${fmt(Math.round(last.survival))}</span>元`;
 
   // Render table
+  let displayRows = rows.filter(r => {
+    if(viewMode === 'all') return true;
+    if(viewMode === '60') return r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0);
+    if(viewMode === '70') return r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0);
+    if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
+    return true;
+  });
   let html = '';
-  const reserveCount = rows.filter(r => r.rate <= 0).length;
-  rows.forEach((r, idx) => {
+  const reserveCount = displayRows.filter(r => r.rate <= 0).length;
+  displayRows.forEach((r, idx) => {
     const isReserve = r.rate <= 0;
     const rateCell = isReserve
       ? (idx === 0 ? `<td class="reserve-cell" rowspan="${reserveCount}">储备期</td>` : '')
@@ -288,13 +311,17 @@ function generate(){
 }
 
 function downloadImage(){
+  document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
   html2canvas(plan, {scale: 2, backgroundColor: '#fff', useCORS: true}).then(canvas => {
+    document.body.classList.remove('capturing');
     const dataUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = dataUrl;
     a.download = '宏禧来理财计划书.png';
     a.click();
+  }).catch(() => {
+    document.body.classList.remove('capturing');
   });
 }
 

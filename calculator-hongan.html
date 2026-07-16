@@ -53,6 +53,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--wine);border:1.5px solid var(--wine);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--wine-bg);}
+body.capturing .no-export{display:none !important;}
 
 .row-positive td{background:#FFE4E4 !important;color:var(--wine) !important;}
 .row-positive .col-rate{background:#FFCDCD !important;}
@@ -132,7 +133,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 
   <div class="dl-bar">
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
-    <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：全部</button>
+    <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：60岁后每5年</button>
     <span class="tip">导出效果图同款版式</span>
   </div>
 
@@ -142,24 +143,24 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
     <div class="section">
       <div class="section-head"><span></span>公司介绍</div>
       <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
-      <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
+      <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
       <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
     </div>
 
-    <div class="section">
+    <div class="section no-export">
       <div class="section-head"><span></span>产品形态</div>
       <p id="productForm">三年交投保年龄：男性30天-64周岁，女性30天-68周岁（2万元起售），期交线上18-59周岁</p>
     </div>
 
     <div class="section">
       <div class="section-head"><span></span>产品简介</div>
-      <p><strong>稳健添利：</strong>现价复利增长，保证现价刚性兑付，写入合同；稳步向上，共享央企经营成果，获得保单红利分配</p>
-      <p><strong>身价保障：</strong>安心理财之余，最高160%赔付比例，额外提供身价保障（特定公共交通工具意外伤害身故或全残额外赔付一笔）</p>
-      <p><strong>规划性强：</strong>合理且有效地规避债务和税收等风险，同时规划教育金、婚嫁金、养老金及财富传承金等多阶段规划</p>
+      <p>✅ 保底年复利 1.75%，利益写入合同，终身锁定，不受利率波动影响</p>
+      <p>✅ 年度盈余分红，演示利率 1.2%，可现金领取、可复利滚存增值</p>
+      <p>✅ 终身身故保障 1.4-1.6 倍，额外赔付 1 倍特定公共交通意外身故金</p>
     </div>
 
     <div class="section">
-      <div class="case-info" id="caseInfo">VIP女士，今年40周岁，3年交、年交10万元，购买宏安世家（分红型）</div>
+      <div class="case-info no-export" id="caseInfo">VIP女士，今年40周岁，3年交、年交10万元，购买宏安世家（分红型）</div>
       <div class="top-info">
         <table class="info-table">
           <tr>
@@ -209,10 +210,10 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 <script>
 let currentGender = 1;
 let currentRate = 0.025;
-let viewMode = 'all';
+let viewMode = '60';
 let DATA = null;
 
-const VIEW_MODE_LABELS = { all: '全部', '60': '60岁后每5年', '70': '70岁后每5年' };
+const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
 const TERM_CONFIG = {
   1: { label: '趸交', maleAge: '72', femaleAge: '68', minPrem: '20000', online: '18-64' },
   3: { label: '三年交', maleAge: '64', femaleAge: '68', minPrem: '20000', online: '18-59' },
@@ -234,7 +235,7 @@ function selectRate(el){
   if(DATA) generate();
 }
 function toggleViewMode(){
-  const modes = ['all', '60', '70'];
+  const modes = ['all', '60', '70', '75'];
   const idx = modes.indexOf(viewMode);
   viewMode = modes[(idx + 1) % modes.length];
   document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
@@ -337,6 +338,7 @@ function generate(){
     if(viewMode === 'all') return true;
     if(viewMode === '60') return r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0);
     if(viewMode === '70') return r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0);
+    if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
     return true;
   });
   tbody.innerHTML = displayRows.map((r, idx) => {
@@ -376,13 +378,17 @@ function generate(){
 }
 
 function downloadImage(){
+  document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
   html2canvas(plan, {scale: 2, backgroundColor: '#fff', useCORS: true}).then(canvas => {
+    document.body.classList.remove('capturing');
     const dataUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = dataUrl;
     a.download = '宏安世家理财计划书.png';
     a.click();
+  }).catch(() => {
+    document.body.classList.remove('capturing');
   });
 }
 
