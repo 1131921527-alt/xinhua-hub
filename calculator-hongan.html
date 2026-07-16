@@ -406,17 +406,26 @@ async function downloadImage(){
     const canvas = await html2canvas(plan, {scale: 4, backgroundColor: '#fff', useCORS: true});
     document.body.classList.remove('capturing');
     const filename = '宏安世家理财计划书.png';
-    const blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
-    if(window.showSaveFilePicker){
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if(!isMobile && window.showSaveFilePicker){
       try{
+        const blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
         const h = await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
         const w = await h.createWritable(); await w.write(blob); await w.close();
         return;
       }catch(e){ if(e.name==='AbortError') return; }
     }
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href=url; a.download=filename; a.click();
-    setTimeout(()=>URL.revokeObjectURL(url), 2000);
+    // 手机端 & 桌面降级：用 data URL 确保兼容性
+    const dataUrl = canvas.toDataURL('image/png');
+    const a = document.createElement('a'); a.href=dataUrl; a.download=filename;
+    a.style.display='none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    // 手机端兜底：如果直接下载没触发，打开新标签页让用户长按保存
+    if(isMobile){
+      setTimeout(()=>{
+        const win=window.open('','_blank');
+        if(win)win.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+filename+'</title><style>body{margin:0;display:flex;justify-content:center;background:#f5f5f5;}img{max-width:100%;height:auto;}</style></head><body><img src="'+dataUrl+'"></body></html>');
+      },600);
+    }
   }catch(e){
     document.body.classList.remove('capturing');
   }

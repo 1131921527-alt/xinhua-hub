@@ -743,76 +743,56 @@ function downloadImage() {
       
       // ===== 下载 =====
       const filename = `宏御世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
+      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
       
-      let blobOk = false;
-      if (canvas.toBlob) {
+      if (canvas.toBlob && !isMobile) {
         try {
           canvas.toBlob(async blob => {
             if (blob) {
-              // Try File System Access API (desktop Chrome/Edge - 弹出另存为窗口)
+              // 桌面端：File System Access API
               if(window.showSaveFilePicker){
                 try{
                   const h=await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
                   const w=await h.createWritable(); await w.write(blob); await w.close();
                   showToast('已保存到所选位置');
                   showLoading(false);
-                  blobOk = true;
                   return;
-                }catch(e){ if(e.name==='AbortError'){ showLoading(false); blobOk=true; return; } }
+                }catch(e){ if(e.name==='AbortError'){ showLoading(false); return; } }
               }
-              // Fallback: blob URL download
+              // 桌面降级：blob URL
               try {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => {
-                  document.body.removeChild(a);
-                  URL.revokeObjectURL(url);
-                }, 2000);
+                a.href = url; a.download = filename;
+                document.body.appendChild(a); a.click();
+                setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 2000);
                 showToast('计划书图片已下载');
                 showLoading(false);
                 if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, filename); }catch(e){} }
-                blobOk = true;
               } catch(e3) {
-                showImagePreview(canvas, filename);
+                showImagePreview(canvas, filename); showLoading(false);
               }
             } else {
-              showImagePreview(canvas, filename);
+              showImagePreview(canvas, filename); showLoading(false);
             }
           }, 'image/png');
         } catch(e4) {
-          showImagePreview(canvas, filename);
+          showImagePreview(canvas, filename); showLoading(false);
         }
       } else {
-        downloadViaDataURL(filename);
-      }
-      
-      setTimeout(() => {
-        if (!blobOk) {
-          try { showImagePreview(canvas, filename); } catch(e) {}
-        }
-      }, 3000);
-      
-      function downloadViaDataURL(fname) {
+        // 手机端：data URL 直接下载 + 新标签兜底
         try {
-          const dataURL = canvas.toDataURL('image/png');
+          const dataUrl = canvas.toDataURL('image/png');
           const a = document.createElement('a');
-          a.href = dataURL;
-          a.download = fname;
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(() => {
-            document.body.removeChild(a);
-          }, 100);
-          showToast('计划书图片已下载');
+          a.href = dataUrl; a.download = filename;
+          a.style.display='none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
           showLoading(false);
-          // 浏览器打开提示
-          if(typeof showBrowserOpenPrompt==='function'){ try{ var _bd2=canvas.toDataURL('image/png');showBrowserOpenPrompt(_bd2, fname); }catch(e){} }
-        } catch(e2) {
-          showImagePreview(canvas, fname);
+          setTimeout(() => {
+            const win=window.open('','_blank');
+            if(win)win.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+filename+'</title><style>body{margin:0;display:flex;justify-content:center;background:#f5f5f5;}img{max-width:100%;height:auto;}</style></head><body><img src="'+dataUrl+'"></body></html>');
+          }, 600);
+        } catch(e5) {
+          showImagePreview(canvas, filename); showLoading(false);
         }
       }
       

@@ -522,19 +522,30 @@ function downloadImage(){
 
   const _fn=`宏泰世家分红型理财计划_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
   canvas.toBlob(async function(blob){
-    if(window.showSaveFilePicker){
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if(!isMobile && window.showSaveFilePicker){
       try{
         const h=await window.showSaveFilePicker({suggestedName:_fn, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
         const w=await h.createWritable(); await w.write(blob); await w.close();
         showToast('已保存到所选位置 ✅'); return;
       }catch(e){ if(e.name==='AbortError') return; }
     }
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a'); a.href=url; a.download=_fn;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),2000);
-    showToast('计划书已下载 ✅');
-    if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, _fn); }catch(e){} }
+    const dataUrl = canvas.toDataURL('image/png');
+    if(isMobile){
+      const _a=document.createElement('a'); _a.href=dataUrl; _a.download=_fn;
+      _a.style.display='none'; document.body.appendChild(_a); _a.click(); document.body.removeChild(_a);
+      setTimeout(()=>{
+        const win=window.open('','_blank');
+        if(win)win.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+_fn+'</title><style>body{margin:0;display:flex;justify-content:center;background:#f5f5f5;}img{max-width:100%;height:auto;}</style></head><body><img src="'+dataUrl+'"></body></html>');
+      },600);
+    }else{
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download=_fn;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),2000);
+      showToast('计划书已下载 ✅');
+      if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, _fn); }catch(e){} }
+    }
   },'image/png');
 }
 
