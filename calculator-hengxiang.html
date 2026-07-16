@@ -6,14 +6,14 @@
 <title>恒享人生年金保险 · 利益演示计算器</title>
 <style>
   :root{
-    --brown:#7A1515; --brown2:#8B1A1A; --gray:#64748B; --graybg:#FEF3C7;
-    --line:#E2E8F0; --accent:#A52A2A;
-    --cv:#A52A2A; --surv:#8B1A1A; --ann:#D97706;
+    --brown:#1E3A5F; --brown2:#8B1A1A; --gray:#64748B; --graybg:#FEF3C7;
+    --line:#E2E8F0; --accent:#3B82F6;
+    --cv:#3B82F6; --surv:#8B1A1A; --ann:#D97706;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
   .wrap{max-width:1140px;margin:0 auto;}
-  .title-bar{background:linear-gradient(135deg,var(--brown),var(--brown2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #7A1515;}
+  .title-bar{background:linear-gradient(135deg,var(--brown),var(--brown2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #1E3A5F;}
   .title-bar h1{font-size:22px;font-weight:700;}
   .title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
   .card{background:#fff;border:1px solid #8B1A1A;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
@@ -28,12 +28,12 @@
   .btn:hover{background:#8B1A1A;}
   .btn:disabled{opacity:.6;cursor:not-allowed;}
   .btn-dl{background:#8B1A1A;margin-left:10px;}
-  .btn-dl:hover{background:#7A1515;}
+  .btn-dl:hover{background:#1E3A5F;}
   #paramBar{display:none;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
   #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--brown);}
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:980px;}
-  thead th{background:#7A1515;color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
+  thead th{background:#1E3A5F;color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
   tbody td{padding:9px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
   tbody tr.row-5y{background:#FEF3C7;}
   tbody tr.row-last{background:#FDE68A;}
@@ -41,7 +41,7 @@
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
   .col-ann{color:var(--ann);}
-  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#7A1515;text-align:center;padding:10px 4px;background:#FEF3C7;border:1px solid #D97706;}
+  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E3A5F;text-align:center;padding:10px 4px;background:#FEF3C7;border:1px solid #D97706;}
   .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
@@ -186,7 +186,7 @@ async function generate(){
     for(const row of years){ if(row[3]>0){ annStartAge=age+row[0]-1; break; } }
     document.getElementById('paramBar').style.display='flex';
     document.getElementById('paramBar').innerHTML=
-      `<strong style="color:#7A1515;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#7A1515;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#7A1515;font-size:16px;">${termLabel}</strong>`+
+      `<strong style="color:#1E3A5F;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E3A5F;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E3A5F;font-size:16px;">${termLabel}</strong>`+
       (annStartAge?`<span style="color:#64748B;">${annStartAge}岁开始领</span>`:'');
 
     const body=document.getElementById('resultBody');

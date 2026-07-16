@@ -6,16 +6,16 @@
 <title>福盛世家（添翼版）终身寿险 · 利益演示计算器</title>
 <style>
   :root{
-    --blue:#8B1A1A; --blue2:#A52A2A; --gray:#64748B; --graybg:#F1F5F9;
-    --line:#E2E8F0; --accent:#8B1A1A;
+    --blue:#1E40AF; --blue2:#3B82F6; --gray:#64748B; --graybg:#F1F5F9;
+    --line:#E2E8F0; --accent:#1E40AF;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
   .wrap{max-width:1080px;margin:0 auto;}
-  .title-bar{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #7A1515;}
+  .title-bar{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #1E3A5F;}
   .title-bar h1{font-size:22px;font-weight:700;}
   .title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
-  .card{background:#fff;border:1px solid #8B1A1A;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .card{background:#fff;border:1px solid #1E40AF;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
   .form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
   .field{display:flex;flex-direction:column;gap:6px;}
   .field label{font-size:13px;color:var(--gray);font-weight:600;}
@@ -24,21 +24,21 @@
   .gender-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
   input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:130px;}
   .btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
-  .btn:hover{background:#8B1A1A;}
+  .btn:hover{background:#1E40AF;}
   .btn:disabled{opacity:.6;cursor:not-allowed;}
-  .btn-dl{background:#8B1A1A;margin-left:10px;}
-  .btn-dl:hover{background:#7A1515;}
+  .btn-dl{background:#1E40AF;margin-left:10px;}
+  .btn-dl:hover{background:#1E3A5F;}
   #paramBar{display:none;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
   #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--blue);}
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:15px;min-width:860px;}
-  thead th{background:#8B1A1A;color:#fff;padding:11px 10px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
+  thead th{background:#1E40AF;color:#fff;padding:11px 10px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
   thead th[colspan],thead th[rowspan]{vertical-align:middle;}
   tbody td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);}
   tbody tr.row-5y{background:#FFF5F5;}
   tbody tr.row-last{background:#FFE4E4;}
   tbody tr.row-5y td, tbody tr.row-last td{background:transparent;}
-  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#8B1A1A;text-align:center;padding:10px 4px;background:#FFF5F5;border:1px solid #F0C5C5;}
+  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#FFF5F5;border:1px solid #F0C5C5;}
   .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
@@ -194,7 +194,7 @@ async function generate(){
     const termLabel={1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
     document.getElementById('paramBar').style.display='flex';
     document.getElementById('paramBar').innerHTML=
-      `<strong style="color:#8B1A1A;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#8B1A1A;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#8B1A1A;font-size:16px;">${termLabel}</strong><span style="color:#64748B;">非分红型</span>`;
+      `<strong style="color:#1E40AF;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E40AF;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E40AF;font-size:16px;">${termLabel}</strong><span style="color:#64748B;">非分红型</span>`;
 
     const body=document.getElementById('resultBody');
     body.innerHTML='';
@@ -296,7 +296,7 @@ function downloadImage(){
 
   // —— 标题栏（蓝渐变）——
   const grad=ctx.createLinearGradient(0,0,canvasW,0);
-  grad.addColorStop(0,'#8B1A1A');grad.addColorStop(0.5,'#8B1A1A');grad.addColorStop(1,'#1E40AF');
+  grad.addColorStop(0,'#1E40AF');grad.addColorStop(0.5,'#1E40AF');grad.addColorStop(1,'#1E40AF');
   ctx.fillStyle=grad; ctx.fillRect(0,0,canvasW,titleH);
   ctx.fillStyle='#FFFFFF'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.font='bold 26px "PingFang SC","Microsoft YaHei",sans-serif';
@@ -311,7 +311,7 @@ function downloadImage(){
   const infoY=titleH+4, colGap=24, infoColW=(canvasW-pad*2-colGap)/2;
   // 左：公司背景
   ctx.fillStyle='#EFF6FF'; rr(pad,infoY,infoColW,infoH-6,6);
-  ctx.fillStyle='#8B1A1A'; ctx.font='bold 17px "PingFang SC",sans-serif'; ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillStyle='#1E40AF'; ctx.font='bold 17px "PingFang SC",sans-serif'; ctx.textAlign='left'; ctx.textBaseline='middle';
   ctx.fillText('★ 公司背景', pad+12, infoY+20);
   const compLines=[
     '新华保险成立于1996年9月人民大会堂',
@@ -346,7 +346,7 @@ function downloadImage(){
 
   // —— 子标题栏 ——
   const sHdrY=paramY+paramH;
-  ctx.fillStyle='#8B1A1A'; ctx.fillRect(pad,sHdrY,canvasW-pad*2,subHdrH);
+  ctx.fillStyle='#1E40AF'; ctx.fillRect(pad,sHdrY,canvasW-pad*2,subHdrH);
   ctx.fillStyle='#FFF'; ctx.font='bold 20px "PingFang SC",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText('利 益 演 示 表', canvasW/2, sHdrY+subHdrH/2);
 
@@ -354,7 +354,7 @@ function downloadImage(){
   const tblX=pad, tblY=sHdrY+subHdrH;
   const topHeaderH=38, subHeaderH=34;
   // 分组头
-  ctx.fillStyle='#8B1A1A'; ctx.fillRect(tblX,tblY,totalW,topHeaderH);
+  ctx.fillStyle='#1E40AF'; ctx.fillRect(tblX,tblY,totalW,topHeaderH);
   const groupHdrs=[
     {t:'保单年度',w:colWidths[0]},
     {t:'年龄',w:colWidths[1]},
@@ -396,7 +396,7 @@ function downloadImage(){
   let reserveCellX=0;
   dlRows.forEach((r,idx)=>{
     const y=tblY+headerH+idx*rowH;
-    ctx.fillStyle=idx%2===0?'#FFFFFF':'#FFF8F8';
+    ctx.fillStyle=idx%2===0?'#FFFFFF':'#F0F9FF';
     ctx.fillRect(tblX,y,totalW,rowH);
     // 行分隔线：储备期块内断开（不穿过合并单元格）
     ctx.strokeStyle='#E2E8F0'; ctx.lineWidth=0.5; ctx.beginPath();
@@ -413,8 +413,8 @@ function downloadImage(){
       {t:r.age,c:'#475569',f:'16px PingFang SC'},
       {t:r.prem>0?fmt(r.prem):'-',c:'#475569',f:'15px PingFang SC'},
       {t:fmt(r.cum),c:'#475569',f:'15px PingFang SC'},
-      {t:fmt(r.deathGeneral),c:'#8B1A1A',f:'bold 15px PingFang SC'},
-      {t:fmt(r.deathPublic),c:'#8B1A1A',f:'bold 15px PingFang SC'},
+      {t:fmt(r.deathGeneral),c:'#1E40AF',f:'bold 15px PingFang SC'},
+      {t:fmt(r.deathPublic),c:'#1E40AF',f:'bold 15px PingFang SC'},
       {t:fmt(r.cash),c:'#1E40AF',f:'bold 16px PingFang SC'},
       {t:'',c:'#94A3B8',f:'15px PingFang SC'}
     ];
