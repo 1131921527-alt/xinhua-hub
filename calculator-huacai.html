@@ -508,7 +508,7 @@ function downloadImage() {
       ctx.fillStyle=COLORS.companyBg; rr(infoX, infoY+4, infoColW, INFO_H-8, 8);
       ctx.fillStyle=COLORS.subHeader; ctx.font='bold 17px "PingFang SC"'; ctx.textAlign='left';
       ctx.fillText('公司背景', infoX+14, infoY+28);
-      const compLines=['成立1996年9月','中央汇金(中农工建4行同属大股东)','接近1.9万亿总资产 偿付能力210%','A+H股上市 全球最具价值保险品牌100强','国内主流大型险企老六家之一','连续九年获惠誉A级 穆迪A2级'];
+      const compLines=['成立1996年9月','中央汇金(中农工建4行同属大股东)、中国宝武钢铁','接近1.9万亿总资产 偿付能力210%','A+H股上市 全球最具价值保险品牌100强','国内主流大型险企老六家之一','连续九年获惠誉A级 穆迪A2级'];
       ctx.fillStyle=COLORS.textGray; ctx.font='13px "PingFang SC"';
       compLines.forEach((l,i)=>{ctx.fillText(l, infoX+14, infoY+48+i*15);});
 
