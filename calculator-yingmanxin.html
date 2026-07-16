@@ -43,16 +43,29 @@ body.capturing .no-export{display:none !important;}
 
 .case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
 
-.top-info{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
-.info-table{flex:1;min-width:300px;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);}
+.top-info{display:block;}
+.info-table{width:100%;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);}
 .info-table th,.info-table td{border:1px solid var(--wine);padding:7px 8px;text-align:center;}
 .info-table th{background:var(--wine);color:#fff;font-weight:700;}
 .info-table td{background:#fff;color:#1E293B;font-weight:600;}
 .info-table td.label{background:var(--wine-bg);color:var(--wine);font-weight:700;}
-.side-stats{display:flex;flex-direction:column;gap:10px;}
-.stat-box{display:flex;align-items:center;border:2px solid var(--wine);background:#fff;}
-.stat-box .stat-label{background:var(--wine);color:#fff;padding:8px 12px;font-size:13px;font-weight:700;white-space:nowrap;}
-.stat-box .stat-val{padding:8px 14px;font-size:14px;font-weight:700;min-width:80px;text-align:center;color:var(--wine);}
+.side-stats{display:flex;width:100%;border:2px solid var(--wine);border-top:0;box-sizing:border-box;}
+.stat-box{flex:1;display:flex;align-items:center;border-right:2px solid var(--wine);background:#fff;box-sizing:border-box;}
+.stat-box:last-child{border-right:0;}
+.stat-box .stat-label{background:var(--wine);color:#fff;padding:10px 8px;font-size:12px;font-weight:700;white-space:nowrap;}
+.stat-box .stat-val{flex:1;text-align:center;padding:10px 8px;font-size:14px;font-weight:700;color:var(--wine);min-width:0;}
+@media(max-width:768px){
+  .side-stats{flex-direction:column;border-top:2px solid var(--wine);}
+  .stat-box{border-right:0;border-bottom:2px solid var(--wine);}
+  .stat-box:last-child{border-bottom:0;}
+}
+.intro-row{display:flex;align-items:stretch;gap:0;}
+.intro-row > .section{flex:1;min-width:0;margin-bottom:0;}
+.intro-row > .section:first-child{margin-right:-2px;position:relative;z-index:1;}
+@media(max-width:768px){
+  .intro-row{flex-direction:column;}
+  .intro-row > .section:first-child{margin-right:0;margin-bottom:-2px;z-index:1;}
+}
 
 .main-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;}
 .main-table th,.main-table td{border:1px solid #fff;padding:7px 3px;text-align:center;vertical-align:middle;}
@@ -148,19 +161,21 @@ body.capturing .no-export{display:none !important;}
   <div id="planArea" class="plan">
     <div class="plan-title">盈满鑫两全保险（分红型）理财计划</div>
 
-    <div class="section">
-      <div class="section-head"><span></span>公司介绍</div>
-      <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
-      <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
-      <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》《财富》500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
-    </div>
+    <div class="intro-row">
+      <div class="section">
+        <div class="section-head"><span></span>公司介绍</div>
+        <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
+        <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
+        <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》《财富》500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
+      </div>
 
-    <div class="section">
-      <div class="section-head"><span></span>产品简介</div>
-      <p><strong>投保年龄：</strong>0-75周岁，3年交支持6年/8年/10年，5年交支持10年/15年</p>
-      <p><strong>身故保障：</strong>安心理财之余，最高160%赔付比例，额外提供身故保障</p>
-      <p><strong>满期领取：</strong>被保险人生存至保险期间届满，按基本保险金额（高于所交保费）给付满期生存保险金</p>
-      <p><strong>鑫享红利：</strong>享有保单红利分配的机会，赋能利益提升，共享保司盈利</p>
+      <div class="section">
+        <div class="section-head"><span></span>产品简介</div>
+        <p><strong>投保年龄：</strong>0-75周岁，3年交支持6年/8年/10年，5年交支持10年/15年</p>
+        <p><strong>身故保障：</strong>安心理财之余，最高160%赔付比例，额外提供身故保障</p>
+        <p><strong>满期领取：</strong>被保险人生存至保险期间届满，按基本保险金额（高于所交保费）给付满期生存保险金</p>
+        <p><strong>鑫享红利：</strong>享有保单红利分配的机会，赋能利益提升，共享保司盈利</p>
+      </div>
     </div>
 
     <div class="section">

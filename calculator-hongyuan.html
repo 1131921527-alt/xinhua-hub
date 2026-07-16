@@ -169,23 +169,20 @@ body.capturing .no-export{display:none !important;}
   <div id="planArea" class="plan">
     <div class="plan-title">宏愿人生养老年金（分红型）理财计划</div>
 
-    <div class="section">
-      <div class="section-head"><span></span>公司介绍</div>
-      <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
-      <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
-      <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
-    </div>
+    <div class="intro-row">
+      <div class="section">
+        <div class="section-head"><span></span>公司介绍</div>
+        <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
+        <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
+        <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
+      </div>
 
-    <div class="section no-export">
-      <div class="section-head"><span></span>产品形态</div>
-      <p id="productForm">三年交投保年龄：30天-69周岁，保险期间终身，年金起领年龄可选55/60/65/70周岁</p>
-    </div>
-
-    <div class="section">
-      <div class="section-head"><span></span>产品简介</div>
-      <p><strong>双轨增值：</strong>依托央企红利分配，红利可进入累计生息账户二次增值；现金价值稳步增长，收益清晰可靠</p>
-      <p><strong>领取灵活：</strong>女性55岁起领，可选55/60/65/70岁，月领年领可调；支持保单贷款，适配50岁以上客群</p>
-      <p><strong>属性多元：</strong>稳定养老现金流为核心，现金价值具备定向传承属性，一单覆盖养老与传承</p>
+      <div class="section">
+        <div class="section-head"><span></span>产品简介</div>
+        <p><strong>双轨增值：</strong>依托央企红利分配，红利可进入累计生息账户二次增值；现金价值稳步增长，收益清晰可靠</p>
+        <p><strong>领取灵活：</strong>女性55岁起领，可选55/60/65/70岁，月领年领可调；支持保单贷款，适配50岁以上客群</p>
+        <p><strong>属性多元：</strong>稳定养老现金流为核心，现金价值具备定向传承属性，一单覆盖养老与传承</p>
+      </div>
     </div>
 
     <div class="section">
@@ -273,7 +270,8 @@ function updateFormText(){
   const term = parseInt(document.getElementById('term').value);
   const cfg = TERM_CONFIG[term];
   const label = cfg.label;
-  document.getElementById('productForm').textContent =
+  const pf = document.getElementById('productForm');
+  if (pf) pf.textContent =
     `${label}投保年龄：30天-${cfg.maxAge}周岁，保险期间终身，年金起领年龄可选55/60/65/70周岁`;
 }
 
