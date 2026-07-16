@@ -252,6 +252,7 @@
   // ===== 检测微信环境 =====
   const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile|Windows Phone|HarmonyOS/i.test(navigator.userAgent) || window.innerWidth < 768;
 
   // ===== 出单流程文字版内容 =====
   const FLOW_TEXT_DATA = {
@@ -464,6 +465,30 @@
     wechatHint.classList.add('show');
   }
 
+  // 文件类型图标
+  const FILE_ICONS = {
+    ppt:'📽️', pptx:'📽️', doc:'📝', docx:'📝',
+    xls:'📈', xlsx:'📈', pdf:'📕', zip:'📦', rar:'📦',
+    default:'📄'
+  };
+  function fileIcon() {
+    return FILE_ICONS[ext] || FILE_ICONS[type] || FILE_ICONS.default;
+  }
+
+  // 统一「无法在线预览」友好兜底面板（移动端预览失败时使用）
+  function showFileFallback(opts) {
+    opts = opts || {};
+    hideLoading();
+    viewer.style.display = 'none';
+    imgViewer.style.display = 'none';
+    textViewer.style.display = 'none';
+    noPreview.style.display = 'block';
+    typeIcon.textContent = opts.icon || fileIcon();
+    var guide = opts.guide || '请点击下方「下载文件」保存后查看<br>或点击「浏览器打开」在新窗口查看';
+    typeMsg.innerHTML = (opts.msg || '该文件暂不支持在线预览') +
+      '<br><span style="font-size:12px;color:#94a3b8;line-height:1.6;">' + guide + '</span>';
+  }
+
   // 显示加载中
   loadingOverlay.classList.remove('hidden');
 
@@ -484,45 +509,64 @@
       setTimeout(hideLoading, 8000);
     }
   } else if (isOffice) {
-    // Office文件 → 使用Microsoft Office Online Viewer在线预览
-    if (isWeChat) {
-      showWeChatHint('微信内可能无法直接预览Office文件，如加载失败请点击「浏览器打开」或下载后查看');
-    }
-    const absUrl = getAbsoluteUrl(file);
-    const officeUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absUrl);
-    viewer.style.display = 'block';
-    viewer.src = officeUrl;
-    document.querySelector('.loading-text').textContent = '正在加载在线预览，请稍候...';
-    viewer.onload = () => { hideLoading(); };
-    // Office文件超时时间更长（大文件可能需要时间）
-    setTimeout(() => {
-      if (!loadingOverlay.classList.contains('hidden')) {
-        hideLoading();
-        noPreview.style.display = 'block';
-        viewer.style.display = 'none';
-        const iconMap = {'ppt':'📽️','pptx':'📽️','doc':'📝','docx':'📝','xls':'📈','xlsx':'📈'};
-        typeIcon.textContent = iconMap[ext] || iconMap[type] || '📄';
-        typeMsg.innerHTML = '在线预览加载超时<br>请点击下方「下载文件」或「浏览器打开」查看';
+    if (isMobile) {
+      // 移动端：微软在线预览器在国内/微信网络下极容易失败或长时间白屏，
+      // 直接给出下载 / 浏览器打开的友好引导，避免用户干等白屏。
+      if (isWeChat) {
+        showWeChatHint('微信内暂无法直接预览，请点「浏览器打开」后用系统浏览器下载查看');
       }
-    }, 20000);
-  } else if (isPdf) {
-    // PDF → iframe预览
-    if (isWeChat && isIOS) {
-      showWeChatHint('苹果微信内可能无法直接预览PDF，如显示空白请点击「浏览器打开」用Safari查看');
+      showFileFallback({
+        icon: fileIcon(),
+        msg: 'PPT / Office 文件暂不支持手机内直接预览',
+        guide: '请点击下方「下载文件」保存到手机查看<br>或点「浏览器打开」用手机浏览器查看'
+      });
+    } else {
+      // 桌面端：使用 Microsoft Office Online Viewer 在线预览
+      if (isWeChat) {
+        showWeChatHint('微信内可能无法直接预览Office文件，如加载失败请点击「浏览器打开」或下载后查看');
+      }
+      const absUrl = getAbsoluteUrl(file);
+      const officeUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absUrl);
+      viewer.style.display = 'block';
+      viewer.src = officeUrl;
+      document.querySelector('.loading-text').textContent = '正在加载在线预览，请稍候...';
+      viewer.onload = () => { hideLoading(); };
+      // Office文件超时时间更长（大文件可能需要时间）
+      setTimeout(() => {
+        if (!loadingOverlay.classList.contains('hidden')) {
+          hideLoading();
+          showFileFallback({
+            icon: fileIcon(),
+            msg: '在线预览加载超时',
+            guide: '请点击下方「下载文件」或「浏览器打开」查看'
+          });
+        }
+      }, 20000);
     }
-    viewer.style.display = 'block';
-    const pdfUrl = file + (file.indexOf('#') === -1 ? '#view=FitH' : '');
-    viewer.src = pdfUrl;
-    document.querySelector('.loading-text').textContent = '正在加载PDF文件，请稍候...';
-    viewer.onload = () => { hideLoading(); };
-    viewer.onerror = () => {
-      hideLoading();
-      noPreview.style.display = 'block';
-      viewer.style.display = 'none';
-      typeIcon.textContent = '⚠️';
-      typeMsg.innerHTML = 'PDF加载失败<br>请尝试下载后查看';
-    };
-    setTimeout(hideLoading, 15000);
+  } else if (isPdf) {
+    if (isWeChat && isIOS) {
+      // iOS 微信内 iframe 加载 PDF 经常白屏，直接引导到系统浏览器或下载
+      showWeChatHint('苹果微信内无法直接预览PDF，请点「浏览器打开」用Safari查看，或下载后查看');
+      showFileFallback({
+        icon: '📕',
+        msg: 'PDF 暂无法在当前环境预览',
+        guide: '请点「浏览器打开」用 Safari 查看<br>或点「下载文件」保存到手机'
+      });
+    } else {
+      if (isWeChat) {
+        showWeChatHint('微信内如显示空白，请点「浏览器打开」用系统浏览器查看');
+      }
+      viewer.style.display = 'block';
+      const pdfUrl = file + (file.indexOf('#') === -1 ? '#view=FitH' : '');
+      viewer.src = pdfUrl;
+      document.querySelector('.loading-text').textContent = '正在加载PDF文件，请稍候...';
+      viewer.onload = () => { hideLoading(); };
+      viewer.onerror = () => {
+        hideLoading();
+        showFileFallback({ icon:'⚠️', msg:'PDF加载失败', guide:'请尝试下载后查看' });
+      };
+      setTimeout(hideLoading, 15000);
+    }
   } else if (isImg) {
     // 图片 → 使用imgViewer（支持双指缩放和滚动）
     imgViewer.style.display = 'block';
@@ -597,6 +641,9 @@
   }
 
   function openInNew() {
+    if (isWeChat) {
+      showWeChatHint('请点击右上角「···」选择「在浏览器中打开」，再下载或查看文件');
+    }
     window.open(file, '_blank');
   }
   </script>
