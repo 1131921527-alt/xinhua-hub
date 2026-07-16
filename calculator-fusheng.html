@@ -287,7 +287,7 @@ function downloadImage(){
   const canvasW=totalW+pad*2;
   const canvasH=titleH+infoH+paramH+subHdrH+tableH+10+16+10;   // 10=footer前距(紧贴), 16=1行文字高, 10=底留白
 
-  const dpr=2;
+  const dpr=4;
   canvas.width=Math.round(canvasW*dpr); canvas.height=Math.round(canvasH*dpr);
   canvas.style.width=canvasW+'px'; canvas.style.height=canvasH+'px';
   ctx.setTransform(1,0,0,1,0,0);
@@ -447,15 +447,23 @@ function downloadImage(){
   ctx.fillStyle='#94A3B8'; ctx.font='12px PingFang SC'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText('本计划书基于保证利益（非分红型）演算，现金价值写入合同逐年增长，仅供产品利益参考，具体以保险合同为准', canvasW/2, ftY);
 
-  // —— 导出（toDataURL + <a download>，微信X5可弹窗）——
-  const dataUrl=canvas.toDataURL('image/png');
-  const a=document.createElement('a');
-  a.href=dataUrl;
-  a.download=`福盛世家利益演示_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
-  document.body.appendChild(a); a.click(); a.remove();
-  showToast('计划书已下载');
-  // 浏览器打开提示
-  if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, `福盛世家利益演示_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`); }catch(e){} }
+  // —— 导出（超清toBlob + 桌面保存）——
+  const _fn=`福盛世家利益演示_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
+  canvas.toBlob(async function(blob){
+    if(window.showSaveFilePicker){
+      try{
+        const h=await window.showSaveFilePicker({suggestedName:_fn, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
+        const w=await h.createWritable(); await w.write(blob); await w.close();
+        showToast('已保存到所选位置'); return;
+      }catch(e){ if(e.name==='AbortError') return; }
+    }
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=_fn;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    showToast('计划书已下载');
+    if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, _fn); }catch(e){} }
+  },'image/png');
 }
 
 // 初始化

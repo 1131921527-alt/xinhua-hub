@@ -479,11 +479,11 @@ function downloadImage() {
       const canvasW = totalWidth + padding * 2;
       const canvasH = footerY + 28;       // 2行footer(18px) + 10px底留白
       
-      canvas.width = canvasW * 2; // Retina
-      canvas.height = canvasH * 2;
+      canvas.width = canvasW * 4; // 超清
+      canvas.height = canvasH * 4;
       canvas.style.width = canvasW + 'px';
       canvas.style.height = canvasH + 'px';
-      ctx.scale(2, 2);
+      ctx.scale(4, 4);
       
       // ===== Background =====
       ctx.fillStyle = '#FFFFFF';
@@ -748,8 +748,20 @@ function downloadImage() {
       let blobOk = false;
       if (canvas.toBlob) {
         try {
-          canvas.toBlob(blob => {
+          canvas.toBlob(async blob => {
             if (blob) {
+              // Try File System Access API (desktop Chrome/Edge - 弹出另存为窗口)
+              if(window.showSaveFilePicker){
+                try{
+                  const h=await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
+                  const w=await h.createWritable(); await w.write(blob); await w.close();
+                  showToast('已保存到所选位置');
+                  showLoading(false);
+                  blobOk = true;
+                  return;
+                }catch(e){ if(e.name==='AbortError'){ showLoading(false); blobOk=true; return; } }
+              }
+              // Fallback: blob URL download
               try {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -760,11 +772,10 @@ function downloadImage() {
                 setTimeout(() => {
                   document.body.removeChild(a);
                   URL.revokeObjectURL(url);
-                }, 200);
+                }, 2000);
                 showToast('计划书图片已下载');
                 showLoading(false);
-                // 浏览器打开提示
-                if(typeof showBrowserOpenPrompt==='function'){ try{ var _bd=canvas.toDataURL('image/png');showBrowserOpenPrompt(_bd, filename); }catch(e){} }
+                if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, filename); }catch(e){} }
                 blobOk = true;
               } catch(e3) {
                 showImagePreview(canvas, filename);

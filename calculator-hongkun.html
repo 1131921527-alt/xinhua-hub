@@ -282,7 +282,7 @@ function downloadImage(){
   });
 
   // ===== 尺寸常量（统一规范）=====
-  const DPR=2, PAD=22;
+  const DPR=4, PAD=22;
   const TITLE_H=80, INFO_H=130, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
   const colWidths=[56,46,96,104,100,108,116,112,96,108,108,82];
   const totalW=colWidths.reduce((a,b)=>a+b,0);
@@ -428,15 +428,23 @@ function downloadImage(){
   ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText('本演示红利为基于公司经营假设的预期值，实际红利可能高于或低于演示值；生存总利益=养老年金祝寿金+满期保险金+现金价值+累积红利。具体以保险合同为准。', canvasW/2, tableY+tableH+10);
 
-  // ===== ⑨ 导出（toDataURL）=====
-  const dataUrl=canvas.toDataURL('image/png');
-  const a=document.createElement('a');
-  a.href=dataUrl;
-  a.download=`宏坤人生利益演示_${genderLabel}${age}岁${termLabel}_${drawLabel}.png`;
-  document.body.appendChild(a); a.click(); a.remove();
-  showToast('计划书已下载');
-  // 浏览器打开提示
-  if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, `宏坤人生利益演示_${genderLabel}${age}岁${termLabel}_${drawLabel}.png`); }catch(e){} }
+  // ===== ⑨ 导出（超清toBlob + 桌面保存）=====
+  const _fn=`宏坤人生利益演示_${genderLabel}${age}岁${termLabel}_${drawLabel}.png`;
+  canvas.toBlob(async function(blob){
+    if(window.showSaveFilePicker){
+      try{
+        const h=await window.showSaveFilePicker({suggestedName:_fn, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
+        const w=await h.createWritable(); await w.write(blob); await w.close();
+        showToast('已保存到所选位置'); return;
+      }catch(e){ if(e.name==='AbortError') return; }
+    }
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=_fn;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    showToast('计划书已下载');
+    if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, _fn); }catch(e){} }
+  },'image/png');
 }
 
 // Auto-generate on page load

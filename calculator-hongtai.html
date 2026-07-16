@@ -321,8 +321,8 @@ function downloadImage(){
     });
   });
 
-  const DPR=window.devicePixelRatio||2;
-  const SCALE=1.5; // 超清放大
+  const DPR=4;
+  const SCALE=2; // 超清放大
   const PAD=20;
   const TITLE_H=72, INFO_H=158, SUBHDR_H=38, HEADER_H=64, ROW_H=33, FOOTER_H=46;
   const colW=[44,42,86,118,90,84,78,96,102,62]; // 10列宽
@@ -520,14 +520,22 @@ function downloadImage(){
   ctx.fillText('本演示基于交清增额红利领取方式，利益演示仅供参考，不作为保险合同组成部分，具体以保险合同为准。',
     PAD+totalW/2, footY);
 
-  const dataUrl=canvas.toDataURL('image/png');
-  const a=document.createElement('a');
-  a.href=dataUrl;
-  a.download=`宏泰世家分红型理财计划_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
-  document.body.appendChild(a); a.click(); a.remove();
-  showToast('计划书已下载 ✅');
-  // 浏览器打开提示
-  if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(dataUrl, `宏泰世家分红型理财计划_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`); }catch(e){} }
+  const _fn=`宏泰世家分红型理财计划_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
+  canvas.toBlob(async function(blob){
+    if(window.showSaveFilePicker){
+      try{
+        const h=await window.showSaveFilePicker({suggestedName:_fn, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
+        const w=await h.createWritable(); await w.write(blob); await w.close();
+        showToast('已保存到所选位置 ✅'); return;
+      }catch(e){ if(e.name==='AbortError') return; }
+    }
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=_fn;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    showToast('计划书已下载 ✅');
+    if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, _fn); }catch(e){} }
+  },'image/png');
 }
 
 // 初始化

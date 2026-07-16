@@ -398,21 +398,29 @@ function generate(){
   document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';
 }
 
-function downloadImage(){
+async function downloadImage(){
   const plan = document.getElementById('planArea');
   document.body.classList.add('capturing');
-  html2canvas(plan, {scale: 2, backgroundColor: '#fff', useCORS: true}).then(canvas => {
-    const dataUrl = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = '盈满鑫理财计划书.png';
-    a.click();
-  }).catch(function(err){
+  try{
+    const canvas = await html2canvas(plan, {scale: 4, backgroundColor: '#fff', useCORS: true});
+    const filename = '盈满鑫理财计划书.png';
+    const blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
+    if(window.showSaveFilePicker){
+      try{
+        const h = await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
+        const w = await h.createWritable(); await w.write(blob); await w.close();
+        return;
+      }catch(e){ if(e.name==='AbortError') return; }
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url; a.download=filename; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url), 2000);
+  }catch(err){
     console.error('下载图片失败:', err);
     showToast('下载图片失败，请重试');
-  }).finally(function(){
+  }finally{
     document.body.classList.remove('capturing');
-  });
+  }
 }
 
 loadData();

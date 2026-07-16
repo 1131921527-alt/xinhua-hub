@@ -399,19 +399,27 @@ function generate(){
   updateFormText();
 }
 
-function downloadImage(){
+async function downloadImage(){
   document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
-  html2canvas(plan, {scale: 2, backgroundColor: '#fff', useCORS: true}).then(canvas => {
+  try{
+    const canvas = await html2canvas(plan, {scale: 4, backgroundColor: '#fff', useCORS: true});
     document.body.classList.remove('capturing');
-    const dataUrl = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = '宏安世家理财计划书.png';
-    a.click();
-  }).catch(() => {
+    const filename = '宏安世家理财计划书.png';
+    const blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
+    if(window.showSaveFilePicker){
+      try{
+        const h = await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
+        const w = await h.createWritable(); await w.write(blob); await w.close();
+        return;
+      }catch(e){ if(e.name==='AbortError') return; }
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url; a.download=filename; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url), 2000);
+  }catch(e){
     document.body.classList.remove('capturing');
-  });
+  }
 }
 
 loadData();
