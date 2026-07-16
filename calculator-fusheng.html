@@ -32,13 +32,13 @@
   #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--blue);}
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:15px;min-width:860px;}
-  thead th{background:#1E40AF;color:#fff;padding:11px 10px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
+  thead th{background:#1E40AF;color:#fff;padding:8px 4px;text-align:center;font-weight:700;font-size:17px;position:sticky;top:0;}
   thead th[colspan],thead th[rowspan]{vertical-align:middle;}
-  tbody td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);}
-  tbody tr.row-5y{background:#FFF5F5;}
-  tbody tr.row-last{background:#FFE4E4;}
+  tbody td{font-size:17px;padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);}
+  tbody tr.row-5y{background:#EFF6FF;}
+  tbody tr.row-last{background:#DBEAFE;}
   tbody tr.row-5y td, tbody tr.row-last td{background:transparent;}
-  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#FFF5F5;border:1px solid #F0C5C5;}
+  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#EFF6FF;border:1px solid #93C5FD;}
   .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
@@ -59,7 +59,7 @@
     input,select{width:100%;}
     table{font-size:13px;min-width:760px;}
     thead th{font-size:12px;padding:9px 4px;}
-    tbody td{padding:8px 4px;}
+    tbody td{font-size:17px;padding:8px 4px;}
   }
 </style>
 </head>
@@ -340,7 +340,7 @@ function downloadImage(){
   // —— 参数栏（浅蓝底）——
   const paramY=infoY+infoH;
   const totalP=premium*(term===1?1:term);
-  ctx.fillStyle='#FFF5F5'; ctx.fillRect(pad,paramY,canvasW-pad*2,paramH);
+  ctx.fillStyle='#EFF6FF'; ctx.fillRect(pad,paramY,canvasW-pad*2,paramH);
   ctx.fillStyle='#1E293B'; ctx.font='bold 15px "PingFang SC",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText(`性别 ${genderLabel}  年龄 ${age}周岁  ${termLabel}  年缴保费 ${fmt(premium)}元  基本保额 ${fmt(sumAssured)}元  保险期间 终身  固收型(非分红)`, canvasW/2, paramY+paramH/2);
 

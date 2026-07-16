@@ -10,7 +10,7 @@
 :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#F8F9FA;color:#1E293B;padding:16px;}
-.wrap{max-width:1100px;margin:0 auto;background:#fff;padding:0 0 24px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.wrap{max-width:1100px;margin:0 auto;background:#fff;padding:0 0 4px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08);}
 
 /* 输入区 */
 .input-card{background:#fff;border:2px solid var(--primary);border-radius:12px;padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
@@ -35,13 +35,16 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 body.capturing .no-export{display:none !important;}
 
 /* 计划书样式 */
-.plan{padding:28px 32px;background:#fff;}
-.plan-title{text-align:center;font-size:28px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:1px;}
+.plan{padding:28px 32px 4px;background:#fff;}
+.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:1px;}
 .section{margin-bottom:18px;border:2px solid var(--primary);background:#fff;padding:16px;}
-.section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:8px 16px;font-size:16px;font-weight:700;margin:-16px -16px 12px -16px;}
-.section-head span{display:inline-block;width:3px;height:16px;background:#fff;margin-right:8px;}
-.section p{font-size:14px;line-height:1.8;color:#1E293B;margin:4px 0;}
+.section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:9px 16px;font-size:17px;font-weight:700;margin:-16px -16px 12px -16px;}
+.section-head span{display:inline-block;width:3px;height:17px;background:#fff;margin-right:8px;}
+.section p{font-size:14px;line-height:1.7;color:#1E293B;margin:0 0 6px 0;}
+.section p:last-child{margin-bottom:0;}
 .section p strong{color:var(--primary);font-weight:700;}
+/* 产品简介字号放大2级 */
+.intro-row > .section:nth-child(2) p{font-size:16px;line-height:1.75;}
 .intro-row{display:flex;align-items:stretch;gap:0;}
 .intro-row > .section{flex:1;min-width:0;margin-bottom:0;}
 .intro-row > .section:first-child{margin-right:-2px;position:relative;z-index:1;}
@@ -60,8 +63,8 @@ body.capturing .no-export{display:none !important;}
 .info-table td.label{background:var(--primary-bg);color:var(--primary);font-weight:700;}
 
 /* 主数据表 */
-.main-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;}
-.main-table th,.main-table td{border:1px solid #fff;padding:8px 4px;text-align:center;vertical-align:middle;}
+.main-table{width:100%;border-collapse:collapse;font-size:17px;table-layout:fixed;}
+.main-table th,.main-table td{border:1px solid #fff;padding:5px 2px;text-align:center;vertical-align:middle;}
 .main-table thead th{background:var(--primary);color:#fff;font-weight:700;}
 .main-table thead th.sub{background:#3B82F6;color:#fff;font-weight:600;}
 .main-table tbody tr:nth-child(even){background:#F0F9FF;}
@@ -90,7 +93,7 @@ body.capturing .no-export{display:none !important;}
   .field{width:100%;}
   input,select{width:100%;}
   .plan{padding:16px;}
-  .main-table{font-size:11px;}
+  .main-table{font-size:12px;}
   .dl-bar{flex-direction:column;align-items:stretch;}
   .btn-dl{margin:10px 0 0 0;}
 }

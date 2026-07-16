@@ -6,52 +6,52 @@
 <title>华彩鎏金年金保险（分红型）· 利益演示计算器</title>
 <style>
 :root{
-  --blue:#8B1A1A; --blue2:#3B82F6; --gray:#64748B; --graybg:#F1F5F9;
-  --headerbg:#8B1A1A; --rowalt:#F0F9FF; --line:#E2E8F0; --accent:#8B1A1A;
+  --blue:#1E40AF; --blue2:#3B82F6; --gray:#64748B; --graybg:#F1F5F9;
+  --headerbg:#1E40AF; --rowalt:#F0F9FF; --line:#E2E8F0; --accent:#1E40AF;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
 .wrap{max-width:1080px;margin:0 auto;}
-.title-bar{background:linear-gradient(135deg,#8B1A1A,#3B82F6);color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #1E3A5F;}
+.title-bar{background:linear-gradient(135deg,#1E40AF,#3B82F6);color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:14px;border-bottom:3px solid #1E3A5F;}
 .title-bar h1{font-size:22px;font-weight:700;}
 .title-bar p{font-size:13px;opacity:.85;margin-top:6px;line-height:1.5;}
-.card{background:#fff;border:1px solid #8B1A1A;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.card{background:#fff;border:1px solid #1E40AF;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
 .form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
 .field{display:flex;flex-direction:column;gap:6px;}
 .field label{font-size:13px;color:var(--gray);font-weight:600;}
 .gender-group{display:flex;gap:8px;}
 .gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;color:var(--gray);}
-.gender-btn.active{background:#8B1A1A;color:#fff;border-color:#8B1A1A;}
+.gender-btn.active{background:#1E40AF;color:#fff;border-color:#1E40AF;}
 input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:140px;}
 .btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
-.btn:hover{background:#8B1A1A;}
+.btn:hover{background:#1E40AF;}
 .btn:disabled{opacity:.6;cursor:not-allowed;}
-.btn-dl{background:#8B1A1A;margin-left:10px;}
+.btn-dl{background:#1E40AF;margin-left:10px;}
 .btn-dl:hover{background:#1E3A5F;}
 .btn-dl-secondary{background:#64748B;margin-left:10px;}
 .btn-dl-secondary:hover{background:#475569;}
 #paramBar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
-#paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:#8B1A1A;}
+#paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:#1E40AF;}
 .table-scroll{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;}
-thead th{background:#8B1A1A;color:#fff;padding:11px 8px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
-tbody td{padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
-tbody tr.row-5y{background:#FFF5F5;}
-tbody tr.row-last{background:#FFE4E4;}
+thead th{background:#1E40AF;color:#fff;padding:11px 8px;text-align:center;font-weight:700;font-size:17px;position:sticky;top:0;}
+tbody td{font-size:17px;padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+tbody tr.row-5y{background:#EFF6FF;}
+tbody tr.row-last{background:#DBEAFE;}
 tbody tr.row-5y td,tbody tr.row-last td{background:transparent;}
 tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
-.col-cv{font-weight:800;color:#8B1A1A;}
-.col-rate{color:#8B1A1A;font-weight:700;}
-.col-guarantee{color:#8B1A1A;font-weight:600;}
-.col-paidup{color:#8B1A1A;font-weight:600;}
-.col-total{color:#8B1A1A;font-weight:700;}
-.col-dividend{color:#8B1A1A;font-weight:600;}
-.col-survival{color:#8B1A1A;font-weight:700;}
+.col-cv{font-weight:800;color:#1E40AF;}
+.col-rate{color:#1E40AF;font-weight:700;}
+.col-guarantee{color:#1E40AF;font-weight:600;}
+.col-paidup{color:#1E40AF;font-weight:600;}
+.col-total{color:#1E40AF;font-weight:700;}
+.col-dividend{color:#1E40AF;font-weight:600;}
+.col-survival{color:#1E40AF;font-weight:700;}
 .col-death{color:#475569;font-weight:600;}
 .col-num{font-weight:600;color:#1E293B;}
 .rate-reserve{color:#94A3B8;font-weight:700;}
-.rate-up{color:#8B1A1A;}
-.side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#8B1A1A;text-align:center;padding:10px 4px;background:#FFF5F5;border:1px solid #F0C5C5;}
+.rate-up{color:#1E40AF;}
+.side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#EFF6FF;border:1px solid #93C5FD;}
 .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
 .reserve-cell{background:#F5F5F5 !important;color:#888;font-weight:800;text-align:center;vertical-align:middle;}
 .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
@@ -320,10 +320,10 @@ async function generate() {
     const startAge = age + 5;  // 华彩第5年开始领
 
     const pb=document.getElementById('paramBar'); pb.style.display='flex'; pb.innerHTML = `
-      <strong style="color:#8B1A1A;font-size:17px;">${age}岁${genderLabel}士</strong> ·
-      <strong style="color:#8B1A1A;font-size:17px;">每年${fmt(premium)}</strong> ·
-      <strong style="color:#8B1A1A;font-size:17px;">${termLabel}</strong> ·
-      <strong style="color:#8B1A1A;font-size:17px;">${startAge}岁开始领</strong> ·
+      <strong style="color:#1E40AF;font-size:17px;">${age}岁${genderLabel}士</strong> ·
+      <strong style="color:#1E40AF;font-size:17px;">每年${fmt(premium)}</strong> ·
+      <strong style="color:#1E40AF;font-size:17px;">${termLabel}</strong> ·
+      <strong style="color:#1E40AF;font-size:17px;">${startAge}岁开始领</strong> ·
       <span style="color:#64748B;">分红养老年金</span>`;
 
     const tbody = document.getElementById('resultBody');
@@ -443,12 +443,12 @@ function downloadImage() {
       // ===== 尺寸常量（统一规范） =====
       const PAD=22, DPR=2, TITLE_H=80, INFO_H=150, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
       const COLORS={
-        titleGrad:['#8B1A1A','#8B1A1A','#1E40AF'],
-        companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#FFF5F5',
-        subHeader:'#8B1A1A', tableHeader:'#8B1A1A',
+        titleGrad:['#1E40AF','#1E40AF','#1E40AF'],
+        companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#EFF6FF',
+        subHeader:'#1E40AF', tableHeader:'#1E40AF',
         rowWhite:'#FFFFFF', rowAlt:'#F0F9FF', reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
         textDark:'#1E293B', textGray:'#475569', textLight:'#64748B', textMuted:'#94A3B8',
-        accentBlue:'#8B1A1A', accentRed:'#8B1A1A', lineColor:'#E2E8F0'
+        accentBlue:'#1E40AF', accentRed:'#1E40AF', lineColor:'#E2E8F0'
       };
 
       // ===== 表头 13 列（华彩专属） =====
@@ -558,24 +558,24 @@ function downloadImage() {
       dlRows.forEach((r,i)=>{ if(r.yr<=reserveYears){ if(reserveStartIdx===-1)reserveStartIdx=i; reserveCount++; } });
 
       // ===== 表格数据行 =====
-      const HL_EXCLUDE=['#8B1A1A','#7C3AED','#8B1A1A','#8B1A1A'];
-      const MAT_EXCLUDE=['#8B1A1A','#7C3AED','#8B1A1A','#8B1A1A'];
+      const HL_EXCLUDE=['#1E40AF','#7C3AED','#1E40AF','#1E40AF'];
+      const MAT_EXCLUDE=['#1E40AF','#7C3AED','#1E40AF','#1E40AF'];
       ctx.textBaseline='middle';
       dlRows.forEach((r,idx)=>{
         const y=tblY+HEADER_H+idx*ROW_H;
         const isHL=(r.yr===5), isMat=(r.yr===70), isRes=(r.yr<=reserveYears);
         // 行背景
-        ctx.fillStyle=(isHL||isMat)?'#FFF5F5':(idx%2===0?COLORS.rowWhite:COLORS.rowAlt);
+        ctx.fillStyle=(isHL||isMat)?'#EFF6FF':(idx%2===0?COLORS.rowWhite:COLORS.rowAlt);
         ctx.fillRect(tblX, y, totalW, ROW_H);
         // 行边框
         ctx.strokeStyle=COLORS.lineColor; ctx.lineWidth=0.5;
         ctx.beginPath(); ctx.moveTo(tblX, y+ROW_H); ctx.lineTo(tblX+totalW, y+ROW_H); ctx.stroke();
         if(isHL||isMat){
-          ctx.strokeStyle='#F0C5C5'; ctx.lineWidth=1.5;
+          ctx.strokeStyle='#93C5FD'; ctx.lineWidth=1.5;
           ctx.strokeRect(tblX+0.5, y+0.5, totalW-1, ROW_H-1);
         }
 
-        const colorFor=(c)=> (isHL||isMat)&&!['#8B1A1A','#8B1A1A'].includes(c)?'#8B1A1A':c;
+        const colorFor=(c)=> (isHL||isMat)&&!['#1E40AF','#1E40AF'].includes(c)?'#1E40AF':c;
 
         const vals=[
           {t:r.yr,            c:COLORS.textDark, f:'bold 16px "PingFang SC"'},
@@ -588,8 +588,8 @@ function downloadImage() {
           {t:fmt(r.annualDiv),c:COLORS.accentBlue, f:'13px "PingFang SC"'},
           {t:fmt(r.cumDiv),   c:COLORS.accentBlue, f:'bold 13px "PingFang SC"'},
           {t:fmt(r.cv),       c:COLORS.accentBlue, f:'bold 14px "PingFang SC"'},
-          {t:fmt(r.survDiv),  c:(isHL||isMat)?'#1E40AF':'#8B1A1A', f:`bold ${isHL||isMat?'16':'15'}px "PingFang SC"`},
-          {t:fmt(r.survDiv),  c:'#8B1A1A', f:'13px "PingFang SC"'},
+          {t:fmt(r.survDiv),  c:(isHL||isMat)?'#1E40AF':'#1E40AF', f:`bold ${isHL||isMat?'16':'15'}px "PingFang SC"`},
+          {t:fmt(r.survDiv),  c:'#1E40AF', f:'13px "PingFang SC"'},
           {t:'',               c:COLORS.textMuted, f:'14px "PingFang SC"'}
         ];
         let cellX=tblX;

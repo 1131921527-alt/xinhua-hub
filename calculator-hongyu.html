@@ -34,10 +34,10 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:#1E40AF;}
 .table-scroll{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;}
-thead th{background:#1E40AF;color:#fff;padding:11px 8px;text-align:center;font-weight:700;font-size:14px;position:sticky;top:0;}
-tbody td{padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
-tbody tr.row-5y{background:#FFF5F5;}
-tbody tr.row-last{background:#FFE4E4;}
+thead th{background:#1E40AF;color:#fff;padding:11px 8px;text-align:center;font-weight:700;font-size:17px;position:sticky;top:0;}
+tbody td{font-size:17px;padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+tbody tr.row-5y{background:#EFF6FF;}
+tbody tr.row-last{background:#DBEAFE;}
 tbody tr.row-5y td,tbody tr.row-last td{background:transparent;}
 tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 .col-cv{font-weight:800;color:#1E40AF;}
@@ -51,7 +51,7 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 .col-num{font-weight:600;color:#1E293B;}
 .rate-reserve{color:#94A3B8;font-weight:700;}
 .rate-up{color:#1E40AF;}
-.side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#FFF5F5;border:1px solid #F0C5C5;}
+.side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#EFF6FF;border:1px solid #93C5FD;}
 .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
 .reserve-cell{background:#F5F5F5 !important;color:#888;font-weight:800;text-align:center;vertical-align:middle;}
 .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
@@ -571,7 +571,7 @@ function downloadImage() {
       const totalPremium = premium * (term === 1 ? 1 : term);
       const sumAssured = Math.round((CALC_DATA[`${currentGender}_${age}_${term}`] || {E:0}).E * premium / 1000);
       
-      ctx.fillStyle = '#FFF5F5';
+      ctx.fillStyle = '#EFF6FF';
       ctx.fillRect(padding, paramY, canvasW - padding * 2, paramH);
       ctx.fillStyle = '#1E293B';
       ctx.font = 'bold 18px "PingFang SC", "Microsoft YaHei", sans-serif';
