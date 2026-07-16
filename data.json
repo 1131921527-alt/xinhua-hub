@@ -291,6 +291,19 @@
       ]
     },
     {
+      "id": "knowledge-card",
+      "name": "保险知识卡",
+      "icon": "🃏",
+      "items": [
+        {
+          "name": "保险知识卡 · 利率与分红政策图解",
+          "type": "card",
+          "description": "预定利率/演示利率/分红实现率专有词汇 + 预定利率调整时间线 + 演示利率时间线 + 630政策解读 + 为什么主流是1.75%保底+分红 + 官方来源",
+          "url": "insurance-knowledge-card.html"
+        }
+      ]
+    },
+    {
       "id": "product-compare",
       "name": "产品对比",
       "icon": "⚖️",

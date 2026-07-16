@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>保险知识卡 · 利率与分红政策图解</title>
+<style>
+:root{
+  --blue:#1E3A5F; --blue2:#2563EB; --gold:#B8893B; --wine:#9b2235;
+  --bg:#F6F8FB; --card:#fff; --text:#1E293B; --gray:#64748B; --line:#E5E9F0;
+  --soft:#EEF3FA; --chip:#E7EEF8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;}
+.header{background:linear-gradient(135deg,var(--blue),#2c5282);color:#fff;padding:38px 20px 30px;text-align:center;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.06)}
+.header .kicker{display:inline-block;font-size:12px;letter-spacing:3px;background:rgba(255,255,255,.15);padding:4px 14px;border-radius:20px;margin-bottom:14px}
+.header h1{font-size:27px;font-weight:800;letter-spacing:1px}
+.header p{opacity:.9;margin-top:10px;font-size:14px;max-width:560px;margin-left:auto;margin-right:auto}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 50px}
+.toc{background:var(--card);border-radius:14px;padding:16px 18px;margin:-22px 0 18px;box-shadow:0 4px 16px rgba(30,58,95,.08);position:relative;z-index:2}
+.toc h3{font-size:13px;color:var(--gray);margin-bottom:10px;letter-spacing:1px}
+.toc a{display:inline-block;text-decoration:none;color:var(--blue);background:var(--chip);font-size:13px;padding:7px 13px;border-radius:20px;margin:5px 6px 0 0;font-weight:600}
+.toc a:hover{background:var(--blue);color:#fff}
+.card{background:var(--card);border-radius:14px;padding:20px 18px;margin-bottom:16px;box-shadow:0 2px 10px rgba(30,58,95,.05);border:1px solid var(--line)}
+.card h2{font-size:19px;color:var(--blue);margin-bottom:6px;display:flex;align-items:center;gap:9px}
+.card h2 .no{background:var(--blue);color:#fff;font-size:13px;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.card .sub{font-size:13px;color:var(--gray);margin-bottom:16px}
+.section-subtitle{font-size:15px;color:var(--wine);font-weight:700;margin:20px 0 10px;border-left:4px solid var(--wine);padding-left:10px}
+
+/* 术语卡 */
+.glossary{display:grid;grid-template-columns:1fr;gap:12px}
+.term{background:var(--soft);border-radius:10px;padding:14px 15px;border-left:4px solid var(--blue2)}
+.term h4{font-size:15px;color:var(--blue);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.term h4 .en{font-size:11px;color:var(--gray);font-weight:500;background:#fff;border:1px solid var(--line);padding:2px 7px;border-radius:6px}
+.term p{font-size:13.5px;color:var(--text);margin-top:7px}
+.term .analogy{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+.term .mn{font-size:12px;color:var(--wine);margin-top:4px;font-weight:600}
+@media(min-width:560px){.glossary{grid-template-columns:1fr 1fr}.term{margin:0}}
+
+/* 时间轴 */
+.timeline{position:relative;margin:14px 0 6px;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--blue),var(--gold))}
+.node{position:relative;margin-bottom:18px}
+.node::before{content:"";position:absolute;left:-22px;top:5px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--blue);box-shadow:0 0 0 3px var(--soft)}
+.node.wine::before{border-color:var(--wine)}
+.node.gold::before{border-color:var(--gold)}
+.node .date{font-size:13px;font-weight:800;color:var(--blue)}
+.node.wine .date{color:var(--wine)}
+.node .body{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-top:5px}
+.node .body .val{font-size:16px;font-weight:800;color:var(--text)}
+.node .body .val small{font-size:12px;font-weight:600;color:var(--gray)}
+.node .body .desc{font-size:13px;color:var(--text);margin-top:5px}
+.tags{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 9px;border-radius:14px;font-weight:600}
+.tag.reg{background:#E8EEF7;color:var(--blue)}
+.tag.win{background:#FDECEC;color:var(--wine)}
+.tag.note{background:#FBF1DD;color:#92631A}
+
+/* 630 情形表 */
+.case-box{background:var(--soft);border-radius:10px;padding:14px 15px;margin-top:12px}
+.case-box ol{margin:8px 0 0 18px;font-size:13.5px;color:var(--text)}
+.case-box li{margin-bottom:8px}
+
+/* 为什么1.75% */
+.flow{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.flow .step{background:var(--soft);border-radius:10px;padding:13px 14px;display:flex;gap:12px;align-items:flex-start}
+.flow .step .n{background:var(--wine);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;margin-top:2px}
+.flow .step .t{font-size:13.5px}
+.flow .step .t b{color:var(--blue)}
+.highlight-num{font-size:22px;font-weight:800;color:var(--wine)}
+.tip{background:#FFF8EC;border-left:4px solid var(--gold);padding:11px 13px;border-radius:8px;font-size:13px;color:#7a5418;margin-top:12px}
+
+/* 监管主体演变条 */
+.regevo{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+.regevo .r{flex:1;min-width:90px;background:var(--soft);border-radius:10px;padding:11px 9px;text-align:center;border:1px solid var(--line)}
+.regevo .r .y{font-size:12px;font-weight:800;color:var(--blue)}
+.regevo .r .n{font-size:12.5px;margin-top:4px}
+
+/* 官方来源 */
+.src{font-size:12.5px;color:var(--gray)}
+.src a{color:var(--blue2);word-break:break-all}
+.src li{margin-bottom:7px;list-style:none;padding-left:16px;position:relative}
+.src li::before{content:"▸";position:absolute;left:0;color:var(--gold)}
+.foot{text-align:center;font-size:12px;color:var(--gray);padding:8px 0 24px}
+.disclaimer{background:#F1F5F9;border-radius:10px;padding:12px 14px;font-size:12px;color:var(--gray);margin-top:6px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="kicker">保险知识卡 · 投顾工具</span>
+  <h1>利率与分红政策图解</h1>
+  <p>预定利率、演示利率、分红实现率是什么？历次调整的时间线、监管窗口期，以及为什么现在主流产品都是「保底+分红」——一张图讲清楚。</p>
+</div>
+
+<div class="wrap">
+  <div class="toc">
+    <h3>📑 目录</h3>
+    <a href="#g">① 专有词汇</a>
+    <a href="#tl-rate">② 预定利率时间线</a>
+    <a href="#tl-demo">③ 演示利率时间线</a>
+    <a href="#s630">④ 630政策解读</a>
+    <a href="#why">⑤ 为什么是1.75%+分红</a>
+    <a href="#src">⑥ 官方来源</a>
+  </div>
+
+  <!-- ① 专有词汇 -->
+  <div class="card" id="g">
+    <h2><span class="no">1</span>专有词汇 · 大白话解释</h2>
+    <div class="sub">卖保险、看计划书，先搞懂这几个词，不然容易被"演示数字"带偏。</div>
+    <div class="term" style="background:#E8F0FB;border-left-color:var(--blue)">
+      <h4>📌 目前利率水平（截至2025年9月调整后）</h4>
+      <p style="margin-top:6px"><b>预定利率（写进合同的"成本价"）：</b></p>
+      <p style="margin-top:4px">• 普通型：<b>2.0%</b>（2025.9起，从2.5%降）<br>• 分红型：预定利率上限 <b>2.0%</b>，但客户实际拿到的"保证复利"约 <b>1.75%</b>（如宏安世家"保底1.75%"）<br>• 万能型：保证利率上限 <b>1.5%</b><br><span style="color:var(--gray);font-size:12.5px">👉 所以常说的"1.75%和2%"——2%是分红型预定利率，1.75%是客户实得保证复利，两者常被一起说成"预定利率水平"。</span></p>
+      <p style="margin-top:8px"><b>演示利率（计划书演算假设，非承诺）：</b>分红险演示利率上限 = <b>3.5%</b>。</p>
+    </div>
+    <div class="glossary">
+      <div class="term">
+        <h4>预定利率 </h4>
+        <p>保险公司给产品定价时，承诺给客户的"内部回报率"。一旦写进合同就<span class="mn">锁死不能变</span>，是保险公司的刚性成本。</p>
+        <p class="analogy">类比：产品的"出厂成本价"。成本越高，给客户的好处越多，但公司利差损风险也越大。</p>
+        <p class="mn">📌 记忆：预定利率 = 保险公司"承诺的回报率"，是底线，不是你到手的全部。</p>
+      </div>
+      <div class="term">
+        <h4>演示利率 </h4>
+        <p>分红险计划书上用来"演算"红利的假设利率，<span class="mn">只是假设、不是承诺</span>，且受监管上限约束。</p>
+        <p class="analogy">类比：产品说明书里的"预期收益演算图"。画得好看，但不等于真能拿到。</p>
+        <p class="mn">📌 记忆：演示 ≠ 承诺。看计划书先看"保证利益"，再看"演示红利"。</p>
+      </div>
+      <div class="term">
+        <h4>分红实现率 </h4>
+        <p>实际派发的红利 ÷ 计划书演示的红利。<span class="mn">反映"画的饼实际端上来几成"</span>。100%即完全兑现，低于100%就是没达到演示。</p>
+        <p class="analogy">类比：年初说发12个月奖金，年底只发9个月，实现率就是75%。</p>
+        <p class="mn">📌 记忆：实现率高 ≠ 你拿到手多（还得看预定利率高低）。看连续多年，别只看一年。</p>
+      </div>
+      <div class="term">
+        <h4>保证利益 / 保底 </h4>
+        <p>合同白纸黑字写死的部分（现金价值、固定返还），<span class="mn">不管保险公司赚不赚，这一分都不少</span>。</p>
+        <p class="analogy">类比：工资里"固定底薪"。分红是"绩效奖金"，可多可少可为零。</p>
+        <p class="mn">📌 记忆：分红险 = 保底（确定）+ 分红（浮动）。先看保底够不够，再谈分红。</p>
+      </div>
+      <div class="term">
+        <h4>平滑机制 </h4>
+        <p>保险公司把投资好的年份多赚的钱存进"分红特别储备池"，差年份从池子里取水补分红，<span class="mn">削峰填谷</span>，让每年分红尽量平稳。</p>
+        <p class="analogy">类比：丰年存粮、荒年放粮，年年有饭吃。</p>
+        <p class="mn">📌 记忆：平滑机制让分红"不会大起大落"，但池子也有耗尽的时候。</p>
+      </div>
+      <div class="term">
+        <h4>利差损 </h4>
+        <p>保险公司实际投资收益率 <span class="mn">低于</span> 保单预定利率，赚了保费却覆盖不了承诺成本，长期就亏钱。这是行业头号风险。</p>
+        <p class="analogy">类比：你以5%利息借的钱，只能投出3%收益，每笔都亏。</p>
+        <p class="mn">📌 记忆：预定利率一降再降，根子就是防利差损。客户"锁定高利率"的好，是保险公司"利差损"的压力。</p>
+      </div>
+      <div class="term">
+        <h4>窗口期 / 切换期 </h4>
+        <p>监管发文后，旧产品停售、新产品上线的<span class="mn">过渡时间段</span>。窗口关闭 = 老产品下架，再买只能买新利率产品。</p>
+        <p class="analogy">类比：老款手机清仓倒计时，到点就只剩新款。</p>
+        <p class="mn">📌 记忆：2024.8.31（普通型停）、2024.9.30（分红/万能停）是关键节点。</p>
+      </div>
+      <div class="term">
+        <h4>三类产品区别</h4>
+        <p><b>普通型（R1）</b>：收益100%写死，最稳。<br><b>分红型（R2）</b>：保底+浮动分红。<br><b>万能型（R1/R2）</b>：保底+结算利率账户，结算利率每月浮动。</p>
+        <p class="analogy">类比：定期存款 / 保底理财+分红 / 余额宝式账户。</p>
+        <p class="mn">📌 记忆：利率越下行，行业越推"分红型"——把收益波动和客户共担。</p>
+      </div>
+      <div class="term">
+        <h4>预定利率研究值 </h4>
+        <p>保险行业协会每季度发布，<span class="mn">挂钩市场利率</span>（5年期LPR、5年定存、10年国债）。产品利率连续2季度高于研究值25个基点，就要下调。</p>
+        <p class="analogy">类比：行业"温度计"。温度降，产品利率跟着降。</p>
+        <p class="mn">📌 记忆：2025年研究值一路降到1.99%，触发了新一轮下调。</p>
+      </div>
+      <div class="term">
+        <h4>限高令 / 630意见函</h4>
+        <p><b>限高令</b>（2024.3）：分红水平参照万能险结算利率上限，大公司≤3.0%、中小≤3.2%。<br><b>630意见函</b>（2025.6.18）：金寿险函〔2025〕374号，防"内卷式"竞争，设六类情形+3.20%指导线。</p>
+        <p class="mn">📌 记忆：监管怕公司"虚高分红利"揽客，逼分红和实际投资能力挂钩。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 预定利率时间线 -->
+  <div class="card" id="tl-rate">
+    <h2><span class="no">2</span>预定利率调整时间线</h2>
+    <div class="sub">普通型产品为主线（分红型、万能型节奏见节点说明）。数据来自金融监管总局文件及新华社、上证报公开报道。</div>
+
+    <div class="regevo">
+      <div class="r"><div class="y">1999–2018</div><div class="n">原保监会</div></div>
+      <div class="r"><div class="y">2018–2023</div><div class="n">银保监会</div></div>
+      <div class="r"><div class="y">2023–至今</div><div class="n">金融监管总局</div></div>
+    </div>
+
+    <div class="timeline">
+      <div class="node wine">
+        <div class="date">1999.6</div>
+        <div class="body">
+          <div class="val">上限 2.5% <small>下调并锁定</small></div>
+          <div class="desc">原保监会将人身险预定利率上限从高位降至2.5%，应对90年代高利率保单的利差损。这一上限<span class="mn">持续约14年</span>。</div>
+          <div class="tags"><span class="tag reg">原保监会</span><span class="tag note">起点：2.5%时代</span></div>
+        </div>
+      </div>
+      <div class="node">
+        <div class="date">2013</div>
+        <div class="body">
+          <div class="val">上调至 3.5% <small>年金可上浮至 4.025%</small></div>
+          <div class="desc">费率市场化改革，预定利率上限由2.5%上调至3.5%，结束长达14年的2.5%时代。3.5%上限<span class="mn">持续10年</span>。</div>
+          <div class="tags"><span class="tag reg">原保监会</span></div>
+        </div>
+      </div>
+      <div class="node">
+        <div class="date">2019</div>
+        <div class="body">
+          <div class="val">年金 4.025% → 3.5% <small>评估利率下调</small></div>
+          <div class="desc">原银保监会将普通型长期年金评估利率由4.025%下调至3.5%，部分产品实际降至3%，高预定利率年金淡出。</div>
+          <div class="tags"><span class="tag reg">原银保监会</span></div>
+        </div>
+      </div>
+      <div class="node wine">
+        <div class="date">2023.8</div>
+        <div class="body">
+          <div class="val">普通型 3.5% → 3.0%</div>
+          <div class="desc">应对市场利率持续下行，统一指导下调。持续10年的3.5%时代结束，增额终身寿仍为主推。</div>
+          <div class="tags"><span class="tag reg">原银保监会</span><span class="tag win">窗口：旧3.5%产品陆续停售</span></div>
+        </div>
+      </div>
+      <div class="node gold">
+        <div class="date">2024.9.1</div>
+        <div class="body">
+          <div class="val">普通型 → 2.5% <small>分红型2.0% / 万能型1.5%紧随其后</small></div>
+          <div class="desc">金融监管总局《关于健全人身保险产品定价机制的通知》：普通型9月1日起上限2.5%；分红型、万能型10月1日起分别为2.0%、1.5%。并<span class="mn">建立预定利率与市场利率挂钩的动态调整机制</span>。</div>
+          <div class="tags"><span class="tag reg">金融监管总局</span><span class="tag win">窗口：3.0%产品 8.31 前停售</span></div>
+        </div>
+      </div>
+      <div class="node">
+        <div class="date">2024.10.1</div>
+        <div class="body">
+          <div class="val">分红型 2.0% / 万能型 1.5%</div>
+          <div class="desc">分红型、万能型旧产品切换完成。分红型预定利率进入2.0%时代，万能型保证利率上限1.5%。</div>
+          <div class="tags"><span class="tag reg">金融监管总局</span><span class="tag win">窗口：旧产品 9.30 前停售</span></div>
+        </div>
+      </div>
+      <div class="node">
+        <div class="date">2025.1.10</div>
+        <div class="body">
+          <div class="val">动态调整机制落地</div>
+          <div class="desc">《关于建立预定利率与市场利率挂钩及动态调整机制有关事项的通知》：预定利率最高值取0.25%整倍数；连续2季度高于"研究值"25个基点即须下调。协会发布研究值：1月 <b>2.34%</b> → 4月 <b>2.13%</b>。</div>
+          <div class="tags"><span class="tag reg">金融监管总局</span><span class="tag note">研究值逐季下行</span></div>
+        </div>
+      </div>
+      <div class="node gold">
+        <div class="date">2025.9（起）</div>
+        <div class="body">
+          <div class="val">普通型 → 2.0% <small>新一轮下调触发</small></div>
+          <div class="desc">二季度研究值降至 <b>1.99%</b>，普通型最高值2.5%已连续两季度高于研究值25个基点，触发下调条件，普通型进入"2.0%"时代。分红型、万能型随机制联动。</div>
+          <div class="tags"><span class="tag reg">金融监管总局</span><span class="tag win">窗口：新旧切换</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="tip">💡 一句话：预定利率从 1999 的 2.5% → 2013 的 3.5%（高峰10年）→ 2023 的 3.0% → 2024 的 2.5% → 2025 的 2.0%，一路下行，根子是防利差损。每次下调都是"旧产品停售倒计时"，这就是行业说的窗口期。</div>
+  </div>
+
+  <!-- ③ 演示利率时间线 -->
+  <div class="card" id="tl-demo">
+    <h2><span class="no">3</span>演示利率 / 分红水平时间线</h2>
+    <div class="sub">演示利率是"演算假设"，分红水平是"实际能分多少"。两者都被监管一步步收紧。</div>
+    <div class="tip" style="margin:4px 0 12px;background:#E8F0FB;border-left-color:var(--blue)">📌 当前口径：分红险 <b>演示利率上限 = 3.5%</b>；实际分红水平指导区间约 3.2%（见第④节630意见函）。</div>
+    <div class="timeline">
+      <div class="node">
+        <div class="date">早年（2020前）</div>
+        <div class="body">
+          <div class="val">老产品演示利率高达 4.5%–6%</div>
+          <div class="desc">部分早年分红险演示利率偏高，导致"分母大"，后来分红实现率显得偏低（实现率=实际÷演示）。</div>
+          <div class="tags"><span class="tag note">演示≠承诺</span></div>
+        </div>
+      </div>
+      <div class="node wine">
+        <div class="date">2020.2</div>
+        <div class="body">
+          <div class="val">明确演示利率上限 + 分配比例统一70%</div>
+          <div class="desc">银保监会《关于强化人身保险精算监管有关事项的通知》：修订分红险利益演示方法，<span class="mn">明确演示利率上限</span>，并将红利分配比例统一为70%，防止夸大演示、销售误导。</div>
+          <div class="tags"><span class="tag reg">原银保监会</span></div>
+        </div>
+      </div>
+      <div class="node gold">
+        <div class="date">2024.3</div>
+        <div class="body">
+          <div class="val">"限高令"：大公司≤3.0% / 中小≤3.2%</div>
+          <div class="desc">窗口指导：分红水平参照万能险结算利率上限（大公司3.1%、中小3.3%），实际执行中分红水平大公司不高于3.0%、中小不高于3.2%。行业分红实现率当年普遍低于100%。</div>
+          <div class="tags"><span class="tag reg">窗口指导</span><span class="tag win">限高</span></div>
+        </div>
+      </div>
+      <div class="node wine">
+        <div class="date">2025.6.18</div>
+        <div class="body">
+          <div class="val">意见函：3.20% 指导线 + 六类情形</div>
+          <div class="desc">金融监管总局人身保险监管司下发《关于分红险分红水平监管意见的函》（金寿险函〔2025〕374号）：以行业过去3年平均财务收益率 <b>3.20%</b> 为指导线，设六类情形（详见第④节），防"内卷式"竞争。好公司可论证突破限高，中小受限。</div>
+          <div class="tags"><span class="tag reg">金融监管总局</span><span class="tag win">630政策</span></div>
+        </div>
+      </div>
+      <div class="node gold">
+        <div class="date">2026.6.30（630窗口）</div>
+        <div class="body">
+          <div class="val">演示利率上限 3.9% → 3.5% <small>（3.5%以下）</small></div>
+          <div class="desc">"630"节点：监管将分红险演示利率上限由3.9%下调至 <b>3.5%（即3.5%以下）</b>，要求2026年6月30日前完成切换。这和销售端"限高令""意见函"一脉相承——把演示与兑现的差距进一步压缩，防止把分红险当固收卖。至此演示利率稳定在 <b>3.5%</b> 上限。</div>
+          <div class="tags"><span class="tag reg">监管导向</span><span class="tag win">630：压到3.5%以下</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="tip">💡 演示利率是"说明书上的假设"，分红实现率才是"兑现的成绩单"。监管一边压演示上限、一边压实际分红水平，目的只有一个：让客户预期回归理性，别把分红险当固收卖。</div>
+  </div>
+
+  <!-- ④ 630政策 -->
+  <div class="card" id="s630">
+    <h2><span class="no">4</span>630政策解读（金寿险函〔2025〕374号）</h2>
+    <div class="sub">2025年6月18日，金融监管总局人身保险监管司下发《关于分红险分红水平监管意见的函》。业内简称"630政策"。</div>
+
+    <div class="section-subtitle">为什么出这个文件？</div>
+    <p style="font-size:13.5px">低利率下分红险成主推，部分公司为抢份额把分红演示/实际分配做得过激，"虚高分红预期"揽客。监管要<span class="mn">防内卷、防利差损</span>：分红必须基于账户真实投资收益和资产负债状况，不能随意抬高。</p>
+    <div class="tip" style="margin-top:10px;background:#E8F0FB;border-left-color:var(--blue)">🔗 监管是"分两步走"的：<b>2025.6（本意见函）</b>压的是"实际分红水平"（3.20%指导线）；到 <b>2026.6.30（业内也简称"630"窗口）</b>，进一步把"演示利率上限"由3.9%压到 <b>3.5%以下</b>（详见第③节时间线）。两步合起来，把分红险从"高演示、虚高分红利"拉回理性。所以客户问"630是不是要把分红压到3.5%以下"——准确说是：演示利率上限压到3.5%以下，实际分红水平另有3.20%指导线。</div>
+
+    <div class="section-subtitle">六类情形（出现任一，须充分论证+报资产负债管理委员会审定）</div>
+    <div class="case-box">
+      <ol>
+        <li>拟分红率对应的投资收益率，超过该账户过去3年财务/综合投资收益率的较低者；</li>
+        <li>分红特别储备为负值，或当期分红实施后将为负值；</li>
+        <li>设立不足3年的账户，拟分红水平（客户收益率）超过行业过去3年平均财务收益率 <b>3.20%</b>；</li>
+        <li>监管评级1–3级，拟分红水平超过行业过去3年平均财务收益率 <b>3.20%</b>；</li>
+        <li>监管评级4–5级，拟分红水平超过产品预定利率；</li>
+        <li>产品、精算、投资、财务等部门认为需提交审议的其他情形。</li>
+      </ol>
+    </div>
+
+    <div class="section-subtitle">对客户的实质影响</div>
+    <p style="font-size:13.5px">① <b>分红更"实在"</b>：和保险公司真实投资能力挂钩，不再随意画大饼。<br>② <b>老产品实现率仍偏低</b>：早年高演示产品分母大，实现率可能只有50%–90%，这是客观事实，不是公司"不靠谱"。<br>③ <b>好公司优势凸显</b>：投资能力强、储备充足的公司，可论证后突破限高，分红更稳；中小公司高分红揽客空间被压缩。</p>
+
+    <div class="tip">⚠️ 销售红线：绝不能把"演示红利"说成"保证收益"，绝不能承诺"明年分红肯定高"。监管明确：违反者约谈、责令整改、评级扣分。</div>
+  </div>
+
+  <!-- ⑤ 为什么1.75%+分红 -->
+  <div class="card" id="why">
+    <h2><span class="no">5</span>为什么现在主流是「保底1.75% + 分红」？</h2>
+    <div class="sub">一句话：2024年9月分红型预定利率降到2.0%，产品从"固定收益"转向"保底+浮动"，这是监管鼓励的大方向。</div>
+
+    <div class="flow">
+      <div class="step"><div class="n">1</div><div class="t"><b>2024.9 分红型预定利率降至 2.0%</b><br>普通型降到2.5%、万能型1.5%。固定收益空间被压缩，行业必须转向浮动收益型。</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>"保底"=预定利率2.0%，客户实得保证复利约 1.75%</b><br>预定利率是定价假设，扣除费用后，客户现金价值实际保证复利约 <span class="highlight-num">1.75%</span>（如宏安世家"保底1.75%"）。</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>分红演示约 1.225%，合计演示约 3.0%</b><br>保底1.75% + 分红演示1.225%，整体演示贴近3.0%附近，符合3.5%演示上限与3.2%分红指导线。</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>监管鼓励分红险，头部险企目标占比超50%</b><br>发展新"国十条"支持浮动收益型保险。平安、太保、新华等公开表示分红险占比将达50%以上——这是防利差损的"自救"。</div></div>
+      <div class="step"><div class="n">5</div><div class="t"><b>2025.6 意见函固化"保底+浮动"结构</b><br>630政策进一步明确分红险收益=预定利率保底+浮动红利，逼行业回到"风险共担、收益共享"的本源。</div></div>
+    </div>
+
+    <div class="tip">💡 所以现在你看到的主流产品：<b>普通型</b>写死2.5%（或更低）、<b>分红型</b>保底约1.75%–2.0%+浮动分红。客户用"保底部分"锁住底线，用"分红部分"博取上行——这正是利率下行周期里，险企和客户的"公约数"。</div>
+  </div>
+
+  <!-- ⑥ 官方来源 -->
+  <div class="card" id="src">
+    <h2><span class="no">6</span>官方来源与数据出处</h2>
+    <div class="sub">本页时间线依据以下官方文件及权威公开报道整理，数据以官方原文为准。</div>
+    <ul class="src">
+      <li>国家金融监督管理总局《关于健全人身保险产品定价机制的通知》（2024年8月，普通型2.5%/分红型2.0%/万能型1.5%，建立动态调整机制）—— 央广网报道 <a href="https://www.toutiao.com/article/7406497647755887116">toutiao.com/article/7406497647755887116</a></li>
+      <li>国家金融监督管理总局《关于建立预定利率与市场利率挂钩及动态调整机制有关事项的通知》（2025.1.10，研究值1月2.34%、4月2.13%）—— 21世纪经济报道 <a href="https://m.21jingji.com/article/20250624/a63f21c8ba1d48e567948d4dbc1516cd.html">21jingji.com/article/20250624</a></li>
+      <li>《关于分红险分红水平监管意见的函》金寿险函〔2025〕374号（2025.6.18，六类情形+3.20%指导线）—— 保险日报 <a href="https://www.insurdaily.com/archives/6244.html">insurdaily.com/archives/6244</a> ／ 南方周末 <a href="https://news.qq.com/rain/a/20250709A056R300">news.qq.com 20250709</a></li>
+      <li>新华社《从2.5%到2.5% 保险业穿越利率大周期》（2024.9.2，预定利率历史脉络）—— <a href="https://www.news.cn/money/20240902/56902d407cb84836abb640b3a9942e76/c.html">news.cn/money/20240902</a></li>
+      <li>上证报《从2.5%到2.5%——保险业穿越利率大周期》—— <a href="https://m.cnstock.com/commonDetail/259250">cnstock.com/commonDetail/259250</a></li>
+      <li>银保监会《关于强化人身保险精算监管有关事项的通知》（2020.2，演示利率上限、分配比例统一70%）—— <a href="https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=891254&itemId=915&generaltype=0">nfra.gov.cn 答记者问</a></li>
+      <li>新华保险2024年度报告（总投资收益率5.8%、综合8.5%、净利262亿创历史新高）—— <a href="https://www.newchinalife.com/info/61529">newchinalife.com/info/61529</a></li>
+      <li>21世纪经济报道《分红险实现率回暖，百余款产品超100%》（2025.7.23，分红实现率行业数据）—— <a href="https://www.21jingji.com/article/20250723/herald/27781df136451acfd1cf35e89cd4988a.html">21jingji.com/article/20250723</a></li>
+    </ul>
+    <div class="disclaimer">说明：本页为学习科普用途，时间线图依据上述官方公开数据绘制；官方原始图示与最新口径请以国家金融监督管理总局官网（www.nfra.gov.cn）及保险公司官网披露为准。保险产品的保证利益以合同条款为准，分红为非保证，历史实现率不代表未来。</div>
+  </div>
+
+  <div class="foot">保险知识卡 · 利率与分红政策图解 ｜ 个人整理，仅供学习参考</div>
+</div>
+</body>
+</html>

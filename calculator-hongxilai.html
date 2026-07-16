@@ -42,7 +42,14 @@ body.capturing .no-export{display:none !important;}
 .section-head span{display:inline-block;width:3px;height:16px;background:#fff;margin-right:8px;}
 .section p{font-size:14px;line-height:1.8;color:#1E293B;margin:4px 0;}
 .section p strong{color:var(--wine);font-weight:700;}
-.case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
+.intro-row{display:flex;align-items:stretch;gap:0;}
+.intro-row > .section{flex:1;min-width:0;margin-bottom:0;}
+.intro-row > .section:first-child{margin-right:-2px;position:relative;z-index:1;}
+@media(max-width:768px){
+  .intro-row{flex-direction:column;}
+  .intro-row > .section:first-child{margin-right:0;margin-bottom:-2px;z-index:1;}
+}
+.case-info{display:none;}
 .case-info em{font-style:normal;color:var(--wine);}
 
 /* 信息表 */
@@ -142,24 +149,21 @@ body.capturing .no-export{display:none !important;}
   <div id="planArea" class="plan">
     <div class="plan-title">宏禧来（分红型）理财计划</div>
 
-    <div class="section">
-      <div class="section-head"><span></span>公司介绍</div>
-      <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
-      <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
-      <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
-    </div>
+    <div class="intro-row">
+      <div class="section">
+        <div class="section-head"><span></span>公司介绍</div>
+        <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
+        <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）</p>
+        <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
+      </div>
 
-    <div class="section no-export">
-      <div class="section-head"><span></span>产品形态</div>
-      <p><strong>投保年龄：</strong>出生满30天至72周岁（2万元起售），线上单：18-64周岁</p>
-    </div>
-
-    <div class="section">
-      <div class="section-head"><span></span>产品简介</div>
-      <p><strong>短期高效：</strong>一次交费即可享六/八/十年保障，对教育、退休、资金积累等需求定向规划</p>
-      <p><strong>满期给付：</strong>满期给付基本保险金额，高于所交保费，合同约定，清晰明确</p>
-      <p><strong>分红添利：</strong>共享央企经营成果，获得保单红利分配机会，锦上添花</p>
-      <p><strong>倍享关爱：</strong>同时兼顾最高1.6倍身价保障，关爱备至，幸福加持</p>
+      <div class="section">
+        <div class="section-head"><span></span>产品简介</div>
+        <p><strong>短期高效：</strong>一次交费即可享六/八/十年保障，对教育、退休、资金积累等需求定向规划</p>
+        <p><strong>满期给付：</strong>满期给付基本保险金额，高于所交保费，合同约定，清晰明确</p>
+        <p><strong>分红添利：</strong>共享央企经营成果，获得保单红利分配机会，锦上添花</p>
+        <p><strong>倍享关爱：</strong>同时兼顾最高1.6倍身价保障，关爱备至，幸福加持</p>
+      </div>
     </div>
 
     <div class="section">

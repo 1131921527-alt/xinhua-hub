@@ -35,21 +35,38 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .section{margin-bottom:16px;border:2px solid var(--wine);background:#fff;padding:16px;}
 .section-head{display:flex;align-items:center;background:var(--wine);color:#fff;padding:8px 16px;font-size:16px;font-weight:700;margin:-16px -16px 12px -16px;}
 .section-head span{display:inline-block;width:3px;height:16px;background:#fff;margin-right:8px;}
-.section p{font-size:14px;line-height:1.8;color:#1E293B;margin:4px 0;}
+.section p{font-size:14px;line-height:1.6;color:#1E293B;margin:0 0 6px 0;}
+.section p:last-child{margin-bottom:0;}
 .section p strong{color:var(--wine);font-weight:700;}
+.intro-row{display:flex;align-items:stretch;gap:0;}
+.intro-row > .section{flex:1;min-width:0;margin-bottom:0;}
+.intro-row > .section:first-child{margin-right:-2px;position:relative;z-index:1;}
+.intro-row > .section .company-intro{display:flex;flex-direction:column;gap:8px;}
+@media(max-width:768px){
+  .intro-row{flex-direction:column;}
+  .intro-row > .section:first-child{margin-right:0;margin-bottom:-2px;z-index:1;}
+}
 
-.case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
+.case-info{display:none;}
 
-.top-info{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
-.info-table{flex:1;min-width:300px;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);}
-.info-table th,.info-table td{border:1px solid var(--wine);padding:7px 8px;text-align:center;}
+.top-info{display:block;}
+.info-table{width:100%;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);table-layout:fixed;}
+.info-table th,.info-table td{border:1px solid var(--wine);padding:7px 4px;text-align:center;}
 .info-table th{background:var(--wine);color:#fff;font-weight:700;}
 .info-table td{background:#fff;color:#1E293B;font-weight:600;}
 .info-table td.label{background:var(--wine-bg);color:var(--wine);font-weight:700;}
-.side-stats{display:flex;flex-direction:column;gap:10px;}
-.stat-box{display:flex;align-items:center;border:2px solid var(--wine);background:#fff;}
-.stat-box .stat-label{background:var(--wine);color:#fff;padding:8px 12px;font-size:13px;font-weight:700;white-space:nowrap;}
-.stat-box .stat-val{padding:8px 14px;font-size:14px;font-weight:700;min-width:80px;text-align:center;color:var(--wine);}
+.stats-row{display:flex;width:100%;border:2px solid var(--wine);border-top:0;box-sizing:border-box;}
+.stat-inline-box{flex:1;display:flex;align-items:center;min-width:0;border-right:2px solid var(--wine);background:#fff;box-sizing:border-box;}
+.stat-inline-box:last-child{border-right:0;}
+.stat-inline-box span{background:var(--wine);color:#fff;padding:10px 8px;font-size:12px;font-weight:700;white-space:nowrap;}
+.stat-inline-box strong{flex:1;text-align:center;padding:10px 8px;font-size:14px;font-weight:700;color:var(--wine);}
+@media(max-width:768px){
+  .stats-row{flex-direction:column;border-top:2px solid var(--wine);}
+  .stat-inline-box{border-right:0;border-bottom:2px solid var(--wine);}
+  .stat-inline-box:last-child{border-bottom:0;}
+}
+.side-stats{display:none;}
+.stat-box{display:none;}
 
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--wine);border:1.5px solid var(--wine);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--wine-bg);}
@@ -140,27 +157,24 @@ body.capturing .no-export{display:none !important;}
   <div id="planArea" class="plan">
     <div class="plan-title">宏安世家（分红型）理财计划</div>
 
-    <div class="section">
-      <div class="section-head"><span></span>公司介绍</div>
-      <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
-      <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
-      <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
-    </div>
-
-    <div class="section no-export">
-      <div class="section-head"><span></span>产品形态</div>
-      <p id="productForm">三年交投保年龄：男性30天-64周岁，女性30天-68周岁（2万元起售），期交线上18-59周岁</p>
-    </div>
-
-    <div class="section">
-      <div class="section-head"><span></span>产品简介</div>
-      <p>✅ 保底年复利 1.75%，利益写入合同，终身锁定，不受利率波动影响</p>
-      <p>✅ 年度盈余分红，演示利率 1.2%，可现金领取、可复利滚存增值</p>
-      <p>✅ 终身身故保障 1.4-1.6 倍，额外赔付 1 倍特定公共交通意外身故金</p>
+    <div class="intro-row">
+      <div class="section">
+        <div class="section-head"><span></span>公司介绍</div>
+        <div class="company-intro">
+          <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
+          <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
+          <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-head"><span></span>产品简介</div>
+        <p>✅ 保底年复利 1.75%，利益写入合同，终身锁定，不受利率波动影响</p>
+        <p>✅ 年度盈余分红，演示利率 1.2%，可现金领取、可复利滚存增值</p>
+        <p>✅ 终身身故保障 1.4-1.6 倍，额外赔付 1 倍特定公共交通意外身故金</p>
+      </div>
     </div>
 
     <div class="section">
-      <div class="case-info no-export" id="caseInfo">VIP女士，今年40周岁，3年交、年交10万元，购买宏安世家（分红型）</div>
       <div class="top-info">
         <table class="info-table">
           <tr>
@@ -171,10 +185,10 @@ body.capturing .no-export{display:none !important;}
             <td id="infoPremium">100000</td><td id="infoSa">273900</td><td>终身</td><td>累积生息</td>
           </tr>
         </table>
-        <div class="side-stats">
-          <div class="stat-box"><div class="stat-label">第二年现价百分比</div><div class="stat-val" id="statCashRatio">48.55%</div></div>
-          <div class="stat-box"><div class="stat-label">演示分红实现率</div><div class="stat-val">100%</div></div>
-          <div class="stat-box"><div class="stat-label">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
+        <div class="stats-row">
+          <div class="stat-inline-box"><span>第二年现价百分比</span><strong id="statCashRatio">48.55%</strong></div>
+          <div class="stat-inline-box"><span>演示分红实现率</span><strong>100%</strong></div>
+          <div class="stat-inline-box"><span>演示累积生息利率</span><strong id="statRate">2.50%</strong></div>
         </div>
       </div>
 
@@ -250,8 +264,11 @@ function updateFormText(){
   const otherGender = currentGender === 1 ? '男性' : '女性';
   const otherMax = currentGender === 1 ? cfg.maleAge : cfg.femaleAge;
   const thisMax = currentGender === 1 ? cfg.femaleAge : cfg.maleAge;
-  document.getElementById('productForm').textContent =
-    `${cfg.label}投保年龄：${otherGender}30天-${otherMax}周岁，${gender}30天-${thisMax}周岁（${cfg.minPrem}元起售），${cfg.label}线上${cfg.online}周岁`;
+  const productForm = document.getElementById('productForm');
+  if (productForm) {
+    productForm.textContent =
+      `${cfg.label}投保年龄：${otherGender}30天-${otherMax}周岁，${gender}30天-${thisMax}周岁（${cfg.minPrem}元起售），${cfg.label}线上${cfg.online}周岁`;
+  }
 }
 
 async function loadData(){
@@ -368,8 +385,11 @@ function generate(){
   document.getElementById('infoSa').textContent = fmt(basicSa);
 
   const genderStr = currentGender === 1 ? '女士' : '先生';
-  document.getElementById('caseInfo').textContent =
-    `VIP${genderStr}，今年${age}周岁，${cfg.label}、年交${fmt(premium)}元，购买宏安世家（分红型）`;
+  const caseInfo = document.getElementById('caseInfo');
+  if (caseInfo) {
+    caseInfo.textContent =
+      `VIP${genderStr}，今年${age}周岁，${cfg.label}、年交${fmt(premium)}元，购买宏安世家（分红型）`;
+  }
 
   document.getElementById('statCashRatio').textContent = year2CvRatio.toFixed(2) + '%';
   document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';

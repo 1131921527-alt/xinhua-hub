@@ -43,16 +43,30 @@ body.capturing .no-export{display:none !important;}
 
 .case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
 
-.top-info{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
-.info-table{flex:1;min-width:300px;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);}
+.top-info{display:block;}
+.info-table{width:100%;border-collapse:collapse;font-size:13px;border:2px solid var(--wine);}
 .info-table th,.info-table td{border:1px solid var(--wine);padding:7px 8px;text-align:center;}
 .info-table th{background:var(--wine);color:#fff;font-weight:700;}
 .info-table td{background:#fff;color:#1E293B;font-weight:600;}
 .info-table td.label{background:var(--wine-bg);color:var(--wine);font-weight:700;}
-.side-stats{display:flex;flex-direction:column;gap:10px;}
-.stat-box{display:flex;align-items:center;border:2px solid var(--wine);background:#fff;}
-.stat-box .stat-label{background:var(--wine);color:#fff;padding:8px 12px;font-size:13px;font-weight:700;white-space:nowrap;}
-.stat-box .stat-val{padding:8px 14px;font-size:14px;font-weight:700;min-width:80px;text-align:center;color:var(--wine);}
+.side-stats{display:flex;width:100%;border:2px solid var(--wine);border-top:0;box-sizing:border-box;}
+.stat-box{flex:1;display:flex;align-items:center;border-right:2px solid var(--wine);background:#fff;box-sizing:border-box;}
+.stat-box:last-child{border-right:0;}
+.stat-box .stat-label{background:var(--wine);color:#fff;padding:10px 8px;font-size:12px;font-weight:700;white-space:nowrap;}
+.stat-box .stat-val{flex:1;text-align:center;padding:10px 8px;font-size:14px;font-weight:700;color:var(--wine);min-width:0;}
+@media(max-width:768px){
+  .side-stats{flex-direction:column;border-top:2px solid var(--wine);}
+  .stat-box{border-right:0;border-bottom:2px solid var(--wine);}
+  .stat-box:last-child{border-bottom:0;}
+}
+.intro-row{display:flex;align-items:stretch;gap:0;}
+.intro-row > .section{flex:1;min-width:0;margin-bottom:0;}
+.intro-row > .section:first-child{margin-right:-2px;position:relative;z-index:1;}
+@media(max-width:768px){
+  .intro-row{flex-direction:column;}
+  .intro-row > .section:first-child{margin-right:0;margin-bottom:-2px;z-index:1;}
+}
+.case-info{display:none;}
 
 .main-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;}
 .main-table th,.main-table td{border:1px solid #fff;padding:7px 3px;text-align:center;vertical-align:middle;}
