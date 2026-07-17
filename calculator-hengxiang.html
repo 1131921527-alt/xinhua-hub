@@ -109,6 +109,7 @@
 
   <div class="err" id="errorMsg"></div>
   <div id="paramBar"></div>
+  <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
 
   <div class="card">
     <div style="display:flex;align-items:center;margin-bottom:10px;">
@@ -188,6 +189,13 @@ async function generate(){
     document.getElementById('paramBar').innerHTML=
       `<strong style="color:#1E3A5F;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E3A5F;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E3A5F;font-size:16px;">${termLabel}</strong>`+
       (annStartAge?`<span style="color:#64748B;">${annStartAge}岁开始领</span>`:'');
+
+    // 第二年末现价百分比
+    let y2ratio = 0;
+    if(years.length > 1){ const r2=years[1]; if(r2[2]>0) y2ratio = r2[7] / r2[2] * 100; }
+    const bar2=document.getElementById('year2CvBar');
+    bar2.style.display='block';
+    document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
 
     const body=document.getElementById('resultBody');
     body.innerHTML='';

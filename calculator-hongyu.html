@@ -127,6 +127,7 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 
   <div class="err" id="errorMsg"></div>
   <div id="paramBar"></div>
+  <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
 
   <div class="card">
     <div class="dl-bar">
@@ -337,7 +338,13 @@ async function generate() {
       prevTotal = total;
       prevO = O;
     }
-    
+
+    // 第二年末现价百分比
+    let y2ratio=0;
+    if(allRows.length>1){const r2=allRows[1];if(r2.cumPremiumAll>0)y2ratio=r2.guaranteed/r2.cumPremiumAll*100;}
+    document.getElementById('year2CvBar').style.display='block';
+    document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
+
     let html = '';
     for (let i = 0; i < allRows.length; i++) {
       const r = allRows[i];

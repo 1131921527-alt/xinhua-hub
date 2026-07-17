@@ -116,6 +116,7 @@
 
   <div class="err" id="errorMsg"></div>
   <div id="paramBar"></div>
+  <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
 
   <div class="card">
     <div class="dl-bar" style="display:flex;align-items:center;margin-bottom:10px;">
@@ -220,6 +221,11 @@ async function generate(){
       `<strong style="color:#1E40AF;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E40AF;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E40AF;font-size:16px;">${termLabel}</strong><span style="color:#64748B;">分红交清增额</span>`;
 
     const rows=getRows();
+    let y2ratio=0;
+    if(rows.length>1){let cp=0;for(let i=0;i<2&&i<rows.length;i++)cp+=rows[i].prem||0;if(cp>0)y2ratio=rows[1].cv_guar/cp*100;}
+    document.getElementById('year2CvBar').style.display='block';
+    document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
+
     const body=document.getElementById('resultBody');
     body.innerHTML='';
     const reserveYears=term;  // 缴费期合并
