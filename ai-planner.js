@@ -693,8 +693,17 @@
     if (!_pendingDataUrl) return;
 
     try {
-      // 方法1：创建一个新窗口，写入带图片的HTML页面
-      // 在微信内置浏览器中，这通常会触发系统级"选择浏览器打开"提示
+      // 确保 URL 是 Blob URL（避免超长 dataURL 在 document.write 中被截断导致图片无法打开）
+      var imgSrc = _pendingDataUrl;
+      if (_pendingDataUrl.indexOf('data:image') === 0) {
+        // 将 base64 dataURL 转 Blob URL
+        var parts = _pendingDataUrl.split(',');
+        var byteString = atob(parts[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+        imgSrc = URL.createObjectURL(new Blob([ab], {type: 'image/png'}));
+      }
       var newWin = window.open('', '_blank');
       if (newWin) {
         newWin.document.write(
@@ -702,7 +711,7 @@
           '<title>计划书图片 - ' + _pendingFileName + '</title>' +
           '<style>*{margin:0;padding:0;}body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f0f2f5;}img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.15);}' +
           '.tip{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-family:-apple-system,sans-serif;}</style></head>' +
-          '<body><img src="' + _pendingDataUrl + '" alt="plan"/>' +
+          '<body><img src="' + imgSrc + '" alt="plan"/>' +
           '<div class="tip">📥 长按图片保存到手机 · 或点击菜单保存</div></body></html>'
         );
         newWin.document.close();
