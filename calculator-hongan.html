@@ -73,6 +73,16 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--primary-bg);}
 body.capturing .no-export{display:none !important;}
+/* 抓图时强制桌面布局（覆盖 @media(max-width:768px) 的竖排/缩字号等） */
+body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
+body.capturing .plan{padding:28px 32px 4px !important;}
+body.capturing .intro-row{flex-direction:row !important;}
+body.capturing .intro-row>.section:first-child{margin-right:-2px !important;margin-bottom:0 !important;}
+body.capturing .stats-row{flex-direction:row !important;border-top:0 !important;}
+body.capturing .stat-inline-box{border-right:2px solid #1E40AF !important;border-bottom:0 !important;}
+body.capturing .stat-inline-box:last-child{border-right:0 !important;}
+body.capturing .main-table{font-size:17px !important;min-width:100% !important;}
+body.capturing .table-scroll{overflow-x:visible !important;}
 
 .row-positive td{background:#DBEAFE !important;color:var(--primary) !important;}
 .row-positive .col-rate{background:#BFDBFE !important;}
@@ -98,7 +108,8 @@ body.capturing .no-export{display:none !important;}
   .field{width:100%;}
   input,select{width:100%;}
   .plan{padding:16px;}
-  .main-table{font-size:11px;}
+  .main-table{font-size:13px;min-width:980px;}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .dl-bar{flex-direction:column;align-items:stretch;}
   .btn-dl{margin:10px 0 0 0;}
 }
@@ -188,7 +199,7 @@ body.capturing .no-export{display:none !important;}
           </tr>
         </table>
         <div class="stats-row">
-          <div class="stat-inline-box"><span>第二年现价百分比</span><strong id="statCashRatio">48.55%</strong></div>
+          <div class="stat-inline-box"><span>第二年末现价百分比</span><strong id="statCashRatio">48.55%</strong></div>
           <div class="stat-inline-box"><span>演示分红实现率</span><strong>100%</strong></div>
           <div class="stat-inline-box"><span>演示累积生息利率</span><strong id="statRate">2.50%</strong></div>
         </div>
@@ -402,8 +413,22 @@ function generate(){
 async function downloadImage(){
   document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
+  const wrap = plan.closest('.wrap');
+  const tableScroll = plan.querySelector('.table-scroll');
+  // CSS body.capturing overrides 强制桌面布局（flex横排/padding/字号等），JS 双保险强制宽度
+  const oldWrapWidth = wrap ? wrap.style.width : '';
+  const oldWrapMaxWidth = wrap ? wrap.style.maxWidth : '';
+  const oldPlanWidth = plan.style.width;
+  const oldPlanMinWidth = plan.style.minWidth;
+  const oldScrollOverflow = tableScroll ? tableScroll.style.overflowX : '';
+  if(wrap){ wrap.style.width='1200px'; wrap.style.maxWidth='1200px'; }
+  plan.style.width='1200px'; plan.style.minWidth='1200px';
+  if(tableScroll){ tableScroll.style.overflowX='visible'; }
   try{
-    const canvas = await html2canvas(plan, {scale: 4, backgroundColor: '#fff', useCORS: true});
+    const canvas = await html2canvas(plan, {scale:3, backgroundColor:'#fff', useCORS:true, windowWidth:1200});
+    if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
+    plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
+    if(tableScroll){ tableScroll.style.overflowX=oldScrollOverflow; }
     document.body.classList.remove('capturing');
     const filename = '宏安世家理财计划书.png';
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
@@ -429,6 +454,9 @@ async function downloadImage(){
       },600);
     }
   }catch(e){
+    if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
+    plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
+    if(tableScroll){ tableScroll.style.overflowX=oldScrollOverflow; }
     document.body.classList.remove('capturing');
   }
 }

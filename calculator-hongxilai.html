@@ -33,6 +33,16 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--primary-bg);}
 body.capturing .no-export{display:none !important;}
+/* 抓图时强制桌面布局（覆盖 @media 的竖排/缩字号等） */
+body.capturing .wrap{max-width:1100px !important;width:1100px !important;}
+body.capturing .plan{padding:28px 32px 4px !important;}
+body.capturing .intro-row{flex-direction:row !important;}
+body.capturing .intro-row>.section:first-child{margin-right:-2px !important;margin-bottom:0 !important;}
+body.capturing .stats-row{flex-direction:row !important;border-top:0 !important;}
+body.capturing .stat-inline-box{border-right:2px solid #1E40AF !important;border-bottom:0 !important;}
+body.capturing .stat-inline-box:last-child{border-right:0 !important;}
+body.capturing .main-table{font-size:17px !important;min-width:100% !important;}
+body.capturing .table-scroll{overflow-x:visible !important;}
 
 /* 计划书样式 */
 .plan{padding:28px 32px 4px;background:#fff;}
@@ -93,9 +103,20 @@ body.capturing .no-export{display:none !important;}
   .field{width:100%;}
   input,select{width:100%;}
   .plan{padding:16px;}
-  .main-table{font-size:12px;}
+  .main-table{font-size:13px;min-width:980px;}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .dl-bar{flex-direction:column;align-items:stretch;}
   .btn-dl{margin:10px 0 0 0;}
+}
+.stats-row{display:flex;width:100%;border:2px solid var(--primary);border-top:0;box-sizing:border-box;}
+.stat-inline-box{flex:1;display:flex;align-items:center;min-width:0;border-right:2px solid var(--primary);background:#fff;box-sizing:border-box;}
+.stat-inline-box:last-child{border-right:0;}
+.stat-inline-box span{background:var(--primary);color:#fff;padding:10px 8px;font-size:13px;font-weight:700;white-space:nowrap;}
+.stat-inline-box strong{flex:1;text-align:center;padding:10px 8px;font-size:15px;font-weight:700;color:var(--primary);}
+@media(max-width:640px){
+  .stats-row{flex-direction:column;border-top:2px solid var(--primary);}
+  .stat-inline-box{border-right:0;border-bottom:2px solid var(--primary);}
+  .stat-inline-box:last-child{border-bottom:0;}
 }
 </style>
 </head>
@@ -180,6 +201,11 @@ body.capturing .no-export{display:none !important;}
           <td id="infoPeriod">8年</td><td>累积生息</td><td id="infoRate">2.50%</td><td id="infoSa">1100500元</td>
         </tr>
       </table>
+
+      <div class="stats-row" style="margin-top:10px; margin-bottom:10px;">
+        <div class="stat-inline-box"><span>第二年末现价百分比</span><strong id="statCashRatio">95.58%</strong></div>
+        <div class="stat-inline-box"><span>演示累积生息利率</span><strong id="statRate">2.50%</strong></div>
+      </div>
 
       <div class="table-scroll">
         <table class="main-table" id="resultTable">
@@ -286,6 +312,12 @@ function generate(){
   const last = rows[rows.length-1];
   document.getElementById('caseInfo').innerHTML = `VIP${currentGender===1?'女士':'先生'}，今年${age}岁，购买${fmt(premium)}元${period}年期宏禧来(分红型)，预计满期总利益<span class="em" style="color:var(--primary)">${fmt(Math.round(last.survival))}</span>元`;
 
+  // 第二年末现价百分比
+  const d2 = DATA[`${currentGender}_${age}_${period}_2`];
+  if(d2 && d2.cum_premium > 0){
+    document.getElementById('statCashRatio').textContent = (d2.cv / d2.cum_premium * 100).toFixed(2) + '%';
+  }
+
   // Render table
   let displayRows = rows.filter(r => {
     if(viewMode === 'all') return true;
@@ -320,8 +352,22 @@ function generate(){
 async function downloadImage(){
   document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
+  const wrap = plan.closest('.wrap');
+  const tableScroll = plan.querySelector('.table-scroll');
+  // CSS body.capturing overrides 强制桌面布局，JS 双保险强制宽度
+  const oldWrapWidth = wrap ? wrap.style.width : '';
+  const oldWrapMaxWidth = wrap ? wrap.style.maxWidth : '';
+  const oldPlanWidth = plan.style.width;
+  const oldPlanMinWidth = plan.style.minWidth;
+  const oldScrollOverflow = tableScroll ? tableScroll.style.overflowX : '';
+  if(wrap){ wrap.style.width='1100px'; wrap.style.maxWidth='1100px'; }
+  plan.style.width='1100px'; plan.style.minWidth='1100px';
+  if(tableScroll){ tableScroll.style.overflowX='visible'; }
   try{
-    const canvas = await html2canvas(plan, {scale: 4, backgroundColor: '#fff', useCORS: true});
+    const canvas = await html2canvas(plan, {scale:3, backgroundColor:'#fff', useCORS:true, windowWidth:1100});
+    if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
+    plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
+    if(tableScroll){ tableScroll.style.overflowX=oldScrollOverflow; }
     document.body.classList.remove('capturing');
     const filename = '宏禧来理财计划书.png';
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
@@ -345,6 +391,9 @@ async function downloadImage(){
       },600);
     }
   }catch(e){
+    if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
+    plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
+    if(tableScroll){ tableScroll.style.overflowX=oldScrollOverflow; }
     document.body.classList.remove('capturing');
   }
 }
