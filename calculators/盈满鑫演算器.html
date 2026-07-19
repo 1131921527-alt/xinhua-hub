@@ -84,7 +84,7 @@ const DATA={"0_0_3_6_1": {"cv": 710.0, "div": 11.23, "maturity": 0.0}, "0_0_3_6_
 
 let gender=1,rate=0.025;
 const PAY={3:{l:'3年交'},5:{l:'5年交'},6:{l:'6年交'},10:{l:'10年交'}};
-const PER={10:{l:'10年'},15:{l:'15年'},20:{l:'20年'}};
+const PER={6:{l:'6年'},8:{l:'8年'},10:{l:'10年'}};
 function sg(e){document.querySelectorAll('.gb').forEach(b=>b.classList.remove('active'));e.classList.add('active');gender=+e.dataset.v;gen()}
 function sr(e){document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('active'));e.classList.add('active');rate=+e.dataset.r;gen()}
 function dr(a){if(a<18)return 1;if(a<=40)return 1.6;if(a<=60)return 1.4;return 1.2}
@@ -120,8 +120,8 @@ if(typeof html2canvas==='undefined'){const s=document.createElement('script');s.
 const c=await html2canvas(document.getElementById('plan'),{scale:3,backgroundColor:'#fff',useCORS:true,windowWidth:900});
 const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='盈满鑫理财计划.png';a.click();
 }
-document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="40" min="0" max="75"></div><div class="fd"><label>交费方式</label><select id="ipay" onchange="gen()"><option value="3" selected>3年交</option><option value="5">5年交</option><option value="6">6年交</option><option value="10">10年交</option></select></div><div class="fd"><label>保险期间</label><select id="iper" onchange="gen()"><option value="10" selected>10年</option><option value="15">15年</option><option value="20">20年</option></select></div><div class="fd"><label>年交保费（元）</label><input id="iprem" type="number" value="100000" min="10000" step="10000"></div><div class="fd"><label>演示利率</label><div class="rb"><div class="rbtn" data-r="0.0175" onclick="sr(this)">1.75%</div><div class="rbtn" data-r="0.02" onclick="sr(this)">2.0%</div><div class="rbtn active" data-r="0.025" onclick="sr(this)">2.5%</div></div></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
-document.getElementById('tp').textContent='默认：女 / 40岁 / 3年交 / 10年期 / 年交10万 / 演示利率2.5%';
+document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="40" min="0" max="75"></div><div class="fd"><label>交费方式</label><select id="ipay" onchange="gen()"><option value="3" selected>3年交</option><option value="5">5年交</option></select></div><div class="fd"><label>保险期间</label><select id="iper" onchange="gen()"><option value="6" selected>6年</option><option value="8">8年</option><option value="10">10年</option></select></div><div class="fd"><label>年交保费（元）</label><input id="iprem" type="number" value="100000" min="10000" step="10000"></div><div class="fd"><label>演示利率</label><div class="rb"><div class="rbtn" data-r="0.0175" onclick="sr(this)">1.75%</div><div class="rbtn" data-r="0.02" onclick="sr(this)">2.0%</div><div class="rbtn active" data-r="0.025" onclick="sr(this)">2.5%</div></div></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
+document.getElementById('tp').textContent='默认：女 / 40岁 / 3年交 / 6年期 / 年交10万 / 演示利率2.5%';
 gen();
 
 </script></body></html>

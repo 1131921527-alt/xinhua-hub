@@ -113,7 +113,7 @@ if(typeof html2canvas==='undefined'){const s=document.createElement('script');s.
 const c=await html2canvas(document.getElementById('plan'),{scale:3,backgroundColor:'#fff',useCORS:true,windowWidth:900});
 const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='恒享人生理财计划.png';a.click();
 }
-document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="46" min="0" max="80"></div><div class="fd"><label>交费方式</label><select id="it" onchange="gen()"><option value="1">一次交清</option><option value="3" selected>3年交</option><option value="5">5年交</option><option value="10">10年交</option></select></div><div class="fd"><label>年交保费（元）</label><input id="ip" type="number" value="100000" min="1000" step="1000"></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
+document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="46" min="0" max="80"></div><div class="fd"><label>交费方式</label><select id="it" onchange="gen()"><option value="1">一次交清</option><option value="3" selected>3年交</option><option value="5">5年交</option><option value="10">10年交</option></select></div><div class="fd"><label>年交保费（元）</label><input id="ip" type="number" value="500000" min="1000" step="1000"></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
 document.getElementById('tp').textContent='默认：女 / 46岁 / 3年交 / 年交10万 / 非分红型（确定利益）';
 gen();
 

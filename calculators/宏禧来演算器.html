@@ -16437,7 +16437,7 @@ const DATA={
 };
 
 let gender=1,rate=0.025;
-const PMAP={6:{l:'6年'},10:{l:'10年'},15:{l:'15年'},20:{l:'20年'}};
+const PMAP={6:{l:'6年'},8:{l:'8年'}};
 function sg(e){document.querySelectorAll('.gb').forEach(b=>b.classList.remove('active'));e.classList.add('active');gender=+e.dataset.v;gen()}
 function sr(e){document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('active'));e.classList.add('active');rate=+e.dataset.r;gen()}
 function fmt(n){return Math.round(n).toLocaleString('zh-CN')}
@@ -16469,7 +16469,7 @@ if(typeof html2canvas==='undefined'){const s=document.createElement('script');s.
 const c=await html2canvas(document.getElementById('plan'),{scale:3,backgroundColor:'#fff',useCORS:true,windowWidth:900});
 const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='宏禧来理财计划.png';a.click();
 }
-document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="40" min="0" max="72"></div><div class="fd"><label>保险期间</label><select id="it" onchange="gen()"><option value="6">6年</option><option value="10" selected>10年</option><option value="15">15年</option><option value="20">20年</option></select></div><div class="fd"><label>年交保费（元）</label><input id="ip" type="number" value="100000" min="20000" step="10000"></div><div class="fd"><label>演示利率</label><div class="rb"><div class="rbtn" data-r="0.0175" onclick="sr(this)">1.75%</div><div class="rbtn" data-r="0.02" onclick="sr(this)">2.0%</div><div class="rbtn active" data-r="0.025" onclick="sr(this)">2.5%</div></div></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
+document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="40" min="0" max="72"></div><div class="fd"><label>保险期间</label><select id="it" onchange="gen()"><option value="6">6年</option><option value="8" selected>8年</option></select></div><div class="fd"><label>一次交清保险费（元）</label><input id="ip" type="number" value="1000000" min="20000" step="1000"></div><div class="fd"><label>演示利率</label><div class="rb"><div class="rbtn" data-r="0.0175" onclick="sr(this)">1.75%</div><div class="rbtn" data-r="0.02" onclick="sr(this)">2.0%</div><div class="rbtn active" data-r="0.025" onclick="sr(this)">2.5%</div></div></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
 document.getElementById('tp').textContent='默认：女 / 40岁 / 10年期 / 年交10万 / 演示利率2.5%';
 gen();
 
