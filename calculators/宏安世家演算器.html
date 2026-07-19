@@ -15,7 +15,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;bac
 input,select{padding:7px 10px;border:1.5px solid #e2e8f0;border-radius:6px;font-size:14px;width:130px}
 .bg{padding:9px 22px;background:var(--db);color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer}
 .rb{display:flex;gap:5px}
-.rbtn{padding:5px 11px;border:1.5px solid #e2e8f0;background:#fff;border-radius:5px;cursor:pointer;font-size:13px;font-weight:600;color:var(--gy)}.rbtn.active{background:var(--db);color:#fff}
+.rbtn{padding:5px 11px;border:1.5px solid #e2e8f0;background:#fff;border-radius:5px;cursor:pointer;font-size:13px;font-weight:600;color:var(--gy)}.rbtn.active{background:var(--db);color:#fff}.dmode{padding:5px 11px;border:1.5px solid #e2e8f0;background:#fff;border-radius:5px;cursor:pointer;font-size:13px;font-weight:600;color:var(--gy)}.dmode.active{background:var(--db);color:#fff}
 .tp{font-size:11px;color:var(--gy);margin-top:6px}
 .pl{background:#fff;padding:20px 24px 8px;border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,.06)}
 .pt{text-align:center;font-size:24px;font-weight:800;color:var(--db);margin-bottom:16px;letter-spacing:2px}
@@ -28,7 +28,7 @@ input,select{padding:7px 10px;border:1.5px solid #e2e8f0;border-radius:6px;font-
 .sb p{font-size:13px;line-height:1.75;color:var(--tx);margin:0 0 6px}.sb p strong{color:var(--db);font-weight:700}
 .it{width:100%;border-collapse:collapse;font-size:13px;border:2px solid var(--db);margin-bottom:0}
 .it th,.it td{border:1px solid var(--db);padding:7px 3px;text-align:center}
-.it th{background:var(--db);color:#fff;font-weight:700}.it td{background:#fff;color:var(--tx);font-weight:600}
+.it th{background:var(--db);color:#fff;font-weight:700}.it td{background:#fff;color:var(--tx);font-weight:600}.it td.l{background:var(--db);color:#fff;font-weight:700;text-align:center;width:38%}
 .sr{display:flex;border:2px solid var(--db);border-top:0}
 .sbx{flex:1;display:flex;align-items:center;border-right:2px solid var(--db);background:#fff;min-width:0}
 .sbx:last-child{border-right:0}
@@ -66,7 +66,7 @@ input,select{padding:7px 10px;border:1.5px solid #e2e8f0;border-radius:6px;font-
 <p>✅ 年度盈余分红，演示红利实现率 100%+，可现金领取、可复利滚存增值</p>
 <p>✅ 终身身故保障 1.4-1.6 倍，额外赔付 1 倍特定公共交通意外身故金</p>
 </div></div></div>
-<table class="it"><tr><th>被保人</th><th>性别</th><th>年龄</th><th>交费期间</th><th>年交保费</th><th>基本保额</th><th>保险期间</th><th>红利领取方式</th></tr><tr><td>VIP</td><td id='dg'>女</td><td id='da'>40周岁</td><td id='dt'>3年交</td><td id='dp'>100,000</td><td id='dsa'></td><td>终身</td><td>累积生息</td></tr></table>
+<table class="it"><tr><td class="l">被保人</td><td>VIP</td></tr><tr><td class="l">性别</td><td id='dg'>女</td></tr><tr><td class="l">年龄</td><td id='da'>40周岁</td></tr><tr><td class="l">交费期间</td><td id='dt'>3年交</td></tr><tr><td class="l">年交保费</td><td id='dp'>100,000</td></tr><tr><td class="l">基本保额</td><td id='dsa'></td></tr><tr><td class="l">保险期间</td><td>终身</td></tr><tr><td class="l">红利领取方式</td><td>累积生息</td></tr></table>
 <div class="sr">
 <div class="sbx"><span class="tg">第二年末现价百分比</span><strong class="vl" id="scv">-</strong></div>
 <div class="sbx"><span class="tg">演示分红实现率</span><strong class="vl" id="srate">-</strong></div>
@@ -230316,10 +230316,10 @@ const DATA={
   }
 };
 
-let gender=1,rate=0.025;
+let gender=1,rate=0.025;let dispMode='5y60';
 const TC={1:{l:'趸交',mA:72,fA:68},3:{l:'3年交',mA:64,fA:68},5:{l:'5年交',mA:62,fA:66},10:{l:'10年交',mA:57,fA:57}};
 function sg(e){document.querySelectorAll('.gb').forEach(b=>b.classList.remove('active'));e.classList.add('active');gender=+e.dataset.v;gen()}
-function sr(e){document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('active'));e.classList.add('active');rate=+e.dataset.r;gen()}
+function sr(e){document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('active'));e.classList.add('active');rate=+e.dataset.r;gen()}function sd(e){document.querySelectorAll('.dmode').forEach(b=>b.classList.remove('active'));e.classList.add('active');dispMode=e.dataset.d;gen()}
 function dr(a){if(a<18)return 1;if(a<=40)return 1.6;if(a<=60)return 1.4;return 1.2}
 function fmt(n){return Math.round(n).toLocaleString('zh-CN')}
 function gen(){
@@ -230340,7 +230340,7 @@ rows.push({yr,ae,yp,av,db,ad,cd,cv,sv,yv});ls=sv;
 }
 dg.textContent=gender===1?'女':'男';da.textContent=a+'周岁';dt.textContent=c.l;
 dp.textContent=fmt(p);dsa.textContent=fmt(bsa);
-scv.textContent=y2c.toFixed(2)+'%';srt.textContent=(rate*100).toFixed(2)+'%';srate.textContent='100%';
+scv.textContent=y2c.toFixed(2)+'%';srt.textContent=(rate*100).toFixed(2)+'%';srate.textContent='100%';if(dispMode!=='all'){const thr=dispMode==='5y60'?60:dispMode==='5y70'?70:75;rows=rows.filter(r=>r.ae<thr||(r.ae-thr)%5===0);}
 const tb=document.getElementById('tb');
 tb.innerHTML=rows.map((r,i)=>{
 const isPay=r.yr<=t;
@@ -230354,7 +230354,7 @@ const c=await html2canvas(document.getElementById('plan'),{scale:3,backgroundCol
 const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='宏安世家理财计划.png';a.click();
 }
 // 控件
-document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="40" min="0" max="68"></div><div class="fd"><label>交费方式</label><select id="it" onchange="gen()"><option value="1">趸交</option><option value="3" selected>3年交</option><option value="5">5年交</option><option value="10">10年交</option></select></div><div class="fd"><label>年交保费（元）</label><input id="ip" type="number" value="100000" min="10000" step="10000"></div><div class="fd"><label>演示利率</label><div class="rb"><div class="rbtn" data-r="0.0175" onclick="sr(this)">1.75%</div><div class="rbtn" data-r="0.02" onclick="sr(this)">2.0%</div><div class="rbtn active" data-r="0.025" onclick="sr(this)">2.5%</div></div></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
+document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="40" min="0" max="68"></div><div class="fd"><label>交费方式</label><select id="it" onchange="gen()"><option value="1">趸交</option><option value="3" selected>3年交</option><option value="5">5年交</option><option value="10">10年交</option></select></div><div class="fd"><label>年交保费（元）</label><input id="ip" type="number" value="100000" min="10000" step="10000"></div><div class="fd"><label>演示利率</label><div class="rb"><div class="rbtn" data-r="0.0175" onclick="sr(this)">1.75%</div><div class="rbtn" data-r="0.02" onclick="sr(this)">2.0%</div><div class="rbtn active" data-r="0.025" onclick="sr(this)">2.5%</div></div></div><div class="fd">&nbsp;</div><div class="fd"><label>显示密度</label><div class="rb"><div class="dmode active" data-d="5y60" onclick="sd(this)">60岁起每5年</div><div class="dmode" data-d="5y70" onclick="sd(this)">70岁起每5年</div><div class="dmode" data-d="all" onclick="sd(this)">每年</div></div></div><button class="bg" onclick="gen()">生成</button>`;
 document.getElementById('tp').textContent='默认：女 / 40岁 / 3年交 / 年交10万 / 演示利率2.5%';
 gen();
 
