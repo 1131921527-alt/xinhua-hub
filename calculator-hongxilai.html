@@ -47,7 +47,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 
 /* 计划书样式 */
 .plan{padding:28px 32px 4px;background:#fff;}
-.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:0;padding:0 8px;overflow:visible;box-sizing:border-box;}
+.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:1px;padding:0 8px;overflow:visible;box-sizing:border-box;}
 .section{margin-bottom:18px;border:2px solid var(--primary);background:#fff;padding:16px;}
 .section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:9px 16px;font-size:17px;font-weight:700;margin:-16px -16px 12px -16px;}
 .section-head span{display:inline-block;width:3px;height:17px;background:#fff;margin-right:8px;}
@@ -179,7 +179,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   </div>
 
   <div id="planArea" class="plan">
-    <div class="plan-title">宏禧来（分红型）理财计划</div>
+    <div class="plan-title">宏禧来 （分红型） 理财计划</div>
 
     <div class="intro-row">
       <div class="section">
@@ -199,7 +199,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
     </div>
 
     <div class="section">
-      <div class="case-info no-export" id="caseInfo">VIP女士，今年40岁，购买100万8年期宏禧来(分红型)，预计满期总利益<span class="em">1209405</span>元</div>
+      <div class="case-info no-export" id="caseInfo">VIP女士，今年40岁，购买100万8年期宏禧来 （分红型），预计满期总利益<span class="em">1209405</span>元</div>
       <table class="info-table">
         <tr>
           <th>被保人</th><th>性别</th><th>年龄</th><th>一次交清保险费</th><th>保险期间</th><th>红利领取方式</th><th>演示累积生息利率</th><th>基本保额</th>
@@ -226,7 +226,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
               <th rowspan="2">身故<br>保险金</th>
               <th colspan="2">红利利益演示（年末）</th>
               <th rowspan="2">现金价值<br>（保证部分）</th>
-              <th rowspan="2">预期生存<br>总利益</th>
+              <th rowspan="2">预期生存<br>总利益（保证 + 红利）</th>
               <th rowspan="2">预期<br>年化单利</th>
             </tr>
             <tr>
@@ -319,7 +319,7 @@ function generate(){
   document.getElementById('infoRate').textContent = fmtRate(currentRate);
   document.getElementById('infoSa').textContent = fmt(maturitySa) + '元';
   const last = rows[rows.length-1];
-  document.getElementById('caseInfo').innerHTML = `VIP${currentGender===1?'女士':'先生'}，今年${age}岁，购买${fmt(premium)}元${period}年期宏禧来(分红型)，预计满期总利益<span class="em" style="color:var(--primary)">${fmt(Math.round(last.survival))}</span>元`;
+  document.getElementById('caseInfo').innerHTML = `VIP${currentGender===1?'女士':'先生'}，今年${age}岁，购买${fmt(premium)}元${period}年期宏禧来 （分红型），预计满期总利益<span class="em" style="color:var(--primary)">${fmt(Math.round(last.survival))}</span>元`;
 
   // 第二年末现价百分比
   const d2 = DATA[`${currentGender}_${age}_${period}_2`];

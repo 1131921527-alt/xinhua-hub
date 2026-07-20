@@ -753,7 +753,7 @@
     '<div style="padding:10px 20px 2px;">' +
       '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
         '📱 微信用户：长按上方图片 → 保存图片<br/>' +
-        '💾 如无法长按，再点下方「保存到相册」' +
+        '💾 如长按无效，点下方「打开图片页保存」再长按' +
       '</div>' +
     '</div>' +
         // 按钮区
@@ -779,10 +779,26 @@
   }
 
   /**
-   * 显示"浏览器打开提示"弹窗
-   * @param {string} dataUrl - canvas.toDataURL 生成的 base64 图片数据
-   * @param {string} filename - 文件名（用于显示和下载）
+   * 将 base64 dataURL 转为 Blob 对象
    */
+  function dataUrlToBlob(dataUrl) {
+    var parts = dataUrl.split(',');
+    var mimeMatch = parts[0].match(/:(.*?);/);
+    var mime = mimeMatch ? mimeMatch[1] : 'image/png';
+    var byteString = atob(parts[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+    return new Blob([ab], { type: mime });
+  }
+
+  /**
+   * 将 base64 dataURL 转为 Blob URL（避免微信 WebView 截断/无法识别）
+   */
+  function dataUrlToBlobUrl(dataUrl) {
+    return URL.createObjectURL(dataUrlToBlob(dataUrl));
+  }
+
   /**
    * 将 dataUrl 图片按比例缩小，返回新的 base64 dataUrl
    */
@@ -807,26 +823,33 @@
   }
 
   /**
-   * 通过系统分享 API 保存图片到相册（微信/移动端最稳的保存方式）
+   * 压缩并将图片转为 Blob URL，便于微信长按保存
+   */
+  function compressToBlobUrl(dataUrl, maxWidth) {
+    return compressDataUrl(dataUrl, maxWidth).then(function(smallUrl) {
+      return dataUrlToBlobUrl(smallUrl);
+    });
+  }
+
+  /**
+   * 通过系统分享 API 保存图片到相册；微信内打开独立图片页供长按保存
    */
   function saveViaShare() {
     if (!_pendingDataUrl) {
       showPageToast('图片尚未准备好，请稍后重试');
       return;
     }
-    try {
-      var parts = _pendingDataUrl.split(',');
-      var mimeMatch = parts[0].match(/:(.*?);/);
-      var mime = mimeMatch ? mimeMatch[1] : 'image/png';
-      var byteString = atob(parts[1]);
-      var ab = new ArrayBuffer(byteString.length);
-      var ia = new Uint8Array(ab);
-      for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-      var blob = new Blob([ab], {type: mime});
-      var fileName = _pendingFileName || '理财计划书.png';
-      var file = new File([blob], fileName, {type: mime});
+    var isWechat = /MicroMessenger/i.test(navigator.userAgent);
 
-      if (navigator.canShare && navigator.canShare({files: [file]})) {
+    // 微信 WebView 里系统分享极不稳定，直接打开独立图片页面，用户可长按保存
+    if (isWechat) {
+      doOpenInBrowser();
+      return;
+    }
+
+    try {
+      var file = new File([dataUrlToBlob(_pendingDataUrl)], _pendingFileName || '理财计划书.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
         navigator.share({
           files: [file],
           title: '新华保险理财计划书',
@@ -835,30 +858,17 @@
           console.warn('share canceled/failed:', e);
         });
       } else {
-        // 不支持文件分享时，尝试 base64 链接下载，或提示长按保存
-        if (/MicroMessenger/i.test(navigator.userAgent)) {
-          showPageToast('请长按上方图片，选择「保存图片」');
-        } else {
-          trySaveByAnchor(_pendingDataUrl, fileName);
-        }
+        trySaveByAnchor(_pendingDataUrl, _pendingFileName || '理财计划书.png');
       }
     } catch (e) {
       console.warn('saveViaShare failed:', e);
-      showPageToast('保存失败，请长按图片或点「在浏览器中打开」');
+      trySaveByAnchor(_pendingDataUrl, _pendingFileName || '理财计划书.png');
     }
   }
 
   function trySaveByAnchor(dataUrl, fileName) {
     try {
-      var parts = dataUrl.split(',');
-      var mimeMatch = parts[0].match(/:(.*?);/);
-      var mime = mimeMatch ? mimeMatch[1] : 'image/png';
-      var byteString = atob(parts[1]);
-      var ab = new ArrayBuffer(byteString.length);
-      var ia = new Uint8Array(ab);
-      for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-      var blob = new Blob([ab], {type: mime});
-      var blobUrl = URL.createObjectURL(blob);
+      var blobUrl = dataUrlToBlobUrl(dataUrl);
       var a = document.createElement('a');
       a.href = blobUrl; a.download = fileName;
       a.style.display = 'none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
@@ -883,9 +893,9 @@
 
     if (imgEl && dataUrl) {
       if (isWechat) {
-        // 微信里显示压缩后的图片，让长按保存更稳、更适配手机屏幕
-        compressDataUrl(dataUrl, 900).then(function(smallUrl) {
-          imgEl.src = smallUrl;
+        // 微信里压缩到 600px 并转成 Blob URL，图片更小、长按保存更稳
+        compressToBlobUrl(dataUrl, 600).then(function(blobUrl) {
+          imgEl.src = blobUrl;
         }).catch(function() {
           imgEl.src = dataUrl;
         });
@@ -894,9 +904,10 @@
       }
     }
 
-    // 「保存到相册」按钮始终显示（微信里作为兜底提示，非微信尝试下载）
+    // 微信里按钮文案改为打开图片页，更稳；非微信保持「保存到相册」
     if (saveBtn) {
       saveBtn.style.display = 'block';
+      saveBtn.textContent = isWechat ? '打开图片页保存' : '📥 保存到相册';
     }
 
     if (overlay) {
@@ -912,32 +923,34 @@
   function doOpenInBrowser() {
     if (!_pendingDataUrl) return;
 
+    var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+
     try {
-      // 确保 URL 是 Blob URL（避免超长 dataURL 在 document.write 中被截断导致图片无法打开）
-      var imgSrc = _pendingDataUrl;
-      if (_pendingDataUrl.indexOf('data:image') === 0) {
-        // 将 base64 dataURL 转 Blob URL
-        var parts = _pendingDataUrl.split(',');
-        var byteString = atob(parts[1]);
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-        imgSrc = URL.createObjectURL(new Blob([ab], {type: 'image/png'}));
-      }
-      var newWin = window.open('', '_blank');
-      if (newWin) {
-        newWin.document.write(
-          '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
-          '<title>计划书图片 - ' + _pendingFileName + '</title>' +
-          '<style>*{margin:0;padding:0;}body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f0f2f5;}img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.15);}' +
-          '.tip{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-family:-apple-system,sans-serif;}</style></head>' +
-          '<body><img src="' + imgSrc + '" alt="plan"/>' +
-          '<div class="tip">📥 长按图片保存到手机 · 或点击菜单保存</div></body></html>'
-        );
-        newWin.document.close();
+      // 微信里先压缩，避免生成的图片页太大无法保存；再统一用 Blob URL
+      var doOpen = function(srcUrl) {
+        var newWin = window.open('', '_blank');
+        if (newWin) {
+          newWin.document.write(
+            '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">' +
+            '<title>计划书图片 - ' + _pendingFileName + '</title>' +
+            '<style>*{margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;background:#000;padding:10px;box-sizing:border-box;}img{max-width:100vw;max-height:88vh;object-fit:contain;border-radius:8px;background:#fff;}' +
+            '.tip{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-family:-apple-system,sans-serif;white-space:nowrap;}' +
+            '.tip2{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.95);color:#1E40AF;padding:8px 16px;border-radius:20px;font-size:13px;font-family:-apple-system,sans-serif;font-weight:700;white-space:nowrap;}</style></head>' +
+            '<body><div class="tip2">📥 长按图片保存到相册</div><img src="' + srcUrl + '" alt="plan"/>' +
+            '<div class="tip">若长按无效，点右上角「在浏览器中打开」</div></body></html>'
+          );
+          newWin.document.close();
+        } else {
+          copyPageLinkAndTip();
+        }
+      };
+
+      if (isWechat) {
+        compressToBlobUrl(_pendingDataUrl, 600).then(doOpen).catch(function() {
+          doOpen(dataUrlToBlobUrl(_pendingDataUrl));
+        });
       } else {
-        // 弹窗被拦截，回退到复制链接提示
-        copyPageLinkAndTip();
+        doOpen(dataUrlToBlobUrl(_pendingDataUrl));
       }
     } catch(e) {
       console.warn('openInBrowser failed:', e);

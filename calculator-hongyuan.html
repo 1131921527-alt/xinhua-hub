@@ -45,7 +45,7 @@ body.capturing .main-table{font-size:17px !important;min-width:100% !important;}
 body.capturing .table-scroll{overflow-x:visible !important;}
 
 .plan{padding:28px 32px 4px;background:#fff;}
-.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:0;padding:0 8px;overflow:visible;box-sizing:border-box;}
+.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:1px;padding:0 8px;overflow:visible;box-sizing:border-box;}
 .section{margin-bottom:16px;border:2px solid var(--primary);background:#fff;padding:16px;}
 .section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:9px 16px;font-size:17px;font-weight:700;margin:-16px -16px 12px -16px;}
 .section-head span{display:inline-block;width:3px;height:17px;background:#fff;margin-right:8px;}
@@ -192,7 +192,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   </div>
 
   <div id="planArea" class="plan">
-    <div class="plan-title">宏愿人生养老年金（分红型）理财计划</div>
+    <div class="plan-title">宏愿人生养老年金 （分红型） 理财计划</div>
 
     <div class="intro-row">
       <div class="section">
@@ -211,7 +211,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
     </div>
 
     <div class="section">
-      <div class="case-info no-export" id="caseInfo">VIP女士，今年50周岁，3年交、年交50万元，购买宏愿人生养老年金（分红型），55岁起领</div>
+      <div class="case-info no-export" id="caseInfo">VIP女士，今年50周岁，3年交、年交50万元，购买宏愿人生养老年金 （分红型），55岁起领</div>
       <div class="top-info">
         <table class="info-table">
           <tr>
@@ -417,7 +417,7 @@ function generate(){
   const genderStr = currentGender === 1 ? '女士' : '先生';
   const modeStr = annuityMode === 'month' ? '月领' : '年领';
   document.getElementById('caseInfo').textContent =
-    `VIP${genderStr}，今年${age}周岁，${cfg.label}、年交${fmt(premium)}元，购买宏愿人生养老年金（分红型），${annuityAge}岁起领（${modeStr}）`;
+    `VIP${genderStr}，今年${age}周岁，${cfg.label}、年交${fmt(premium)}元，购买宏愿人生养老年金 （分红型），${annuityAge}岁起领（${modeStr}）`;
 
   updateFormText();
 }
