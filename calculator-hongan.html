@@ -52,8 +52,8 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .case-info{display:none;}
 
 .top-info{display:block;}
-.info-table{width:100%;border-collapse:collapse;font-size:14px;border:2px solid var(--primary);table-layout:fixed;}
-.info-table th,.info-table td{border:1px solid var(--primary);padding:8px 4px;text-align:center;}
+.info-table{width:100%;border-collapse:collapse;font-size:14px;border:2px solid var(--primary);table-layout:auto;}
+.info-table th,.info-table td{border:1px solid var(--primary);padding:8px 6px;text-align:center;white-space:nowrap;}
 .info-table th{background:var(--primary);color:#fff;font-weight:700;}
 .info-table td{background:#fff;color:#1E293B;font-weight:600;}
 .info-table td.label{background:var(--primary-bg);color:var(--primary);font-weight:700;}
@@ -81,7 +81,7 @@ body.capturing .intro-row>.section:first-child{margin-right:-2px !important;marg
 body.capturing .stats-row{flex-direction:row !important;border-top:0 !important;}
 body.capturing .stat-inline-box{border-right:2px solid #1E40AF !important;border-bottom:0 !important;}
 body.capturing .stat-inline-box:last-child{border-right:0 !important;}
-body.capturing .main-table{font-size:17px !important;min-width:100% !important;}
+body.capturing .plan-title{padding:0 12px !important;}
 body.capturing .table-scroll{overflow-x:visible !important;}
 
 .row-positive td{background:#DBEAFE !important;color:var(--primary) !important;}
@@ -107,11 +107,23 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   .form-row{flex-direction:column;align-items:stretch;}
   .field{width:100%;}
   input,select{width:100%;}
-  .plan{padding:16px;}
-  .main-table{font-size:13px;min-width:980px;}
+  .plan{padding:12px;}
+  .plan-title{font-size:26px;}
+  .info-table{font-size:15px;}
+  .info-table th,.info-table td{padding:10px 8px;}
+  .stats-row{flex-direction:column;border-top:2px solid var(--primary);}
+  .stat-inline-box{border-right:0;border-bottom:2px solid var(--primary);}
+  .stat-inline-box:last-child{border-bottom:0;}
+  .stat-inline-box span{padding:10px 12px;}
+  .stat-inline-box strong{padding:10px 12px;font-size:16px;}
+  .main-table{font-size:15px;min-width:1100px;}
+  .main-table th,.main-table td{padding:6px 4px;}
   .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .dl-bar{flex-direction:column;align-items:stretch;}
   .btn-dl{margin:10px 0 0 0;}
+  body{padding:8px;}
+  .wrap{border-radius:0;}
+  .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
 }
 </style>
 </head>

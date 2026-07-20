@@ -743,7 +743,7 @@
         // 标题栏
         '<div style="background:linear-gradient(135deg,#1D4ED8,#2563EB);padding:18px 20px;text-align:center;">' +
           '<div style="font-size:17px;font-weight:700;color:#fff;letter-spacing:0.5px;">计划书图片已生成</div>' +
-          '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">点击「保存到相册」即可保存</div>' +
+          '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">长按图片即可保存到相册</div>' +
         '</div>' +
     // 图片预览区（放大，方便微信查看）
     '<div style="padding:12px;text-align:center;background:#f8fafc;overflow:auto;max-height:60vh;">' +
@@ -752,8 +752,8 @@
     // 提示文字
     '<div style="padding:10px 20px 2px;">' +
       '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
-        '📥 点下方「保存到相册」直接存入手机相册<br/>' +
-        '🌐 如不可用，点「在浏览器中打开」下载' +
+        '📱 微信用户：长按上方图片 → 保存图片<br/>' +
+        '💾 如无法长按，再点下方「保存到相册」' +
       '</div>' +
     '</div>' +
         // 按钮区
@@ -784,6 +784,29 @@
    * @param {string} filename - 文件名（用于显示和下载）
    */
   /**
+   * 将 dataUrl 图片按比例缩小，返回新的 base64 dataUrl
+   */
+  function compressDataUrl(dataUrl, maxWidth) {
+    return new Promise(function(resolve, reject) {
+      var img = new Image();
+      img.onload = function() {
+        var w = img.width, h = img.height;
+        if (w <= maxWidth) { resolve(dataUrl); return; }
+        var scale = maxWidth / w;
+        var newW = Math.floor(w * scale), newH = Math.floor(h * scale);
+        var canvas = document.createElement('canvas');
+        canvas.width = newW; canvas.height = newH;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, newW, newH);
+        ctx.drawImage(img, 0, 0, newW, newH);
+        resolve(canvas.toDataURL('image/png'));
+      };
+      img.onerror = reject;
+      img.src = dataUrl;
+    });
+  }
+
+  /**
    * 通过系统分享 API 保存图片到相册（微信/移动端最稳的保存方式）
    */
   function saveViaShare() {
@@ -811,18 +834,38 @@
         }).catch(function(e) {
           console.warn('share canceled/failed:', e);
         });
-      } else if (navigator.share) {
-        navigator.share({
-          title: '新华保险理财计划书',
-          text: '新华保险理财计划书',
-          url: location.href
-        }).catch(function() {});
       } else {
-        showPageToast('当前环境不支持直接保存，请长按图片或点「在浏览器中打开」');
+        // 不支持文件分享时，尝试 base64 链接下载，或提示长按保存
+        if (/MicroMessenger/i.test(navigator.userAgent)) {
+          showPageToast('请长按上方图片，选择「保存图片」');
+        } else {
+          trySaveByAnchor(_pendingDataUrl, fileName);
+        }
       }
     } catch (e) {
       console.warn('saveViaShare failed:', e);
-      showPageToast('保存失败，请改用「在浏览器中打开」');
+      showPageToast('保存失败，请长按图片或点「在浏览器中打开」');
+    }
+  }
+
+  function trySaveByAnchor(dataUrl, fileName) {
+    try {
+      var parts = dataUrl.split(',');
+      var mimeMatch = parts[0].match(/:(.*?);/);
+      var mime = mimeMatch ? mimeMatch[1] : 'image/png';
+      var byteString = atob(parts[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+      var blob = new Blob([ab], {type: mime});
+      var blobUrl = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = blobUrl; a.download = fileName;
+      a.style.display = 'none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 1000);
+    } catch (e) {
+      console.warn('trySaveByAnchor failed:', e);
+      showPageToast('自动下载失败，请长按图片保存');
     }
   }
 
@@ -836,28 +879,26 @@
     var imgEl = document.getElementById('browserPromptImg');
     var saveBtn = document.getElementById('browserPromptSave');
 
+    var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+
     if (imgEl && dataUrl) {
-      imgEl.src = dataUrl;
+      if (isWechat) {
+        // 微信里显示压缩后的图片，让长按保存更稳、更适配手机屏幕
+        compressDataUrl(dataUrl, 900).then(function(smallUrl) {
+          imgEl.src = smallUrl;
+        }).catch(function() {
+          imgEl.src = dataUrl;
+        });
+      } else {
+        imgEl.src = dataUrl;
+      }
     }
-    // 动态判断是否显示「保存到相册」按钮：仅当浏览器支持文件分享时显示
-    var canShareFiles = false;
-    try {
-      var parts = dataUrl.split(',');
-      var mimeMatch = parts[0].match(/:(.*?);/);
-      var mime = mimeMatch ? mimeMatch[1] : 'image/png';
-      var byteString = atob(parts[1]);
-      var ab = new ArrayBuffer(byteString.length);
-      var ia = new Uint8Array(ab);
-      for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-      var blob = new Blob([ab], {type: mime});
-      var file = new File([blob], filename || '理财计划书.png', {type: mime});
-      canShareFiles = !!(navigator.canShare && navigator.canShare({files: [file]}));
-    } catch (e) {
-      canShareFiles = false;
-    }
+
+    // 「保存到相册」按钮始终显示（微信里作为兜底提示，非微信尝试下载）
     if (saveBtn) {
-      saveBtn.style.display = canShareFiles ? 'block' : 'none';
+      saveBtn.style.display = 'block';
     }
+
     if (overlay) {
       overlay.style.display = 'flex';
     }
