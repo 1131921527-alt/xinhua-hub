@@ -745,17 +745,17 @@
           '<div style="font-size:17px;font-weight:700;color:#fff;letter-spacing:0.5px;">计划书图片已生成</div>' +
           '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">可在浏览器中打开此网页来下载文件</div>' +
         '</div>' +
-        // 图片预览区
-        '<div style="padding:16px;text-align:center;background:#f8fafc;overflow:auto;max-height:45vh;">' +
-          '<img id="browserPromptImg" src="" alt="计划书预览" style="max-width:100%;max-height:40vh;border-radius:8px;border:1px solid #e2e8f0;" />' +
-        '</div>' +
-        // 提示文字
-        '<div style="padding:12px 20px 4px;">' +
-          '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
-            '📱 手机用户：长按上方图片可保存到相册<br/>' +
-            '🌐 如无法保存，请在浏览器中打开本页下载' +
-          '</div>' +
-        '</div>' +
+    // 图片预览区（放大，方便微信长按保存）
+    '<div style="padding:12px;text-align:center;background:#f8fafc;overflow:auto;max-height:65vh;">' +
+      '<img id="browserPromptImg" src="" alt="计划书预览" style="max-width:100%;max-height:60vh;border-radius:8px;border:1px solid #e2e8f0;" />' +
+    '</div>' +
+    // 提示文字
+    '<div style="padding:12px 20px 4px;">' +
+      '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
+        '📱 手机用户：长按上方图片可保存到相册<br/>' +
+        '⚠️ 若提示保存失败，请点下方按钮在浏览器中打开下载' +
+      '</div>' +
+    '</div>' +
         // 按钮区
         '<div style="padding:12px 20px 20px;display:flex;gap:10px;">' +
           '<button id="browserPromptClose" style="flex:1;padding:13px 0;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#64748B;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">关闭</button>' +

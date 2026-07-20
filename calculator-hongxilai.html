@@ -46,7 +46,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 
 /* 计划书样式 */
 .plan{padding:28px 32px 4px;background:#fff;}
-.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:1px;}
+.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:0;padding:0 8px;overflow:visible;box-sizing:border-box;}
 .section{margin-bottom:18px;border:2px solid var(--primary);background:#fff;padding:16px;}
 .section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:9px 16px;font-size:17px;font-weight:700;margin:-16px -16px 12px -16px;}
 .section-head span{display:inline-block;width:3px;height:17px;background:#fff;margin-right:8px;}
@@ -376,12 +376,14 @@ async function downloadImage(){
   try{
     const captureH = plan.scrollHeight;
     const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
-    // 微信/移动端 Canvas 像素限制保护：内容过高时自动降低 scale 防止被截断
-    let captureScale = 4;
-    const maxCanvasPixels = isWechatEnv ? 16000000 : 32000000;
+    // 微信/移动端 Canvas 像素限制保护：微信保存 PNG 有宽高/总像素上限，限制更严
+    const maxScale = isWechatEnv ? 2.5 : 4;
+    const maxCanvasPixels = isWechatEnv ? 8000000 : 16000000;
+    let captureScale = maxScale;
     if (captureW * captureH * captureScale * captureScale > maxCanvasPixels) {
-      captureScale = Math.max(1.5, Math.floor(Math.sqrt(maxCanvasPixels / (captureW * captureH)) * 10) / 10);
+      captureScale = Math.floor(Math.sqrt(maxCanvasPixels / (captureW * captureH)) * 10) / 10;
     }
+    captureScale = Math.max(1.0, captureScale);
     const canvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
