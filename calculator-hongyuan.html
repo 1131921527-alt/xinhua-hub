@@ -44,7 +44,7 @@ body.capturing .main-table{font-size:17px !important;min-width:100% !important;}
 body.capturing .table-scroll{overflow-x:visible !important;}
 
 .plan{padding:28px 32px 4px;background:#fff;}
-.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:3px;}
+.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:1px;}
 .section{margin-bottom:16px;border:2px solid var(--primary);background:#fff;padding:16px;}
 .section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:9px 16px;font-size:17px;font-weight:700;margin:-16px -16px 12px -16px;}
 .section-head span{display:inline-block;width:3px;height:17px;background:#fff;margin-right:8px;}
@@ -421,16 +421,46 @@ async function downloadImage(){
   const oldWrapMaxWidth = wrap ? wrap.style.maxWidth : '';
   const oldPlanWidth = plan.style.width;
   const oldPlanMinWidth = plan.style.minWidth;
-  const oldScrollOverflow = tableScroll ? tableScroll.style.overflowX : '';
+  const oldPlanOverflow = plan.style.overflow;
+  const oldPlanHeight = plan.style.height;
+  const oldScrollOverflow = tableScroll ? tableScroll.style.overflow : '';
+  const oldScrollOverflowX = tableScroll ? tableScroll.style.overflowX : '';
+  const oldScrollHeight = tableScroll ? tableScroll.style.height : '';
   if(wrap){ wrap.style.width='1200px'; wrap.style.maxWidth='1200px'; }
   plan.style.width='1200px'; plan.style.minWidth='1200px';
-  if(tableScroll){ tableScroll.style.overflowX='visible'; }
+  plan.style.overflow='visible'; plan.style.height='auto';
+  if(tableScroll){ tableScroll.style.overflow='visible'; tableScroll.style.overflowX='visible'; tableScroll.style.height='auto'; }
+  // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
+  const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  window.scrollTo(0,0);
   try{
-    const canvas = await html2canvas(plan, {scale:3, backgroundColor:'#fff', useCORS:true, windowWidth:1200});
+    const captureW = 1200;
+    const captureH = plan.scrollHeight;
+    const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
+    // 微信/移动端 Canvas 像素限制保护：内容过高时自动降低 scale 防止被截断
+    let captureScale = 4;
+    const maxCanvasPixels = isWechatEnv ? 16000000 : 32000000;
+    if (captureW * captureH * captureScale * captureScale > maxCanvasPixels) {
+      captureScale = Math.max(1.5, Math.floor(Math.sqrt(maxCanvasPixels / (captureW * captureH)) * 10) / 10);
+    }
+    const canvas = await html2canvas(plan, {
+      scale: captureScale,
+      backgroundColor: '#fff',
+      useCORS: true,
+      windowWidth: captureW,
+      windowHeight: captureH + 100,
+      width: captureW,
+      height: captureH,
+      scrollX: 0,
+      scrollY: 0,
+      logging: false
+    });
     if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
     plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
-    if(tableScroll){ tableScroll.style.overflowX=oldScrollOverflow; }
+    plan.style.overflow=oldPlanOverflow; plan.style.height=oldPlanHeight;
+    if(tableScroll){ tableScroll.style.overflow=oldScrollOverflow; tableScroll.style.overflowX=oldScrollOverflowX; tableScroll.style.height=oldScrollHeight; }
     document.body.classList.remove('capturing');
+    window.scrollTo(0, oldScrollTop);
     const filename = '宏愿人生理财计划书.png';
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     if(!isMobile && window.showSaveFilePicker){
@@ -443,8 +473,7 @@ async function downloadImage(){
     }
     const dataUrl = canvas.toDataURL('image/png');
     // 微信内置浏览器屏蔽自动下载，直接弹窗显示图片让用户长按保存
-    const isWechat = /MicroMessenger/i.test(navigator.userAgent);
-    if (isWechat && typeof window.showBrowserOpenPrompt === 'function') {
+    if (isWechatEnv && typeof window.showBrowserOpenPrompt === 'function') {
       window.showBrowserOpenPrompt(dataUrl, filename);
       return;
     }
@@ -461,8 +490,10 @@ async function downloadImage(){
   }catch(e){
     if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
     plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
-    if(tableScroll){ tableScroll.style.overflowX=oldScrollOverflow; }
+    plan.style.overflow=oldPlanOverflow; plan.style.height=oldPlanHeight;
+    if(tableScroll){ tableScroll.style.overflow=oldScrollOverflow; tableScroll.style.overflowX=oldScrollOverflowX; tableScroll.style.height=oldScrollHeight; }
     document.body.classList.remove('capturing');
+    window.scrollTo(0, oldScrollTop);
   }
 }
 
