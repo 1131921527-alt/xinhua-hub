@@ -61,7 +61,7 @@
 <div class="wrap">
   <div class="title-bar">
     <h1>恒享人生年金保险 · 利益演示计算器</h1>
-    <p>新华保险 · 年金保险（非分红型）。输入被保人信息，自动演算各保单年度关爱金/年金、满期、身故、现金价值及生存总利益。前5年为储备期。</p>
+    <p>新华保险 · 年金保险（非分红型）。输入被保人信息，自动演算各保单年度关爱金/年金、满期、身故、现金价值及生存总利益。</p>
   </div>
 
   <div class="card">
@@ -270,20 +270,19 @@ function downloadImage(){
   const scale=premium/1000;
   const sumAssured=Math.round(entry.E*scale);
   const years=entry.y;
-  const reserveYears=5;
 
   const genderLabel=currentGender===0?'男':'女';
   const termLabel={1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
   const productName='恒享人生保险利益演示';
 
-  // 组装下载行（9列：非分红型，无累计保费/累计关爱金/红利列）
+  // 组装下载行（7列：非分红型，含关爱金/年金、现金价值、生存/身故总利益）
   const dlRows=[];
   years.forEach(row=>{
     const yr=row[0],prem=row[1],ann=row[3],death=row[6],cv=row[7],surv=row[8];
     const curAge=age+yr-1;
     // 下载默认5年模式：60岁起每5年一行
     if(curAge>=60&&(curAge-60)%5!==0)return;
-    dlRows.push({yr,age:curAge,prem:prem*scale,ann:ann*scale,cv:cv*scale,surv:surv*scale,death:death*scale,reserve:yr<=reserveYears});
+    dlRows.push({yr,age:curAge,prem:prem*scale,ann:ann*scale,cv:cv*scale,surv:surv*scale,death:death*scale});
   });
 
   // 统一配色（蓝白）
@@ -307,7 +306,7 @@ function downloadImage(){
   const PAD=22, DPR=4;
   const TITLE_H=80, INFO_H=130, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
   // P5 恒享专属 8 列（删除空白满期生存保险金列）
-  const colWidths=[56,48,96,96,96,106,100,80];
+  const colWidths=[56,48,96,96,96,106,100];
   const totalW=colWidths.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
@@ -375,7 +374,7 @@ function downloadImage(){
   // 表头
   const tableX=PAD, tableY=subY+SUBHDR_H;
   ctx.fillStyle=COLORS.tableHeader; ctx.fillRect(tableX,tableY,totalW,HEADER_H);
-  const headers=['保单\n年度','年龄\n(年末)','当年保险费\n(年初)','关爱金\n年金','现金价值\n(年末)','生存总利益\n(年末)','身故总利益\n(年末)','储备期'];
+  const headers=['保单\n年度','年龄\n(年末)','当年保险费\n(年初)','关爱金\n年金','现金价值\n(年末)','生存总利益\n(年末)','身故总利益\n(年末)'];
   ctx.fillStyle='#FFFFFF'; ctx.textAlign='center'; ctx.textBaseline='middle';
   let hx=tableX;
   headers.forEach((h,i)=>{
@@ -387,7 +386,6 @@ function downloadImage(){
 
   // 数据行
   const lastColIdx=colWidths.length-1;
-  let reserveCellX=0;
   dlRows.forEach((r,idx)=>{
     const y=tableY+HEADER_H+idx*ROW_H;
     ctx.fillStyle=idx%2===0?COLORS.rowWhite:COLORS.rowAlt;
@@ -412,24 +410,7 @@ function downloadImage(){
       ctx.fillText(String(cv_.t), cellX, y+ROW_H/2);
       cx+=colWidths[i];
     });
-    if(r.reserve){
-      const colX=tableX+colWidths.slice(0,lastColIdx).reduce((a,b)=>a+b,0);
-      reserveCellX=colX+colWidths[lastColIdx]/2;
-    }
   });
-
-  // 储备期合并单元格（两阶段：画完后单独 fillRect+strokeRect+fillText）
-  const reserveRows=dlRows.filter(r=>r.reserve);
-  if(reserveRows.length>0 && reserveCellX>0){
-    const y0=tableY+HEADER_H;
-    const blockH=reserveRows.length*ROW_H;
-    const colX=tableX+colWidths.slice(0,lastColIdx).reduce((a,b)=>a+b,0);
-    ctx.fillStyle=COLORS.reserveBg; ctx.fillRect(colX,y0,colWidths[lastColIdx],blockH);
-    ctx.strokeStyle=COLORS.reserveBorder; ctx.lineWidth=1; ctx.strokeRect(colX+0.5,y0+0.5,colWidths[lastColIdx]-1,blockH-1);
-    ctx.fillStyle=COLORS.textMuted; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('储备期', reserveCellX, y0+blockH/2);
-  }
 
   // 页脚声明
   const footerY=tableY+tableH+10;   // footer紧贴表格，去掉重复的HEADER_H
