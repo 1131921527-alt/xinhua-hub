@@ -643,7 +643,7 @@ function downloadImage() {
         function dataUrlToBlobUrl(url){var p=url.split(','),bs=atob(p[1]),ab=new ArrayBuffer(bs.length),ia=new Uint8Array(ab);for(var i=0;i<bs.length;i++)ia[i]=bs.charCodeAt(i);return URL.createObjectURL(new Blob([ab],{type:'image/png'}));}
         const blobUrl = dataUrlToBlobUrl(dataUrl);
         if(isMobile){
-          const _a=document.createElement('a'); _a.href=dataUrl; _a.download=_fn;
+          const _a=document.createElement('a'); _a.href=blobUrl; _a.download=_fn;
           _a.style.display='none'; document.body.appendChild(_a); _a.click(); document.body.removeChild(_a);
           setTimeout(()=>{
             const win=window.open('','_blank');

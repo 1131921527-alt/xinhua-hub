@@ -793,7 +793,7 @@ function downloadImage() {
           function dataUrlToBlobUrl(url){var p=url.split(','),bs=atob(p[1]),ab=new ArrayBuffer(bs.length),ia=new Uint8Array(ab);for(var i=0;i<bs.length;i++)ia[i]=bs.charCodeAt(i);return URL.createObjectURL(new Blob([ab],{type:'image/png'}));}
           const blobUrl = dataUrlToBlobUrl(dataUrl);
           const a = document.createElement('a');
-          a.href = dataUrl; a.download = filename;
+          a.href = blobUrl; a.download = filename;
           a.style.display='none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
           showLoading(false);
           setTimeout(() => {

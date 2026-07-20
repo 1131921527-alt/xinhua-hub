@@ -443,7 +443,7 @@ async function downloadImage(){
     // 将 base64 转 Blob URL（避免超长 dataURL 在 window.open 中被截断）
     function dataUrlToBlobUrl(url){var p=url.split(','),bs=atob(p[1]),ab=new ArrayBuffer(bs.length),ia=new Uint8Array(ab);for(var i=0;i<bs.length;i++)ia[i]=bs.charCodeAt(i);return URL.createObjectURL(new Blob([ab],{type:'image/png'}));}
     const blobUrl = dataUrlToBlobUrl(dataUrl);
-    const a = document.createElement('a'); a.href=dataUrl; a.download=filename;
+    const a = document.createElement('a'); a.href=blobUrl; a.download=filename;
     a.style.display='none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     if(isMobile){
       setTimeout(()=>{
