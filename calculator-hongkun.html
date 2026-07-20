@@ -41,7 +41,6 @@
   .col-surv{color:var(--surv);font-weight:700;}
   .col-div{color:var(--div);font-weight:600;}
   .col-ann{color:var(--div);}
-  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#EFF6FF;border:1px solid #93C5FD;}
   .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
@@ -129,7 +128,7 @@
           <th>保单年度</th><th>年龄</th><th>当年保费</th><th>累计保费</th>
           <th id="thAnn">养老年金<br>祝寿金(年领)</th><th>累计养老年金<br>祝寿金</th><th>满期生存<br>保险金</th>
           <th>身故<br>保险金</th><th>现金价值</th><th>累积红利</th>
-          <th>生存总利益<br>(红利演示)</th><th>身故总利益<br>(红利演示)</th><th>阶段</th>
+          <th>生存总利益<br>(红利演示)</th><th>身故总利益<br>(红利演示)</th>
         </tr></thead>
         <tbody id="resultBody"></tbody>
       </table>
@@ -217,7 +216,7 @@ async function generate(){
       const rowClass=isLast?'row-last':(is5y?'row-5y':'');
       const tr=document.createElement('tr');
       if(rowClass) tr.className=rowClass;
-      // 缴费期合并"缴费期分X年投入" (阶段列)
+      // 缴费期合并"缴费期分X年投入"
       let stageCell='';
       if(isPayYear){
         if(isFirstPay){
@@ -227,21 +226,13 @@ async function generate(){
       } else {
         stageCell=`<td>-</td>`;
       }
-      // 左侧竖排标签
-      let sideLabelCell='';
-      if(yr===1){
-        sideLabelCell=`<td class="side-label" rowspan="${paymentYears}">不再缴费</td>`;
-      } else if(yr===paymentYears+1){
-        const longTermRowspan=maxYear-paymentYears;
-        if(longTermRowspan>0) sideLabelCell=`<td class="side-label" rowspan="${longTermRowspan}">长期收益<br>安全稳健<br>条款明确</td>`;
-      }
       tr.innerHTML=`<td>${yr}</td><td>${curAge}</td>`+
         `<td>${prem>0?fmt(prem*scale):'-'}</td><td>${fmt(cum*scale)}</td>`+
         `<td class="col-ann">${ann>0?fmt(ann*scale*annFactor):'-'}</td><td class="col-ann">${fmt(annCum*scale*annFactor)}</td>`+
         `<td>${mat>0?fmt(mat*scale):'-'}</td><td>${fmt(death*scale)}</td>`+
         `<td class="col-cv">${fmt(cv*scale)}</td><td class="col-div">${fmt(cumDiv*scale)}</td>`+
         `<td class="col-surv">${fmt(surv*scale)}</td><td class="col-surv">${fmt(deathDiv*scale)}</td>`+
-        stageCell+sideLabelCell;
+        stageCell;
       body.appendChild(tr);
     });
     // 应用显示密度过滤
