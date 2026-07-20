@@ -750,6 +750,12 @@ function downloadImage() {
       
       // ===== 下载 =====
       const filename = `宏御世家_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
+      const isWechat = /MicroMessenger/i.test(navigator.userAgent);
+      if (isWechat) {
+        showImagePreview(canvas, filename);
+        showLoading(false);
+        return;
+      }
       const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
       
       if (canvas.toBlob && !isMobile) {

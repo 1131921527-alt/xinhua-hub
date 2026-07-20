@@ -442,6 +442,12 @@ async function downloadImage(){
       }catch(e){ if(e.name==='AbortError') return; }
     }
     const dataUrl = canvas.toDataURL('image/png');
+    // 微信内置浏览器屏蔽自动下载，直接弹窗显示图片让用户长按保存
+    const isWechat = /MicroMessenger/i.test(navigator.userAgent);
+    if (isWechat && typeof window.showBrowserOpenPrompt === 'function') {
+      window.showBrowserOpenPrompt(dataUrl, filename);
+      return;
+    }
     function dataUrlToBlobUrl(url){var p=url.split(','),bs=atob(p[1]),ab=new ArrayBuffer(bs.length),ia=new Uint8Array(ab);for(var i=0;i<bs.length;i++)ia[i]=bs.charCodeAt(i);return URL.createObjectURL(new Blob([ab],{type:'image/png'}));}
     const blobUrl = dataUrlToBlobUrl(dataUrl);
     const a = document.createElement('a'); a.href=blobUrl; a.download=filename;
