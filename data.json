@@ -40,13 +40,13 @@
       "icon": "🏦",
       "items": [
         {
-          "name": "S10 宏安世家终身寿险（分红型）在线演算",
+          "name": "宏安世家终身寿险（分红型）在线演算",
           "type": "calculator",
           "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，完整利益演示，红利可选累计生息(利率可调)/交清增额",
           "url": "calculator-hongan.html"
         },
         {
-          "name": "S02 宏愿人生养老年金（分红型）在线演算",
+          "name": "宏愿人生养老年金（分红型）在线演算",
           "type": "calculator",
           "description": "养老年金利益演示，完整利益演示，年金起领年龄可选55/60/65/70岁，可下载计划书图片",
           "url": "calculator-hongyuan.html"
@@ -58,13 +58,13 @@
           "url": "calculator-yingmanxin.html"
         },
         {
-          "name": "S12 宏禧来两全保险（分红型）在线演算",
+          "name": "宏禧来两全保险（分红型）在线演算",
           "type": "calculator",
           "description": "趸交，6/8年期短期两全险，完整利益演示，可下载计划书图片",
           "url": "calculator-hongxilai.html"
         },
         {
-          "name": "G23 恒享人生年金险在线演算",
+          "name": "恒享人生年金险在线演算",
           "type": "calculator",
           "description": "关爱金年金利益演示 → 完整利益演示 → 可下载计划书图片",
           "url": "calculator-hengxiang.html"
