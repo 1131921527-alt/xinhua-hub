@@ -42,31 +42,31 @@
         {
           "name": "S10 宏安世家终身寿险（分红型）在线演算",
           "type": "calculator",
-          "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，10列完整数据，红利可选累计生息(利率可调)/交清增额",
+          "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，完整利益演示，红利可选累计生息(利率可调)/交清增额",
           "url": "calculator-hongan.html"
         },
         {
           "name": "S02 宏愿人生养老年金（分红型）在线演算",
           "type": "calculator",
-          "description": "养老年金利益演示，11列完整数据，年金起领年龄可选55/60/65/70岁，可下载计划书图片",
+          "description": "养老年金利益演示，完整利益演示，年金起领年龄可选55/60/65/70岁，可下载计划书图片",
           "url": "calculator-hongyuan.html"
         },
         {
           "name": "盈满鑫两全保险（分红型）在线演算",
           "type": "calculator",
-          "description": "3年/5年交，6/8/10/15年期中短期两全险，累计生息模式，10列完整数据，利率可调1.75%/2.0%/2.5%，可下载计划书图片",
+          "description": "3年/5年交，6/8/10/15年期中短期两全险，累计生息模式，完整利益演示，利率可调1.75%/2.0%/2.5%，可下载计划书图片",
           "url": "calculator-yingmanxin.html"
         },
         {
           "name": "S12 宏禧来两全保险（分红型）在线演算",
           "type": "calculator",
-          "description": "趸交，6/8年期短期两全险，9列完整利益演示，可下载计划书图片",
+          "description": "趸交，6/8年期短期两全险，完整利益演示，可下载计划书图片",
           "url": "calculator-hongxilai.html"
         },
         {
           "name": "G23 恒享人生年金险在线演算",
           "type": "calculator",
-          "description": "关爱金年金利益演示 → 11列完整数据 → 可下载计划书图片",
+          "description": "关爱金年金利益演示 → 完整利益演示 → 可下载计划书图片",
           "url": "calculator-hengxiang.html"
         },
         {
@@ -157,7 +157,7 @@
         {
           "name": "S10 宏安世家终身寿险（分红型）在线演算",
           "type": "calculator",
-          "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，10列完整数据，红利可选累计生息(利率可调)/交清增额",
+          "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，完整利益演示，红利可选累计生息(利率可调)/交清增额",
           "url": "calculator-hongan.html"
         },
         {
@@ -169,13 +169,13 @@
         {
           "name": "S03 宏泰世家（分红型）在线演算",
           "type": "calculator",
-          "description": "输入年龄/性别/金额 → 11列完整利益演示 → 可下载计划书图片",
+          "description": "输入年龄/性别/金额 → 完整利益演示 → 可下载计划书图片",
           "url": "calculator-hongtai.html"
         },
         {
           "name": "S02 宏愿人生养老年金（分红型）在线演算",
           "type": "calculator",
-          "description": "养老年金利益演示，11列完整数据，年金起领年龄可选55/60/65/70岁，可下载计划书图片",
+          "description": "养老年金利益演示，完整利益演示，年金起领年龄可选55/60/65/70岁，可下载计划书图片",
           "url": "calculator-hongyuan.html"
         },
         {
@@ -187,19 +187,19 @@
         {
           "name": "S06 宏坤人生养老年金（分红型）在线演算",
           "type": "calculator",
-          "description": "养老年金利益演示 → 13列完整数据 → 可下载计划书图片（支持年领/月领切换）",
+          "description": "养老年金利益演示 → 完整利益演示 → 可下载计划书图片（支持年领/月领切换）",
           "url": "calculator-hongkun.html"
         },
         {
           "name": "G23 恒享人生年金险在线演算",
           "type": "calculator",
-          "description": "关爱金年金利益演示 → 11列完整数据 → 可下载计划书图片",
+          "description": "关爱金年金利益演示 → 完整利益演示 → 可下载计划书图片",
           "url": "calculator-hengxiang.html"
         },
         {
           "name": "G24 福盛世家添翼版在线演算",
           "type": "calculator",
-          "description": "固收型终身寿利益演示 → 7列完整数据 → 可下载计划书图片",
+          "description": "固收型终身寿利益演示 → 完整利益演示 → 可下载计划书图片",
           "url": "calculator-fusheng.html"
         }
       ]
