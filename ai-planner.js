@@ -752,16 +752,16 @@
     // 提示文字
     '<div style="padding:10px 20px 2px;">' +
       '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
-        '📱 微信用户：长按上方图片 → 保存图片<br/>' +
-        '💾 如长按无效，点下方「打开图片页保存」再长按' +
+        '📤 点「转发到微信保存」→ 选「文件传输助手」<br/>' +
+        '💾 在聊天里长按图片即可保存到相册' +
       '</div>' +
     '</div>' +
         // 按钮区
         '<div style="padding:12px 20px 20px;display:flex;flex-direction:column;gap:10px;">' +
-          '<button id="browserPromptSave" style="width:100%;padding:14px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;font-size:16px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;">📥 保存到相册</button>' +
+          '<button id="browserPromptSave" style="width:100%;padding:14px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;font-size:16px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;">📤 转发到微信保存</button>' +
           '<div style="display:flex;gap:10px;">' +
+            '<button id="browserPromptCopy" style="flex:1;padding:13px 0;border-radius:10px;border:1.5px solid #2563EB;background:#fff;color:#2563EB;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">📋 复制链接</button>' +
             '<button id="browserPromptClose" style="flex:1;padding:13px 0;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#64748B;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">关闭</button>' +
-            '<button id="browserPromptOpenBrowser" style="flex:1.2;padding:13px 0;border-radius:10px;border:none;background:#fff;color:#2563EB;border:1.5px solid #2563EB;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">在浏览器中打开</button>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -770,7 +770,7 @@
 
     // 绑定事件
     overlay.querySelector('#browserPromptClose').addEventListener('click', hideBrowserPrompt);
-    overlay.querySelector('#browserPromptOpenBrowser').addEventListener('click', doOpenInBrowser);
+    overlay.querySelector('#browserPromptCopy').addEventListener('click', copyPageLinkAndTip);
     overlay.querySelector('#browserPromptSave').addEventListener('click', saveViaShare);
     // 点击遮罩关闭
     overlay.addEventListener('click', function(e) {
@@ -832,7 +832,9 @@
   }
 
   /**
-   * 通过系统分享 API 保存图片到相册；微信内打开独立图片页供长按保存
+   * 通过系统分享 API 保存图片
+   * - 微信内：直接调起转发（不检测 canShare，微信会唤起转发面板，选「文件传输助手」后聊天里长按图片即可保存）
+   * - 非微信：优先 navigator.share，降级 blob 下载
    */
   function saveViaShare() {
     if (!_pendingDataUrl) {
@@ -840,30 +842,50 @@
       return;
     }
     var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+    var fileName = _pendingFileName || '理财计划书.png';
 
-    // 微信 WebView 里系统分享极不稳定，直接打开独立图片页面，用户可长按保存
-    if (isWechat) {
-      doOpenInBrowser();
+    var file = null;
+    try {
+      file = new File([dataUrlToBlob(_pendingDataUrl)], fileName, { type: 'image/png' });
+    } catch (e) {
+      showPageToast('图片生成失败，请重试');
       return;
     }
 
-    try {
-      var file = new File([dataUrlToBlob(_pendingDataUrl)], _pendingFileName || '理财计划书.png', { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({
-          files: [file],
-          title: '新华保险理财计划书',
-          text: '新华保险理财计划书'
-        }).catch(function(e) {
-          console.warn('share canceled/failed:', e);
-        });
+    // 微信环境：直接调起系统分享（转发图片到微信好友 / 文件传输助手）
+    if (isWechat) {
+      if (navigator.share) {
+        navigator.share({ files: [file], title: '新华保险理财计划书', text: '新华保险理财计划书' })
+          .then(function() {
+            showPageToast('已调起转发，发到「文件传输助手」后长按图片即可保存');
+          })
+          .catch(function(e) {
+            console.warn('wechat share failed:', e);
+            fallbackWechatSave();
+          });
       } else {
-        trySaveByAnchor(_pendingDataUrl, _pendingFileName || '理财计划书.png');
+        fallbackWechatSave();
       }
-    } catch (e) {
-      console.warn('saveViaShare failed:', e);
-      trySaveByAnchor(_pendingDataUrl, _pendingFileName || '理财计划书.png');
+      return;
     }
+
+    // 非微信：优先 share，降级 blob 下载
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file], title: '新华保险理财计划书', text: '新华保险理财计划书' })
+        .catch(function(e) {
+          console.warn('share canceled/failed:', e);
+          trySaveByAnchor(_pendingDataUrl, fileName);
+        });
+    } else {
+      trySaveByAnchor(_pendingDataUrl, fileName);
+    }
+  }
+
+  /**
+   * 微信里分享不可用时降级：复制页面链接，引导在系统浏览器打开后保存
+   */
+  function fallbackWechatSave() {
+    copyPageLinkAndTip();
   }
 
   function trySaveByAnchor(dataUrl, fileName) {
@@ -904,10 +926,10 @@
       }
     }
 
-    // 微信里按钮文案改为打开图片页，更稳；非微信保持「保存到相册」
+    // 微信里按钮文案改为「转发到微信保存」；非微信保持「保存到相册」
     if (saveBtn) {
       saveBtn.style.display = 'block';
-      saveBtn.textContent = isWechat ? '打开图片页保存' : '📥 保存到相册';
+      saveBtn.textContent = isWechat ? '📤 转发到微信保存' : '📥 保存到相册';
     }
 
     if (overlay) {
@@ -961,13 +983,13 @@
   }
 
   function copyPageLinkAndTip() {
-    var pageUrl = location.href.split('?')[0];
-    // 尝试复制当前URL到剪贴板
+    // 保留 URL 中的版本号参数（?v=xxx），避免微信缓存旧页面
+    var pageUrl = location.href;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pageUrl).then(function() {
-        showPageToast('已复制页面链接 ✅ 请粘贴到浏览器地址栏打开');
+        showPageToast('已复制页面链接 ✅ 请粘贴到浏览器打开后保存图片');
       }).catch(function() {
-        showPageToast('请在浏览器中打开本页：' + pageUrl.slice(0, 40) + '...');
+        showPageToast('请复制地址栏链接，在外部浏览器中打开');
       });
     } else {
       showPageToast('请复制地址栏链接，在外部浏览器中打开');
