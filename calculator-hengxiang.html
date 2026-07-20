@@ -41,7 +41,6 @@
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
   .col-ann{color:var(--ann);}
-  .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E3A5F;text-align:center;padding:10px 4px;background:#EFF6FF;border:1px solid #93C5FD;}
   .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
@@ -122,7 +121,6 @@
           <th>保单年度</th><th>年龄</th><th>当年保费</th><th>累计保费</th>
           <th>关爱金<br>年金</th><th>累计关爱金<br>年金</th>
           <th>身故<br>保险金</th><th>现金价值</th>          <th>生存总利益<br>(年末)</th>
-          <th>阶段</th>
         </tr></thead>
         <tbody id="resultBody"></tbody>
       </table>
@@ -205,15 +203,6 @@ async function generate(){
     let isFirstPay=true;
 
     // 4段侧标：缴费期 / 不再缴费 / 长期收益 / 安全稳健
-    // 段1: yr 1~term (缴费期)
-    // 段2: yr term+1 ~ term+5 (不再缴费)
-    // 段3: yr term+6 ~ maxYear-5 (长期收益)
-    // 段4: yr maxYear-4 ~ maxYear (安全稳健+条款明确)
-    const seg1End=paymentYears;
-    const seg2End=paymentYears+5;
-    const seg3End=maxYear-5;
-    const seg4End=maxYear;
-
     years.forEach((row,idx)=>{
       const yr=row[0], prem=row[1], cum=row[2], ann=row[3], annCum=row[4], mat=row[5], death=row[6], cv=row[7], surv=row[8];
       const curAge=age+yr-1;
@@ -240,16 +229,6 @@ async function generate(){
       cells+=`<td class="col-ann">${ann>0?fmt(ann*scale):'-'}</td><td class="col-ann">${fmt(annCum*scale)}</td>`;
       cells+=`<td>${fmt(death*scale)}</td>`;
       cells+=`<td class="col-cv">${fmt(cv*scale)}</td><td class="col-surv">${fmt(surv*scale)}</td>`;
-      // 侧标
-      if(yr===1){
-        cells+=`<td class="side-label" rowspan="${seg1End}">不再缴费</td>`;
-      } else if(yr===seg1End+1 && seg2End>seg1End){
-        cells+=`<td class="side-label" rowspan="${seg2End-seg1End}">长期收益</td>`;
-      } else if(yr===seg2End+1 && seg3End>seg2End){
-        cells+=`<td class="side-label" rowspan="${seg3End-seg2End}">安全稳健</td>`;
-      } else if(yr===seg3End+1 && seg4End>seg3End){
-        cells+=`<td class="side-label" rowspan="${seg4End-seg3End}">条款明确</td>`;
-      }
       tr.innerHTML=cells;
       body.appendChild(tr);
     });
