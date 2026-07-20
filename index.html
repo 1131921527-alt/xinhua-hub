@@ -909,7 +909,7 @@
   </div>
 </noscript>
 
-<div class="pw-overlay" id="pwOverlay">
+<div class="pw-overlay" id="pwOverlay" style="display:none;">
   <div class="pw-card">
     <div class="pw-icon">🔐</div>
     <h2>新华保险 · 资料库<br><span style="font-size:12px;font-weight:400;color:var(--text-secondary);">Made by 王铭泽</span></h2>
@@ -1022,8 +1022,8 @@
 </div>
 
 <script>
-// ===== Password System =====
-const SITE_PASSWORD = '0225';
+// ===== Password System (公开访问，已取消) =====
+const SITE_PASSWORD = '';
 
 function getTodayKey() {
   const now = new Date();
@@ -1031,18 +1031,10 @@ function getTodayKey() {
 }
 
 function checkPassword() {
-  const input = document.getElementById('pwInput');
-  const val = input.value.trim();
-  
-  if (val === SITE_PASSWORD) {
-    localStorage.setItem(getTodayKey(), '1');
-    document.getElementById('pwOverlay').style.display = 'none';
-  } else {
-    input.classList.add('shake');
-    setTimeout(() => input.classList.remove('shake'), 400);
-    input.value = '';
-    input.placeholder = '密码错误，重新输入';
-  }
+  // 公开内容，无需密码
+  localStorage.setItem(getTodayKey(), '1');
+  const overlay = document.getElementById('pwOverlay');
+  if (overlay) overlay.style.display = 'none';
 }
 
 // Enter key support
