@@ -8,7 +8,7 @@
   :root{
     --brown:#1E3A5F; --brown2:#1E40AF; --gray:#64748B; --graybg:#EFF6FF;
     --line:#E2E8F0; --accent:#3B82F6;
-    --cv:#3B82F6; --surv:#1E40AF; --ann:#93C5FD;
+    --cv:#3B82F6; --surv:#1E40AF;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#EEF2F7;color:#1E293B;padding:16px;}
@@ -40,8 +40,7 @@
   tbody tr.row-5y td, tbody tr.row-last td{background:transparent;}
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
-  .col-ann{color:var(--ann);}
-  .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
+  .col-ann{color:#2563EB;font-weight:600;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 22px;border-radius:24px;opacity:0;transition:.3s;font-size:14px;z-index:99;}
@@ -118,7 +117,7 @@
     <div class="table-scroll">
       <table id="resultTable">
         <thead><tr>
-          <th>保单年度</th><th>年龄</th><th>当年保费</th><th>累计保费</th>
+          <th>保单年度</th><th>年龄</th><th>累计保费</th>
           <th>关爱金<br>年金</th><th>累计关爱金<br>年金</th>
           <th>身故<br>保险金</th><th>现金价值</th>          <th>生存总利益<br>(年末)</th>
         </tr></thead>
@@ -198,15 +197,10 @@ async function generate(){
 
     const body=document.getElementById('resultBody');
     body.innerHTML='';
-    const paymentYears=term;
-    const maxYear=years.length;
-    let isFirstPay=true;
 
-    // 4段侧标：缴费期 / 不再缴费 / 长期收益 / 安全稳健
     years.forEach((row,idx)=>{
-      const yr=row[0], prem=row[1], cum=row[2], ann=row[3], annCum=row[4], mat=row[5], death=row[6], cv=row[7], surv=row[8];
+      const yr=row[0], cum=row[2], ann=row[3], annCum=row[4], death=row[6], cv=row[7], surv=row[8];
       const curAge=age+yr-1;
-      const isPayYear=yr<=paymentYears;
       const is5y=yr>=5 && yr%5===0;
       const isLast=(idx===years.length-1);
       const rowClass=isLast?'row-last':(is5y?'row-5y':'');
@@ -214,17 +208,6 @@ async function generate(){
       if(rowClass) tr.className=rowClass;
 
       let cells=`<td>${yr}</td><td>${curAge}</td>`;
-      // 当年保费 - 缴费期合并
-      if(isFirstPay){
-        if(paymentYears>1){
-          cells+=`<td class="pay-merge" rowspan="${paymentYears}">${fmt(prem*scale)}<br><span style="font-size:11px;color:#94A3B8;">缴费期分${paymentYears}年投入</span></td>`;
-        } else {
-          cells+=`<td>${fmt(prem*scale)}</td>`;
-        }
-        isFirstPay=false;
-      } else if(!isPayYear){
-        cells+=`<td>-</td>`;
-      }
       cells+=`<td>${fmt(cum*scale)}</td>`;
       cells+=`<td class="col-ann">${ann>0?fmt(ann*scale):'-'}</td><td class="col-ann">${fmt(annCum*scale)}</td>`;
       cells+=`<td>${fmt(death*scale)}</td>`;
@@ -257,11 +240,11 @@ function downloadImage(){
   // 组装下载行（7列：非分红型，含关爱金/年金、现金价值、生存/身故总利益）
   const dlRows=[];
   years.forEach(row=>{
-    const yr=row[0],prem=row[1],ann=row[3],death=row[6],cv=row[7],surv=row[8];
+    const yr=row[0],ann=row[3],annCum=row[4],death=row[6],cv=row[7],surv=row[8];
     const curAge=age+yr-1;
     // 下载默认5年模式：60岁起每5年一行
     if(curAge>=60&&(curAge-60)%5!==0)return;
-    dlRows.push({yr,age:curAge,prem:prem*scale,ann:ann*scale,cv:cv*scale,surv:surv*scale,death:death*scale});
+    dlRows.push({yr,age:curAge,ann:ann*scale,annCum:annCum*scale,cv:cv*scale,surv:surv*scale,death:death*scale});
   });
 
   // 统一配色（蓝白）
@@ -284,8 +267,8 @@ function downloadImage(){
   };
   const PAD=22, DPR=4;
   const TITLE_H=80, INFO_H=130, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
-  // P5 恒享专属 8 列（删除空白满期生存保险金列）
-  const colWidths=[56,48,96,96,96,106,100];
+  // P5 恒享专属 7 列：保单年度|年龄|关爱金|累计关爱金|现金价值|生存总利益|身故总利益
+  const colWidths=[56,48,96,96,106,100,100];
   const totalW=colWidths.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
@@ -353,7 +336,7 @@ function downloadImage(){
   // 表头
   const tableX=PAD, tableY=subY+SUBHDR_H;
   ctx.fillStyle=COLORS.tableHeader; ctx.fillRect(tableX,tableY,totalW,HEADER_H);
-  const headers=['保单\n年度','年龄\n(年末)','当年保险费\n(年初)','关爱金\n年金','现金价值\n(年末)','生存总利益\n(年末)','身故总利益\n(年末)'];
+  const headers=['保单\n年度','年龄\n(年末)','关爱金\n年金','累计关爱金\n年金','现金价值\n(年末)','生存总利益\n(年末)','身故总利益\n(年末)'];
   ctx.fillStyle='#FFFFFF'; ctx.textAlign='center'; ctx.textBaseline='middle';
   let hx=tableX;
   headers.forEach((h,i)=>{
@@ -371,13 +354,11 @@ function downloadImage(){
     ctx.fillRect(tableX,y,totalW,ROW_H);
     ctx.strokeStyle=COLORS.lineColor; ctx.lineWidth=0.5;
     ctx.beginPath(); ctx.moveTo(tableX,y+ROW_H); ctx.lineTo(tableX+totalW,y+ROW_H); ctx.stroke();
-    // 关爱金：前4年为0正常显示，第5年起出现标红色突出
-    const annRed=r.ann>0;
     const vals=[
       {t:r.yr,c:COLORS.textDark,f:'bold 17px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:r.age,c:COLORS.textGray,f:'16px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:r.prem>0?fmt(r.prem):'-',c:COLORS.textGray,f:'15px "PingFang SC","Microsoft YaHei",sans-serif'},
-      {t:r.ann>0?fmt(r.ann):'-',c:annRed?COLORS.accentRed:COLORS.textGray,f:annRed?'bold 16px "PingFang SC","Microsoft YaHei",sans-serif':'15px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:r.ann>0?fmt(r.ann):'-',c:COLORS.accentRed,f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
+      {t:fmt(r.annCum),c:COLORS.accentRed,f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.cv),c:'#1E40AF',f:'bold 16px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.surv),c:'#1E40AF',f:'bold 17px "PingFang SC","Microsoft YaHei",sans-serif'},
       {t:fmt(r.death),c:COLORS.textGray,f:'15px "PingFang SC","Microsoft YaHei",sans-serif'}
