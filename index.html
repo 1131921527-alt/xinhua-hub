@@ -650,6 +650,28 @@
   }
   .ap-modal-row .ap-label { color: var(--text-secondary); }
   .ap-modal-row .ap-value { color: var(--text); font-weight: 600; }
+  .ap-modal-row select.ap-value,
+  .ap-modal-row input.ap-value {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    min-width: 90px;
+    text-align: right;
+    -webkit-appearance: auto;
+    appearance: auto;
+    direction: rtl;
+  }
+  .ap-modal-row input.ap-value { direction: ltr; width: 80px; }
+  .ap-modal-row select.ap-value:focus,
+  .ap-modal-row input.ap-value:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  }
   .ap-modal-btns {
     display: flex;
     gap: 10px;
@@ -996,6 +1018,7 @@
     <button class="ap-btn" id="aiPlannerBtn">立即生成</button>
   </div>
   <div class="ap-examples" id="aiPlannerExamples">
+    <span class="ap-example">恒享 40岁 女 10×3</span>
     <span class="ap-example">宏安 40岁 女 100万 3年交</span>
     <span class="ap-example">宏愿 50岁 女 50×3 55岁起领 月领</span>
     <span class="ap-example">盈满鑫 45岁 女 20×3 8年交</span>
@@ -1010,12 +1033,16 @@
 <div class="ap-modal-overlay" id="aiPlannerModal">
   <div class="ap-modal">
     <h3>确认计划书参数</h3>
-    <div class="ap-subtitle">请确认以下信息后生成计划书</div>
-    <div class="ap-modal-row"><span class="ap-label">产品</span><span class="ap-value" id="apProdName">-</span></div>
-    <div class="ap-modal-row"><span class="ap-label">客户年龄</span><span class="ap-value" id="apAge">-</span></div>
-    <div class="ap-modal-row"><span class="ap-label">客户性别</span><span class="ap-value" id="apGender">-</span></div>
-    <div class="ap-modal-row"><span class="ap-label">年交保费</span><span class="ap-value" id="apPremium">-</span></div>
-    <div class="ap-modal-row"><span class="ap-label">缴费期限</span><span class="ap-value" id="apTerm">-</span></div>
+    <div class="ap-subtitle">点击参数可滚动选择，确认后生成计划书</div>
+    <div class="ap-modal-row"><span class="ap-label">产品</span><select class="ap-value" id="apProdSelect"></select></div>
+    <div class="ap-modal-row"><span class="ap-label">客户年龄</span><select class="ap-value" id="apAgeSelect"></select></div>
+    <div class="ap-modal-row"><span class="ap-label">客户性别</span><select class="ap-value" id="apGenderSelect"><option value="1">女</option><option value="0">男</option></select></div>
+    <div class="ap-modal-row"><span class="ap-label">年交保费</span><input type="number" class="ap-value" id="apPremiumInput" min="1" max="1000" step="1" style="width:80px;text-align:right;"> 万元</div>
+    <div class="ap-modal-row" id="apTermRow"><span class="ap-label">缴费期限</span><select class="ap-value" id="apTermSelect"></select></div>
+    <div class="ap-modal-row" id="apPayModeRow" style="display:none;"><span class="ap-label">交费方式</span><select class="ap-value" id="apPayModeSelect"></select></div>
+    <div class="ap-modal-row" id="apPeriodRow" style="display:none;"><span class="ap-label">保险期间</span><select class="ap-value" id="apPeriodSelect"></select></div>
+    <div class="ap-modal-row" id="apAnnuityAgeRow" style="display:none;"><span class="ap-label">年金起领</span><select class="ap-value" id="apAnnuityAgeSelect"></select></div>
+    <div class="ap-modal-row" id="apAnnuityModeRow" style="display:none;"><span class="ap-label">领取方式</span><select class="ap-value" id="apAnnuityModeSelect"><option value="month">月领</option><option value="year">年领</option></select></div>
     <div class="ap-modal-btns">
       <button class="ap-back-btn" id="apBackBtn">返回修改</button>
       <button class="ap-confirm-btn" id="apConfirmBtn">确认生成</button>

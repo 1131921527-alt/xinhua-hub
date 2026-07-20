@@ -141,40 +141,152 @@
       }
     }
 
+    // 弹窗内 select 填充
+    function fillSelect(el, options, selectedValue) {
+      if (!el) return;
+      el.innerHTML = '';
+      options.forEach(function(opt) {
+        var option = document.createElement('option');
+        option.value = opt.value;
+        option.textContent = opt.label;
+        if (opt.value == selectedValue) option.selected = true;
+        el.appendChild(option);
+      });
+    }
+
+    function getProductOptions(product) {
+      var termOptions = [
+        {value:1, label:'趸交'}, {value:3, label:'3年交'}, {value:5, label:'5年交'},
+        {value:10, label:'10年交'}, {value:15, label:'15年交'}, {value:20, label:'20年交'}, {value:30, label:'30年交'}
+      ];
+      var payModeOptions = [
+        {value:1, label:'趸交'}, {value:3, label:'3年交'}, {value:5, label:'5年交'},
+        {value:8, label:'8年交'}, {value:10, label:'10年交'}, {value:15, label:'15年交'}, {value:20, label:'20年交'}
+      ];
+      var periodOptions = [
+        {value:8, label:'8年期'}, {value:10, label:'10年期'}, {value:15, label:'15年期'},
+        {value:20, label:'20年期'}, {value:30, label:'30年期'}
+      ];
+      var annuityAgeOptions = [
+        {value:50, label:'50岁起领'}, {value:55, label:'55岁起领'}, {value:60, label:'60岁起领'},
+        {value:65, label:'65岁起领'}, {value:70, label:'70岁起领'}
+      ];
+      var options = {};
+      var params = product.params || ['term'];
+      if (params.indexOf('term') !== -1) options.term = termOptions;
+      if (params.indexOf('payMode') !== -1) options.payMode = payModeOptions;
+      if (params.indexOf('period') !== -1) options.period = periodOptions;
+      if (params.indexOf('annuityAge') !== -1) options.annuityAge = annuityAgeOptions;
+      return options;
+    }
+
+    function updateModalRows(product) {
+      var params = product.params || ['term'];
+      document.getElementById('apTermRow').style.display = params.indexOf('term') !== -1 ? 'flex' : 'none';
+      document.getElementById('apPayModeRow').style.display = params.indexOf('payMode') !== -1 ? 'flex' : 'none';
+      document.getElementById('apPeriodRow').style.display = params.indexOf('period') !== -1 ? 'flex' : 'none';
+      document.getElementById('apAnnuityAgeRow').style.display = params.indexOf('annuityAge') !== -1 ? 'flex' : 'none';
+      document.getElementById('apAnnuityModeRow').style.display = params.indexOf('annuityMode') !== -1 ? 'flex' : 'none';
+    }
+
     function showConfirmModal(result) {
       if (!modalEl) return;
-      document.getElementById('apProdName').textContent = result.product.label;
-      document.getElementById('apAge').textContent = result.age + '岁';
-      document.getElementById('apGender').textContent = result.genderLabel;
-      document.getElementById('apPremium').textContent = result.premiumDisplay;
 
-      // 根据产品参数拼装展示文本
-      var displayParts = [];
-      var params = result.product.params || ['term'];
-      if (params.indexOf('term') !== -1 && result.termDisplay) displayParts.push(result.termDisplay);
-      if (params.indexOf('payMode') !== -1 && result.payMode) displayParts.push(result.payMode + '年交');
-      if (params.indexOf('period') !== -1 && result.period) displayParts.push(result.period + '年期');
-      if (params.indexOf('annuityAge') !== -1 && result.annuityAge) displayParts.push(result.annuityAge + '岁起领');
-      if (params.indexOf('annuityMode') !== -1 && result.annuityMode) displayParts.push(result.annuityMode === 'month' ? '月领' : '年领');
-      document.getElementById('apTerm').textContent = displayParts.join(' / ') || '-';
+      // 产品下拉
+      var prodSelect = document.getElementById('apProdSelect');
+      prodSelect.innerHTML = '';
+      PRODUCTS.forEach(function(p) {
+        var opt = document.createElement('option');
+        opt.value = p.file;
+        opt.textContent = p.label;
+        if (p.file === result.product.file) opt.selected = true;
+        prodSelect.appendChild(opt);
+      });
+
+      // 年龄下拉
+      var ageSelect = document.getElementById('apAgeSelect');
+      ageSelect.innerHTML = '';
+      for (var a = 18; a <= 75; a++) {
+        var opt = document.createElement('option');
+        opt.value = a;
+        opt.textContent = a + '岁';
+        if (a === result.age) opt.selected = true;
+        ageSelect.appendChild(opt);
+      }
+
+      // 性别
+      document.getElementById('apGenderSelect').value = (result.gender === 0 || result.gender === '0') ? '0' : '1';
+
+      // 保费（万元）
+      var premiumWan = result.premium ? (result.premium / 10000) : '';
+      document.getElementById('apPremiumInput').value = premiumWan;
+
+      // 产品相关下拉
+      var opts = getProductOptions(result.product);
+      if (opts.term) fillSelect(document.getElementById('apTermSelect'), opts.term, result.termVal || 3);
+      if (opts.payMode) fillSelect(document.getElementById('apPayModeSelect'), opts.payMode, result.payMode || 3);
+      if (opts.period) fillSelect(document.getElementById('apPeriodSelect'), opts.period, result.period || 8);
+      if (opts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), opts.annuityAge, result.annuityAge || 60);
+
+      // 年金领取方式
+      if ((result.product.params || []).indexOf('annuityMode') !== -1) {
+        document.getElementById('apAnnuityModeSelect').value = result.annuityMode || 'month';
+      }
+
+      updateModalRows(result.product);
+
+      // 切换产品时更新关联字段
+      prodSelect.onchange = function() {
+        var newProduct = null;
+        for (var i = 0; i < PRODUCTS.length; i++) {
+          if (PRODUCTS[i].file === prodSelect.value) { newProduct = PRODUCTS[i]; break; }
+        }
+        updateModalRows(newProduct);
+        var newOpts = getProductOptions(newProduct);
+        if (newOpts.term) fillSelect(document.getElementById('apTermSelect'), newOpts.term, 3);
+        if (newOpts.payMode) fillSelect(document.getElementById('apPayModeSelect'), newOpts.payMode, 3);
+        if (newOpts.period) fillSelect(document.getElementById('apPeriodSelect'), newOpts.period, 8);
+        if (newOpts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), newOpts.annuityAge, 60);
+        if ((newProduct.params || []).indexOf('annuityMode') !== -1) {
+          document.getElementById('apAnnuityModeSelect').value = 'month';
+        }
+      };
 
       modalEl.style.display = 'flex';
-      // 存储结果供确认使用
       modalEl._result = result;
     }
 
     function confirmAndGo(confirmed) {
       if (!modalEl) return;
       modalEl.style.display = 'none';
-      if (!confirmed || !modalEl._result) return;
+      if (!confirmed) return;
 
-      var r = modalEl._result;
-      var params = r.product.params || ['term'];
-      var url = r.product.file + '?age=' + r.age + '&gender=' + r.gender + '&premium=' + r.premium;
+      var productFile = document.getElementById('apProdSelect').value;
+      var product = null;
+      for (var i = 0; i < PRODUCTS.length; i++) {
+        if (PRODUCTS[i].file === productFile) { product = PRODUCTS[i]; break; }
+      }
+      var age = parseInt(document.getElementById('apAgeSelect').value);
+      var gender = parseInt(document.getElementById('apGenderSelect').value);
+      var premiumWan = parseFloat(document.getElementById('apPremiumInput').value);
+      var premium = Math.round(premiumWan * 10000);
+
+      var url = product.file + '?age=' + age + '&gender=' + gender + '&premium=' + premium;
+      var params = product.params || ['term'];
       params.forEach(function(p) {
-        var val = r[p];
-        if (p === 'term') val = r.termVal; // 兼容旧字段名
-        if (val !== null && val !== undefined) {
+        var val;
+        if (p === 'term') {
+          val = parseInt(document.getElementById('apTermSelect').value);
+        } else if (p === 'payMode') {
+          val = parseInt(document.getElementById('apPayModeSelect').value);
+        } else if (p === 'period') {
+          val = parseInt(document.getElementById('apPeriodSelect').value);
+        } else if (p === 'annuityAge') {
+          val = parseInt(document.getElementById('apAnnuityAgeSelect').value);
+        } else if (p === 'annuityMode') {
+          val = document.getElementById('apAnnuityModeSelect').value;
+        }
+        if (val !== null && val !== undefined && val !== '') {
           url += '&' + p + '=' + val;
         }
       });
