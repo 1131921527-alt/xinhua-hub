@@ -743,23 +743,26 @@
         // 标题栏
         '<div style="background:linear-gradient(135deg,#1D4ED8,#2563EB);padding:18px 20px;text-align:center;">' +
           '<div style="font-size:17px;font-weight:700;color:#fff;letter-spacing:0.5px;">计划书图片已生成</div>' +
-          '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">可在浏览器中打开此网页来下载文件</div>' +
+          '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">点击「保存到相册」即可保存</div>' +
         '</div>' +
-    // 图片预览区（放大，方便微信长按保存）
-    '<div style="padding:12px;text-align:center;background:#f8fafc;overflow:auto;max-height:65vh;">' +
-      '<img id="browserPromptImg" src="" alt="计划书预览" style="max-width:100%;max-height:60vh;border-radius:8px;border:1px solid #e2e8f0;" />' +
+    // 图片预览区（放大，方便微信查看）
+    '<div style="padding:12px;text-align:center;background:#f8fafc;overflow:auto;max-height:60vh;">' +
+      '<img id="browserPromptImg" src="" alt="计划书预览" style="max-width:100%;max-height:55vh;border-radius:8px;border:1px solid #e2e8f0;" />' +
     '</div>' +
     // 提示文字
-    '<div style="padding:12px 20px 4px;">' +
+    '<div style="padding:10px 20px 2px;">' +
       '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
-        '📱 手机用户：长按上方图片可保存到相册<br/>' +
-        '⚠️ 若提示保存失败，请点下方按钮在浏览器中打开下载' +
+        '📥 点下方「保存到相册」直接存入手机相册<br/>' +
+        '🌐 如不可用，点「在浏览器中打开」下载' +
       '</div>' +
     '</div>' +
         // 按钮区
-        '<div style="padding:12px 20px 20px;display:flex;gap:10px;">' +
-          '<button id="browserPromptClose" style="flex:1;padding:13px 0;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#64748B;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">关闭</button>' +
-          '<button id="browserPromptOpenBrowser" style="flex:1.2;padding:13px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">在浏览器中打开</button>' +
+        '<div style="padding:12px 20px 20px;display:flex;flex-direction:column;gap:10px;">' +
+          '<button id="browserPromptSave" style="width:100%;padding:14px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;font-size:16px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;">📥 保存到相册</button>' +
+          '<div style="display:flex;gap:10px;">' +
+            '<button id="browserPromptClose" style="flex:1;padding:13px 0;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#64748B;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">关闭</button>' +
+            '<button id="browserPromptOpenBrowser" style="flex:1.2;padding:13px 0;border-radius:10px;border:none;background:#fff;color:#2563EB;border:1.5px solid #2563EB;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">在浏览器中打开</button>' +
+          '</div>' +
         '</div>' +
       '</div>';
 
@@ -768,6 +771,7 @@
     // 绑定事件
     overlay.querySelector('#browserPromptClose').addEventListener('click', hideBrowserPrompt);
     overlay.querySelector('#browserPromptOpenBrowser').addEventListener('click', doOpenInBrowser);
+    overlay.querySelector('#browserPromptSave').addEventListener('click', saveViaShare);
     // 点击遮罩关闭
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) hideBrowserPrompt();
@@ -779,6 +783,49 @@
    * @param {string} dataUrl - canvas.toDataURL 生成的 base64 图片数据
    * @param {string} filename - 文件名（用于显示和下载）
    */
+  /**
+   * 通过系统分享 API 保存图片到相册（微信/移动端最稳的保存方式）
+   */
+  function saveViaShare() {
+    if (!_pendingDataUrl) {
+      showPageToast('图片尚未准备好，请稍后重试');
+      return;
+    }
+    try {
+      var parts = _pendingDataUrl.split(',');
+      var mimeMatch = parts[0].match(/:(.*?);/);
+      var mime = mimeMatch ? mimeMatch[1] : 'image/png';
+      var byteString = atob(parts[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+      var blob = new Blob([ab], {type: mime});
+      var fileName = _pendingFileName || '理财计划书.png';
+      var file = new File([blob], fileName, {type: mime});
+
+      if (navigator.canShare && navigator.canShare({files: [file]})) {
+        navigator.share({
+          files: [file],
+          title: '新华保险理财计划书',
+          text: '新华保险理财计划书'
+        }).catch(function(e) {
+          console.warn('share canceled/failed:', e);
+        });
+      } else if (navigator.share) {
+        navigator.share({
+          title: '新华保险理财计划书',
+          text: '新华保险理财计划书',
+          url: location.href
+        }).catch(function() {});
+      } else {
+        showPageToast('当前环境不支持直接保存，请长按图片或点「在浏览器中打开」');
+      }
+    } catch (e) {
+      console.warn('saveViaShare failed:', e);
+      showPageToast('保存失败，请改用「在浏览器中打开」');
+    }
+  }
+
   window.showBrowserOpenPrompt = function(dataUrl, filename) {
     _pendingDataUrl = dataUrl;
     _pendingFileName = filename || '理财计划书.png';
@@ -787,9 +834,29 @@
 
     var overlay = document.getElementById('browserPromptOverlay');
     var imgEl = document.getElementById('browserPromptImg');
+    var saveBtn = document.getElementById('browserPromptSave');
 
     if (imgEl && dataUrl) {
       imgEl.src = dataUrl;
+    }
+    // 动态判断是否显示「保存到相册」按钮：仅当浏览器支持文件分享时显示
+    var canShareFiles = false;
+    try {
+      var parts = dataUrl.split(',');
+      var mimeMatch = parts[0].match(/:(.*?);/);
+      var mime = mimeMatch ? mimeMatch[1] : 'image/png';
+      var byteString = atob(parts[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+      var blob = new Blob([ab], {type: mime});
+      var file = new File([blob], filename || '理财计划书.png', {type: mime});
+      canShareFiles = !!(navigator.canShare && navigator.canShare({files: [file]}));
+    } catch (e) {
+      canShareFiles = false;
+    }
+    if (saveBtn) {
+      saveBtn.style.display = canShareFiles ? 'block' : 'none';
     }
     if (overlay) {
       overlay.style.display = 'flex';
