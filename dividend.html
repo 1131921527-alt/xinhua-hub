@@ -29,7 +29,10 @@
   .chip.on{background:var(--blue); color:#fff; border-color:var(--blue);}
   .count{font-size:12px; color:var(--sub); margin:10px 2px 4px;}
   .card{background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:12px; overflow:hidden; box-shadow:0 1px 3px rgba(15,23,42,.04);}
-  .card-h{display:flex; align-items:center; justify-content:space-between; padding:13px 15px; cursor:pointer;}
+  .card-h{display:flex; align-items:center; justify-content:space-between; padding:13px 15px; cursor:default;}
+  .card-h .arrow{cursor:pointer;}
+  .card-h a.nm-link{display:flex;align-items:center;flex-wrap:wrap;flex:1;text-decoration:none;color:inherit;min-width:0;}
+  .card-h a.nm-link:hover .nm{text-decoration:underline;}
   .card-h .nm{font-size:15px; font-weight:600; line-height:1.35;}
   .badge{font-size:11px; padding:2px 9px; border-radius:20px; background:var(--blue-l); color:var(--blue-d); white-space:nowrap; margin-left:8px;}
   .arrow{color:var(--sub); font-size:13px; transition:transform .2s; flex:none; margin-left:6px;}
@@ -110,14 +113,14 @@ function render(){
     let rows = (p.records||[]).map(r =>
       `<tr><td>${r.year}</td><td>${r.label}</td><td><span class="rate ${rateClass(r.rate)}">${r.rate}%</span></td></tr>`).join('');
     card.innerHTML = `
-      <div class="card-h" onclick="this.parentElement.classList.toggle('open')">
-        <div style="display:flex;align-items:center;flex-wrap:wrap;">
+      <div class="card-h">
+        <a class="nm-link" href="${DATA.sourceUrl}?productName=${encodeURIComponent(p.name)}" target="_blank" rel="noopener">
           <span class="nm">${p.name}</span>
           <span class="badge">${p.type}</span>
-        </div>
+        </a>
         <span style="display:flex;align-items:center;gap:8px;">
           ${lr ? `<span class="rate ${rateClass(lr.rate)}">最新 ${lr.rate}%</span>` : ''}
-          <span class="arrow">▶</span>
+          <span class="arrow" onclick="this.closest('.card').classList.toggle('open')">▶</span>
         </span>
       </div>
       <div class="body"><table>
