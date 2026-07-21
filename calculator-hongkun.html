@@ -280,7 +280,7 @@ function downloadImage(){
   // ===== 尺寸常量（统一规范）=====
   const DPR=4, PAD=22;
   const TITLE_H=80, INFO_H=130, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
-  const colWidths=[56,46,96,104,100,108,116,112,96,108,108,82];
+  const colWidths=[60,58,96,104,100,108,116,112,96,108,108,74];
   const totalW=colWidths.reduce((a,b)=>a+b,0);
   const tableH=HEADER_H+dlRows.length*ROW_H;
   const canvasW=totalW+PAD*2;
@@ -353,12 +353,12 @@ function downloadImage(){
   ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText(`${genderLabel} ${age}周岁 · ${termLabel} · 年交${fmt(premium)}元 · 基本保额${fmt(sumAssured)}元 · ${drawLabel}`, canvasW/2, paramY+PARAM_H/2);
 
-  // ===== ④ 子标题栏 =====
+  // ===== ④ 子标题栏（与表格等宽对齐）=====
   const subY=paramY+PARAM_H;
-  ctx.fillStyle=C.subHeader; ctx.fillRect(0,subY,canvasW,SUBHDR_H);
+  ctx.fillStyle=C.subHeader; ctx.fillRect(PAD,subY,totalW,SUBHDR_H);
   ctx.fillStyle='#FFFFFF'; ctx.font='bold 20px "PingFang SC","Microsoft YaHei",sans-serif';
   ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText('利 益 演 示 表', canvasW/2, subY+SUBHDR_H/2);
+  ctx.fillText('利 益 演 示 表', PAD+totalW/2, subY+SUBHDR_H/2);
 
   // ===== ⑤ 表头 =====
   const tableX=PAD, tableY=subY+SUBHDR_H;

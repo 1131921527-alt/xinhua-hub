@@ -485,7 +485,6 @@ function downloadImage() {
       }
 
       const canvasW=totalW+PAD*2;
-      const ftY=tblY+HEADER_H+dlRows.length*ROW_H+10;   // footer紧贴表格
       const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+HEADER_H+dlRows.length*ROW_H+10+30+10;  // 10=footer前距, 30=2行文字高, 10=底留白
       canvas.width=canvasW*DPR; canvas.height=canvasH*DPR;
       canvas.style.width=canvasW+'px'; canvas.style.height=canvasH+'px';
@@ -546,6 +545,7 @@ function downloadImage() {
 
       // ===== 表头 =====
       const tblX=PAD, tblY=sHdrY+SUBHDR_H;
+      const ftY=tblY+HEADER_H+dlRows.length*ROW_H+10;   // footer紧贴表格（tblY 已声明）
       ctx.fillStyle=COLORS.tableHeader; ctx.fillRect(tblX, tblY, totalW, HEADER_H);
       ctx.fillStyle='#FFFFFF'; ctx.font='bold 15px "PingFang SC"'; ctx.textAlign='center'; ctx.textBaseline='middle';
       let hx=tblX;

@@ -37,9 +37,14 @@
   // PART 2: 测算器URL参数读取 + 微信按钮
   // ══════════════════════════════════════════
   if (isCalculator) {
-    setupCalculatorParams();
-    injectWeChatButton();
-    setupBrowserPrompt();  // 浏览器打开提示
+    const _initCalc = () => {
+      setupCalculatorParams();
+      injectWeChatButton();
+      setupBrowserPrompt();  // 浏览器打开提示
+    };
+    // 兼容 head 内同步加载（此时 document.body 可能为 null）
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _initCalc);
+    else _initCalc();
   }
 
   // ========== Part 1: 智能计划书快捷生成 ==========

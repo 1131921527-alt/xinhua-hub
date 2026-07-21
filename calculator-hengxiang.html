@@ -304,30 +304,31 @@ function downloadImage(){
   ctx.font='14px "PingFang SC","Microsoft YaHei",sans-serif';
   ctx.fillText('新华保险 · 年金保险（非分红型）· 保障至105周岁', canvasW/2, 60);
 
-  // 公司介绍区（左右栏）
+  // 公司介绍区（左右栏）— 加大间距避免文字遮挡
   const infoY=TITLE_H;
   ctx.fillStyle=COLORS.companyBg; ctx.fillRect(0,infoY,canvasW,INFO_H);
   ctx.strokeStyle=COLORS.lineColor; ctx.lineWidth=1;
   ctx.beginPath(); ctx.moveTo(canvasW/2,infoY+10); ctx.lineTo(canvasW/2,infoY+INFO_H-12); ctx.stroke();
-  const lx=PAD+4, rx=canvasW/2+12;
+  const lx=PAD+8, rx=canvasW/2+16;   // 加大左右缩进，拉开与中线距离
   ctx.textAlign='left'; ctx.textBaseline='top';
   ctx.fillStyle=COLORS.subHeader; ctx.font='bold 16px "PingFang SC","Microsoft YaHei",sans-serif';
   ctx.fillText('公司背景', lx, infoY+10);
   ctx.fillText('产品特点', rx, infoY+10);
-  ctx.font='13px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.font='12.5px "PingFang SC","Microsoft YaHei",sans-serif';   // 字号缩小一点防溢出
   ctx.fillStyle=COLORS.textGray;
   const leftLines=[
     '· 成立于1996年9月（人民大会堂）',
-    '· 中央汇金控股（中农工建4行同属大股东）、中国宝武钢铁',
+    '· 中央汇金控股（中农工建4行同属',
+    '  大股东）、中国宝武钢铁',
     '· 全国性大型寿险公司',
     '· 2024上市 全球品牌价值2000强'
   ];
   const rightLines=[
     '· 投保年龄：30天-80周岁',
     '· 交费：18-64岁 5万起；领取18-59周岁',
-    '· 关爱金：第5年起每年基本保额10%×5年',
+    '· 关爱金：第5年起每年基本额10%×5年',
     '· 年金：交清后每年固定给付',
-    '· 非分红型·保证利益写入合同·保障至105周岁'
+    '· 非分红型·保证利益写入合同'
   ];
   let ly=infoY+34;
   leftLines.forEach(l=>{ctx.fillText(l,lx,ly);ly+=15;});
@@ -341,15 +342,16 @@ function downloadImage(){
   ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText(`${genderLabel} ${age}周岁 · ${termLabel} · 年交${fmt(premium)}元 · 基本保额${fmt(sumAssured)}元 · 保障终身 · 非分红型(保证利益)`, canvasW/2, paramY+PARAM_H/2);
 
-  // 子标题栏
+  // 子标题栏 — 与表格等宽对齐（不再铺满全宽）
+  const tableX=PAD;
   const subY=paramY+PARAM_H;
-  ctx.fillStyle=COLORS.subHeader; ctx.fillRect(0,subY,canvasW,SUBHDR_H);
+  ctx.fillStyle=COLORS.subHeader; ctx.fillRect(tableX,subY,totalW,SUBHDR_H);
   ctx.fillStyle='#FFFFFF'; ctx.font='bold 20px "PingFang SC","Microsoft YaHei",sans-serif';
   ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText('利 益 演 示 表', canvasW/2, subY+SUBHDR_H/2);
+  ctx.fillText('利 益 演 示 表', tableX+totalW/2, subY+SUBHDR_H/2);
 
   // 表头
-  const tableX=PAD, tableY=subY+SUBHDR_H;
+  const tableY=subY+SUBHDR_H;
   ctx.fillStyle=COLORS.tableHeader; ctx.fillRect(tableX,tableY,totalW,HEADER_H);
   const headers=['保单\n年度','年龄\n(年末)','关爱金\n年金','累计关爱金\n年金','现金价值\n(年末)','生存总利益\n(年末)','身故总利益\n(年末)'];
   ctx.fillStyle='#FFFFFF'; ctx.textAlign='center'; ctx.textBaseline='middle';
@@ -393,43 +395,54 @@ function downloadImage(){
   ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillText('本演示基于保证利益（非分红型），生存总利益=关爱金/年金+现金价值，仅供产品利益参考，具体以保险合同为准', canvasW/2, footerY+10);
 
-  // 导出（超清toBlob + 桌面保存）
+  // 导出（微信/手机：页面内显示图片长按保存；桌面：直接下载）
   const _fn=`${productName}_${genderLabel}${age}岁${termLabel}_保费${fmt(premium)}元.png`;
+  const ua=navigator.userAgent;
+  const isWechat=/MicroMessenger/i.test(ua);
+  const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(ua)||window.innerWidth<768;
   canvas.toBlob(async function(blob){
-    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-    if(!isMobile && window.showSaveFilePicker){
+    if(!blob){showToast('生成图片失败，请重试');return;}
+    const blobUrl=URL.createObjectURL(blob);
+    if(isWechat||isMobile){
+      showImagePreview(blobUrl,_fn);
+      showToast('长按图片即可保存到相册');
+      return;
+    }
+    if(window.showSaveFilePicker){
       try{
         const h=await window.showSaveFilePicker({suggestedName:_fn, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
         const w=await h.createWritable(); await w.write(blob); await w.close();
-        showToast('已保存到所选位置'); return;
-      }catch(e){ if(e.name==='AbortError') return; }
+        showToast('已保存到所选位置'); URL.revokeObjectURL(blobUrl); return;
+      }catch(e){ if(e&&e.name==='AbortError'){URL.revokeObjectURL(blobUrl);return;} }
     }
-    // 手机端：data URL 确保兼容，不弹提示
-    const dataUrl = canvas.toDataURL('image/png');
-    // 微信内置浏览器屏蔽自动下载，直接弹窗显示图片让用户长按保存
-    const isWechat = /MicroMessenger/i.test(navigator.userAgent);
-    if (isWechat && typeof window.showBrowserOpenPrompt === 'function') {
-      window.showBrowserOpenPrompt(dataUrl, _fn);
-      return;
-    }
-    function dataUrlToBlobUrl(url){var p=url.split(','),bs=atob(p[1]),ab=new ArrayBuffer(bs.length),ia=new Uint8Array(ab);for(var i=0;i<bs.length;i++)ia[i]=bs.charCodeAt(i);return URL.createObjectURL(new Blob([ab],{type:'image/png'}));}
-    const blobUrl = dataUrlToBlobUrl(dataUrl);
-    if(isMobile){
-      const _a=document.createElement('a'); _a.href=blobUrl; _a.download=_fn;
-      _a.style.display='none'; document.body.appendChild(_a); _a.click(); document.body.removeChild(_a);
-      setTimeout(()=>{
-        const win=window.open('','_blank');
-        if(win)win.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+_fn+'</title><style>body{margin:0;display:flex;justify-content:center;background:#f5f5f5;}img{max-width:100%;height:auto;}</style></head><body><img src="'+blobUrl+'"></body></html>');
-      },600);
-    }else{
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a'); a.href=url; a.download=_fn;
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),2000);
-      showToast('计划书已下载');
-      if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, _fn); }catch(e){} }
-    }
+    const a=document.createElement('a'); a.href=blobUrl; a.download=_fn;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(blobUrl),3000);
+    showToast('计划书已下载');
   },'image/png');
+}
+
+// 微信/手机端：页面内全屏显示图片，提示长按保存到相册
+function showImagePreview(url, fn){
+  let ov=document.getElementById('imgPreviewOverlay');
+  if(!ov){
+    ov=document.createElement('div');
+    ov.id='imgPreviewOverlay';
+    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;';
+    ov.innerHTML=''
+      +'<div style="color:#fff;font-size:14px;margin-bottom:10px;text-align:center;line-height:1.5;">长按下方图片即可保存到相册</div>'
+      +'<img id="ipImg" style="max-width:100%;max-height:68%;border-radius:8px;background:#fff;">'
+      +'<div style="margin-top:14px;display:flex;gap:12px;">'
+      +'<button id="ipClose" style="padding:10px 20px;border:none;border-radius:8px;background:#fff;color:#1E40AF;font-size:15px;font-weight:700;">关闭</button>'
+      +'<a id="ipOpen" style="padding:10px 20px;border-radius:8px;background:#1E40AF;color:#fff;font-size:15px;font-weight:700;text-decoration:none;display:flex;align-items:center;" target="_blank">用浏览器打开</a>'
+      +'</div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('click',function(e){ if(e.target===ov||e.target.id==='ipClose'){ov.style.display='none';} });
+  }
+  document.getElementById('ipImg').src=url;
+  const openBtn=document.getElementById('ipOpen');
+  openBtn.href=url; openBtn.download=fn;
+  ov.style.display='flex';
 }
 
 // 初始化
