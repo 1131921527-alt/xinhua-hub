@@ -67,7 +67,32 @@
     .btn-dl{margin-left:0;margin-top:10px;width:100%;}
     .wrap{padding:0;}
   }
+/* ===== 统一下载计划书模板（与中行/宏安一致）===== */
+  .dl-bar{display:flex;align-items:center;margin:14px 0;flex-wrap:wrap;}
+  .dl-bar .tip{margin:0 0 0 12px;}
+  .plan{padding:0 0 8px;background:#fff;}
+  .plan-title{text-align:center;font-size:24px;font-weight:800;color:#1E40AF;margin:6px 0 14px;letter-spacing:0;}
+  .plan-intro{display:flex;gap:0;border:2px solid #1E40AF;margin:0 0 14px;background:#fff;}
+  .plan-intro>div{flex:1;min-width:0;padding:12px 14px;border-right:2px solid #1E40AF;}
+  .plan-intro>div:last-child{border-right:0;}
+  .plan-intro h4{color:#1E40AF;font-size:14px;font-weight:700;margin-bottom:6px;}
+  .plan-intro p{font-size:12.5px;line-height:1.65;color:#1E293B;margin:0 0 4px;}
+  #paramBar{margin-bottom:12px;}
+  body.capturing .no-export{display:none !important;}
+  body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
+  body.capturing .plan{padding:0 !important;}
+  body.capturing .table-scroll{overflow:visible !important;}
+  body.capturing thead th{position:static !important;}
+  @media(max-width:768px){
+    .dl-bar{flex-direction:column;align-items:stretch;}
+    .dl-bar .btn-dl,.dl-bar .btn-dl-secondary{margin:10px 0 0 0 !important;width:100%;}
+    .dl-bar .tip{margin:8px 0 0 0 !important;}
+    .plan-intro{flex-direction:column;}
+    .plan-intro>div{border-right:0;border-bottom:2px solid #1E40AF;}
+    .plan-intro>div:last-child{border-bottom:0;}
+  }
 </style>
+<script src="html2canvas.min.js"></script>
 </head>
 <body>
 <a class="back-link" href="index.html">← 返回资料库</a>
@@ -121,14 +146,30 @@
   </div>
 
   <div class="err" id="errorMsg"></div>
-  <div id="paramBar"></div>
-  <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
 
-  <div class="card">
-    <div style="display:flex;align-items:center;margin-bottom:10px;">
-      <button class="btn btn-dl" onclick="downloadImage()">下载演算图片</button>
-      <span class="tip" style="margin:0 0 0 12px;">导出含完整演算表的计划书图片</span>
+  <div class="dl-bar no-export">
+    <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
+    <span class="tip" style="margin:0 0 0 12px;">导出效果图同款版式，含完整演算表</span>
+  </div>
+
+  <div id="planArea" class="plan">
+    <div class="plan-title">恒享人生 · 年金保险 · 理财计划</div>
+    <div class="plan-intro">
+      <div>
+        <h4>公司介绍</h4>
+        <p>成立1996年9月（人民大会堂），中央汇金（与中农工建同属大股东）、中国宝武钢铁控股。</p>
+        <p>国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强。</p>
+        <p>连续九年获惠誉财务实力评级"A"级、穆迪"A2"级。</p>
+      </div>
+      <div>
+        <h4>产品简介</h4>
+        <p>✅ 非分红型，保证利益写入合同</p>
+        <p>✅ 第5年起关爱金、交清后每年固定年金给付</p>
+        <p>✅ 现金价值稳健增长，身故保障充足</p>
+      </div>
     </div>
+    <div id="paramBar"></div>
+    <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
     <div class="table-scroll">
       <table id="resultTable">
         <thead><tr>
@@ -236,7 +277,7 @@ async function generate(){
   btn.disabled=false; btn.textContent='生成利益演示';
 }
 
-function downloadImage(){
+function _legacyDownloadImage(){
   const age=parseInt(document.getElementById('age').value);
   const term=parseInt(document.getElementById('term').value);
   const premium=parseInt(document.getElementById('premium').value);
@@ -450,5 +491,71 @@ try{generate();}catch(e){console.error('init:',e);var _b=document.getElementById
 </script>
 
 <script src="ai-planner.js"></script>
+
+<!-- 统一下载方案：html2canvas 截 #planArea，与中行/宏安一致 -->
+<script>
+async function downloadImage(){
+  const tbody=document.getElementById('resultBody');
+  if(!tbody||!tbody.innerHTML){showToast('请先生成利益演示');return;}
+  const plan=document.getElementById('planArea');
+  const wrap=plan.closest('.wrap');
+  const tableScroll=plan.querySelector('.table-scroll');
+  const oldWrapWidth=wrap?wrap.style.width:'';
+  const oldWrapMaxWidth=wrap?wrap.style.maxWidth:'';
+  const oldPlanWidth=plan.style.width;
+  const oldPlanMinWidth=plan.style.minWidth;
+  const oldPlanOverflow=plan.style.overflow;
+  const oldPlanHeight=plan.style.height;
+  const oldScrollOverflow=tableScroll?tableScroll.style.overflow:'';
+  const oldScrollOverflowX=tableScroll?tableScroll.style.overflowX:'';
+  const oldScrollHeight=tableScroll?tableScroll.style.height:'';
+  document.body.classList.add('capturing');
+  if(wrap){wrap.style.width='1200px';wrap.style.maxWidth='1200px';}
+  plan.style.width='1200px';plan.style.minWidth='1200px';
+  plan.style.overflow='visible';plan.style.height='auto';
+  if(tableScroll){tableScroll.style.overflow='visible';tableScroll.style.overflowX='visible';tableScroll.style.height='auto';}
+  const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;
+  window.scrollTo(0,0);
+  try{
+    const captureW=1200;
+    const captureH=plan.scrollHeight;
+    const isWechatEnv=/MicroMessenger/i.test(navigator.userAgent);
+    const maxScale=isWechatEnv?2.5:4;
+    const maxCanvasPixels=isWechatEnv?8000000:16000000;
+    let captureScale=maxScale;
+    if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}
+    captureScale=Math.max(1.0,captureScale);
+    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
+    if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
+    plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
+    if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
+    document.body.classList.remove('capturing');
+    window.scrollTo(0,oldScrollTop);
+    const filename='恒享人生理财计划书.png';
+    const _blob=await new Promise(r=>canvas.toBlob(r,'image/png'));
+    const _blobUrl=URL.createObjectURL(_blob);
+    const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
+    const isWechatEnv2=/MicroMessenger/i.test(navigator.userAgent);
+    if(isWechatEnv2||isMobile){showImagePreview(_blobUrl,filename);showToast('长按图片即可保存到相册');return;}
+    if(!isMobile&&window.showSaveFilePicker){
+      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}
+    }
+    const a=document.createElement('a');a.href=_blobUrl;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);
+    showToast('计划书已下载');
+  }catch(e){
+    if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
+    plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
+    if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
+    document.body.classList.remove('capturing');window.scrollTo(0,oldScrollTop);
+    showError('图片生成失败：'+e.message);
+  }
+}
+function showImagePreview(url,fn){
+  let ov=document.getElementById('imgPreviewOverlay');
+  if(!ov){ov=document.createElement('div');ov.id='imgPreviewOverlay';ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;';ov.innerHTML='<div style="color:#fff;font-size:14px;margin-bottom:10px;text-align:center;line-height:1.5;">长按下方图片即可保存到相册</div><img id="ipImg" style="max-width:100%;max-height:68%;border-radius:8px;background:#fff;"><div style="margin-top:14px;display:flex;gap:12px;"><button id="ipClose" style="padding:10px 20px;border:none;border-radius:8px;background:#fff;color:#1E40AF;font-size:15px;font-weight:700;">关闭</button><a id="ipOpen" style="padding:10px 20px;border-radius:8px;background:#1E40AF;color:#fff;font-size:15px;font-weight:700;text-decoration:none;display:flex;align-items:center;" target="_blank">用浏览器打开</a></div>';document.body.appendChild(ov);ov.addEventListener('click',function(e){if(e.target===ov||e.target.id==='ipClose'){ov.style.display='none';}});}
+  document.getElementById('ipImg').src=url;const openBtn=document.getElementById('ipOpen');openBtn.href=url;openBtn.download=fn;ov.style.display='flex';
+}
+</script>
 </body>
 </html>
