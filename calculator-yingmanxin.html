@@ -377,12 +377,10 @@ function generate(){
     if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
     return true;
   });
-  const reserveYears = displayRows.filter(r => r.yieldVal === null).length;
   tbody.innerHTML = displayRows.map((r, idx) => {
-    const isReserve = r.yieldVal === null;
-    const yieldCell = isReserve
-      ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">投资期</span></td>` : '')
-      : `<td class="col-rate">${(r.yieldVal * 100).toFixed(2) + '%'}</td>`;
+    const yieldCell = r.yr <= 5
+      ? `<td class="col-rate"><span class="reserve-cell">储备期</span></td>`
+      : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     const rowClass = r.cvTotal > cumPrem ? 'row-positive' : '';
     return `<tr class="${rowClass}">
       <td>${r.yr}</td>

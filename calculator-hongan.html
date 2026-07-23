@@ -378,10 +378,9 @@ function generate(){
     return true;
   });
   tbody.innerHTML = displayRows.map((r, idx) => {
-    const isPaymentRow = r.yr <= term;
-    const yieldCell = idx === 0
-      ? `<td class="col-rate" rowspan="${term}"><span class="reserve-cell">投资期</span></td>`
-      : (isPaymentRow ? '' : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`);
+    const yieldCell = r.yr <= 5
+      ? `<td class="col-rate"><span class="reserve-cell">储备期</span></td>`
+      : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     const rowClass = r.survival > totalPrem ? 'row-positive' : '';
     return `<tr class="${rowClass}">
       <td>${r.yr}</td>
