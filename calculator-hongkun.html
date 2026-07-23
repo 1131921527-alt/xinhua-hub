@@ -162,7 +162,6 @@
       </div>
     </div>
     <div id="paramBar"></div>
-    <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
     <div class="table-scroll">
       <table id="resultTable">
         <thead><tr>
@@ -239,10 +238,6 @@ async function generate(){
       `<strong style="color:#1E40AF;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E40AF;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E40AF;font-size:16px;">${termLabel}</strong><strong style="color:#1E40AF;font-size:16px;">${startAge}岁开始领</strong><span style="color:#64748B;">领取方式 ${drawLabel}</span>`;
     document.getElementById('thAnn').innerHTML = drawMode==='month' ? '养老年金<br>祝寿金(月领)' : '养老年金<br>祝寿金(年领)';
 
-    let y2ratio=0; if(years.length>1){const r2=years[1];if(r2[2]>0) y2ratio=r2[7]/r2[2]*100;}
-    document.getElementById('year2CvBar').style.display='block';
-    document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
-
     const body=document.getElementById('resultBody');
     body.innerHTML='';
     const paymentYears=term===1?1:term;
@@ -257,12 +252,11 @@ async function generate(){
       const rowClass=isLast?'row-last':(is5y?'row-5y':'');
       const tr=document.createElement('tr');
       if(rowClass) tr.className=rowClass;
-      // 缴费期合并"缴费期分X年投入"
+      // 储备期：前5年合并显示"储备期"
       let stageCell='';
-      if(isPayYear){
+      if(yr <= 5){
         if(isFirstPay){
-          const payText=paymentYears===1?'趸交':`缴费期分${paymentYears}年投入`;
-          stageCell=`<td class="pay-merge" rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;">${payText}</td>`;
+          stageCell=`<td class="pay-merge" rowspan="5" style="vertical-align:middle;text-align:center;">储备期</td>`;
         }
       } else {
         stageCell=`<td>-</td>`;

@@ -215,7 +215,6 @@ body.capturing .table-scroll{overflow-x:visible !important;}
           </tr>
         </table>
         <div class="side-stats">
-          <div class="stat-box"><div class="stat-label">第二年末现价百分比</div><div class="stat-val" id="statCashRatio">84.99%</div></div>
           <div class="stat-box"><div class="stat-label">演示分红实现率</div><div class="stat-val">100%</div></div>
           <div class="stat-box"><div class="stat-label">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
         </div>
@@ -330,7 +329,6 @@ function generate(){
   let rows = [];
   let cumDiv = 0;
   let cumPrem = 0;
-  let year2CvRatio = 0;
   let basicSa = 0;
 
   for(let yr = 1; yr <= period; yr++){
@@ -361,10 +359,6 @@ function generate(){
     let yieldVal = null;
     if(yr > 1 && cvTotal > cumPrem){
       yieldVal = (cvTotal - cumPrem) / (cumPrem * (yr - 1));
-    }
-
-    if(yr === 2){
-      year2CvRatio = cv / cumPrem * 100;
     }
 
     // Get basic SA from last year's maturity
@@ -417,7 +411,6 @@ function generate(){
   if (caseInfo) caseInfo.textContent =
     `VIP${genderStr}，今年${age}周岁，${payTermLabel}、年交${fmt(premium)}元，购买盈满鑫两全保险（分红型），保险期间${period}年`;
 
-  document.getElementById('statCashRatio').textContent = year2CvRatio.toFixed(2) + '%';
   document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';
 }
 

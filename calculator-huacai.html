@@ -196,7 +196,6 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
       </div>
     </div>
     <div id="paramBar"></div>
-    <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
     <div class="table-scroll">
       <table id="resultTable">
         <thead>
@@ -369,11 +368,6 @@ async function generate() {
       <strong style="color:#1E40AF;font-size:17px;">${startAge}岁开始领</strong> ·
       <span style="color:#64748B;">分红养老年金</span>`;
 
-    let y2ratio=0;
-    if(HC_DATA.length>1){const r2=HC_DATA[1];const cp=Math.round(r2[3]*scale);if(cp>0)y2ratio=Math.round(r2[8]*scale)/cp*100;}
-    document.getElementById('year2CvBar').style.display='block';
-    document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
-
     const tbody = document.getElementById('resultBody');
     const paymentYears = term === 1 ? 1 : term;
 
@@ -406,14 +400,12 @@ async function generate() {
       const isLast = (idx === HC_DATA.length - 1);
       const rowClass = isLast ? 'row-last' : (is5y ? 'row-5y' : '');
 
-      // 缴费期合并"缴费期分X年投入" (放最后阶段列)
-      const isPayYear = yr <= paymentYears;
+      // 阶段列：前5年合并显示"储备期"
       const isFirstPay = yr === 1;
       let rateCell = '';
-      if (isPayYear) {
+      if (yr <= 5) {
         if (isFirstPay) {
-          const payText = paymentYears === 1 ? '趸交' : `缴费期分${paymentYears}年投入`;
-          rateCell = `<td class="col-rate rate-reserve" rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;">${payText}</td>`;
+          rateCell = `<td class="col-rate rate-reserve" rowspan="5" style="vertical-align:middle;text-align:center;">储备期</td>`;
         }
       } else {
         rateCell = `<td class="col-rate">-</td>`;

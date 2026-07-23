@@ -171,7 +171,6 @@ body.capturing thead th{position:static !important;}
       </div>
     </div>
     <div id="paramBar"></div>
-    <div id="year2CvBar" style="display:none;margin-bottom:12px;"><div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div></div>
     <div class="table-scroll">
       <table id="resultTable">
         <thead>
@@ -376,40 +375,21 @@ async function generate() {
       prevO = O;
     }
 
-    // 第二年末现价百分比
-    let y2ratio=0;
-    if(allRows.length>1){const r2=allRows[1];if(r2.cumPremiumAll>0)y2ratio=r2.guaranteed/r2.cumPremiumAll*100;}
-    document.getElementById('year2CvBar').style.display='block';
-    document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
-
     let html = '';
     for (let i = 0; i < allRows.length; i++) {
       const r = allRows[i];
       
-      // 标准版：缴费期不合并行，只合并"总利益增长额"和"年增长率"两列
-      const isPayYear = r.yr <= paymentYears;
-      const isFirstPayYear = r.yr === 1;
+      // 总利益增长额：每年显示具体数额
+      const growth = i > 0 ? r.total - allRows[i-1].total : r.total;
+      const totalGrowthCell = `<td>${fmt(growth)}</td>`;
+      
+      // 年增长率：前reserveYears年显示"储备期"，之后显示百分比
+      const rateCell = `<td class="col-rate ${r.rateClass}">${r.rate}</td>`;
       
       // 每5年高亮 + 末年高亮
       const is5y = r.yr >= 5 && r.yr % 5 === 0;
       const isLast = (i === allRows.length - 1) || (r.yr === maxYear);
       const rowClass = isLast ? 'row-last' : (is5y ? 'row-5y' : '');
-      
-      // 总利益增长额 / 年增长率 - 缴费期合并
-      let totalGrowthCell, rateCell;
-      if (isPayYear) {
-        if (isFirstPayYear) {
-          const payText = paymentYears === 1 ? '趸交' : `缴费期分${paymentYears}年投入`;
-          totalGrowthCell = `<td rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;color:#94A3B8;">${payText}</td>`;
-          rateCell = `<td rowspan="${paymentYears}" style="vertical-align:middle;text-align:center;color:#94A3B8;">${payText}</td>`;
-        } else {
-          totalGrowthCell = '';  // 被rowspan
-          rateCell = '';  // 被rowspan
-        }
-      } else {
-        totalGrowthCell = `<td>${fmt(r.total - (i > 0 ? allRows[i-1].total : 0))}</td>`;
-        rateCell = `<td class="col-rate ${r.rateClass}">${r.rate}</td>`;
-      }
       
       // 左侧竖排标签
       let sideLabelCell = '';

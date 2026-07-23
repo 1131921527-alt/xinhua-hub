@@ -211,7 +211,6 @@ body.capturing .table-scroll{overflow-x:visible !important;}
       </table>
 
       <div class="stats-row" style="margin-top:10px; margin-bottom:10px;">
-        <div class="stat-inline-box"><span>第二年末现价百分比</span><strong id="statCashRatio">95.58%</strong></div>
         <div class="stat-inline-box"><span>2025年度红利实现率</span><strong>118%</strong></div>
         <div class="stat-inline-box"><span>演示累积生息利率</span><strong id="statRate">2.50%</strong></div>
       </div>
@@ -320,12 +319,6 @@ function generate(){
   document.getElementById('infoSa').textContent = fmt(maturitySa) + '元';
   const last = rows[rows.length-1];
   document.getElementById('caseInfo').innerHTML = `VIP${currentGender===1?'女士':'先生'}，今年${age}岁，购买${fmt(premium)}元${period}年期宏禧来 （分红型），预计满期总利益<span class="em" style="color:var(--primary)">${fmt(Math.round(last.survival))}</span>元`;
-
-  // 第二年末现价百分比
-  const d2 = DATA[`${currentGender}_${age}_${period}_2`];
-  if(d2 && d2.cum_premium > 0){
-    document.getElementById('statCashRatio').textContent = (d2.cv / d2.cum_premium * 100).toFixed(2) + '%';
-  }
 
   // Render table
   let displayRows = rows.filter(r => {

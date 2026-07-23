@@ -93,7 +93,7 @@
 <div class="wrap">
   <div class="title-bar">
     <h1>宏泰世家（分红型）终身寿险 · 利益演示计算器</h1>
-    <p>新华保险 · 分红型终身寿险。输入被保人信息，自动演算各保单年度现金价值、红利、交清增额等利益。前5年为投资期。</p>
+    <p>新华保险 · 分红型终身寿险。输入被保人信息，自动演算各保单年度现金价值、红利、交清增额等利益。前5年为储备期。</p>
   </div>
 
   <div class="card">
@@ -163,9 +163,8 @@
       </div>
     </div>
     <div id="paramBar"></div>
-    <div id="year2CvBar" style="display:none;margin-bottom:12px;">
-      <div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;margin-right:10px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">第二年末现价百分比</span><strong id="statCashRatio" style="color:#1E40AF;font-size:18px;font-weight:700;">--</strong></div>
-      <div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">2025年度红利实现率</span><strong style="color:#1E40AF;font-size:18px;font-weight:700;">118%</strong></div>
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;margin-right:10px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">2025年度红利实现率</span><strong style="color:#1E40AF;font-size:18px;font-weight:700;">118%</strong></div>
     </div>
     <div class="table-scroll">
       <table id="resultTable">
@@ -266,11 +265,6 @@ async function generate(){
       `<strong style="color:#1E40AF;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E40AF;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E40AF;font-size:16px;">${termLabel}</strong><span style="color:#64748B;">分红交清增额</span>`;
 
     const rows=getRows();
-    let y2ratio=0;
-    if(rows.length>1){let cp=0;for(let i=0;i<2&&i<rows.length;i++)cp+=rows[i].prem||0;if(cp>0)y2ratio=rows[1].cv_guar/cp*100;}
-    document.getElementById('year2CvBar').style.display='block';
-    document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
-
     const body=document.getElementById('resultBody');
     body.innerHTML='';
     const reserveYears=term;  // 缴费期合并
@@ -317,9 +311,9 @@ async function generate(){
       // 现金价值（保证+红利）
       if(isPayback) cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
       else cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
-      // 收益率 - 前5年合并居中显示"缴费期"，第6年起显示收益率
+      // 收益率 - 前5年合并居中显示"储备期"，第6年起显示收益率
       if(isFirstPay){
-        cells+=`<td class="pay-merge" rowspan="5">缴费期</td>`;
+        cells+=`<td class="pay-merge" rowspan="5">储备期</td>`;
       } else if(yr > 5){
         const rv=row.rate_raw;
         if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
@@ -540,7 +534,7 @@ function _legacyDownloadImage(){
     });
   });
 
-  // 6) 前5年收益率列显示"缴费期"（合并单元格居中）
+  // 6) 前5年收益率列显示"储备期"（合并单元格居中）
   let reserveStartIdx=-1, reserveCount=0;
   dlRows.forEach((r,idx)=>{ if(r.reserve){ if(reserveStartIdx===-1) reserveStartIdx=idx; reserveCount++; } });
   if(reserveStartIdx>=0&&reserveCount>0){
@@ -552,7 +546,7 @@ function _legacyDownloadImage(){
     ctx.strokeRect(rcX+.5,ry0+.5,colW[9]-1,blockH-1);
     ctx.fillStyle=C.textGray; ctx.font='bold 12px '+FAM;
     ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('缴费期', rcX+colW[9]/2, ry0+blockH/2);
+    ctx.fillText('储备期', rcX+colW[9]/2, ry0+blockH/2);
   }
 
   // 7) 收益率列（非投资期行）

@@ -211,7 +211,6 @@ body.capturing .table-scroll{overflow-x:visible !important;}
           </tr>
         </table>
         <div class="stats-row">
-          <div class="stat-inline-box"><span>第二年末现价百分比</span><strong id="statCashRatio">48.55%</strong></div>
           <div class="stat-inline-box"><span>2025年度红利实现率</span><strong>118%</strong></div>
           <div class="stat-inline-box"><span>演示累积生息利率</span><strong id="statRate">2.50%</strong></div>
         </div>
@@ -328,7 +327,6 @@ function generate(){
   let cumDiv = 0;
   let cumPrem = 0;
   let lastSurvival = 0;
-  let year2CvRatio = 0;
   let basicSa = 0;
   const maxYear = 105 - age;
 
@@ -364,10 +362,6 @@ function generate(){
       yieldVal = null;
     } else {
       yieldVal = (survival - lastSurvival) / cumPrem;
-    }
-
-    if(yr === 2){
-      year2CvRatio = cv / cumPrem * 100;
     }
 
     rows.push({ yr, ageEnd, yearPrem, aviation, deathBenefit, annualDiv, cumDiv, cv, survival, yieldVal });
@@ -416,7 +410,6 @@ function generate(){
       `VIP${genderStr}，今年${age}周岁，${cfg.label}、年交${fmt(premium)}元，购买宏安世家（分红型）`;
   }
 
-  document.getElementById('statCashRatio').textContent = year2CvRatio.toFixed(2) + '%';
   document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';
 
   updateFormText();

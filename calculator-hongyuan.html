@@ -223,7 +223,6 @@ body.capturing .table-scroll{overflow-x:visible !important;}
           </tr>
         </table>
         <div class="side-stats">
-          <div class="stat-box"><div class="stat-label">第二年末现价百分比</div><div class="stat-val" id="statCashRatio">--</div></div>
           <div class="stat-box"><div class="stat-label">2025年度红利实现率</div><div class="stat-val">118%</div></div>
           <div class="stat-box"><div class="stat-label">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
         </div>
@@ -330,7 +329,6 @@ function generate(){
   let cumDiv = 0;
   let cumAnn = 0;
   let cumPrem = 0;
-  let year2CvRatio = 0;
   let lastSurv = 0;
   let basicSa = 0;
 
@@ -344,7 +342,6 @@ function generate(){
     cumPrem += yearPrem;
 
     const cv = d.cv * scale;
-    if(yr === 2 && cumPrem > 0) year2CvRatio = cv / cumPrem * 100;
     const hl = (d.hl || 0) * scale;
     const sa = d.sa * scale;
     if(yr === 1) basicSa = sa;
@@ -412,7 +409,6 @@ function generate(){
   document.getElementById('infoSa').textContent = fmt(basicSa);
   document.getElementById('infoAnnAge').textContent = annuityAge + '周岁';
   document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';
-  document.getElementById('statCashRatio').textContent = year2CvRatio.toFixed(2) + '%';
 
   const genderStr = currentGender === 1 ? '女士' : '先生';
   const modeStr = annuityMode === 'month' ? '月领' : '年领';
