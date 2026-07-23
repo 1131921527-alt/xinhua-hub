@@ -252,15 +252,8 @@ async function generate(){
       const rowClass=isLast?'row-last':(is5y?'row-5y':'');
       const tr=document.createElement('tr');
       if(rowClass) tr.className=rowClass;
-      // 储备期：前5年合并显示"储备期"
-      let stageCell='';
-      if(yr <= 5){
-        if(isFirstPay){
-          stageCell=`<td class="pay-merge" rowspan="5" style="vertical-align:middle;text-align:center;">储备期</td>`;
-        }
-      } else {
-        stageCell=`<td>-</td>`;
-      }
+      // 储备期：前5年显示"储备期"
+      const stageCell = yr <= 5 ? '<td class="pay-merge" style="vertical-align:middle;text-align:center;">储备期</td>' : '<td>-</td>';
       tr.innerHTML=`<td>${yr}</td><td>${curAge}</td>`+
         `<td>${prem>0?fmt(prem*scale):'-'}</td><td>${fmt(cum*scale)}</td>`+
         `<td class="col-ann">${ann>0?fmt(ann*scale*annFactor):'-'}</td><td class="col-ann">${fmt(annCum*scale*annFactor)}</td>`+
