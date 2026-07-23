@@ -236,7 +236,7 @@ async function generate(){
     document.getElementById('paramBar').innerHTML=
       `<strong style="color:#1E40AF;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E40AF;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E40AF;font-size:16px;">${termLabel}</strong><span style="color:#64748B;">非分红型</span>`;
 
-    let y2ratio=0; if(years.length>1){const r2=years[1];if(r2[2]>0) y2ratio=r2[7]/r2[2]*100;}
+    let y2ratio=0; if(years.length>1){const r2=years[1];if(r2[2]>0) y2ratio=r2[3]/r2[2]*100;}
     document.getElementById('year2CvBar').style.display='block';
     document.getElementById('statCashRatio').textContent=y2ratio.toFixed(2)+'%';
 
