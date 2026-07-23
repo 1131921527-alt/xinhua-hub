@@ -44,7 +44,7 @@ input,select{padding:7px 10px;border:1.5px solid #e2e8f0;border-radius:6px;font-
 .dbar{display:flex;align-items:center;gap:8px;margin:12px 0;flex-wrap:wrap}
 .bdl{padding:9px 20px;background:var(--db);color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer}
 @media(max-width:768px){.fr{flex-direction:column}.fd{width:100%}input,select{width:100%}.ir{flex-direction:column}.ir .sec:first-child{margin-right:0;margin-bottom:-2px}.sr{flex-direction:column}.sbx{border-right:0;border-bottom:2px solid var(--db)}.mt{font-size:11px;min-width:680px}.pt{font-size:19px}}
-</style></head>
+body.capturing .dbar{display:none !important;}</style></head>
 <body>
 
 <div class="ic"><div class="fr">
@@ -118,7 +118,28 @@ return `<tr><td>${r.yr}</td><td>${r.ae}</td><td>${r.yp>0?fmt(r.yp):'-'}</td><td>
 }).join('');
 }
 async function dlPng(){
-if(typeof html2canvas==='undefined'){const s=document.createElement('script');s.src='html2canvas.min.js';await new Promise(r=>{s.onload=r;document.head.appendChild(s)});}
+  const plan=document.getElementById('plan');
+  if(!plan){alert('请先生成演算表');return;}
+  if(typeof html2canvas==='undefined'){const s=document.createElement('script');s.src='html2canvas.min.js';await new Promise(r=>{s.onload=r;document.head.appendChild(s)});}
+  const oldW=plan.style.width,oldMinW=plan.style.minWidth,oldOv=plan.style.overflow,oldH=plan.style.height;
+  document.body.classList.add('capturing');
+  plan.style.width='1100px';plan.style.minWidth='1100px';plan.style.overflow='visible';plan.style.height='auto';
+  try{
+    const c=await html2canvas(plan,{scale:3,backgroundColor:'#fff',useCORS:true,windowWidth:1100});
+    const blob=await new Promise(r=>c.toBlob(r,'image/png'));
+    const url=URL.createObjectURL(blob);
+    const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
+    const isWechat=/MicroMessenger/i.test(navigator.userAgent);
+    if(isWechat||isMobile){showImagePreview(url,'宏愿人生理财计划.png');return;}
+    if(!isMobile&&window.showSaveFilePicker){
+      try{const h=await window.showSaveFilePicker({suggestedName:'宏愿人生理财计划.png',types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}
+    }
+    const a=document.createElement('a');a.href=url;a.download='宏愿人生理财计划.png';a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),3000);
+  }catch(e){alert('图片生成失败：'+e.message);}
+  plan.style.width=oldW;plan.style.minWidth=oldMinW;plan.style.overflow=oldOv;plan.style.height=oldH;
+  document.body.classList.remove('capturing');
+});}
 const c=await html2canvas(document.getElementById('plan'),{scale:3,backgroundColor:'#fff',useCORS:true,windowWidth:900});
 const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='宏愿人生理财计划.png';a.click();
 }
@@ -126,4 +147,9 @@ document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data
 document.getElementById('tp').textContent='默认：女 / 40岁 / 3年交 / 年交10万 / 60岁起领 / 演示利率2.5%';
 gen();
 
-</script></body></html>
+</script>function showImagePreview(url,fn){
+  let ov=document.getElementById('imgPreviewOverlay');
+  if(!ov){ov=document.createElement('div');ov.id='imgPreviewOverlay';ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;';ov.innerHTML='<div style="color:#fff;font-size:14px;margin-bottom:10px;text-align:center;line-height:1.5;">长按下方图片即可保存到相册</div><img id="ipImg" style="max-width:100%;max-height:68%;border-radius:8px;background:#fff;"><div style="margin-top:14px;display:flex;gap:12px;"><button id="ipClose" style="padding:10px 20px;border:none;border-radius:8px;background:#fff;color:#1E40AF;font-size:15px;font-weight:700;">关闭</button><a id="ipOpen" style="padding:10px 20px;border-radius:8px;background:#1E40AF;color:#fff;font-size:15px;font-weight:700;text-decoration:none;display:flex;align-items:center;" target="_blank">用浏览器打开</a></div>';document.body.appendChild(ov);ov.addEventListener('click',function(e){if(e.target===ov||e.target.id==='ipClose'){ov.style.display='none';}});}
+  document.getElementById('ipImg').src=url;const openBtn=document.getElementById('ipOpen');openBtn.href=url;openBtn.download=fn;ov.style.display='flex';
+}
+</body></html>
