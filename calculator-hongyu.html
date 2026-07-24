@@ -132,7 +132,7 @@ body.capturing thead th{position:static !important;}
       </div>
       <div class="field">
         <label>显示密度</label>
-        <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
+        <select id="displayMode" onchange="applyDisplayMode(this.value)">
           <option value="all">显示全部</option>
           <option value="5y60" selected>60岁起每5年一行</option>
           <option value="5y70">70岁起每5年一行</option>
@@ -384,7 +384,10 @@ async function generate() {
       const totalGrowthCell = `<td>${fmt(growth)}</td>`;
       
       // 年增长率：前reserveYears年显示"储备期"，之后显示百分比
-      const rateCell = `<td class="col-rate ${r.rateClass}">${r.rate}</td>`;
+      // 储备期仅首行输出合并单元格（rowspan 由 applyReserveRowspan 处理）
+      const rateCell = r.rate === '储备期'
+        ? `<td class="col-rate rate-reserve reserve-merge"><span class="reserve-cell">储备期</span></td>`
+        : `<td class="col-rate ${r.rateClass}">${r.rate}</td>`;
       
       // 每5年高亮 + 末年高亮
       const is5y = r.yr >= 5 && r.yr % 5 === 0;
@@ -420,6 +423,7 @@ async function generate() {
     
     // 应用显示密度过滤
     if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y60'); }
+    applyReserveRowspan();
     
     
   } catch (e) {
@@ -428,6 +432,37 @@ async function generate() {
     btn.disabled = false;
     btn.textContent = '生成利益演示';
   }
+}
+
+// 将逐行的“储备期”合并为一个 rowspan 居中单元格
+// 须在全部行构建完毕、且显示密度过滤（filterRowsByAge）执行之后调用
+function applyReserveRowspan(){
+  const tbody = document.getElementById('resultBody');
+  if(!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const reserveCells = Array.from(tbody.querySelectorAll('td.reserve-merge'));
+  // 复位：恢复全部储备单元格并显示、清除 rowspan
+  reserveCells.forEach(td => { td.style.display = ''; td.removeAttribute('rowspan'); });
+  // 统计可见的储备期行（连续块，位于表格顶部）
+  const visible = [];
+  for(const tr of rows){
+    if(tr.style.display === 'none') continue;
+    const cell = tr.querySelector('td.reserve-merge');
+    if(cell) visible.push(cell); else break;
+  }
+  if(visible.length > 0){
+    const n = visible.length;
+    visible.forEach((cell, i) => {
+      if(i === 0) cell.setAttribute('rowspan', String(n));
+      else cell.style.display = 'none';
+    });
+  }
+}
+
+// 显示密度切换：先执行行过滤，再重算储备期合并单元格
+function applyDisplayMode(mode){
+  if(typeof filterRowsByAge === 'function'){ filterRowsByAge(mode); }
+  applyReserveRowspan();
 }
 
 // Copy table

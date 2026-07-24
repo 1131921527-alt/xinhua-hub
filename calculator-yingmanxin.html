@@ -377,9 +377,13 @@ function generate(){
     if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
     return true;
   });
+  // 储备期行数动态计算（基于已过滤后的展示行），不硬写 5
+  const reserveYears = displayRows.filter(r => r.yr <= 5).length;
   tbody.innerHTML = displayRows.map((r, idx) => {
-    const yieldCell = r.yr <= 5
-      ? `<td class="col-rate"><span class="reserve-cell">储备期</span></td>`
+    const isReserve = r.yr <= 5;
+    // 仅首行输出合并单元格，后续储备期行不再输出该列 td
+    const yieldCell = isReserve
+      ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
       : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     const rowClass = r.cvTotal > cumPrem ? 'row-positive' : '';
     return `<tr class="${rowClass}">
