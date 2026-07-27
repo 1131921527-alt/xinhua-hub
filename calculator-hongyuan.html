@@ -379,9 +379,9 @@ function generate(){
     if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
     return true;
   });
-  const reserveYears = displayRows.filter(r => r.yieldVal === null).length;
+  const reserveYears = displayRows.filter(r => r.yr <= 5).length;
   tbody.innerHTML = displayRows.map((r, idx) => {
-    const isReserve = r.yieldVal === null;
+    const isReserve = r.yr <= 5;
     const yieldCell = isReserve
       ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
       : `<td class="col-rate">${(r.yieldVal * 100).toFixed(2) + '%'}</td>`;

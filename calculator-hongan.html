@@ -98,6 +98,15 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .main-table .col-rate{background:#DBEAFE;color:var(--primary);}
 .main-table .col-total{background:#DBEAFE;}
 .main-table .reserve-cell{color:#64748B;white-space:nowrap;}
+/* 储备期合并单元格：明确四周边框 + 水平垂直居中（下载图里要看得见） */
+.main-table td.reserve-merged{
+  background:#DBEAFE;
+  color:#64748B;
+  border:1.5px solid var(--primary-light);
+  font-weight:700;
+  text-align:center;
+  vertical-align:middle;
+}
 
 .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin:0 22px 12px;font-size:14px;font-weight:600;}
 .err.show{display:block;}
@@ -383,7 +392,7 @@ function generate(){
     const isReserve = r.yr <= 5;
     // 仅首行输出合并单元格，后续储备期行不再输出该列 td
     const yieldCell = isReserve
-      ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
+      ? (idx === 0 ? `<td class="col-rate reserve-merged" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
       : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     const rowClass = r.survival > totalPrem ? 'row-positive' : '';
     return `<tr class="${rowClass}">

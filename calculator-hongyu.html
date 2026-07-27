@@ -53,7 +53,8 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 .rate-up{color:#1E40AF;}
 .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#EFF6FF;border:1px solid #93C5FD;}
 .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
-.reserve-cell{background:#F5F5F5 !important;color:#888;font-weight:800;text-align:center;vertical-align:middle;}
+.reserve-cell{background:transparent;color:#64748B;font-weight:800;text-align:center;vertical-align:middle;}
+#resultTable td.reserve-merge{background:#DBEAFE;border:1.5px solid #3B82F6;color:#64748B;font-weight:700;text-align:center;vertical-align:middle;}
 .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
 .err.show{display:block;}
 .tip{font-size:12px;color:var(--gray);margin-top:8px;}
@@ -86,9 +87,17 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 #paramBar{margin-bottom:12px;}
 body.capturing .no-export{display:none !important;}
 body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
-body.capturing .plan{padding:0 !important;}
+body.capturing .plan{padding:28px 32px 4px !important;}
+body.capturing .plan-title{margin-top:0 !important;font-size:32px !important;}
+body.capturing .plan-intro h4{font-size:19px !important;}
+body.capturing .plan-intro p{font-size:16px !important;line-height:1.8 !important;}
+body.capturing #paramBar{font-size:18px !important;}
+body.capturing #paramBar strong{font-size:19px !important;}
+body.capturing #paramBar span{font-size:16px !important;}
+body.capturing table{min-width:100% !important;font-size:17px !important;}
+body.capturing thead th{position:static !important;font-size:20px !important;padding:11px 8px !important;}
+body.capturing tbody td{font-size:18px !important;padding:11px 8px !important;}
 body.capturing .table-scroll{overflow:visible !important;}
-body.capturing thead th{position:static !important;}
 @media(max-width:768px){
   .plan-intro{flex-direction:column;}
   .plan-intro>div{border-right:0;border-bottom:2px solid var(--blue);}
@@ -316,7 +325,7 @@ async function generate() {
     const tbody = document.getElementById('resultBody');
     const maxYear = Math.min(years.length, 106);
     const paymentYears = term === 1 ? 1 : term;
-    const reserveYears = paymentYears + 2;  // 储备期 = 缴费年数 + 2年
+    const reserveYears = 5;  // 储备期=前5年（回本），与缴费期无关
     
     // 第一遍：计算所有年份数据（即使被显示模式过滤也要计算）
     let cumK = 0;       // L = 累计K（累计交清增额基本保险金额）
@@ -405,7 +414,7 @@ async function generate() {
         sideLabelCell = `<td class="side-label" rowspan="${longTermRowspan}">长期收益</td>`;
       }
       
-      html += `<tr class="${rowClass}">
+      html += `<tr class="${rowClass}" data-age="${r.currentAge}">
         ${sideLabelCell}
         <td class="col-num">${r.yr}</td>
         <td>${r.currentAge}</td>
@@ -463,6 +472,29 @@ function applyReserveRowspan(){
 function applyDisplayMode(mode){
   if(typeof filterRowsByAge === 'function'){ filterRowsByAge(mode); }
   applyReserveRowspan();
+}
+
+// 读取当前显示密度选择（#displayMode select）
+function getDisplayMode(){
+  const sel = document.getElementById('displayMode');
+  return sel ? sel.value : '5y60';
+}
+
+// 按年龄抽样隐藏/显示表格行（只改展示，不改 allRows 数据与公式）
+// all：显示全部；5y60：60岁前全显，60岁后每5岁一行；5y70/5y75 同理
+function filterRowsByAge(mode){
+  const tbody = document.getElementById('resultBody');
+  if(!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.forEach(tr => {
+    const age = parseInt(tr.getAttribute('data-age') || '0', 10);
+    let show = true;
+    if(mode === '5y60'){ show = age < 60 || (age >= 60 && (age - 60) % 5 === 0); }
+    else if(mode === '5y70'){ show = age < 70 || (age >= 70 && (age - 70) % 5 === 0); }
+    else if(mode === '5y75'){ show = age < 75 || (age >= 75 && (age - 75) % 5 === 0); }
+    else { show = true; }
+    tr.style.display = show ? '' : 'none';
+  });
 }
 
 // Copy table
@@ -678,7 +710,7 @@ function _legacyDownloadImage() {
       const dlEntry = CALC_DATA[dlKey];
       const dlYears = dlEntry ? dlEntry.y : [];
       const dlPayYears = term === 1 ? 1 : term;
-      const dlReserveYears = dlPayYears + 2;
+      const dlReserveYears = 5;  // 储备期=前5年（回本），与缴费期无关
       const dlDisplayMode = 'after60';
       const dlMaxYear = Math.min(dlYears.length, 105);
 
@@ -924,6 +956,24 @@ setTimeout(() => {
 
 <!-- 统一下载方案：html2canvas 截 #planArea，与中行/宏安一致 -->
 <script>
+// 覆盖 ai-planner.js 中基于“列序号解析年龄文本”的 filterRowsByAge（该版本无法适配
+// 宏御表格的 side-label/储备期 rowspan 结构，会导致 60 岁后无法按每 5 年抽样）。
+// 此处改用每行可靠的 data-age 属性，确保 60 岁后每 5 岁保留一行。
+function filterRowsByAge(mode){
+  const tbody = document.getElementById('resultBody');
+  if(!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.forEach(tr => {
+    const age = parseInt(tr.getAttribute('data-age') || '0', 10);
+    if (isNaN(age)) { tr.style.display = ''; return; }
+    let show = true;
+    if (mode === '5y60') { show = age < 60 || (age >= 60 && (age - 60) % 5 === 0); }
+    else if (mode === '5y70') { show = age < 70 || (age >= 70 && (age - 70) % 5 === 0); }
+    else if (mode === '5y75') { show = age < 75 || (age >= 75 && (age - 75) % 5 === 0); }
+    else { show = true; }
+    tr.style.display = show ? '' : 'none';
+  });
+}
 async function downloadImage(){
   const tbody=document.getElementById('resultBody');
   if(!tbody||!tbody.innerHTML){showToast('请先生成利益演示');return;}
@@ -940,6 +990,10 @@ async function downloadImage(){
   const oldScrollOverflowX=tableScroll?tableScroll.style.overflowX:'';
   const oldScrollHeight=tableScroll?tableScroll.style.height:'';
   document.body.classList.add('capturing');
+  // 下载强制使用 5y60 密度，确保图片不密集；记录当前模式以便还原
+  const _prevMode = (typeof getDisplayMode === 'function') ? getDisplayMode() : '5y60';
+  if(typeof filterRowsByAge === 'function'){ filterRowsByAge('5y60'); }
+  if(typeof applyReserveRowspan === 'function'){ applyReserveRowspan(); }
   if(wrap){wrap.style.width='1200px';wrap.style.maxWidth='1200px';}
   plan.style.width='1200px';plan.style.minWidth='1200px';
   plan.style.overflow='visible';plan.style.height='auto';
@@ -960,6 +1014,9 @@ async function downloadImage(){
     plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
     if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
     document.body.classList.remove('capturing');
+    // 还原用户选择的显示密度
+    if(typeof filterRowsByAge === 'function'){ filterRowsByAge(_prevMode); }
+    if(typeof applyReserveRowspan === 'function'){ applyReserveRowspan(); }
     window.scrollTo(0,oldScrollTop);
     const filename='宏御世家理财计划书.png';
     const _blob=await new Promise(r=>canvas.toBlob(r,'image/png'));
@@ -977,7 +1034,10 @@ async function downloadImage(){
     if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
     plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
     if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
-    document.body.classList.remove('capturing');window.scrollTo(0,oldScrollTop);
+    document.body.classList.remove('capturing');
+    if(typeof filterRowsByAge === 'function'){ filterRowsByAge(_prevMode); }
+    if(typeof applyReserveRowspan === 'function'){ applyReserveRowspan(); }
+    window.scrollTo(0,oldScrollTop);
     showError('图片生成失败：'+e.message);
   }
 }

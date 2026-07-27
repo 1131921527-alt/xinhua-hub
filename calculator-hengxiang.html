@@ -79,8 +79,13 @@
   .plan-intro p{font-size:12.5px;line-height:1.65;color:#1E293B;margin:0 0 4px;}
   #paramBar{margin-bottom:12px;}
   body.capturing .no-export{display:none !important;}
-  body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
-  body.capturing .plan{padding:0 !important;}
+  body.capturing .wrap{max-width:1200px !important;width:1200px !important;margin:0 auto !important;}
+  body.capturing .plan{padding:28px 32px 4px !important;}
+  body.capturing .plan-title{margin-top:0 !important;padding:0 20px !important;}
+  /* 与中行/宏安一致：强制公司介绍+产品简介横向双栏，保证整图顶部完整 */
+  body.capturing .plan-intro{flex-direction:row !important;}
+  body.capturing .plan-intro>div{border-right:2px solid #1E40AF !important;}
+  body.capturing .plan-intro>div:last-child{border-right:0 !important;}
   body.capturing .table-scroll{overflow:visible !important;}
   body.capturing thead th{position:static !important;}
   @media(max-width:768px){
@@ -508,6 +513,8 @@ async function downloadImage(){
   if(tableScroll){tableScroll.style.overflow='visible';tableScroll.style.overflowX='visible';tableScroll.style.height='auto';}
   const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;
   window.scrollTo(0,0);
+  plan.scrollTop=0;
+  void plan.offsetHeight; // 强制回流，确保 scrollHeight 与最新布局一致
   try{
     const captureW=1200;
     const captureH=plan.scrollHeight;
@@ -517,7 +524,8 @@ async function downloadImage(){
     let captureScale=maxScale;
     if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}
     captureScale=Math.max(1.0,captureScale);
-    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
+    // x:0,y:0 显式从 #planArea 元素左上角（即蓝色标题）开始截取，杜绝顶部被裁切
+    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,x:0,y:0,logging:false});
     if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
     plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
     if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
