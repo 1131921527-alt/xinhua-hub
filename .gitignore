@@ -6,7 +6,12 @@ node_modules/
 .workbuddy/
 package.json
 package-lock.json
-nul
 files/中行资料/suitability_enlarged.png
 files/中行资料/suitability_enlarged_segments/
 files/中行资料/segments/suitability_*.png
+
+# —— 内部资料与开发目录，禁止进入公开仓库 ——
+/tools/
+/archive/
+/backup/
+/宣传素材/

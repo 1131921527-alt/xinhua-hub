@@ -257,81 +257,7 @@
   // ===== 出单流程文字版内容 =====
   const FLOW_TEXT_DATA = {
 
-    '华彩鎏金出单流程图': `
-      <div class="flow-title">华彩鎏金年金保险（分红型）<br>出单流程 · 招行手机银行</div>
-      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」APP → 点击顶部搜索框 → 输入产品代码<strong>S24</strong>或产品名称「华彩鎏金年金保险」→ 进入产品详情页</div></div>
-      <div class="flow-step"><div class="step-num">2</div><div class="step-title">选择产品 & 填写被保人信息</div><div class="step-desc"><ul><li>选择「新华华彩鎏金年金保险（分红型）」</li><li>填写被保人：性别、出生日期</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>选择保费金额（最低 ¥5,000 起）</li><li>选择缴费方式：<strong>一次交清 / 年缴 / 3年 / 5年 / 10年</strong></li><li>选择缴费年限</li><li>保险期间至 <strong>105周岁</strong></li></ul></div></div>
-      <div class="flow-step"><div class="step-num">4</div><div class="step-title">阅读健康告知 & 免责条款</div><div class="step-desc"><ul><li>仔细阅读《消费者权益保障告知》</li><li>阅读《健康告知》— 确认健康状况符合要求</li><li>阅读《免责条款》《客户声明》</li><li>勾选<span class="step-tip">已全部阅读</span>后点击下一步</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写客户信息</div><div class="step-desc"><ul><li>姓名、证件类型、证件号码</li><li>手机号码、电子邮箱</li><li>通讯地址、邮政编码</li><li>婚姻状态、户籍属性</li><li>证件起始日期</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">6</div><div class="step-title">确认填写正确 → 电子签名</div><div class="step-desc">核对所有信息无误后，点击「确认填写正确」，进行电子签名确认</div></div>
-      <div class="flow-step"><div class="step-num">7</div><div class="step-title">交易确认 & 支付</div><div class="step-desc"><ul><li>核对订单详情（保障内容、保费、缴费方式等）</li><li>输入<strong>招商银行卡密码</strong>完成支付</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">8</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示「投保成功」提示页，可查看订单详情。<span class="step-tip">通常在22:30前投保当日生效</span></div></div>
-      <div class="flow-footer">💡 <strong>温馨提示：</strong>华彩鎏金为年金型分红产品，<br>支持减保领取、保单贷款（最高80%现价）、身故全残保障</div>
-    `,
-
-    '宏御世家出单流程图': `
-      <div class="flow-title">宏御世家终身寿险（分红型）<br>出单流程 · 招行手机银行</div>
-      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」APP → 搜索框输入 <strong>S11</strong> 或「宏御世家终身寿险」→ 进入产品页</div></div>
-      <div class="flow-step"><div class="step-num">2</div><div class="step-title">选择产品 & 填写被保人</div><div class="step-desc"><ul><li>选择「新华宏御世家终身寿险（分红型）」</li><li>填写：性别、出生日期（投保年龄 0~69周岁）</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>年缴保费：<strong>¥20,000 起（1,000元整数倍）</strong></li><li>缴费方式：一次交清 / <strong>3年交</strong> / 5年交 / 10年交</li><li>保险期间：<strong>终身</strong></li></ul></div></div>
-      <div class="flow-step"><div class="step-num">4</div><div class="step-title">阅读健康告知 & 条款</div><div class="step-desc"><ul><li>《消费者权益保障告知》</li><li>《健康告知》— 根据实际情况如实填写</li><li>《免责条款》《客户声明》</li><li>点击「已全部阅读，下一步」</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写客户信息</div><div class="step-desc"><ul><li>姓名、证件类型、身份证号</li><li>手机号、邮箱、通讯地址</li><li>婚姻状态、邮编</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">6</div><div class="step-title">电子签名确认</div><div class="step-desc">核对信息 → 「确认填写正确」→ 手写电子签名</div></div>
-      <div class="flow-step"><div class="step-num">7</div><div class="step-title">交易确认 & 支付</div><div class="step-desc"><ul><li>核对：被保人信息、保费、基本保额、缴费期</li><li>输入招行密码完成支付</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">8</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示投保成功页面，可查看保单详情。<span class="step-tip">建议截图保存订单号</span></div></div>
-      <div class="flow-footer">💡 <strong>宏御世家特点：</strong>R2风险等级 · 保额每年递增1.75% · 分红可选现金/累积生息/交清增额<br>🔒 保单贷款可达现金价值80%</div>
-    `,
-
-    '宏愿人生出单流程图': `
-      <div class="flow-title">宏愿人生养老年金保险（分红型）<br>出单流程 · 招行手机银行</div>
-      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>S02</strong> 或「宏愿人生养老年金」→ 选择产品进入</div></div>
-      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc"><ul><li>选择「新华宏愿人生养老年金保险（分红型）」</li><li>填写性别、出生日期</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费金额</li><li>选择缴费方式（趸交/3年/5年/10年/20年交等）</li><li>选择领取年龄（男60/65/70岁，女55/60/65岁）</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款确认</div><div class="step-desc"><ul><li>阅读消费者权益保障告知</li><li>根据健康情况如实填写健康告知</li><li>阅读并确认免责条款与客户声明</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写完整客户资料</div><div class="step-desc"><ul><li>姓名、身份证件信息</li><li>联系方式（手机、邮箱、地址）</li><li>其他必要身份信息</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">6</div><div class="step-title">签名 & 交易确认支付</div><div class="step-desc"><ul><li>电子签名确认</li><li>核对订单详情</li><li>输入招行密码支付</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示成功页面。宏愿人生是养老年金+分红双驱动产品。</div></div>
-      <div class="flow-footer">💡 <strong>宏愿人生特点：</strong>养老年金 + 红利分配 · 多种领取年龄可选<br>🔒 身故/全残保障 + 红利灵活领取</div>
-    `,
-
-    '宏泰世家出单流程图': `
-      <div class="flow-title">宏泰世家终身寿险（分红型）<br>出单流程 · 招行手机银行</div>
-      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>宏泰世家</strong> 或产品代码 → 选择进入</div></div>
-      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc">选择「新华宏泰世家（分红型）」→ 填写性别、出生日期</div></div>
-      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费（最低起投金额）</li><li>选择缴费方式（一次交清 / 3年 / 5年 / 10年）</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款</div><div class="step-desc">阅读健康告知、免责条款 → 确认无异常 → 下一步</div></div>
-      <div class="flow-step"><div class="step-num">5</div><div class="step-title">填写客户信息 & 签名</div><div class="step-desc">填写姓名、证件、联系方式 → 电子签名确认</div></div>
-      <div class="flow-step"><div class="step-num">6</div><div class="step-title">交易确认 & 支付</div><div class="step-desc">核对订单详情 → 输入招行密码支付</div></div>
-      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示投保成功，可查看保单详情。</div></div>
-      <div class="flow-footer">💡 <strong>宏泰世家：</strong>终身寿险 + 分红 · 财富传承工具<br>🔒 减保灵活 · 可贷现价80%</div>
-    `,
-
-    '恒享人生出单流程图': `
-      <div class="flow-title">恒享人生年金保险（分红型）<br>出单流程 · 招行手机银行</div>
-      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>G23</strong> 或「恒享人生年金」→ 选择产品</div></div>
-      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc">选择「新华恒享人生年金险（分红型）」→ 填写基本信息</div></div>
-      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费金额</li><li>选择缴费方式</li><li>确认领取方案</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款确认</div><div class="step-desc">阅读各项告知与条款 → 勾选确认</div></div>
-      <div class="flow-step"><div class="step-num">5</div><div class="step-title">客户信息 & 签名</div><div class="step-desc">填写客户资料 → 电子签名</div></div>
-      <div class="flow-step"><div class="step-num">6</div><div class="step-title">交易确认 & 支付</div><div class="step-desc">核对订单 → 招行密码支付</div></div>
-      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示成功页面。</div></div>
-      <div class="flow-footer">💡 <strong>恒享人生：</strong>年金 + 分红 · 灵活领取<br>🔒 生存金 + 红利双重收益</div>
-    `,
-
-    '福盛世家添翼版出单流程图': `
-      <div class="flow-title">福盛世家添翼版终身寿险（分红型）<br>出单流程 · 招行手机银行</div>
-      <div class="flow-step"><div class="step-num">1</div><div class="step-title">搜索产品</div><div class="step-desc">打开「招行手机银行」→ 搜索 <strong>福盛世家</strong> 或产品代码 → 选择产品</div></div>
-      <div class="flow-step"><div class="step-num">2</div><div class="step-title">填写被保人信息</div><div class="step-desc">选择「福盛世家添翼版（分红型）」→ 填写性别、出生日期</div></div>
-      <div class="flow-step"><div class="step-num">3</div><div class="step-title">设置投保参数</div><div class="step-desc"><ul><li>设置年缴保费</li><li>选择缴费方式（趸交/3年/5年/10年）</li></ul></div></div>
-      <div class="flow-step"><div class="step-num">4</div><div class="step-title">健康告知 & 条款</div><div class="step-desc">阅读告知与条款 → 确认</div></div>
-      <div class="flow-step"><div class="step-num">5</div><div class="step-title">客户信息 & 签名</div><div class="step-desc">填写资料 → 电子签名</div></div>
-      <div class="flow-step"><div class="step-num">6</div><div class="step-title">交易确认 & 支付</div><div class="step-desc">核对订单 → 密码支付</div></div>
-      <div class="flow-step"><div class="step-num">7</div><div class="step-title">投保成功 ✅</div><div class="step-desc">显示成功页面。</div></div>
-      <div class="flow-footer">💡 <strong>福盛世家添翼版：</strong>增额终身寿险 + 分红<br>🔒 保额递增 · 减保灵活 · 传承规划</div>
-    `,
-
-    '交清增额释义': `
+                            '交清增额释义': `
       <div class="flow-title">交清增额（Paid-up Addition）<br>分红方式释义</div>
       <div class="flow-step"><div class="step-num">1</div><div class="step-title">什么是交清增额？</div><div class="step-desc">交清增额是分红型保险的一种红利领取方式。保险公司将当年红利作为一次性保费，自动购买额外的保额（交清增额保险），增加到原有保单上。</div></div>
       <div class="flow-step"><div class="step-num">2</div><div class="step-title">核心特点</div><div class="step-desc"><ul><li><strong>无需额外缴费：</strong>红利自动购买，不需要投保人再交保费</li><li><strong>保额递增：</strong>每年红利购买的增额会累积，总保额逐年增长</li><li><strong>永久有效：</strong>增额一旦购买即为"交清"状态，终身有效</li><li><strong>提升现金价值：</strong>交清增额部分也有现金价值，随时间增长</li></ul></div></div>
@@ -340,55 +266,7 @@
       <div class="flow-footer">💡 <strong>交清增额优势：</strong>保额复利增长 · 现金价值同步提升<br>适合追求长期保障增长、不急于领取红利的客户</div>
     `,
 
-    '在售产品投保年龄及起售金额': `
-      <div class="flow-title" style="text-align:center;">新华在售产品 投保年龄及起售金额一览</div>
-      <div class="flow-desc" style="text-align:center;color:#64748B;font-size:13px;margin-bottom:16px;">线上投保年龄统一为：趸交64周岁，期交59周岁</div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-      <table class="prod-table">
-        <thead>
-          <tr>
-            <th rowspan="2">产品</th><th rowspan="2">代码</th><th rowspan="2">性别</th><th>趸交</th><th>三年</th><th>五年</th><th>十年</th><th rowspan="2">产品形态和特点</th>
-          </tr>
-          <tr><th>(岁)</th><th>(岁)</th><th>(岁)</th><th>(岁)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td rowspan="3"><b>宏泰世家终身寿<br>（分红型）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S03</span></td><td>男</td><td>64</td><td>63</td><td>62</td><td>60</td><td rowspan="3">趸交5年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>1.2%分红现值增速稳健达成<br>同档竞品产品溢价前列+列车、航空意外</td></tr>
-          <tr><td>女</td><td>67</td><td>67</td><td>66</td><td>64</td></tr>
-          <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 3万 / 1万 / 1万</b></td></tr>
-
-          <tr><td rowspan="3"><b>宏御世家终身寿<br>（分红型）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S11</span></td><td>男</td><td>65</td><td>65</td><td>64</td><td>61</td><td rowspan="3">现价最高·老七家现价前三<br>趸交4年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>1.2%分红现值增速稳健达成</td></tr>
-          <tr><td>女</td><td>69</td><td>69</td><td>68</td><td>64</td></tr>
-          <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 2万 / 2万 / 2万</b></td></tr>
-
-          <tr><td rowspan="3"><b>宏愿人生养老年金<br>分红险</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S02</span></td><td>男</td><td colspan="4" style="text-align:center;color:#1D4ED8;"><b>最高投保年龄都为69周岁，（70岁领年金）</b></td><td rowspan="3">趸交5年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>特定期60岁以后领取较好<br>可指定53（男）、60、65、70岁</td></tr>
-          <tr><td>女</td><td colspan="4"></td></tr>
-          <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 3万 / 1万 / 1万</b></td></tr>
-
-          <tr><td rowspan="3"><b>华彩鎏金年金险<br>（分红型）<br><small>1.75%固定年金 + 1.2%分红</small></b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">S24</span></td><td>男</td><td>72</td><td>70</td><td>70</td><td>65</td><td rowspan="3">趸交四年覆盖总保费<br>三至五年覆盖总保费<br>现价回正快·75%即领1.2%的红利<br>按100%现价高，每年收益2.98%</td></tr>
-          <tr><td>女</td><td></td><td></td><td></td><td></td></tr>
-          <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 2万 / 1万 / 1万</b></td></tr>
-
-          <tr><td rowspan="3"><b>恒享人生年金<br>（2%固定年金）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">G23</span></td><td>男</td><td>80</td><td>77</td><td>75</td><td>70</td><td rowspan="3">趸交5年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>现价覆盖低保·年金作为保费的2%<br>利益简单明了（固收型）</td></tr>
-          <tr><td>女</td><td></td><td></td><td></td><td></td></tr>
-          <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 2万 / 1万 / 1万</b></td></tr>
-
-          <tr><td rowspan="3"><b>福盛世家添翼版<br>（2.0%固定增额）</b></td><td rowspan="3"><span style="color:#1D4ED8;font-weight:700;">G14</span></td><td>男</td><td>68</td><td>68</td><td>67</td><td>65</td><td rowspan="3">趸交5年覆盖总保费<br>三至五年覆盖总保费<br>五至六年覆盖总保费<br>固定2%增幅<br>含特定公共交通意外险</td></tr>
-          <tr><td>女</td><td>72</td><td>72</td><td>70</td><td>65</td></tr>
-          <tr><td colspan="5"><b style="color:#DC2626;">起售金额：5万 / 2万 / 1万 / 1万</b></td></tr>
-        </tbody>
-      </table>
-      </div>
-      <style>
-        .prod-table{width:100%;border-collapse:collapse;font-size:13px;}
-        .prod-table th,.prod-table td{border:1px solid #E2E8F0;padding:7px 6px;text-align:center;white-space:nowrap;}
-        .prod-table thead th{background:#1D4ED8;color:#fff;font-size:12px;font-weight:600;position:sticky;top:0;z-index:1;}
-        .prod-table tbody tr:nth-child(even){background:#F8FAFC;}
-        .prod-table tbody tr:hover{background:#EFF6FF;}
-        .prod-table td:first-child{text-align:left!important;padding-left:10px!important;}
-      </style>
-      <div class="flow-footer" style="margin-top:12px;">💡 以上数据仅供参考，具体以公司正式条款和核保规则为准<br>📌 起售金额单位：万元（人民币）</div>
-    `,
-  };
+      };
 
   // ===== 主逻辑 =====
   const params = new URLSearchParams(location.search);
