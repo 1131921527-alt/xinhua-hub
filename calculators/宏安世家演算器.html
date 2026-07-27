@@ -67,7 +67,7 @@ input,select{padding:7px 10px;border:1.5px solid #e2e8f0;border-radius:6px;font-
 <p>✅ 年度盈余分红，演示红利实现率 100%+，可现金领取、可复利滚存增值</p>
 <p>✅ 终身身故保障 1.4-1.6 倍，额外赔付 1 倍特定公共交通意外身故金</p>
 </div></div></div>
-<table class="it"><tr><td class="l">被保人</td><td>VIP</td></tr><tr><td class="l">性别</td><td id='dg'>女</td></tr><tr><td class="l">年龄</td><td id='da'>40周岁</td></tr><tr><td class="l">交费期间</td><td id='dt'>3年交</td></tr><tr><td class="l">年交保费</td><td id='dp'>100,000</td></tr><tr><td class="l">基本保额</td><td id='dsa'></td></tr><tr><td class="l">保险期间</td><td>终身</td></tr><tr><td class="l">红利领取方式</td><td>累积生息</td></tr></table>
+
 <div class="sr">
 <div class="sbx"><span class="tg">第二年末现价百分比</span><strong class="vl" id="scv">-</strong></div>
 <div class="sbx"><span class="tg">演示分红实现率</span><strong class="vl" id="srate">-</strong></div>
@@ -230351,9 +230351,6 @@ return `<tr><td>${r.yr}</td><td>${r.ae}</td><td>${isPay?fmt(r.yp):'-'}</td><td>$
 }
 async function dlPng(){
 try{
-// 下载图片时隐藏被保人信息表
-const _infoTables=document.querySelectorAll('.it');
-_infoTables.forEach(function(el){el.style.display='none';});
 
 if(typeof html2canvas==='undefined'){await new Promise((res,rej)=>{const s=document.createElement('script');s.src='html2canvas.min.js';s.onload=res;s.onerror=()=>rej(new Error('插件加载失败'));document.head.appendChild(s);});}
 const node=document.getElementById('plan');
@@ -230365,22 +230362,16 @@ const canvas=await html2canvas(node,{scale:scale,backgroundColor:'#fff',useCORS:
 const name='宏安世家理财计划';
 canvas.toBlob(function(blob){
  if(!blob){
-// 恢复被保人信息表显示
-document.querySelectorAll('.it').forEach(function(el){el.style.display='';});
 const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=name+'.png';document.body.appendChild(a);a.click();a.remove();return;
 }
  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name+'.png';document.body.appendChild(a);a.click();
  if(/iP(hone|ad|od)/.test(navigator.userAgent)){setTimeout(function(){window.open(url);},300);}
  setTimeout(function(){
-// 恢复被保人信息表显示
-document.querySelectorAll('.it').forEach(function(el){el.style.display='';});
 URL.revokeObjectURL(url);
 a.remove();
 },2000);
 },'image/png');
 }catch(err){
-// 恢复被保人信息表显示
-document.querySelectorAll('.it').forEach(function(el){el.style.display='';});
 console.error(err);
 alert('图片生成失败：'+(err&&err.message||err)+'。可改用截屏保存当前页面。');
 }

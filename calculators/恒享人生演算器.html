@@ -67,7 +67,7 @@ input,select{padding:7px 10px;border:1.5px solid #e2e8f0;border-radius:6px;font-
 <p>✅ 第5年起关爱金，交清后每年固定年金</p>
 <p>✅ 保障至105周岁，兼顾养老与传承</p>
 </div></div></div>
-<table class="it"><tr><td class="l">被保人</td><td>VIP</td></tr><tr><td class="l">性别</td><td id='dg'>女</td></tr><tr><td class="l">年龄</td><td id='da'>46周岁</td></tr><tr><td class="l">交费期间</td><td id='dt'>3年交</td></tr><tr><td class="l">年交保费</td><td id='dp'>100,000</td></tr><tr><td class="l">基本保额</td><td id='dsa'></td></tr><tr><td class="l">保险期间</td><td id='dprd'>终身</td></tr><tr><td class="l">领取方式</td><td>固定年金</td></tr></table>
+
 <div class="sr">
 <div class="sbx"><span class="tg">第二年末现价百分比</span><strong class="vl" id="scv">-</strong></div>
 <div class="sbx"><span class="tg">演示分红实现率</span><strong class="vl" id="srate">-</strong></div>
@@ -114,9 +114,6 @@ return `<tr><td>${r.yr}</td><td>${r.curAge}</td><td>${r.prem>0?fmt(Math.round(r.
 
 async function dlPng(){
 try{
-// 下载图片时隐藏被保人信息表
-const _infoTables=document.querySelectorAll('.it');
-_infoTables.forEach(function(el){el.style.display='none';});
 
 if(typeof html2canvas==='undefined'){await new Promise((res,rej)=>{const s=document.createElement('script');s.src='html2canvas.min.js';s.onload=res;s.onerror=()=>rej(new Error('插件加载失败'));document.head.appendChild(s);});}
 const node=document.getElementById('plan');
@@ -128,22 +125,16 @@ const canvas=await html2canvas(node,{scale:scale,backgroundColor:'#fff',useCORS:
 const name='恒享人生理财计划';
 canvas.toBlob(function(blob){
  if(!blob){
-// 恢复被保人信息表显示
-document.querySelectorAll('.it').forEach(function(el){el.style.display='';});
 const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=name+'.png';document.body.appendChild(a);a.click();a.remove();return;
 }
  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name+'.png';document.body.appendChild(a);a.click();
  if(/iP(hone|ad|od)/.test(navigator.userAgent)){setTimeout(function(){window.open(url);},300);}
  setTimeout(function(){
-// 恢复被保人信息表显示
-document.querySelectorAll('.it').forEach(function(el){el.style.display='';});
 URL.revokeObjectURL(url);
 a.remove();
 },2000);
 },'image/png');
 }catch(err){
-// 恢复被保人信息表显示
-document.querySelectorAll('.it').forEach(function(el){el.style.display='';});
 console.error(err);
 alert('图片生成失败：'+(err&&err.message||err)+'。可改用截屏保存当前页面。');
 }
