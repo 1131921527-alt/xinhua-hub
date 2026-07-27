@@ -111,10 +111,24 @@ tb.innerHTML=rows.map(r=>{
 return `<tr><td>${r.yr}</td><td>${r.curAge}</td><td>${r.prem>0?fmt(Math.round(r.prem)):'-'}</td><td>${fmt(Math.round(r.cum))}</td><td>${r.ann>0?fmt(Math.round(r.ann)):'-'}</td><td>${r.annCum>0?fmt(Math.round(r.annCum)):'-'}</td><td>${fmt(Math.round(r.death))}</td><td>${fmt(Math.round(r.cv))}</td><td class="ch">${fmt(Math.round(r.surv))}</td></tr>`;
 }).join('');
 }
+
 async function dlPng(){
-if(typeof html2canvas==='undefined'){const s=document.createElement('script');s.src='html2canvas.min.js';await new Promise(r=>{s.onload=r;document.head.appendChild(s)});}
-const c=await html2canvas(document.getElementById('plan'),{scale:3,backgroundColor:'#fff',useCORS:true,windowWidth:900});
-const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='恒享人生理财计划.png';a.click();
+try{
+if(typeof html2canvas==='undefined'){await new Promise((res,rej)=>{const s=document.createElement('script');s.src='html2canvas.min.js';s.onload=res;s.onerror=()=>rej(new Error('插件加载失败'));document.head.appendChild(s);});}
+const node=document.getElementById('plan');
+const w=Math.max(node.scrollWidth,node.clientWidth,900);
+const h=Math.max(node.scrollHeight,node.clientHeight,600);
+const MAX=16000000;let scale=3;
+while(scale>1&&w*scale*h*scale>MAX){scale-=0.5;}
+const canvas=await html2canvas(node,{scale:scale,backgroundColor:'#fff',useCORS:true,windowWidth:w,logging:false});
+const name='恒享人生理财计划';
+canvas.toBlob(function(blob){
+ if(!blob){const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=name+'.png';document.body.appendChild(a);a.click();a.remove();return;}
+ const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name+'.png';document.body.appendChild(a);a.click();
+ if(/iP(hone|ad|od)/.test(navigator.userAgent)){setTimeout(function(){window.open(url);},300);}
+ setTimeout(function(){URL.revokeObjectURL(url);a.remove();},2000);
+},'image/png');
+}catch(err){console.error(err);alert('图片生成失败：'+(err&&err.message||err)+'。可改用截屏保存当前页面。');}
 }
 document.getElementById('ctrls').innerHTML=`<div class="gg"><div class="gb" data-v="0" onclick="sg(this)">男</div><div class="gb active" data-v="1" onclick="sg(this)">女</div></div><div class="fd"><label>投保年龄</label><input id="ia" type="number" value="46" min="0" max="80" onchange="gen()" oninput="gen()"></div><div class="fd"><label>交费方式</label><select id="it" onchange="gen()"><option value="1">一次交清</option><option value="3" selected>3年交</option><option value="5">5年交</option><option value="10">10年交</option></select></div><div class="fd"><label>年交保费（元）</label><input id="ip" type="number" value="500000" min="1000" step="1000" onchange="gen()" oninput="gen()"></div><div class="fd"><label>显示密度</label><div class="rb"><div class="dmode active" data-d="5y60" onclick="sd(this)">60岁起每5年</div><div class="dmode" data-d="5y70" onclick="sd(this)">70岁起每5年</div><div class="dmode" data-d="all" onclick="sd(this)">每年</div></div></div><div class="fd">&nbsp;</div><button class="bg" onclick="gen()">生成</button>`;
 document.getElementById('tp').textContent='默认：女 / 46岁 / 3年交 / 年交10万 / 非分红型（确定利益）';
