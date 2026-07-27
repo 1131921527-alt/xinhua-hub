@@ -472,11 +472,14 @@ async function downloadImage(){
     window.scrollTo(0, oldScrollTop);
     const filename = '宏安世家理财计划书.png';
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+    // 无条件先生成 blob，确保手机端/桌面端都能拿到（修复手机端 blob 未定义导致下载无反应）
+    const _blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
+    const _blobUrl = URL.createObjectURL(_blob);
     if(!isMobile && window.showSaveFilePicker){
       try{
-        const blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
         const h = await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
-        const w = await h.createWritable(); await w.write(blob); await w.close();
+        const w = await h.createWritable(); await w.write(_blob); await w.close();
+        URL.revokeObjectURL(_blobUrl);
         return;
       }catch(e){ if(e.name==='AbortError') return; }
     }
@@ -484,7 +487,6 @@ async function downloadImage(){
     // 微信/手机端：页面内显示图片，提示长按保存；桌面：直接下载
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-    const _blobUrl = URL.createObjectURL(blob);
     if(isWechatEnv2 || isMobile2){
       showImagePreview(_blobUrl, filename);
       if(typeof showToast==='function') showToast('长按图片即可保存到相册');
