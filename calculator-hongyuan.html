@@ -359,12 +359,12 @@ function generate(){
     const survival = cv + cumDiv + cumAnn;
 
     let yieldVal;
-    // 储备期=前5年（回本时间），与投保年龄/领取年龄/缴费期均无关
-    // 旧逻辑误用 annuityStartYear 把储备期拉到“起领前”，已修正为固定前5年
-    if(yr <= 5){
+    if(yr === 1){
       yieldVal = null;
-    } else {
+    } else if(yr > annuityStartYear){
       yieldVal = (survival - lastSurv) / cumPrem;
+    } else {
+      yieldVal = null;
     }
 
     rows.push({ yr, ageEnd, yearPrem, annuity, cumAnn, hl, cumDiv, death, cv, survival, yieldVal });
