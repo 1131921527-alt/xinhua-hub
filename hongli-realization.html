@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>红利实现率：分红险的确定性答案 | 新华保险资料库</title>
+<style>
+:root{--primary:#1D4ED8;--primary-light:#DBEAFE;--primary-dark:#1E40AF;--text:#1E293B;--text-light:#64748B;--bg:#F8FAFC;--card-bg:#FFFFFF;--border:#E2E8F0;--success:#16A34A;--warning:#D97706;--danger:#DC2626}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:48px 20px;border-radius:12px;margin-bottom:32px;text-align:center}
+.header h1{font-size:28px;font-weight:700;margin-bottom:12px}
+.header .subtitle{font-size:16px;opacity:.9;margin-bottom:16px}
+.header .meta{font-size:13px;opacity:.75;line-height:1.6}
+.card{background:var(--card-bg);border-radius:10px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--border)}
+.card h2{font-size:20px;color:var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card h3{font-size:17px;color:var(--text);margin:20px 0 10px}
+.card p{margin-bottom:12px;color:var(--text-light)}
+.card ul,.card ol{margin-left:20px;color:var(--text-light)}
+.card li{margin-bottom:6px}
+.orchard-card{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-left:4px solid #F59E0B;border-radius:8px;padding:24px;margin:20px 0}
+.orchard-card h3{color:#B45309;margin-top:0}
+.orchard-card .step{display:flex;gap:16px;margin:14px 0;align-items:flex-start}
+.orchard-card .step-num{width:36px;height:36px;background:#F59E0B;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:15px}
+.orchard-card .step-text{flex:1}
+.orchard-card .highlight{font-size:24px;font-weight:700;color:#B45309;text-align:center;margin:18px 0}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.data-table tr:nth-child(even){background:var(--bg)}
+.data-table .num{font-weight:700;color:var(--primary);text-align:right}
+.formula-box{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:20px;margin:16px 0;font-family:'Courier New',Consolas,monospace;text-align:center;font-size:15px;line-height:1.8}
+.product-tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.product-tag{background:var(--primary-light);color:var(--primary);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}
+.product-tag.high{background:#DCFCE7;color:#15803D}
+.warning-box{background:#FEF2F2;border-left:4px solid var(--danger);padding:16px 20px;border-radius:6px;margin:16px 0;font-size:14px}
+.success-box{background:#F0FDF4;border-left:4px solid var(--success);padding:16px 20px;border-radius:6px;margin:16px 0;font-size:14px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:20px 0}
+.stat-item{background:var(--bg);border-radius:8px;padding:20px;text-align:center}
+.stat-item .value{font-size:28px;font-weight:700;color:var(--primary)}
+.stat-item .label{font-size:13px;color:var(--text-light);margin-top:4px}
+.disclaimer{background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;padding:20px;font-size:13px;color:#92400E;margin-top:32px}
+.disclaimer ul{margin:10px 0 0 18px}
+blockquote{border-left:4px solid var(--primary);padding:16px 20px;background:var(--bg);border-radius:0 8px 8px 0;font-style:normal}
+blockquote p{font-size:17px;color:var(--primary);margin:0}
+.compare-row{display:flex;gap:16px;margin:16px 0}
+.compare-item{flex:1;border-radius:8px;padding:18px;text-align:center}
+.compare-item .cv{font-size:22px;font-weight:700}
+.compare-item .cl{font-size:13px;color:var(--text-light);margin-top:4px}
+@media(max-width:640px){
+.header h1{font-size:22px}.header{padding:32px 16px}.card{padding:18px}
+.stats-grid{grid-template-columns:repeat(2,1fr)}.data-table{font-size:11px}
+.data-table th,.data-table td{padding:6px 8px}.compare-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- A. Header -->
+<div class="header">
+<h1>📊 红利实现率：分红险的确定性答案</h1>
+<p class="subtitle">用红利实现率读懂分红险"浮动收益"的真实兑现程度</p>
+<p class="meta">更新时间：2026年7月<br>资料来源：新华保险2025年度分红报告 / 官网披露 / 《分红险转型重塑险资配置框架》/《2026年一季度人身险业发展动态分析》/ 监管函件 金寿险函〔2025〕374号</p>
+</div>
+
+<!-- B. Why dividend insurance is back -->
+<div class="card">
+<h2><span>🔥</span> 为什么分红险重新成为市场主力</h2>
+
+<h3>低利率时代，优质稳健资产极度稀缺</h3>
+<p>国内理财产品早已打破刚兑，银行五年期定存利率降至 <strong>1.3%</strong>。在全球进入低利率、高波动的经济新常态下，优质稳健资产变得极度稀缺。</p>
+
+<h3>市场波动成为常态</h3>
+<p>以韩国为例：总人口5000多万，股票账户超过1亿个。2025年6月19日韩国综合指数创历史新高9385点，一个月跌掉近1/3。<strong>73%</strong> 的散户在牛市亏钱——牛市和破产之间，可能只隔着1个交易日。</p>
+
+<div class="stats-grid">
+<div class="stat-item"><div class="value">2160亿</div><div class="label">2026Q1 全行业<br>分红险保费规模</div></div>
+<div class="stat-item"><div class="value">82%</div><div class="label">储蓄类寿险新单中<br>分红险占比</div></div>
+<div class="stat-item"><div class="value">+17.8%</div><div class="label">同比增幅</div></div>
+<div class="stat-item"><div class="value">六成</div><div class="label">热销产品自<br>2025年起销售</div></div>
+</div>
+
+<h3>"保证利益 + 浮动红利"的核心优势</h3>
+<ul>
+<li><strong>保证利益岿然不动：</strong>即便市场波动，保证收益部分由行业统一的预定利率决定，不受影响</li>
+<li><strong>盈余共享机制：</strong>监管要求保险公司将实际经营成果优于精算假设的盈余，拿出 <strong>70%</strong> 分给保单持有人</li>
+<li><strong>投资平滑准备金：</strong>分红险特有的平滑机制，穿越周期拿到相对平稳回报</li>
+<li><strong>可配置权益类资产：</strong>追求更好浮动收益的同时，拥有上扬的财富曲线</li>
+</ul>
+</div>
+
+<!-- C. What is dividend realization rate -->
+<div class="card">
+<h2><span>🍎</span> 什么是红利实现率</h2>
+
+<p><strong>红利实现率反映的是分红险"浮动收益部分"的实际兑现程度。</strong></p>
+<p>由于分红险的保证收益部分由行业统一的预定利率决定，真正拉开差距的正是浮动部分。红利实现率就是衡量这部分兑现程度的硬指标。</p>
+
+<div class="orchard-card">
+<h3>🌳 果园收成案例：一眼看懂红利实现率</h3>
+
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-text"><strong>预计收成：</strong>果农小华根据今年情况，在《收成预计书》里保守估计——明年能比往年多结出 <strong>1000斤</strong> 苹果。<br><span style="color:#92400E;font-size:13px;">→ 这相当于投保时，保险计划书演示的红利水平</span></div>
+</div>
+
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-text"><strong>实际收成：</strong>一年过去，小华把树上摘下来的苹果一过秤——竟然比往年多了 <strong>1180斤</strong>！<br><span style="color:#92400E;font-size:13px;">→ 这相当于保险公司真正发给客户的红利</span></div>
+</div>
+
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-text"><strong>计算实现率：</strong>实际 ÷ 预计 = 1180 ÷ 1000 = <strong>118%</strong></div>
+</div>
+
+<div class="highlight">✨ 红利实现率 = 118%</div>
+
+<p style="text-align:center;color:#92400E;font-size:14px;">实现率超过100% = 到手比当初保守预计还要多<br>这不是冰冷的数字，而是一家保险公司对承诺的兑现程度</p>
+</div>
+
+<div class="compare-row">
+<div class="compare-item" style="background:#FEF2F2;">
+<div class="cv" style="color:#DC2626;">50%</div>
+<div class="cl">普通果园 · 只多收了500斤</div>
+<div style="font-size:12px;color:#DC2626;margin-top:6px;">客户大失所望 😞</div>
+</div>
+<div class="compare-item" style="background:#F0FDF4;">
+<div class="cv" style="color:#16A34A;">118%</div>
+<div class="cl">优秀果园 · 多收了180斤</div>
+<div style="font-size:12px;color:#16A34A;margin-top:6px;">超额答卷 🎉</div>
+</div>
+</div>
+</div>
+
+<!-- D. New China Life 2025 results -->
+<div class="card">
+<h2><span>🏆</span> 新华保险2025年度红利实现率成绩单</h2>
+<p>数据来源：新华保险官网披露（2025年度）</p>
+
+<div class="stats-grid">
+<div class="stat-item"><div class="value">97款</div><div class="label">全系分红产品</div></div>
+<div class="stat-item"><div class="value">128%</div><div class="label">平均红利实现率</div></div>
+<div class="stat-item"><div class="value">80款</div><div class="label">实现率 ≥100%<br>（占比82%）</div></div>
+<div class="stat-item"><div class="value">56+</div><div class="label">连续5年超100%<br>达成产品数</div></div>
+</div>
+
+<h3>各产品实现率一览（数据来源：新华保险官网）</h3>
+<div class="product-tags">
+<span class="product-tag">吉星高照B款 100%</span>
+<span class="product-tag">祥和特享 107%</span>
+<span class="product-tag">宏享世家 114%</span>
+<span class="product-tag">新华尊悦 114%</span>
+<span class="product-tag">盛世荣耀智赢版 114%</span>
+<span class="product-tag">宏坤人生 118%</span>
+<span class="product-tag">盛世恒盈 118%</span>
+<span class="product-tag">荣耀庆典 118%</span>
+<span class="product-tag">盛世安盈 118%</span>
+<span class="product-tag">成长阳光 120%</span>
+<span class="product-tag high">福享一生 204%</span>
+<span class="product-tag high">好利年年 215%</span>
+<span class="product-tag high">红双喜 220%</span>
+<span class="product-tag high">荣享人生 233%</span>
+</div>
+<p style="font-size:13px;color:var(--text-light)">其中2025年新上市的17款产品红利实现率均超110%，最高达到118%。全系列产品最高实现率达到233%。在目前披露寿险公司中稳居首位。</p>
+</div>
+
+<!-- E. Formula & Case -->
+<div class="card">
+<h2><span>🧮</span> 怎么算？公式与真实案例</h2>
+
+<h3>基础公式：演示收益率怎么来的？</h3>
+<div class="formula-box">
+演示收益率 = 预定利率 + （演示利率 − 预定利率）× 70%
+</div>
+<p style="text-align:center;">以预定利率 1.75%、演示利率 3.5% 为例：<br><strong>演示收益率 = 1.75% + (3.5% − 1.75%) × 70% = 2.98%</strong></p>
+
+<h3>加入红利实现率的实际收益率</h3>
+<div class="formula-box">
+实际收益率 = 预定利率 + （演示利率 − 预定利率）× 70% × 红利实现率
+</div>
+<p style="text-align:center;">以实现率 118% 为例：<br><strong>实际收益率 = 1.75% + (3.5% − 1.75%) × 70% × 118% = 3.2%</strong></p>
+
+<h3>💰 真实案例：宏御世家（分红型）超额红利测算</h3>
+<p>以 40岁女性投保宏御世家（分红型），100万保额，3年期交为例，按新华保险2025年红利实现率118%测算：</p>
+
+<table class="data-table">
+<tr><th>保单年度</th><th>1</th><th>2</th><th>3</th><th>5</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th></tr>
+<tr><td>118%累计红利(元)</td><td class="num">5,253</td><td class="num">24,356</td><td class="num">65,792</td><td class="num">123,776</td><td class="num">169,628</td><td class="num">431,609</td><td class="num">1,153,203</td><td class="num">2,227,587</td><td class="num">3,796,934</td><td class="num">6,054,261</td><td class="num">9,263,463</td></tr>
+<tr><td>100%累计红利(元)</td><td class="num">4,452</td><td class="num">20,641</td><td class="num">55,756</td><td class="num">104,895</td><td class="num">143,753</td><td class="num">365,771</td><td class="num">977,291</td><td class="num">1,887,786</td><td class="num">3,217,741</td><td class="num">5,130,730</td><td class="num">7,850,393</td></tr>
+</table>
+
+<div class="success-box">
+<strong>超额红利亮点（不增加一分保费，额外多出）：</strong>
+<ul style="margin-left:18px;margin-top:8px;">
+<li>30年超额红利：<strong>33.98万元</strong></li>
+<li>50年超额红利：<strong>92.35万元</strong></li>
+<li>60年超额红利：<strong>141.3万元</strong></li>
+</ul>
+</div>
+<p style="font-size:13px;color:var(--text-light)">注：以上数据来自PPT测算示例，具体以公司正式计划书为准。"超额红利"指118%实现率相对于100%实现率的差额部分。</p>
+</div>
+
+<!-- F. Regulatory constraints -->
+<div class="card">
+<h2><span>⚖️</span> 监管硬约束：不是想发多少就发多少</h2>
+<p>红利实现率受严格监管约束。根据<strong>《关于分红险分红水平监管意见的函》（金寿险函〔2025〕374号）</strong>，存在以下情形之一的，保险公司必须充分论证拟分红水平的必要性、合理性和可持续性，提交资产负债管理委员会审定后实施：</p>
+
+<ol>
+<li><strong>与历史业绩挂钩：</strong>拟分红水平对应的投资收益率超过公司分红保险账户过去3年平均财务投资收益率和综合投资收益率的较低者</li>
+<li><strong>与资本实力挂钩：</strong>分红保险账户特别储备为负值，或当期分红实施后特别储备将为负值</li>
+<li><strong>为新产品设限：</strong>设立时间不足三年的分红保险账户，拟分红水平超过人身保险业过去3年平均财务收益率（<strong>3.20%</strong>）</li>
+<li><strong>与公司监管评级挂钩：</strong>公司监管评级为1-3级且拟分红水平超过3.20%；或评级为4-5级且超过产品预定利率</li>
+<li><strong>强化内部制衡：</strong>公司产品、精算、投资、财务等部门认为需要提交审议的其他情形</li>
+</ol>
+
+<div class="warning-box">
+⚠️ <strong>关键结论：</strong>红利实现率不仅是营销数字，更是监管强制要求官网披露的检验工具。它绑定分红特别储备的水位与投资能力，体现的是一家保险公司诚信度、投资力和经营稳健性的<strong>综合信用评分</strong>。
+</div>
+</div>
+
+<!-- G. Why 118% is the ceiling -->
+<div class="card">
+<h2><span>🤔</span> 为什么118%是"天花板"？实现率高低不能孤立比较</h2>
+
+<p>你可能会问：有些公司宣传自己达到了120%甚至更高的实现率，是不是比新华的118%更好？</p>
+<p><strong>答案是不一定。</strong>因为不同产品的预定利率不同，同样的实际收益率对应不同的实现率数字。</p>
+
+<h3>对比案例：同样的实际收益率，不同的实现率数字</h3>
+<div class="formula-box" style="background:#FEF3C7;border-color:#F59E0B;">
+<div>新华方案：预定利率 <strong>1.75%</strong></div>
+<div>实际收益率 = 1.75% + (3.5% − 1.75%) × 70% × <strong>118%</strong> = <strong>3.2%</strong></div>
+<hr style="margin:14px 0;border-color:#F59E0B;">
+<div>对比方案：预定利率 <strong>1.25%</strong>（更低）</div>
+<div>实际收益率 = 1.25% + (3.5% − 1.25%) × 70% × <strong>124%</strong> = <strong>3.2%</strong></div>
+</div>
+
+<p>两种方案最终给客户的实际收益率都是 <strong>3.2%</strong>，但实现率数字一个是118%，另一个是124%。这是因为对比方案的预定利率更低，需要更高的实现率才能达到相同的实际收益。</p>
+
+<div class="success-box">
+✅ <strong>挑选建议：</strong>挑选分红险时，不要只看实现率数字的高低，更要关注：<br>
+① 公司长期的平均红利实现率是否稳定在100%以上 &nbsp;|&nbsp;
+② 公司的投资收益率能否持续支撑分红 &nbsp;|&nbsp;
+③ 保证利益部分（预定利率）是否具有竞争力
+</div>
+</div>
+
+<!-- H. Gold standard -->
+<div class="card">
+<h2><span>⭐</span> 挑选分红险的"金标准"</h2>
+
+<blockquote>
+<p>挑选分红险的核心不是看演示收益谁更高，而是从长期视角看红利实现率、关注公司长期投资收益率对分红险的支撑能力。</p>
+</blockquote>
+
+<p>在业内，"<strong>红利实现率</strong>"就是广受关注的金标准。它绑定了：</p>
+<ul>
+<li>演示利益落地的硬指标 —— 反映客户最终到手的真金白银</li>
+<li>分红特别储备的水位 —— 体现公司平滑分配能力</li>
+<li>公司的投资能力 —— 高质量权益资产配置能力</li>
+<li>经营稳健性 —— 长期可持续的盈利模式</li>
+</ul>
+</div>
+
+<!-- I. Company strength -->
+<div class="card">
+<h2><span>🏦</span> 新华保险：万亿资产的长期主义底座</h2>
+<p>红利实现率超过100%的自信，根植于新华保险底层坚实的投资根基。作为资产破万亿的头部险企，拥有极其稀缺的"大体量、长周期"资金优势。</p>
+
+<h3>2025年核心经营指标（创历史新高）</h3>
+<table class="data-table">
+<tr><th>指标</th><th>数值</th><th>同比变化</th><th>指标解读</th></tr>
+<tr><td>总资产</td><td class="num">1.9万亿元</td><td>+12.2%</td><td>规模与价值增长</td></tr>
+<tr><td>原保险保费收入</td><td class="num">1959亿元</td><td>+14.9%</td><td>量价齐升</td></tr>
+<tr><td>归母净利润</td><td class="num">363亿元</td><td>+38.3%</td><td>盈利能力显著提升</td></tr>
+<tr><td>内含价值</td><td class="num">2878亿元</td><td>+11.4%</td><td>长期价值核心体现</td></tr>
+<tr><td>新业务价值</td><td class="num">98亿元</td><td>+57.4%</td><td>新业务盈利潜力爆发</td></tr>
+<tr><td>总投资收益率</td><td class="num">6.6%</td><td>+0.8pct</td><td>量、率、稳统一</td></tr>
+<tr><td>综合投资收益率</td><td class="num">6.9%</td><td>—</td><td>老七家同口径维度</td></tr>
+<tr><td>投资资产规模</td><td class="num">1.84万亿元</td><td>+13%</td><td>规模与收益率双突破</td></tr>
+<tr><td>股东分红</td><td class="num">85.16亿元</td><td>+7.9%</td><td>中期+末期</td></tr>
+<tr><td>每股股息</td><td class="num">2.73元/股</td><td>+7.9%</td><td>股东回报稳步增长</td></tr>
+</table>
+
+<h3>偿付能力充足、风险抵御能力佳</h3>
+<div class="stats-grid">
+<div class="stat-item"><div class="value">2013.62亿</div><div class="label">核心资本<br>强劲增长</div></div>
+<div class="stat-item"><div class="value">3136.72亿</div><div class="label">实际资本<br>风险抵御坚实</div></div>
+</div>
+<p style="font-size:13px;color:var(--text-light)">有效覆盖最低资本要求，整体偿付能力充足率维持在高水平区间。</p>
+
+<h3>长期股权投资布局</h3>
+<ul>
+<li><strong>杭州银行：</strong>2025年1月24日通过杭银转债转股（转股价11.35元/股）</li>
+<li><strong>北京控股：</strong>2025年3月26日通过二级市场集中竞价方式增持</li>
+<li><strong>持有待售交易性金融资产：</strong>安井食品、中国动力、东山精密</li>
+</ul>
+</div>
+
+<!-- J. Disclaimer -->
+<div class="disclaimer">
+<strong>⚠️ 重要提示</strong>
+<ul>
+<li>本页面为业务学习资料，不构成任何形式的收益承诺或投资建议</li>
+<li>红利实现率数据来源于新华保险官方披露及公开行业报告，具体以公司最新公告为准</li>
+<li>过往表现不代表未来收益，分红险的浮动红利部分取决于公司实际经营成果</li>
+<li>演示利率仅为计划书演示用途，不代表实际收益承诺</li>
+<li>投保前请仔细阅读产品条款、产品说明书及投保提示书</li>
+</ul>
+</div>
+
+<p style="text-align:center;color:var(--text-light);font-size:13px;margin-top:24px;padding-bottom:16px;">
+百年契约，与光同行 —— 新华保险<br>
+数据更新于 2026 年 7 月 · 以公司正式披露为准
+</p>
+
+</div>
+</body>
+</html>
