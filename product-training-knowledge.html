@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华保险产品培训知识库 | 新华Hub</title>
+<style>
+:root{--primary:#1D4ED8;--primary-light:#DBEAFE;--primary-dark:#1E40AF;--text:#1E293B;--text-light:#64748B;--bg:#F8FAFC;--card-bg:#FFFFFF;--border:#E2E8F0;--success:#16A34A;--warning:#D97706;--danger:#DC2626;--amber-bg:#FFFBEB;--amber-border:#FCD34D}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}
+.container{max-width:980px;margin:0 auto;padding:20px}
+
+/* Header */
+.header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:48px 32px;border-radius:12px;margin-bottom:24px}
+.header h1{font-size:28px;font-weight:700;margin-bottom:10px}
+.header .subtitle{font-size:16px;opacity:.9;margin-bottom:20px}
+.header .meta{font-size:13px;opacity:.75;line-height:1.7}
+.header .meta-row{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:8px}
+.header .meta-item{display:flex;align-items:center;gap:4px}
+
+/* TOC */
+.toc{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:24px 28px;margin-bottom:24px}
+.toc h3{font-size:16px;color:var(--primary);margin-bottom:12px}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.toc a{display:block;padding:8px 12px;background:var(--bg);border-radius:6px;color:var(--primary);text-decoration:none;font-size:14px;transition:background .2s}
+.toc a:hover{background:var(--primary-light)}
+
+/* Quick nav scene cards */
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:32px}
+.scene-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;cursor:pointer;text-decoration:none;color:var(--text);transition:all .2s;display:block}
+.scene-card:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(29,78,216,.1);transform:translateY(-2px)}
+.scene-card .scene-icon{font-size:28px;margin-bottom:10px}
+.scene-card .scene-title{font-size:16px;font-weight:600;color:var(--primary);margin-bottom:6px}
+.scene-card .scene-desc{font-size:13px;color:var(--text-light);line-height:1.5}
+
+/* Section */
+.section-title{font-size:22px;color:var(--primary);margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid var(--primary-light);display:flex;align-items:center;gap:10px}
+.section-title .num{background:var(--primary);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+
+/* Card */
+.card{background:var(--card-bg);border-radius:10px;padding:28px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid var(--border)}
+.card h2{font-size:19px;color:var(--primary);margin-bottom:14px}
+.card h3{font-size:16px;color:var(--text);margin:18px 0 8px}
+.card h4{font-size:14px;color:var(--text);margin:12px 0 6px}
+.card p{margin-bottom:10px;color:var(--text-light);font-size:14px}
+.card ul,.card ol{margin-left:20px;color:var(--text-light);font-size:14px}
+.card li{margin-bottom:5px}
+
+/* Metric card */
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:16px 0}
+.metric-item{background:var(--bg);border-radius:8px;padding:18px}
+.metric-item .metric-name{font-size:16px;font-weight:700;color:var(--primary);margin-bottom:8px}
+.metric-item .metric-data{font-size:13px;color:var(--text-light);line-height:1.6}
+.metric-item .metric-what{font-size:13px;color:var(--text);margin-top:8px;padding-left:10px;border-left:3px solid var(--primary-light)}
+.metric-item .metric-significance{font-size:13px;color:var(--text-light);margin-top:6px;font-style:italic}
+.metric-item .metric-source{font-size:11px;color:var(--text-light);margin-top:8px;opacity:.7}
+
+/* Status badge */
+.status{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.status-green{background:#DCFCE7;color:#15803D}
+.status-amber{background:var(--amber-bg);color:#92400E;border:1px solid var(--amber-border)}
+
+/* Stats grid */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.stat-item{background:var(--bg);border-radius:8px;padding:18px;text-align:center}
+.stat-item .value{font-size:26px;font-weight:700;color:var(--primary)}
+.stat-item .label{font-size:12px;color:var(--text-light);margin-top:4px}
+
+/* Data table */
+.data-table-wrap{overflow-x:auto;margin:14px 0;-webkit-overflow-scrolling:touch}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;min-width:700px}
+.data-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:12px;white-space:nowrap}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:13px}
+.data-table tr:nth-child(even){background:var(--bg)}
+.data-table .num{font-weight:700;color:var(--primary);text-align:right;white-space:nowrap}
+
+/* Product card */
+.product-card{border:2px solid var(--border);border-radius:10px;padding:26px;margin-bottom:20px;background:var(--card-bg)}
+.product-card:hover{border-color:var(--primary-light)}
+.product-card .prod-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.product-card .prod-name{font-size:20px;font-weight:700;color:var(--primary-dark)}
+.product-card .prod-type{font-size:13px;background:var(--primary-light);color:var(--primary);padding:4px 12px;border-radius:20px;white-space:nowrap}
+.product-card .prod-position{font-size:14px;color:var(--text);margin-bottom:16px;padding:12px 16px;background:var(--bg);border-radius:8px;border-left:4px solid var(--primary)}
+.product-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0}
+.product-info-grid .info-item{font-size:13px;line-height:1.6}
+.product-info-grid .info-label{color:var(--text-light)}
+.product-info-grid .info-val{color:var(--text);font-weight:500}
+.prod-suit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.prod-suit{font-size:13px;padding:12px 14px;border-radius:8px;line-height:1.5}
+.prod-suit-fit{background:#F0FDF4;border:1px solid #BBF7D0}
+.prod-suit-nofit{background:#FFF1F2;border:1px solid #FECDD3}
+.prod-suit h4{font-size:13px;margin-bottom:4px}
+.prod-suit-fit h4{color:var(--success)}
+.prod-suit-nofit h4{color:var(--danger)}
+.prod-comm{font-size:13px;padding:12px 14px;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:8px;margin:10px 0}
+.prod-comm h4{color:var(--warning);font-size:13px;margin-bottom:4px}
+.prod-faq{margin:8px 0}
+.prod-faq .faq-q{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.prod-faq .faq-a{font-size:13px;color:var(--text-light);margin-bottom:10px}
+.prod-source{font-size:11px;color:var(--text-light);margin-top:16px;padding-top:10px;border-top:1px solid var(--border);opacity:.7}
+
+/* Related tools */
+.prod-tools{margin-top:16px;padding:16px 18px;background:linear-gradient(135deg,#EFF6FF,#F0F9FF);border-radius:8px;border:1px solid #BFDBFE}
+.prod-tools h4{font-size:14px;color:var(--primary);margin-bottom:10px}
+.prod-tools-grid{display:flex;flex-wrap:wrap;gap:8px}
+.prod-tool-link{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--primary);text-decoration:none;transition:all .2s}
+.prod-tool-link:hover{border-color:var(--primary);background:var(--primary-light)}
+
+/* Sales support */
+.sales-item{margin-bottom:20px;padding:20px;background:var(--bg);border-radius:8px}
+.sales-item .q{font-size:15px;font-weight:600;color:var(--primary);margin-bottom:10px}
+.sales-step{margin:8px 0;font-size:13px;line-height:1.7}
+.sales-step .step-label{font-weight:600;color:var(--text);display:inline}
+.sales-step .step-content{color:var(--text-light)}
+.sales-flow{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:10px;padding:24px;margin:16px 0}
+.sales-flow h3{color:var(--primary);margin-bottom:14px;font-size:16px}
+.sales-flow-step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+.sales-flow-step .step-num{width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.sales-flow-step .step-text{font-size:13px;color:var(--text);line-height:1.6;flex:1}
+
+/* Warning / success / info boxes */
+.warning-box{background:#FEF2F2;border-left:4px solid var(--danger);padding:16px 20px;border-radius:6px;margin:16px 0;font-size:13px}
+.success-box{background:#F0FDF4;border-left:4px solid var(--success);padding:16px 20px;border-radius:6px;margin:16px 0;font-size:13px}
+.info-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px 20px;border-radius:6px;margin:16px 0;font-size:13px}
+
+/* Disclaimer */
+.disclaimer{background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;padding:20px;font-size:13px;color:#92400E;margin-top:40px}
+.disclaimer ul{margin:8px 0 0 18px}
+.disclaimer li{margin-bottom:4px}
+
+/* Back to top */
+.back-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;background:var(--primary);color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);display:none;z-index:100}
+.back-top.show{display:flex;align-items:center;justify-content:center}
+
+/* Responsive */
+@media(max-width:768px){
+.header h1{font-size:22px}.header{padding:32px 20px}
+.card{padding:18px}.product-card{padding:18px}
+.stats-grid{grid-template-columns:repeat(2,1fr)}
+.scene-grid{grid-template-columns:1fr}
+.metric-grid{grid-template-columns:1fr}
+.product-info-grid{grid-template-columns:1fr}
+.prod-suit-grid{grid-template-columns:1fr}
+.data-table{font-size:11px}.data-table th,.data-table td{padding:6px 8px}
+}
+@media(max-width:390px){
+.container{padding:12px}
+.header h1{font-size:19px}.header .subtitle{font-size:14px}
+.section-title{font-size:18px}
+.product-card .prod-name{font-size:17px}
+.stats-grid{grid-template-columns:1fr 1fr;gap:8px}
+.stat-item .value{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="top">
+
+<!-- ====== HEADER ====== -->
+<div class="header">
+<h1>📘 新华保险产品培训知识库</h1>
+<p class="subtitle">面向银保客户经理与理财经理的产品学习、查询和客户沟通工具</p>
+<div class="meta">
+<div class="meta-row">
+<span class="meta-item">📄 来源：《2604新华在售产品培训.pptx》</span>
+<span class="meta-item">📅 资料时间：2026年7月</span>
+<span class="meta-item">🔧 整理状态：基于内部培训资料结构化整理</span>
+</div>
+<div style="margin-top:8px">
+<span class="status status-green">🟢 PPT明确内容</span>
+<span class="status status-amber" style="margin-left:8px">🟡 基于培训资料归纳</span>
+</div>
+</div>
+</div>
+
+<!-- ====== 页面目录 ====== -->
+<div class="toc" id="toc">
+<h3>📑 页面目录</h3>
+<div class="toc-grid">
+<a href="#quick">🔍 快速查询入口</a>
+<a href="#sec1">🏢 一、新华保险公司实力</a>
+<a href="#sec2">📊 二、五款产品总览</a>
+<a href="#sec3">📋 三、产品详解</a>
+<a href="#sec4">📈 四、分红实现能力</a>
+<a href="#sec5">💬 五、销售支持</a>
+<a href="#sec6">❓ 六、常见问题FAQ</a>
+<a href="#disclaimer">⚠️ 风险提示</a>
+</div>
+</div>
+
+<!-- ====== 快速查询入口 ====== -->
+<div id="quick">
+<h2 class="section-title"><span class="num">🔍</span> 我是理财经理，我想快速解决什么问题？</h2>
+<div class="scene-grid">
+<a class="scene-card" href="#sec1">
+<div class="scene-icon">🏦</div>
+<div class="scene-title">客户问："新华靠谱吗？"</div>
+<div class="scene-desc">1.8万亿总资产 · 偿付能力256% · 净利润连续高增 → 用数据快速回应信任问题</div>
+</a>
+<a class="scene-card" href="#sec4">
+<div class="scene-icon">📊</div>
+<div class="scene-title">客户问："分红可靠吗？"</div>
+<div class="scene-desc">近5年均值156.1%行业第一 · 79%产品超100% · 五步讲清资金流向</div>
+</a>
+<a class="scene-card" href="#prod-macro">
+<div class="scene-icon">🏖️</div>
+<div class="scene-title">客户想：做养老规划</div>
+<div class="scene-desc">宏愿人生（分红型养老+满期返还）vs 恒享人生（固定年金+102%返还）</div>
+</a>
+<a class="scene-card" href="#prod-hongtai">
+<div class="scene-icon">🏛️</div>
+<div class="scene-title">客户想：财富传承</div>
+<div class="scene-desc">宏泰（含交通意外保障）vs 宏御（老七家现价前三）vs 福盛（2%固定增额）</div>
+</a>
+<a class="scene-card" href="#sec2">
+<div class="scene-icon">⚖️</div>
+<div class="scene-title">客户需要：比较五款产品</div>
+<div class="scene-desc">一屏对比表：投保年龄 · 起售门槛 · 回本速度 · 核心特点 · 一句话定位</div>
+</a>
+<a class="scene-card" href="calculators/index.html">
+<div class="scene-icon">🧮</div>
+<div class="scene-title">客户需要：在线测算利益</div>
+<div class="scene-desc">跳转演算器：宏泰/宏御/福盛/宏愿/恒享在线利益演示</div>
+</a>
+</div>
+</div>
+
+<!-- ====== 一、公司实力 ====== -->
+<div id="sec1">
+<h2 class="section-title"><span class="num">1</span> 新华保险公司实力</h2>
+
+<div class="card">
+<h3>📊 关键财务指标入门</h3>
+<p>以下指标帮助理财经理用精准的事实向客户说明新华保险的经营实力，所有概念解释均来自PPT原文（第2-3页）。</p>
+
+<div class="metric-grid">
+<div class="metric-item">
+<div class="metric-name">营业收入</div>
+<div class="metric-data"><strong>钱从哪来</strong>：保险公司总收入 = 已赚保费 + 投资收益</div>
+<div class="metric-what">营收高说明公司业务规模大，但不直接等于利润</div>
+<div class="metric-significance">对客户的意义：规模大的保险公司拥有更强的抗风险能力和持续服务能力</div>
+<div class="metric-source">📄 来源：PPT 第2页</div>
+</div>
+
+<div class="metric-item">
+<div class="metric-name">内含价值</div>
+<div class="metric-data"><strong>公司真正的家底</strong>：调整后净资产 + 有效业务价值</div>
+<div class="metric-what">保险行业特有的核心指标，剔除了未来新业务影响，反映公司已锁定的价值。比账面净资产更能体现长期盈利能力</div>
+<div class="metric-significance">对客户的意义：内含价值越高的公司，已签保单未来能兑现的利益越有保障</div>
+<div class="metric-source">📄 来源：PPT 第2页</div>
+</div>
+
+<div class="metric-item">
+<div class="metric-name">归母净利润</div>
+<div class="metric-data"><strong>股东真正赚到手的钱</strong>：母公司股东回报的直接指标</div>
+<div class="metric-what">公司总利润扣除少数股东部分后的余额。注意可能受资本市场波动影响</div>
+<div class="metric-significance">对客户的意义：盈利能力强的公司，长期经营更稳定，保单兑现更有保障</div>
+<div class="metric-source">📄 来源：PPT 第2页</div>
+</div>
+
+<div class="metric-item">
+<div class="metric-name">投资资产规模</div>
+<div class="metric-data"><strong>拿来投资的本金有多少</strong>：剔除自用办公楼/现金后，配置股票/债券/基金等金融产品的资金总额</div>
+<div class="metric-what">规模越大，可运作资金体量越强</div>
+<div class="metric-significance">对客户的意义：投资资产规模大意味着可以"以量取胜"，分散配置，平滑风险</div>
+<div class="metric-source">📄 来源：PPT 第3页</div>
+</div>
+
+<div class="metric-item">
+<div class="metric-name">总投资收益率</div>
+<div class="metric-data"><strong>用这些本金赚了多少</strong>：含利息/股息/买卖差价+资产公允价值变动</div>
+<div class="metric-what">比率越高通常说明投资能力越强。高收益有时伴随高风险</div>
+<div class="metric-significance">对客户的意义：总投资收益率是衡量保险公司"赚钱效率"的核心指标，直接关系分红险的浮动收益能力</div>
+<div class="metric-source">📄 来源：PPT 第3页</div>
+</div>
+</div>
+
+<div class="info-box" style="margin-top:16px">
+💡 <strong>沟通口诀</strong>：营收看规模，内含价值看家底，归母净利润看当期回报，投资收益率看赚钱效率。四项兼优 = "又大又强" <span style="opacity:.6">🟡 AI整理，基于财务指标逻辑归纳</span>
+</div>
+</div>
+
+<!-- Key figures card -->
+<div class="card">
+<h3>💰 新华保险核心数据速览 <span class="status status-green">🟢 PPT明确内容</span></h3>
+<p>以下数据均来自PPT第33页，可作为客户沟通中的事实支撑：</p>
+
+<div class="stats-grid">
+<div class="stat-item"><div class="value">1.8万亿+</div><div class="label">总资产规模</div></div>
+<div class="stat-item"><div class="value">256.01%</div><div class="label">综合偿付能力充足率</div></div>
+<div class="stat-item"><div class="value">170.72%</div><div class="label">核心偿付能力充足率</div></div>
+<div class="stat-item"><div class="value">8.6%</div><div class="label">年化总投资收益率(2025Q3)</div></div>
+<div class="stat-item"><div class="value">5.13%</div><div class="label">近十年平均总投资收益率</div></div>
+<div class="stat-item"><div class="value">328.57亿</div><div class="label">归母净利润(2025Q3)</div></div>
+</div>
+
+<div class="info-box">
+📊 <strong>盈利趋势（第33页）</strong>：2023年归母净利润87.12亿元 → 2024年262.29亿元（同比+201.1%）→ 2025年前三季度328.57亿元（同比+58.9%）。
+<span style="opacity:.6">来源：PPT 第33页</span>
+</div>
+</div>
+</div>
+
+<!-- ====== 二、五款产品总览 ====== -->
+<div id="sec2">
+<h2 class="section-title"><span class="num">2</span> 五款产品总览</h2>
+
+<div class="data-table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th>产品名称</th>
+<th>代码</th>
+<th>类型</th>
+<th>一句话定位 <span class="status status-amber">🟡</span></th>
+<th>投保年龄</th>
+<th>起售门槛</th>
+<th>核心特点</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>宏泰世家</strong></td>
+<td>S03</td>
+<td>分红型终身寿</td>
+<td>看重现金价值确定增长 + 自带交通意外保障的分红终身寿</td>
+<td>男64/女67</td>
+<td>趸5万 · 3年3万 · 5/10年1万</td>
+<td>3年交5年超保费 · 1.2%分红预期 · 现价领先 · 交通意外额外保障</td>
+<td>S4-S7</td>
+</tr>
+<tr>
+<td><strong>宏御世家</strong></td>
+<td>S11</td>
+<td>分红型终身寿</td>
+<td>追求高现金价值的分红终身寿，老七家现价前三</td>
+<td>男65/女69</td>
+<td>趸5万 · 3/5/10年2万</td>
+<td>3年交4年超保费 · 现价超高 · 1.2%分红预期</td>
+<td>S8-S11</td>
+</tr>
+<tr>
+<td><strong>福盛世家添翼版</strong></td>
+<td>G14</td>
+<td>2%固定增额终身寿</td>
+<td>合同确定2%年增额 + 公共交通意外保障的固收型终身寿</td>
+<td>男68/女72<span style="font-size:10px;color:#999">(按交费期)</span></td>
+<td>趸5万 · 3年2万 · 5/10年1万</td>
+<td>2%固定增额 · 公共交通意外保障 · 3年交4年超保费</td>
+<td>S12-S14</td>
+</tr>
+<tr>
+<td><strong>宏愿人生</strong></td>
+<td>S02</td>
+<td>分红型养老年金</td>
+<td>解决退休后长期现金流的分红养老年金，满期返还保费</td>
+<td>69周岁</td>
+<td>趸5万 · 3年3万 · 5/10年1万</td>
+<td>3年交5年超保费 · 每年确定养老金至105岁 · 满期返还保费 · 分红浮动收益</td>
+<td>S15-S17</td>
+</tr>
+<tr>
+<td><strong>恒享人生</strong></td>
+<td>G23</td>
+<td>固定型年金</td>
+<td>利益简单明了的固定年金，每笔钱写进合同</td>
+<td>80周岁</td>
+<td>趸5万 · 3年2万 · 5/10年1万</td>
+<td>年领2%保费 · 满期返102%保费 · 关爱金 · 利益简单明了</td>
+<td>S18-S20</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="font-size:11px;color:var(--text-light);margin-top:4px">
+<span class="status status-amber">🟡</span> "一句话定位"为基于培训资料的产品特征归纳，不代表公司官方产品定位。投保年龄为最高值，因交费方式/性别不同。<br>
+📄 来源：PPT 第21页 产品回顾表 + 各产品基本要素页
+</div>
+</div>
+
+<!-- ====== 三、产品详解 ====== -->
+<div id="sec3">
+<h2 class="section-title"><span class="num">3</span> 五款产品详解</h2>
+
+<!-- 宏泰世家 -->
+<div class="product-card" id="prod-hongtai">
+<div class="prod-header">
+<span class="prod-name">宏泰世家终身寿险（分红型）</span>
+<span class="prod-type">S03 · 分红型终身寿</span>
+</div>
+<div class="prod-position"><strong>🟡 一句话定位</strong>：看重现金价值确定增长、同时需要自带交通意外保障的分红终身寿险。<br><span style="font-size:11px;opacity:.7">基于培训资料产品责任与案例特征归纳</span></div>
+
+<div class="product-info-grid">
+<div class="info-item"><span class="info-label">投保年龄：</span><span class="info-val">出生满30日-67周岁（男最高64/女最高67）</span></div>
+<div class="info-item"><span class="info-label">交费方式：</span><span class="info-val">一次交清 / 3年交 / 5年交 / 10年交</span></div>
+<div class="info-item"><span class="info-label">保险期间：</span><span class="info-val">终身</span></div>
+<div class="info-item"><span class="info-label">红利领取：</span><span class="info-val">现金领取 / 累积生息 / 购买交清增额</span></div>
+<div class="info-item"><span class="info-label">最低保费：</span><span class="info-val">趸5万 · 3年3万 · 5年1万 · 10年1万</span></div>
+<div class="info-item"><span class="info-label">体检标准：</span><span class="info-val">深圳：0-50岁5000万 · 51-65岁4000万 · 66-70岁2500万</span></div>
+</div>
+
+<h4>📋 核心保险责任</h4>
+<ul>
+<li><strong>身故或身体全残保险金</strong></li>
+<li><strong>客运列车及航空意外伤害身故或全残</strong>：18-75周岁，额外给付基本保险金额的1.5倍，同一被保险人累计给付以2000万元为限（不含红利相关利益）</li>
+</ul>
+
+<h4>📐 PPT案例</h4>
+<div class="info-box">宏先生，40周岁，3年交，年交保费10万元（总保费30万），基本保险金额263,700元。<br>
+<strong>关键数据</strong>：5年覆盖已交保费 · 29年翻倍 · 1.4倍身故金 · 1.3倍交通意外保障<br>
+<span style="font-size:11px;opacity:.7">📄 来源：PPT 第6页（本案例为PPT虚拟案例，仅供理解产品之用）</span></div>
+
+<h4>✅ 产品优势（PPT第7页）</h4>
+<ul>
+<li>合同确定现金价值：保单全周期现金价值领先，3年交费期满时现价近199万</li>
+<li>前期预期收益占优：保单前8年预期生存总利益持续领跑市场</li>
+<li>增值+保障双兼顾：产品自带特定交通意外保障，同业竞品无此项专属责任</li>
+</ul>
+<div style="font-size:11px;opacity:.6">注：PPT原文对比中泰康按3.9%预定利率定价，新华按3.5%定价，新华在确定性收益、前期增值上实现全面领先</div>
+
+<div class="prod-suit-grid">
+<div class="prod-suit prod-suit-fit">
+<h4>👤 适合客户</h4>
+<ul><li>有中长期资金规划需求的客户</li><li>看重合同确定现金价值增长</li><li>希望在财富增值同时获得交通意外保障</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+<div class="prod-suit prod-suit-nofit">
+<h4>🚫 不适合客户</h4>
+<ul><li>短期内（3年内）需要动用的资金</li><li>对浮动分红部分完全没有接受度</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+</div>
+
+<div class="prod-comm">
+<h4>💬 沟通切入口</h4>当客户说"我想存一笔钱，但不想冒太大风险，最好还能有点保障"时，宏泰世家同时提供合同确定的现金价值增长+交通意外额外赔付。<br>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品定位归纳</span>
+</div>
+
+<div class="prod-faq">
+<div class="faq-q">❓ 宏泰和宏御有什么区别？</div>
+<div class="faq-a">宏泰有交通意外额外保障（1.5倍）且红利领取有三种方式可选（含现金领取）；宏御现价更高、回本更快（4年覆盖保费），但红利领取只有累积生息和交清增额两种。选择逻辑：需要交通保障选宏泰，纯看现金价值选宏御。<br><span style="font-size:10px;opacity:.6">🟡 基于培训资料产品对比归纳</span></div>
+</div>
+
+<div class="prod-tools">
+<h4>🔗 关联工具入口</h4>
+<div class="prod-tools-grid">
+<a href="calculator-hongtai.html" class="prod-tool-link">🧮 宏泰世家演算器</a>
+<a href="clause-hongtai.html" class="prod-tool-link">📜 产品条款</a>
+<a href="#sec4" class="prod-tool-link">📊 分红实现率</a>
+<a href="product-qa-handbook.html" class="prod-tool-link">📖 产品问答手册</a>
+</div>
+</div>
+
+<div class="prod-source">📄 来源：PPT 第4-7页 <span class="status status-green">🟢 PPT明确内容</span> · 部分标注🟡的为基于培训资料归纳</div>
+</div>
+
+<!-- 宏御世家 -->
+<div class="product-card" id="prod-hongyu">
+<div class="prod-header">
+<span class="prod-name">宏御世家终身寿险（分红型）</span>
+<span class="prod-type">S11 · 分红型终身寿</span>
+</div>
+<div class="prod-position"><strong>🟡 一句话定位</strong>：现金价值在老七家中排名前三、回本快的高现价分红终身寿。<br><span style="font-size:11px;opacity:.7">基于培训资料同业对比和产品特征归纳</span></div>
+
+<div class="product-info-grid">
+<div class="info-item"><span class="info-label">投保年龄：</span><span class="info-val">出生满30日-69周岁（男最高65/女最高69）</span></div>
+<div class="info-item"><span class="info-label">交费方式：</span><span class="info-val">一次交清 / 3年交 / 5年交 / 10年交</span></div>
+<div class="info-item"><span class="info-label">保险期间：</span><span class="info-val">终身</span></div>
+<div class="info-item"><span class="info-label">红利领取：</span><span class="info-val">累积生息 / 购买交清增额</span></div>
+<div class="info-item"><span class="info-label">最低保费：</span><span class="info-val">趸5万 · 3年2万 · 5年2万 · 10年2万</span></div>
+<div class="info-item"><span class="info-label">体检标准：</span><span class="info-val">深圳：0-50岁5000万 · 51-65岁4000万 · 66-70岁2500万</span></div>
+</div>
+
+<h4>📋 核心保险责任</h4>
+<ul><li><strong>身故或身体全残保险金</strong></li></ul>
+<div style="font-size:12px;color:var(--text-light)">上述身故或身体全残保险金所称的基本保险金额不包括因红利分配产生的相关利益（PPT第9页）</div>
+
+<h4>📐 PPT案例</h4>
+<div class="info-box">40岁，3年交，年交50万元（总保费150万），红利领取方式选择购买交清增额。<br>
+<strong>关键数据</strong>：加红利第4年现金价值覆盖已交保费 · 28年收益翻倍<br>
+<span style="font-size:11px;opacity:.7">📄 来源：PPT 第10页（完整利益演示表含65行数据。本案例为虚拟案例）</span></div>
+
+<h4>✅ 产品特点（PPT第10-11页）</h4>
+<ul>
+<li>3年交4年覆盖总保费（含红利），同业对比排名第二（仅次于泰康同为4年）</li>
+<li>老七家现价前三，40年总收益与太平几乎持平（差仅约1500元）</li>
+</ul>
+
+<div class="prod-suit-grid">
+<div class="prod-suit prod-suit-fit">
+<h4>👤 适合客户</h4>
+<ul><li>追求较高现金价值增长的客户</li><li>对分红险回本速度有要求</li><li>有中长期资产传承规划</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+<div class="prod-suit prod-suit-nofit">
+<h4>🚫 不适合客户</h4>
+<ul><li>需要交通意外等额外保障</li><li>需要现金领取红利（宏御仅支持累积生息和交清增额）</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+</div>
+
+<div class="prod-comm">
+<h4>💬 沟通切入口</h4>当客户关注"我的钱多久能回本？收益在市场里算什么水平？"时，宏御世家的4年回本速度和同业前三的现价表现是核心卖点。<br>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料同业对比归纳</span>
+</div>
+
+<div class="prod-faq">
+<div class="faq-q">❓ 宏御的1.2%分红是什么意思？</div>
+<div class="faq-a">1.2%是PPT中对该产品分红预期水平的简要描述（第10页）。分红水平是不保证的，在某些年度可能为零。具体以公司实际宣告为准。<br><span style="font-size:10px;opacity:.6">🟡 基于培训资料归纳，具体以条款和公司宣告为准</span></div>
+</div>
+
+<div class="prod-tools">
+<h4>🔗 关联工具入口</h4>
+<div class="prod-tools-grid">
+<a href="calculator-hongyu.html" class="prod-tool-link">🧮 宏御世家演算器</a>
+<a href="clause-hongyu.html" class="prod-tool-link">📜 产品条款</a>
+<a href="#sec4" class="prod-tool-link">📊 分红实现率</a>
+<a href="card-hongyu.html" class="prod-tool-link">💳 宏御产品卡片</a>
+</div>
+</div>
+
+<div class="prod-source">📄 来源：PPT 第8-11页 <span class="status status-green">🟢 PPT明确内容</span> · 部分标注🟡的为基于培训资料归纳</div>
+</div>
+
+<!-- 福盛世家添翼版 -->
+<div class="product-card" id="prod-fusheng">
+<div class="prod-header">
+<span class="prod-name">福盛世家添翼版终身寿险</span>
+<span class="prod-type">G14 · 2%固定增额终身寿</span>
+</div>
+<div class="prod-position"><strong>🟡 一句话定位</strong>：合同确定每年2%增额、附带公共交通意外保障的固收型终身寿险。<br><span style="font-size:11px;opacity:.7">基于培训资料产品责任归纳</span></div>
+
+<div class="product-info-grid">
+<div class="info-item"><span class="info-label">投保年龄：</span><span class="info-val">0周岁-72周岁（男趸68·3年68·5年67·10年65 / 女72·72·70·65）</span></div>
+<div class="info-item"><span class="info-label">交费方式：</span><span class="info-val">一次交清 / 3年交 / 5年交 / 10年交</span></div>
+<div class="info-item"><span class="info-label">保险期间：</span><span class="info-val">终身</span></div>
+<div class="info-item"><span class="info-label">增额方式：</span><span class="info-val">合同确定每年2%固定增额</span></div>
+<div class="info-item"><span class="info-label">最低保费：</span><span class="info-val">趸5万 · 3年2万 · 5年1万 · 10年1万</span></div>
+</div>
+
+<h4>📋 核心保险责任</h4>
+<ul>
+<li><strong>身故或身体全残保险金</strong></li>
+<li><strong>特定公共交通工具意外伤害身故或全残</strong>：18-75周岁保单周年日之间，乘坐特定公共交通工具期间因交通事故导致，额外给付基本保险金额</li>
+</ul>
+
+<h4>📐 PPT案例</h4>
+<div class="info-box"><span style="opacity:.7">PPT第14页含利益演示图表。具体数据以PPT原文和正式产品资料为准。</span><br>
+<span style="font-size:11px;opacity:.7">📄 来源：PPT 第12-14页</span></div>
+
+<div class="prod-suit-grid">
+<div class="prod-suit prod-suit-fit">
+<h4>👤 适合客户</h4>
+<ul><li>不接受浮动收益、需要确定性增长的客户</li><li>对公共交通意外保障有实际需求</li><li>保守型中长期资金规划</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+<div class="prod-suit prod-suit-nofit">
+<h4>🚫 不适合客户</h4>
+<ul><li>追求更高潜在回报（2%固定 vs 分红型浮动收益）</li><li>对收益增长有更高期待</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+</div>
+
+<div class="prod-comm">
+<h4>💬 沟通切入口</h4>当客户说"分红是浮动的我不放心，有没有写死在合同里每年涨多少的？"时，福盛世家添翼版的2%固定增额就是回答。<br>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品定位归纳</span>
+</div>
+
+<div class="prod-faq">
+<div class="faq-q">❓ 2%固定增额比得上分红型吗？</div>
+<div class="faq-a">2%固定增额是合同确定的，不受市场波动影响。分红型（如宏泰/宏御）有浮动收益，上限更高但也有不确定性。选福盛的核心逻辑是"确定性"——不管市场怎么变，现金价值一分不少地按2%年增。<br><span style="font-size:10px;opacity:.6">🟡 AI整理���基于产品类型对比归纳</span></div>
+<div class="faq-q">❓ 交通意外保障和宏泰的有什么区别？</div>
+<div class="faq-a">两者都保18-75周岁。宏泰保障的是"客运列车及航空意外"，福盛保障的是"特定公共交通工具"（含公交、地铁、轻轨等），范围更广。宏泰的赔付是基本保额的1.5倍，福盛是额外给付基本保额。<br><span style="font-size:10px;opacity:.6">🟡 AI整理，基于PPT第5页、第13页产品责任对比</span></div>
+</div>
+
+<div class="prod-tools">
+<h4>🔗 关联工具入口</h4>
+<div class="prod-tools-grid">
+<a href="calculator-fusheng.html" class="prod-tool-link">🧮 福盛世家演算器</a>
+<a href="#sec2" class="prod-tool-link">📊 产品对比表</a>
+<a href="product-qa-handbook.html" class="prod-tool-link">📖 产品问答手册</a>
+</div>
+</div>
+
+<div class="prod-source">📄 来源：PPT 第12-14页 <span class="status status-green">🟢 PPT明确内容</span> · 部分标注🟡的为基于培训资料归纳</div>
+</div>
+
+<!-- 宏愿人生 -->
+<div class="product-card" id="prod-macro">
+<div class="prod-header">
+<span class="prod-name">宏愿人生养老年金保险（分红型）</span>
+<span class="prod-type">S02 · 分红型养老年金</span>
+</div>
+<div class="prod-position"><strong>🟡 一句话定位</strong>：解决客户退休后长期现金流规划需求的分红型养老年金。<br><span style="font-size:11px;opacity:.7">基于培训资料产品责任归纳</span></div>
+
+<div class="product-info-grid">
+<div class="info-item"><span class="info-label">投保年龄：</span><span class="info-val">出生满30日-69周岁</span></div>
+<div class="info-item"><span class="info-label">交费方式：</span><span class="info-val">一次交清 / 3年交 / 5年交 / 10年交</span></div>
+<div class="info-item"><span class="info-label">保险期间：</span><span class="info-val">至被保险人年满105周岁</span></div>
+<div class="info-item"><span class="info-label">养老金领取年龄：</span><span class="info-val">55（女）/ 60 / 65 / 70周岁</span></div>
+<div class="info-item"><span class="info-label">领取方式：</span><span class="info-val">年领（基本保险金额）或月领（基本保险金额×0.085）</span></div>
+<div class="info-item"><span class="info-label">红利领取：</span><span class="info-val">现金领取 或 累积生息</span></div>
+<div class="info-item"><span class="info-label">最低保费：</span><span class="info-val">趸5万 · 3年3万 · 5年1万 · 10年1万</span></div>
+</div>
+
+<h4>📋 核心保险责任</h4>
+<ul>
+<li><strong>养老年金</strong>：每个领取日零时生存，按年领=基本保险金额 / 月领=基本保险金额×0.085</li>
+<li><strong>满期生存保险金</strong>：生存至期满，按实际交纳的保险费给付</li>
+<li><strong>身故保险金</strong>：MAX（实际交纳保险费，现金价值）</li>
+</ul>
+
+<h4>📐 PPT案例</h4>
+<div class="info-box"><strong>关键数据</strong>：每年确定养老金直到105岁 · 第5年超保费 · 第30年年化约3.1% · 第40年年化约3.3% · 满期返还保费<br>
+注：上述演示数据经过取整处理，红利累积利率假设为年利率1.75%。红利水平是不保证的，在某些年度可能为零。<br>
+<span style="font-size:11px;opacity:.7">📄 来源：PPT 第17页（本案例为虚拟案例，仅供理解产品之用）</span></div>
+
+<div class="prod-suit-grid">
+<div class="prod-suit prod-suit-fit">
+<h4>👤 适合客户</h4>
+<ul><li>关注退休后长期稳定现金流的客户</li><li>50周岁以上客户（PPT第21页明确"针对50周岁以上客户利好"）</li><li>希望在养老金基础上获得分红浮动增长的客户</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任和对比表推断</span>
+</div>
+<div class="prod-suit prod-suit-nofit">
+<h4>🚫 不适合客户</h4>
+<ul><li>短期内需要动用本金的客户</li><li>主要需求是资产传承而非养老现金流</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+</div>
+
+<div class="prod-comm">
+<h4>💬 沟通切入口</h4>当客户说"我担心退休后钱不够花，但又不想把钱一次性用完"时，宏愿人生的终身年金+满期返还保费设计是回应核心。<br>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品定位归纳</span>
+</div>
+
+<div class="prod-faq">
+<div class="faq-q">❓ 万一没活到105岁，本金能拿回来吗？</div>
+<div class="faq-a">能。宏愿人生的身故保险金 = MAX（实际交纳保险费，现金价值），取两者中较大者。也就是说，无论何时身故，至少拿回已交保费，不会亏。<br><span style="font-size:10px;opacity:.6">🟡 AI整理，基于PPT第16页保险责任</span></div>
+<div class="faq-q">❓ 领取年龄怎么选？55/60/65/70哪个划算？</div>
+<div class="faq-a">取决于客户退休计划。越晚开始领取，每年领取金额越高（因为积累期更长）。PPT第21页明确"针对50周岁以上客户利好"，建议临近退休客户选60岁领取，让保单有10年左右积累期。<br><span style="font-size:10px;opacity:.6">🟡 AI整理，基于PPT第15-16页、第21页产品特征归纳</span></div>
+</div>
+
+<div class="prod-tools">
+<h4>🔗 关联工具入口</h4>
+<div class="prod-tools-grid">
+<a href="calculator-hongyuan.html" class="prod-tool-link">🧮 宏愿人生演算器</a>
+<a href="clause-hongyuan.html" class="prod-tool-link">📜 产品条款</a>
+<a href="boc-hongyuan-guide.html" class="prod-tool-link">📋 投保操作指引</a>
+<a href="#sec4" class="prod-tool-link">📊 分红实现率</a>
+</div>
+</div>
+
+<div class="prod-source">📄 来源：PPT 第15-17页、第21页 <span class="status status-green">🟢 PPT明确内容</span> · 部分标注🟡的为基于培训资料归纳 · 详细投保操作见<a href="boc-hongyuan-guide.html">宏愿人生投保指引</a>页</div>
+</div>
+
+<!-- 恒享人生 -->
+<div class="product-card" id="prod-hengxiang">
+<div class="prod-header">
+<span class="prod-name">恒享人生年金保险</span>
+<span class="prod-type">G23 · 固定型年金</span>
+</div>
+<div class="prod-position"><strong>🟡 一句话定位</strong>：利益简单明了的固定年金产品，每笔钱都写进合同。<br><span style="font-size:11px;opacity:.7">基于培训资料产品特征归纳</span></div>
+
+<div class="product-info-grid">
+<div class="info-item"><span class="info-label">投保年龄：</span><span class="info-val">0周岁-80周岁（按交费方式不同，男趸80·3年77·5年75·10年70）</span></div>
+<div class="info-item"><span class="info-label">交费方式：</span><span class="info-val">一次交清 / 3年交 / 5年交 / 10年交</span></div>
+<div class="info-item"><span class="info-label">保险期间：</span><span class="info-val">至被保险人年满105周岁</span></div>
+<div class="info-item"><span class="info-label">最低保费：</span><span class="info-val">趸5万 · 3年2万 · 5年1万 · 10年1万（千元递增）</span></div>
+</div>
+
+<h4>📋 核心保险责任</h4>
+<ul>
+<li><strong>关爱金</strong>：关爱金领取日（趸/3年第6年·5年第7年·10年第11年）给付基本保险金额</li>
+<li><strong>年金</strong>：关爱金领取日起至期满，每年给付实际交纳保险费的2%</li>
+<li><strong>满期生存保险金</strong>：实际交纳保险费的102%</li>
+<li><strong>身故保险金</strong>：MAX（实际交纳保险费，现金价值）</li>
+</ul>
+
+<h4>📐 PPT案例</h4>
+<div class="info-box">40岁，3年交，年交10万元（总保费30万），含60年完整利益演示。<br>
+<strong>关键数据</strong>：第7年起每年领6000元年金（总保费2%）· 满期返306,000元（102%保费）· 现金价值覆盖总保费 · 生存总利益逐年增长<br>
+<span style="font-size:11px;opacity:.7">📄 来源：PPT 第20页（完整60年利益演示表。本案例为虚拟案例）</span></div>
+
+<div class="prod-suit-grid">
+<div class="prod-suit prod-suit-fit">
+<h4>👤 适合客户</h4>
+<ul><li>追求确定收益、不接受任何浮动部分的客户</li><li>需要每年稳定现金流补充</li><li>预算有限但希望锁定长期利率</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+<div class="prod-suit prod-suit-nofit">
+<h4>🚫 不适合客户</h4>
+<ul><li>追求更高潜在回报（固定型 vs 分红型浮动收益）</li><li>希望有交通意外等附加保障</li></ul>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品责任推断</span>
+</div>
+</div>
+
+<div class="prod-comm">
+<h4>💬 沟通切入口</h4>当客户说"我就想每年固定领一笔钱，别跟我讲什么分红不分红的"时，恒享人生的保费的2%年领+102%满期返还就是最简单的答案。<br>
+<span style="font-size:10px;opacity:.6">🟡 基于培训资料产品定位归纳</span>
+</div>
+
+<div class="prod-faq">
+<div class="faq-q">❓ 恒享和宏愿有什么区别？怎么给客户推荐？</div>
+<div class="faq-a">核心区别：恒享是固定收益（每年领总保费2%，满期返102%），宏愿是分红养老（领取金额可随分红增长）。推荐逻辑：客户说"我不想操心分红涨跌，就想要确定数字"→恒享；客户说"我愿意接受浮动，希望养老金能越领越多"→宏愿。<br><span style="font-size:10px;opacity:.6">🟡 AI整理，基于PPT第18-20页产品特征及第21页对比表</span></div>
+<div class="faq-q">❓ 关爱金和年金是什么关系？</div>
+<div class="faq-a">关爱金是先给的一笔"红包"（一次性给付基本保险金额，趸/3年第6年领，5年第7年，10年第11年）���年金是之后每年持续给的"工资"（每年给付总保费的2%）。先拿一笔大的，再每年拿稳定收入。<br><span style="font-size:10px;opacity:.6">🟡 AI整理，基于PPT第19页保险责任</span></div>
+</div>
+
+<div class="prod-tools">
+<h4>🔗 关联工具入口</h4>
+<div class="prod-tools-grid">
+<a href="calculator-hengxiang.html" class="prod-tool-link">🧮 恒享人生演算器</a>
+<a href="clause-hengxiang.html" class="prod-tool-link">📜 产品条款</a>
+<a href="#sec2" class="prod-tool-link">📊 产品对比表</a>
+<a href="product-qa-handbook.html" class="prod-tool-link">📖 产品问答手册</a>
+</div>
+</div>
+
+<div class="prod-source">📄 来源：PPT 第18-20页 <span class="status status-green">🟢 PPT明确内容</span> · 部分标注🟡的为基于培训资料归纳</div>
+</div>
+</div>
+
+<!-- ====== 四、分红实现能力 ====== -->
+<div id="sec4">
+<h2 class="section-title"><span class="num">4</span> 分红实现能力</h2>
+
+<div class="card">
+<h3>📊 什么是红利实现率？</h3>
+<p>红利实现率反映的是分红险"浮动收益部分"的实际兑现程度。由于分红险的保证收益部分由行业统一的预定利率决定，真正拉开差距的正是浮动部分。红利实现率就是衡量这部分兑现程度的硬指标。</p>
+<p>📄 详细概念解释请查看 <a href="dividend-2025-report.html">红利实现率独立知识页</a>（含果园案例等完整讲解）。</p>
+</div>
+
+<div class="card">
+<h3>📈 新华保险2024年分红实现率数据 <span class="status status-green">🟢 PPT明确内容</span></h3>
+
+<div class="stats-grid">
+<div class="stat-item"><div class="value">152%</div><div class="label">保额分红平均实现率<br>（59款中56款≥100%）</div></div>
+<div class="stat-item"><div class="value">117%</div><div class="label">现金分红平均实现率<br>（7款在售均超100%）</div></div>
+<div class="stat-item"><div class="value">122%</div><div class="label">现金分红最高实现率</div></div>
+<div class="stat-item"><div class="value">156.1%</div><div class="label">近5年平均红利实现率<br>🥇 行业第一</div></div>
+</div>
+<div style="font-size:12px;color:var(--text-light);margin-top:8px">📄 来源：PPT 第32-33页</div>
+</div>
+
+<div class="card">
+<h3>🏆 近5年同业排名（第33页）</h3>
+<ul>
+<li>新华保险近5年平均红利实现率 <strong>156.1%</strong>，在所有披露数据的公司中位列第一</li>
+<li>2024年，80款分红产品中 <strong>63款（近79%）</strong> 实现100%及以上红利实现率</li>
+<li>在42家公司中排名前三，<strong>老七家中排名第一</strong>，高于中英人寿、中意人寿、陆家嘴国泰</li>
+</ul>
+
+<div class="warning-box" style="margin-top:16px">
+⚠️ <strong>重要提示</strong>：历史红利实现情况不代表未来，红利水平是不保证的，在某些年度可能为零。具体以公司正式披露为准。<br>
+<span style="font-size:11px;opacity:.7">📄 来源：PPT第17页风险提示 + 第32-33页数据</span>
+</div>
+</div>
+
+<div class="card">
+<h3>💪 分红兑现的底层支撑 <span class="status status-green">🟢 PPT明确内容</span></h3>
+<ul>
+<li><strong>盈利支撑</strong>：2023年归母净利润87.12亿 → 2024年262.29亿（+201.1%）→ 2025Q3 328.57亿（+58.9%）</li>
+<li><strong>偿付支撑</strong>：综合偿付能力256.01% · 核心偿付能力170.72%（2025年半年报）</li>
+<li><strong>投资支撑</strong>：年化总投资收益率8.6% · 近十年平均5.13%（2025Q3）</li>
+<li><strong>鸿鹄基金</strong>：累计出资近500亿，入选央视财经"金融改革"2025年度案例</li>
+</ul>
+<div style="font-size:12px;color:var(--text-light);margin-top:8px">📄 来源：PPT 第33页</div>
+</div>
+</div>
+
+<!-- ====== 五、销售支持 ====== -->
+<div id="sec5">
+<h2 class="section-title"><span class="num">5</span> 销售支持</h2>
+
+<div class="card">
+<h3>💬 客户问题1："新华保险靠谱吗？"</h3>
+
+<div class="sales-item">
+<div class="q">🔍 判断客户真正关心什么</div>
+<p style="font-size:13px;color:var(--text-light)">客户问"靠谱"，本质是问三个问题：①公司会不会倒闭？②我的保单利益有没有保障？③公司投资和管理行不行？</p>
+<p style="font-size:11px;opacity:.6">🟡 基于培训资料沟通逻辑归纳</p>
+</div>
+
+<div class="sales-item">
+<div class="q">📋 专业解释逻辑</div>
+<div class="sales-step">
+<span class="step-label">① 公司规模：</span><span class="step-content">总资产突破1.8万亿元，A+H股双上市公司，2025年A股涨49%、H股涨131%，涨幅保险板块首位。</span>
+<span style="font-size:11px;opacity:.5">PPT S33</span>
+</div>
+<div class="sales-step">
+<span class="step-label">② 盈利能力：</span><span class="step-content">归母净利润从2023年87亿增长至2025年前三季度329亿，连续两年大幅增长。</span>
+<span style="font-size:11px;opacity:.5">PPT S33</span>
+</div>
+<div class="sales-step">
+<span class="step-label">③ 偿付能力：</span><span class="step-content">综合偿付能力充足率256%、核心170%，远超监管红线。</span>
+<span style="font-size:11px;opacity:.5">PPT S33</span>
+</div>
+<div class="sales-step">
+<span class="step-label">④ 投资能力：</span><span class="step-content">年化总投资收益率8.6%，近十年平均5.13%。</span>
+<span style="font-size:11px;opacity:.5">PPT S33</span>
+</div>
+</div>
+
+<div class="sales-item">
+<div class="q">💡 可使用的沟通重点</div>
+<ul style="font-size:13px;color:var(--text-light)">
+<li>总资产1.8万亿，A+H股双上市公司，保险板块涨幅第一</li>
+<li>偿付能力超监管红线2倍以上</li>
+<li>近5年平均红利实现率156.1%，行业第一</li>
+<li>以上数据均来自公开披露，可在公司官网查阅</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<h3>💬 客户问题2："分红险的钱去了哪里？怎么赚钱？"</h3>
+
+<div class="info-box" style="margin-bottom:16px">
+📄 以下内容完整保留PPT第31页"五步话术"逻辑。🟢 PPT明确内容。
+</div>
+
+<div class="sales-flow">
+<h3>📊 五步讲清分红险资金流向</h3>
+
+<div class="sales-flow-step">
+<div class="step-num">1</div>
+<div class="step-text"><strong>您的保费进了"专用账户"</strong><br>
+您交的保费不进公司自己的账户，而是进独立的分红保险专用账户，专款专用，单独核算。<br>
+<span style="font-size:11px;opacity:.6">📄 PPT 第31页</span></div>
+</div>
+
+<div class="sales-flow-step">
+<div class="step-num">2</div>
+<div class="step-text"><strong>保险公司拿着这些钱去投资</strong><br>
+三个方向：①鸿鹄基金——监管特批"长钱长投"试点，超2000亿规模，买中国石化、中国神华、陕西煤业等高股息龙头；②长久期债券——锁定长期利率，稳定底仓；③战略性举牌——上海医药、国药股份、杭州银行等优质公司。<br>
+<span style="font-size:11px;opacity:.6">📄 PPT 第31页</span></div>
+</div>
+
+<div class="sales-flow-step">
+<div class="step-num">3</div>
+<div class="step-text"><strong>投资赚了钱，先扣除成本</strong><br>
+投资收益先扣保障成本、赔付支出、运营费用，剩下的就是"可分配盈余"。<br>
+<span style="font-size:11px;opacity:.6">📄 PPT 第31页</span></div>
+</div>
+
+<div class="sales-flow-step">
+<div class="step-num">4</div>
+<div class="step-text"><strong>监管规定：至少70%盈余分给客户</strong><br>
+公司投资赚的钱，大头必须给客户，公司自己只能留一小部分。<br>
+<span style="font-size:11px;opacity:.6">📄 PPT 第31页</span></div>
+</div>
+
+<div class="sales-flow-step">
+<div class="step-num">5</div>
+<div class="step-text"><strong>您到手的两笔钱</strong><br>
+· 保证利益：写进合同，不管投资赚多赚少一定给<br>
+· 非保证红利：根据实际投资收益浮动<br>
+2024年，新华60多款产品分红实现率超100%，意味着实际拿到的分红比计划书演示的还要多。<br>
+<span style="font-size:11px;opacity:.6">📄 PPT 第31页</span></div>
+</div>
+</div>
+
+<div class="info-box" style="margin-top:14px">
+📊 <strong>客户可能会追问："公司投资到底赚得怎么样？"</strong><br>
+· 2024年总投资收益率 5.8%<br>
+· 2025年总投资收益率 6.6%（连续两年行业亮眼）<br>
+· 净投资收益率（利息+股息）2025年 2.8%，这是分红的"压舱石"<br>
+<span style="font-size:11px;opacity:.6">📄 PPT 第31页</span>
+</div>
+
+<div class="success-box" style="margin-top:14px">
+🎯 <strong>一句话总结（PPT第31页原文）</strong>：您买的新华分红险，钱被投到了国家支持的优质资产里，有"鸿鹄基金"这样的高股息底仓，也有长期债券打底，投资风格稳健。公司赚得好了，分红就更有保障。
+</div>
+</div>
+
+<div class="card">
+<h3>💬 客户问题3："为什么不直接存银行？"</h3>
+
+<div class="sales-item">
+<div class="q">🔍 判断客户真正关心什么</div>
+<p style="font-size:13px;color:var(--text-light)">客户问的不是银行和保险的技术差异，而是"我的钱放在哪里更划算？"核心是比较安全感、收益性和灵活性。</p>
+<p style="font-size:11px;opacity:.6">🟡 基于培训资料沟通逻辑归纳</p>
+</div>
+
+<div class="sales-item">
+<div class="q">📋 专业解释逻辑</div>
+<div class="sales-step">
+<span class="step-label">① 银行利率趋势：</span><span class="step-content">五年期定存利率已降至1.3%，且利率下行趋势仍在持续。银行存款解决的是短期流动性需求。</span>
+<span style="font-size:11px;opacity:.5">PPT S5 备注，第3页</span>
+</div>
+<div class="sales-step">
+<span class="step-label">② 保险的确定性：</span><span class="step-content">保险锁定的是长期利率。银行存的是"今天要用"的钱，保险规划的是"未来确定要发生"的事——养老、传承、教育。</span>
+</div>
+<div class="sales-step">
+<span class="step-label">③ 长期规划的价值：</span><span class="step-content">银行解决3-5年的资金安排，保险解决10年以上的规划。两者不是替代关系，是互补。</span>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>💬 客户问题4："分红不保证，万一不分怎么办？"</h3>
+
+<div class="sales-item">
+<div class="q">🔍 判断客户真正关心什么</div>
+<p style="font-size:13px;color:var(--text-light)">客户担心的是"浮动部分"的风险，需要让客户理解两层保障：①保证收益是写进合同的；②分红有监管机制保护客户利益。</p>
+<p style="font-size:11px;opacity:.6">🟡 基于培训资料沟通逻辑归纳</p>
+</div>
+
+<div class="sales-item">
+<div class="q">📋 专业解释逻辑</div>
+<div class="sales-step">
+<span class="step-label">① 保证利益不受影响：</span><span class="step-content">分红的浮动是在保证利益之上的浮动，保证利益部分由行业统一的预定利率决定，岿然不动。</span>
+<span style="font-size:11px;opacity:.5">PPT S5</span>
+</div>
+<div class="sales-step">
+<span class="step-label">② 70%盈余分配机制：</span><span class="step-content">监管明确规定，公司实际经营成果优于精算假设的盈余，必须拿出70%分给保单持有人。</span>
+<span style="font-size:11px;opacity:.5">PPT S5 备注</span>
+</div>
+<div class="sales-step">
+<span class="step-label">③ 平滑准备金机制：</span><span class="step-content">分红险特有的"投资平滑准备金"制度，可以在好的年份留存一部分，差的年份仍然能维持相对平稳的分红。</span>
+<span style="font-size:11px;opacity:.5">PPT S5</span>
+</div>
+<div class="sales-step">
+<span class="step-label">④ 历史数据参考（不代表未来）：</span><span class="step-content">近5年平均红利实现率156.1%，2024年80款产品中近79%实现了100%及以上的实现率。</span>
+<span style="font-size:11px;opacity:.5">PPT S33</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== 六、FAQ ====== -->
+<div id="sec6">
+<h2 class="section-title"><span class="num">6</span> 常见问题FAQ</h2>
+
+<div class="card">
+<p style="font-size:13px;color:var(--text-light);margin-bottom:14px">以下问题均有PPT依据。没有PPT明确依据的问题不在本FAQ中展示。</p>
+
+<p><strong>Q1：五款产品中，哪款现价最高？</strong></p>
+<p style="font-size:13px;color:var(--text-light)">宏御世家现金价值在老七家中排名前三，是五款产品中现价表现最强的。宏泰世家紧随其后。<br><span style="font-size:11px;opacity:.6">📄 PPT 第11页</span></p>
+
+<p><strong>Q2：五款产品中，哪款起售门槛最低？</strong></p>
+<p style="font-size:13px;color:var(--text-light)">5年交和10年交时，宏泰世家、福盛世家、宏愿人生、恒享人生最低均为1万元/年。宏御世家最低为2万元/年。<br><span style="font-size:11px;opacity:.6">📄 PPT 第21页</span></p>
+
+<p><strong>Q3：年金型产品和终身寿型产品怎么选？</strong></p>
+<p style="font-size:13px;color:var(--text-light)">核心看客户需求：需要终身现金流（退休养老金）→ 宏愿人生或恒享人生；需要资产传承和增值 → 宏泰世家、宏御世家、福盛世家添翼版。两个方向可以组合配置。<br><span style="font-size:11px;opacity:.6">🟡 基于培训资料产品体系归纳</span></p>
+
+<p><strong>Q4：分红型和非分红型怎么选？</strong></p>
+<p style="font-size:13px;color:var(--text-light)">接受一定浮动换取更高潜在回报 → 分红型（宏泰/宏御/宏愿）；要求所有利益写进合同 → 固收型（福盛添翼2%/恒享年金）。<br><span style="font-size:11px;opacity:.6">🟡 基于培训资料产品类型归纳</span></p>
+
+<p><strong>Q5：宏愿人生的年金怎么计算？</strong></p>
+<p style="font-size:13px;color:var(--text-light)">年领 = 基本保险金额；月领 = 基本保险金额 × 0.085。开始领取年龄可选55（女）/60/65/70周岁。<br><span style="font-size:11px;opacity:.6">📄 PPT 第15-16页</span></p>
+
+<p><strong>Q6：恒享人生的关爱金和年金有什么区别？</strong></p>
+<p style="font-size:13px;color:var(--text-light)">关爱金是一次性给付基本保险金额（趸/3年第6年领取，5年第7年，10年第11年）。年金是从关爱金领取日起每年给付保费的2%。<br><span style="font-size:11px;opacity:.6">📄 PPT 第19页</span></p>
+</div>
+</div>
+
+<!-- ====== 风险提示 ====== -->
+<div class="disclaimer" id="disclaimer">
+<h3>⚠️ 风险提示与使用说明</h3>
+<p style="margin-top:8px">本页面内容基于《2604新华在售产品培训.pptx》（内部培训资料），仅限内部学习参考使用。</p>
+<ul>
+<li><strong>来源说明</strong>：🟢 标记为"PPT明确内容"的，均为PPT原文可得数据。🟡 标记为"基于培训资料归纳"的，是对原始培训资料的结构化整理，不代表新增产品规则，<strong>具体以公司正式产品资料、保险条款和保险合同为准</strong>。</li>
+<li><strong>产品规则</strong>：产品责任、责任免除等内容以条款和正式保险合同为准。本页面中的"保险责任"为方便理解的简要摘写，不构成完整的产品说明。</li>
+<li><strong>红利提示</strong>：红利水平是不保证的，在某些年度可能为零。历史红利实现率不代表未来表现。</li>
+<li><strong>案例说明</strong>：PPT中的案例均为虚拟案例，仅供理解产品之用，不代表实际收益承诺。</li>
+<li><strong>免责声明</strong>：本资料为内部培训材料，不得外传。本页面内容不构成投保建议，具体投保决策请以客户实际情况及正式产品资料为准。</li>
+</ul>
+<div style="margin-top:12px;font-size:11px;opacity:.7">
+📄 来源：《2604新华在售产品培训.pptx》第34页免责声明（改写为内部培训标识）<br>
+📅 内容整理时间：2026年7月28日<br>
+🔧 整理方式：PPT文本提取 + 结构化整理，未新增保险业务规则<br>
+👤 整理：WorkBuddy（基于Commander审核通过的V2页面结构设计）
+</div>
+</div>
+
+<button class="back-top" id="backTop" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})" title="回到顶部">↑</button>
+
+</div>
+
+<script>
+// 回到顶部按钮显示/隐藏
+window.addEventListener('scroll',function(){document.getElementById('backTop').classList.toggle('show',window.scrollY>500);});
+</script>
+</body>
+</html>
