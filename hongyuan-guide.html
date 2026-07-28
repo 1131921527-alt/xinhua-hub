@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="version" content="v1.0">
+<meta name="updated" content="2026-07-28">
+<title>宏愿人生｜已有双录订单后续投保操作指引 | 新华保险资料库</title>
+<style>
+:root{
+  --accent:#DC2626;--accent-dark:#991B1B;--accent-light:#FEF2F2;
+  --primary:#1D4ED8;--text:#1E293B;--text-light:#64748B;--bg:#F8FAFC;
+  --card-bg:#FFFFFF;--border:#E2E8F0;
+  --green:#16A34A;--green-bg:#F0FDF4;--green-bd:#BBF7D0;
+  --yellow:#D97706;--yellow-bg:#FFFBEB;--yellow-bd:#FDE68A;
+  --red:#DC2626;--red-bg:#FEF2F2;--red-bd:#FECACA;
+  --blue-bg:#EFF6FF;--blue-bd:#BFDBFE;
+  --primary-dark:#1E40AF;--primary-light:#DBEAFE;--success:#16A34A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:var(--bg);line-height:1.75;font-size:15px}
+.container{max-width:920px;margin:0 auto;padding:20px}
+
+/* ===== Header ===== */
+.header{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;padding:36px 22px 30px;border-radius:12px;margin-bottom:20px}
+.header h1{font-size:23px;font-weight:700;margin-bottom:8px;letter-spacing:.3px}
+.header .subtitle{font-size:14px;opacity:.92;margin-bottom:14px}
+.header .meta{font-size:12.5px;opacity:.8;line-height:1.7}
+
+/* ===== Mandatory top notice ===== */
+.notice{background:var(--yellow-bg);border:1px solid var(--yellow-bd);border-left:5px solid var(--yellow);border-radius:8px;padding:15px 18px;margin-bottom:24px;font-size:13.5px;color:#92400E}
+.notice strong{color:var(--yellow)}
+
+/* ===== Cards / sections ===== */
+.card{background:var(--card-bg);border-radius:10px;padding:26px 24px;margin-bottom:22px;box-shadow:0 1px 3px rgba(0,0,0,.07);border:1px solid var(--border)}
+.card > h2{font-size:18px;color:var(--accent);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:8px}
+.card h3{font-size:15.5px;color:var(--text);margin:18px 0 10px;padding-left:11px;border-left:3px solid var(--accent)}
+.card p{margin-bottom:10px;color:var(--text-light)}
+.card ul,.card ol{margin-left:20px;color:var(--text-light)}
+.card li{margin-bottom:6px}
+.card li b,.card p b{color:var(--text)}
+
+/* ===== Badges ===== */
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:20px;vertical-align:middle;white-space:nowrap}
+.badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-bd)}
+.badge-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+.legend{font-size:12.5px;color:var(--text-light);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+
+/* ===== Step blocks ===== */
+.step{border:1px solid var(--border);border-radius:10px;margin:14px 0;overflow:hidden}
+.step-head{background:var(--blue-bg);padding:12px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.step-head .num{background:var(--accent);color:#fff;font-weight:700;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.step-head .title{font-weight:700;font-size:15px;color:var(--text)}
+.step-body{padding:14px 18px}
+.field-row{display:grid;grid-template-columns:120px 1fr;gap:8px 12px;padding:7px 0;border-bottom:1px dashed var(--border);font-size:13.5px}
+.field-row:last-child{border-bottom:none}
+.field-row .k{color:var(--text-light);font-weight:600}
+.field-row .v{color:var(--text)}
+.note-line{background:var(--yellow-bg);border-radius:6px;padding:8px 12px;margin-top:10px;font-size:12.8px;color:#92400E}
+.note-line b{color:var(--yellow)}
+
+/* ===== Tables ===== */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th,td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--accent-light);color:var(--accent-dark);font-weight:700}
+tr:nth-child(even) td{background:#FBFCFE}
+
+/* ===== doc list ===== */
+.doc-list{counter-reset:doc;list-style:none;margin:10px 0;padding:0}
+.doc-list li{counter-increment:doc;background:var(--bg);border-radius:7px;padding:11px 14px 11px 46px;margin:8px 0;position:relative;font-size:14px;color:var(--text)}
+.doc-list li::before{content:counter(doc);position:absolute;left:12px;top:11px;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.covered-list{list-style:none;margin:10px 0;padding:0}
+.covered-list li{background:var(--red-bg);border:1px solid var(--red-bd);border-radius:7px;padding:10px 14px;margin:7px 0;font-size:13.5px;color:var(--red)}
+.covered-list li::before{content:"🔴";margin-right:8px}
+
+/* ===== highlight boxes ===== */
+.box{border-radius:8px;padding:15px 18px;margin:14px 0;font-size:13.5px}
+.box-blue{background:var(--blue-bg);border:1px solid var(--blue-bd)}
+.box-blue b{color:var(--primary)}
+.box-yellow{background:var(--yellow-bg);border:1px solid var(--yellow-bd);color:#92400E}
+.box-red{background:var(--red-bg);border:1px solid var(--red-bd);color:var(--red)}
+
+/* ===== footer disclaimer ===== */
+.footer-risk{background:var(--red-bg);border:1px solid var(--red-bd);border-radius:10px;padding:20px 22px;margin-top:10px;font-size:13.5px;color:var(--red-dark,#7F1D1D);line-height:1.8}
+.footer-risk b{color:var(--accent-dark)}
+.source-note{background:#F1F5F9;border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:12.8px;color:var(--text-light)}
+.source-note b{color:var(--text)}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:12px 0;font-size:14px}
+.flow .node{background:var(--accent);color:#fff;padding:6px 14px;border-radius:20px;font-weight:600;font-size:13.5px}
+.flow .arrow{color:var(--accent);font-weight:700}
+
+@media(max-width:640px){
+  .header h1{font-size:19px}.header{padding:28px 14px 24px}.card{padding:18px 14px}
+  .field-row{grid-template-columns:1fr;gap:2px}.field-row .k{font-size:12px}
+  .flow .node{padding:5px 10px;font-size:12.5px}
+}
+
+/* ===== P0 通用组件（复用 policy-retrieval-guide.html，蓝色统一工具色，与红色内容主题区分） ===== */
+.quick-card{background:linear-gradient(135deg,#EFF6FF,#F0F9FF);border:1px solid #BFDBFE;border-radius:12px;padding:24px;margin-bottom:20px}
+.quick-card .qc-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.quick-card .qc-q{font-size:18px;font-weight:700;color:var(--primary-dark)}
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.quick-item{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.quick-item .qi-label{font-size:12px;color:var(--text-light);margin-bottom:5px;font-weight:600}
+.quick-item .qi-val{font-size:14px;color:var(--text);line-height:1.6}
+.quick-item .qi-val.recommend{color:var(--primary);font-weight:700}
+.script-box{background:#FFF;border:1px dashed var(--primary);border-radius:8px;padding:16px;font-size:14px;color:var(--text);line-height:1.75;position:relative}
+.script-box .sb-tag{position:absolute;top:-11px;left:14px;background:var(--primary);color:#fff;font-size:11px;padding:2px 10px;border-radius:10px}
+.script-box .sb-hint{font-size:12px;color:var(--text-light);margin-top:10px;font-style:italic}
+.section-title{font-size:22px;color:var(--primary);margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid var(--primary-light);display:flex;align-items:center;gap:10px}
+.section-title .num{background:var(--primary);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.copy-btn{margin-top:14px;display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:var(--primary-dark)}
+.copy-toast{display:none;margin-left:10px;font-size:13px;color:var(--success);font-weight:600;vertical-align:middle}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:32px}
+.scene-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;cursor:pointer;text-decoration:none;color:var(--text);transition:all .2s;display:block}
+.scene-card:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(29,78,216,.1);transform:translateY(-2px)}
+.scene-card .scene-icon{font-size:28px;margin-bottom:10px}
+.scene-card .scene-title{font-size:16px;font-weight:600;color:var(--primary);margin-bottom:6px}
+.scene-card .scene-desc{font-size:13px;color:var(--text-light);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== Mandatory top notice (B. 适用范围 in banner) ===== -->
+<div class="notice">
+⚠️ <strong>适用范围提示：</strong>本页面仅根据现有《宏愿人生投保指引》长图整理，覆盖<strong>已有双录订单后</strong>的后续投保操作，不包含完整的新建订单、产品选择、正式投保规则、回执回访等全部流程。具体操作以公司最新系统页面和正式文件为准。
+</div>
+
+<!-- ===== 30秒速查（P0 通用组件） ===== -->
+<div class="quick-card" id="quick">
+<div class="qc-head"><span style="font-size:22px">⏱️</span><span class="qc-q">30 秒速查：已有双录订单后续投保</span></div>
+<div class="quick-grid">
+<div class="quick-item"><div class="qi-label">适用对象</div><div class="qi-val recommend">已有未完成的双录订单</div></div>
+<div class="quick-item"><div class="qi-label">入口路径</div><div class="qi-val">中行APP → 财富 → 保险</div></div>
+<div class="quick-item"><div class="qi-label">关键动作</div><div class="qi-val">点「查看」未完成双录订单 → 核对信息点「投保」</div></div>
+<div class="quick-item"><div class="qi-label">收尾步骤</div><div class="qi-val">手写签名 → 阅读勾选 → 确认 → 投保成功</div></div>
+</div>
+<div class="box box-yellow" style="margin-bottom:0">
+<b>提示：</b>本页仅覆盖「已有双录订单后」的后续操作，不含新建双录、产品选择、正式投保规则、回执回访等，详见下方各节与「九、当前资料未覆盖内容」。
+</div>
+</div>
+
+<!-- ===== A. 页面标题 ===== -->
+<div class="header">
+<h1>宏愿人生｜已有双录订单后续投保操作指引</h1>
+<p class="subtitle">根据现有操作长图整理，仅覆盖已有双录订单后的操作流程</p>
+<p class="meta">
+资料来源：《宏愿人生投保指引.pdf》（1页长图，约 700×16384 pt）<br>
+核验方式：Codex 图像核对（已实际读取原图）<br>
+真实性状态：🟡 待验证 —— 内容已与原始操作长图核对；涉及系统路径、字段名称、操作步骤，最终以公司最新系统页面和正式文件为准
+</p>
+<div style="margin-top:8px;font-size:12px;opacity:.85">🏷️ 版本 V1.0 · 更新于 2026-07-28</div>
+</div>
+
+<!-- ===== B. 适用范围 ===== -->
+<div class="card">
+<h2>📋 一、适用范围</h2>
+<ul>
+<li><span class="badge badge-green">🟢 覆盖</span> 适用于<strong>已有双录订单后</strong>的后续投保操作。</li>
+<li><span class="badge badge-red">🔴 不覆盖</span> 完整<strong>新建双录订单</strong>流程（原图未展示从无到有的建单过程）。</li>
+<li><span class="badge badge-red">🔴 不覆盖</span> <strong>产品选择</strong>（原图未展示产品列表、搜索、产品卡点击进入）。</li>
+<li><span class="badge badge-red">🔴 不覆盖</span> <strong>正式投保规则</strong>（投保年龄、领取年龄、最低保费等正式规则原图未出现）。</li>
+<li><span class="badge badge-red">🔴 不覆盖</span> <strong>回执回访</strong>（原图仅提示"稍后办理"，未展示渠道与时限）。</li>
+<li><span class="badge badge-red">🔴 不覆盖</span> 完整<strong>缴费/扣款结果</strong>流程（原图未单独展示即时扣款页面）。</li>
+</ul>
+</div>
+
+<!-- ===== C. 已确认入口 ===== -->
+<div class="card">
+<h2>🧭 二、已确认入口</h2>
+<div class="flow">
+<span class="node">中国银行手机银行 APP</span><span class="arrow">→</span>
+<span class="node">底部导航「财富」</span><span class="arrow">→</span>
+<span class="node">财富页「保险」</span>
+</div>
+<div class="box box-blue">
+<b>原图确认：</b>首页红圈标出底部「财富」；财富功能页红圈标出页面标题「财富」及其下功能「保险」。入口为「财富 → 保险」，<b>不是</b>首页宣传区的「按期理财」。
+</div>
+</div>
+
+<!-- ===== D. 原图已确认的后续步骤 ===== -->
+<div class="card">
+<h2>📱 三、原图已确认的后续步骤</h2>
+<p class="legend">
+<span><span class="badge badge-green">🟢 原图已确认</span></span>
+<span><span class="badge badge-yellow">🟡 原图部分可见</span></span>
+<span><span class="badge badge-red">🔴 原图无法确认</span></span>
+</p>
+<p style="font-size:13px;">以下步骤严格按原图从上到下顺序整理；原图中个人信息（姓名、证件号、银行卡号等）均被蓝色遮挡，<b>不得恢复或猜测</b>。</p>
+
+<!-- Step 1 -->
+<div class="step">
+<div class="step-head"><span class="num">1</span><span class="title">打开中国银行手机银行，进入「财富」</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">长图顶部，中国银行手机银行首页</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">进入财富页</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">财富（底部导航，红圈标注）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">打开中国银行手机银行APP，在下方中间位置选择「财富」</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">打开并登录中国银行手机银行APP，点击底部导航「财富」</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">APP 版本号原图未显示</span></div>
+</div>
+</div>
+
+<!-- Step 2 -->
+<div class="step">
+<div class="step-head"><span class="num">2</span><span class="title">在「财富」页进入「保险」</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">财富功能页</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">进入保险</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">保险（红圈标注）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">「财富」下方找到「保险」</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">在「财富」页面向下查找并点击「保险」</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">需向下滑动的具体距离原图未说明</span></div>
+</div>
+</div>
+
+<!-- Step 3 -->
+<div class="step">
+<div class="step-head"><span class="num">3</span><span class="title">处理未完成的双录订单</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">保险页面顶部</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">查看双录订单</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">查看（红框提示「您有1份未完成的双录订单需要处理，点击查看」）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">您有1份未完成的双录订单需要处理，点击查看</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">如页面顶部出现未完成双录订单提示，点击「查看」进入订单</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">仅适用于「已有未完成双录订单」的情况；无订单时如何新建，原图未说明</span></div>
+</div>
+</div>
+
+<!-- Step 4 -->
+<div class="step">
+<div class="step-head"><span class="num">4</span><span class="title">核对订单并点击「投保」</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">双录订单页面（订单编号 402，其他值部分遮挡）</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">提交投保</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">投保（产品名下划线，红圈标注）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">核对投保产品、投保人、被保险人，确认无误后点击「投保」</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">核对订单中的产品、投保人和被保险人信息，确认后点击「投保」</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">双录日期及部分人员信息被遮挡</span></div>
+</div>
+</div>
+
+<!-- Step 5 -->
+<div class="step">
+<div class="step-head"><span class="num">5</span><span class="title">填写投保信息（账户/缴费/人员）</span><span class="badge badge-yellow">🟡 原图部分可见</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">投保页面上半部分</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">选择账户、缴费年期；填写首期保费；完善人员信息</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">付款账户、承保地区、主险信息、主险保费、投保人信息、被保险人信息、受益人、其他信息</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">选好缴费方式；填写首期保费；完善投保人、被保险人信息</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">选择付款账户与承保地区；选择缴费年期；填写首期保费；检查或完善投保人、被保险人、受益人及其他信息</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">原图没有逐屏展示所有个人信息的录入方法；承保地区投保页可见「深圳」，双录订单页被大字覆盖</span></div>
+</div>
+</div>
+
+<!-- Step 6 -->
+<div class="step">
+<div class="step-head"><span class="num">6</span><span class="title">填写保费与投保人年收入</span><span class="badge badge-yellow">🟡 原图部分可见</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">主险信息及其他信息页面</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">选择缴费年期、填写保费；填写其他信息</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">趸缴/保终身、年缴/保终身、投保人年收入（箭头指向 500,000.00）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">投保人年收入应为首期保费3倍以上</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">选择页面提供的缴费年期并填写保费；填写其他信息时，按原图提示使投保人年收入达到首期保费3倍以上</span></div>
+<div class="note-line"><b>原图提示：</b>「投保人年收入应为首期保费3倍以上」为原图明确出现的提示文字，<b>仅确认来源于现有操作图</b>；正式适用口径请以公司最新制度和实际系统提示为准。不得写成绝对制度结论。</div>
+</div>
+</div>
+
+<!-- Step 7 -->
+<div class="step">
+<div class="step-head"><span class="num">7</span><span class="title">完成健康职业告知与领取方式</span><span class="badge badge-green">🟢 原图已确认（仅示例）</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">其他信息页面</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">完成告知、确认账户与领取方式</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">健康及职业告知、健康告知、职业告知、续期缴费方式、银行账户、开户行、投保人账户姓名、红利领取方式、保单索取方式</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">红利领取方式选「累积生息」</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">完成健康及职业告知，确认续期缴费账户；原图示例将红利领取方式选为「累积生息」，保单索取方式为「电子保单」</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">健康告知示例为「无健康告知」、职业告知示例为「无职业告知」（仅为原图示例状态）；红利领取方式仅确认原图示例选择「累积生息」，原图未展示其他领取方式</span></div>
+</div>
+</div>
+
+<!-- Step 8 -->
+<div class="step">
+<div class="step-head"><span class="num">8</span><span class="title">手写签名</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">投保页信息汇总</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">手写签名</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">受益人、其他信息、手写签名（大字提示「填好所有信息，手写签名」）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">填好所有信息，手写签名</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">确认受益人及其他信息后，完成手写签名（原图示例显示「法定受益人」「其他信息 已确认」「手写签名 已完成」）</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">签名页面的具体书写界面未展示</span></div>
+</div>
+</div>
+
+<!-- Step 9 -->
+<div class="step">
+<div class="step-head"><span class="num">9</span><span class="title">阅读「关键内容展示」并勾选声明</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">阅读确认区及「关键内容展示」页</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">逐项阅读关键内容、勾选声明</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">本人已认真阅读并理解、已阅读（勾选框红圈标注）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">阅读关键内容展示</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">逐项打开关键内容并完成阅读，确认各项显示「已阅读」，再勾选阅读及授权声明</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">声明全文部分字号较小，不能逐字还原；11项材料名称见「九、必读文件清单」</span></div>
+</div>
+</div>
+
+<!-- Step 10 -->
+<div class="step">
+<div class="step-head"><span class="num">10</span><span class="title">复制并粘贴声明，点击「投保」</span><span class="badge badge-yellow">🟡 原图部分可见</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">关键内容展示下方</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">复制粘贴声明、提交投保</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">复制并粘贴（红圈）、投保（蓝色按钮，红框）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">阅读完成后点击复制粘贴；点击「投保」</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">阅读完成后，点击「复制并粘贴」完成页面要求的声明输入，再点击蓝色「投保」按钮</span></div>
+<div class="note-line"><b>原图部分可见：</b>需要复制粘贴的<strong>完整声明文字无法可靠逐字识别</strong>，本页面不提供具体声明原文。</div>
+</div>
+</div>
+
+<!-- Step 11 -->
+<div class="step">
+<div class="step-head"><span class="num">11</span><span class="title">点击「下一步」</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">再次显示的投保信息页底部</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">进入确认页</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">下一步（红框标注）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">点击「下一步」</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">再次检查当前页面状态，点击「下一步」</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">无</span></div>
+</div>
+</div>
+
+<!-- Step 12 -->
+<div class="step">
+<div class="step-head"><span class="num">12</span><span class="title">核对并点击「确认」</span><span class="badge badge-green">🟢 原图已确认</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">确认信息页（示例：保费 10,000.00 元、年缴、缴费 10 年、保障终身）</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">最终核对与提交</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">确认（红框标注）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">认真核对产品信息、缴费年限、金额、投保人信息、被保险人信息；核对无误后点击「确认」完成本次投保</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">在确认信息页核对保费、付款账户、产品、主险、投保人、被保险人、受益人和其他信息，确认无误后点击「确认」</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">人员及银行卡具体值被遮挡</span></div>
+</div>
+</div>
+
+<!-- Step 13 -->
+<div class="step">
+<div class="step-head"><span class="num">13</span><span class="title">投保成功</span><span class="badge badge-green">🟢 原图已确认（结果部分）</span></div>
+<div class="step-body">
+<div class="field-row"><span class="k">原图位置</span><span class="v">操作结果页</span></div>
+<div class="field-row"><span class="k">操作名称</span><span class="v">完成投保</span></div>
+<div class="field-row"><span class="k">原图按钮/字段</span><span class="v">投保成功、查看详情（绿色对勾）</span></div>
+<div class="field-row"><span class="k">原图原文</span><span class="v">感谢您的认真与耐心，辛苦啦！到这个页面我们已完成本次投保，稍后请签收回执，并完成回访</span></div>
+<div class="field-row"><span class="k">整理后说明</span><span class="v">页面显示「投保成功」即本次操作完成；记录页面展示的保费和保险起期，后续按实际通知办理回执及回访</span></div>
+<div class="field-row"><span class="k">注意事项</span><span class="v">保险起期完整日期、回执形式、回访渠道和时限原图未说明；成功页可见「继续投保」「我的保单」「热门推荐」入口，但原图未说明后续操作要求</span></div>
+<div class="script-box" id="clientScript" style="margin-top:14px"><span class="sb-tag">投保成功页提示语</span>感谢您的认真与耐心，辛苦啦！到这个页面我们已完成本次投保，稍后请签收回执，并完成回访<div class="sb-hint">以上为原图投保成功页原文，可复制后用于回执回访提醒客户。</div></div>
+<button class="copy-btn" id="copyBtn" onclick="copyClientScript()">📋 复制提示语</button><span class="copy-toast" id="copyToast">已复制✓</span>
+</div>
+</div>
+</div>
+
+<!-- ===== E. 已确认字段 ===== -->
+<div class="card">
+<h2>🔑 四、已确认字段（仅列原图真正出现的）</h2>
+
+<h3>投保人字段</h3>
+<p>姓名、证件号码；确认页另可见：性别、出生日期、国家/地区、证件类型、证件生效日、证件到期日、婚姻状态、居民类型、通讯地址、通讯地址邮编、手机号码、电子邮箱、职业、与被保人关系。<span class="badge badge-red">🔴 具体值被遮挡</span>，禁止恢复或猜测。</p>
+
+<h3>被保险人字段</h3>
+<p>姓名、证件号码；确认页可见与投保人类似的身份字段。<span class="badge badge-red">🔴 具体值被遮挡</span>。</p>
+
+<h3>受益人字段</h3>
+<p>原图示例为「<b>法定受益人</b>」。<span class="badge badge-red">🔴 指定受益人的录入方法原图未发现</span>，不得写入网页。</p>
+
+<h3>其他信息字段（原图示例状态）</h3>
+<table>
+<tr><th>字段</th><th>原图示例值</th><th>状态</th></tr>
+<tr><td>健康及职业告知</td><td>已阅读</td><td><span class="badge badge-green">🟢 已确认</span></td></tr>
+<tr><td>健康告知</td><td>无健康告知</td><td><span class="badge badge-green">🟢 已确认（示例）</span></td></tr>
+<tr><td>职业告知</td><td>无职业告知</td><td><span class="badge badge-green">🟢 已确认（示例）</span></td></tr>
+<tr><td>续期缴费方式</td><td>银行转账</td><td><span class="badge badge-green">🟢 已确认</span></td></tr>
+<tr><td>银行账户 / 开户行 / 投保人账户姓名</td><td>卡号以 6217 开头、开户行以「中国银行深…」开头</td><td><span class="badge badge-red">🔴 完整值被遮挡</span></td></tr>
+<tr><td>红利领取方式</td><td>累积生息</td><td><span class="badge badge-green">🟢 已确认（示例）</span></td></tr>
+<tr><td>保单索取方式</td><td>电子保单</td><td><span class="badge badge-green">🟢 已确认（示例）</span></td></tr>
+</table>
+
+<h3>原图出现的按钮 / 状态</h3>
+<p>查看、投保、去完善、复制并粘贴、下一步、确认、查看详情；状态示例：「其他信息 未确认 / 已确认」「手写签名 已完成」「已阅读」。</p>
+</div>
+
+<!-- ===== F. 缴费期示例 ===== -->
+<div class="card">
+<h2>💰 五、缴费期示例</h2>
+<p>原操作图中可见以下缴费选项：</p>
+<table>
+<tr><th>来源位置</th><th>缴费选项</th><th>状态</th></tr>
+<tr><td>产品选择页</td><td>趸缴 / 保终身 缴费 <b>0 年</b></td><td><span class="badge badge-green">🟢 原图已确认</span></td></tr>
+<tr><td>产品选择页</td><td>年缴 / 保终身 缴费 <b>3 年</b></td><td><span class="badge badge-green">🟢 原图已确认</span></td></tr>
+<tr><td>产品选择页</td><td>年缴 / 保终身 缴费 <b>5 年</b></td><td><span class="badge badge-green">🟢 原图已确认</span></td></tr>
+<tr><td>确认信息页示例</td><td>年缴、缴费 <b>10 年</b>、保障终身（示例保费 10,000.00 元）</td><td><span class="badge badge-yellow">🟡 原图确认页示例</span></td></tr>
+</table>
+<div class="box box-yellow">
+<b>说明：</b>原操作图示例中可见 0 年、3 年、5 年等缴费选项，并在确认页面中出现 10 年示例。不同截图并非同一组一致案例，<b>具体可选缴费期限以实际系统页面及公司正式规则为准</b>。原图<b>未出现 20 年缴费</b>，不得写入。
+</div>
+</div>
+
+<!-- ===== G. 红利领取方式示例 ===== -->
+<div class="card">
+<h2>📊 六、红利领取方式示例</h2>
+<div class="box box-blue">
+原操作图示例中，红利领取方式选择为「<b>累积生息</b>」。<span class="badge badge-yellow">🟡 原图仅确认此一种</span>
+</div>
+<p>原图<b>未展示</b>其他领取方式，因此本页面<b>不得扩展</b>为「三选一」或自行加入其他领取方式说明。</p>
+</div>
+
+<!-- ===== H. 原图重点提示 ===== -->
+<div class="card">
+<h2>⭐ 七、原图重点提示（红框 / 红圈 / 箭头）</h2>
+<ul>
+<li><span class="badge badge-yellow">🟡 原图提示</span> <b>投保人年收入应为首期保费 3 倍以上</b>（原图箭头指向投保人年收入 500,000.00；该内容目前仅确认来源于现有操作图，正式适用口径请以公司最新制度和实际系统提示为准）。</li>
+<li>首页红圈标注底部「财富」。</li>
+<li>财富页红圈标注「保险」。</li>
+<li>保险页红框标注「您有1份未完成的双录订单需要处理，点击查看」。</li>
+<li>双录订单页：产品名下划线 + 红圈标注「投保」。</li>
+<li>投保页：缴费选项红框 + 首期保费红线标注。</li>
+<li>其他信息页：红框标注「其他信息 未确认」+ 箭头指向投保人年收入。</li>
+<li>手写签名处大字提示「填好所有信息，手写签名」。</li>
+<li>关键内容展示：勾选框红圈标注。</li>
+<li>复制并粘贴：红圈标注；「投保」按钮红框标注。</li>
+<li>确认信息页：红框标注「确认」。</li>
+</ul>
+</div>
+
+<!-- ===== I. 必读文件清单 ===== -->
+<div class="card">
+<h2>📄 八、必读文件清单（关键内容展示 11 项）</h2>
+<p>原图「关键内容展示」共 11 项，名称以下方为准（已补「敏感个人信息授权书」，并修正原网页误写的授权书名称；「复制并粘贴」为阅读后的操作，<b>不属于</b>本清单文件项）。</p>
+<ol class="doc-list">
+<li>产品说明书</li>
+<li>保险产品条款</li>
+<li>健康及职业告知</li>
+<li>投保提示书</li>
+<li>免除保险人责任书面说明</li>
+<li>特殊产品提示</li>
+<li>中国银行对私代理保险缴费转账授权书</li>
+<li>中国银行对私代理保险业务投保人声明</li>
+<li>中国银行对私代理保险业务个人信息授权书</li>
+<li>中国银行对私代理保险业务<span style="color:var(--accent);font-weight:700">敏感</span>个人信息授权书</li>
+<li>中国银行对私代理保险业务对外提供个人信息授权书</li>
+</ol>
+<div class="source-note">
+<b>名称来源：</b>以上 11 项名称严格按原图「关键内容展示」页面整理。勾选声明中另出现《投保人声明》《现金价值表》《投保单》《保险单》等名称，但这些未作为该 11 项独立清单出现，不混入本清单。
+</div>
+</div>
+
+<!-- ===== J. 当前资料未覆盖内容 ===== -->
+<div class="card">
+<h2>🚫 九、当前资料未覆盖内容</h2>
+<p>以下内容原图（现有 PDF 长图）<b>未覆盖</b>，暂不写入网页，待补充对应资料后另作核实：</p>
+<ul class="covered-list">
+<li>新建双录订单（从无到有的建单流程）</li>
+<li>产品选择（产品列表、搜索、产品卡进入）</li>
+<li>正式投保年龄（原图未出现年龄规则）</li>
+<li>正式缴费规则（最低保费、全部可选缴费期限等正式规则）</li>
+<li>签名页（签名界面的具体书写/清除/重签操作）</li>
+<li>扣款结果（是否实时扣款、失败处理）</li>
+<li>回执（形式、入口、办理方式）</li>
+<li>回访（渠道、操作步骤、时限）</li>
+</ul>
+<div class="box box-red"><b>说明：</b>现有 PDF 未覆盖上述内容，本页面不推测、不补写，标记为待人工补充（🔴）。</div>
+</div>
+
+<!-- ===== Source & verification status ===== -->
+<div class="source-note">
+<b>资料来源与核验状态：</b>本页面内容已与原始《宏愿人生投保指引》操作长图（经 Codex 图像核对）逐项比对。涉及系统路径、字段名称、操作步骤、金额与缴费示例的内容，当前仅确认与原图一致；最终以公司官网、监管文件、最新系统页面及正式披露为准。原图中被遮挡的个人信息（姓名、证件号、银行卡号等）一律不展示、不推测。
+</div>
+
+<!-- ===== K. 底部风险提示 ===== -->
+<div class="footer-risk">
+<b>风险提示：</b>本页面根据现有操作长图整理，仅供业务学习和流程参考。具体产品责任、投保规则、系统入口、字段名称及操作步骤，以公司最新正式文件和实际系统页面为准。
+</div>
+
+<!-- ====== 相关页面推荐（P0 通用组件） ====== -->
+<div id="related" style="margin-top:40px">
+<h2 class="section-title"><span class="num">🔗</span> 相关页面推荐</h2>
+<div class="scene-grid">
+<a class="scene-card" href="policy-retrieval-guide.html">
+<div class="scene-icon">📥</div>
+<div class="scene-title">电子保单获取指引</div>
+<div class="scene-desc">投保成功后，在此查收电子保单、完成回执与回访</div>
+</a>
+<a class="scene-card" href="hongli-realization.html">
+<div class="scene-icon">📊</div>
+<div class="scene-title">红利实现率专题</div>
+<div class="scene-desc">客户质疑分红/收益时的数据说服工具</div>
+</a>
+<a class="scene-card" href="product-qa-handbook.html">
+<div class="scene-icon">💬</div>
+<div class="scene-title">产品答疑实战手册</div>
+<div class="scene-desc">客户对保单/产品有疑问时的标准话术与答疑参考</div>
+</a>
+</div>
+</div>
+
+<p style="text-align:center;color:var(--text-light);font-size:12.5px;margin-top:22px;padding-bottom:18px;">
+新华保险 × 中国银行 · 资料库内部参考<br>
+整理于 2026 年 7 月 · 真实性状态：🟡 待验证
+</p>
+<div style="text-align:right;font-size:12px;color:var(--text-light);margin-top:20px">版本 V1.0 · 更新于 2026-07-28</div>
+
+</div>
+<script>
+function copyClientScript(){
+  var node=document.getElementById('clientScript');
+  var text=node?node.innerText.trim():'';
+  var btn=document.getElementById('copyBtn');
+  var toast=document.getElementById('copyToast');
+  function done(){if(btn){btn.innerHTML='✅ 已复制';}if(toast){toast.style.display='inline-block';}setTimeout(function(){if(btn){btn.innerHTML='📋 复制提示语';}if(toast){toast.style.display='none';}},2000);}
+  function fallback(){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(ta);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(fallback);}else{fallback();}
+}
+</script>
+</body>
+</html>
