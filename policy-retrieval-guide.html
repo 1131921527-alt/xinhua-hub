@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电子保单获取操作指南 | 新华Hub · 中行理财经理专用</title>
+<meta name="description" content="面向银行理财经理的电子保单与纸质保单获取操作指引：5种电子保单获取方式、3种纸质保单申请方式、理财经理30秒快速处理版。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "电子保单获取操作指南",
+  "about": {
+    "@type": "Thing",
+    "name": "新华保险电子保单与纸质保单获取"
+  },
+  "audience": "银行理财经理 / 银保客户经理 / 新人",
+  "usageScenario": "客户咨询保单在哪里下载、如何获取纸质保单、电子保单如何使用",
+  "coreFields": ["获取渠道", "操作步骤", "所需条件", "注意事项", "资料状态"],
+  "sourceMaterial": "客户获取电子保单和纸质保单的方式.pdf（内部操作流程资料）",
+  "contentStatus": "🟢 资料明确内容 + 🟡 AI整理归纳 + 🔴 待核验标注",
+  "datePublished": "2026-07-28"
+}
+</script>
+<style>
+:root{--primary:#1D4ED8;--primary-light:#DBEAFE;--primary-dark:#1E40AF;--text:#1E293B;--text-light:#64748B;--bg:#F8FAFC;--card-bg:#FFFFFF;--border:#E2E8F0;--success:#16A34A;--warning:#D97706;--danger:#DC2626;--amber-bg:#FFFBEB;--amber-border:#FCD34D;--red-bg:#FEF2F2;--red-border:#FCA5A5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}
+.container{max-width:980px;margin:0 auto;padding:20px}
+
+/* Header */
+.header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:48px 32px;border-radius:12px;margin-bottom:24px}
+.header h1{font-size:28px;font-weight:700;margin-bottom:10px}
+.header .subtitle{font-size:16px;opacity:.9;margin-bottom:20px}
+.header .meta{font-size:13px;opacity:.75;line-height:1.7}
+.header .meta-row{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:8px}
+.header .meta-item{display:flex;align-items:center;gap:4px}
+
+/* Status badge */
+.status{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.status-green{background:#DCFCE7;color:#15803D}
+.status-amber{background:var(--amber-bg);color:#92400E;border:1px solid var(--amber-border)}
+.status-red{background:var(--red-bg);color:#B91C1C;border:1px solid var(--red-border)}
+
+/* TOC */
+.toc{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:24px 28px;margin-bottom:24px}
+.toc h3{font-size:16px;color:var(--primary);margin-bottom:12px}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.toc a{display:block;padding:8px 12px;background:var(--bg);border-radius:6px;color:var(--primary);text-decoration:none;font-size:14px;transition:background .2s}
+.toc a:hover{background:var(--primary-light)}
+
+/* Layer badge */
+.layer-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#F59E0B,var(--warning));padding:6px 16px;border-radius:20px;margin-bottom:16px}
+.layer-badge.layer2{background:linear-gradient(135deg,#0EA5E9,var(--primary))}
+
+/* Section */
+.section-title{font-size:22px;color:var(--primary);margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid var(--primary-light);display:flex;align-items:center;gap:10px}
+.section-title .num{background:var(--primary);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+
+/* 30s Quick Card */
+.quick-card{background:linear-gradient(135deg,#EFF6FF,#F0F9FF);border:1px solid #BFDBFE;border-radius:12px;padding:24px;margin-bottom:20px}
+.quick-card .qc-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.quick-card .qc-q{font-size:18px;font-weight:700;color:var(--primary-dark)}
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.quick-item{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.quick-item .qi-label{font-size:12px;color:var(--text-light);margin-bottom:5px;font-weight:600}
+.quick-item .qi-val{font-size:14px;color:var(--text);line-height:1.6}
+.quick-item .qi-val.recommend{color:var(--primary);font-weight:700}
+.script-box{background:#FFF;border:1px dashed var(--primary);border-radius:8px;padding:16px;font-size:14px;color:var(--text);line-height:1.75;position:relative}
+.script-box .sb-tag{position:absolute;top:-11px;left:14px;background:var(--primary);color:#fff;font-size:11px;padding:2px 10px;border-radius:10px}
+.script-box .sb-hint{font-size:12px;color:var(--text-light);margin-top:10px;font-style:italic}
+
+/* Recommended order */
+.rec-order{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:20px}
+.rec-order h3{font-size:16px;color:var(--primary);margin-bottom:14px}
+.rec-step{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed var(--border)}
+.rec-step:last-child{border-bottom:none}
+.rec-num{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.rec-body{flex:1}
+.rec-body .rec-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.rec-body .rec-detail{font-size:13px;color:var(--text-light);line-height:1.6}
+.rec-tag{font-size:11px;color:var(--text-light);margin-top:6px;font-style:italic}
+
+/* Two-column quick grid for scene cards */
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:32px}
+.scene-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;cursor:pointer;text-decoration:none;color:var(--text);transition:all .2s;display:block}
+.scene-card:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(29,78,216,.1);transform:translateY(-2px)}
+.scene-card .scene-icon{font-size:28px;margin-bottom:10px}
+.scene-card .scene-title{font-size:16px;font-weight:600;color:var(--primary);margin-bottom:6px}
+.scene-card .scene-desc{font-size:13px;color:var(--text-light);line-height:1.5}
+
+/* Card */
+.card{background:var(--card-bg);border-radius:10px;padding:28px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid var(--border)}
+.card h2{font-size:19px;color:var(--primary);margin-bottom:14px}
+.card h3{font-size:16px;color:var(--text);margin:18px 0 8px}
+.card p{margin-bottom:10px;color:var(--text-light);font-size:14px}
+.card ul,.card ol{margin-left:20px;color:var(--text-light);font-size:14px}
+.card li{margin-bottom:5px}
+
+/* Data table */
+.data-table-wrap{overflow-x:auto;margin:14px 0;-webkit-overflow-scrolling:touch}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+.data-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:12px;white-space:nowrap}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+.data-table tr:nth-child(even){background:var(--bg)}
+.data-table .rec-star{color:var(--warning);font-weight:700}
+
+/* Channel step card */
+.channel-card{border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px;background:var(--card-bg)}
+.channel-card .ch-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.channel-card .ch-name{font-size:16px;font-weight:700;color:var(--primary-dark)}
+.channel-card .ch-icon{font-size:22px;margin-right:6px}
+.step-list{margin:0;padding:0;list-style:none;counter-reset:step}
+.step-list li{counter-increment:step;position:relative;padding:10px 0 10px 38px;border-bottom:1px solid var(--border);font-size:13px;line-height:1.6;color:var(--text)}
+.step-list li:last-child{border-bottom:none}
+.step-list li::before{content:counter(step);position:absolute;left:0;top:10px;width:26px;height:26px;background:var(--primary-light);color:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.step-list li .step-note{display:block;color:var(--text-light);font-size:12px;margin-top:3px}
+.ch-warn{background:var(--red-bg);border:1px solid var(--red-border);border-radius:8px;padding:12px 14px;margin-top:12px;font-size:13px;color:#B91C1C;line-height:1.6}
+.ch-correct{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:12px 14px;margin-top:12px;font-size:13px;color:#15803D;line-height:1.6}
+
+/* Placeholder for OCR */
+.ocr-placeholder{background:repeating-linear-gradient(45deg,#F8FAFC,#F8FAFC 12px,#F1F5F9 12px,#F1F5F9 24px);border:2px dashed var(--red-border);border-radius:10px;padding:28px;text-align:center;color:#B91C1C;margin:14px 0}
+.ocr-placeholder .ocr-icon{font-size:34px;margin-bottom:8px}
+.ocr-placeholder .ocr-text{font-size:14px;font-weight:600}
+.ocr-placeholder .ocr-sub{font-size:12px;color:var(--text-light);margin-top:6px}
+
+/* QA */
+.qa-item{margin-bottom:16px;padding:16px;background:var(--bg);border-radius:8px}
+.qa-item .qa-q{font-size:14px;font-weight:600;color:var(--primary);margin-bottom:8px}
+.qa-item .qa-a{font-size:13px;color:var(--text-light);line-height:1.7}
+.qa-item .qa-a .gap{color:#B91C1C;font-style:italic}
+
+/* Warning / info boxes */
+.warning-box{background:var(--red-bg);border-left:4px solid var(--danger);padding:14px 18px;border-radius:6px;margin:14px 0;font-size:13px;color:#B91C1C;line-height:1.6}
+.info-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:14px 18px;border-radius:6px;margin:14px 0;font-size:13px;color:var(--text);line-height:1.6}
+
+/* Source map */
+.src-table{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0}
+.src-table th{background:#334155;color:#fff;padding:8px 10px;text-align:left}
+.src-table td{padding:7px 10px;border-bottom:1px solid var(--border)}
+.src-table tr:nth-child(even){background:var(--bg)}
+
+/* Disclaimer */
+.disclaimer{background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;padding:20px;font-size:13px;color:#92400E;margin-top:40px}
+.disclaimer ul{margin:8px 0 0 18px}
+.disclaimer li{margin-bottom:4px}
+
+/* Back to top */
+.back-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;background:var(--primary);color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);display:none;z-index:100}
+.back-top.show{display:flex;align-items:center;justify-content:center}
+
+/* Responsive */
+@media(max-width:768px){
+.header h1{font-size:22px}.header{padding:32px 20px}
+.card{padding:18px}
+.quick-grid{grid-template-columns:1fr}
+.scene-grid{grid-template-columns:1fr}
+.data-table{font-size:11px}.data-table th,.data-table td{padding:6px 8px}
+.rec-step{flex-direction:row}
+}
+@media(max-width:390px){
+.container{padding:12px}
+.header h1{font-size:19px}.header .subtitle{font-size:14px}
+.section-title{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="top">
+
+<!-- ====== HEADER ====== -->
+<div class="header">
+<h1>📄 电子保单获取操作指南</h1>
+<p class="subtitle">中行理财经理专用 · 客户保单查询与获取一站式指引</p>
+<div class="meta">
+<div class="meta-row">
+<span class="meta-item">📑 来源：《客户获取电子保单和纸质保单的方式.pdf》</span>
+<span class="meta-item">📅 资料时间：内部操作流程资料</span>
+<span class="meta-item">🔧 整理状态：资料结构化 + AI归纳 + 待核验标注</span>
+</div>
+<div style="margin-top:8px">
+<span class="status status-green">🟢 资料明确内容</span>
+<span class="status status-amber" style="margin-left:8px">🟡 AI整理归纳</span>
+<span class="status status-red" style="margin-left:8px">🔴 待核验</span>
+</div>
+</div>
+</div>
+
+<!-- ====== 页面目录 ====== -->
+<div class="toc" id="toc">
+<h3>📑 页面目录</h3>
+<div class="toc-grid">
+<a href="#quick">🚀 快速处理（高频）</a>
+<a href="#rec">📌 理财经理推荐顺序</a>
+<a href="#scene2">💬 客户常见疑问</a>
+<a href="#sec1">📱 一、电子保单5种方式对比</a>
+<a href="#sec2">📋 二、逐渠道操作步骤</a>
+<a href="#sec3">📮 三、纸质保单申请</a>
+<a href="#sec4">⚠️ 四、注意事项与常见问题</a>
+<a href="#sec5">📎 五、来源映射与状态</a>
+</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- 第一层：🚀 快速处理（高频使用）                                -->
+<!-- ============================================================= -->
+<span class="layer-badge">🚀 第一层 · 快速处理（高频使用）</span>
+
+<!-- 场景① 30秒卡片 -->
+<div class="quick-card" id="quick">
+<div class="qc-head">
+<span style="font-size:24px">🙋</span>
+<span class="qc-q">客户问："我的保单在哪里？"</span>
+</div>
+<div class="quick-grid">
+<div class="quick-item">
+<div class="qi-label">✅ 推荐方式</div>
+<div class="qi-val recommend">📩 短信链接（投保当日发到手机）</div>
+</div>
+<div class="quick-item">
+<div class="qi-label">📍 操作入口</div>
+<div class="qi-val">客户自己的手机短信</div>
+</div>
+<div class="quick-item">
+<div class="qi-label">👆 客户需完成的动作</div>
+<div class="qi-val">① 点开短信链接 → ② 输入证件号后4位 → ③ 下载电子保单</div>
+</div>
+</div>
+<div class="script-box">
+<span class="sb-tag">可直接转发客户</span>
+X先生/女士，您的保单已承保✅ 公司刚发短信到您手机，点开链接、输入证件号后4位就能下载电子保单，客户可通过电子方式查看和获取保单信息，随时调取，不用等邮寄~
+<div class="sb-hint">※ 话术仅描述"可通过电子方式查看和获取保单信息"，未对法律效力作任何声明（原资料未明确说明）。</div>
+</div>
+</div>
+
+<!-- 理财经理推荐顺序 -->
+<div class="rec-order" id="rec">
+<h3>📌 理财经理推荐顺序（遇到客户咨询时按此优先级引导）</h3>
+<div class="rec-step">
+<div class="rec-num">①</div>
+<div class="rec-body">
+<div class="rec-title">首选：短信链接</div>
+<div class="rec-detail"><b>适用：</b>刚承保客户　|　<b>原因：</b>客户手机直接接收，操作最快，无需安装任何APP</div>
+</div>
+</div>
+<div class="rec-step">
+<div class="rec-num">②</div>
+<div class="rec-body">
+<div class="rec-title">备用：掌上新华APP / 微信公众号</div>
+<div class="rec-detail"><b>适用：</b>客户需要长期、反复查询保单　|　<b>原因：</b>注册关联后可随时调取，适合后续服务</div>
+</div>
+</div>
+<div class="rec-step">
+<div class="rec-num">③</div>
+<div class="rec-body">
+<div class="rec-title">特殊情况：95567客服</div>
+<div class="rec-detail"><b>适用：</b>客户需要申请纸质保单　|　<b>原因：</b>纸质保单需通过人工客服或指定渠道申请</div>
+</div>
+</div>
+<div class="rec-tag">🟡 AI整理（基于资料渠道归纳）</div>
+</div>
+
+<!-- 场景② 客户常见疑问 -->
+<div id="scene2">
+<h2 class="section-title"><span class="num">💬</span> 客户常见疑问（30秒简答）</h2>
+<div class="scene-grid">
+<a class="scene-card" href="#sec1">
+<div class="scene-icon">📲</div>
+<div class="scene-title">客户问："电子保单有用吗？"</div>
+<div class="scene-desc">电子保单是投保后公司提供的电子化保单凭证，客户可通过电子方式查看和获取保单信息；具体与纸质保单的对应关系以监管规定及公司正式说明为准（原资料未明确说明法律效力）</div>
+</a>
+<a class="scene-card" href="#sec3">
+<div class="scene-icon">📮</div>
+<div class="scene-title">客户问："我要纸质保单怎么办？"</div>
+<div class="scene-desc">拨打95567按0转人工申请，或登录掌上新华APP通过"服务-保单服务-纸质保单申请"办理（仅限身份证投保客户）</div>
+</a>
+</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- 第二层：📚 完整操作指南（学习和查阅）                          -->
+<!-- ============================================================= -->
+<span class="layer-badge layer2">📚 第二层 · 完整操作指南（学习和查阅）</span>
+
+<!-- 一、电子保单5种方式对比 -->
+<div id="sec1">
+<h2 class="section-title"><span class="num">📱</span> 一、电子保单：5种获取方式对比</h2>
+<div class="card">
+<p>客户投保后，可通过以下 5 种方式获取电子保单。下表为方式对比，便于理财经理在 30 秒内判断推荐哪个渠道。</p>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead>
+<tr><th>方式</th><th>获取速度</th><th>前提条件</th><th>推荐度</th><th>适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td class="rec-star">短信 ⭐首选</td><td>当日即时</td><td>投保时预留手机号可收短信</td><td class="rec-star">⭐⭐⭐ 最高</td><td>刚承保客户，当场引导</td></tr>
+<tr><td>邮箱</td><td>当日即时</td><td>预留邮箱准确，仅发送一次</td><td>⭐⭐</td><td>客户习惯用邮件存档</td></tr>
+<tr><td>掌上新华APP</td><td>需安装注册</td><td>下载APP、注册并关联保单</td><td>⭐⭐⭐</td><td>长期、反复查询</td></tr>
+<tr><td>官网</td><td>需注册</td><td>登录官网、注册并关联保单</td><td>⭐⭐</td><td>电脑端操作</td></tr>
+<tr><td>官方微信公众号</td><td>需注册</td><td>关注"新华保险"、关联保单</td><td>⭐⭐</td><td>微信端常用客户</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:12px;color:var(--text-light);margin-top:8px">🟡 对比维度与推荐度为 AI 基于资料渠道归纳整理，非原资料直接表述。</p>
+</div>
+</div>
+
+<!-- 二、逐渠道操作步骤 -->
+<div id="sec2">
+<h2 class="section-title"><span class="num">📋</span> 二、逐渠道操作步骤</h2>
+
+<!-- 短信 -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">📩</span><span class="ch-name">短信（推荐！）</span></span>
+<span class="status status-green">🟢 资料明确</span>
+</div>
+<ol class="step-list">
+<li>投保当日，公司发送承保短信到客户预留手机（请提醒客户留意是否设置短信拦截）
+<div class="step-note">来源：第1页 表1 第1行</div></li>
+<li>客户点击短信中的链接
+<div class="step-note">来源：第1页 表1 第1行</div></li>
+<li>输入证件号后四位，下载电子保单
+<div class="step-note">来源：第1页 表1 第1行 + 第2页"输入证件后四位后下载"</div></li>
+</ol>
+<div class="ocr-placeholder">
+<div class="ocr-icon">🔴</div>
+<div class="ocr-text">短信获取界面截图演示 · 待核验</div>
+<div class="ocr-sub">原资料第2页含 5 张操作截图（收到短信 → 进行认证 → 下载电子保单），当前环境无法读取图片文字，需 Codex OCR 后补全界面按钮与页面标题。<br>已确认文字流程：收到短信 → 进行认证 → 下载电子保单（第2页原文）。</div>
+</div>
+</div>
+
+<!-- 邮箱 -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">📧</span><span class="ch-name">邮箱</span></span>
+<span class="status status-green">🟢 资料明确</span>
+</div>
+<ol class="step-list">
+<li>投保当日，公司发送邮件到客户预留邮箱
+<div class="step-note">提醒：投保前留意邮箱填写是否准确</div></li>
+<li>客户直接下载邮件附件中的电子保单
+<div class="step-note">⚠️ 原资料注明：邮件"只能发送一次！"</div></li>
+</ol>
+<div class="warning-box">⚠️ 原资料明确提示：邮箱电子保单<b>只能发送一次</b>。如客户未收到或误删，补发机制原资料未覆盖，需人工向公司确认（🔴 待核验）。</div>
+</div>
+
+<!-- 手机APP -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">📱</span><span class="ch-name">手机APP（掌上新华）</span></span>
+<span class="status status-green">🟢 资料明确</span>
+</div>
+<ol class="step-list">
+<li>下载"掌上新华"手机APP</li>
+<li>注册后关联保单</li>
+<li>进入"我的保单 - 保单详情"</li>
+<li>选择对应保单，即可下载电子保单</li>
+</ol>
+</div>
+
+<!-- 官网 -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">🌐</span><span class="ch-name">官网</span></span>
+<span class="status status-green">🟢 资料明确</span>
+</div>
+<ol class="step-list">
+<li>登录公司官方网站 <b>www.newchinalife.com</b></li>
+<li>注册后关联保单</li>
+<li>在"我的保单 - 资料下载"查询电子保单</li>
+</ol>
+</div>
+
+<!-- 官微 -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">💬</span><span class="ch-name">官方微信公众号</span></span>
+<span class="status status-green">🟢 资料明确</span>
+</div>
+<ol class="step-list">
+<li>关注公司官方微信公众号"新华保险"</li>
+<li>注册、登录、关联保单</li>
+<li>底部"服务大厅"菜单 → 选择"基础服务"</li>
+<li>选择"保单概览 - 保单信息 - 其他类 - 保单 - 查看电子保单"</li>
+<li>输入证件号后四位，下载电子保单</li>
+</ol>
+</div>
+</div>
+
+<!-- 三、纸质保单申请 -->
+<div id="sec3">
+<h2 class="section-title"><span class="num">📮</span> 三、纸质保单：3种申请方式</h2>
+
+<!-- 95567 -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">☎️</span><span class="ch-name">95567 客服申请</span></span>
+<span class="status status-green">🟢 资料明确</span>
+</div>
+<ol class="step-list">
+<li>使用预留电话拨打 <b>95567</b></li>
+<li>按 <b>0</b> 转"人工客服"</li>
+<li>等待客服回拨，申请纸质保单</li>
+</ol>
+</div>
+
+<!-- 手机APP申请纸质 -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">📱</span><span class="ch-name">掌上新华APP 申请纸质保单</span></span>
+<span class="status status-red">🔴 资料有误 / 待核验</span>
+</div>
+<div class="ch-warn">⚠️ 原资料第3页该条目文字为"在'我的保单'中，选择保单类型，<b>即可查询分红</b>"——此句明显为复制粘贴错误，与"纸质保单申请"主题不符。下方正确路径取自同页"掌上新华申请流程"说明，但原资料两处表述不一致，需人工核实。</div>
+<div class="ch-correct">✅ 同页正确的申请路径（原资料"掌上新华申请流程"）：<br>服务 → 保单服务 → 纸质保单申请<br><span style="font-size:12px">（仅限身份证投保的客户注册）</span></div>
+<ol class="step-list">
+<li>下载"掌上新华"手机APP，注册后关联保单</li>
+<li>进入"服务 - 保单服务 - 纸质保单申请"</li>
+<li>按页面提示提交纸质保单申请（仅限身份证投保客户）</li>
+</ol>
+</div>
+
+<!-- 随信通 -->
+<div class="channel-card">
+<div class="ch-head">
+<span><span class="ch-icon">🔳</span><span class="ch-name">随信通</span></span>
+<span class="status status-red">🔴 时效过期 / 待核验</span>
+</div>
+<ol class="step-list">
+<li>扫码随信通二维码，申请纸质保单功能</li>
+</ol>
+<div class="ch-warn">⚠️ 原资料标注"预计2022年底上线，敬请期待！"——距资料制作已过去较长时间，该功能当前是否已正式上线、申请流程是否有变化，原资料未更新，<b>需人工向公司确认当前状态</b>。</div>
+</div>
+</div>
+
+<!-- 四、注意事项与常见问题 -->
+<div id="sec4">
+<h2 class="section-title"><span class="num">⚠️</span> 四、注意事项与常见问题</h2>
+<div class="card">
+<h3>原资料已提示的注意事项</h3>
+<ul>
+<li>📩 <b>短信拦截：</b>投保当日短信可能被手机拦截，提醒客户检查拦截箱（🟢 资料明确）</li>
+<li>📧 <b>邮箱一次性：</b>邮箱电子保单只能发送一次，客户需及时下载保存（🟢 资料明确）</li>
+</ul>
+
+<h3>客户常见问题（含信息缺口标注）</h3>
+<div class="qa-item">
+<div class="qa-q">Q：短信链接打不开 / 失效了怎么办？</div>
+<div class="qa-a"><span class="gap">🔴 原资料未覆盖此场景。</span>建议引导客户改用掌上新华APP或官网下载；具体补发/重发机制需向公司确认。</div>
+</div>
+<div class="qa-item">
+<div class="qa-q">Q：电子保单和纸质保单法律效力一样吗？</div>
+<div class="qa-a"><span class="gap">🔴 原资料未明确说明电子保单法律效力。</span>可告知客户：电子保单是投保后公司提供的电子化保单凭证，客户可通过电子方式查看和获取保单信息；具体与纸质保单的对应关系以监管规定及公司正式说明为准。避免自行作等价声明。</div>
+</div>
+<div class="qa-item">
+<div class="qa-q">Q：纸质保单多久能收到？</div>
+<div class="qa-a"><span class="gap">🔴 原资料未说明纸质保单投递时效。</span>以公司向客户正式告知的时效为准，需人工确认后回复客户。</div>
+</div>
+<div class="qa-item">
+<div class="qa-q">Q：邮箱没收到电子保单怎么办？</div>
+<div class="qa-a"><span class="gap">🟡 原资料仅提示"只能发送一次"，未说明补发渠道。</span>核实客户邮箱填写是否准确，补发机制需向公司确认。</div>
+</div>
+</div>
+</div>
+
+<!-- 五、来源映射与状态 -->
+<div id="sec5">
+<h2 class="section-title"><span class="num">📎</span> 五、来源映射与内容状态</h2>
+<div class="card">
+<h3>页面内容 → 原资料来源映射</h3>
+<div class="data-table-wrap">
+<table class="src-table">
+<thead><tr><th>页面内容</th><th>原资料位置</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td>短信获取步骤</td><td>第1页 表1 第1行 + 第2页"收到短信→认证→下载"</td><td>🟢 明确</td></tr>
+<tr><td>邮箱获取步骤</td><td>第1页 表1 第2行</td><td>🟢 明确</td></tr>
+<tr><td>掌上新华APP（电子）</td><td>第1页 表1 第3行</td><td>🟢 明确</td></tr>
+<tr><td>官网获取步骤</td><td>第1页 表1 第4行</td><td>🟢 明确</td></tr>
+<tr><td>官微获取步骤</td><td>第1页 表1 第5行</td><td>🟢 明确</td></tr>
+<tr><td>短信界面截图演示</td><td>第2页 5张截图</td><td>🔴 待OCR核验</td></tr>
+<tr><td>95567客服申请</td><td>第3页 表1 第1行</td><td>🟢 明确</td></tr>
+<tr><td>掌上新华APP（纸质）</td><td>第3页 表1 第2行 + "掌上新华申请流程"</td><td>🔴 原文误写"查询分红"</td></tr>
+<tr><td>随信通申请</td><td>第3页 表1 第3行</td><td>🔴 "2022年底"已过期</td></tr>
+<tr><td>5方式对比表 / 推荐顺序</td><td>AI归纳</td><td>🟡 AI整理</td></tr>
+<tr><td>法律效力 / 补发 / 投递时效</td><td>原资料未覆盖</td><td>🔴 不补充</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>状态图例</h3>
+<p>
+<span class="status status-green">🟢 资料明确内容</span> 来自《客户获取电子保单和纸质保单的方式.pdf》原文<br><br>
+<span class="status status-amber">🟡 AI整理归纳</span> 基于资料渠道逻辑归纳（对比维度、推荐顺序、场景话术框架）<br><br>
+<span class="status status-red">🔴 待核验</span> 原资料有误 / 时效过期 / 图片不可读 / 未覆盖，均不自行补充
+</p>
+</div>
+</div>
+
+<!-- ====== 声明 ====== -->
+<div class="disclaimer">
+<strong>⚠️ 内容声明</strong>
+<ul>
+<li>本页内容基于内部操作流程资料《客户获取电子保单和纸质保单的方式.pdf》结构化整理，仅供银行理财经理内部学习与客户沟通参考。</li>
+<li>🟢 为资料明确内容；🟡 为 AI 基于资料归纳整理；🔴 为原资料有误 / 时效过期 / 未覆盖，均保留原始状态并标注，未做任何猜测性补充。</li>
+<li>电子保单与纸质保单的法律效力对应关系、纸质保单投递时效、邮件补发机制等，原资料未明确说明，请以监管规定及公司正式说明为准。</li>
+<li>具体操作流程如与最新公司系统不一致，以公司官方最新指引为准。</li>
+</ul>
+</div>
+
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+window.addEventListener('scroll',function(){
+var bt=document.getElementById('backTop');
+if(window.scrollY>400){bt.classList.add('show')}else{bt.classList.remove('show')}
+});
+</script>
+</body>
+</html>
