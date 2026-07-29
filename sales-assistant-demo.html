@@ -3,171 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新华Hub · 销售助手（原型）</title>
+<title>新华Hub 销售助手（蓝色精修版）</title>
 <style>
   :root{
-    --brand:#dc2626;
-    --brand-dark:#b91c1c;
-    --bg:#f0f2f5;
+    --brand:#1E40AF;
+    --brand-2:#2563EB;
+    --accent:#3B82F6;
+    --blue-bg:#EFF6FF;
+    --blue-bg2:#DBEAFE;
+    --page-bg:#F5F7FB;
     --card:#ffffff;
-    --text:#1f2329;
-    --text-light:#8a9099;
-    --line:#ebedf0;
+    --text:#1E293B;
+    --text-light:#64748B;
+    --line:#E2E8F0;
+    --green:#16A34A;
+    --yellow:#CA8A04;
+    --red:#DC2626;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-  .app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);padding-bottom:48px}
-  /* 顶部栏：像微信工具，不像后台 */
-  .topbar{position:sticky;top:0;z-index:10;background:var(--brand);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-  .topbar .logo{font-size:18px;font-weight:700;letter-spacing:.5px}
-  .topbar .sub{font-size:12px;opacity:.9;margin-left:auto;background:rgba(255,255,255,.18);padding:3px 10px;border-radius:20px}
+  html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--page-bg);color:var(--text);line-height:1.65}
+  .wrap{max-width:960px;margin:0 auto;padding:0 14px 90px}
+  /* 顶部蓝色渐变 */
+  .topbar{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;padding:18px 14px;text-align:center;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px rgba(30,64,175,.18)}
+  .topbar h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.5px}
+  .topbar p{margin:4px 0 0;font-size:13px;opacity:.92}
+
   /* 搜索区 */
-  .search{padding:16px}
+  .search{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:16px 0;box-shadow:0 1px 3px rgba(15,23,42,.04)}
   .search .hint{font-size:13px;color:var(--text-light);margin-bottom:8px}
-  .search input{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:15px 14px;font-size:16px;background:#fff;outline:none;transition:.2s}
-  .search input:focus{border-color:var(--brand)}
-  .btn{display:block;width:100%;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:600;color:#fff;background:var(--brand);margin-top:12px;cursor:pointer;transition:.15s}
-  .btn:active{background:var(--brand-dark);transform:scale(.99)}
-  /* 结果卡：白色圆角卡片 + 区块间距 */
-  .card{background:var(--card);border-radius:16px;padding:16px;margin:0 14px 14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-  .card .label{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--brand);margin-bottom:10px}
-  .card .label .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:12px}
-  .pname{font-size:19px;font-weight:700;margin:0 0 2px}
-  .remark{font-size:12.5px;color:var(--text-light);margin-bottom:10px}
-  .intro{font-size:15px;color:#333}
-  /* 工具按钮行 */
-  .row{display:flex;gap:10px}
-  .tool-btn{flex:1;border:1.5px solid var(--brand);color:var(--brand);background:#fff;border-radius:12px;padding:13px 8px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer}
-  .tool-btn.primary{background:var(--brand);color:#fff}
-  .tool-btn:active{opacity:.85}
-  /* 三版话术 */
+  .input-row{display:flex;gap:10px}
+  .search input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;background:#fff;outline:none;color:var(--text);transition:.15s;min-width:0}
+  .search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+  .btn{border:none;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
+  .btn-primary{background:var(--brand-2);color:#fff}
+  .btn-primary:hover{background:var(--brand)}
+  .btn-primary:active{transform:scale(.98)}
+  .btn-ghost{background:#fff;color:var(--brand);border:1.5px solid var(--blue-bg2)}
+  .btn-ghost:hover{background:var(--blue-bg)}
+  .btn-ghost:active{transform:scale(.98)}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .tag{background:var(--blue-bg);border:1px solid var(--blue-bg2);color:var(--brand);font-size:12.5px;padding:7px 12px;border-radius:20px;cursor:pointer;transition:.15s}
+  .tag:hover{background:var(--blue-bg2)}
+  .tag:active{transform:scale(.97)}
+
+  /* 结果区两列 */
+  .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .col{display:flex;flex-direction:column;gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 3px rgba(15,23,42,.04)}
+  .card.full{grid-column:1 / -1}
+  .label{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--brand);margin-bottom:10px}
+  .label .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:12px}
+  .pname{font-size:20px;font-weight:700;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px}
+  .badge.y{background:#FEF9C3;color:var(--yellow);border:1px solid #FDE68A}
+  .badge.g{background:#DCFCE7;color:var(--green);border:1px solid #BBF7D0}
+  .badge.r{background:#FEE2E2;color:var(--red);border:1px solid #FECACA}
+  .remark{font-size:13px;color:var(--text-light);margin:6px 0 10px}
+  .intro{font-size:15px;color:#334155}
+
+  /* 核心按钮 */
+  .core-btns{display:flex;flex-direction:column;gap:10px}
+  .core{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border-radius:12px;padding:15px;font-size:15.5px;font-weight:700;transition:.15s;cursor:pointer}
+  .core.main{background:var(--brand-2);color:#fff}
+  .core.main:hover{background:var(--brand)}
+  .core.sub{background:#fff;color:var(--brand);border:1.5px solid var(--blue-bg2)}
+  .core.sub:hover{background:var(--blue-bg)}
+  .core:active{transform:scale(.99)}
+  .note-line{font-size:12.5px;color:var(--text-light);margin-top:4px;line-height:1.6}
+
+  /* 话术 */
   .tabs{display:flex;gap:8px;margin-bottom:10px}
-  .tab{flex:1;text-align:center;padding:9px 4px;border-radius:10px;font-size:13px;background:#f2f3f5;color:var(--text-light);cursor:pointer;transition:.15s}
+  .tab{flex:1;text-align:center;padding:9px 4px;border-radius:10px;font-size:13px;background:var(--blue-bg);color:var(--brand);cursor:pointer;transition:.15s;border:1px solid transparent}
   .tab.active{background:var(--brand);color:#fff;font-weight:600}
-  .script-box{background:#f7f8fa;border-radius:12px;padding:13px;font-size:14px;color:#2b2f36;white-space:pre-wrap;min-height:64px}
-  .copy-btn{margin-top:10px;border:none;background:#fff;border:1.5px solid var(--brand);color:var(--brand);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
-  .copy-btn:active{background:#fff0f0}
-  /* FAQ 折叠 */
-  .faq-item{border-bottom:1px solid var(--line);padding:12px 0}
-  .faq-item:last-child{border-bottom:none;padding-bottom:0}
-  .faq-q{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-  .faq-q .arrow{color:var(--text-light);font-size:13px;transition:.2s}
-  .faq-item.open .faq-q .arrow{transform:rotate(90deg)}
-  .faq-a{font-size:13.5px;color:#4a4f57;margin-top:8px;display:none;line-height:1.7}
-  .faq-item.open .faq-a{display:block}
-  /* 未找到 */
-  .empty{text-align:center;padding:30px 16px;color:var(--text-light)}
-  .empty .big{font-size:15px;color:#555;margin-bottom:8px}
-  .empty .plist{display:inline-block;background:#fff;border-radius:10px;padding:8px 14px;font-size:13px;color:var(--brand);margin-top:6px}
-  /* 提示条 + 页脚声明 */
-  .toast{position:fixed;left:50%;bottom:48px;transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:11px 20px;border-radius:22px;font-size:14px;opacity:0;transition:.25s;z-index:50;pointer-events:none;max-width:80%;text-align:center}
+  .script-box{background:#F8FAFC;border:1px solid var(--line);border-radius:12px;padding:13px;font-size:14px;color:#334155;white-space:pre-wrap;overflow-wrap:anywhere;min-height:70px}
+  .script-tag{font-size:11px;color:var(--yellow);font-weight:600;margin-left:6px}
+  .btn-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .copy-btn{background:#fff;color:var(--brand);border:1.5px solid var(--blue-bg2);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+  .copy-btn:hover{background:var(--blue-bg)}
+  .copy-btn:active{transform:scale(.98)}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-item:last-child{border-bottom:none}
+  .faq-q{font-size:14.5px;font-weight:600;padding:13px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}
+  .faq-q .arr{color:var(--text-light);font-size:12px;transition:transform .2s;flex-shrink:0}
+  .faq-item.open .faq-q .arr{transform:rotate(90deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;font-size:13.5px;color:#475569;line-height:1.7}
+  .faq-item.open .faq-a{max-height:400px;padding-bottom:13px}
+  .faq-a .src{display:block;margin-top:6px;font-size:12px;color:var(--text-light)}
+
+  /* 深度资料 + 来源 */
+  .detail-line{font-size:13.5px;color:var(--text-light);background:var(--blue-bg);border:1px dashed var(--blue-bg2);border-radius:10px;padding:11px 13px;margin-bottom:12px}
+  .source{background:#F8FAFC;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font-size:12.5px;color:#475569;line-height:1.8}
+  .source b{color:var(--text)}
+  .legend{margin-top:10px;font-size:12.5px;color:var(--text-light);display:flex;gap:14px;flex-wrap:wrap}
+
+  /* 空状态 */
+  .empty{text-align:center;padding:34px 16px;color:var(--text-light)}
+  .empty .big{font-size:15px;color:#334155;margin-bottom:6px}
+
+  /* 底部提示 */
+  .toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:rgba(15,23,42,.88);color:#fff;padding:11px 20px;border-radius:22px;font-size:13.5px;opacity:0;transition:.25s;z-index:60;pointer-events:none;max-width:86%;text-align:center}
   .toast.show{opacity:1}
-  .note{font-size:12px;color:var(--text-light);text-align:center;padding:8px 24px 0;line-height:1.6}
-  .hidden{display:none}
+  .foot-note{font-size:12px;color:var(--text-light);text-align:center;padding:18px 10px 0;line-height:1.7}
+
+  /* 手机底部操作栏（仅窄屏显示） */
+  .mobile-bar{display:none}
+  @media (max-width:760px){
+    .result-grid{grid-template-columns:1fr}
+    .wrap{padding-bottom:84px}
+    .mobile-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);box-shadow:0 -2px 10px rgba(15,23,42,.06);padding:8px 12px;gap:10px;max-width:960px;margin:0 auto}
+    .mobile-bar a,.mobile-bar button{flex:1;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;border:none}
+    .mobile-bar .mb-calc{background:var(--brand-2);color:#fff}
+    .mobile-bar .mb-copy{background:var(--blue-bg);color:var(--brand);border:1.5px solid var(--blue-bg2)}
+  }
+  @media (max-width:760px){
+    .search input{font-size:16px}
+    .intro,.script-box,.faq-a{font-size:14px}
+  }
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="topbar">
-    <span class="logo">🛟 新华Hub</span>
-    <span class="sub">销售助手 · 原型</span>
-  </div>
+<div class="topbar">
+  <h1>新华Hub 销售助手</h1>
+  <p>说一句话，10秒拿到能直接发给客户的素材</p>
+</div>
 
+<div class="wrap">
   <div class="search">
-    <div class="hint">说一句话，10 秒出销售素材 · 不限制格式</div>
-    <input id="q" value="宏安世家，客户30岁女，20万交3年" placeholder="例如：宏安世家，客户30岁女，20万交3年" />
-    <button class="btn" onclick="run()">查 询</button>
+    <div class="hint">支持自然语言，不限制格式（例如：宏安世家，客户30岁女，20万交3年）</div>
+    <div class="input-row">
+      <input id="q" value="宏安世家，客户30岁女，20万交3年" placeholder="说一句话，如：宏安世家，客户30岁女，20万交3年" />
+      <button class="btn btn-primary" onclick="run()">查询</button>
+      <button class="btn btn-ghost" onclick="clearInput()">清空</button>
+    </div>
+    <div class="tags" id="tags"></div>
   </div>
 
   <div id="result"></div>
 
-  <div class="note">本页为原型演示 · 话术与 FAQ 为示例稿，实际以公司正式资料与条款为准</div>
+  <div class="foot-note">
+    本页为新华Hub 销售助手原型 · 话术与 FAQ 为示例稿并标注「🟡 AI整理」，未经公司正式审核，实际以产品条款与官方资料为准。<br>
+    中行在线测算资产（calculator-*.html 等）仅被调用，未被修改。
+  </div>
 </div>
+
+<!-- 手机底部快捷栏 -->
+<div class="mobile-bar">
+  <a class="mb-calc" href="calculator-hongan.html" target="_blank" rel="noopener">在线测算</a>
+  <button class="mb-copy" onclick="copyShort()">复制微信话术</button>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-/* 产品工具包数据：第一版只放宏安世家，后续加产品只需往里补 */
-const PRODUCTS = [
-  {
-    key:'hongAn',
-    keyword:'宏安',
-    name:'宏安世家',
-    remark:'客户备注：30岁 女 · 20万交3年（演示）',
-    intro:'宏安世家是增额终身寿险，现金价值长期稳定增长，适合想做稳健资产底仓、有孩子教育或养老规划的中产家庭。',
-    calc:'calculator-hongan.html',
-    scripts:{
-      short:'宏安世家，锁定长期稳定增值的终身寿，20万交3年，适合做孩子教育或自己养老的底仓。方案图我发您看看~',
-      std:'姐，这款是增额终身寿，说白了就是让钱按约定长期稳稳长大。您 30 岁、一年 20 万交 3 年，后面现金价值逐年递增，需要用钱时可以减保取一部分，不取就一直滚。比单纯存定期多一层确定性，也方便以后给孩子或自己留一笔。',
-      deep:'存款胜在灵活、短期稳，但利率是往下走的，长期看复利效应弱。这款前期现金价值增长慢一点，但锁定的是长期复利，持有越久优势越明显，而且有身故保障和传承功能，存款没有。如果您这笔钱是 10 年以上的规划，它比存款更划算；如果是两三年内要用的活钱，那还是存款更合适。咱按您的真实用途来选，不硬推。'
+/* ============================================================
+   产品工具包对象结构（本轮仅填写宏安世家）
+   后续新增产品：复制下方对象，填字段即可，不改页面逻辑
+   字段：productName / aliases / productType / shortIntro /
+        calculatorUrl / planImageAction / scripts(short,standard,deep) /
+        faq / detailUrl / source / authenticity
+   ============================================================ */
+const PRODUCTS = {
+  hongan: {
+    productName: '宏安世家',
+    aliases: ['宏安世家', '宏安'],
+    productType: '分红型理财计划',
+    shortIntro: '宏安世家是新华保险的分红型理财计划，提供终身身故保障，合同载明的保证现金价值随持有年限增长。适配有长期稳健配置与传承需求的客户。',
+    calculatorUrl: 'calculator-hongan.html',
+    planImageAction: {
+      tip: '请进入宏安世家在线测算，完成参数填写后点击「下载图片」，即可生成客户方案图。'
     },
-    faq:[
-      ['分红可靠吗？','宏安世家是增额终身寿，利益以合同约定的现金价值写进保单，白纸黑字确定；分红型部分看公司实际经营，不是固定承诺。简单说：保证的部分合同里看得见，浮动的分红不保证。'],
-      ['为什么选这个产品？','锁定长期复利、现金价值写进合同、兼顾身故保障和传承，适合做 10 年以上的稳健底仓，比单纯存定期多一层确定性。'],
-      ['现金价值怎么看？','保单里有一张现金价值表，对应每个年度的账户价值，就是您那年“退保能拿回的钱”。需要用钱时可减保取一部分，不取就按约定长期增长。'],
-      ['中途急用钱怎么办？','两种常见方式：一是减保，取一部分现金价值出来用；二是保单贷款，一般可贷出现金价值的 80% 左右，不影响保障。具体以条款和当时规则为准。'],
-      ['和银行理财 / 存款有啥区别？','存款/理财胜在灵活短期稳，但利率下行、长期复利弱；这款前期现价增长慢，但锁定长期复利，越久越明显，还带身故保障和传承功能。活钱放存款，长钱做规划，各司其职。']
-    ]
+    scripts: {
+      short: '宏安世家·分红型理财计划，提供终身身故保障。20万交3年，利益以合同保证现金价值+年度分红（非保证）为准，方案图稍后发您。',
+      standard: '姐，这款是新华保险的分红型理财计划，核心是提供终身身故保障，合同里有保证现金价值，每年还有年度分红（演示利率1.2%，非保证，实际看公司经营）。您30岁、一年20万交3年，长期持有现金价值会逐年增长。它更适合做10年以上的稳健规划，不是短期理财。',
+      deep: '先说结论：宏安世家是分红型理财计划，有终身身故保障，现金价值分「保证部分」和「保证+红利」两部分，年度分红按演示利率1.2%演示、非保证。它适合用长期不用的钱做稳健配置和传承规划；如果这笔钱两三年内就要用（流动性需求高），那存款/货基更合适，别硬放进来。具体减保、保单贷款规则以条款为准。咱按您的真实资金用途来选。'
+    },
+    faq: [
+      ['分红可靠吗？', '结论：分红是不确定的。宏安世家是分红型产品，年度分红按演示利率1.2%演示，实际金额看公司每年经营情况，不保证、非承诺。能确定的是合同载明的保证现金价值部分。', '🟡 AI整理（以条款与公司披露为准）'],
+      ['为什么选择这个产品？', '结论：适合有长期稳健配置需求、看重身故保障与传承的人。它提供终身身故保障（1.4–1.6倍，含公共交通意外额外赔付），保证现金价值随持有年限增长。是否适合您，看这笔钱是不是长期不用的钱。', '🟡 AI整理'],
+      ['现金价值怎么看？', '结论：现金价值就是您那年「退保能拿回的钱」。演算器里分「保证部分」和「保证+红利」两列，保证部分写进合同。具体数值以演算器测算和保单现金价值表为准。', '🟢 资料明确（来源：calculator-hongan.html）'],
+      ['中途需要用钱怎么办？', '结论：一般可通过减保或保单贷款获取流动性，但宏安世家能否办理、可领比例、是否影响保障，需以正式条款和当时公司规则为准。短期要用的活钱不建议放进来。', '🟡 AI整理（待核验）'],
+      ['和存款、银行理财有什么区别？', '结论：存款/理财灵活、短期稳，但利率下行、长期复利弱；这款前期现金价值增长慢，但提供终身身故保障、保证现金价值写进合同，持有越久保障与现价越明显。它不是存款替代，而是长期保障+储蓄功能。是否更优看资金期限，不承诺「更划算」。', '🟡 AI整理']
+    ],
+    detailUrl: '', // 暂无专属知识页
+    source: {
+      product: 'calculator-hongan.html（🟢 资料明确：产品名称 / 分红演示利率 / 身故保障倍数）',
+      calc: 'calculator-hongan.html（🟢 资料明确）',
+      scriptsFaq: '🟡 AI整理（基于公开产品框架整理，未经公司正式审核，以条款为准）'
+    },
+    authenticity: '🟡 AI整理'
   }
+};
+
+/* 常用输入示例 */
+const EXAMPLES = [
+  '宏安世家，客户30岁女，20万交3年',
+  '帮我看看宏安世家，30岁女士，每年20万交3年',
+  '宏安 30女 20万×3'
 ];
 
-let currentScript = '';
+let currentScripts = null; // 当前产品话术对象
+let currentShort = '';     // 当前短版话术（手机底部栏用）
 
-function run(){
-  const text = (document.getElementById('q').value || '').trim();
-  const p = PRODUCTS.find(p => text.includes(p.keyword));
-  if(!p){ renderEmpty(); return; }
-  render(p);
+/* 渲染示例标签 */
+function renderTags(){
+  const box = document.getElementById('tags');
+  box.innerHTML = EXAMPLES.map(t => `<span class="tag" onclick="fillTag(this)">${t}</span>`).join('');
+}
+function fillTag(el){
+  document.getElementById('q').value = el.textContent;
+  run();
+}
+function clearInput(){
+  document.getElementById('q').value = '';
+  document.getElementById('q').focus();
 }
 
-function render(p){
-  currentScript = p.scripts.short;
-  const faqHtml = p.faq.map((f,i)=>`
+/* 自然语言解析（仅用于客户备注展示，不传入演算器） */
+function parseInput(text){
+  const t = text || '';
+  let name = '';
+  const p = Object.values(PRODUCTS).find(p => p.aliases.some(a => t.includes(a)));
+  if(p) name = p.productName;
+  const ageM = t.match(/(\d{1,3})\s*岁/);
+  const age = ageM ? ageM[1] : '';
+  let gender = '';
+  if(/女|女士|姑娘|姐/.test(t)) gender = '女';
+  else if(/男|先生|哥/.test(t)) gender = '男';
+  const wanM = t.match(/(\d+(?:\.\d+)?)\s*万/);
+  let premium = '';
+  if(wanM) premium = wanM[1] + '万元/年';
+  else { const ym = t.match(/(\d+)\s*元/); if(ym) premium = ym[1] + '元/年'; }
+  const ym = t.match(/交\s*(\d+)\s*年/) || t.match(/(\d+)\s*年[^，。]*?交/) || t.match(/[×x]\s*(\d+)/);
+  const years = ym ? ym[1] : '';
+  const parts = [];
+  if(age) parts.push(age + '岁' + gender);
+  if(premium) parts.push(premium);
+  if(years) parts.push('交' + years + '年');
+  return { name, note: parts.length ? parts.join(' · ') : '（未解析到客户参数）' };
+}
+
+function run(){
+  const text = document.getElementById('q').value.trim();
+  const parsed = parseInput(text);
+  if(!parsed.name){
+    renderEmpty();
+    return;
+  }
+  const key = Object.keys(PRODUCTS).find(k => PRODUCTS[k].aliases.includes(parsed.name) || PRODUCTS[k].productName === parsed.name);
+  render(PRODUCTS[key], parsed.note);
+}
+
+function render(p, note){
+  currentScripts = p.scripts;
+  currentShort = p.scripts.short;
+  const authBadge = `<span class="badge y">${p.authenticity}</span>`;
+  const faqHtml = p.faq.map((f,i) => `
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">${f[0]}<span class="arrow">▶</span></div>
-      <div class="faq-a">${f[1]}</div>
+      <div class="faq-q">${f[0]}<span class="arr">▶</span></div>
+      <div class="faq-a">${f[1]}<span class="src">${f[2] || ''}</span></div>
     </div>`).join('');
 
+  const detailHtml = p.detailUrl
+    ? `<a class="core sub" href="${p.detailUrl}" target="_blank" rel="noopener" style="text-decoration:none">查看${p.productName}详细资料</a>`
+    : `<div class="detail-line">详细知识页待后续接入（当前原型仅含宏安世家工具包）</div>`;
+
   document.getElementById('result').innerHTML = `
-    <!-- 1. 一句话介绍 -->
-    <div class="card">
-      <div class="label"><span class="num">1</span> 产品一句话介绍</div>
-      <div class="pname">${p.name}</div>
-      <div class="remark">${p.remark}</div>
-      <div class="intro">${p.intro}</div>
-    </div>
+    <div class="result-grid">
+      <div class="col">
+        <!-- 1. 一句话介绍 -->
+        <div class="card">
+          <div class="label"><span class="num">1</span> 产品一句话介绍</div>
+          <div class="pname">${p.productName} <span class="badge y">${p.authenticity}</span></div>
+          <div class="remark">客户备注：${note}</div>
+          <div class="intro">${p.shortIntro}</div>
+        </div>
+        <!-- 2. 核心操作按钮 -->
+        <div class="card">
+          <div class="label"><span class="num">2</span> 核心操作</div>
+          <div class="core-btns">
+            <a class="core main" href="${p.calculatorUrl}" target="_blank" rel="noopener">立即在线测算</a>
+            <a class="core sub" href="${p.calculatorUrl}" target="_blank" rel="noopener" onclick="toast('${p.planImageAction.tip}')">生成客户方案图</a>
+          </div>
+          <div class="note-line">方案图：进入演算器填写参数后，点击「下载图片」即可生成客户方案图。${p.planImageAction.tip}</div>
+        </div>
+      </div>
 
-    <!-- 2. 在线测算 -->
-    <div class="card">
-      <div class="label"><span class="num">2</span> 在线测算</div>
-      <div class="row">
-        <a class="tool-btn primary" href="${p.calc}">🧮 打开演算器</a>
+      <div class="col">
+        <!-- 3. 三版客户话术 -->
+        <div class="card">
+          <div class="label"><span class="num">3</span> 三版客户话术 <span class="badge y">🟡 AI整理</span></div>
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab(this,'short')">微信简短</div>
+            <div class="tab" onclick="switchTab(this,'standard')">面谈标准</div>
+            <div class="tab" onclick="switchTab(this,'deep')">深度解释</div>
+          </div>
+          <div class="script-box" id="scriptBox">${p.scripts.short}</div>
+          <div class="btn-row">
+            <button class="copy-btn" onclick="copyCurrent()">复制本版话术</button>
+            <button class="copy-btn" onclick="copyAll()">复制全部话术</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 3. 生成客户方案图（占位） -->
-    <div class="card">
-      <div class="label"><span class="num">3</span> 生成客户方案图</div>
-      <div class="row">
-        <button class="tool-btn" onclick="toast('方案图生成功能开发中，敬请期待')">🖼️ 生成方案图</button>
-      </div>
-    </div>
-
-    <!-- 4. 三版话术 -->
-    <div class="card">
-      <div class="label"><span class="num">4</span> 三版客户话术</div>
-      <div class="tabs">
-        <div class="tab active" onclick="switchTab(this,'short')">微信简短</div>
-        <div class="tab" onclick="switchTab(this,'std')">面谈标准</div>
-        <div class="tab" onclick="switchTab(this,'deep')">深度解释</div>
-      </div>
-      <div class="script-box" id="scriptBox">${p.scripts.short}</div>
-      <button class="copy-btn" onclick="copyScript()">📋 复制话术</button>
-    </div>
-
-    <!-- 5. FAQ -->
-    <div class="card">
-      <div class="label"><span class="num">5</span> 常见问题 FAQ</div>
+    <!-- 4. FAQ -->
+    <div class="card full">
+      <div class="label"><span class="num">4</span> 常见问题 FAQ</div>
       ${faqHtml}
+    </div>
+
+    <!-- 5. 深度资料与来源说明 -->
+    <div class="card full">
+      <div class="label"><span class="num">5</span> 深度资料与来源说明</div>
+      ${detailHtml}
+      <div class="source">
+        <div><b>产品资料来源：</b>${p.source.product}</div>
+        <div><b>在线测算来源：</b>${p.source.calc}</div>
+        <div><b>话术 / FAQ：</b>${p.source.scriptsFaq}</div>
+        <div class="legend">
+          <span>🟢 资料明确</span><span>🟡 AI整理</span><span>🔴 待核验</span>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -175,46 +334,56 @@ function render(p){
 function renderEmpty(){
   document.getElementById('result').innerHTML = `
     <div class="card empty">
-      <div class="big">没匹配到产品，您是想看哪个？</div>
-      <div>目前原型只收录了：</div>
-      <div class="plist">宏安世家</div>
+      <div class="big">当前原型仅开放宏安世家，其他产品正在接入。</div>
+      <div>试试输入：「宏安世家，客户30岁女，20万交3年」</div>
     </div>`;
 }
 
 function switchTab(el, type){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  const p = PRODUCTS.find(p=> (document.getElementById('q').value||'').includes(p.keyword)) || PRODUCTS[0];
-  currentScript = p.scripts[type];
-  document.getElementById('scriptBox').textContent = currentScript;
+  document.getElementById('scriptBox').textContent = currentScripts[type];
 }
-
-function toggleFaq(el){ el.classList.toggle('open'); }
-
-function copyScript(){
-  const text = currentScript;
+function copyCurrent(){
+  copyText(document.getElementById('scriptBox').textContent);
+}
+function copyAll(){
+  const all = `【微信简短】\n${currentScripts.short}\n\n【面谈标准】\n${currentScripts.standard}\n\n【深度解释】\n${currentScripts.deep}`;
+  copyText(all);
+}
+function copyShort(){
+  copyText(currentShort);
+}
+function copyText(text){
   if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(()=>toast('话术已复制 ✓')).catch(()=>fallbackCopy(text));
-  } else { fallbackCopy(text); }
+    navigator.clipboard.writeText(text).then(()=>toast('已复制，可直接发送给客户')).catch(()=>fallback(text));
+  } else { fallback(text); }
 }
-function fallbackCopy(text){
-  const ta=document.createElement('textarea');
-  ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+function fallback(text){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
   document.body.appendChild(ta); ta.select();
-  try{ document.execCommand('copy'); toast('话术已复制 ✓'); }
+  try { document.execCommand('copy'); toast('已复制，可直接发送给客户'); }
   catch(e){ toast('复制失败，请手动选择'); }
   document.body.removeChild(ta);
 }
-
-let toastTimer=null;
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
+function toggleFaq(el){
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if(!wasOpen) el.classList.add('open');
 }
+let toastTimer = null;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+/* 回车直接查询 */
+document.getElementById('q').addEventListener('keydown', e => { if(e.key === 'Enter') run(); });
 
-/* 进入页面即展示一次结果，方便直接看效果 */
+/* 初始化 */
+renderTags();
 run();
 </script>
 </body>
