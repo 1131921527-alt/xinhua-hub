@@ -96,6 +96,14 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .row-positive .col-rate{background:#BFDBFE !important;}
 .row-positive .col-total{background:#BFDBFE !important;}
 
+/* 储备期合并单元格：蓝色边框突出 + 垂直居中 */
+.main-table td.col-reserve{border:2px solid var(--primary);vertical-align:middle;text-align:center;}
+.main-table td.col-reserve .reserve-cell{display:flex;align-items:center;justify-content:center;height:100%;min-height:130px;color:var(--primary);font-weight:700;font-size:14px;letter-spacing:2px;}
+
+/* 收益率口径验证说明 */
+.yield-note{margin-top:12px;padding:11px 13px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:12.5px;color:#334155;line-height:1.7;}
+.yield-note b{color:var(--primary);}
+
 .quick-img{width:100%;border:2px solid var(--primary);border-radius:8px;cursor:zoom-in;transition:transform .2s;}
 .quick-img:hover{transform:scale(1.01);}
 .quick-wrap{text-align:center;}
@@ -239,8 +247,14 @@ body.capturing .table-scroll{overflow-x:visible !important;}
               <th class="sub">现金价值<br>保证+红利</th>
             </tr>
           </thead>
-          <tbody id="resultBody"></tbody>
+          <tbody id="resultBody">          </tbody>
         </table>
+        <div class="yield-note">
+          <b>收益率口径说明：</b>本表「预期年化单利」采用演算器原有公式展示（主展示口径，未改动）。
+          交叉验证采用<b>资金加权平均持有年限</b>法：收益部分 ÷ 总本金 ÷ 平均持有年限；
+          平均持有年限 =（各笔保费持有年限之和）÷ 交费次数。
+          交3年交场景与（年度−1）口径一致；多年交场景两者存在口径差异，以演算器原公式为准。
+        </div>
       </div>
     </div>
   </div>
@@ -383,7 +397,7 @@ function generate(){
     const isReserve = r.yr <= 5;
     // 仅首行输出合并单元格，后续储备期行不再输出该列 td
     const yieldCell = isReserve
-      ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
+      ? (idx === 0 ? `<td class="col-rate col-reserve" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
       : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     const rowClass = r.cvTotal > cumPrem ? 'row-positive' : '';
     return `<tr class="${rowClass}">
