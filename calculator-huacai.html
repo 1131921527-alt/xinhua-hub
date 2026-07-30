@@ -101,6 +101,7 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
   }
 </style>
 <script src="html2canvas.min.js"></script>
+<script src="product-rules.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -400,8 +401,10 @@ async function generate() {
       const isLast = (idx === HC_DATA.length - 1);
       const rowClass = isLast ? 'row-last' : (is5y ? 'row-5y' : '');
 
-      // 阶段列：前5年显示"储备期"（合并居中由 applyReserveRowspan 处理）
-      const rateCell = yr <= 5 ? '<td class="col-rate rate-reserve reserve-merge"><span class="reserve-cell">储备期</span></td>' : '<td class="col-rate">-</td>';
+      // 储备期读取统一产品规则配置（华彩：fixed 前5年；showRate=false → 储备期后显示 "-"）
+      const RULE = window.getProductRule('huacai');
+      const reserveYears = window.resolveReserveYears(RULE, paymentYears);
+      const rateCell = yr <= reserveYears ? '<td class="col-rate rate-reserve reserve-merge"><span class="reserve-cell">储备期</span></td>' : '<td class="col-rate">-</td>';
 
       // 左侧竖排标签
       let sideLabelCell = '';
@@ -614,8 +617,9 @@ function _legacyDownloadImage() {
       });
       ctx.textBaseline='alphabetic';
 
-      // ===== 储备期定位 =====
-      const reserveYears=5;
+      // ===== 储备期定位（读取统一产品规则配置：华彩 fixed 前5年） =====
+      const RULE = window.getProductRule('huacai');
+      const reserveYears = window.resolveReserveYears(RULE, 0);
       const reserveColIdx=colWidths.length-1;
       const reserveColX=tblX+colWidths.slice(0,reserveColIdx).reduce((a,b)=>a+b,0);
       let reserveStartIdx=-1, reserveCount=0, reserveCellX=0;

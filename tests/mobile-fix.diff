@@ -1,0 +1,152 @@
+diff --git a/calculator-hongan.html b/calculator-hongan.html
+index 1918944..93b22a3 100644
+--- a/calculator-hongan.html
++++ b/calculator-hongan.html
+@@ -6,6 +6,7 @@
+ <title>宏安世家（分红型）理财计划 · 在线演算器</title>
+ <script src="ai-planner.js"></script>
+ <script src="html2canvas.min.js"></script>
++<script src="product-rules.js"></script>
+ <style>
+ :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
+ *{box-sizing:border-box;margin:0;padding:0;}
+@@ -133,6 +134,10 @@ body.capturing .table-scroll{overflow-x:visible !important;}
+   body{padding:8px;}
+   .wrap{border-radius:0;}
+   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
++  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至13px */
++  html, body { overflow-x: hidden; }
++  .table-scroll { max-width: 100%; }
++  .tip { font-size: 13px; }
+ }
+ </style>
+ </head>
+@@ -386,10 +391,12 @@ function generate(){
+     if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
+     return true;
+   });
+-  // 储备期行数动态计算（基于已过滤后的展示行），不硬写 5
+-  const reserveYears = displayRows.filter(r => r.yr <= 5).length;
++  // 储备期读取统一产品规则配置（宏安：fixed，前5年）
++  const RULE = window.getProductRule('hongan');
++  const reserveYears = window.resolveReserveYears(RULE, 0);
++  const showRate = RULE.showRate;
+   tbody.innerHTML = displayRows.map((r, idx) => {
+-    const isReserve = r.yr <= 5;
++    const isReserve = r.yr <= reserveYears;
+     // 仅首行输出合并单元格，后续储备期行不再输出该列 td
+     const yieldCell = isReserve
+       ? (idx === 0 ? `<td class="col-rate reserve-merged" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
+diff --git a/calculator-hongxilai.html b/calculator-hongxilai.html
+index 150058f..68d4b5d 100644
+--- a/calculator-hongxilai.html
++++ b/calculator-hongxilai.html
+@@ -6,6 +6,7 @@
+ <title>宏禧来（分红型）理财计划 · 在线演算器</title>
+ <script src="ai-planner.js"></script>
+ <script src="html2canvas.min.js"></script>
++<script src="product-rules.js"></script>
+ <style>
+ :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
+ *{box-sizing:border-box;margin:0;padding:0;}
+@@ -115,6 +116,10 @@ body.capturing .table-scroll{overflow-x:visible !important;}
+   body{padding:8px;}
+   .wrap{border-radius:0;}
+   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
++  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至13px */
++  html, body { overflow-x: hidden; }
++  .table-scroll { max-width: 100%; }
++  .tip { font-size: 13px; }
+ }
+ .stats-row{display:flex;width:100%;border:2px solid var(--primary);border-top:0;box-sizing:border-box;}
+ .stat-inline-box{flex:1;display:flex;align-items:center;min-width:0;border-right:2px solid var(--primary);background:#fff;box-sizing:border-box;}
+@@ -329,9 +334,11 @@ function generate(){
+     return true;
+   });
+   let html = '';
+-  const reserveCount = displayRows.filter(r => r.rate <= 0).length;
++  // 储备期读取统一产品规则配置（宏禧来：dynamic，规则 rate<=0）
++  const RULE = window.getProductRule('hongxilai');
++  const reserveCount = displayRows.filter(r => window.evalReserveRule(RULE, r)).length;
+   displayRows.forEach((r, idx) => {
+-    const isReserve = r.rate <= 0;
++    const isReserve = window.evalReserveRule(RULE, r);
+     const rateCell = isReserve
+       ? (idx === 0 ? `<td class="reserve-cell" rowspan="${reserveCount}">储备期</td>` : '')
+       : `<td class="col-rate">${r.rate.toFixed(2) + '%'}</td>`;
+diff --git a/calculator-hongyuan.html b/calculator-hongyuan.html
+index 8c3ac0d..22ecf68 100644
+--- a/calculator-hongyuan.html
++++ b/calculator-hongyuan.html
+@@ -6,6 +6,7 @@
+ <title>宏愿人生养老年金（分红型）· 在线演算器</title>
+ <script src="ai-planner.js"></script>
+ <script src="html2canvas.min.js"></script>
++<script src="product-rules.js"></script>
+ <style>
+ :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
+ *{box-sizing:border-box;margin:0;padding:0;}
+@@ -120,6 +121,10 @@ body.capturing .table-scroll{overflow-x:visible !important;}
+   body{padding:8px;}
+   .wrap{border-radius:0;}
+   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
++  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至13px */
++  html, body { overflow-x: hidden; }
++  .table-scroll { max-width: 100%; }
++  .tip { font-size: 13px; }
+ }
+ </style>
+ </head>
+@@ -379,9 +384,11 @@ function generate(){
+     if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
+     return true;
+   });
+-  const reserveYears = displayRows.filter(r => r.yr <= 5).length;
++  // 储备期读取统一产品规则配置（宏愿：fixed，前5年）
++  const RULE = window.getProductRule('hongyuan');
++  const reserveYears = window.resolveReserveYears(RULE, 0);
+   tbody.innerHTML = displayRows.map((r, idx) => {
+-    const isReserve = r.yr <= 5;
++    const isReserve = r.yr <= reserveYears;
+     const yieldCell = isReserve
+       ? (idx === 0 ? `<td class="col-rate" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
+       : `<td class="col-rate">${(r.yieldVal * 100).toFixed(2) + '%'}</td>`;
+diff --git a/calculator-yingmanxin.html b/calculator-yingmanxin.html
+index 85d3261..0ea3ba8 100644
+--- a/calculator-yingmanxin.html
++++ b/calculator-yingmanxin.html
+@@ -6,6 +6,7 @@
+ <title>盈满鑫两全保险（分红型） · 在线演算器</title>
+ <script src="ai-planner.js"></script>
+ <script src="html2canvas.min.js"></script>
++<script src="product-rules.js"></script>
+ <style>
+ :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
+ *{box-sizing:border-box;margin:0;padding:0;}
+@@ -130,6 +131,10 @@ body.capturing .table-scroll{overflow-x:visible !important;}
+   body{padding:8px;}
+   .wrap{border-radius:0;}
+   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
++  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至13px */
++  html, body { overflow-x: hidden; }
++  .table-scroll { max-width: 100%; }
++  .tip { font-size: 13px; }
+ }
+ </style>
+ </head>
+@@ -390,11 +395,11 @@ function generate(){
+     if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
+     return true;
+   });
+-  // 储备期 = 交费期（盈满鑫为短期两全分红产品，储备期随交费方式变化）
+-  // 3年交 → 前3年储备期，第4年起显示收益率；5年交 → 前5年储备期，第6年起显示收益率
+-  const reserveYears = displayRows.filter(r => r.yr <= payTerm).length;
++  // 储备期读取统一产品规则配置（盈满鑫：payterm，储备期=交费期）
++  const RULE = window.getProductRule('yingmanxin');
++  const reserveYears = window.resolveReserveYears(RULE, payTerm);
+   tbody.innerHTML = displayRows.map((r, idx) => {
+-    const isReserve = r.yr <= payTerm;
++    const isReserve = r.yr <= reserveYears;
+     // 储备期合并单元格：仅首行( yr=1 )输出 rowspan，后续储备期行省略该列 td
+     let yieldCell;
+     if(isReserve){

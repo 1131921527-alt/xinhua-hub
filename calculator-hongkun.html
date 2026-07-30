@@ -81,6 +81,7 @@
   }
 </style>
 <script src="html2canvas.min.js"></script>
+<script src="product-rules.js"></script>
 </head>
 <body>
 <a class="back-link" href="index.html">← 返回资料库</a>
@@ -254,9 +255,10 @@ async function generate(){
       const rowClass=isLast?'row-last':(is5y?'row-5y':'');
       const tr=document.createElement('tr');
       if(rowClass) tr.className=rowClass;
-      // 储备期：前5年显示"储备期"
-      // 储备期：前5年显示"储备期"（合并居中由 applyReserveRowspan 处理）
-      const stageCell = yr <= 5 ? '<td class="col-rate reserve-merge"><span class="reserve-cell">储备期</span></td>' : '<td>-</td>';
+      // 储备期读取统一产品规则配置（宏坤：fixed 前5年；showRate=false → 储备期后显示 "-"）
+      const RULE = window.getProductRule('hongkun');
+      const reserveYears = window.resolveReserveYears(RULE, term);
+      const stageCell = yr <= reserveYears ? '<td class="col-rate reserve-merge"><span class="reserve-cell">储备期</span></td>' : '<td>-</td>';
       tr.innerHTML=`<td>${yr}</td><td>${curAge}</td>`+
         `<td>${prem>0?fmt(prem*scale):'-'}</td><td>${fmt(cum*scale)}</td>`+
         `<td class="col-ann">${ann>0?fmt(ann*scale*annFactor):'-'}</td><td class="col-ann">${fmt(annCum*scale*annFactor)}</td>`+
@@ -316,7 +318,9 @@ function _legacyDownloadImage(){
   const scale=premium/1000;
   const sumAssured=Math.round(entry.E*scale);
   const years=entry.y;
-  const reserveYears=5;
+  // 储备期读取统一产品规则配置（宏坤：fixed 前5年）
+  const RULE = window.getProductRule('hongkun');
+  const reserveYears = window.resolveReserveYears(RULE, 0);
   const drawLabel = drawMode==='month' ? '月领' : '年领';
   const annFactor = drawMode==='month' ? 0.085 : 1;
 

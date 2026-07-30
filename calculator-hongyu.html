@@ -105,6 +105,7 @@ body.capturing .table-scroll{overflow:visible !important;}
 }
 </style>
 <script src="html2canvas.min.js"></script>
+<script src="product-rules.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -325,7 +326,11 @@ async function generate() {
     const tbody = document.getElementById('resultBody');
     const maxYear = Math.min(years.length, 106);
     const paymentYears = term === 1 ? 1 : term;
-    const reserveYears = 5;  // 储备期=前5年（回本），与缴费期无关
+    // 储备期读取统一产品规则配置（宏御：fixed，前5年）
+    const RULE = window.getProductRule('hongyu');
+    const reserveYears = RULE.reserveType === 'fixed' ? RULE.reserveYears
+                        : RULE.reserveType === 'payterm' ? paymentYears : 0;
+    const showRate = RULE.showRate;
     
     // 第一遍：计算所有年份数据（即使被显示模式过滤也要计算）
     let cumK = 0;       // L = 累计K（累计交清增额基本保险金额）

@@ -1,0 +1,192 @@
+{
+  "timestamp": "2026-07-30T01:13:26.323Z",
+  "overall_status": "PASS",
+  "summary": {
+    "total_products": 10,
+    "html_all_exist": true,
+    "references_ok": true,
+    "rules_loaded": true,
+    "rules_issues_count": 0,
+    "test_assets_ok": true,
+    "screenshot_count": 22,
+    "docs_indexed": true
+  },
+  "details": {
+    "files": {
+      "盈满鑫": {
+        "html_exists": true,
+        "size_bytes": 27128
+      },
+      "宏御": {
+        "html_exists": true,
+        "size_bytes": 1010143
+      },
+      "宏安": {
+        "html_exists": true,
+        "size_bytes": 26999
+      },
+      "宏泰": {
+        "html_exists": true,
+        "size_bytes": 45948
+      },
+      "宏愿": {
+        "html_exists": true,
+        "size_bytes": 26663
+      },
+      "宏禧来": {
+        "html_exists": true,
+        "size_bytes": 24777
+      },
+      "华彩": {
+        "html_exists": true,
+        "size_bytes": 46396
+      },
+      "宏坤": {
+        "html_exists": true,
+        "size_bytes": 34919
+      },
+      "福盛世家": {
+        "html_exists": true,
+        "size_bytes": 31437
+      },
+      "恒享": {
+        "html_exists": true,
+        "size_bytes": 30618
+      }
+    },
+    "dependencies": {
+      "product-rules.js": true,
+      "html2canvas.min.js": true,
+      "data.json": true,
+      "index.html": true
+    },
+    "references": {
+      "盈满鑫": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "宏御": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "宏安": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "宏泰": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "宏愿": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "宏禧来": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "华彩": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "宏坤": {
+        "has_product_rules": true,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "福盛世家": {
+        "has_product_rules": false,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      },
+      "恒享": {
+        "has_product_rules": false,
+        "has_html2canvas": true,
+        "has_doctype": true,
+        "has_viewport": true,
+        "has_generate_btn": true,
+        "has_download_fn": true
+      }
+    },
+    "rules": {
+      "loaded": true,
+      "keys": [
+        "yingmanxin",
+        "hongyu",
+        "hongan",
+        "hongtai",
+        "hongyuan",
+        "hongxilai",
+        "huacai",
+        "hongkun"
+      ],
+      "issues": []
+    },
+    "test_assets": {
+      "screenshots_dir_exists": true,
+      "screenshot_count": 22,
+      "last_report_exists": true,
+      "last_report_pass": true,
+      "acceptance_checklist_exists": true
+    },
+    "docs": {
+      "docs_dir_exists": true,
+      "doc_count": 18,
+      "index_md_exists": true,
+      "doc_files": [
+        "AI_DEV_WORKFLOW.md",
+        "AI_HANDOVER_GUIDE.md",
+        "CODE_DUPLICATION_REPORT.md",
+        "CODE_RULES.md",
+        "DATA_SOURCE_MAP.md",
+        "GIT_WORKFLOW.md",
+        "INDEX.md",
+        "PRODUCT_ACCEPTANCE_CHECKLIST.md",
+        "PRODUCT_KNOWLEDGE_INDEX.md",
+        "PRODUCT_TEST_CHECKLIST.md",
+        "PROJECT_MAP.md",
+        "PROJECT_RISK_REPORT.md",
+        "README-项目总览.md",
+        "rules_scan_report.md",
+        "V1.2系统优化规划.md",
+        "新华Hub_V1.0上线检查清单.md",
+        "新华Hub_V1.0最终巡检报告.md",
+        "验收清单-第一批知识页面-V1.md"
+      ]
+    }
+  }
+}

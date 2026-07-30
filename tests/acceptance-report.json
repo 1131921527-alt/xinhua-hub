@@ -1,0 +1,198 @@
+{
+  "generatedAt": "2026-07-30T04:35:10.504Z",
+  "summary": {
+    "totalProducts": 10,
+    "allGenerateOk": true,
+    "allDownloadOk": true,
+    "allConsoleClean": true,
+    "allMobileNoOverflow": true,
+    "fails": {
+      "generate": [],
+      "download": [],
+      "console": [],
+      "overflow": []
+    }
+  },
+  "products": [
+    {
+      "label": "盈满鑫",
+      "url": "/calculator-yingmanxin.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1441046
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 871463
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "宏御世家",
+      "url": "/calculator-hongyu.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1542675
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 919802
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "宏泰世家",
+      "url": "/calculator-hongtai.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1754366
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 1098431
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "宏愿人生",
+      "url": "/calculator-hongyuan.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1760888
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 1165391
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "宏禧来",
+      "url": "/calculator-hongxilai.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1378436
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 825044
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "华彩鎏金",
+      "url": "/calculator-huacai.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 2605526
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 1644600
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "宏坤人生",
+      "url": "/calculator-hongkun.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1725165
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 1180194
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "宏安世家",
+      "url": "/calculator-hongan.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1853599
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 1207049
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "福盛世家",
+      "url": "/calculator-fusheng.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1207799
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 720512
+      },
+      "consoleErrors": []
+    },
+    {
+      "label": "恒享人生",
+      "url": "/calculator-hengxiang.html",
+      "desktop": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "downloadOk": true,
+        "downloadSize": 1426600
+      },
+      "mobile": {
+        "didGenerate": true,
+        "consoleErrorCount": 0,
+        "horizontalOverflowPx": 0,
+        "downloadOk": true,
+        "downloadSize": 977944
+      },
+      "consoleErrors": []
+    }
+  ]
+}

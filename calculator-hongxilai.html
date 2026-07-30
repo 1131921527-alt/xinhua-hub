@@ -6,6 +6,7 @@
 <title>宏禧来（分红型）理财计划 · 在线演算器</title>
 <script src="ai-planner.js"></script>
 <script src="html2canvas.min.js"></script>
+<script src="product-rules.js"></script>
 <style>
 :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -115,6 +116,10 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   body{padding:8px;}
   .wrap{border-radius:0;}
   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
+  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至13px */
+  html, body { overflow-x: hidden; }
+  .table-scroll { max-width: 100%; }
+  .tip { font-size: 13px; }
 }
 .stats-row{display:flex;width:100%;border:2px solid var(--primary);border-top:0;box-sizing:border-box;}
 .stat-inline-box{flex:1;display:flex;align-items:center;min-width:0;border-right:2px solid var(--primary);background:#fff;box-sizing:border-box;}
@@ -329,9 +334,11 @@ function generate(){
     return true;
   });
   let html = '';
-  const reserveCount = displayRows.filter(r => r.rate <= 0).length;
+  // 储备期读取统一产品规则配置（宏禧来：dynamic，规则 rate<=0）
+  const RULE = window.getProductRule('hongxilai');
+  const reserveCount = displayRows.filter(r => window.evalReserveRule(RULE, r)).length;
   displayRows.forEach((r, idx) => {
-    const isReserve = r.rate <= 0;
+    const isReserve = window.evalReserveRule(RULE, r);
     const rateCell = isReserve
       ? (idx === 0 ? `<td class="reserve-cell" rowspan="${reserveCount}">储备期</td>` : '')
       : `<td class="col-rate">${r.rate.toFixed(2) + '%'}</td>`;

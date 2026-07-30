@@ -851,6 +851,38 @@
     text-overflow: ellipsis;
   }
 
+  /* ===== 快捷入口（任务8：首页快速入口优化） ===== */
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 12px 16px 4px;
+  }
+  .quick-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 13px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .quick-card:active { transform: scale(0.97); box-shadow: var(--shadow-hover); }
+  .quick-icon {
+    width: 40px; height: 40px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px; flex-shrink: 0;
+    background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  }
+  .quick-body { min-width: 0; }
+  .quick-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .quick-sub { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+
 </style>
 </head>
 <body>
@@ -895,6 +927,38 @@
     <span class="boc-sub">宏安 · 宏愿 · 盈满鑫 · 宏禧来 · 恒享 5 款产品一键测算</span>
     <span class="boc-arrow">立即进入 →</span>
   </a>
+</div>
+
+<!-- 快捷入口（任务8：理财经理打开后最快找到四类功能） -->
+<div class="quick-grid">
+  <a class="quick-card" href="boc-calculators.html">
+    <div class="quick-icon">🧮</div>
+    <div class="quick-body">
+      <div class="quick-title">在线测算</div>
+      <div class="quick-sub">10 款产品一键演算</div>
+    </div>
+  </a>
+  <div class="quick-card" onclick="selectCategory('product-intro')">
+    <div class="quick-icon">📚</div>
+    <div class="quick-body">
+      <div class="quick-title">产品介绍</div>
+      <div class="quick-sub">卖点 / 投保指引</div>
+    </div>
+  </div>
+  <a class="quick-card" href="sales-qa.html">
+    <div class="quick-icon">💬</div>
+    <div class="quick-body">
+      <div class="quick-title">销售话术</div>
+      <div class="quick-sub">答疑 / 复制话术</div>
+    </div>
+  </a>
+  <div class="quick-card" onclick="var a=document.querySelector('.ap-section'); if(a){window.scrollTo({top:a.getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});} var i=document.getElementById('aiPlannerInput'); if(i){setTimeout(function(){i.focus();},350);}">
+    <div class="quick-icon">📄</div>
+    <div class="quick-body">
+      <div class="quick-title">计划书下载</div>
+      <div class="quick-sub">智能生成图片</div>
+    </div>
+  </div>
 </div>
 
 <div class="search-wrap">

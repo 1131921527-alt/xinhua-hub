@@ -118,6 +118,31 @@
     header h1{font-size:19px;}
     .sec-title{font-size:16px;}
   }
+
+  /* ===== V1.0 销售助手增强：搜索 / 复制 / 下载（纯展示层） ===== */
+  .toolbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);
+    box-shadow:0 2px 10px rgba(15,23,42,.07);padding:10px 14px;}
+  .qa-search{width:100%;padding:13px 16px;border:2px solid var(--blue);border-radius:12px;font-size:16px;
+    outline:none;box-shadow:0 1px 5px rgba(37,99,235,.14);}
+  .qa-search::placeholder{color:#94A3B8;}
+  .prod-btns{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 2px;-webkit-overflow-scrolling:touch;}
+  .prod-btns::-webkit-scrollbar{height:0;}
+  .prod-btns button{flex:none;border:none;background:var(--blue-l);color:var(--blue-d);font-weight:700;
+    font-size:13px;padding:8px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:.15s;}
+  .prod-btns button:active{background:var(--blue-100);transform:scale(.96);}
+  .qa-count{font-size:12px;color:var(--sub);padding:6px 2px 0;}
+  .qa .a,.obj .oa,.kyc .example{position:relative;padding-right:84px;}
+  .copy-btn{position:absolute;top:10px;right:12px;border:1px solid var(--line);background:#fff;color:var(--blue-d);
+    font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;opacity:.9;z-index:2;}
+  .copy-btn:active{background:var(--blue-l);}
+  .dl-fab{position:fixed;right:16px;bottom:18px;z-index:60;border:none;background:linear-gradient(135deg,var(--blue-dd),var(--blue));
+    color:#fff;font-size:14px;font-weight:700;padding:13px 18px;border-radius:30px;box-shadow:0 6px 18px rgba(37,99,235,.42);
+    cursor:pointer;}
+  .dl-fab:active{transform:scale(.96);}
+  .toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:rgba(15,23,42,.92);color:#fff;
+    font-size:13px;padding:10px 18px;border-radius:22px;z-index:80;opacity:0;transition:opacity .25s;pointer-events:none;}
+  .toast.show{opacity:1;}
+  @media(max-width:560px){ .toolbar{padding:8px 10px;} .qa-search{font-size:15px;padding:11px 14px;} }
 </style>
 </head>
 <body>
@@ -127,6 +152,22 @@
   <div class="sub">MDRT级客户答疑 · 中国银行渠道在售主力全覆盖 · 客户分层KYC + 异议处理</div>
   <span class="pill">银行渠道实战版 · 中国银行服务适配</span>
 </header>
+
+<div class="toolbar">
+  <input class="qa-search" type="search" placeholder="🔍 输入关键词找话术：如「储备期」「分红」「养老」「企业主」…">
+  <div class="prod-btns">
+    <button data-target="#hongan">宏安世家</button>
+    <button data-target="#hongyuan">宏愿人生</button>
+    <button data-target="#hengxiang">恒享人生</button>
+    <button data-target="#fusheng">福盛世家</button>
+    <button data-target="#hongxilai">宏禧来</button>
+    <button data-target="#hongyu">宏御世家</button>
+    <button data-target="#hongtai">宏泰世家</button>
+    <button data-target="#huacai">华彩鎏金</button>
+    <button data-target="#hongkun">宏坤人生</button>
+  </div>
+  <div class="qa-count"></div>
+</div>
 
 <div class="wrap">
   <div class="nav">
@@ -913,6 +954,9 @@
   <footer>新华保险资料库 · 产品销售话术QA答疑手册 ｜ 银行渠道实战版 ｜ 内部学习资料</footer>
 </div>
 
+<button class="dl-fab">📥 下载话术图片</button>
+
+<script src="html2canvas.min.js"></script>
 <script>
 // 单次绑定点击（避免内联+JS双绑定导致toggle抵消）
 document.querySelectorAll('.qa').forEach(function(el){
@@ -927,6 +971,80 @@ document.querySelectorAll('.nav a').forEach(function(a){
     if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
+
+/* ===== V1.0 销售助手增强：复制话术 / 搜索过滤 / 产品按钮 / 下载图片 ===== */
+(function(){
+  function showToast(msg){
+    if(!window.__toastEl){ window.__toastEl=document.createElement('div'); window.__toastEl.className='toast'; document.body.appendChild(window.__toastEl); }
+    var t=window.__toastEl; t.textContent=msg; t.classList.add('show');
+    clearTimeout(t._timer); t._timer=setTimeout(function(){t.classList.remove('show');},1600);
+  }
+  function fallbackCopy(txt){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; ta.style.top='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); showToast('已复制话术 ✓'); }catch(e){ showToast('复制失败，请手动选择'); }
+    document.body.removeChild(ta);
+  }
+  function bindCopy(btn, getText){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var txt=(getText()||'').replace(/\s+/g,' ').trim();
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){showToast('已复制话术 ✓');}).catch(function(){fallbackCopy(txt);});
+      } else { fallbackCopy(txt); }
+    });
+  }
+  function attachCopy(scope){
+    scope.forEach(function(a){
+      var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制话术';
+      a.appendChild(b); bindCopy(b, function(){ return a.innerText.replace('复制话术',''); });
+    });
+  }
+  attachCopy([].slice.call(document.querySelectorAll('.qa .a')));
+  attachCopy([].slice.call(document.querySelectorAll('.obj .oa')));
+  attachCopy([].slice.call(document.querySelectorAll('.kyc .example')));
+
+  var input=document.querySelector('.qa-search');
+  var blocks=[].slice.call(document.querySelectorAll('.qa,.obj,.kyc,.prod-card,.callout'));
+  blocks.forEach(function(b){ b.setAttribute('data-text',(b.innerText||'').toLowerCase().replace(/\s+/g,' ')); });
+  var countEl=document.querySelector('.qa-count');
+  function doFilter(){
+    var q=(input.value||'').trim().toLowerCase().replace(/\s+/g,' ');
+    var n=0;
+    blocks.forEach(function(b){
+      var hit=!q || (b.getAttribute('data-text').indexOf(q)>=0);
+      b.style.display=hit?'':'none'; if(hit) n++;
+    });
+    if(countEl) countEl.textContent = q ? ('找到 '+n+' 条相关话术') : '';
+  }
+  if(input){ input.addEventListener('input', doFilter); input.addEventListener('search', doFilter); }
+
+  document.querySelectorAll('.prod-btns button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t=document.querySelector(btn.getAttribute('data-target'));
+      if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  var dlBtn=document.querySelector('.dl-fab');
+  if(dlBtn){ dlBtn.addEventListener('click', function(){
+    var wrap=document.querySelector('.wrap'); if(!wrap) return;
+    if(typeof html2canvas!=='function'){ showToast('下载组件未加载'); return; }
+    showToast('正在生成图片…');
+    document.querySelectorAll('.qa').forEach(function(q){ q.classList.add('open'); });
+    var prevBg=document.body.style.background; document.body.style.background='#fff';
+    html2canvas(wrap,{scale:2,backgroundColor:'#fff',useCORS:true}).then(function(canvas){
+      document.body.style.background=prevBg;
+      canvas.toBlob(function(blob){
+        if(!blob){ showToast('生成失败'); return; }
+        var url=URL.createObjectURL(blob); var a=document.createElement('a');
+        a.href=url; a.download='新华话术手册.png'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){URL.revokeObjectURL(url);},3000);
+        showToast('话术图片已生成 ✓');
+      });
+    }).catch(function(){ document.body.style.background=prevBg; showToast('生成失败'); });
+  }); }
+})();
 </script>
 </body>
 </html>

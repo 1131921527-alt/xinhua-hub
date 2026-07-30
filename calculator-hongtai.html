@@ -88,6 +88,7 @@
   }
 </style>
 <script src="html2canvas.min.js"></script>
+<script src="product-rules.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -267,8 +268,10 @@ async function generate(){
     const rows=getRows();
     const body=document.getElementById('resultBody');
     body.innerHTML='';
-    const reserveYears=term;  // 缴费期合并
     const paymentYears=term;
+    // 储备期读取统一产品规则配置（宏泰：fixed，前5年），与缴费期解耦
+    const RULE = window.getProductRule('hongtai');
+    const reserveYears = window.resolveReserveYears(RULE, paymentYears);
     const maxYear=rows.length;
 
     // 第一遍：找出缴费期可见的首行
@@ -313,8 +316,8 @@ async function generate(){
       else cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
       // 收益率 - 前5年合并居中显示"储备期"，第6年起显示收益率
       if(isFirstPay){
-        cells+=`<td class="pay-merge" rowspan="5">储备期</td>`;
-      } else if(yr > 5){
+        cells+=`<td class="pay-merge" rowspan="${reserveYears}">储备期</td>`;
+      } else if(yr > reserveYears){
         const rv=row.rate_raw;
         if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
         else cells+=`<td></td>`;
@@ -350,7 +353,9 @@ function _legacyDownloadImage(){
   const sumAssured=Math.round(1332500*(premium/500000));
 
   const rows=getRows();
-  const reserveYears=5;
+  // 储备期读取统一产品规则配置（宏泰：fixed，前5年），与缴费期解耦
+  const RULE = window.getProductRule('hongtai');
+  const reserveYears = window.resolveReserveYears(RULE, term);
   const dlRows=[];
   rows.forEach(row=>{
     const yr=row.yr;
@@ -362,7 +367,7 @@ function _legacyDownloadImage(){
       prem: row.prem, exempt: row.exempt, guar: row.guar_amt,
       exp: row.exp_amt, div: row.div_pv, cv_guar: row.cv_guar, cv: row.cv_total,
       rate: row.rate_raw,
-      reserve: yr<=reserveYears, payback: yr===5
+      reserve: yr<=reserveYears, payback: yr===reserveYears
     });
   });
 

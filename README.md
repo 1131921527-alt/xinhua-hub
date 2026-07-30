@@ -247,3 +247,92 @@ d823147 fix: 在线演算器数据格式修正
 - 性别默认：女（currentGender=1）
 - 保费默认：100万
 - 缴费默认：3年交
+
+---
+
+## 九、V1.0 上线说明（2026-07-30 补充）
+
+> 本节为 V1.0 稳定性整理补充，覆盖 10 款产品统一规则层与上线前检查。
+
+### 1. V1.0 范围
+- **10 款在线演算器全部就绪**：盈满鑫、宏御、宏安、宏泰、宏愿、宏禧来、华彩、宏坤、福盛世家、恒享。
+- **统一规则层 `product-rules.js`**：8 款（盈满鑫/宏御/宏安/宏泰/宏愿/宏禧来/华彩/宏坤）的储备期与收益率展示逻辑已抽离到配置，新增产品只需加一条 `PRODUCT_RULES.xxx`，无需改 HTML。
+- 福盛世家、恒享保持原有本地逻辑（不进统一层）。
+
+### 2. 规则层关键字段
+| 字段 | 含义 |
+|------|------|
+| `reserveType` | `fixed`(固定年限) / `payterm`(=交费期，盈满鑫) / `dynamic`(按 `rule` 动态，宏禧来 `rate<=0`) |
+| `reserveYears` | fixed 模式储备期年数（多为 5） |
+| `showRate` | 储备期后是否展示收益率（华彩/宏坤=false → 显示「-」） |
+
+### 3. 自动化验收
+- 验收脚本：`tests/product-rule-check.js`（Node + Playwright）
+- 运行：`node tests/product-rule-check.js`（可选 `PORT=8831` 指定端口）
+- 覆盖：页面生成 / 无 console 报错 / PNG 下载 / 储备期符合规则；报告输出 `tests/last-report.md`，截图 `tests/shots/`。
+
+### 4. ⚠️ Git 提交规范（重要）
+- **禁止直接 `git push origin main`**。请按 `docs/GIT_WORKFLOW.md`：从 `main` 拉 `feature/*` 分支 → 修改 → 测试 → diff 审核 → PR 合并（由人工审批）。
+- 本地源码真实路径：`E:\workbuddyFIle\腾讯龙虾的成品\xinhua-hub\`（本文档旧版写的 `新华保险资料库设计` 为历史路径，已失效）。
+
+### 5. 本地独立运行
+- 演算器为纯静态页面，但部分产品（如宏泰）运行时 `fetch` 本地 JSON，需经 HTTP 服务而非 `file://` 直接打开：
+  ```bash
+  cd xinhua-hub
+  python -m http.server 8000
+  # 浏览器访问 http://localhost:8000/index.html
+  ```
+- 验收脚本内置最小静态服务器，已验证 10 款产品均可在 HTTP 下正常生成、下载、移动端渲染。
+
+### 6. 配套文档索引
+- 设计/规范/分析文档已归集至 `docs/`（见 `docs/INDEX.md`）：项目地图、代码安全规则、产品测试清单、Git 流程、AI 研发流水线、产品知识索引、数据来源追踪、AI 接管说明、重复代码报告、风险扫描、规则扫描报告。
+
+### 7. V1.0 能力清单
+- **在线测算**：10 款演算器（盈满鑫/宏御/宏安/宏泰/宏愿/宏禧来/华彩/宏坤/福盛世家/恒享），输入年龄、性别、保费、交费期，一键生成现金价值、红利、储备期明细表。
+- **产品资料库**：`docs/` 下 16 份设计/规范/分析文档 + 知识库页面 + 红利实现率/投保指引等专题页。
+- **销售助手**：`sales-qa.html` 话术 QA 手册，支持搜索、产品示例按钮、复制话术、整页下载 PNG（纯前端，无后台）。
+- **图片生成**：每个演算器内置 `html2canvas` 导出 PNG，微信内走长按保存、桌面走文件下载，已验证无截断/空白。
+- **手机适配**：`viewport` + 响应式布局，移动端表格、按钮、下载均通过 Playwright 实机验证。
+
+### 8. 如何运行
+- **本地静态托管**：
+  ```bash
+  cd xinhua-hub
+  python -m http.server 8000
+  # 浏览器访问 http://localhost:8000/index.html
+  ```
+  > 部分产品（如宏泰）运行时 `fetch` 本地 JSON，必须经 HTTP 服务访问，不能直接 `file://` 打开。
+- **自动化验收**：
+  ```bash
+  node tests/product-rule-check.js      # 10 款 Playwright 生成/下载/储备期校验
+  node tests/health-check.js            # 静态检测，输出 V1.0-health-check.json
+  node tests/dump-downloads.js          # 重跑导出 10 款下载 PNG 到 tests/downloads/
+  ```
+- **GitHub Pages**：已部署 `https://1131921527-alt.github.io/xinhua-hub/`（访问密码 0225）。
+
+### 9. 如何新增一款产品
+- **可配置产品**：在 `product-rules.js` 的 `PRODUCT_RULES` 中新增一条，例如：
+  ```js
+  PRODUCT_RULES.xxx = { reserveType: 'fixed', reserveYears: 5, showRate: true }
+  // reserveType: 'fixed'(固定年限) | 'payterm'(=交费期) | 'dynamic'(按 rule 动态)
+  ```
+  演算器 HTML 通过 `resolveReserveYears()` 读取，**无需改动 HTML 结构**。
+- **特殊逻辑产品**：如福盛世家、恒享，保持本地逻辑自行实现，不强制接入统一层。
+- **验收**：新增后跑 `node tests/product-rule-check.js`，确认生成/下载/储备期检查全部通过。
+
+### 10. 文件结构
+```
+xinhua-hub/
+├── index.html              # 总入口/产品导航
+├── product-rules.js        # 8 款产品统一规则层（储备期+收益率展示）
+├── sales-qa.html           # 销售助手话术手册（搜索/复制/下载）
+├── calculator-*.html       # 10 款在线演算器
+├── html2canvas.min.js      # 图片导出库
+├── docs/                   # 16 份设计/规范/分析文档
+├── tests/                  # health-check.js / product-rule-check.js / dump-downloads.js + shots/ + downloads/
+├── archive/                # 临时/历史文件（仅归档，不删除）
+├── dev-archive/            # 开发期草稿
+├── xlsx/                   # Excel 原始数据（⚠️红线：禁止修改）
+├── backup/                 # 发布前备份
+└── 新华在售产品_中国银行版.xlsx  # 原始数据（⚠️红线：禁止修改）
+```

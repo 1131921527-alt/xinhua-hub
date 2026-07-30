@@ -6,6 +6,7 @@
 <title>盈满鑫两全保险（分红型） · 在线演算器</title>
 <script src="ai-planner.js"></script>
 <script src="html2canvas.min.js"></script>
+<script src="product-rules.js"></script>
 <style>
 :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -130,6 +131,10 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   body{padding:8px;}
   .wrap{border-radius:0;}
   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
+  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至13px */
+  html, body { overflow-x: hidden; }
+  .table-scroll { max-width: 100%; }
+  .tip { font-size: 13px; }
 }
 </style>
 </head>
@@ -390,11 +395,11 @@ function generate(){
     if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
     return true;
   });
-  // 储备期 = 交费期（盈满鑫为短期两全分红产品，储备期随交费方式变化）
-  // 3年交 → 前3年储备期，第4年起显示收益率；5年交 → 前5年储备期，第6年起显示收益率
-  const reserveYears = displayRows.filter(r => r.yr <= payTerm).length;
+  // 储备期读取统一产品规则配置（盈满鑫：payterm，储备期=交费期）
+  const RULE = window.getProductRule('yingmanxin');
+  const reserveYears = window.resolveReserveYears(RULE, payTerm);
   tbody.innerHTML = displayRows.map((r, idx) => {
-    const isReserve = r.yr <= payTerm;
+    const isReserve = r.yr <= reserveYears;
     // 储备期合并单元格：仅首行( yr=1 )输出 rowspan，后续储备期行省略该列 td
     let yieldCell;
     if(isReserve){

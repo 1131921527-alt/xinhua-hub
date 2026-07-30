@@ -10,3 +10,11 @@ nul
 files/中行资料/suitability_enlarged.png
 files/中行资料/suitability_enlarged_segments/
 files/中行资料/segments/suitability_*.png
+
+# 本地辅助目录（保留在磁盘，不进版本库，避免仓库膨胀）
+tools/
+backup/
+archive/
+
+# 测试截图（验收产物，可本地重跑 tests 重新生成，不进版本库）
+tests/**/*.png
