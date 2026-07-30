@@ -92,6 +92,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .main-table .col-rate{background:#DBEAFE;color:var(--primary);}
 .main-table .col-total{background:#DBEAFE;}
 .main-table .reserve-cell{color:#64748B;white-space:nowrap;}
+.main-table .col-expected{border-right:none;}
 
 .row-positive td{background:#DBEAFE !important;color:var(--primary) !important;}
 .row-positive .col-rate{background:#BFDBFE !important;}
@@ -244,7 +245,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
               <th rowspan="2">红利现价</th>
               <th rowspan="2">满期金</th>
               <th colspan="2">生存总利益（年末）</th>
-              <th rowspan="2">预期<br>年化单利</th>
+              <th class="col-expected" rowspan="2">预期<br>年化单利</th>
             </tr>
             <tr>
               <th class="sub">现金价值<br>保证部分</th>
@@ -403,10 +404,10 @@ function generate(){
     let yieldCell;
     if(isReserve){
       yieldCell = r.yr === 1
-        ? `<td class="col-rate col-reserve reserve-cell" rowspan="${reserveYears}">储备期</td>`
+        ? `<td class="col-rate col-reserve reserve-cell col-expected" rowspan="${reserveYears}">储备期</td>`
         : '';
     } else {
-      yieldCell = `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
+      yieldCell = `<td class="col-rate col-expected">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     }
     const rowClass = r.cvTotal > cumPrem ? 'row-positive' : '';
     return `<tr class="${rowClass}">
