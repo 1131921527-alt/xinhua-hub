@@ -89,6 +89,16 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .main-table .col-cum-div{color:var(--primary);}
 .main-table .col-num{color:#64748B;}
 .main-table .reserve-cell{color:#64748B;white-space:nowrap;}
+/* 储备期合并单元格：明确四周边框 + flex 居中（html2canvas 对 rowspan 的 vertical-align 支持差，用 span flex 兜底） */
+.main-table td.reserve-cell{
+  background:#DBEAFE;
+  border:1.5px solid var(--primary-light);
+  padding:0;
+}
+.main-table td.reserve-cell > span{
+  display:flex;align-items:center;justify-content:center;height:100%;
+  color:#64748B;font-weight:700;white-space:nowrap;
+}
 
 .row-positive td{background:#DBEAFE !important;color:var(--primary) !important;}
 .row-positive .col-rate{background:#BFDBFE !important;}
@@ -340,7 +350,7 @@ function generate(){
   displayRows.forEach((r, idx) => {
     const isReserve = window.evalReserveRule(RULE, r);
     const rateCell = isReserve
-      ? (idx === 0 ? `<td class="reserve-cell" rowspan="${reserveCount}">储备期</td>` : '')
+      ? (idx === 0 ? `<td class="reserve-cell" rowspan="${reserveCount}"><span>储备期</span></td>` : '')
       : `<td class="col-rate">${r.rate.toFixed(2) + '%'}</td>`;
     const rowClass = r.rate > 0 ? 'row-positive' : '';
     html += `<tr class="${rowClass}">

@@ -146,37 +146,6 @@
     font-size: 13px;
   }
 
-  /* 中行在线演算合集入口 banner */
-  .boc-entry-bar {
-    background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
-    position: relative;
-    z-index: 4;
-    margin-top: 0;
-  }
-  .boc-entry-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 13px 20px;
-    text-decoration: none;
-    color: #fff;
-    flex-wrap: wrap;
-    transition: background .2s;
-  }
-  .boc-entry-link:hover { background: rgba(0,0,0,.10); }
-  .boc-entry-link .boc-icon { font-size: 20px; line-height: 1; }
-  .boc-entry-link .boc-title { font-weight: 800; font-size: 15px; letter-spacing: .5px; }
-  .boc-entry-link .boc-sub { font-size: 12px; opacity: .9; }
-  .boc-entry-link .boc-arrow {
-    font-size: 13px;
-    background: rgba(255,255,255,.2);
-    padding: 3px 13px;
-    border-radius: 20px;
-    font-weight: 700;
-    margin-left: 2px;
-  }
-
   /* Search */
   .search-wrap {
     background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
@@ -919,19 +888,9 @@
   </div>
 </div>
 
-<!-- 中行在线演算合集入口 -->
-<div class="boc-entry-bar">
-  <a class="boc-entry-link" href="boc-calculators.html">
-    <span class="boc-icon">🏦</span>
-    <span class="boc-title">中行在线演算合集</span>
-    <span class="boc-sub">宏安 · 宏愿 · 盈满鑫 · 宏禧来 · 恒享 5 款产品一键测算</span>
-    <span class="boc-arrow">立即进入 →</span>
-  </a>
-</div>
-
 <!-- 快捷入口（任务8：理财经理打开后最快找到四类功能） -->
 <div class="quick-grid">
-  <a class="quick-card" href="boc-calculators.html">
+  <a class="quick-card" onclick="selectCategory('boc-calculators')">
     <div class="quick-icon">🧮</div>
     <div class="quick-body">
       <div class="quick-title">在线测算</div>

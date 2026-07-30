@@ -14,8 +14,8 @@
  * 新增产品：只需在此增加一条 PRODUCT_RULES.xxx，无需改动任何 HTML。
  */
 window.PRODUCT_RULES = {
-  // 盈满鑫：按原 Excel 计划书展示口径，储备期 = 交费期 + 1 年
-  yingmanxin: { reserveType: "paytermPlusOne", showRate: true },
+  // 盈满鑫：储备期 = 交费期（与 products.json 口径一致）；交3年→前3年储备期，第4年起显示收益率
+  yingmanxin: { reserveType: "payterm", showRate: true },
 
   // 宏御世家：前 5 年储备期，展示收益率
   hongyu:     { reserveType: "fixed", reserveYears: 5, showRate: true },

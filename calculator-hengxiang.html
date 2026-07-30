@@ -29,8 +29,6 @@
   .btn:disabled{opacity:.6;cursor:not-allowed;}
   .btn-dl{background:#1E40AF;margin-left:10px;}
   .btn-dl:hover{background:#1E3A5F;}
-  #paramBar{display:none;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
-  #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--brown);}
   .table-scroll{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:980px;}
   thead th{background:#1E3A5F;color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:17px;position:sticky;top:0;}
@@ -173,7 +171,6 @@
         <p>✅ 现金价值稳健增长，身故保障充足</p>
       </div>
     </div>
-    <div id="paramBar"></div>
     <div class="table-scroll">
       <table id="resultTable">
         <thead><tr>
@@ -240,13 +237,7 @@ async function generate(){
     const years=entry.y;
     const genderLabel=currentGender===0?'男':'女';
     const termLabel={1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
-    // 找到首次领取年龄（第一笔年金>0的年度）
-    let annStartAge='';
-    for(const row of years){ if(row[3]>0){ annStartAge=age+row[0]-1; break; } }
-    document.getElementById('paramBar').style.display='flex';
-    document.getElementById('paramBar').innerHTML=
-      `<strong style="color:#1E3A5F;font-size:16px;">${age}岁${genderLabel}士</strong><strong style="color:#1E3A5F;font-size:16px;">每年${fmt(premium)}</strong><strong style="color:#1E3A5F;font-size:16px;">${termLabel}</strong>`+
-      (annStartAge?`<span style="color:#64748B;">${annStartAge}岁开始领</span>`:'');
+    // 顶部客户参数栏已删除（V1.5），避免与计划书表格重复
 
     const body=document.getElementById('resultBody');
     body.innerHTML='';

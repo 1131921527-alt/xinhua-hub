@@ -12,6 +12,12 @@
           "type": "link",
           "description": "2026年最新版公司整体介绍 · 网页版可转发",
           "url": "company-intro.html"
+        },
+        {
+          "name": "新华公司介绍 2026 PDF",
+          "type": "pdf",
+          "description": "2026年最新版公司整体介绍 · 原PDF",
+          "url": "files/公司介绍/新华公司介绍2026.pdf"
         }
       ]
     },
@@ -30,7 +36,7 @@
     },
     {
       "id": "boc-calculators",
-      "name": "产品测算",
+      "name": "中行产品测算",
       "icon": "🏦",
       "items": [
         {
@@ -68,6 +74,30 @@
           "type": "card",
           "description": "原版一页通PDF + 产品形态速览 + 核心卖点解读 + 客户画像 + 话术 + 在线测算入口",
           "url": "intro-yingmanxin.html"
+        },
+        {
+          "name": "中行2026年在售产品清单",
+          "type": "card",
+          "description": "中国银行渠道2026年可销售的6款新华保险产品汇总表，含投保年龄、缴费规则、最低保费、保险期间及核心卖点",
+          "url": "boc-product-list-2026.html"
+        },
+        {
+          "name": "中行产品双录下单准备",
+          "type": "card",
+          "description": "中国银行渠道投保前双录资料核对清单：线上展示4项+手工单5项（含问题编号及投被保人不一致处理说明）",
+          "url": "boc-double-record-prep.html"
+        },
+        {
+          "name": "宏愿人生投保指引（中国银行版）",
+          "type": "card",
+          "description": "中国银行手机银行APP投保宏愿人生养老年金（分红型）全流程图解，含11步操作速览+28张步骤截图",
+          "url": "boc-hongyuan-guide.html"
+        },
+        {
+          "name": "出单前的适当性评估操作步骤",
+          "type": "card",
+          "description": "中国银行渠道投保前适当性评估12步箭头指引，含双录资料核对及手工单问题清单",
+          "url": "boc-suitability-assessment.html"
         }
       ]
     },
@@ -86,7 +116,7 @@
         {
           "name": "居家养老 · 3000分护理包（供应商）",
           "type": "card",
-          "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供（仅2026年6月上线版本，后续根据额度开放情况更新。）",
+          "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供",
           "url": "jujia.html",
           "subsection": "居家服务"
         },
@@ -120,8 +150,63 @@
       ]
     },
     {
+      "id": "calculators",
+      "name": "招行产品测算",
+      "icon": "🏦",
+      "items": [
+        {
+          "name": "S10 宏安世家终身寿险（分红型）在线演算",
+          "type": "calculator",
+          "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，完整利益演示，红利可选累计生息(利率可调)/交清增额",
+          "url": "calculator-hongan.html"
+        },
+        {
+          "name": "S11 宏御世家终身寿（分红型）在线演算",
+          "type": "calculator",
+          "description": "输入年龄/性别/金额 → 即时生成利益演示 → 可下载计划书图片",
+          "url": "calculator-hongyu.html"
+        },
+        {
+          "name": "S03 宏泰世家（分红型）在线演算",
+          "type": "calculator",
+          "description": "输入年龄/性别/金额 → 完整利益演示 → 可下载计划书图片",
+          "url": "calculator-hongtai.html"
+        },
+        {
+          "name": "S02 宏愿人生养老年金（分红型）在线演算",
+          "type": "calculator",
+          "description": "养老年金利益演示，完整利益演示，年金起领年龄可选55/60/65/70岁，可下载计划书图片",
+          "url": "calculator-hongyuan.html"
+        },
+        {
+          "name": "S24 华彩鎏金年金（分红型）在线演算",
+          "type": "calculator",
+          "description": "年金保险利益演示 → 可下载计划书图片（基准演示，平移近似，待补完整Excel数据）",
+          "url": "calculator-huacai.html"
+        },
+        {
+          "name": "S06 宏坤人生养老年金（分红型）在线演算",
+          "type": "calculator",
+          "description": "养老年金利益演示 → 完整利益演示 → 可下载计划书图片（支持年领/月领切换）",
+          "url": "calculator-hongkun.html"
+        },
+        {
+          "name": "G23 恒享人生年金险在线演算",
+          "type": "calculator",
+          "description": "关爱金年金利益演示 → 完整利益演示 → 可下载计划书图片",
+          "url": "calculator-hengxiang.html"
+        },
+        {
+          "name": "G24 福盛世家添翼版在线演算",
+          "type": "calculator",
+          "description": "固收型终身寿利益演示 → 完整利益演示 → 可下载计划书图片",
+          "url": "calculator-fusheng.html"
+        }
+      ]
+    },
+    {
       "id": "workflow",
-      "name": "操作流程",
+      "name": "招行产品出单流程",
       "icon": "🔄",
       "items": [
         {
@@ -137,10 +222,58 @@
           "url": "fuxing.html"
         },
         {
+          "name": "S11 宏御世家 · 出单流程图",
+          "type": "image",
+          "description": "宏御世家终身寿险（分红型）出单完整流程指引",
+          "url": "files/操作流程/宏御世家出单流程图.jpg"
+        },
+        {
+          "name": "S03 宏泰世家 · 出单流程图",
+          "type": "image",
+          "description": "宏泰世家分红型出单完整流程指引",
+          "url": "files/操作流程/宏泰世家出单流程图.jpg"
+        },
+        {
+          "name": "宏愿人生 · 出单流程图",
+          "type": "image",
+          "description": "宏愿人生养老年金（分红型）出单完整流程指引",
+          "url": "files/操作流程/宏愿人生出单流程图.jpg"
+        },
+        {
+          "name": "宏愿人生投保操作流程",
+          "type": "pdf",
+          "description": "宏愿人生投保操作流程图解",
+          "url": "files/操作流程/宏愿人生投保操作流程.pdf"
+        },
+        {
+          "name": "S24 华彩鎏金 · 出单流程图",
+          "type": "image",
+          "description": "华彩鎏金年金保险（分红型）出单完整流程指引",
+          "url": "files/操作流程/华彩鎏金出单流程图.jpg"
+        },
+        {
+          "name": "G23 恒享人生 · 出单流程图",
+          "type": "image",
+          "description": "恒享人生年金险出单完整流程指引",
+          "url": "files/操作流程/恒享人生出单流程图.jpg"
+        },
+        {
+          "name": "G24 福盛世家添翼版 · 出单流程图",
+          "type": "image",
+          "description": "福盛世家添翼版出单完整流程指引",
+          "url": "files/操作流程/福盛世家添翼版出单流程图.jpg"
+        },
+        {
           "name": "客户获取电子保单和纸质保单的方式",
           "type": "pdf",
           "description": "电子保单和纸质保单获取方式说明",
           "url": "files/操作流程/客户获取电子保单和纸质保单的方式.pdf"
+        },
+        {
+          "name": "招行手机银行投保常见问题",
+          "type": "pdf",
+          "description": "招行手机银行投保新华产品常见问题解答",
+          "url": "files/操作流程/招行手机银行投保常见问题（新华）.pdf"
         }
       ]
     },
