@@ -453,6 +453,9 @@ async function downloadImage(){
   const oldScrollOverflow = tableScroll ? tableScroll.style.overflow : '';
   const oldScrollOverflowX = tableScroll ? tableScroll.style.overflowX : '';
   const oldScrollHeight = tableScroll ? tableScroll.style.height : '';
+  const reserveCell = plan.querySelector('td.col-reserve');
+  const oldReserveColor = reserveCell ? reserveCell.style.color : '';
+  let reserveLabelBox = null;
   if(wrap){ wrap.style.width='1200px'; wrap.style.maxWidth='1200px'; }
   plan.style.width='1200px'; plan.style.minWidth='1200px';
   plan.style.overflow='visible'; plan.style.height='auto';
@@ -462,6 +465,24 @@ async function downloadImage(){
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
   try{
+    if(reserveCell){
+      const planRect = plan.getBoundingClientRect();
+      const cellRect = reserveCell.getBoundingClientRect();
+      const reserveRows = plan.querySelectorAll('#resultBody tr');
+      const firstReserveRow = reserveRows[0] ? reserveRows[0].getBoundingClientRect() : cellRect;
+      const lastReserveRow = reserveRows[reserveCell.rowSpan - 1]
+        ? reserveRows[reserveCell.rowSpan - 1].getBoundingClientRect()
+        : cellRect;
+      reserveLabelBox = {
+        left: cellRect.left - planRect.left,
+        top: firstReserveRow.top - planRect.top,
+        width: cellRect.width,
+        height: lastReserveRow.bottom - firstReserveRow.top
+      };
+      // Mobile Chromium may omit text inside a rowspan cell in html2canvas.
+      // Hide the DOM glyph and paint it onto the finished canvas below.
+      reserveCell.style.color = 'transparent';
+    }
     const captureW = 1200;
     const captureH = plan.scrollHeight;
     const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
@@ -485,6 +506,24 @@ async function downloadImage(){
       scrollY: 0,
       logging: false
     });
+    if(reserveLabelBox){
+      const ctx = canvas.getContext('2d');
+      const scaleX = canvas.width / captureW;
+      const scaleY = canvas.height / captureH;
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.fillStyle = '#1E40AF';
+      ctx.font = `700 ${14 * scaleY}px Arial, "Microsoft YaHei", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(
+        '储备期',
+        (reserveLabelBox.left + reserveLabelBox.width / 2) * scaleX,
+        (reserveLabelBox.top + reserveLabelBox.height / 2) * scaleY
+      );
+      ctx.restore();
+      reserveCell.style.color = oldReserveColor;
+    }
     if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
     plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
     plan.style.overflow=oldPlanOverflow; plan.style.height=oldPlanHeight;
@@ -517,6 +556,7 @@ async function downloadImage(){
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);
     if(typeof showToast==='function') showToast('计划书已下载');
   }finally{
+    if(reserveCell) reserveCell.style.color = oldReserveColor;
     document.body.classList.remove('capturing');
     window.scrollTo(0, oldScrollTop);
   }
