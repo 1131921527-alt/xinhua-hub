@@ -17,11 +17,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .crumb{font-size:13px;color:var(--text-light)}
 .crumb b{color:var(--primary)}
 
-/* 目录导航 */
-.toc{position:sticky;top:52px;z-index:20;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin:16px 0;padding:10px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.toc a{flex:0 0 auto;text-decoration:none;color:var(--text-light);font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;background:var(--bg);white-space:nowrap}
-.toc a:hover{background:var(--primary-light);color:var(--primary)}
-.toc a.active{background:var(--primary);color:#fff}
+/* 目录导航（折叠菜单） */
+.toc{position:sticky;top:52px;z-index:20;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin:16px 0;padding:10px}
+.toc-toggle{display:none;width:100%;justify-content:space-between;align-items:center;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:10px 14px;font-size:14px;font-weight:600;cursor:pointer}
+.toc-toggle .tchev{transition:transform .2s}
+.toc-panel{display:flex;flex-direction:column;gap:6px}
+.toc-panel a{text-decoration:none;color:var(--text-light);font-size:13.5px;font-weight:600;padding:9px 12px;border-radius:8px;background:var(--bg);border:1px solid var(--border)}
+.toc-panel a:hover{background:var(--primary-light);color:var(--primary)}
+.toc-panel a.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
 .header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:44px 20px;border-radius:12px;margin:8px 0 28px;text-align:center}
 .header h1{font-size:26px;font-weight:700;margin-bottom:12px;line-height:1.4}
@@ -42,10 +45,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 
 /* 数据大卡 */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:18px 0}
-.stat-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center}
+.stat-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;min-width:0}
 .stat-item .value{font-size:30px;font-weight:700;color:var(--primary);line-height:1.1}
 .stat-item .value.sm{font-size:22px}
 .stat-item .label{font-size:12.5px;color:var(--text-light);margin-top:6px}
+/* 高亮核心数据（仅突出三项） */
+.stats-hero{grid-template-columns:repeat(3,1fr);margin:16px 0}
+.stat-item.hero{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-color:#BFDBFE}
+.stat-item.hero .value{font-size:40px}
+.stat-item.hero .label{color:var(--primary-dark);font-weight:600}
+/* 详细数据（弱化视觉重量） */
+.detail-module{background:var(--card-bg);border:1px dashed var(--border);border-radius:10px;padding:14px 18px;margin:16px 0}
+.detail-module h3{font-size:15px;margin:0 0 10px;color:var(--text-light)}
+.detail-module ul{margin-left:18px}
+.detail-module li{font-size:13.5px;color:var(--text-light);margin-bottom:6px}
+.detail-module b{color:var(--text)}
 
 /* 产品案例卡 */
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:16px 0}
@@ -59,6 +73,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .product .p-body{padding:6px 18px 18px}
 .product .p-body h4{font-size:14px;color:var(--primary);margin:14px 0 4px}
 .product .p-body p{font-size:13.5px;margin:0 0 6px;color:var(--text-light)}
+/* 100% vs 118% 差异案例 */
+.p-diff{background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin:6px 0 0}
+.p-diff h4{margin-top:0}
+.diff-bars{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.diff-bar{display:flex;align-items:center;gap:10px}
+.diff-bar .dl{width:44px;font-size:12px;font-weight:700;color:var(--text-light);flex:0 0 auto}
+.diff-bar .track{flex:1;height:16px;background:#E2E8F0;border-radius:8px;overflow:hidden}
+.diff-bar .track i{display:block;height:100%;border-radius:8px}
+.diff-bar.base .track i{background:#CBD5E1;width:85%}
+.diff-bar.hi .track i{background:var(--primary);width:100%}
+.diff-bar .dv{width:80px;font-size:11.5px;color:var(--text-light);text-align:right;flex:0 0 auto}
 
 /* FAQ */
 .faq details{border:1px solid var(--border);border-radius:10px;margin:12px 0;overflow:hidden;background:var(--card-bg)}
@@ -89,9 +114,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .disclaimer{background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;padding:18px;font-size:13px;color:#92400E;margin-top:28px}
 .disclaimer ul{margin:10px 0 0 18px}
 .totop{display:block;text-align:center;margin:24px 0 8px;color:var(--primary);text-decoration:none;font-size:13px;font-weight:600}
+@media(max-width:768px){
+.toc-toggle{display:flex}
+.toc-panel{display:none;margin-top:8px}
+.toc-panel.open{display:flex}
+}
 @media(max-width:640px){
 .header h1{font-size:21px}.header{padding:32px 16px}.card{padding:18px}
 .stats-grid{grid-template-columns:repeat(2,1fr)}
+.stats-hero{grid-template-columns:repeat(3,1fr)}
+.stat-item.hero .value{font-size:30px}
 .data-table{font-size:11px}.data-table th,.data-table td{padding:6px 7px}
 .compare-row{flex-direction:column}
 .toc{top:52px}
@@ -106,15 +138,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 
 <div class="container">
 
-<!-- 目录导航 -->
+<!-- 目录导航（折叠菜单） -->
 <nav class="toc" id="toc">
-  <a href="#p1">① 什么是红利实现率</a>
-  <a href="#p2">② 为何关注分红险</a>
-  <a href="#p3">③ 2025年度成绩单</a>
-  <a href="#p4">④ 产品案例</a>
-  <a href="#p5">⑤ 118%意味着什么</a>
-  <a href="#p6">⑥ 客户FAQ</a>
-  <a href="#p7">⑦ 新华投资实力</a>
+  <button class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="tocPanel">📑 章节目录 <span class="tchev">▼</span></button>
+  <div class="toc-panel" id="tocPanel">
+    <a href="#p1">① 什么是红利实现率</a>
+    <a href="#p2">② 为何关注分红险</a>
+    <a href="#p3">③ 2025年度成绩单</a>
+    <a href="#p4">④ 产品案例</a>
+    <a href="#p5">⑤ 118%意味着什么</a>
+    <a href="#p6">⑥ 客户FAQ</a>
+    <a href="#p7">⑦ 新华经营·投资·风控</a>
+  </div>
 </nav>
 
 <!-- Header -->
@@ -191,15 +226,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 <!-- Part 3 -->
 <section class="card" id="p3">
   <h2><span>🏆</span> 三、新华2025年度红利成绩单</h2>
-  <p>数据来源：新华保险官网披露（2025年度）。以下为全系分红产品的整体兑现表现：</p>
-  <div class="stats-grid">
-    <div class="stat-item"><div class="value sm">97款</div><div class="label">分红产品<br>全系覆盖</div></div>
-    <div class="stat-item"><div class="value">128%</div><div class="label">平均红利实现率</div></div>
-    <div class="stat-item"><div class="value sm">80款</div><div class="label">实现率≥100%<br>（占比 82%）</div></div>
-    <div class="stat-item"><div class="value">233%</div><div class="label">全系最高<br>实现率</div></div>
-    <div class="stat-item"><div class="value sm">56款+</div><div class="label">连续多年<br>超100%达成</div></div>
+  <p>数据来源：新华保险官网披露（2025年度）。以下为全系分红产品的整体兑现表现，三项核心数据最为关键：</p>
+  <div class="stats-grid stats-hero">
+    <div class="stat-item hero"><div class="value">128%</div><div class="label">平均红利实现率</div></div>
+    <div class="stat-item hero"><div class="value">82%</div><div class="label">100%以上产品占比</div></div>
+    <div class="stat-item hero"><div class="value">233%</div><div class="label">全系最高实现率</div></div>
   </div>
-  <div class="success-box">✅ <strong>一句话结论：</strong>97款产品平均兑现128%、80款超100%（占比82%）、最高达233%，且56款以上连续多年超100%达成——新华用"天花板级"的兑现能力，交出了三十而立的答卷。</div>
+  <div class="detail-module">
+    <h3>详细数据</h3>
+    <ul>
+      <li><strong>97款</strong> 分红产品全系覆盖，实现率披露范围广</li>
+      <li><strong>80款</strong> 产品实现率 ≥ 100%，即上述 82% 占比的来源</li>
+      <li><strong>56款+</strong> 连续多年超 100% 达成，长期稳定性突出</li>
+    </ul>
+  </div>
+  <div class="success-box">✅ <strong>一句话结论：</strong>97款产品平均兑现128%、80款超100%（占比82%）、最高达233%，且56款以上连续多年超100%达成——新华以稳健且持续的兑现表现，交出了扎实的答卷。</div>
 </section>
 
 <!-- Part 4 -->
@@ -211,63 +252,112 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
     <details class="product">
       <summary><span class="p-name">宏腾世家终身寿险（分红型）</span><span class="p-badge">118%</span><span class="chev">▼</span></summary>
       <div class="p-body">
-        <h4>产品简介</h4><p>终身寿险，提供身故/全残保障与终身现金价值增长，红利可累积生息或交清增额。</p>
-        <h4>实现率意义</h4><p>118%意味着实际年度红利高于投保时计划书演示水平，兑现超预期。</p>
-        <h4>对客户影响</h4><p>长期持有可获得超预期红利，实际收益提升（参考下文宏御世家案例，30年超额红利约34万元）。</p>
+        <h4>客户价值解释</h4>
+        <p>终身寿险，提供身故/全残保障与终身现金价值增长。118%实现率下，实际红利持续高于投保时演示水平，长期持有可获得超预期红利，提升"保证+浮动"的综合收益。</p>
+        <h4>100% vs 118% 差异案例</h4>
+        <div class="p-diff">
+          <div class="diff-bars">
+            <div class="diff-bar base"><span class="dl">100%</span><div class="track"><i></i></div><span class="dv">基准</span></div>
+            <div class="diff-bar hi"><span class="dl">118%</span><div class="track"><i></i></div><span class="dv">+18% 超额</span></div>
+          </div>
+          <p>同等演示红利下，118%实现率每年比100%多派发约 <strong>18%</strong> 的浮动红利；长期复利下差距进一步放大。以同系列宏御世家测算，30年累计超额红利约 34 万元（见第五部分）。</p>
+        </div>
       </div>
     </details>
 
     <details class="product">
       <summary><span class="p-name">宏禧来两全保险（分红型）</span><span class="p-badge">118%</span><span class="chev">▼</span></summary>
       <div class="p-body">
-        <h4>产品简介</h4><p>两全保险，满期给付+身故保障，适合6/8年期中短期现金流规划。</p>
-        <h4>实现率意义</h4><p>118%说明期满/年度红利实际派发高于演示，短周期也能兑现超额。</p>
-        <h4>对客户影响</h4><p>中短期资金在保本基础上，额外获得超额红利，提升期满总利益。</p>
+        <h4>客户价值解释</h4>
+        <p>两全保险，满期给付+身故保障，适合6/8年期中短期现金流规划。118%说明期满/年度红利实际派发高于演示，短周期也能兑现超额，在保本基础上额外提升期满总利益。</p>
+        <h4>100% vs 118% 差异案例</h4>
+        <div class="p-diff">
+          <div class="diff-bars">
+            <div class="diff-bar base"><span class="dl">100%</span><div class="track"><i></i></div><span class="dv">基准</span></div>
+            <div class="diff-bar hi"><span class="dl">118%</span><div class="track"><i></i></div><span class="dv">+18% 超额</span></div>
+          </div>
+          <p>同等演示红利下，118%实现率每年比100%多派发约 <strong>18%</strong> 的浮动红利；中短期产品虽周期短，期满时额外红利已使总利益高于演示。</p>
+        </div>
       </div>
     </details>
 
     <details class="product">
       <summary><span class="p-name">宏御世家终身寿险（分红型）</span><span class="p-badge">118%</span><span class="chev">▼</span></summary>
       <div class="p-body">
-        <h4>产品简介</h4><p>增额终身寿险，保额随时间复利增长，是传承与长期现金流的工具。</p>
-        <h4>实现率意义</h4><p>118%实现率下，保额/红利复利底座更扎实，长期放大效应明显。</p>
-        <h4>对客户影响</h4><p>100万3年交、40岁女性案例：30年超额红利约34万、50年约92万、60年约141万（见第五部分）。</p>
+        <h4>客户价值解释</h4>
+        <p>增额终身寿险，保额随时间复利增长，是传承与长期现金流的工具。118%使保额/红利复利底座更扎实，长期放大效应明显。</p>
+        <h4>100% vs 118% 差异案例</h4>
+        <div class="p-diff">
+          <div class="diff-bars">
+            <div class="diff-bar base"><span class="dl">100%</span><div class="track"><i></i></div><span class="dv">基准</span></div>
+            <div class="diff-bar hi"><span class="dl">118%</span><div class="track"><i></i></div><span class="dv">+18% 超额</span></div>
+          </div>
+          <p>以本产品 100万·3年交·40岁女性案例：118%比100%每年多派发约 <strong>18%</strong> 浮动红利，30年累计超额红利约 <strong>34万</strong>、50年约 <strong>92万</strong>、60年约 <strong>141万</strong>（见第五部分真实测算）。</p>
+        </div>
       </div>
     </details>
 
     <details class="product">
       <summary><span class="p-name">宏安世家终身寿险（分红型）</span><span class="p-badge">118%</span><span class="chev">▼</span></summary>
       <div class="p-body">
-        <h4>产品简介</h4><p>终身寿险，保障+长期增值，兼顾身故责任与现金价值积累。</p>
-        <h4>实现率意义</h4><p>118%代表实际红利持续高于演示，长期价值底座稳健。</p>
-        <h4>对客户影响</h4><p>持有越久，超额红利越可观，提升保证+浮动的综合收益。</p>
+        <h4>客户价值解释</h4>
+        <p>终身寿险，保障+长期增值，兼顾身故责任与现金价值积累。118%代表实际红利持续高于演示，持有越久超额红利越可观，提升保证+浮动的综合收益。</p>
+        <h4>100% vs 118% 差异案例</h4>
+        <div class="p-diff">
+          <div class="diff-bars">
+            <div class="diff-bar base"><span class="dl">100%</span><div class="track"><i></i></div><span class="dv">基准</span></div>
+            <div class="diff-bar hi"><span class="dl">118%</span><div class="track"><i></i></div><span class="dv">+18% 超额</span></div>
+          </div>
+          <p>同等演示红利下，118%实现率每年比100%多派发约 <strong>18%</strong> 的浮动红利；长期持有下，这部分超额红利随复利持续放大。</p>
+        </div>
       </div>
     </details>
 
     <details class="product">
       <summary><span class="p-name">宏坤人生养老年金（分红型）</span><span class="p-badge">118%</span><span class="chev">▼</span></summary>
       <div class="p-body">
-        <h4>产品简介</h4><p>养老年金，退休后按约定定期领取养老金，补充养老现金流。</p>
-        <h4>实现率意义</h4><p>118%使每年领取的红利部分高于演示，养老现金流更厚。</p>
-        <h4>对客户影响</h4><p>退休后除固定年金外，还能拿到超额红利，提升晚年品质。</p>
+        <h4>客户价值解释</h4>
+        <p>养老年金，退休后按约定定期领取养老金，补充养老现金流。118%使每年领取的红利部分高于演示，养老现金流更厚，晚年除固定年金外还能拿到超额红利。</p>
+        <h4>100% vs 118% 差异案例</h4>
+        <div class="p-diff">
+          <div class="diff-bars">
+            <div class="diff-bar base"><span class="dl">100%</span><div class="track"><i></i></div><span class="dv">基准</span></div>
+            <div class="diff-bar hi"><span class="dl">118%</span><div class="track"><i></i></div><span class="dv">+18% 超额</span></div>
+          </div>
+          <p>同等演示红利下，118%实现率每年比100%多派发约 <strong>18%</strong> 的浮动红利；退休后除固定年金外，每年额外红利持续增厚养老品质。</p>
+        </div>
       </div>
     </details>
 
     <details class="product">
       <summary><span class="p-name">宏瑞人生养老年金（分红型）</span><span class="p-badge">118%</span><span class="chev">▼</span></summary>
       <div class="p-body">
-        <h4>产品简介</h4><p>养老年金，提供稳定的养老领取，适合长期养老规划。</p>
-        <h4>实现率意义</h4><p>118%兑现使养老账户红利部分超额，领取更可观。</p>
-        <h4>对客户影响</h4><p>叠加保证领取与超额红利，养老替代率更高。</p>
+        <h4>客户价值解释</h4>
+        <p>养老年金，提供稳定的养老领取，适合长期养老规划。118%兑现使养老账户红利部分超额，叠加保证领取与超额红利，养老替代率更高。</p>
+        <h4>100% vs 118% 差异案例</h4>
+        <div class="p-diff">
+          <div class="diff-bars">
+            <div class="diff-bar base"><span class="dl">100%</span><div class="track"><i></i></div><span class="dv">基准</span></div>
+            <div class="diff-bar hi"><span class="dl">118%</span><div class="track"><i></i></div><span class="dv">+18% 超额</span></div>
+          </div>
+          <p>同等演示红利下，118%实现率每年比100%多派发约 <strong>18%</strong> 的浮动红利；保证领取叠加大额超额红利，显著提升退休后现金流。</p>
+        </div>
       </div>
     </details>
 
     <details class="product">
       <summary><span class="p-name">宏愿人生养老年金（A款）</span><span class="p-badge">118%</span><span class="chev">▼</span></summary>
       <div class="p-body">
-        <h4>产品简介</h4><p>养老年金（分红型 A款），年金起领年龄可选，养老规划灵活。</p>
-        <h4>实现率意义</h4><p>118%实现率下，年金+红利组合的实际到手高于演示。</p>
-        <h4>对客户影响</h4><p>灵活领取+超额红利，兼顾养老确定性与成长性。</p>
+        <h4>客户价值解释</h4>
+        <p>养老年金（分红型 A款），年金起领年龄可选，养老规划灵活。118%实现率下，年金+红利组合的实际到手高于演示，灵活领取+超额红利兼顾确定性与成长性。</p>
+        <h4>100% vs 118% 差异案例</h4>
+        <div class="p-diff">
+          <div class="diff-bars">
+            <div class="diff-bar base"><span class="dl">100%</span><div class="track"><i></i></div><span class="dv">基准</span></div>
+            <div class="diff-bar hi"><span class="dl">118%</span><div class="track"><i></i></div><span class="dv">+18% 超额</span></div>
+          </div>
+          <p>同等演示红利下，118%实现率每年比100%多派发约 <strong>18%</strong> 的浮动红利；灵活起领叠加超额红利，让养老规划既稳又具成长性。</p>
+        </div>
       </div>
     </details>
 
@@ -350,32 +440,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 
 <!-- Part 7 -->
 <section class="card" id="p7">
-  <h2><span>🏦</span> 七、新华投资实力：兑现的底气从哪来</h2>
-  <p>红利实现率能持续超100%，根植于新华保险底层坚实的投资根基——作为资产破万亿的头部险企，拥有稀缺的"大体量、长周期"资金优势。</p>
+  <h2><span>🏦</span> 七、新华实力：经营 · 投资 · 风控</h2>
+  <p>红利实现率背后，是新华保险在经营规模、投资运作与风险管控三方面长期积累的体系化能力。以下数据均来自公司公开披露（2025年度），用于说明整体经营与投资基础。</p>
+
+  <h3>🏢 经营实力</h3>
   <div class="stats-grid">
     <div class="stat-item"><div class="value sm">1.9万亿</div><div class="label">资产总规模</div></div>
     <div class="stat-item"><div class="value sm">1.84万亿</div><div class="label">投资资产规模</div></div>
+    <div class="stat-item"><div class="value sm">1958.71亿</div><div class="label">原保险保费收入<br>（同比 +14.9%）</div></div>
+    <div class="stat-item"><div class="value sm">2878亿</div><div class="label">内含价值<br>（同比 +11.4%）</div></div>
+    <div class="stat-item"><div class="value sm">98.42亿</div><div class="label">新业务价值<br>（同比 +57.4%）</div></div>
+    <div class="stat-item"><div class="value sm">363亿</div><div class="label">归母净利润<br>（同比 +38.3%）</div></div>
+  </div>
+
+  <h3>📈 投资能力</h3>
+  <div class="stats-grid">
     <div class="stat-item"><div class="value">6.6%</div><div class="label">总投资收益率</div></div>
+    <div class="stat-item"><div class="value sm">6.9%</div><div class="label">综合投资收益率</div></div>
+    <div class="stat-item"><div class="value sm">1043亿</div><div class="label">总投资收益<br>（同比 +30.9%）</div></div>
+    <div class="stat-item"><div class="value sm">34.7%</div><div class="label">净资产收益率 ROE<br>（+8.8pct）</div></div>
+    <div class="stat-item"><div class="value sm">2.8%</div><div class="label">净投资收益率</div></div>
+  </div>
+
+  <h3>🛡️ 风险抵御能力</h3>
+  <div class="stats-grid">
     <div class="stat-item"><div class="value sm">135.11%</div><div class="label">核心偿付能力<br>充足率</div></div>
     <div class="stat-item"><div class="value sm">210.47%</div><div class="label">综合偿付能力<br>充足率</div></div>
   </div>
-  <div class="note-box">📌 监管要求对照：核心偿付能力充足率不低于 <strong>50%</strong>、综合偿付能力充足率不低于 <strong>100%</strong>。新华两项指标分别达 135.11% 与 210.47%，远超监管红线，财务安全边际稳固。</div>
+  <div class="note-box">📌 监管要求对照：核心偿付能力充足率不低于 <strong>50%</strong>、综合偿付能力充足率不低于 <strong>100%</strong>。新华两项指标分别达 135.11% 与 210.47%，安全边际充足。</div>
 
-  <h3>经营与投资表现（2025年度，多项创历史新高）</h3>
-  <div class="table-scroll">
-  <table class="data-table">
-    <tr><th>指标</th><th>数值</th><th>同比</th></tr>
-    <tr><td>原保险保费收入</td><td class="num">1958.71亿</td><td>+14.9%</td></tr>
-    <tr><td>总投资收益</td><td class="num">1043亿</td><td>+30.9%</td></tr>
-    <tr><td>净投资收益率</td><td class="num">2.8%</td><td>稳中求进</td></tr>
-    <tr><td>综合投资收益率</td><td class="num">6.9%</td><td>老七家同口径前列</td></tr>
-    <tr><td>净资产收益率(ROE)</td><td class="num">34.7%</td><td>+8.8pct</td></tr>
-    <tr><td>归母净利润</td><td class="num">363亿</td><td>+38.3%</td></tr>
-    <tr><td>内含价值</td><td class="num">2878亿</td><td>+11.4%</td></tr>
-    <tr><td>新业务价值</td><td class="num">98.42亿</td><td>+57.4%</td></tr>
-  </table>
-  </div>
-  <p style="font-size:12.5px;color:var(--text-light)">注：以上经营与投资数据引自培训资料（2025年度），部分指标精确值以公司正式财报/披露为准。</p>
+  <p style="font-size:12.5px;color:var(--text-light)">注：以上经营与投资数据引自公司公开披露（2025年度），具体以正式财报/公告为准；本页仅作能力展示，不构成任何收益承诺或投资建议。</p>
 </section>
 
 <!-- 来源与提示 -->
@@ -394,9 +488,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 </div>
 
 <script>
-// TOC 高亮当前章节
+// TOC 折叠菜单 + 高亮当前章节
 (function(){
-  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var toggle = document.getElementById('tocToggle');
+  var panel = document.getElementById('tocPanel');
+  if(toggle){
+    toggle.addEventListener('click', function(){
+      var open = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.querySelector('.tchev').style.transform = open ? 'rotate(180deg)' : '';
+    });
+    panel.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        if(window.innerWidth <= 768){ panel.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); toggle.querySelector('.tchev').style.transform = ''; }
+      });
+    });
+  }
+  var links = Array.prototype.slice.call(document.querySelectorAll('#tocPanel a'));
   var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
   function onScroll(){
     var pos = window.scrollY + 140;
