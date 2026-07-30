@@ -98,8 +98,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .row-positive .col-total{background:#BFDBFE !important;}
 
 /* 储备期合并单元格：蓝色边框突出 + 垂直居中 */
-.main-table td.col-reserve{border:2px solid var(--primary);vertical-align:middle;text-align:center;}
-.main-table td.col-reserve .reserve-cell{display:flex;align-items:center;justify-content:center;height:100%;min-height:80px;color:var(--primary);font-weight:700;font-size:14px;letter-spacing:2px;}
+.main-table td.col-reserve{border:2px solid var(--primary);vertical-align:middle;text-align:center;color:var(--primary);font-weight:700;font-size:14px;letter-spacing:2px;}
 
 /* 收益率口径验证说明 */
 .yield-note{margin-top:12px;padding:11px 13px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:12.5px;color:#334155;line-height:1.7;}
@@ -404,7 +403,7 @@ function generate(){
     let yieldCell;
     if(isReserve){
       yieldCell = r.yr === 1
-        ? `<td class="col-rate col-reserve" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>`
+        ? `<td class="col-rate col-reserve reserve-cell" rowspan="${reserveYears}">储备期</td>`
         : '';
     } else {
       yieldCell = `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
