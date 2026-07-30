@@ -29,7 +29,7 @@
       ]
     },
     {
-      "id": "boc-calculators",
+      "id": "product-calculators",
       "name": "产品测算",
       "icon": "🏦",
       "items": [
@@ -93,7 +93,7 @@
         {
           "name": "润华松鹤颐养中心 - 介绍",
           "type": "pdf",
-          "description": "招行全新重点合作养老项目 | 深圳福田下梅林核心区位 | 医养配套完善 | 合作保司总保费满100万锁定入住资格",
+          "description": "重点合作养老项目 | 深圳福田下梅林核心区位 | 医养配套完善 | 合作保司总保费满100万锁定入住资格",
           "url": "files/养老社区/润华松鹤一页通.pdf",
           "subsection": "养老社区"
         },
