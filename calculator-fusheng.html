@@ -451,11 +451,9 @@ function _legacyDownloadImage(){
   if(reserveRows.length>0 && reserveCellX>0){
     const y0=tblY+headerH;
     const blockH=reserveRows.length*rowH;
-    ctx.fillStyle='#F1F5F9';
+    ctx.fillStyle='#DBEAFE';
     ctx.fillRect(reserveColXStart, y0, colWidths[6], blockH);
-    ctx.strokeStyle='#CBD5E1'; ctx.lineWidth=1;
-    ctx.strokeRect(reserveColXStart+0.5, y0+0.5, colWidths[6]-1, blockH-1);
-    ctx.fillStyle='#94A3B8'; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.fillStyle='#64748B'; ctx.font='bold 17px "PingFang SC","Microsoft YaHei",sans-serif';
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillText('储备期', reserveCellX, y0+blockH/2);
   }
