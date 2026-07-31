@@ -28,6 +28,9 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .rate-btns{display:flex;gap:8px;}
 .rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#64748B;}
 .rate-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.bonus-btns{display:flex;gap:8px;}
+.bonus-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#64748B;}
+.bonus-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
 .tip{font-size:12px;color:#64748B;margin-top:10px;}
 .dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
@@ -180,6 +183,13 @@ body.capturing .table-scroll{overflow-x:visible !important;}
         </div>
       </div>
       <div class="field">
+        <label>红利领取方式</label>
+        <div class="bonus-btns">
+          <div class="bonus-btn active" data-mode="add" onclick="selectBonusMode(this)">交清增额</div>
+          <div class="bonus-btn" data-mode="cum" onclick="selectBonusMode(this)">累计生息</div>
+        </div>
+      </div>
+      <div class="field">
         <label>&nbsp;</label>
         <button class="btn" onclick="generate()">生成利益演示</button>
       </div>
@@ -223,12 +233,12 @@ body.capturing .table-scroll{overflow-x:visible !important;}
           </tr>
           <tr>
             <td>VIP</td><td id="infoGender">女</td><td id="infoAge">40周岁</td><td id="infoTerm">3年交</td>
-            <td id="infoPremium">100,000</td><td id="infoSa">315,500</td><td id="infoPeriod">6年</td><td>累积生息</td>
+            <td id="infoPremium">100,000</td><td id="infoSa">315,500</td><td id="infoPeriod">6年</td><td id="infoBonusMode">交清增额</td>
           </tr>
         </table>
         <div class="side-stats">
           <div class="stat-box"><div class="stat-label">演示分红实现率</div><div class="stat-val">100%</div></div>
-          <div class="stat-box"><div class="stat-label">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
+          <div class="stat-box"><div class="stat-label" id="statRateLabel">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
         </div>
       </div>
 
@@ -241,7 +251,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
               <th rowspan="2">当年保费<br>(年初)</th>
               <th rowspan="2">保证身故<br>保险金</th>
               <th rowspan="2">预期身故<br>保险金</th>
-              <th rowspan="2">红利现价</th>
+              <th rowspan="2" id="thBonus">红利现价</th>
               <th rowspan="2">满期金</th>
               <th colspan="2">生存总利益（年末）</th>
               <th class="col-expected" rowspan="2">预期<br>年化单利</th>
@@ -269,6 +279,8 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 let currentGender = 1;
 let currentRate = 0.025;
 let DATA = null;
+let ADDATA = null;
+let currentBonusMode = 'add';   // 'add'=交清增额(默认) / 'cum'=累计生息
 let viewMode = '60';
 
 const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
@@ -299,6 +311,12 @@ function selectRate(el){
   currentRate = parseFloat(el.dataset.rate);
   if(DATA) generate();
 }
+function selectBonusMode(el){
+  document.querySelectorAll('.bonus-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  currentBonusMode = el.dataset.mode;
+  if(DATA) generate();
+}
 function fmt(n){ return Math.round(n).toLocaleString('zh-CN'); }
 
 function updatePeriodOptions(){
@@ -319,6 +337,10 @@ function updateFormText(){
 async function loadData(){
   const res = await fetch('data_yingmanxin.json');
   DATA = await res.json();
+  try {
+    const res2 = await fetch('data_yingmanxin_addcv.json');
+    ADDATA = await res2.json();
+  } catch(e) { ADDATA = null; }
   generate();
 }
 
@@ -368,10 +390,19 @@ function generate(){
       cumDiv = cumDiv * (1 + currentRate) + annualDiv;
     }
 
-    const cvTotal = cv + cumDiv;
+    // 红利领取方式：交清增额用官方测算红利现价(ADDATA)，累计生息用累计复利(cumDiv)
+    let hongliVal;
+    if(currentBonusMode === 'add'){
+      const addRec = ADDATA ? ADDATA[key] : null;
+      hongliVal = (addRec != null ? addRec : 0) * scale;
+    } else {
+      hongliVal = cumDiv;
+    }
+
+    const cvTotal = cv + hongliVal;
     const ratio = deathRatio(ageBegin);
     const deathGuar = Math.max(cumPrem * ratio, cv);
-    const deathExp = deathGuar + cumDiv;
+    const deathExp = deathGuar + hongliVal;
 
     let yieldVal = null;
     if(yr > 1 && cvTotal > cumPrem){
@@ -383,7 +414,7 @@ function generate(){
       basicSa = maturity;
     }
 
-    rows.push({ yr, ageEnd, yearPrem, deathGuar, deathExp, cumDiv, maturity, cv, cvTotal, yieldVal });
+    rows.push({ yr, ageEnd, yearPrem, deathGuar, deathExp, cumDiv, hongliVal, maturity, cv, cvTotal, yieldVal });
   }
 
   const tbody = document.getElementById('resultBody');
@@ -415,7 +446,7 @@ function generate(){
       <td>${r.yearPrem > 0 ? fmt(r.yearPrem) : '-'}</td>
       <td>${fmt(r.deathGuar)}</td>
       <td>${fmt(r.deathExp)}</td>
-      <td>${fmt(r.cumDiv)}</td>
+      <td>${fmt(r.hongliVal)}</td>
       <td>${r.maturity > 0 ? fmt(r.maturity) : '-'}</td>
       <td>${fmt(r.cv)}</td>
       <td class="col-total">${fmt(r.cvTotal)}</td>
@@ -436,7 +467,21 @@ function generate(){
   if (caseInfo) caseInfo.textContent =
     `VIP${genderStr}，今年${age}周岁，${payTermLabel}、年交${fmt(premium)}元，购买盈满鑫两全保险（分红型），保险期间${period}年`;
 
-  document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';
+  // 红利领取方式联动：信息表 / 表头 / 统计标签
+  const bonusLabel = currentBonusMode === 'add' ? '交清增额' : '累计生息';
+  const infoBm = document.getElementById('infoBonusMode');
+  if (infoBm) infoBm.textContent = bonusLabel;
+  const thB = document.getElementById('thBonus');
+  if (thB) thB.textContent = currentBonusMode === 'add' ? '红利现价(交清增额)' : '红利现价(累计生息)';
+  const stL = document.getElementById('statRateLabel');
+  const stR = document.getElementById('statRate');
+  if (currentBonusMode === 'add') {
+    if (stL) stL.textContent = '红利领取方式';
+    if (stR) stR.textContent = '交清增额';
+  } else {
+    if (stL) stL.textContent = '演示累积生息利率';
+    if (stR) stR.textContent = (currentRate * 100).toFixed(2) + '%';
+  }
 }
 
 async function downloadImage(){
