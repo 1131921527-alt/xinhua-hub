@@ -163,8 +163,8 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-dep .exp-foot-label{text-align:right;font-weight:700;background:var(--primary-bg);color:var(--primary);}
 .exp-dep .exp-foot-val{font-weight:800;color:var(--primary);}
 .exp-combo{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;box-sizing:border-box;}
-.exp-combo td{border:1px solid var(--primary);padding:10px 14px;box-sizing:border-box;}
-.exp-combo .cl{width:62%;background:var(--primary-bg);color:var(--primary);font-weight:700;}
+.exp-combo td{border:1px solid var(--primary);padding:6px 10px;box-sizing:border-box;width:25%;}
+.exp-combo .cl{background:var(--primary-bg);color:var(--primary);font-weight:700;}
 .exp-combo .cv{text-align:right;font-weight:700;color:#1E293B;}
 .exp-combo .hl{background:#DBEAFE;}
 .exp-combo .hl .cv{color:var(--primary);font-weight:800;font-size:17px;}
@@ -623,9 +623,7 @@ function buildExport(rows, dep, p, reserveYears){
     const isReserve = r.yr <= reserveYears;
     let yieldCell;
     if(isReserve){
-      yieldCell = r.yr === 1
-        ? `<td class="exp-reserve" rowspan="${reserveYears}">储备期</td>`
-        : '';
+      yieldCell = `<td class="exp-reserve">储备期</td>`;
     } else {
       yieldCell = `<td>${r.yieldVal === null ? '－' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     }
@@ -717,10 +715,14 @@ function buildExport(rows, dep, p, reserveYears){
     <div class="exp-box">
       <div class="exp-h">保险方案与定存组合计划结果</div>
       <table class="exp-combo">
-        <tr><td class="cl">保险满期所得（生存总利益）</td><td class="cv">${fmt(dep.maturityBenefit)}</td></tr>
-        <tr><td class="cl">定存收益合计</td><td class="cv">${fmt(dep.depositTotal)}</td></tr>
-        <tr class="hl"><td class="cl">组合计划实际所得</td><td class="cv">${fmt(dep.comboTotal)}</td></tr>
-        <tr class="hl"><td class="cl">组合预期年化单利</td><td class="cv">${fmtPct(dep.comboAnnualized)}</td></tr>
+        <tr>
+          <td class="cl">保险满期所得</td><td class="cv">${fmt(dep.maturityBenefit)}</td>
+          <td class="cl">定存收益合计</td><td class="cv">${fmt(dep.depositTotal)}</td>
+        </tr>
+        <tr class="hl">
+          <td class="cl">组合计划实际所得</td><td class="cv">${fmt(dep.comboTotal)}</td>
+          <td class="cl">组合预期年化单利</td><td class="cv">${fmtPct(dep.comboAnnualized)}</td>
+        </tr>
       </table>
     </div>
 
