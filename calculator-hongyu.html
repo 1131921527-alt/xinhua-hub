@@ -86,17 +86,22 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 .plan-intro p{font-size:12.5px;line-height:1.65;color:#1E293B;margin:0 0 4px;}
 #paramBar{margin-bottom:12px;}
 body.capturing .no-export{display:none !important;}
-body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
-body.capturing .plan{padding:28px 32px 4px !important;}
-body.capturing .plan-title{margin-top:0 !important;font-size:36px !important;}
-body.capturing .plan-intro h4{font-size:21px !important;}
-body.capturing .plan-intro p{font-size:18px !important;line-height:1.8 !important;}
-body.capturing #paramBar{font-size:20px !important;}
-body.capturing #paramBar strong{font-size:21px !important;}
-body.capturing #paramBar span{font-size:18px !important;}
-body.capturing table{min-width:100% !important;font-size:19px !important;}
-body.capturing thead th{position:static !important;font-size:22px !important;padding:11px 8px !important;}
-body.capturing tbody td{font-size:20px !important;padding:11px 8px !important;}
+body.capturing .exp-foot-bar{display:block !important;box-sizing:border-box;margin:18px 0 0;padding:14px 16px;font-size:18px !important;color:#64748B;border-top:2px solid #E2E8F0;text-align:center;letter-spacing:.5px;}
+.exp-foot-bar{display:none;}
+
+body.capturing .wrap{max-width:800px !important;width:800px !important;}
+body.capturing .plan{width:800px !important;padding:28px 24px 4px !important;}
+body.capturing .plan > *{max-width:800px !important;width:100% !important;box-sizing:border-box !important;}
+body.capturing .plan-title{margin-top:0 !important;font-size:40px !important;line-height:1.3 !important;}
+body.capturing .plan-intro h4{font-size:24px !important;}
+body.capturing .plan-intro p{font-size:22px !important;line-height:1.8 !important;}
+body.capturing #paramBar{font-size:24px !important;}
+body.capturing #paramBar strong{font-size:25px !important;}
+body.capturing #paramBar span{font-size:22px !important;}
+body.capturing table{min-width:0 !important;font-size:24px !important;table-layout:fixed !important;width:100% !important;border-collapse:collapse;}
+body.capturing th,body.capturing td{white-space:normal !important;word-break:break-word;}
+body.capturing thead th{position:static !important;font-size:26px !important;padding:12px 8px !important;}
+body.capturing tbody td{font-size:24px !important;padding:12px 8px !important;}
 body.capturing .table-scroll{overflow:visible !important;}
 @media(max-width:768px){
   .plan-intro{flex-direction:column;}
@@ -999,17 +1004,21 @@ async function downloadImage(){
   const _prevMode = (typeof getDisplayMode === 'function') ? getDisplayMode() : '5y60';
   if(typeof filterRowsByAge === 'function'){ filterRowsByAge('5y60'); }
   if(typeof applyReserveRowspan === 'function'){ applyReserveRowspan(); }
-  if(wrap){wrap.style.width='1200px';wrap.style.maxWidth='1200px';}
-  plan.style.width='1200px';plan.style.minWidth='1200px';
+  if(wrap){wrap.style.width='800px';wrap.style.maxWidth='800px';}
+  plan.style.width='800px';plan.style.minWidth='800px';
   plan.style.overflow='visible';plan.style.height='auto';
   if(tableScroll){tableScroll.style.overflow='visible';tableScroll.style.overflowX='visible';tableScroll.style.height='auto';}
   const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;
   window.scrollTo(0,0);
   try{
-    const captureW=1200;
+    // V3.0 导出图底部信息：新华资料库 + 生成日期
+    let _expFooter = document.getElementById('expFootBar');
+    if(!_expFooter){ _expFooter = document.createElement('div'); _expFooter.id='expFootBar'; _expFooter.className='exp-foot-bar'; plan.appendChild(_expFooter); }
+    { const d=new Date(); const p=n=>String(n).padStart(2,'0'); _expFooter.textContent='新华资料库 xinhua-hub ｜ 生成日期：'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+    const captureW=800;
     const captureH=plan.scrollHeight;
     const isWechatEnv=/MicroMessenger/i.test(navigator.userAgent);
-    const maxScale=isWechatEnv?2.5:4;
+    const maxScale=2;
     const maxCanvasPixels=isWechatEnv?8000000:16000000;
     let captureScale=maxScale;
     if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}

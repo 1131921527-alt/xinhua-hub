@@ -154,37 +154,38 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .combo-hl .cv{color:var(--primary);font-weight:800;font-size:18px;}
 
 /* ============ 独立隐藏导出模板（高清 PNG，不直接截取网页）============ */
-#exportRoot{position:absolute;left:-9999px;top:0;width:1500px;background:#fff;z-index:-1;pointer-events:none;}
-.exp-wrap{width:1500px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:48px;line-height:1.5;}
-.exp-title{text-align:center;font-size:38px;font-weight:800;color:var(--primary);margin:0 0 28px;letter-spacing:1px;}
+#exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
+.exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:36px;line-height:1.5;}
+.exp-title{text-align:center;font-size:40px;font-weight:800;color:var(--primary);margin:0 0 28px;letter-spacing:1px;}
 .exp-row2{display:flex;border:2px solid var(--primary);margin-bottom:18px;box-sizing:border-box;}
 .exp-box{border:2px solid var(--primary);background:#fff;padding:16px 18px;margin-bottom:18px;box-sizing:border-box;}
 .exp-row2 > .exp-box{flex:1;border:0;margin-bottom:0;}
 .exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
-.exp-h{background:var(--primary);color:#fff;font-size:19px;font-weight:700;padding:9px 14px;margin:-16px -18px 12px;box-sizing:border-box;}
-.exp-b{font-size:16px;line-height:1.85;color:#1E293B;}
-.exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:16px;border:2px solid var(--primary);box-sizing:border-box;}
+.exp-h{background:var(--primary);color:#fff;font-size:24px;font-weight:700;padding:11px 14px;margin:-16px -18px 12px;box-sizing:border-box;}
+.exp-b{font-size:26px;line-height:1.9;color:#1E293B;}
+.exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:24px;border:2px solid var(--primary);box-sizing:border-box;}
 .exp-info th,.exp-info td{border:1px solid var(--primary);padding:8px 6px;text-align:center;box-sizing:border-box;font-weight:600;color:#1E293B;}
 .exp-info th{background:var(--primary-bg);color:var(--primary);font-weight:700;}
 .exp-stats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
-.exp-stats span{background:var(--primary-bg);border:1px solid #BFDBFE;color:var(--primary);padding:6px 14px;font-weight:700;font-size:15px;border-radius:6px;}
-.exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:17px;box-sizing:border-box;margin-top:2px;}
-.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:7px 5px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-stats span{background:var(--primary-bg);border:1px solid #BFDBFE;color:var(--primary);padding:8px 16px;font-weight:700;font-size:22px;border-radius:6px;}
+.exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:24px;box-sizing:border-box;margin-top:2px;}
+.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:10px 6px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
 .exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
 .exp-main tbody tr:nth-child(even){background:#F0F9FF;}
 .exp-main .exp-total{background:#DBEAFE;}
-.exp-main .exp-reserve{background:#DBEAFE;color:#64748B;font-weight:700;text-align:center;vertical-align:middle;font-size:16px;}
+.exp-main .exp-reserve{background:#DBEAFE;color:#64748B;font-weight:700;text-align:center;vertical-align:middle;font-size:24px;}
 .exp-dep tfoot td{border:1px solid var(--primary);padding:8px 5px;box-sizing:border-box;}
 .exp-dep .exp-foot-label{text-align:right;font-weight:700;background:var(--primary-bg);color:var(--primary);}
 .exp-dep .exp-foot-val{font-weight:800;color:var(--primary);}
-.exp-combo{width:100%;border-collapse:collapse;table-layout:fixed;font-size:17px;box-sizing:border-box;}
+.exp-combo{width:100%;border-collapse:collapse;table-layout:fixed;font-size:24px;box-sizing:border-box;}
 .exp-combo td{border:1px solid var(--primary);padding:6px 10px;box-sizing:border-box;width:25%;}
 .exp-combo .cl{background:var(--primary-bg);color:var(--primary);font-weight:700;}
 .exp-combo .cv{text-align:right;font-weight:700;color:#1E293B;}
 .exp-combo .hl{background:#DBEAFE;}
 .exp-combo .hl .cv{color:var(--primary);font-weight:800;font-size:19px;}
-.exp-note{margin-top:10px;padding:10px 12px;background:var(--primary-bg);border:1px solid #BFDBFE;border-radius:8px;font-size:14.5px;color:#334155;line-height:1.7;box-sizing:border-box;}
-.exp-foot{margin-top:18px;font-size:14px;color:#64748B;line-height:1.8;border-top:1px solid #E2E8F0;padding-top:10px;box-sizing:border-box;}
+.exp-note{margin-top:10px;padding:12px 14px;background:var(--primary-bg);border:1px solid #BFDBFE;border-radius:8px;font-size:20px;color:#334155;line-height:1.7;box-sizing:border-box;}
+.exp-foot{margin-top:18px;font-size:20px;color:#64748B;line-height:1.8;border-top:1px solid #E2E8F0;padding-top:10px;box-sizing:border-box;}
+.exp-foot2{margin-top:8px;font-size:20px;color:#64748B;text-align:center;letter-spacing:.5px;}
 </style>
 </head>
 <body>
@@ -631,6 +632,7 @@ function buildExport(rows, dep, p, reserveYears){
   const genderStr = p.gender === 1 ? '女' : '男';
   const payTermLabel = p.payTerm === 3 ? '3年交' : '5年交';
   const dateStr = (() => { const d = new Date(); const m = String(d.getMonth()+1).padStart(2,'0'); const day = String(d.getDate()).padStart(2,'0'); return d.getFullYear()+m+day; })();
+  const dateNice = (() => { const d2 = new Date(); const m2 = String(d2.getMonth()+1).padStart(2,'0'); const dday = String(d2.getDate()).padStart(2,'0'); return d2.getFullYear()+'-'+m2+'-'+dday; })();
 
   const displayRows = filterByView(rows);
   const benefitBody = displayRows.map((r, idx) => {
@@ -742,6 +744,7 @@ function buildExport(rows, dep, p, reserveYears){
     </div>
 
     <div class="exp-foot">⚠ 本计划书基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
+    <div class="exp-foot2">新华资料库 xinhua-hub ｜ 生成日期：${dateNice}</div>
   </div>`;
 }
 
@@ -774,7 +777,7 @@ async function downloadImage(){
     const captureW = plan.offsetWidth || 1500;
     const captureH = plan.scrollHeight;
     const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
-    const captureScale = isWechatEnv ? 2 : 3;   // 微信2倍、其他3倍，保证微信转发后仍清晰
+    const captureScale = 2;   // 微信2倍、其他3倍，保证微信转发后仍清晰
     const srcCanvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
@@ -799,7 +802,7 @@ async function downloadImage(){
       ctx.save();
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.fillStyle = '#1E40AF';
-      ctx.font = `700 ${16 * scaleY}px Arial, "Microsoft YaHei", sans-serif`;
+      ctx.font = `700 ${24 * scaleY}px Arial, "Microsoft YaHei", sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(
