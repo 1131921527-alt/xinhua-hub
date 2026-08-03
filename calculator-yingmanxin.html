@@ -298,7 +298,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
         <div class="yield-note">
           <b>储备期与收益率说明：</b>盈满鑫为短期两全分红产品，按原 Excel 计划书展示口径，储备期 = 交费期间。
           3年交前3年为储备期（第4年起显示收益率），5年交前5年为储备期（第6年起显示收益率）。
-          「预期年化单利」采用原演算器公式：（生存总利益 − 累计保费）÷ 累计保费 ÷（保单年度 − 1），未改动。
+          储备期内「预期年化单利」列不展示收益率。
         </div>
       </div>
     </div>
@@ -393,9 +393,10 @@ function computeDeposit(rows, payTerm, period, premium){
   const maturityBenefit = last ? last.cvTotal : 0;
   const totalPrem = premium * payTerm;
   const comboTotal = maturityBenefit + depositTotal;
-  // 组合预期年化单利 = (组合实际所得 - 累计保费) / 累计保费 / (保险期间 - 1)
-  const comboAnnualized = (totalPrem > 0 && period > 1)
-    ? (comboTotal - totalPrem) / (totalPrem * (period - 1))
+  // 组合预期年化单利：按交费年度加权平均，N = period - (payTerm - 1) / 2
+  const comboN = period - (payTerm - 1) / 2;
+  const comboAnnualized = (totalPrem > 0 && comboN > 0)
+    ? (comboTotal - totalPrem) / (totalPrem * comboN)
     : 0;
   return { items, depositTotal, maturityBenefit, totalPrem, comboTotal, comboAnnualized };
 }
@@ -485,9 +486,11 @@ function generate(){
     const deathGuar = Math.max(cumPrem * ratio, cv);
     const deathExp = deathGuar + hongliVal;
 
+    // 预期年化单利：储备期（交费期间）内不展示；之后按交费年度加权平均
     let yieldVal = null;
-    if(yr > 1 && cvTotal > cumPrem){
-      yieldVal = (cvTotal - cumPrem) / (cumPrem * (yr - 1));
+    if(yr > payTerm && cvTotal > cumPrem){
+      const n = yr - (payTerm - 1) / 2;
+      yieldVal = (cvTotal - cumPrem) / (cumPrem * n);
     }
 
     // Get basic SA from last year's maturity
@@ -700,7 +703,7 @@ function buildExport(rows, dep, p, reserveYears){
         </thead>
         <tbody>${benefitBody}</tbody>
       </table>
-      <div class="exp-note">储备期 = 交费期间（盈满鑫口径）；储备期内不展示收益率。「预期年化单利」采用演算器公式：（生存总利益 − 累计保费）÷ 累计保费 ÷（保单年度 − 1）。</div>
+      <div class="exp-note">储备期 = 交费期间（盈满鑫口径）；储备期内不展示收益率。</div>
     </div>
 
     <div class="exp-box">
