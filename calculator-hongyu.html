@@ -88,15 +88,15 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 body.capturing .no-export{display:none !important;}
 body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
 body.capturing .plan{padding:28px 32px 4px !important;}
-body.capturing .plan-title{margin-top:0 !important;font-size:32px !important;}
-body.capturing .plan-intro h4{font-size:19px !important;}
-body.capturing .plan-intro p{font-size:16px !important;line-height:1.8 !important;}
-body.capturing #paramBar{font-size:18px !important;}
-body.capturing #paramBar strong{font-size:19px !important;}
-body.capturing #paramBar span{font-size:16px !important;}
-body.capturing table{min-width:100% !important;font-size:17px !important;}
-body.capturing thead th{position:static !important;font-size:20px !important;padding:11px 8px !important;}
-body.capturing tbody td{font-size:18px !important;padding:11px 8px !important;}
+body.capturing .plan-title{margin-top:0 !important;font-size:36px !important;}
+body.capturing .plan-intro h4{font-size:21px !important;}
+body.capturing .plan-intro p{font-size:18px !important;line-height:1.8 !important;}
+body.capturing #paramBar{font-size:20px !important;}
+body.capturing #paramBar strong{font-size:21px !important;}
+body.capturing #paramBar span{font-size:18px !important;}
+body.capturing table{min-width:100% !important;font-size:19px !important;}
+body.capturing thead th{position:static !important;font-size:22px !important;padding:11px 8px !important;}
+body.capturing tbody td{font-size:20px !important;padding:11px 8px !important;}
 body.capturing .table-scroll{overflow:visible !important;}
 @media(max-width:768px){
   .plan-intro{flex-direction:column;}
@@ -1014,7 +1014,7 @@ async function downloadImage(){
     let captureScale=maxScale;
     if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}
     captureScale=Math.max(1.0,captureScale);
-    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
+    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,x:0,y:0,logging:false});
     if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
     plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
     if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
