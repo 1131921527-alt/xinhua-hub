@@ -35,15 +35,13 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 body.capturing .no-export{display:none !important;}
 /* 抓图时强制桌面布局（覆盖 @media(max-width:768px) 的竖排/缩字号等） */
 body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
-body.capturing .plan{padding:28px 32px 4px !important;}
-body.capturing .intro-row{flex-direction:row !important;}
-body.capturing .intro-row>.section:first-child{margin-right:-2px !important;margin-bottom:0 !important;}
-body.capturing .side-stats{flex-direction:row !important;border-top:0 !important;}
-body.capturing .stat-box{border-right:2px solid #1E40AF !important;border-bottom:0 !important;}
-body.capturing .stat-box:last-child{border-right:0 !important;}
-body.capturing .plan-title{padding:0 20px !important;}
-body.capturing .main-table{font-size:17px !important;min-width:100% !important;}
-body.capturing .table-scroll{overflow-x:visible !important;}
+body.capturing .plan{padding:28px 0 4px !important;position:fixed !important;top:0 !important;left:0 !important;width:100vw !important;z-index:99999 !important;background:#fff !important;box-shadow:0 4px 24px rgba(0,0,0,.15) !important;display:flex !important;flex-direction:column !important;align-items:center !important;}
+body.capturing .plan > *{max-width:1200px !important;}
+body.capturing .intro-row{flex-direction:row !important;width:calc(100% - 64px) !important;}
+body.capturing .side-stats{flex-direction:row !important;border-top:0 !important;width:calc(100% - 64px) !important;}
+body.capturing .plan-title{padding:0 20px !important;width:100% !important;}
+body.capturing .main-table{font-size:17px !important;min-width:100% !important;width:calc(100% - 64px) !important;}
+body.capturing .table-scroll{overflow-x:visible !important;width:calc(100% - 64px) !important;}
 
 .plan{padding:28px 32px 4px;background:#fff;}
 .plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:0;padding:0 20px;overflow:visible;box-sizing:border-box;}
@@ -141,7 +139,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
       </div>
       <div class="field">
         <label>投保年龄（周岁）</label>
-        <input id="age" type="number" value="50" min="0" max="69">
+        <input id="age" type="number" value="50" min="0" max="69" inputmode="numeric" pattern="[0-9]*">
       </div>
       <div class="field">
         <label>交费方式</label>
@@ -469,6 +467,8 @@ async function downloadImage(){
       height: captureH,
       scrollX: 0,
       scrollY: 0,
+      x: 0,
+      y: 0,
       logging: false
     });
     if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
