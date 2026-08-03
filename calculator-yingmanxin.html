@@ -221,7 +221,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
         <label>年交保费（元）</label>
         <input id="premium" type="number" value="100000" min="10000" step="1000">
       </div>
-      <div class="field">
+      <div class="field" id="rateField">
         <label>演示累积生息利率</label>
         <div class="rate-btns">
           <div class="rate-btn" data-rate="0.0175" onclick="selectRate(this)">1.75%</div>
@@ -285,7 +285,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
         </table>
         <div class="side-stats">
           <div class="stat-box"><div class="stat-label">演示分红实现率</div><div class="stat-val">100%</div></div>
-          <div class="stat-box"><div class="stat-label" id="statRateLabel">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
+          <div class="stat-box" id="statRateBox"><div class="stat-label" id="statRateLabel">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
         </div>
       </div>
 
@@ -364,6 +364,11 @@ function selectBonusMode(el){
   document.querySelectorAll('.bonus-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   currentBonusMode = el.dataset.mode;
+  // 只有“累计生息”才需要显示演示累积生息利率；交清增额时隐藏
+  const rateField = document.getElementById('rateField');
+  const statRateBox = document.getElementById('statRateBox');
+  if(rateField) rateField.style.display = currentBonusMode === 'cum' ? '' : 'none';
+  if(statRateBox) statRateBox.style.display = currentBonusMode === 'cum' ? '' : 'none';
   if(DATA) generate();
 }
 function fmt(n){ return Math.round(n).toLocaleString('zh-CN'); }
@@ -567,15 +572,11 @@ function generate(){
   if (infoBm) infoBm.textContent = bonusLabel;
   const thB = document.getElementById('thBonus');
   if (thB) thB.textContent = currentBonusMode === 'add' ? '红利现价(交清增额)' : '红利现价(累计生息)';
-  const stL = document.getElementById('statRateLabel');
-  const stR = document.getElementById('statRate');
-  if (currentBonusMode === 'add') {
-    if (stL) stL.textContent = '红利领取方式';
-    if (stR) stR.textContent = '交清增额';
-  } else {
-    if (stL) stL.textContent = '演示累积生息利率';
-    if (stR) stR.textContent = (currentRate * 100).toFixed(2) + '%';
-  }
+  // 只有累计生息才显示演示累积生息利率；交清增额时隐藏相关字段
+  const rateField = document.getElementById('rateField');
+  const statRateBox = document.getElementById('statRateBox');
+  if(rateField) rateField.style.display = currentBonusMode === 'cum' ? '' : 'none';
+  if(statRateBox) statRateBox.style.display = currentBonusMode === 'cum' ? '' : 'none';
 
   // ===== 定存收益 + 组合计划（新增模块，不改动任何保险利益公式）=====
   currentParams = { age, payTerm, period, premium, gender: currentGender, rate: currentRate, bonusMode: currentBonusMode, basicSa };
@@ -685,7 +686,7 @@ function buildExport(rows, dep, p, reserveYears){
         <tr><th>被保人</th><td>VIP</td><th>性别</th><td>${genderStr}</td><th>年龄</th><td>${p.age}周岁</td><th>交费期间</th><td>${payTermLabel}</td></tr>
         <tr><th>年交保费</th><td>${fmt(p.premium)}</td><th>基本保额</th><td>${fmt(p.basicSa)}</td><th>保险期间</th><td>${p.period}年</td><th>红利领取方式</th><td>${bonusLabel}</td></tr>
       </table>
-      <div class="exp-stats"><span>演示分红实现率 100%</span><span>演示累积生息利率 ${fmtPct(p.rate)}</span></div>
+      <div class="exp-stats"><span>演示分红实现率 100%</span>${p.bonusMode === 'cum' ? `<span>演示累积生息利率 ${fmtPct(p.rate)}</span>` : ''}</div>
     </div>
 
     <div class="exp-box">
