@@ -158,7 +158,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
 .exp-main tbody tr:nth-child(even){background:#F0F9FF;}
 .exp-main .exp-total{background:#DBEAFE;}
-.exp-main .exp-reserve{background:#DBEAFE;color:#64748B;font-weight:700;}
+.exp-main .exp-reserve{background:#DBEAFE;color:#64748B;font-weight:700;text-align:center;vertical-align:middle;font-size:14px;}
 .exp-dep tfoot td{border:1px solid var(--primary);padding:8px 5px;box-sizing:border-box;}
 .exp-dep .exp-foot-label{text-align:right;font-weight:700;background:var(--primary-bg);color:var(--primary);}
 .exp-dep .exp-foot-val{font-weight:800;color:var(--primary);}
@@ -619,11 +619,13 @@ function buildExport(rows, dep, p, reserveYears){
   const dateStr = (() => { const d = new Date(); const m = String(d.getMonth()+1).padStart(2,'0'); const day = String(d.getDate()).padStart(2,'0'); return d.getFullYear()+m+day; })();
 
   const displayRows = filterByView(rows);
-  const benefitBody = displayRows.map((r) => {
+  const benefitBody = displayRows.map((r, idx) => {
     const isReserve = r.yr <= reserveYears;
     let yieldCell;
     if(isReserve){
-      yieldCell = `<td class="exp-reserve">储备期</td>`;
+      yieldCell = idx === 0
+        ? `<td class="exp-reserve" rowspan="${reserveYears}">储备期</td>`
+        : '';
     } else {
       yieldCell = `<td>${r.yieldVal === null ? '－' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     }
