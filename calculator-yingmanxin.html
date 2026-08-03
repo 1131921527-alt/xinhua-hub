@@ -733,12 +733,13 @@ async function downloadImage(){
   const plan = document.getElementById('exportRoot');
   if(!plan || !currentParams){ if(typeof showToast==='function') showToast('请先生成利益演示'); return; }
   const reserveCell = plan.querySelector('.exp-reserve');
-  const oldReserveColor = reserveCell ? reserveCell.style.color : '';
   let reserveLabelBox = null;
   // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
   try{
+    // 计算储备期合并单元格的中心位置，用于 html2canvas 渲染后在新 canvas 上绘制"储备期"文字
+    // 注意：html2canvas 对 rowspan 合并单元格的文字不渲染（已知问题），必须由我们手动画
     if(reserveCell && reserveCell.rowSpan > 1){
       const planRect = plan.getBoundingClientRect();
       const cellRect = reserveCell.getBoundingClientRect();
@@ -753,13 +754,12 @@ async function downloadImage(){
         width: cellRect.width,
         height: lastReserveRow.bottom - firstReserveRow.top
       };
-      reserveCell.style.color = 'transparent';
     }
     const captureW = plan.offsetWidth || 1500;
     const captureH = plan.scrollHeight;
     const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
     const captureScale = isWechatEnv ? 2 : 3;   // 微信2倍、其他3倍，保证微信转发后仍清晰
-    const canvas = await html2canvas(plan, {
+    const srcCanvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
       useCORS: true,
@@ -771,8 +771,13 @@ async function downloadImage(){
       scrollY: 0,
       logging: false
     });
+    // 把 html2canvas 输出拷贝到新 canvas，再在新 canvas 上 fillText（html2canvas 返回的 canvas 上 fillText 不生效）
+    const canvas = document.createElement('canvas');
+    canvas.width = srcCanvas.width;
+    canvas.height = srcCanvas.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(srcCanvas, 0, 0);
     if(reserveLabelBox){
-      const ctx = canvas.getContext('2d');
       const scaleX = canvas.width / captureW;
       const scaleY = canvas.height / captureH;
       ctx.save();
@@ -787,7 +792,6 @@ async function downloadImage(){
         (reserveLabelBox.top + reserveLabelBox.height / 2) * scaleY
       );
       ctx.restore();
-      reserveCell.style.color = oldReserveColor;
     }
     window.scrollTo(0, oldScrollTop);
     const p = currentParams;
