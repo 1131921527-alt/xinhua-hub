@@ -138,6 +138,38 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   .table-scroll { max-width: 100%; }
   .tip { font-size: 13px; }
 }
+/* ============ 独立隐藏导出模板（高清 PNG，不直接截取网页）============ */
+#exportRoot{position:absolute;left:-9999px;top:0;width:1500px;background:#fff;z-index:-1;pointer-events:none;}
+.exp-wrap{width:1500px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:48px;line-height:1.5;}
+.exp-title{text-align:center;font-size:34px;font-weight:800;color:var(--primary);margin:0 0 28px;letter-spacing:1px;}
+.exp-row2{display:flex;border:2px solid var(--primary);margin-bottom:18px;box-sizing:border-box;}
+.exp-box{border:2px solid var(--primary);background:#fff;padding:16px 18px;margin-bottom:18px;box-sizing:border-box;}
+.exp-row2 > .exp-box{flex:1;border:0;margin-bottom:0;}
+.exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
+.exp-h{background:var(--primary);color:#fff;font-size:17px;font-weight:700;padding:9px 14px;margin:-16px -18px 12px;box-sizing:border-box;}
+.exp-b{font-size:14px;line-height:1.85;color:#1E293B;}
+.exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;border:2px solid var(--primary);box-sizing:border-box;}
+.exp-info th,.exp-info td{border:1px solid var(--primary);padding:8px 6px;text-align:center;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-info th{background:var(--primary-bg);color:var(--primary);font-weight:700;}
+.exp-stats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
+.exp-stats span{background:var(--primary-bg);border:1px solid #BFDBFE;color:var(--primary);padding:6px 14px;font-weight:700;font-size:13px;border-radius:6px;}
+.exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;box-sizing:border-box;margin-top:2px;}
+.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:7px 5px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
+.exp-main tbody tr:nth-child(even){background:#F0F9FF;}
+.exp-main .exp-total{background:#DBEAFE;}
+.exp-main .exp-reserve{background:#DBEAFE;color:#64748B;font-weight:700;}
+.exp-dep tfoot td{border:1px solid var(--primary);padding:8px 5px;box-sizing:border-box;}
+.exp-dep .exp-foot-label{text-align:right;font-weight:700;background:var(--primary-bg);color:var(--primary);}
+.exp-dep .exp-foot-val{font-weight:800;color:var(--primary);}
+.exp-combo{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;box-sizing:border-box;}
+.exp-combo td{border:1px solid var(--primary);padding:10px 14px;box-sizing:border-box;}
+.exp-combo .cl{width:62%;background:var(--primary-bg);color:var(--primary);font-weight:700;}
+.exp-combo .cv{text-align:right;font-weight:700;color:#1E293B;}
+.exp-combo .hl{background:#DBEAFE;}
+.exp-combo .hl .cv{color:var(--primary);font-weight:800;font-size:17px;}
+.exp-note{margin-top:10px;padding:10px 12px;background:var(--primary-bg);border:1px solid #BFDBFE;border-radius:8px;font-size:12.5px;color:#334155;line-height:1.7;box-sizing:border-box;}
+.exp-foot{margin-top:18px;font-size:12px;color:#64748B;line-height:1.8;border-top:1px solid #E2E8F0;padding-top:10px;box-sizing:border-box;}
 </style>
 </head>
 <body>
@@ -270,8 +302,13 @@ body.capturing .table-scroll{overflow-x:visible !important;}
         </div>
       </div>
     </div>
+    <!-- 定存收益明细 + 组合计划结果（实时页展示，与导出图数据一致） -->
+    <div class="section" id="liveDepositSection"></div>
   </div>
 </div>
+
+<!-- 独立隐藏高清导出模板：下载时由 html2canvas 截取，不直接截取网页界面 -->
+<div id="exportRoot" aria-hidden="true"></div>
 
 <canvas id="renderCanvas" style="display:none;"></canvas>
 
@@ -282,6 +319,8 @@ let DATA = null;
 let ADDATA = null;
 let currentBonusMode = 'add';   // 'add'=交清增额(默认) / 'cum'=累计生息
 let viewMode = '60';
+let currentDeposit = null;   // 定存+组合计算结果
+let currentParams = null;    // 当前演算参数（供导出模板/文件名使用）
 
 const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
 
@@ -318,6 +357,48 @@ function selectBonusMode(el){
   if(DATA) generate();
 }
 function fmt(n){ return Math.round(n).toLocaleString('zh-CN'); }
+function fmtPct(n){ return (n * 100).toFixed(2) + '%'; }
+
+// ============ 定存收益模块（利率可配置，禁止硬编码）============
+// 按「闲置年限」分档：只算续期保费（第2年及之后）的定存收益，首年保费直接进保险。
+// 需要调整各期限利率，只改下面这张表即可。
+const FIXED_DEPOSIT_RATE_TABLE = {
+  1: 0.011,    // 一年期定存 1.1%
+  2: 0.012,    // 两年期定存 1.2%
+  3: 0.0135,   // 三年期定存 1.35%
+  4: 0.0145,   // 四年期定存 1.45%
+  5: 0.0155    // 五年期定存 1.55%
+};
+function depositRateByTerm(term){
+  // 取不高于 term 的最大档；超出表最大档则沿用最大档
+  let rate = null;
+  const keys = Object.keys(FIXED_DEPOSIT_RATE_TABLE).map(Number).sort((a,b)=>a-b);
+  for(const k of keys){ if(k <= term) rate = FIXED_DEPOSIT_RATE_TABLE[k]; }
+  return rate != null ? rate : FIXED_DEPOSIT_RATE_TABLE[keys[keys.length-1]];
+}
+// 定存 + 组合计划计算（纯新增，不改动任何保险利益公式）
+function computeDeposit(rows, payTerm, period, premium){
+  const items = [];
+  let depositTotal = 0;
+  // 续期保费（第 k=2..payTerm 年）：闲置年限 = 交费期 - k + 1
+  for(let k = 2; k <= payTerm; k++){
+    const term = payTerm - k + 1;
+    const rate = depositRateByTerm(term);
+    const interest = Math.round(premium * rate * term);
+    depositTotal += interest;
+    items.push({ year: k, amount: premium, term, rate, interest });
+  }
+  // 保险满期所得 = 满期年（最后一行）生存总利益（保证+红利），沿用现有准确数据
+  const last = rows[rows.length - 1];
+  const maturityBenefit = last ? last.cvTotal : 0;
+  const totalPrem = premium * payTerm;
+  const comboTotal = maturityBenefit + depositTotal;
+  // 组合预期年化单利 = (组合实际所得 - 累计保费) / 累计保费 / (保险期间 - 1)
+  const comboAnnualized = (totalPrem > 0 && period > 1)
+    ? (comboTotal - totalPrem) / (totalPrem * (period - 1))
+    : 0;
+  return { items, depositTotal, maturityBenefit, totalPrem, comboTotal, comboAnnualized };
+}
 
 function updatePeriodOptions(){
   const payMode = parseInt(document.getElementById('payMode').value);
@@ -482,38 +563,185 @@ function generate(){
     if (stL) stL.textContent = '演示累积生息利率';
     if (stR) stR.textContent = (currentRate * 100).toFixed(2) + '%';
   }
+
+  // ===== 定存收益 + 组合计划（新增模块，不改动任何保险利益公式）=====
+  currentParams = { age, payTerm, period, premium, gender: currentGender, rate: currentRate, bonusMode: currentBonusMode, basicSa };
+  currentDeposit = computeDeposit(rows, payTerm, period, premium);
+  window.currentParams = currentParams;   // 暴露便于调试与自动化测试
+  window.currentDeposit = currentDeposit;
+  renderLiveDeposit(currentDeposit, currentParams);
+  buildExport(rows, currentDeposit, currentParams, reserveYears);
+}
+
+// ---------- 实时页：定存明细 + 组合计划 ----------
+function renderLiveDeposit(dep, p){
+  const sec = document.getElementById('liveDepositSection');
+  if(!sec || !dep) return;
+  const bonusLabel = p.bonusMode === 'add' ? '交清增额' : '累计生息';
+  const depRows = dep.items.map(it => `<tr>
+    <td>第${it.year}年</td>
+    <td>${fmt(it.amount)}</td>
+    <td>${it.term}年</td>
+    <td>${fmtPct(it.rate)}</td>
+    <td>${fmt(it.interest)}</td>
+  </tr>`).join('');
+  sec.innerHTML = `
+    <div class="section-head"><span></span>定存收益明细（续期保费组合）</div>
+    <table class="dep-table">
+      <thead><tr><th>保费年度</th><th>存款金额</th><th>期限</th><th>利率</th><th>所得收益</th></tr></thead>
+      <tbody>${depRows}</tbody>
+      <tfoot><tr><td colspan="4" class="dep-total-label">定存收益合计</td><td class="dep-total-val">${fmt(dep.depositTotal)}</td></tr></tfoot>
+    </table>
+    <div class="section-head" style="margin-top:16px;"><span></span>保险方案与定存组合计划结果</div>
+    <table class="combo-table">
+      <tr><td class="cl">保险满期所得（生存总利益）</td><td class="cv">${fmt(dep.maturityBenefit)}</td></tr>
+      <tr><td class="cl">定存收益合计</td><td class="cv">${fmt(dep.depositTotal)}</td></tr>
+      <tr class="combo-hl"><td class="cl">组合计划实际所得</td><td class="cv">${fmt(dep.comboTotal)}</td></tr>
+      <tr class="combo-hl"><td class="cl">组合预期年化单利</td><td class="cv">${fmtPct(dep.comboAnnualized)}</td></tr>
+    </table>`;
+}
+
+// ---------- 独立隐藏导出模板（高清 PNG，不直接截取网页）----------
+function filterByView(rows){
+  if(viewMode === 'all') return rows;
+  if(viewMode === '60') return rows.filter(r => r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0));
+  if(viewMode === '70') return rows.filter(r => r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0));
+  if(viewMode === '75') return rows.filter(r => r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0));
+  return rows;
+}
+
+function buildExport(rows, dep, p, reserveYears){
+  const root = document.getElementById('exportRoot');
+  if(!root) return;
+  const bonusLabel = p.bonusMode === 'add' ? '交清增额' : '累计生息';
+  const genderStr = p.gender === 1 ? '女' : '男';
+  const payTermLabel = p.payTerm === 3 ? '3年交' : '5年交';
+  const dateStr = (() => { const d = new Date(); const m = String(d.getMonth()+1).padStart(2,'0'); const day = String(d.getDate()).padStart(2,'0'); return d.getFullYear()+m+day; })();
+
+  const displayRows = filterByView(rows);
+  const benefitBody = displayRows.map((r) => {
+    const isReserve = r.yr <= reserveYears;
+    let yieldCell;
+    if(isReserve){
+      yieldCell = r.yr === 1
+        ? `<td class="exp-reserve" rowspan="${reserveYears}">储备期</td>`
+        : '';
+    } else {
+      yieldCell = `<td>${r.yieldVal === null ? '－' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
+    }
+    return `<tr>
+      <td>${r.yr}</td>
+      <td>${r.ageEnd}</td>
+      <td>${r.yearPrem > 0 ? fmt(r.yearPrem) : '－'}</td>
+      <td>${fmt(r.deathGuar)}</td>
+      <td>${fmt(r.deathExp)}</td>
+      <td>${fmt(r.hongliVal)}</td>
+      <td>${r.maturity > 0 ? fmt(r.maturity) : '－'}</td>
+      <td>${fmt(r.cv)}</td>
+      <td class="exp-total">${fmt(r.cvTotal)}</td>
+      ${yieldCell}
+    </tr>`;
+  }).join('');
+
+  const depRows = dep.items.map(it => `<tr>
+    <td>第${it.year}年</td>
+    <td>${fmt(it.amount)}</td>
+    <td>${it.term}年</td>
+    <td>${fmtPct(it.rate)}</td>
+    <td>${fmt(it.interest)}</td>
+  </tr>`).join('');
+
+  root.innerHTML = `
+  <div class="exp-wrap">
+    <div class="exp-title">盈满鑫两全保险 · 分红型 · 理财计划书</div>
+
+    <div class="exp-row2">
+      <div class="exp-box">
+        <div class="exp-h">公司介绍</div>
+        <div class="exp-b">成立日期：1996年9月人民大会堂<br>主要股东：中央汇金（与中农工建四大银行同属一个大股东）、中国宝武钢铁<br>荣誉地位：全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》《财富》500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</div>
+      </div>
+      <div class="exp-box">
+        <div class="exp-h">产品简介</div>
+        <div class="exp-b">投保年龄：0-75周岁，3年交支持6年/8年/10年，5年交支持10年/15年<br>身故保障：安心理财之余，最高160%赔付比例，额外提供身故保障<br>满期领取：被保险人生存至保险期间届满，按基本保险金额（高于所交保费）给付满期生存保险金<br>鑫享红利：享有保单红利分配的机会，赋能利益提升，共享保司盈利</div>
+      </div>
+    </div>
+
+    <div class="exp-box">
+      <div class="exp-h">被保险人及投保参数</div>
+      <table class="exp-info">
+        <tr><th>被保人</th><td>VIP</td><th>性别</th><td>${genderStr}</td><th>年龄</th><td>${p.age}周岁</td><th>交费期间</th><td>${payTermLabel}</td></tr>
+        <tr><th>年交保费</th><td>${fmt(p.premium)}</td><th>基本保额</th><td>${fmt(p.basicSa)}</td><th>保险期间</th><td>${p.period}年</td><th>红利领取方式</th><td>${bonusLabel}</td></tr>
+      </table>
+      <div class="exp-stats"><span>演示分红实现率 100%</span><span>演示累积生息利率 ${fmtPct(p.rate)}</span></div>
+    </div>
+
+    <div class="exp-box">
+      <div class="exp-h">各保单年度利益演示</div>
+      <table class="exp-main">
+        <colgroup>
+          <col style="width:6%"><col style="width:6%"><col style="width:9%"><col style="width:12%"><col style="width:12%"><col style="width:11%"><col style="width:9%"><col style="width:12%"><col style="width:13%"><col style="width:10%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th rowspan="2">保单<br>年度</th>
+            <th rowspan="2">年龄<br>(年末)</th>
+            <th rowspan="2">当年保费<br>(年初)</th>
+            <th rowspan="2">保证身故<br>保险金</th>
+            <th rowspan="2">预期身故<br>保险金</th>
+            <th rowspan="2">红利现价</th>
+            <th rowspan="2">满期金</th>
+            <th colspan="2">生存总利益（年末）</th>
+            <th rowspan="2">预期<br>年化单利</th>
+          </tr>
+          <tr>
+            <th>现金价值<br>保证部分</th>
+            <th>现金价值<br>保证+红利</th>
+          </tr>
+        </thead>
+        <tbody>${benefitBody}</tbody>
+      </table>
+      <div class="exp-note">储备期 = 交费期间（盈满鑫口径）；储备期内不展示收益率。「预期年化单利」采用演算器公式：（生存总利益 − 累计保费）÷ 累计保费 ÷（保单年度 − 1）。</div>
+    </div>
+
+    <div class="exp-box">
+      <div class="exp-h">定存收益明细（续期保费组合）</div>
+      <table class="exp-dep">
+        <colgroup><col style="width:18%"><col style="width:22%"><col style="width:14%"><col style="width:16%"><col style="width:30%"></colgroup>
+        <thead><tr><th>保费年度</th><th>存款金额</th><th>期限</th><th>利率</th><th>所得收益</th></tr></thead>
+        <tbody>${depRows}</tbody>
+        <tfoot><tr><td colspan="4" class="exp-foot-label">定存收益合计</td><td class="exp-foot-val">${fmt(dep.depositTotal)}</td></tr></tfoot>
+      </table>
+      <div class="exp-note">仅续期保费（第2年及之后）按实际闲置年限计入定存，利率按年限分档（可配置）。</div>
+    </div>
+
+    <div class="exp-box">
+      <div class="exp-h">保险方案与定存组合计划结果</div>
+      <table class="exp-combo">
+        <tr><td class="cl">保险满期所得（生存总利益）</td><td class="cv">${fmt(dep.maturityBenefit)}</td></tr>
+        <tr><td class="cl">定存收益合计</td><td class="cv">${fmt(dep.depositTotal)}</td></tr>
+        <tr class="hl"><td class="cl">组合计划实际所得</td><td class="cv">${fmt(dep.comboTotal)}</td></tr>
+        <tr class="hl"><td class="cl">组合预期年化单利</td><td class="cv">${fmtPct(dep.comboAnnualized)}</td></tr>
+      </table>
+    </div>
+
+    <div class="exp-foot">⚠ 本计划书基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
+  </div>`;
 }
 
 async function downloadImage(){
-  const plan = document.getElementById('planArea');
-  const wrap = plan.closest('.wrap');
-  const tableScroll = plan.querySelector('.table-scroll');
-  // CSS body.capturing overrides 强制桌面布局，JS 双保险强制宽度
-  const oldWrapWidth = wrap ? wrap.style.width : '';
-  const oldWrapMaxWidth = wrap ? wrap.style.maxWidth : '';
-  const oldPlanWidth = plan.style.width;
-  const oldPlanMinWidth = plan.style.minWidth;
-  const oldPlanOverflow = plan.style.overflow;
-  const oldPlanHeight = plan.style.height;
-  const oldScrollOverflow = tableScroll ? tableScroll.style.overflow : '';
-  const oldScrollOverflowX = tableScroll ? tableScroll.style.overflowX : '';
-  const oldScrollHeight = tableScroll ? tableScroll.style.height : '';
-  const reserveCell = plan.querySelector('td.col-reserve');
+  const plan = document.getElementById('exportRoot');
+  if(!plan || !currentParams){ if(typeof showToast==='function') showToast('请先生成利益演示'); return; }
+  const reserveCell = plan.querySelector('.exp-reserve');
   const oldReserveColor = reserveCell ? reserveCell.style.color : '';
   let reserveLabelBox = null;
-  if(wrap){ wrap.style.width='1200px'; wrap.style.maxWidth='1200px'; }
-  plan.style.width='1200px'; plan.style.minWidth='1200px';
-  plan.style.overflow='visible'; plan.style.height='auto';
-  if(tableScroll){ tableScroll.style.overflow='visible'; tableScroll.style.overflowX='visible'; tableScroll.style.height='auto'; }
-  document.body.classList.add('capturing');
   // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
   try{
-    if(reserveCell){
+    if(reserveCell && reserveCell.rowSpan > 1){
       const planRect = plan.getBoundingClientRect();
       const cellRect = reserveCell.getBoundingClientRect();
-      const reserveRows = plan.querySelectorAll('#resultBody tr');
+      const reserveRows = plan.querySelectorAll('.exp-main tbody tr');
       const firstReserveRow = reserveRows[0] ? reserveRows[0].getBoundingClientRect() : cellRect;
       const lastReserveRow = reserveRows[reserveCell.rowSpan - 1]
         ? reserveRows[reserveCell.rowSpan - 1].getBoundingClientRect()
@@ -524,27 +752,18 @@ async function downloadImage(){
         width: cellRect.width,
         height: lastReserveRow.bottom - firstReserveRow.top
       };
-      // Mobile Chromium may omit text inside a rowspan cell in html2canvas.
-      // Hide the DOM glyph and paint it onto the finished canvas below.
       reserveCell.style.color = 'transparent';
     }
-    const captureW = 1200;
+    const captureW = plan.offsetWidth || 1500;
     const captureH = plan.scrollHeight;
     const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
-    // 微信/移动端 Canvas 像素限制保护：微信保存 PNG 有宽高/总像素上限，限制更严
-    const maxScale = isWechatEnv ? 2.5 : 4;
-    const maxCanvasPixels = isWechatEnv ? 8000000 : 16000000;
-    let captureScale = maxScale;
-    if (captureW * captureH * captureScale * captureScale > maxCanvasPixels) {
-      captureScale = Math.floor(Math.sqrt(maxCanvasPixels / (captureW * captureH)) * 10) / 10;
-    }
-    captureScale = Math.max(1.0, captureScale);
+    const captureScale = isWechatEnv ? 2 : 3;   // 微信2倍、其他3倍，保证微信转发后仍清晰
     const canvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
       useCORS: true,
       windowWidth: captureW,
-      windowHeight: captureH + 100,
+      windowHeight: captureH,
       width: captureW,
       height: captureH,
       scrollX: 0,
@@ -569,12 +788,11 @@ async function downloadImage(){
       ctx.restore();
       reserveCell.style.color = oldReserveColor;
     }
-    if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
-    plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
-    plan.style.overflow=oldPlanOverflow; plan.style.height=oldPlanHeight;
-    if(tableScroll){ tableScroll.style.overflow=oldScrollOverflow; tableScroll.style.overflowX=oldScrollOverflowX; tableScroll.style.height=oldScrollHeight; }
     window.scrollTo(0, oldScrollTop);
-    const filename = '盈满鑫理财计划书.png';
+    const p = currentParams;
+    const payTermLabel = p.payTerm === 3 ? '3年交' : '5年交';
+    const dateStr = (() => { const d=new Date(); const m=String(d.getMonth()+1).padStart(2,'0'); const day=String(d.getDate()).padStart(2,'0'); return ''+d.getFullYear()+m+day; })();
+    const filename = `盈满鑫两全保险_${p.age}_${payTermLabel}_${p.premium}_${dateStr}.png`;
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     // 无条件先生成 blob，确保手机端/桌面端都能拿到（修复手机端 blob 为 null 导致下载无反应）
     const _blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
