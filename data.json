@@ -12,12 +12,6 @@
           "type": "link",
           "description": "2026年最新版公司整体介绍 · 网页版可转发",
           "url": "company-intro.html"
-        },
-        {
-          "name": "2025年度红利实现率深度解读专题页",
-          "type": "dividend",
-          "description": "128%/82%/233%数据背景·7款产品点击展开·100%vs118%案例对比·FAQ·新华投资实力",
-          "url": "dividend-2025-interpretation.html"
         }
       ]
     },
@@ -44,6 +38,12 @@
           "type": "calculator",
           "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，完整利益演示，红利可选累计生息(利率可调)/交清增额",
           "url": "calculator-hongan.html"
+        },
+        {
+          "name": "宏御世家终身寿险（分红型）在线演算",
+          "type": "calculator",
+          "description": "增额终身寿利益演示，支持3年/5年/10年交，保额递增，可下载计划书图片",
+          "url": "calculator-hongyu.html"
         },
         {
           "name": "宏愿人生养老年金（分红型）在线演算",
@@ -118,16 +118,28 @@
       "icon": "📊",
       "items": [
         {
-          "name": "新华保险红利实现率（官方公开披露）",
+          "name": "🔍 红利实现率官方查询台",
           "type": "dividend",
-          "description": "同步官网公开信息披露的红利实现率，支持搜索/按类型筛选",
+          "description": "同步官网公开信息披露的红利实现率，支持搜索/按产品类型筛选",
           "url": "dividend.html"
         },
         {
-          "name": "新华保险红利实现率深度解读（官方整理）",
+          "name": "📰 2025年度红利实现率深度解读",
+          "type": "dividend",
+          "description": "128%/82%/233%数据背景 · 7款产品点击展开 · 100% vs 118%案例对比 · 新华投资实力",
+          "url": "dividend-2025-interpretation.html"
+        },
+        {
+          "name": "📖 红利实现率详细说明",
           "type": "dividend",
           "description": "概念科普/市场背景/年度成绩单/产品案例/118%计算/客户FAQ/投资实力，一站式图文解读",
           "url": "hongli-realization.html"
+        },
+        {
+          "name": "📊 红利实现率解读报告（培训资料）",
+          "type": "dividend",
+          "description": "2025年度红利实现率解读报告专题页，培训/汇报资料",
+          "url": "dividend-2025-report.html"
         }
       ]
     },

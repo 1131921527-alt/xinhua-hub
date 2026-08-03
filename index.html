@@ -852,6 +852,124 @@
   .quick-title { font-size: 14px; font-weight: 700; color: var(--text); }
   .quick-sub { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
 
+  /* ===== 产品直达区（V3.0） ===== */
+  .pd-section { margin: 14px 16px 10px; }
+  .pd-title {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .pd-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  .pd-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px;
+    box-shadow: var(--shadow); transition: all 0.2s;
+    cursor: pointer; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .pd-card:active { transform: scale(0.97); box-shadow: var(--shadow-hover); }
+  .pd-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .pd-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .pd-tag {
+    font-size: 10px; font-weight: 600; padding: 3px 6px;
+    border-radius: 5px; background: var(--bg); color: var(--text-secondary);
+  }
+  .pd-tag.hl { background: #DBEAFE; color: #1D4ED8; }
+  .pd-btn {
+    margin-top: auto; padding: 7px 0; border-radius: 8px;
+    background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #fff;
+    text-align: center; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+  }
+
+  /* ===== 专业产品墙（导出图统一展示）===== */
+  .pw-section { margin: 14px 16px 10px; }
+  .pw-title {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .pw-sub { font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-left: auto; }
+  .pw-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  .pw-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow); transition: all 0.2s; cursor: pointer;
+  }
+  .pw-card:active { transform: scale(0.98); box-shadow: var(--shadow-hover); }
+  .pw-img-wrap {
+    width: 100%; aspect-ratio: 4 / 3;
+    background: #F8FAFC; display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .pw-img-wrap img {
+    width: 100%; height: 100%; object-fit: contain; object-position: center top;
+    display: block;
+  }
+  .pw-info { padding: 10px 12px; }
+  .pw-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .pw-date { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+  .pw-full-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 6px; font-size: 11px; color: var(--primary); font-weight: 600;
+  }
+
+  /* ===== 红利实现率专区入口（V3.0） ===== */
+  .bonus-zone {
+    margin: 14px 16px 10px;
+    background: linear-gradient(135deg, #064E3B 0%, #065F46 60%, #059669 100%);
+    border-radius: var(--radius); padding: 16px;
+    color: #fff; box-shadow: 0 8px 20px rgba(5, 150, 105, 0.18);
+  }
+  .bonus-zone-title {
+    font-size: 16px; font-weight: 700; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .bonus-zone-desc { font-size: 12px; opacity: 0.85; margin-bottom: 12px; }
+  .bonus-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+  }
+  .bonus-btn {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px; padding: 12px 10px; color: #fff; text-decoration: none;
+    text-align: center; font-size: 13px; font-weight: 700;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .bonus-btn:active { background: rgba(255,255,255,0.22); transform: scale(0.97); }
+  .bonus-btn span { font-size: 10px; opacity: 0.8; font-weight: 500; }
+  .home-spacer { height: 120px; }
+
+  /* ===== 图片灯箱 ===== */
+  .pic-lightbox {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.92);
+    z-index: 2000; display: none; align-items: center; justify-content: flex-start;
+    overflow: auto; -webkit-overflow-scrolling: touch; padding: 20px;
+  }
+  .pic-lightbox.show { display: flex; }
+  .pic-lightbox img {
+    max-width: 100%; width: auto; height: auto; margin: auto;
+    object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .pic-lightbox-close {
+    position: fixed; top: 12px; right: 12px; width: 34px; height: 34px;
+    background: rgba(255,255,255,0.15); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; cursor: pointer; z-index: 2001;
+    backdrop-filter: blur(4px);
+  }
+  .pic-lightbox-tip {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.6); color: #fff; padding: 6px 14px;
+    border-radius: 20px; font-size: 12px; pointer-events: none; z-index: 2001;
+  }
+
+  @media (max-width: 380px) {
+    .pd-grid, .pw-grid, .bonus-grid { grid-template-columns: 1fr; }
+  }
+
 </style>
 </head>
 <body>
@@ -920,6 +1038,99 @@
   </div>
 </div>
 
+<!-- 产品直达（V3.0：30秒内找到产品） -->
+<div class="pd-section">
+  <div class="pd-title">🎯 产品演算器直达</div>
+  <div class="pd-grid">
+    <a class="pd-card" href="calculator-hongan.html">
+      <div class="pd-name">宏安世家</div>
+      <div class="pd-tags"><span class="pd-tag">终身寿</span><span class="pd-tag hl">分红型</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-yingmanxin.html">
+      <div class="pd-name">盈满鑫</div>
+      <div class="pd-tags"><span class="pd-tag">两全险</span><span class="pd-tag hl">交3保6/8</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-hengxiang.html">
+      <div class="pd-name">恒享人生</div>
+      <div class="pd-tags"><span class="pd-tag">年金险</span><span class="pd-tag">关爱金</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-hongyu.html">
+      <div class="pd-name">宏御世家</div>
+      <div class="pd-tags"><span class="pd-tag">终身寿</span><span class="pd-tag hl">分红型</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-hongyuan.html">
+      <div class="pd-name">宏愿人生</div>
+      <div class="pd-tags"><span class="pd-tag">养老金</span><span class="pd-tag hl">分红型</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="intro-yingmanxin.html">
+      <div class="pd-name">盈满鑫解读</div>
+      <div class="pd-tags"><span class="pd-tag">一页通</span><span class="pd-tag">话术</span></div>
+      <div class="pd-btn">查看资料 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+  </div>
+</div>
+
+<!-- 专业产品墙（导出图统一展示） -->
+<div class="pw-section">
+  <div class="pw-title">📋 计划书预览墙 <span class="pw-sub">点击看大图</span></div>
+  <div class="pw-grid">
+    <div class="pw-card" onclick="openLightbox('assets/preview/hongan-full.jpg','宏安世家 · 计划书')">
+      <div class="pw-img-wrap"><img src="assets/preview/hongan-card.jpg" alt="宏安世家计划书" loading="lazy"></div>
+      <div class="pw-info">
+        <div class="pw-name">宏安世家终身寿险</div>
+        <div class="pw-date">分红型 · 终身保障</div>
+      </div>
+    </div>
+    <div class="pw-card" onclick="openLightbox('assets/preview/yingmanxin-full.jpg','盈满鑫 · 计划书')">
+      <div class="pw-img-wrap"><img src="assets/preview/yingmanxin-card.jpg" alt="盈满鑫计划书" loading="lazy"></div>
+      <div class="pw-info">
+        <div class="pw-name">盈满鑫两全保险</div>
+        <div class="pw-date">分红型 · 交3保6/8/10/15</div>
+      </div>
+    </div>
+    <div class="pw-card" onclick="openLightbox('assets/preview/hengxiang-full.jpg','恒享人生 · 计划书')">
+      <div class="pw-img-wrap"><img src="assets/preview/hengxiang-card.jpg" alt="恒享人生计划书" loading="lazy"></div>
+      <div class="pw-info">
+        <div class="pw-name">恒享人生年金险</div>
+        <div class="pw-date">关爱金年金 · 稳定现金流</div>
+      </div>
+    </div>
+    <div class="pw-card" onclick="openLightbox('assets/preview/hongyu-full.jpg','宏御世家 · 计划书')">
+      <div class="pw-img-wrap"><img src="assets/preview/hongyu-card.jpg" alt="宏御世家计划书" loading="lazy"></div>
+      <div class="pw-info">
+        <div class="pw-name">宏御世家终身寿险</div>
+        <div class="pw-date">分红型 · 终身保障</div>
+      </div>
+    </div>
+    <div class="pw-card" onclick="openLightbox('assets/preview/hongyuan-full.jpg','宏愿人生 · 计划书')">
+      <div class="pw-img-wrap"><img src="assets/preview/hongyuan-card.jpg" alt="宏愿人生计划书" loading="lazy"></div>
+      <div class="pw-info">
+        <div class="pw-name">宏愿人生养老年金</div>
+        <div class="pw-date">分红型 · 55/60/65/70岁起领</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 红利实现率专区入口（消除孤立页） -->
+<div class="bonus-zone">
+  <div class="bonus-zone-title">📈 红利实现率专区</div>
+  <div class="bonus-zone-desc">2025年度数据 · 深度解读 · 详细说明 · 培训资料</div>
+  <div class="bonus-grid">
+    <a class="bonus-btn" href="dividend.html">🔍 官方查询台<span>同步官网公开信息披露</span></a>
+    <a class="bonus-btn" href="dividend-2025-interpretation.html">📰 2025深度解读<span>128%/82%/233%数据背景</span></a>
+    <a class="bonus-btn" href="hongli-realization.html">📖 详细说明<span>概念科普/市场背景/FAQ</span></a>
+    <a class="bonus-btn" href="dividend-2025-report.html">📊 培训/报告<span>红利实现率解读报告</span></a>
+  </div>
+</div>
+
+<div class="home-spacer"></div>
+
 <div class="search-wrap">
   <div class="search-box">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -986,6 +1197,13 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- 图片灯箱 -->
+<div class="pic-lightbox" id="picLightbox" onclick="if(event.target.id==='picLightbox' || event.target.tagName==='IMG') closeLightbox();">
+  <div class="pic-lightbox-close" onclick="closeLightbox()">×</div>
+  <img id="picLightboxImg" src="" alt="">
+  <div class="pic-lightbox-tip">双指缩放 · 点击图片关闭</div>
+</div>
 
 <div class="footer">
   <div class="footer-item active" onclick="showAll()">
@@ -1578,6 +1796,22 @@ window.addEventListener('scroll', function() {
   if (el) el.textContent = `${y}年${m}月${d}日 ${h}点${min}分${sec}秒`;
   setTimeout(updateClock, 1000);
 })();
+
+// 图片灯箱（产品墙点击查看大图）
+function openLightbox(src, alt) {
+  const img = document.getElementById('picLightboxImg');
+  const lb = document.getElementById('picLightbox');
+  if (!img || !lb) return;
+  img.src = src; img.alt = alt || '';
+  lb.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  const lb = document.getElementById('picLightbox');
+  if (lb) lb.classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLightbox(); });
 
 // Init
 loadData();
