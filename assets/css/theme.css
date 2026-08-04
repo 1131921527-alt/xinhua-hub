@@ -1,0 +1,231 @@
+/* ============================================================
+   xinhua-hub 统一设计系统  theme.css  (V4.0)
+   ------------------------------------------------------------
+   全站唯一视觉来源。修改品牌色/圆角/阴影/字体/间距，只改这里。
+   页面通过 <link rel="stylesheet" href="assets/css/theme.css">
+   引入；页面内联 <style> 在 link 之后，可覆盖局部细节。
+   ============================================================ */
+
+:root {
+  /* ---------- 品牌色 ---------- */
+  --primary: #2563EB;          /* 主蓝（按钮/链接/强调） */
+  --primary-dark: #1D4ED8;     /* 主蓝 hover/active */
+  --primary-deep: #1E40AF;     /* 深蓝（演算器主色/标题装饰） */
+  --primary-light: #DBEAFE;    /* 浅蓝底（标签/次按钮） */
+  --primary-bg: #EFF6FF;       /* 极浅蓝底（区块背景） */
+  --accent: #3B82F6;           /* 亮蓝点缀 */
+
+  /* ---------- 中性色 ---------- */
+  --bg: #F8FAFC;               /* 页面背景 */
+  --bg-alt: #F1F5F9;           /* 浅灰底（表头/隔行） */
+  --card-bg: #FFFFFF;          /* 卡片背景 */
+  --text: #1E293B;             /* 主文字 */
+  --text-2: #475569;           /* 次级文字 */
+  --text-3: #64748B;           /* 辅助文字 */
+  --text-4: #94A3B8;           /* 弱文字/占位 */
+  --border: #E2E8F0;           /* 边框 */
+  --border-strong: #CBD5E1;    /* 强边框 */
+
+  /* ---------- 语义色 ---------- */
+  --success: #16A34A;
+  --success-bg: #DCFCE7;
+  --warning: #F59E0B;
+  --warning-bg: #FEF3C7;
+  --danger: #DC2626;
+  --danger-bg: #FEE2E2;
+  --up: #DC2626;               /* 涨（中国惯例红） */
+  --down: #16A34A;             /* 跌（中国惯例绿） */
+
+  /* ---------- 圆角 ---------- */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  /* ---------- 阴影 ---------- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+  --shadow: 0 2px 8px rgba(37,99,235,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 16px rgba(37,99,235,.10);
+  --shadow-lg: 0 8px 30px rgba(37,99,235,.14);
+  --shadow-hover: 0 6px 20px rgba(37,99,235,.15);
+
+  /* ---------- 间距 ---------- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --page-x: 16px;                /* 页面左右安全边距 */
+
+  /* ---------- 字体 ---------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-num: "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  --fs-xs: 11px; --fs-sm: 12px; --fs-base: 14px; --fs-md: 15px;
+  --fs-lg: 17px; --fs-xl: 19px; --fs-2xl: 22px; --fs-3xl: 28px;
+
+  /* ---------- 层级 / 安全区 ---------- */
+  --z-header: 100;
+  --z-modal: 1000;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --maxw: 480px;               /* 移动端内容容器最大宽 */
+}
+
+/* ============================================================
+   基础 reset
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { -webkit-tap-highlight-color: transparent; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: var(--fs-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--primary); text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ============================================================
+   布局容器
+   ============================================================ */
+.app-container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+.page { padding: var(--space-5) var(--page-x); }
+.section { padding: var(--space-6) var(--page-x); }
+.section + .section { padding-top: 0; }
+
+/* ============================================================
+   区块标题
+   ============================================================ */
+.section-title {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-4);
+  line-height: 1.3;
+}
+.section-title::before {
+  content: "";
+  width: 4px; height: 18px;
+  background: linear-gradient(var(--primary), var(--primary-deep));
+  border-radius: 2px;
+  flex: none;
+}
+.section-sub { font-size: var(--fs-sm); color: var(--text-3); margin-top: -8px; margin-bottom: var(--space-4); }
+
+/* ============================================================
+   按钮
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 12px 20px; border: none; border-radius: var(--radius);
+  font-size: var(--fs-md); font-weight: 600; line-height: 1;
+  transition: all .18s ease; user-select: none; white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: #fff; box-shadow: var(--shadow); }
+.btn-primary:active { transform: scale(.97); background: var(--primary-dark); }
+.btn-ghost { background: var(--primary-light); color: var(--primary-dark); }
+.btn-outline { background: #fff; color: var(--primary); border: 1.5px solid var(--primary); }
+.btn-outline:active { background: var(--primary-bg); }
+.btn-block { width: 100%; }
+.btn-lg { padding: 15px 24px; font-size: var(--fs-lg); }
+.btn-sm { padding: 8px 14px; font-size: var(--fs-sm); border-radius: var(--radius-sm); }
+
+/* ============================================================
+   卡片
+   ============================================================ */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card-hover { transition: transform .22s ease, box-shadow .22s ease; }
+.card-hover:active { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+/* ============================================================
+   标签 / 徽章
+   ============================================================ */
+.tag {
+  display: inline-block; padding: 3px 10px; border-radius: var(--radius-full);
+  font-size: var(--fs-sm); font-weight: 600; line-height: 1.5;
+  background: var(--primary-light); color: var(--primary-dark);
+}
+.tag-success { background: var(--success-bg); color: var(--success); }
+.tag-warning { background: var(--warning-bg); color: var(--warning); }
+.tag-muted   { background: var(--bg-alt); color: var(--text-3); }
+.tag-danger  { background: var(--danger-bg); color: var(--danger); }
+
+/* ============================================================
+   网格
+   ============================================================ */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+@media (max-width: 360px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   通用表格（浏览器/微信默认可读基线）
+   ============================================================ */
+table { border-collapse: collapse; width: 100%; }
+th, td { padding: var(--space-3); text-align: left; border-bottom: 1px solid var(--border); font-size: var(--fs-base); }
+th { font-weight: 600; color: var(--text-2); background: var(--bg-alt); }
+tbody tr:nth-child(even) { background: #FBFCFE; }
+
+/* ============================================================
+   表单
+   ============================================================ */
+input, select, textarea {
+  font-family: inherit; font-size: var(--fs-md);
+  padding: 11px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: #fff; color: var(--text); outline: none; width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light);
+}
+label { font-size: var(--fs-sm); color: var(--text-2); font-weight: 600; }
+
+/* ============================================================
+   文本工具
+   ============================================================ */
+.text-2 { color: var(--text-2); } .text-3 { color: var(--text-3); }
+.text-primary { color: var(--primary); } .text-up { color: var(--up); }
+.fw-600 { font-weight: 600; } .fw-700 { font-weight: 700; }
+.fs-sm { font-size: var(--fs-sm); } .fs-xs { font-size: var(--fs-xs); }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.mt-2 { margin-top: var(--space-2); } .mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); } .mt-5 { margin-top: var(--space-5); }
+.mb-3 { margin-bottom: var(--space-3); } .mb-4 { margin-bottom: var(--space-4); }
+.center { text-align: center; }
+
+/* ============================================================
+   通用页脚（署名 / 安全区）
+   ============================================================ */
+.app-footer {
+  text-align: center; padding: var(--space-6) var(--page-x);
+  color: var(--text-4); font-size: var(--fs-xs); line-height: 1.7;
+  padding-bottom: calc(var(--space-6) + var(--safe-bottom));
+}
+
+/* ============================================================
+   移动端微调
+   ============================================================ */
+@media (max-width: 480px) {
+  :root { --space-5: 16px; --space-6: 20px; --fs-xl: 18px; }
+}

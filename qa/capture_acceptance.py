@@ -58,6 +58,7 @@ PAGES = [
     {"key": "sales_qa_chuancheng","file": "sales-qa-chuancheng.html",     "kind": "page", "label": "财富传承"},
     {"key": "sales_qa_hk",       "file": "sales-qa-hk.html",               "kind": "page", "label": "香港保险"},
     {"key": "sales_qa_gaoke",    "file": "sales-qa-gaoke.html",           "kind": "page", "label": "高客经营"},
+    {"key": "training",    "file": "training.html",                     "kind": "page", "label": "培训中心"},
     {"key": "company",     "file": "company-intro.html",                "kind": "page", "label": "公司介绍"},
 ]
 

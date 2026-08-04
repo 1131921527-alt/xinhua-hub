@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/calc-common.css">
 <title>宏御世家 终身寿险（分红型）· 利益演示计算器</title>
 <style>
 :root{
@@ -1040,7 +1042,7 @@ async function downloadImage(){
     const captureH=plan.scrollHeight;
     const isWechatEnv=/MicroMessenger/i.test(navigator.userAgent);
     const maxScale=2;
-    const maxCanvasPixels=isWechatEnv?8000000:16000000;
+    const maxCanvasPixels=isWechatEnv?12000000:32000000;
     let captureScale=maxScale;
     if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}
     captureScale=Math.max(1.0,captureScale);
