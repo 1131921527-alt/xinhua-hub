@@ -1,5 +1,6 @@
 *.py
 !qa/capture_acceptance.py
+!qa/mobile_scenario_test.py
 *_data.json
 *_data_new.js
 *_data_check.json
@@ -19,3 +20,6 @@ archive/
 
 # 测试截图（验收产物，可本地重跑 tests 重新生成，不进版本库）
 tests/**/*.png
+
+# 用户自行打包的本地归档，不跟踪
+qa/screenshots/*.rar

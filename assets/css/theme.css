@@ -180,12 +180,16 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ============================================================
-   通用表格（浏览器/微信默认可读基线）
+   通用表格（可读基线）
+   ⚠ 必须使用 .tbl 显式启用，禁止改回裸标签选择器 table/th/td。
+   裸选择器会给全站每一张表（含演算器导出模板 .exp-main）强制注入
+   font-size / padding，导致导出图自适应字号失效、行高被撑高、
+   html2canvas 触发像素上限而降级——2026-08-05 已踩过一次坑。
    ============================================================ */
-table { border-collapse: collapse; width: 100%; }
-th, td { padding: var(--space-3); text-align: left; border-bottom: 1px solid var(--border); font-size: var(--fs-base); }
-th { font-weight: 600; color: var(--text-2); background: var(--bg-alt); }
-tbody tr:nth-child(even) { background: #FBFCFE; }
+.tbl { border-collapse: collapse; width: 100%; }
+.tbl th, .tbl td { padding: var(--space-3); text-align: left; border-bottom: 1px solid var(--border); font-size: var(--fs-base); }
+.tbl th { font-weight: 600; color: var(--text-2); background: var(--bg-alt); }
+.tbl tbody tr:nth-child(even) { background: #FBFCFE; }
 
 /* ============================================================
    表单

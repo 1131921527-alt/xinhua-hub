@@ -172,6 +172,8 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-stats span{background:var(--primary-bg);border:1px solid #BFDBFE;color:var(--primary);padding:5px 10px;font-weight:700;font-size:18px;border-radius:6px;}
 .exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:18px;box-sizing:border-box;margin-top:2px;}
 .exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:4px 1px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-main tbody td{white-space:nowrap;}
+.exp-info td{white-space:nowrap;}
 .exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
 .exp-main thead th{font-size:13px;line-height:1.25;padding:4px 1px;white-space:normal;word-break:break-word;}
 .exp-main thead .exp-th-main,.exp-main thead .exp-th-sub{display:block;white-space:normal;}
@@ -203,8 +205,17 @@ body.capturing .table-scroll{overflow-x:visible !important;}
     .km-val{font-size:15px;}
     .km-label{font-size:11px;}
   }
-  /* 导出图（html2canvas 截 planArea）时隐藏指标卡，保持导出图精简 */
-  body.capturing .key-metrics{display:none !important;}
+  /* 导出图（html2canvas 截 planArea）时保持指标卡，微信转发后主要数据仍能一眼看清 */
+  body.capturing .key-metrics{display:flex !important;gap:18px !important;margin:24px 0 18px !important;}
+  body.capturing .km-card{padding:18px 8px !important;border-radius:14px !important;border-width:2px !important;}
+  body.capturing .km-label{font-size:18px !important;margin-bottom:8px !important;}
+  body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
+
+  /* 独立导出模板中的核心指标卡（与网页版指标卡数据一致） */
+  .exp-km{display:flex;gap:18px;margin:18px 0 12px;}
+  .exp-km .km-card{flex:1;background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%);border:2px solid #BFDBFE;border-radius:14px;padding:18px 8px;text-align:center;box-sizing:border-box;}
+  .exp-km .km-label{font-size:18px;color:#1E40AF;font-weight:700;margin-bottom:8px;line-height:1.1;}
+  .exp-km .km-val{font-size:32px;font-weight:800;color:#1E3A8A;line-height:1.2;word-break:break-word;}
 
 </style>
 </head>
@@ -274,7 +285,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   </div>
 
   <div id="planArea" class="plan">
-    <div class="plan-title">盈满鑫两全保险 · 分红型 · 理财计划</div>
+    <div class="plan-title">盈满鑫两全保险 · 分红型 · 理财计划书</div>
 <div class="key-metrics" id="keyMetrics">
       <div class="km-card"><div class="km-label">满期收益</div><div class="km-val" id="kmMaturity">—</div></div>
       <div class="km-card"><div class="km-label">累计收益</div><div class="km-val" id="kmCum">—</div></div>
@@ -698,6 +709,12 @@ function buildExport(rows, dep, p, reserveYears){
   <div class="exp-wrap">
     <div class="exp-title">盈满鑫两全保险 · 分红型 · 理财计划书</div>
 
+    <div class="exp-km">
+      <div class="km-card"><div class="km-label">满期收益</div><div class="km-val">${document.getElementById('kmMaturity') ? document.getElementById('kmMaturity').textContent : '—'}</div></div>
+      <div class="km-card"><div class="km-label">累计收益</div><div class="km-val">${document.getElementById('kmCum') ? document.getElementById('kmCum').textContent : '—'}</div></div>
+      <div class="km-card"><div class="km-label">年化单利</div><div class="km-val">${document.getElementById('kmRate') ? document.getElementById('kmRate').textContent : '—'}</div></div>
+    </div>
+
     <div class="exp-row2">
       <div class="exp-box">
         <div class="exp-h">公司介绍</div>
@@ -727,18 +744,18 @@ function buildExport(rows, dep, p, reserveYears){
         <thead>
           <tr>
             <th rowspan="2"><span class="exp-th-main">保单</span><span class="exp-th-sub">年度</span></th>
-            <th rowspan="2"><span class="exp-th-main">年龄</span></th>
-            <th rowspan="2"><span class="exp-th-main">当年保费</span></th>
+            <th rowspan="2"><span class="exp-th-main">年龄</span><span class="exp-th-sub">（年末）</span></th>
+            <th rowspan="2"><span class="exp-th-main">当年保费</span><span class="exp-th-sub">（年初）</span></th>
             <th rowspan="2"><span class="exp-th-main">保证身故</span><span class="exp-th-sub">保险金</span></th>
             <th rowspan="2"><span class="exp-th-main">预期身故</span><span class="exp-th-sub">保险金</span></th>
-            <th rowspan="2">红利现价</th>
-            <th rowspan="2">满期金</th>
-            <th colspan="2"><span class="exp-th-main">生存总利益</span><span class="exp-th-sub">（保证+红利）</span></th>
+            <th rowspan="2"><span class="exp-th-main">红利</span><span class="exp-th-sub">现价</span></th>
+            <th rowspan="2"><span class="exp-th-main">满期金</span></th>
+            <th colspan="2"><span class="exp-th-main">生存总利益</span><span class="exp-th-sub">（年末）</span></th>
             <th rowspan="2"><span class="exp-th-main">预期</span><span class="exp-th-sub">年化单利</span></th>
           </tr>
           <tr>
-            <th><span class="exp-th-main">现金价</span><span class="exp-th-sub">保证</span></th>
-            <th><span class="exp-th-main">现金价</span><span class="exp-th-sub">保证+红利</span></th>
+            <th><span class="exp-th-main">现金价值</span><span class="exp-th-sub">保证部分</span></th>
+            <th><span class="exp-th-main">现金价值</span><span class="exp-th-sub">保证+红利</span></th>
           </tr>
         </thead>
         <tbody>${benefitBody}</tbody>
@@ -775,15 +792,23 @@ function buildExport(rows, dep, p, reserveYears){
   </div>`;
 
   // 按本次测算的实际数字自动缩放：10万保持清晰大字，最高1000万仍不得串格。
+  // 修复：把字号直接写到每个单元格 inline-style，避免 theme.css 等全局选择器覆盖。
   const fitExportTable = (table, cellSelector, startSize, minSize) => {
     if(!table) return;
     let fontSize = startSize;
+    const allCells = Array.from(table.querySelectorAll('th, td'));
     const valueCells = Array.from(table.querySelectorAll(cellSelector));
     const hasOverflow = () => valueCells.some(cell => cell.scrollWidth > cell.clientWidth + 1);
-    table.style.fontSize = fontSize + 'px';
+    const setAll = (fs) => {
+      allCells.forEach(c => {
+        c.style.fontSize = fs + 'px';
+        c.style.lineHeight = '1.35';
+      });
+    };
+    setAll(fontSize);
     while(fontSize > minSize && hasOverflow()){
       fontSize -= 1;
-      table.style.fontSize = fontSize + 'px';
+      setAll(fontSize);
     }
   };
   fitExportTable(root.querySelector('.exp-info'), 'td', 19, 12);
