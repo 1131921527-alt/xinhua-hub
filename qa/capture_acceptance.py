@@ -51,7 +51,13 @@ PAGES = [
     {"key": "dividend",    "file": "dividend.html",                     "kind": "page", "label": "红利实现率查询台"},
     {"key": "hongli_2025", "file": "dividend-2025-interpretation.html", "kind": "page", "label": "2025红利深度解读"},
     {"key": "hongli_doc",  "file": "hongli-realization.html",           "kind": "page", "label": "红利实现率详细说明"},
-    {"key": "sales_qa",    "file": "sales-qa.html",                     "kind": "page", "label": "销售问答"},
+    {"key": "sales_qa",         "file": "sales-qa.html",                  "kind": "page", "label": "销售问答索引"},
+    {"key": "sales_qa_yiyi",    "file": "sales-qa-yiyi.html",             "kind": "page", "label": "客户异议"},
+    {"key": "sales_qa_fenhong", "file": "sales-qa-fenhong.html",          "kind": "page", "label": "分红险话术"},
+    {"key": "sales_qa_yanglao", "file": "sales-qa-yanglao.html",          "kind": "page", "label": "养老规划"},
+    {"key": "sales_qa_chuancheng","file": "sales-qa-chuancheng.html",     "kind": "page", "label": "财富传承"},
+    {"key": "sales_qa_hk",       "file": "sales-qa-hk.html",               "kind": "page", "label": "香港保险"},
+    {"key": "sales_qa_gaoke",    "file": "sales-qa-gaoke.html",           "kind": "page", "label": "高客经营"},
     {"key": "company",     "file": "company-intro.html",                "kind": "page", "label": "公司介绍"},
 ]
 
@@ -63,6 +69,18 @@ window.__capBlob = null;
 URL.createObjectURL = function(blob){ window.__capBlob = blob; return 'blob:fake#'+Math.random().toString(36).slice(2); };
 try { Object.defineProperty(window, 'showSaveFilePicker', { value: undefined, configurable: true }); } catch(e){}
 HTMLAnchorElement.prototype.click = function(){};
+// 兜底：部分页面 showToast 在导出分支中不可见，避免流程中断
+if(typeof window.showToast !== 'function'){ window.showToast = function(msg){ console.log('[toast]', msg); }; }
+// 兜底：宏御(canvas 绘制) 用 canvas.toBlob 而非 URL.createObjectURL，截获 blob
+(function(){
+  const orig = HTMLCanvasElement.prototype.toBlob;
+  if(orig && !orig.__capPatched){
+    HTMLCanvasElement.prototype.toBlob = function(cb, type, quality){
+      orig.call(this, function(blob){ if(blob) window.__capBlob = blob; if(cb) cb(blob); }, type, quality);
+    };
+    HTMLCanvasElement.prototype.toBlob.__capPatched = true;
+  }
+})();
 """
 
 saved, problems = [], []
@@ -113,6 +131,11 @@ def run_calc(page):
                 'button:has-text("计算")', '#calcBtn', '.calc-btn']:
         try:
             page.click(sel, timeout=2500)
+            # V3.1: 等待异步数据加载并填充核心指标卡（#kmMaturity 不再是占位符"—"）
+            page.wait_for_function("""() => {
+                const km = document.getElementById('kmMaturity');
+                return km && km.textContent !== '\u2014' && km.textContent !== '-';
+            }""", timeout=10000)
             return
         except Exception:
             continue

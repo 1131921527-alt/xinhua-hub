@@ -942,6 +942,34 @@
   .bonus-btn span { font-size: 10px; opacity: 0.8; font-weight: 500; }
   .home-spacer { height: 120px; }
 
+  /* ===== 培训中心专区（V3.1） ===== */
+  .training-zone {
+    margin: 14px 16px 10px;
+    background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 60%, #3B82F6 100%);
+    border-radius: var(--radius); padding: 16px;
+    color: #fff; box-shadow: 0 8px 20px rgba(30, 64, 175, 0.18);
+  }
+  .training-zone-title {
+    font-size: 16px; font-weight: 700; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .training-zone-desc { font-size: 12px; opacity: 0.85; margin-bottom: 12px; }
+  .training-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+  }
+  .training-btn {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px; padding: 12px 10px; color: #fff; text-decoration: none;
+    text-align: center; font-size: 13px; font-weight: 700;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .training-btn:active { background: rgba(255,255,255,0.22); transform: scale(0.97); }
+  .training-btn span { font-size: 10px; opacity: 0.8; font-weight: 500; }
+  @media (max-width: 768px) {
+    .training-grid { grid-template-columns: 1fr; }
+  }
+
   /* ===== 图片灯箱 ===== */
   .pic-lightbox {
     position: fixed; inset: 0; background: rgba(0,0,0,0.92);
@@ -1006,36 +1034,29 @@
   </div>
 </div>
 
-<!-- 快捷入口（任务8：理财经理打开后最快找到四类功能） -->
+<!-- 快捷入口（V3.1：三大核心工具入口，强化工具属性） -->
 <div class="quick-grid">
-  <a class="quick-card" onclick="selectCategory('product-calculators')">
+  <a class="quick-card" href="javascript:void(0)" onclick="scrollToSection('.pd-section')">
     <div class="quick-icon">🧮</div>
     <div class="quick-body">
-      <div class="quick-title">在线测算</div>
+      <div class="quick-title">产品演算器</div>
       <div class="quick-sub">10 款产品一键演算</div>
     </div>
   </a>
-  <div class="quick-card" onclick="selectCategory('product-intro')">
-    <div class="quick-icon">📚</div>
+  <a class="quick-card" href="javascript:void(0)" onclick="scrollToSection('#trainingZone')">
+    <div class="quick-icon">🎓</div>
     <div class="quick-body">
-      <div class="quick-title">产品介绍</div>
-      <div class="quick-sub">卖点 / 投保指引</div>
-    </div>
-  </div>
-  <a class="quick-card" href="sales-qa.html">
-    <div class="quick-icon">💬</div>
-    <div class="quick-body">
-      <div class="quick-title">销售话术</div>
-      <div class="quick-sub">答疑 / 复制话术</div>
+      <div class="quick-title">培训中心</div>
+      <div class="quick-sub">话术库 / 培训资料</div>
     </div>
   </a>
-  <div class="quick-card" onclick="var a=document.querySelector('.ap-section'); if(a){window.scrollTo({top:a.getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});} var i=document.getElementById('aiPlannerInput'); if(i){setTimeout(function(){i.focus();},350);}">
-    <div class="quick-icon">📄</div>
+  <a class="quick-card" href="javascript:void(0)" onclick="scrollToSection('.bonus-zone')">
+    <div class="quick-icon">📈</div>
     <div class="quick-body">
-      <div class="quick-title">计划书下载</div>
-      <div class="quick-sub">智能生成图片</div>
+      <div class="quick-title">红利实现率</div>
+      <div class="quick-sub">2025 官方数据</div>
     </div>
-  </div>
+  </a>
 </div>
 
 <!-- 产品直达（V3.0：30秒内找到产品） -->
@@ -1114,6 +1135,19 @@
         <div class="pw-date">分红型 · 55/60/65/70岁起领</div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- 培训中心专区（V3.1：聚合话术库/培训资料，强化工具属性） -->
+<div class="training-zone" id="trainingZone">
+  <div class="training-zone-title">🎓 培训中心</div>
+  <div class="training-zone-desc">销售话术 · 答疑手册 · 产品培训 · 投资实力 · 知识卡</div>
+  <div class="training-grid">
+    <a class="training-btn" href="sales-qa.html">💬 销售话术QA手册<span>客户异议/分红话术/养老传承</span></a>
+    <a class="training-btn" href="product-qa-handbook.html">📘 产品答疑实战<span>7大板块全覆盖</span></a>
+    <a class="training-btn" href="files/公司介绍/2604新华在售产品培训.html">🏫 在售产品培训<span>2026年4月版</span></a>
+    <a class="training-btn" href="files/公司介绍/新华保险投资实力介绍（新华资管）.html">📊 投资实力介绍<span>新华资管资产配置</span></a>
+    <a class="training-btn" href="insurance-knowledge-card.html">🃏 保险知识卡<span>利率与分红政策图解</span></a>
   </div>
 </div>
 
@@ -1415,6 +1449,13 @@ function renderTabs() {
     tab.addEventListener('click', function() { selectCategory(cat.id); });
     tabs.appendChild(tab);
   });
+}
+
+function scrollToSection(sel){
+  var el = document.querySelector(sel);
+  if(!el) return;
+  var y = el.getBoundingClientRect().top + window.scrollY - 8;
+  window.scrollTo({top:y, behavior:'smooth'});
 }
 
 function selectCategory(catId) {

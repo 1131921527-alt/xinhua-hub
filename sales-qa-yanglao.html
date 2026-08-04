@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>养老规划 · 销售实战问答 · 新华保险资料库</title>
+<style>
+  :root{
+    --blue:#2563EB; --blue-d:#1E40AF; --blue-l:#EFF6FF;
+    --blue-dd:#1E3A8A; --blue-100:#DBEAFE;
+    --ink:#0F172A; --sub:#64748B; --line:#E2E8F0; --bg:#F4F7FB;
+    --good:#16A34A; --good-l:#F0FDF4; --warn:#D97706; --warn-l:#FFF7ED;
+    --card:#FFFFFF; --accent:#7C3AED; --accent-l:#F5F3FF;
+    --wine:#8B1A1A;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.75; padding:0 0 60px;}
+  header{background:linear-gradient(135deg,var(--blue-dd),var(--blue)); color:#fff; padding:28px 18px 24px;}
+  header a.back{color:#fff; opacity:.85; font-size:13px; text-decoration:none; display:inline-block; margin-bottom:10px;}
+  header h1{margin:0; font-size:22px; font-weight:800; letter-spacing:.5px;}
+  header .sub{margin-top:7px; font-size:13px; opacity:.92;}
+  .pill{display:inline-block; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:20px; font-size:11px; margin-top:10px;}
+  .wrap{max-width:760px; margin:0 auto; padding:16px 14px 0;}
+
+  /* 导航 */
+  .nav{display:flex; gap:6px; overflow-x:auto; padding:8px 0; margin-bottom:4px; -webkit-overflow-scrolling:touch;}
+  .nav::-webkit-scrollbar{height:0;}
+  .nav a{font-size:12.5px; color:var(--blue-d); background:var(--blue-l); border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; white-space:nowrap; text-decoration:none; flex:none;}
+  .nav a:active{background:var(--blue-100);}
+
+  /* 区块标题 */
+  .sec-title{font-size:18px; font-weight:800; margin:26px 4px 14px; display:flex; align-items:center; gap:8px;}
+  .sec-title .bar{width:4px; height:20px; background:var(--blue); border-radius:3px; display:inline-block;}
+  .sec-title .cnt{font-size:12px; font-weight:600; color:var(--sub); background:var(--blue-l); padding:2px 8px; border-radius:10px;}
+
+  /* 产品标签 */
+  .prod-tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
+    padding:4px 10px; border-radius:8px; margin-bottom:10px;}
+  .prod-tag.hongyu{background:#EFF6FF; color:#1E40AF;}
+  .prod-tag.hongtai{background:#F0FDF4; color:#166534;}
+  .prod-tag.fusheng{background:#FFF7ED; color:#9A3412;}
+  .prod-tag.hongyuan{background:#F5F3FF; color:#6D28D9;}
+  .prod-tag.hengxiang{background:#FDF4FF; color:#9D174D;}
+  .prod-tag.huacai{background:#ECFEFF; color:#155E75;}
+  .prod-tag.hongkun{background:#FFFBEB; color:#92400E;}
+  .prod-tag.hongan{background:#FEF2F2; color:#B91C1C;}
+  .prod-tag.hongxilai{background:#FFF7ED; color:#9A3412;}
+  .prod-tag.general{background:#F1F5F9; color:#334155;}
+
+  /* QA卡片 */
+  .qa{background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:12px;
+    overflow:hidden; box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .qa .q{display:flex; gap:10px; padding:13px 15px; background:var(--blue-l); cursor:pointer;
+    align-items:flex-start; -webkit-user-select:none; user-select:none;}
+  .qa .q .qi{flex:none; width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;}
+  .qa .q .qt{flex:1; font-size:14.5px; font-weight:700; color:var(--blue-d); line-height:1.6;}
+  .qa .q .arrow{flex:none; color:var(--sub); font-size:14px; transition:transform .2s; margin-top:3px;}
+  .qa.open .q .arrow{transform:rotate(180deg);}
+  .qa .a{display:none; padding:14px 15px; font-size:14px; color:#334155; line-height:1.85;}
+  .qa.open .a{display:block;}
+  .qa .a b{color:var(--ink);}
+  .qa .a .hl{color:var(--blue-d); font-weight:700;}
+  .qa .a .tip{display:block; margin-top:8px; padding:8px 12px; background:var(--good-l); border-radius:8px;
+    font-size:13px; color:#166534; border-left:3px solid var(--good);}
+  .qa .a .warn{display:block; margin-top:8px; padding:8px 12px; background:var(--warn-l); border-radius:8px;
+    font-size:13px; color:#9A3412; border-left:3px solid var(--warn);}
+
+  /* 产品概览卡 */
+  .prod-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px;
+    margin-bottom:14px; box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .prod-card h3{margin:0 0 8px; font-size:16px; font-weight:800;}
+  .prod-card .feat{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;}
+  .prod-card .feat span{font-size:11.5px; padding:3px 8px; border-radius:6px; background:var(--blue-l); color:var(--blue-d); font-weight:600;}
+  .prod-card .who{font-size:13.5px; color:var(--sub); margin:0;}
+  .prod-card .vs{font-size:13px; color:#334155; margin:8px 0 0; padding:10px 12px; background:var(--bg); border-radius:8px;}
+
+  /* callout */
+  .callout{background:linear-gradient(135deg,#1E40AF,#2563EB); color:#fff; border-radius:14px; padding:16px 17px; margin:14px 0;}
+  .callout .t{font-size:15px; font-weight:700; margin-bottom:6px;}
+  .callout .b{font-size:13.5px; opacity:.95; line-height:1.7;}
+
+  /* 免责 */
+  .note{margin:18px 2px 4px; padding:13px 15px; background:var(--warn-l); border:1px solid #FED7AA; border-radius:12px;
+    font-size:12.5px; color:#9A3412; line-height:1.7;}
+  .note b{color:#7C2D12;}
+
+  footer{text-align:center; font-size:11px; color:var(--sub); margin-top:22px; padding:0 16px;}
+
+  /* 异议处理卡片 */
+  .obj{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-bottom:12px;
+    box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .obj .oq{font-size:14.5px; font-weight:700; color:#DC2626; margin-bottom:8px; display:flex; gap:8px; align-items:flex-start;}
+  .obj .oq .oi{flex:none; width:24px; height:24px; border-radius:50%; background:#FEE2E2; color:#DC2626;
+    display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700;}
+  .obj .oa{font-size:14px; color:#334155; line-height:1.85; padding-left:32px;}
+  .obj .oa b{color:var(--blue-d);}
+
+  /* 客户分层卡片 */
+  .kyc{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:14px;
+    box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .kyc .tag{display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:6px; margin-bottom:8px;}
+  .kyc .tag.boss{background:#FEF2F2; color:#B91C1C;}
+  .kyc .tag.exe{background:#EFF6FF; color:#1E40AF;}
+  .kyc .tag.pb{background:#F5F3FF; color:#6D28D9;}
+  .kyc h3{margin:0 0 6px; font-size:16px; font-weight:800;}
+  .kyc .scene{font-size:13.5px; color:var(--sub); margin:0 0 8px;}
+  .kyc .line{font-size:14px; color:#334155; line-height:1.8; margin:6px 0 0;}
+  .kyc .line b{color:var(--ink);}
+  .kyc .rec{display:inline-block; margin-top:8px; font-size:12px; font-weight:700; padding:4px 10px; border-radius:8px;
+    background:var(--blue-l); color:var(--blue-d);}
+  .kyc .example{margin-top:10px; padding:10px 12px; background:var(--bg); border-radius:8px; font-size:13px; color:#334155; line-height:1.7;}
+  .kyc .example b{color:var(--ink);}
+
+  @media(max-width:560px){
+    header h1{font-size:19px;}
+    .sec-title{font-size:16px;}
+  }
+
+  /* ===== V1.0 销售助手增强：搜索 / 复制 / 下载（纯展示层） ===== */
+  .toolbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);
+    box-shadow:0 2px 10px rgba(15,23,42,.07);padding:10px 14px;}
+  .qa-search{width:100%;padding:13px 16px;border:2px solid var(--blue);border-radius:12px;font-size:16px;
+    outline:none;box-shadow:0 1px 5px rgba(37,99,235,.14);}
+  .qa-search::placeholder{color:#94A3B8;}
+  .prod-btns{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 2px;-webkit-overflow-scrolling:touch;}
+  .prod-btns::-webkit-scrollbar{height:0;}
+  .prod-btns button{flex:none;border:none;background:var(--blue-l);color:var(--blue-d);font-weight:700;
+    font-size:13px;padding:8px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:.15s;}
+  .prod-btns button:active{background:var(--blue-100);transform:scale(.96);}
+  .qa-count{font-size:12px;color:var(--sub);padding:6px 2px 0;}
+  .qa .a,.obj .oa,.kyc .example{position:relative;padding-right:84px;}
+  .copy-btn{position:absolute;top:10px;right:12px;border:1px solid var(--line);background:#fff;color:var(--blue-d);
+    font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;opacity:.9;z-index:2;}
+  .copy-btn:active{background:var(--blue-l);}
+  .dl-fab{position:fixed;right:16px;bottom:18px;z-index:60;border:none;background:linear-gradient(135deg,var(--blue-dd),var(--blue));
+    color:#fff;font-size:14px;font-weight:700;padding:13px 18px;border-radius:30px;box-shadow:0 6px 18px rgba(37,99,235,.42);
+    cursor:pointer;}
+  .dl-fab:active{transform:scale(.96);}
+  .toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:rgba(15,23,42,.92);color:#fff;
+    font-size:13px;padding:10px 18px;border-radius:22px;z-index:80;opacity:0;transition:opacity .25s;pointer-events:none;}
+  .toast.show{opacity:1;}
+  @media(max-width:560px){ .toolbar{padding:8px 10px;} .qa-search{font-size:15px;padding:11px 14px;} }
+
+  /* ===== V3.1 销售实战问答分类导航 ===== */
+  .cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px 14px 6px;max-width:760px;margin:0 auto;}
+  .cat-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:4px;text-decoration:none;box-shadow:0 1px 3px rgba(15,23,42,.04);transition:.15s;}
+  .cat-card:active{transform:scale(.97);background:var(--blue-l);}
+  .cat-card .ci{font-size:22px;}
+  .cat-card .ct{font-size:15px;font-weight:800;color:var(--blue-d);}
+  .cat-card .cd{font-size:11.5px;color:var(--sub);line-height:1.4;}
+  .cat-card.feat{background:linear-gradient(135deg,#1E40AF,#2563EB);border-color:transparent;}
+  .cat-card.feat .ct{color:#fff;}
+  .cat-card.feat .cd{color:rgba(255,255,255,.88);}
+  @media(max-width:560px){.cat-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="sales-qa.html">← 返回销售实战问答</a>
+  <h1>🌿 养老规划</h1>
+  <div class="sub">退休现金流与养老配置</div>
+  <span class="pill">银行渠道实战版 · 中国银行服务适配</span>
+</header>
+<div class="wrap">
+  <h3>画像：收入高且稳定，最怕"退休后收入断崖"</h3>
+    <p class="scene">年薪百万级，正在交高额个税，但退休后工资收入会大幅缩水。注重生活品质，对养老现金流有隐性焦虑，也看重资产的长期确定增长。</p>
+    <p class="line"><b>核心痛点：</b>现在赚得多，但退休后没这么多。需要把"现在的钱"搬一部分到"退休后的现金流"，让品质不塌。</p>
+    <p class="line"><b>KYC三问：</b>① 您打算几岁退休？② 退休后希望每月/每年有多少被动收入？③ 现在有没有一笔5年以上不用的闲钱？</p>
+    <span class="rec">首选：宏愿人生（养老现金流）｜搭配：宏安/宏御做长期复利增值</span>
+    <div class="example"><b>举例子跟客户讲：</b>"李总，您现在年薪高，但退休那天工资就停了，光靠社保那点钱，品质肯定掉一截。宏愿这款，您现在年交一笔，等到约定年龄开始每月/每年领钱，领一辈子。等于把您现在的高收入，'平移'一部分到退休后——人退了，钱没退。"</div>
+  </div>
+
+  <div class="kyc">
+    <span class="tag pb">私人银行客户 · 50岁+</span>
+    
+<h3>方案二：高管退休现金流</h3>
+    <div class="feat">
+      <span>宏愿 S02</span><span>+ 宏安 S10</span><span>或 恒享 G23</span>
+    </div>
+    <p class="who">35-55岁公司高管，收入高但退休后怕收入断崖，既想增值又想退休后稳定领钱。</p>
+    <div class="vs"><b>话术：</b>"宏愿管养老——约定年龄开始每月每年领钱；宏安管增值——钱在里面复利跑、还带意外保障。一个管'退休后花钱'，一个管'现在钱生钱'，各司其职。"</div>
+  </div>
+
+  <div class="prod-card">
+    
+  <div class="note"><b>免责声明：</b>本页话术仅供内部培训与合规答疑参考，不构成收益承诺。所有数据以保险合同条款及官方披露为准，销售须遵守监管与合规要求。</div>
+  <footer>新华保险资料库 · 销售实战问答 · 养老规划</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+document.querySelectorAll('.qa .q').forEach(function(q){q.addEventListener('click',function(){q.parentElement.classList.toggle('open');});});
+function showToast(m){var t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},1500);}
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var a=b.closest('.qa,.obj,.kyc');if(!a)return;var t=a.innerText.replace(/复制/g,'');if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){showToast('已复制');});}});});
+</script>
+
+</body>
+</html>

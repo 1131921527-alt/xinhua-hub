@@ -189,6 +189,21 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-note{margin-top:8px;padding:8px 10px;background:var(--primary-bg);border:1px solid #BFDBFE;border-radius:8px;font-size:17px;color:#334155;line-height:1.7;box-sizing:border-box;}
 .exp-foot{margin-top:12px;font-size:17px;color:#64748B;line-height:1.8;border-top:1px solid #E2E8F0;padding-top:10px;box-sizing:border-box;}
 .exp-foot2{margin-top:8px;font-size:17px;color:#64748B;text-align:center;letter-spacing:.5px;}
+
+  /* ===== V3.1 结果页核心指标卡（手机首屏突出满期/累计/年化） ===== */
+  .key-metrics{display:flex;gap:8px;margin:14px 0 6px;}
+  .km-card{flex:1;background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%);border:1px solid #BFDBFE;border-radius:10px;padding:10px 6px;text-align:center;box-sizing:border-box;}
+  .km-label{font-size:12px;color:#1E40AF;font-weight:700;margin-bottom:4px;line-height:1.1;}
+  .km-val{font-size:17px;font-weight:800;color:#1E3A8A;line-height:1.15;word-break:break-word;}
+  @media (max-width:768px){
+    .key-metrics{gap:6px;}
+    .km-card{padding:9px 4px;}
+    .km-val{font-size:15px;}
+    .km-label{font-size:11px;}
+  }
+  /* 导出图（html2canvas 截 planArea）时隐藏指标卡，保持导出图精简 */
+  body.capturing .key-metrics{display:none !important;}
+
 </style>
 </head>
 <body>
@@ -258,6 +273,11 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 
   <div id="planArea" class="plan">
     <div class="plan-title">盈满鑫两全保险 · 分红型 · 理财计划</div>
+<div class="key-metrics" id="keyMetrics">
+      <div class="km-card"><div class="km-label">满期收益</div><div class="km-val" id="kmMaturity">—</div></div>
+      <div class="km-card"><div class="km-label">累计收益</div><div class="km-val" id="kmCum">—</div></div>
+      <div class="km-card"><div class="km-label">年化单利</div><div class="km-val" id="kmRate">—</div></div>
+    </div>
 
     <div class="intro-row">
       <div class="section">
@@ -590,6 +610,7 @@ function generate(){
   window.currentDeposit = currentDeposit;
   renderLiveDeposit(currentDeposit, currentParams);
   buildExport(rows, currentDeposit, currentParams, reserveYears);
+  (function(){var km=document.getElementById('keyMetrics');if(!km)return;var d=currentDeposit;var mb=d.maturityBenefit,tp=d.totalPrem;document.getElementById('kmMaturity').textContent=fmt(mb);document.getElementById('kmCum').textContent=fmt(mb-tp);document.getElementById('kmRate').textContent=(d.comboAnnualized*100).toFixed(2)+'%';})();
 }
 
 // ---------- 实时页：定存明细 + 组合计划 ----------
@@ -678,11 +699,11 @@ function buildExport(rows, dep, p, reserveYears){
     <div class="exp-row2">
       <div class="exp-box">
         <div class="exp-h">公司介绍</div>
-        <div class="exp-b">成立日期：1996年9月人民大会堂<br>主要股东：中央汇金（与中农工建四大银行同属一个大股东）、中国宝武钢铁<br>荣誉地位：全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》《财富》500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</div>
+        <div class="exp-b">成立：1996年，国有控股上市险企（上海/香港两地上市）<br>大股东：中央汇金、中国宝武钢铁<br>评级：连续九年惠誉"A"级、穆迪"A2"级，世界500强企业</div>
       </div>
       <div class="exp-box">
         <div class="exp-h">产品简介</div>
-        <div class="exp-b">投保年龄：0-75周岁，3年交支持6年/8年/10年，5年交支持10年/15年<br>身故保障：安心理财之余，最高160%赔付比例，额外提供身故保障<br>满期领取：被保险人生存至保险期间届满，按基本保险金额（高于所交保费）给付满期生存保险金<br>鑫享红利：享有保单红利分配的机会，赋能利益提升，共享保司盈利</div>
+        <div class="exp-b">投保年龄0-75周岁：3年交支持6/8/10年，5年交支持10/15年<br>满期领取：生存至期满按基本保额（高于所交保费）给付满期金<br>身故保障：最高160%赔付；鑫享红利：享保单红利分配</div>
       </div>
     </div>
 
@@ -699,23 +720,23 @@ function buildExport(rows, dep, p, reserveYears){
       <div class="exp-h">各保单年度利益演示</div>
       <table class="exp-main">
         <colgroup>
-          <col style="width:6%"><col style="width:8%"><col style="width:11%"><col style="width:11%"><col style="width:11%"><col style="width:10%"><col style="width:11%"><col style="width:12%"><col style="width:12%"><col style="width:8%">
+          <col style="width:6%"><col style="width:7%"><col style="width:9%"><col style="width:8%"><col style="width:8%"><col style="width:9%"><col style="width:11%"><col style="width:13%"><col style="width:15%"><col style="width:14%">
         </colgroup>
         <thead>
           <tr>
             <th rowspan="2"><span class="exp-th-main">保单</span><span class="exp-th-sub">年度</span></th>
-            <th rowspan="2"><span class="exp-th-main">年龄</span><span class="exp-th-sub">（年末）</span></th>
-            <th rowspan="2"><span class="exp-th-main">当年保费</span><span class="exp-th-sub">（年初）</span></th>
+            <th rowspan="2"><span class="exp-th-main">年龄</span></th>
+            <th rowspan="2"><span class="exp-th-main">当年保费</span></th>
             <th rowspan="2"><span class="exp-th-main">保证身故</span><span class="exp-th-sub">保险金</span></th>
             <th rowspan="2"><span class="exp-th-main">预期身故</span><span class="exp-th-sub">保险金</span></th>
             <th rowspan="2">红利现价</th>
             <th rowspan="2">满期金</th>
-            <th colspan="2"><span class="exp-th-main">生存总利益</span><span class="exp-th-sub">（年末）</span></th>
+            <th colspan="2"><span class="exp-th-main">生存总利益</span><span class="exp-th-sub">（保证+红利）</span></th>
             <th rowspan="2"><span class="exp-th-main">预期</span><span class="exp-th-sub">年化单利</span></th>
           </tr>
           <tr>
-            <th><span class="exp-th-main">现金价值</span><span class="exp-th-sub">保证部分</span></th>
-            <th><span class="exp-th-main">现金价值</span><span class="exp-th-sub">保证+红利</span></th>
+            <th><span class="exp-th-main">现金价</span><span class="exp-th-sub">保证</span></th>
+            <th><span class="exp-th-main">现金价</span><span class="exp-th-sub">保证+红利</span></th>
           </tr>
         </thead>
         <tbody>${benefitBody}</tbody>

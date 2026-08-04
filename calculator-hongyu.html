@@ -108,6 +108,21 @@ body.capturing .table-scroll{overflow:visible !important;}
   .plan-intro>div{border-right:0;border-bottom:2px solid var(--blue);}
   .plan-intro>div:last-child{border-bottom:0;}
 }
+
+  /* ===== V3.1 结果页核心指标卡（手机首屏突出满期/累计/年化） ===== */
+  .key-metrics{display:flex;gap:8px;margin:14px 0 6px;}
+  .km-card{flex:1;background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%);border:1px solid #BFDBFE;border-radius:10px;padding:10px 6px;text-align:center;box-sizing:border-box;}
+  .km-label{font-size:12px;color:#1E40AF;font-weight:700;margin-bottom:4px;line-height:1.1;}
+  .km-val{font-size:17px;font-weight:800;color:#1E3A8A;line-height:1.15;word-break:break-word;}
+  @media (max-width:768px){
+    .key-metrics{gap:6px;}
+    .km-card{padding:9px 4px;}
+    .km-val{font-size:15px;}
+    .km-label{font-size:11px;}
+  }
+  /* 导出图（html2canvas 截 planArea）时隐藏指标卡，保持导出图精简 */
+  body.capturing .key-metrics{display:none !important;}
+
 </style>
 <script src="html2canvas.min.js"></script>
 <script src="product-rules.js"></script>
@@ -171,6 +186,11 @@ body.capturing .table-scroll{overflow:visible !important;}
 
   <div id="planArea" class="plan">
     <div class="plan-title">宏御世家 · 分红型 · 理财计划</div>
+<div class="key-metrics" id="keyMetrics">
+      <div class="km-card"><div class="km-label">满期收益</div><div class="km-val" id="kmMaturity">—</div></div>
+      <div class="km-card"><div class="km-label">累计收益</div><div class="km-val" id="kmCum">—</div></div>
+      <div class="km-card"><div class="km-label">年化单利</div><div class="km-val" id="kmRate">—</div></div>
+    </div>
     <div class="plan-intro">
       <div>
         <h4>公司介绍</h4>
@@ -445,7 +465,8 @@ async function generate() {
     applyReserveRowspan();
     
     
-  } catch (e) {
+    (function(){var km=document.getElementById('keyMetrics');if(!km)return;var lr=allRows[allRows.length-1];var tp=premium*(term===1?1:term);document.getElementById('kmMaturity').textContent=fmt(lr.total);document.getElementById('kmCum').textContent=fmt(lr.total-tp);document.getElementById('kmRate').textContent=((lr.total-tp)/(tp*maxYear)*100).toFixed(2)+'%';})();
+  } catch(e) {
     showError('计算出错：' + e.message);
   } finally {
     btn.disabled = false;
