@@ -644,7 +644,7 @@ function buildExport(rows, dep, p, reserveYears){
     let yieldCell;
     if(isReserve){
       yieldCell = idx === 0
-        ? `<td class="exp-reserve" rowspan="${reserveYears}">储备期</td>`
+        ? `<td class="exp-reserve" rowspan="${reserveYears}" aria-label="储备期"></td>`
         : '';
     } else {
       yieldCell = `<td>${r.yieldVal === null ? '－' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
