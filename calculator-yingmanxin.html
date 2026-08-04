@@ -169,11 +169,11 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-stats{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
 .exp-stats span{background:var(--primary-bg);border:1px solid #BFDBFE;color:var(--primary);padding:5px 10px;font-weight:700;font-size:18px;border-radius:6px;}
 .exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:18px;box-sizing:border-box;margin-top:2px;}
-.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:6px 2px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:4px 1px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
 .exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
-.exp-main thead th{font-size:14px;line-height:1.2;padding:5px 1px;}
-.exp-main thead .exp-th-main,.exp-main thead .exp-th-sub{display:block;white-space:nowrap;}
-.exp-main thead .exp-th-sub{font-size:13px;margin-top:2px;}
+.exp-main thead th{font-size:13px;line-height:1.25;padding:4px 1px;white-space:normal;word-break:break-word;}
+.exp-main thead .exp-th-main,.exp-main thead .exp-th-sub{display:block;white-space:normal;}
+.exp-main thead .exp-th-sub{font-size:12px;margin-top:1px;font-weight:500;}
 .exp-main tbody tr:nth-child(even){background:#F0F9FF;}
 .exp-main .exp-total{background:#DBEAFE;}
 .exp-main .exp-reserve{background:#DBEAFE;color:#475569;font-weight:800;text-align:center;vertical-align:middle;font-size:20px;letter-spacing:1px;}
@@ -720,7 +720,7 @@ function buildExport(rows, dep, p, reserveYears){
       <div class="exp-h">各保单年度利益演示</div>
       <table class="exp-main">
         <colgroup>
-          <col style="width:6%"><col style="width:7%"><col style="width:9%"><col style="width:8%"><col style="width:8%"><col style="width:9%"><col style="width:11%"><col style="width:13%"><col style="width:15%"><col style="width:14%">
+          <col style="width:4%"><col style="width:4%"><col style="width:12%"><col style="width:10%"><col style="width:12%"><col style="width:10%"><col style="width:11%"><col style="width:13%"><col style="width:15%"><col style="width:9%">
         </colgroup>
         <thead>
           <tr>
@@ -785,7 +785,7 @@ function buildExport(rows, dep, p, reserveYears){
     }
   };
   fitExportTable(root.querySelector('.exp-info'), 'td', 19, 12);
-  fitExportTable(root.querySelector('.exp-main'), 'tbody td:not(.exp-reserve)', 18, 10);
+  fitExportTable(root.querySelector('.exp-main'), 'tbody td:not(.exp-reserve)', 16, 12);
 }
 
 async function downloadImage(){
