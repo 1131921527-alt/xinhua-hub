@@ -72,7 +72,7 @@ th, td { font-size: var(--fs-base); }
 ### 4.2 标准全站验收（`qa/capture_acceptance.py`）
 - **69 张截图 / 23.9MB** → `qa/screenshots/2026-08-05/`
 - 18 个页面手机端横向滚动全 PASS。
-- 5 款演算器导出 PNG 宽度/署名/储备期（除恒享历史遗留外）全部 OK。
+- 5 款演算器导出 PNG 宽度/署名/储备期全部 OK（恒享储备期列后续已补齐）。
 
 ### 4.3 关键截图位置
 - 手机场景全量：`qa/screenshots/2026-08-05/mobile/`
@@ -81,15 +81,17 @@ th, td { font-size: var(--fs-base); }
 - 宏安 1000万导出：`hongan_1000w_export.png`
 - 宏御 1000万导出：`hongyu_1000w_export.png`
 
-## 五、已知遗留
-- **恒享人生 hengxiang 导出图「储备期」标记缺失**：V4.0 前历史遗留，本次未触碰其生成逻辑，待后续专项处理。
+## 五、后续补充修复
+- **恒享人生 hengxiang 导出图/网页「储备期」列补齐**：
+  - 网页表格新增第 9 列「储备期」（前5年浅蓝底「储备期」，之后「-」），遵循 2026-07-24 招行版「逐行独立 td」规范。
+  - 修复 `generate()` 中核心指标卡 IIFE 被错误放在 `}catch` 之后，引用 `try` 块级 `years` 导致的 `years is not defined`，以致按钮永久卡死在「计算中…」且 #kmMaturity/#kmCum/#kmRate 空白。
 - **站内搜索**：仍为方案文档 `docs/search-plan.md`，未开发。
 
 ## 六、提交
-- 本次 commit：`b115ef5`
+- 任务0 commit：`b115ef5`
+- 恒享储备期 + 指标卡 IIFE 修复 commit：`TODO`
 - 已 push 至 GitHub Pages：`https://1131921527-alt.github.io/xinhua-hub/`
 - 微信内置浏览器会拦截 github.io，请用 Chrome 桌面端或手机浏览器打开。
 
 ## 七、后续建议
 1. 若用户继续反馈某款演算器导出图表格仍小，可考虑对复杂表启用「导出摘要模式」（顶部大卡 + 关键年度数据），保留完整数据表作为第二页。
-2. 恒享「储备期」标记缺失建议单独立项，修复后统一跑 `mobile_scenario_test.py hengxiang` 验证。

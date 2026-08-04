@@ -41,6 +41,9 @@
   .col-cv{color:var(--cv);font-weight:600;}
   .col-surv{color:var(--surv);font-weight:700;}
   .col-ann{color:#2563EB;font-weight:600;}
+  /* 储备期列：遵循 2026-07-24 招行规范（前5年逐行独立 td，浅蓝底居中灰字，与宏安/宏御/宏愿对齐） */
+  #resultTable .col-rate{text-align:center;color:#64748B;font-weight:600;white-space:nowrap;}
+  #resultTable td.col-rate.reserve-cell{background:#DBEAFE;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 22px;border-radius:24px;opacity:0;transition:.3s;font-size:14px;z-index:99;}
@@ -213,7 +216,7 @@ body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
         <thead><tr>
           <th>保单年度</th><th>年龄</th><th>累计保费</th>
           <th>关爱金年金</th><th>累计关爱金年金</th>
-          <th>身故保险金</th><th>现金价值</th><th>生存总利益(年末)</th>
+          <th>身故保险金</th><th>现金价值</th><th>生存总利益(年末)</th><th>储备期</th>
         </tr></thead>
         <tbody id="resultBody"></tbody>
       </table>
@@ -279,6 +282,7 @@ async function generate(){
     const body=document.getElementById('resultBody');
     body.innerHTML='';
 
+    const reserveYears=5; // 招行规范：前5年（储备期）统一显示"储备期"
     years.forEach((row,idx)=>{
       const yr=row[0], cum=row[2], ann=row[3], annCum=row[4], death=row[6], cv=row[7], surv=row[8];
       const curAge=age+yr-1;
@@ -288,18 +292,25 @@ async function generate(){
       const tr=document.createElement('tr');
       if(rowClass) tr.className=rowClass;
 
+      // 储备期列：前5年显示"储备期"（浅蓝底，逐行独立 td），之后显示"-"
+      const reserveCell = yr <= reserveYears
+        ? `<td class="col-rate reserve-cell">储备期</td>`
+        : `<td class="col-rate">-</td>`;
+
       let cells=`<td>${yr}</td><td>${curAge}</td>`;
       cells+=`<td>${fmt(cum*scale)}</td>`;
       cells+=`<td class="col-ann">${ann>0?fmt(ann*scale):'-'}</td><td class="col-ann">${fmt(annCum*scale)}</td>`;
       cells+=`<td>${fmt(death*scale)}</td>`;
       cells+=`<td class="col-cv">${fmt(cv*scale)}</td><td class="col-surv">${fmt(surv*scale)}</td>`;
+      cells+=reserveCell;
       tr.innerHTML=cells;
       body.appendChild(tr);
     });
     // 应用显示密度过滤
     if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y60'); }
+    // 填充核心指标卡（满期/累计/年化）——须位于 try 内：years/scale 为 try 块级作用域
+    (function(){var km=document.getElementById('keyMetrics');if(!km)return;var ly=years[years.length-1];var ls=ly[8]*scale;var tp=premium*term;document.getElementById('kmMaturity').textContent=fmt(ls);document.getElementById('kmCum').textContent=fmt(ls-tp);document.getElementById('kmRate').textContent=((ls-tp)/(tp*years.length)*100).toFixed(2)+'%';})();
   }catch(e){showError('生成出错：'+e.message);}
-  (function(){var km=document.getElementById('keyMetrics');if(!km)return;var ly=years[years.length-1];var ls=ly[8]*scale;var tp=premium*term;document.getElementById('kmMaturity').textContent=fmt(ls);document.getElementById('kmCum').textContent=fmt(ls-tp);document.getElementById('kmRate').textContent=((ls-tp)/(tp*years.length)*100).toFixed(2)+'%';})();
   btn.disabled=false; btn.textContent='生成利益演示';
 }
 
