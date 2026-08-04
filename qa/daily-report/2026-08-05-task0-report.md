@@ -89,7 +89,7 @@ th, td { font-size: var(--fs-base); }
 
 ## 六、提交
 - 任务0 commit：`b115ef5`
-- 恒享储备期 + 指标卡 IIFE 修复 commit：`TODO`
+- 恒享储备期 + 指标卡 IIFE 修复 commit：`3cf55ee`
 - 已 push 至 GitHub Pages：`https://1131921527-alt.github.io/xinhua-hub/`
 - 微信内置浏览器会拦截 github.io，请用 Chrome 桌面端或手机浏览器打开。
 
