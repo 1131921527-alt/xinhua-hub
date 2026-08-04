@@ -155,14 +155,14 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 
 /* ============ 独立隐藏导出模板（高清 PNG，不直接截取网页）============ */
 #exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
-.exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:36px;line-height:1.55;}
-.exp-title{text-align:center;font-size:34px;font-weight:800;color:var(--primary);margin:0 0 20px;letter-spacing:1px;}
-.exp-row2{display:flex;border:2px solid var(--primary);margin-bottom:10px;box-sizing:border-box;}
-.exp-box{border:2px solid var(--primary);background:#fff;padding:10px 12px;margin-bottom:10px;box-sizing:border-box;}
+.exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:30px;line-height:1.5;}
+.exp-title{text-align:center;font-size:32px;font-weight:800;color:var(--primary);margin:0 0 16px;letter-spacing:1px;}
+.exp-row2{display:flex;border:2px solid var(--primary);margin-bottom:8px;box-sizing:border-box;}
+.exp-box{border:2px solid var(--primary);background:#fff;padding:8px 10px;margin-bottom:8px;box-sizing:border-box;}
 .exp-row2 > .exp-box{flex:1;border:0;margin-bottom:0;}
 .exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
-.exp-h{background:var(--primary);color:#fff;font-size:19px;font-weight:700;padding:7px 9px;margin:-10px -12px 7px;box-sizing:border-box;}
-.exp-b{font-size:17px;line-height:1.55;color:#1E293B;}
+.exp-h{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:6px 8px;margin:-8px -10px 6px;box-sizing:border-box;}
+.exp-b{font-size:15px;line-height:1.45;color:#1E293B;}
 .exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:19px;border:2px solid var(--primary);box-sizing:border-box;}
 .exp-info th,.exp-info td{border:1px solid var(--primary);padding:5px 3px;text-align:center;box-sizing:border-box;font-weight:600;color:#1E293B;}
 .exp-info th{background:var(--primary-bg);color:var(--primary);font-weight:700;}
@@ -171,7 +171,9 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:18px;box-sizing:border-box;margin-top:2px;}
 .exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:6px 2px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
 .exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
-.exp-main thead th{line-height:1.15;}
+.exp-main thead th{font-size:14px;line-height:1.2;padding:5px 1px;}
+.exp-main thead .exp-th-main,.exp-main thead .exp-th-sub{display:block;white-space:nowrap;}
+.exp-main thead .exp-th-sub{font-size:13px;margin-top:2px;}
 .exp-main tbody tr:nth-child(even){background:#F0F9FF;}
 .exp-main .exp-total{background:#DBEAFE;}
 .exp-main .exp-reserve{background:#DBEAFE;color:#475569;font-weight:800;text-align:center;vertical-align:middle;font-size:20px;letter-spacing:1px;}
@@ -697,23 +699,23 @@ function buildExport(rows, dep, p, reserveYears){
       <div class="exp-h">各保单年度利益演示</div>
       <table class="exp-main">
         <colgroup>
-          <col style="width:6%"><col style="width:6%"><col style="width:11%"><col style="width:11%"><col style="width:11%"><col style="width:10%"><col style="width:11%"><col style="width:12%"><col style="width:12%"><col style="width:10%">
+          <col style="width:6%"><col style="width:8%"><col style="width:11%"><col style="width:11%"><col style="width:11%"><col style="width:10%"><col style="width:11%"><col style="width:12%"><col style="width:12%"><col style="width:8%">
         </colgroup>
         <thead>
           <tr>
-            <th rowspan="2">保单<br>年度</th>
-            <th rowspan="2">年龄<br>(年末)</th>
-            <th rowspan="2">当年保费<br>(年初)</th>
-            <th rowspan="2">保证身故<br>保险金</th>
-            <th rowspan="2">预期身故<br>保险金</th>
+            <th rowspan="2"><span class="exp-th-main">保单</span><span class="exp-th-sub">年度</span></th>
+            <th rowspan="2"><span class="exp-th-main">年龄</span><span class="exp-th-sub">（年末）</span></th>
+            <th rowspan="2"><span class="exp-th-main">当年保费</span><span class="exp-th-sub">（年初）</span></th>
+            <th rowspan="2"><span class="exp-th-main">保证身故</span><span class="exp-th-sub">保险金</span></th>
+            <th rowspan="2"><span class="exp-th-main">预期身故</span><span class="exp-th-sub">保险金</span></th>
             <th rowspan="2">红利现价</th>
             <th rowspan="2">满期金</th>
-            <th colspan="2">生存总利益（年末）</th>
-            <th rowspan="2">预期<br>年化单利</th>
+            <th colspan="2"><span class="exp-th-main">生存总利益</span><span class="exp-th-sub">（年末）</span></th>
+            <th rowspan="2"><span class="exp-th-main">预期</span><span class="exp-th-sub">年化单利</span></th>
           </tr>
           <tr>
-            <th>现金价值<br>保证部分</th>
-            <th>现金价值<br>保证+红利</th>
+            <th><span class="exp-th-main">现金价值</span><span class="exp-th-sub">保证部分</span></th>
+            <th><span class="exp-th-main">现金价值</span><span class="exp-th-sub">保证+红利</span></th>
           </tr>
         </thead>
         <tbody>${benefitBody}</tbody>
