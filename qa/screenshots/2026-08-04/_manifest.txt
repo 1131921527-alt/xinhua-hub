@@ -1,0 +1,68 @@
+xinhua-hub 验收截图清单  2026-08-04
+共 48 张 / 19.1MB
+
+2026-08-04_company_firstscreen_mobile.png                780x1688  226KB
+2026-08-04_company_mobile.png                            390x4167  211KB
+2026-08-04_company_pc.png                                1440x2639  281KB
+2026-08-04_dividend_firstscreen_mobile.png               780x1688  292KB
+2026-08-04_dividend_mobile.png                           390x1495  128KB
+2026-08-04_dividend_pc.png                               1440x1200  192KB
+2026-08-04_hengxiang_export_mobile.png                   1600x3044  780KB
+2026-08-04_hengxiang_input_mobile.png                    748x946  46KB
+2026-08-04_hengxiang_input_pc.png                        1140x101  10KB
+2026-08-04_hengxiang_mobile.png                          390x3468  180KB
+2026-08-04_hengxiang_result_mobile.png                   748x2502  227KB
+2026-08-04_hengxiang_result_pc.png                       1140x1180  190KB
+2026-08-04_home_firstscreen_mobile.png                   780x1688  373KB
+2026-08-04_home_mobile.png                               390x9320  790KB
+2026-08-04_home_pc.png                                   1440x9465  1194KB
+2026-08-04_hongan_export_mobile.png                      1600x7566  1939KB
+2026-08-04_hongan_input_mobile.png                       780x1042  62KB
+2026-08-04_hongan_input_pc.png                           1200x130  15KB
+2026-08-04_hongan_mobile.png                             390x2718  110KB
+2026-08-04_hongan_result_mobile.png                      748x3964  282KB
+2026-08-04_hongan_result_pc.png                          1200x1551  331KB
+2026-08-04_hongli_2025_firstscreen_mobile.png            780x1688  442KB
+2026-08-04_hongli_2025_mobile.png                        390x8282  666KB
+2026-08-04_hongli_2025_pc.png                            1440x6297  828KB
+2026-08-04_hongli_doc_firstscreen_mobile.png             780x1688  362KB
+2026-08-04_hongli_doc_mobile.png                         390x10901  876KB
+2026-08-04_hongli_doc_pc.png                             1440x7396  1027KB
+2026-08-04_hongyu_export_mobile.png                      1600x9732  1823KB
+2026-08-04_hongyu_input_mobile.png                       716x1040  68KB
+2026-08-04_hongyu_input_pc.png                           1080x125  15KB
+2026-08-04_hongyu_mobile.png                             390x2781  186KB
+2026-08-04_hongyu_result_mobile.png                      716x3538  277KB
+2026-08-04_hongyu_result_pc.png                          1080x1569  241KB
+2026-08-04_hongyuan_export_mobile.png                    1600x6654  1629KB
+2026-08-04_hongyuan_input_mobile.png                     780x1346  83KB
+2026-08-04_hongyuan_input_pc.png                         1200x207  19KB
+2026-08-04_hongyuan_mobile.png                           390x2555  115KB
+2026-08-04_hongyuan_result_mobile.png                    748x3334  290KB
+2026-08-04_hongyuan_result_pc.png                        1200x1210  255KB
+2026-08-04_sales_qa_firstscreen_mobile.png               780x1688  442KB
+2026-08-04_sales_qa_mobile.png                           390x844  126KB
+2026-08-04_sales_qa_pc.png                               1440x900  256KB
+2026-08-04_yingmanxin_export_mobile.png                  1600x3030  837KB
+2026-08-04_yingmanxin_input_mobile.png                   780x1322  91KB
+2026-08-04_yingmanxin_input_pc.png                       1200x221  21KB
+2026-08-04_yingmanxin_mobile.png                         390x2757  169KB
+2026-08-04_yingmanxin_result_mobile.png                  748x3738  413KB
+2026-08-04_yingmanxin_result_pc.png                      1200x1420  191KB
+
+手机端横向滚动检查：
+  home         PASS 无横向滚动
+  yingmanxin   PASS 无横向滚动
+  hongan       PASS 无横向滚动
+  hengxiang    PASS 无横向滚动
+  hongyu       PASS 无横向滚动
+  hongyuan     PASS 无横向滚动
+  dividend     PASS 无横向滚动
+  hongli_2025  PASS 无横向滚动
+  hongli_doc   PASS 无横向滚动
+  sales_qa     PASS 无横向滚动
+  company      PASS 无横向滚动
+
+遇到的问题：
+- 2026-08-04_sales_qa_pc.png: 页面过长(16077px)，仅截取前 12000px
+- 2026-08-04_sales_qa_mobile.png: 页面过长(22195px)，仅截取前 12000px

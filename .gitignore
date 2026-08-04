@@ -1,4 +1,5 @@
 *.py
+!qa/capture_acceptance.py
 *_data.json
 *_data_new.js
 *_data_check.json
