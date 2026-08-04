@@ -157,12 +157,12 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 #exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
 .exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:36px;line-height:1.55;}
 .exp-title{text-align:center;font-size:34px;font-weight:800;color:var(--primary);margin:0 0 20px;letter-spacing:1px;}
-.exp-row2{display:flex;border:2px solid var(--primary);margin-bottom:14px;box-sizing:border-box;}
-.exp-box{border:2px solid var(--primary);background:#fff;padding:12px 14px;margin-bottom:14px;box-sizing:border-box;}
+.exp-row2{display:flex;border:2px solid var(--primary);margin-bottom:10px;box-sizing:border-box;}
+.exp-box{border:2px solid var(--primary);background:#fff;padding:10px 12px;margin-bottom:10px;box-sizing:border-box;}
 .exp-row2 > .exp-box{flex:1;border:0;margin-bottom:0;}
 .exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
-.exp-h{background:var(--primary);color:#fff;font-size:20px;font-weight:700;padding:8px 10px;margin:-12px -14px 9px;box-sizing:border-box;}
-.exp-b{font-size:20px;line-height:1.8;color:#1E293B;}
+.exp-h{background:var(--primary);color:#fff;font-size:19px;font-weight:700;padding:7px 9px;margin:-10px -12px 7px;box-sizing:border-box;}
+.exp-b{font-size:17px;line-height:1.55;color:#1E293B;}
 .exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:19px;border:2px solid var(--primary);box-sizing:border-box;}
 .exp-info th,.exp-info td{border:1px solid var(--primary);padding:5px 3px;text-align:center;box-sizing:border-box;font-weight:600;color:#1E293B;}
 .exp-info th{background:var(--primary-bg);color:var(--primary);font-weight:700;}
@@ -221,7 +221,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
       </div>
       <div class="field">
         <label>年交保费（元）</label>
-        <input id="premium" type="number" value="100000" min="10000" step="1000">
+        <input id="premium" type="number" value="100000" min="10000" max="10000000" step="1000">
       </div>
       <div class="field" id="rateField">
         <label>演示累积生息利率</label>
@@ -461,6 +461,7 @@ function generate(){
 
   if(age < 0 || age > 75){ errEl.textContent = '投保年龄超出范围（0-75周岁）'; errEl.classList.add('show'); return; }
   if(premium < 10000){ errEl.textContent = '年交保费最低1万元'; errEl.classList.add('show'); return; }
+  if(premium > 10000000){ errEl.textContent = '年交保费最高1000万元'; errEl.classList.add('show'); return; }
 
   const scale = premium / 1000;
   const totalPrem = premium * payTerm;
@@ -747,6 +748,21 @@ function buildExport(rows, dep, p, reserveYears){
     <div class="exp-foot">⚠ 本计划书基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
     <div class="exp-foot2">新华资料库 xinhua-hub ｜ 生成日期：${dateNice}</div>
   </div>`;
+
+  // 按本次测算的实际数字自动缩放：10万保持清晰大字，最高1000万仍不得串格。
+  const fitExportTable = (table, cellSelector, startSize, minSize) => {
+    if(!table) return;
+    let fontSize = startSize;
+    const valueCells = Array.from(table.querySelectorAll(cellSelector));
+    const hasOverflow = () => valueCells.some(cell => cell.scrollWidth > cell.clientWidth + 1);
+    table.style.fontSize = fontSize + 'px';
+    while(fontSize > minSize && hasOverflow()){
+      fontSize -= 1;
+      table.style.fontSize = fontSize + 'px';
+    }
+  };
+  fitExportTable(root.querySelector('.exp-info'), 'td', 19, 12);
+  fitExportTable(root.querySelector('.exp-main'), 'tbody td:not(.exp-reserve)', 18, 10);
 }
 
 async function downloadImage(){
