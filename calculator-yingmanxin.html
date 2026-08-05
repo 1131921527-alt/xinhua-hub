@@ -163,11 +163,15 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 #exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
 .exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:30px;line-height:1.5;}
 .exp-title{text-align:center;font-size:28px;font-weight:800;color:var(--primary);margin:0 0 12px;letter-spacing:1px;}
-.exp-row2{display:table;width:100%;table-layout:fixed;border:2px solid var(--primary);border-collapse:collapse;margin-bottom:8px;box-sizing:border-box;}
-.exp-box{border:2px solid var(--primary);background:#fff;padding:8px 10px;margin-bottom:8px;box-sizing:border-box;}
+.exp-row2{display:table;width:100%;table-layout:fixed;border:2px solid var(--primary);border-collapse:collapse;margin-bottom:6px;box-sizing:border-box;}
+.exp-box{border:2px solid var(--primary);background:#fff;padding:8px 10px;margin-bottom:6px;box-sizing:border-box;}
 .exp-row2 > .exp-box{display:table-cell;width:50%;vertical-align:top;border:0;margin-bottom:0;padding:10px 12px;box-sizing:border-box;}
 .exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
 .exp-h{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:6px 10px;margin:-10px -12px 10px;box-sizing:border-box;}
+/* 定存收益明细区块：标题条与 .exp-box 蓝色边框/表格表头之间留出白间隙，避免蓝色块与蓝线重叠 */
+.exp-box.dep-box{padding-top:10px;}
+.exp-box.dep-box .exp-h{margin:-6px -12px 14px;border-radius:4px;}
+.exp-box.dep-box .exp-dep{margin-top:6px;}
 .exp-b{font-size:15px;line-height:1.8;color:#1E293B;margin-top:4px;}
 .exp-b p{margin:0 0 8px 0;}
 .exp-b p:last-child{margin-bottom:0;}
@@ -175,23 +179,24 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 /* 导出表格统一强制垂直居中（html2canvas 对 vertical-align 支持不稳，inline 兜底见 fitExportTable） */
 .exp-info th,.exp-info td,.exp-main th,.exp-main td,.exp-dep th,.exp-dep td,.exp-dep tfoot td,.exp-combo td{vertical-align:middle !important;}
 .exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:19px;border:2px solid var(--primary);box-sizing:border-box;}
-.exp-info th,.exp-info td{border:1px solid var(--primary);padding:7px 3px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-info th,.exp-info td{border:1px solid var(--primary);padding:6px 3px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:400;color:#1E293B;}
 .exp-info th{font-size:15px;}
 .exp-info th{background:var(--primary-bg);color:var(--primary);font-weight:700;}
 .exp-stats{margin-top:8px;background:#F8FAFC;border:1px solid #E2E8F0;border-left:3px solid var(--primary);border-radius:4px;padding:7px 10px;font-size:13.5px;color:#475569;line-height:1.6;box-sizing:border-box;}
 .exp-stats span{display:inline;background:none;border:none;color:#334155;font-weight:600;font-size:13.5px;padding:0;margin:0;border-radius:0;}
 .exp-stats span + span::before{content:"｜";color:#94A3B8;font-weight:400;margin:0 6px;}
 .exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:18px;box-sizing:border-box;margin-top:2px;}
-.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:6px 2px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:5px 2px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:400;color:#1E293B;}
 .exp-main tbody td{white-space:nowrap;}
 .exp-info td{white-space:nowrap;}
 .exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
-.exp-main thead th{font-size:14px;line-height:1.25;padding:6px 1px;white-space:normal;word-break:break-word;}
+.exp-main thead th{font-size:13px;line-height:1.15;padding:4px 1px;white-space:normal;word-break:break-word;}
 .exp-main thead .exp-th-main,.exp-main thead .exp-th-sub{display:block;white-space:normal;}
-.exp-main thead .exp-th-sub{font-size:12px;margin-top:1px;font-weight:500;}
+.exp-main thead .exp-th-sub{font-size:11px;margin-top:0;font-weight:500;}
 .exp-main tbody tr:nth-child(even){background:#F0F9FF;}
-.exp-main .exp-total{background:#DBEAFE;}
-.exp-main .exp-reserve{background:#DBEAFE;color:#475569;font-weight:800;text-align:center;vertical-align:middle;font-size:15px;letter-spacing:1px;padding:4px 2px;box-sizing:border-box;}
+.exp-main .exp-total{background:#DBEAFE;font-weight:700;}
+.exp-main .exp-key{font-weight:700;}
+.exp-main .exp-reserve{background:#DBEAFE;color:#475569;font-weight:800;text-align:center;vertical-align:middle;font-size:15px;letter-spacing:1px;padding:0;box-sizing:border-box;}
 .exp-dep tfoot td{border:1px solid var(--primary);padding:7px 2px;vertical-align:middle;box-sizing:border-box;}
 .exp-dep .exp-foot-label{text-align:right;font-weight:700;background:var(--primary-bg);color:var(--primary);}
 .exp-dep .exp-foot-val{font-weight:800;color:var(--primary);}
@@ -703,7 +708,7 @@ function buildExport(rows, dep, p, reserveYears){
       <td>${fmt(r.deathGuar)}</td>
       <td>${fmt(r.deathExp)}</td>
       <td>${fmt(r.hongliVal)}</td>
-      <td>${r.maturity > 0 ? fmt(r.maturity) : '－'}</td>
+      <td class="exp-key">${r.maturity > 0 ? fmt(r.maturity) : '－'}</td>
       <td>${fmt(r.cv)}</td>
       <td class="exp-total">${fmt(r.cvTotal)}</td>
       ${yieldCell}
@@ -755,7 +760,7 @@ function buildExport(rows, dep, p, reserveYears){
       <div class="exp-h">各保单年度利益演示</div>
       <table class="exp-main">
         <colgroup>
-          <col style="width:4%"><col style="width:4%"><col style="width:12%"><col style="width:10%"><col style="width:12%"><col style="width:10%"><col style="width:11%"><col style="width:13%"><col style="width:15%"><col style="width:9%">
+          <col style="width:3.5%"><col style="width:4.5%"><col style="width:11%"><col style="width:11%"><col style="width:11%"><col style="width:10%"><col style="width:11%"><col style="width:13%"><col style="width:15%"><col style="width:10%">
         </colgroup>
         <thead>
           <tr>
@@ -778,7 +783,7 @@ function buildExport(rows, dep, p, reserveYears){
       </table>
     </div>
 
-    <div class="exp-box">
+    <div class="exp-box dep-box">
       <div class="exp-h">定存收益明细（续期保费组合）</div>
       <table class="exp-dep">
         <colgroup><col style="width:18%"><col style="width:22%"><col style="width:14%"><col style="width:16%"><col style="width:30%"></colgroup>
@@ -820,7 +825,7 @@ function buildExport(rows, dep, p, reserveYears){
     // 表头固定较小字号（13-14px），避免字段拥挤
     const setHeader = (fs) => headerCells.forEach(c => {
       c.style.fontSize = fs + 'px';
-      c.style.lineHeight = '1.25';
+      c.style.lineHeight = '1.15';
       c.querySelectorAll('.exp-th-main').forEach(s => s.style.fontSize = fs + 'px');
       c.querySelectorAll('.exp-th-sub').forEach(s => s.style.fontSize = (fs - 2) + 'px');
     });
@@ -837,26 +842,73 @@ function buildExport(rows, dep, p, reserveYears){
       setBody(fontSize);
     }
     // 真正垂直居中兜底：html2canvas 对 vertical-align 支持不稳，
-    // 表头回归 table-cell + verticalAlign 由 CSS 控制，避免 display:flex 破坏表格列宽；
-    // 数据单元格用 line-height=格高强制单行文本居中
-    table.querySelectorAll('tbody tr').forEach(tr => {
-      const cells = Array.from(tr.querySelectorAll('td'));
-      let maxH = 0;
-      cells.forEach(c => { maxH = Math.max(maxH, c.clientHeight); });
-      if(maxH > 0){
-        cells.forEach(c => {
-          c.style.height = maxH + 'px';
-          c.style.lineHeight = maxH + 'px';
+    // 数据单元格用 line-height=格高强制单行文本居中。
+    // 关键点：rowspan 合并格的高度必须等于跨行总高度，否则会把首行撑高，并在底部留下白缝。
+    // 因此先取「没有 rowspan 的行」的普通单元格最大高度作为统一行高，再强制所有普通格等高、
+    // 合并格等于 行高×跨行数。
+    const rowsOfSection = new Map();
+    ['tbody','tfoot'].forEach(tag => {
+      const section = table.querySelector(tag);
+      if(section) rowsOfSection.set(tag, Array.from(section.querySelectorAll('tr')));
+    });
+    // 没有 tbody/tfoot 的表格（如 exp-info），直接把顶层 tr 当 body
+    if(rowsOfSection.size === 0){
+      rowsOfSection.set('body', Array.from(table.querySelectorAll(':scope > tr')));
+    }
+    const allRows = Array.from(rowsOfSection.values()).flat();
+    // 计算未受 rowspan 影响的统一行高
+    let normalH = 0;
+    rowsOfSection.forEach(rows => {
+      rows.forEach(tr => {
+        const hasRowspan = Array.from(tr.querySelectorAll('td')).some(c => c.rowSpan > 1);
+        if(!hasRowspan){
+          Array.from(tr.querySelectorAll('td')).forEach(c => { normalH = Math.max(normalH, c.clientHeight); });
+        }
+      });
+    });
+    // 兜底：若全部行都含 rowspan，则取普通单元格最小高度，避免为 0
+    if(normalH === 0){
+      let minH = Infinity;
+      allRows.forEach(tr => {
+        Array.from(tr.querySelectorAll('td')).forEach(c => {
+          if(c.rowSpan <= 1) minH = Math.min(minH, c.clientHeight);
+        });
+      });
+      normalH = minH === Infinity ? 0 : minH;
+    }
+    // 强制所有普通单元格为统一行高并垂直居中
+    rowsOfSection.forEach(rows => {
+      rows.forEach(tr => {
+        Array.from(tr.querySelectorAll('td')).forEach(c => {
+          if(c.rowSpan > 1) return;
+          const h = normalH || c.clientHeight;
+          c.style.height = h + 'px';
+          c.style.lineHeight = h + 'px';
           c.style.paddingTop = '0';
           c.style.paddingBottom = '0';
           c.style.boxSizing = 'border-box';
         });
-      }
+      });
+    });
+    // 强制 rowspan 合并单元格高度 = 跨行总高度，使其不额外撑高首行，并消除底部白缝
+    rowsOfSection.forEach(rows => {
+      rows.forEach((tr, rowIndex) => {
+        Array.from(tr.querySelectorAll('td')).forEach(c => {
+          if(c.rowSpan > 1 && normalH > 0){
+            const totalH = normalH * c.rowSpan;
+            c.style.height = totalH + 'px';
+            c.style.lineHeight = totalH + 'px';
+            c.style.paddingTop = '0';
+            c.style.paddingBottom = '0';
+            c.style.boxSizing = 'border-box';
+          }
+        });
+      });
     });
   };
-  fitExportTable(root.querySelector('.exp-info'), 'td', 16, 12, 14);
-  fitExportTable(root.querySelector('.exp-main'), 'tbody td', 16, 12, 14);
-  fitExportTable(root.querySelector('.exp-dep'), 'td', 15, 12, 14);
+  fitExportTable(root.querySelector('.exp-info'), 'td', 15, 12, 13);
+  fitExportTable(root.querySelector('.exp-main'), 'tbody td', 16, 11, 13);
+  fitExportTable(root.querySelector('.exp-dep'), 'td', 15, 11, 13);
   // 公司介绍/产品简介两栏底部强制对齐：html2canvas 对 flex stretch 支持不稳，用显式等高兜底
   const row2 = root.querySelector('.exp-row2');
   if (row2) {
