@@ -46,7 +46,18 @@
   .course-actions a { flex: 1; }
   .empty { text-align: center; color: var(--text-4); padding: 40px; font-size: 14px; }
 
-  @media (max-width: 360px) { .course-grid { grid-template-columns: 1fr; } }
+  /* 相关产品与资源（T095 交叉引用） */
+  .rel-wrap { padding: 8px var(--page-x) 92px; }
+  .rel-title { font-size: 16px; font-weight: 800; color: var(--text); margin: 6px 0 12px; }
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .rel-card {
+    display: flex; align-items: center; gap: 8px; background: var(--card-bg);
+    border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px;
+    font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; box-shadow: var(--shadow);
+  }
+  .rel-card:active { background: var(--bg-alt); }
+
+  @media (max-width: 360px) { .course-grid { grid-template-columns: 1fr; } .rel-grid { grid-template-columns: 1fr; } }
 
   .bottom-nav {
     position: fixed; left: 0; right: 0; bottom: 0; max-width: var(--maxw); margin: 0 auto;
@@ -70,6 +81,17 @@
 
   <div class="filter-bar" id="filterBar"></div>
   <div class="course-grid" id="courseGrid"></div>
+
+  <!-- 相关产品与资源（T095 交叉引用） -->
+  <div class="rel-wrap">
+    <div class="rel-title">📦 相关产品与资源</div>
+    <div class="rel-grid">
+      <a class="rel-card" href="intro-yingmanxin.html">💡 盈满鑫产品解读</a>
+      <a class="rel-card" href="dividend.html">📈 红利实现率解读</a>
+      <a class="rel-card" href="sales-qa.html">💬 销售问答中心</a>
+      <a class="rel-card" href="company-intro.html">🏢 公司实力介绍</a>
+    </div>
+  </div>
 
   <div class="bottom-nav">
     <a href="index.html"><span class="bn-icon">🏠</span>首页</a>
