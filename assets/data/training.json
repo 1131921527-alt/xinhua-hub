@@ -66,18 +66,18 @@
     },
     {
       "id": "prod-qa-handbook",
-      "title": "产品答疑实战手册",
+      "title": "销售问答中心",
       "date": "2026-07",
       "instructor": "王铭泽",
       "category": "销售话术",
-      "tags": ["产品答疑", "7大板块"],
-      "summary": "7大板块产品答疑实战，覆盖投保/收益/领取/传承等高频问题。",
+      "tags": ["产品答疑", "销售问答中心"],
+      "summary": "统一销售问答入口，产品知识库+客户常见问题+销售话术规范，含盈满鑫等产品合规销售问答。",
       "ppt": "",
-      "page": "product-qa-handbook.html",
+      "page": "sales-qa.html",
       "recording": "",
       "notes": "",
       "cover": "assets/preview/hongyu-card.jpg",
-      "link": "product-qa-handbook.html"
+      "link": "sales-qa.html"
     },
     {
       "id": "ins-knowledge",

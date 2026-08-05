@@ -70,10 +70,10 @@
       "icon": "💬",
       "items": [
         {
-          "name": "产品答疑实战手册（QA手册）",
+          "name": "销售问答中心（QA手册）",
           "type": "card",
-          "description": "投顾视角 · 7大板块全覆盖：产品专项答疑+通用问题+超龄客户处理+口岸/南方客群+极端案例攻坚+关系维护实战+KYC方法论",
-          "url": "product-qa-handbook.html"
+          "description": "统一销售问答入口 · 三大板块：产品知识库 + 客户常见问题 + 销售话术规范，含盈满鑫等产品合规销售问答",
+          "url": "sales-qa.html"
         }
       ]
     },
