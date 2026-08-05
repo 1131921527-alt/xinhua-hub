@@ -18,61 +18,51 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#F8F9FA;c
 .input-card{background:#fff;border:2px solid var(--primary);border-radius:12px;padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
 .form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
 .field{display:flex;flex-direction:column;gap:6px;}
-.field label{font-size:13px;color:var(--gray);font-weight:600;}
+.field label{font-size:15px;color:var(--gray);font-weight:600;}
 .gender-group{display:flex;gap:8px;}
-.gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;color:#64748B;}
+.gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:17px;font-weight:600;color:#64748B;}
 .gender-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
-input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:150px;}
-.btn{padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
+input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:17px;width:150px;}
+.btn{padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;}
 .btn:hover{background:#1E3A5F;}
 .btn-dl{background:var(--primary);margin-left:10px;}
 .btn-dl:hover{background:#1E3A5F;}
 .rate-btns{display:flex;gap:8px;}
-.rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#64748B;}
+.rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:16px;font-weight:600;color:#64748B;}
 .rate-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
-.tip{font-size:12px;color:#64748B;margin-top:10px;}
+.tip{font-size:14px;color:#64748B;margin-top:10px;}
 .dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
-.view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:10px;}
+.view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--primary-bg);}
 body.capturing .no-export{display:none !important;}
-body.capturing .plan-title{font-size:44px !important;line-height:1.3 !important;}
-body.capturing .main-table{font-size:var(--cap-fs,28px) !important;min-width:0 !important;width:100% !important;border-collapse:collapse;}
-body.capturing .main-table thead th{line-height:1.15 !important;white-space:normal !important;padding:6px 4px !important;}
-body.capturing .main-table tbody td{white-space:nowrap !important;padding:8px 4px !important;}
-body.capturing .plan-intro,.body.capturing .side-stats{font-size:26px !important;line-height:1.7 !important;}
-body.capturing .reserve-cell{font-size:28px !important;font-weight:800 !important;color:#475569 !important;letter-spacing:1px !important;}
-body.capturing .exp-foot-bar{display:block !important;box-sizing:border-box;margin:18px 0 0;padding:14px 16px;font-size:18px !important;color:#64748B;border-top:2px solid #E2E8F0;text-align:center;letter-spacing:.5px;}
-.exp-foot-bar{display:none;}
-body.capturing .key-metrics{display:none !important;}
-body.capturing .km-card{padding:18px 8px !important;border-radius:14px !important;border-width:2px !important;}
-body.capturing .km-label{font-size:18px !important;margin-bottom:8px !important;}
-body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
-
 /* 抓图时强制桌面布局（覆盖 @media(max-width:768px) 的竖排/缩字号等） */
-body.capturing .wrap{max-width:1000px !important;width:1000px !important;}
-body.capturing .plan{padding:28px 0 4px !important;position:fixed !important;top:0 !important;left:0 !important;width:100vw !important;z-index:99999 !important;background:#fff !important;box-shadow:0 4px 24px rgba(0,0,0,.15) !important;display:flex !important;flex-direction:column !important;align-items:center !important;}
-body.capturing .plan > *{max-width:1000px !important;width:100% !important;box-sizing:border-box !important;}
-body.capturing .plan-intro{flex-direction:row !important;width:calc(100% - 64px) !important;}
-body.capturing .side-stats{flex-direction:row !important;border-top:0 !important;width:calc(100% - 64px) !important;}
-body.capturing .plan-title{padding:0 20px !important;width:100% !important;}
-body.capturing .main-table{min-width:100% !important;width:calc(100% - 64px) !important;}
-body.capturing .table-scroll{overflow-x:visible !important;width:calc(100% - 64px) !important;}
-body.capturing .info-table{table-layout:auto !important;}
-body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !important;}
+body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
+body.capturing .plan{padding:28px 32px 4px !important;}
+body.capturing .plan-intro{flex-direction:row !important;}
+body.capturing .plan-intro>div:last-child{border-right:0 !important;}
+body.capturing .side-stats{flex-direction:row !important;border-top:0 !important;}
+body.capturing .stat-box{border-right:2px solid var(--primary) !important;border-bottom:0 !important;}
+body.capturing .stat-box:last-child{border-right:0 !important;}
+body.capturing .plan-title{padding:0 20px !important;}
+body.capturing .main-table{font-size:19px !important;min-width:100% !important;}
+body.capturing .main-table tbody td{white-space:nowrap !important;padding:6px 4px !important;}
+body.capturing .main-table thead th{padding:6px 4px !important;white-space:normal !important;}
+body.capturing .table-scroll{overflow-x:visible !important;}
+body.capturing .key-metrics{display:none !important;}
 
 .plan{padding:28px 32px 4px;background:#fff;}
-.plan-title{text-align:center;font-size:30px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:0;padding:0 20px;overflow:visible;box-sizing:border-box;}
-.section{margin-bottom:16px;border:2px solid var(--primary);background:#fff;padding:16px;}
-.section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:9px 16px;font-size:17px;font-weight:700;margin:-16px -16px 12px -16px;}
+.plan-title{text-align:center;font-size:34px;font-weight:800;color:var(--primary);margin-bottom:16px;letter-spacing:0;padding:0 20px;overflow:visible;box-sizing:border-box;}
+.section{margin-bottom:12px;border:2px solid var(--primary);background:#fff;padding:16px;}
+.section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:8px 16px;font-size:19px;font-weight:700;margin:-16px -16px 12px -16px;}
 .section-head span{display:inline-block;width:3px;height:17px;background:#fff;margin-right:8px;}
-.section p{font-size:14px;line-height:1.7;color:#1E293B;margin:0 0 6px 0;}
+.section p{font-size:16px;line-height:1.7;color:#1E293B;margin:0 0 6px 0;}
 .section p:last-child{margin-bottom:0;}
 .section p strong{color:var(--primary);font-weight:700;}
 
 .case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
 
 .top-info{display:block;}
-.info-table{width:100%;border-collapse:collapse;font-size:14px;border:2px solid var(--primary);table-layout:auto;}
+.info-table{width:100%;border-collapse:collapse;font-size:16px;border:2px solid var(--primary);table-layout:auto;}
 .info-table th,.info-table td{border:1px solid var(--primary);padding:8px 6px;text-align:center;vertical-align:middle;white-space:nowrap;}
 .info-table th{background:var(--primary);color:#fff;font-weight:700;}
 .info-table td{background:#fff;color:#1E293B;font-weight:400;}
@@ -80,8 +70,8 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
 .side-stats{display:flex;width:100%;border:2px solid var(--primary);border-top:0;box-sizing:border-box;}
 .stat-box{flex:1;display:flex;align-items:center;border-right:2px solid var(--primary);background:#fff;box-sizing:border-box;}
 .stat-box:last-child{border-right:0;}
-.stat-box .stat-label{background:var(--primary);color:#fff;padding:10px 8px;font-size:13px;font-weight:700;white-space:nowrap;}
-.stat-box .stat-val{flex:1;text-align:center;padding:10px 8px;font-size:15px;font-weight:700;color:var(--primary);min-width:0;}
+.stat-box .stat-label{background:var(--primary);color:#fff;padding:10px 8px;font-size:15px;font-weight:700;white-space:nowrap;}
+.stat-box .stat-val{flex:1;text-align:center;padding:10px 8px;font-size:17px;font-weight:700;color:var(--primary);min-width:0;}
 @media(max-width:768px){
   .side-stats{flex-direction:column;border-top:2px solid var(--primary);}
   .stat-box{border-right:0;border-bottom:2px solid var(--primary);}
@@ -102,7 +92,7 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
 }
 .case-info{display:none;}
 
-.main-table{width:100%;border-collapse:collapse;font-size:17px;table-layout:fixed;}
+.main-table{width:100%;border-collapse:collapse;font-size:19px;table-layout:fixed;}
 .main-table th,.main-table td{border:1px solid #fff;padding:5px 2px;text-align:center;vertical-align:middle;}
 .main-table thead th{background:var(--primary);color:#fff;font-weight:700;}
 .main-table tbody tr:nth-child(even){background:#F0F9FF;}
@@ -121,18 +111,22 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
 .err.show{display:block;}
 .table-scroll{width:100%;overflow-x:auto;margin-top:14px;}
 
+/* 底部免责声明（与盈满鑫统一标准） */
+.plan-foot-note{margin-top:10px;padding-top:8px;border-top:1px solid #E2E8F0;color:#64748B;font-size:13px;line-height:1.65;}
+.plan-foot-source{margin-top:4px;color:#94A3B8;font-size:12px;text-align:center;letter-spacing:.4px;}
+
 @media(max-width:768px){
   .form-row{flex-direction:column;align-items:stretch;}
   .field{width:100%;}
   input,select{width:100%;}
   .plan{padding:12px;}
-  .plan-title{font-size:26px;}
-  .info-table{font-size:13px;table-layout:fixed;}
+  .plan-title{font-size:30px;}
+  .info-table{font-size:14px;table-layout:fixed;}
   .info-table th,.info-table td{padding:8px 3px;white-space:normal;word-break:break-word;}
   .side-stats{flex-direction:column;border-top:2px solid var(--primary);}
   .stat-box{border-right:0;border-bottom:2px solid var(--primary);}
   .stat-box:last-child{border-bottom:0;}
-  .main-table{font-size:15px;min-width:1100px;}
+  .main-table{font-size:17px;min-width:1100px;}
   .main-table th,.main-table td{padding:6px 4px;}
   .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .dl-bar{flex-direction:column;align-items:stretch;}
@@ -140,10 +134,10 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
   body{padding:8px;}
   .wrap{border-radius:0;}
   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
-  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至13px */
+  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动；偏小说明文字提至15px */
   html, body { overflow-x: hidden; }
   .table-scroll { max-width: 100%; }
-  .tip { font-size: 13px; }
+  .tip { font-size: 15px; }
 }
 
   /* ===== V3.1 结果页核心指标卡（手机首屏突出满期/累计/年化） ===== */
@@ -288,6 +282,8 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
         </table>
       </div>
     </div>
+    <div class="plan-foot-note">⚠ 本计划书基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
+    <div class="plan-foot-source">新华资料库 xinhua-hub｜计划书仅供演示与沟通使用</div>
   </div>
 </div>
 
@@ -461,84 +457,62 @@ function generate(){
 }
 
 async function downloadImage(){
-  document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
-  const wrap = plan.closest('.wrap');
-  const tableScroll = plan.querySelector('.table-scroll');
-  // CSS body.capturing overrides 强制桌面布局，JS 双保险强制宽度
-  const oldWrapWidth = wrap ? wrap.style.width : '';
-  const oldWrapMaxWidth = wrap ? wrap.style.maxWidth : '';
-  const oldPlanWidth = plan.style.width;
-  const oldPlanMinWidth = plan.style.minWidth;
-  const oldPlanOverflow = plan.style.overflow;
-  const oldPlanHeight = plan.style.height;
-  const oldScrollOverflow = tableScroll ? tableScroll.style.overflow : '';
-  const oldScrollOverflowX = tableScroll ? tableScroll.style.overflowX : '';
-  const oldScrollHeight = tableScroll ? tableScroll.style.height : '';
-  if(wrap){ wrap.style.width='1000px'; wrap.style.maxWidth='1000px'; }
-  plan.style.width='1000px'; plan.style.minWidth='1000px';
-  plan.style.overflow='visible'; plan.style.height='auto';
-  if(tableScroll){ tableScroll.style.overflow='visible'; tableScroll.style.overflowX='visible'; tableScroll.style.height='auto'; }
+  if(!plan){ if(typeof showToast==='function') showToast('未找到计划书区域'); return; }
   // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
+  document.body.classList.add('capturing');
+  let introBoxes = [];
+  let introOldHeights = [];
+  let mainTable = null;
+  let mainTableOldFs = '';
   try{
-    // V3.0 导出图底部信息：新华资料库 + 生成日期
-    let _expFooter = document.getElementById('expFootBar');
-    if(!_expFooter){ _expFooter = document.createElement('div'); _expFooter.id='expFootBar'; _expFooter.className='exp-foot-bar'; plan.appendChild(_expFooter); }
-    { const d=new Date(); const p=n=>String(n).padStart(2,'0'); _expFooter.textContent='新华资料库 xinhua-hub ｜ 生成日期：'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
-    // 根据实际数字长度动态降字号，避免1000万大金额换行/挤压（任务0）
+    // 直接截取在线结果区域 #planArea，做到网页看到什么、下载就是什么
+    const intro = plan.querySelector('.plan-intro');
+    introBoxes = intro ? Array.from(intro.querySelectorAll(':scope > div')) : [];
+    introOldHeights = introBoxes.map(b => b.style.height);
+    if(introBoxes.length === 2){
+      const h = Math.max(introBoxes[0].offsetHeight, introBoxes[1].offsetHeight);
+      introBoxes.forEach(b => b.style.height = h + 'px');
+    }
+    // 大金额字号自适应：19px→14px
     (function fitPlanTables(){
-      const fit = (sel, start, min, varName) => {
-        const t = document.querySelector(sel);
-        if(!t) return;
-        let fs = start;
-        const cells = Array.from(t.querySelectorAll('tbody td, tbody th'));
-        const overflow = () => cells.some(c => c.scrollWidth > c.clientWidth + 1);
-        do{
-          t.style.setProperty(varName, fs+'px', 'important');
-          if(!overflow()) break;
-          fs -= 1;
-        } while(fs >= min);
-      };
-      fit('.main-table', 28, 14, '--cap-fs');
+      mainTable = plan.querySelector('.main-table');
+      if(!mainTable) return;
+      mainTableOldFs = mainTable.style.fontSize;
+      const cells = Array.from(mainTable.querySelectorAll('tbody td'));
+      const hasOverflow = () => cells.some(c => c.scrollWidth > c.clientWidth + 1);
+      let fs = 19;
+      while(fs > 14 && hasOverflow()){
+        fs -= 1;
+        mainTable.style.fontSize = fs + 'px';
+      }
     })();
-    const captureW = 1000;
+    const captureW = plan.offsetWidth || 1200;
     const captureH = plan.scrollHeight;
     const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
-    // 微信/移动端 Canvas 像素限制保护：微信保存 PNG 有宽高/总像素上限，限制更严
-    const maxScale = 2;
     const maxCanvasPixels = isWechatEnv ? 8000000 : 16000000;
-    let captureScale = maxScale;
-    if (captureW * captureH * captureScale * captureScale > maxCanvasPixels) {
+    let captureScale = 2;
+    if(captureW * captureH * captureScale * captureScale > maxCanvasPixels){
       captureScale = Math.floor(Math.sqrt(maxCanvasPixels / (captureW * captureH)) * 10) / 10;
     }
     captureScale = Math.max(1.0, captureScale);
-    // 导出前强制公司介绍/产品简介双栏等高（html2canvas 对 flex stretch 支持不稳，用显式高度兜底）
-    (function(){var rows=plan.querySelectorAll('.intro-row, .plan-intro');rows.forEach(function(r){var ks=[].slice.call(r.children).filter(function(c){return c.tagName==='DIV';});if(ks.length===2){var h=Math.max(ks[0].offsetHeight,ks[1].offsetHeight);ks[0].style.height=h+'px';ks[1].style.height=h+'px';}});})();
     const canvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
       useCORS: true,
-      windowWidth: captureW,
-      windowHeight: captureH + 100,
+      windowWidth: document.documentElement.scrollWidth,
+      windowHeight: document.documentElement.scrollHeight,
       width: captureW,
       height: captureH,
       scrollX: 0,
       scrollY: 0,
-      x: 0,
-      y: 0,
       logging: false
     });
-    if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
-    plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
-    plan.style.overflow=oldPlanOverflow; plan.style.height=oldPlanHeight;
-    if(tableScroll){ tableScroll.style.overflow=oldScrollOverflow; tableScroll.style.overflowX=oldScrollOverflowX; tableScroll.style.height=oldScrollHeight; }
-    document.body.classList.remove('capturing');
     window.scrollTo(0, oldScrollTop);
     const filename = '宏愿人生理财计划书.png';
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-    // 无条件先生成 blob，确保手机端/桌面端都能拿到（修复手机端 blob 未定义导致下载无反应）
     const _blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
     const _blobUrl = URL.createObjectURL(_blob);
     if(!isMobile && window.showSaveFilePicker){
@@ -549,7 +523,6 @@ async function downloadImage(){
         return;
       }catch(e){ if(e.name==='AbortError') return; }
     }
-    // 微信/手机端：页面内显示图片，提示长按保存；桌面：直接下载
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     if(isWechatEnv2 || isMobile2){
@@ -561,11 +534,9 @@ async function downloadImage(){
     a.style.display='none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);
     if(typeof showToast==='function') showToast('计划书已下载');
-  }catch(e){
-    if(wrap){ wrap.style.width=oldWrapWidth; wrap.style.maxWidth=oldWrapMaxWidth; }
-    plan.style.width=oldPlanWidth; plan.style.minWidth=oldPlanMinWidth;
-    plan.style.overflow=oldPlanOverflow; plan.style.height=oldPlanHeight;
-    if(tableScroll){ tableScroll.style.overflow=oldScrollOverflow; tableScroll.style.overflowX=oldScrollOverflowX; tableScroll.style.height=oldScrollHeight; }
+  }finally{
+    if(mainTable) mainTable.style.fontSize = mainTableOldFs;
+    introBoxes.forEach((b, i) => { b.style.height = introOldHeights[i]; });
     document.body.classList.remove('capturing');
     window.scrollTo(0, oldScrollTop);
   }
