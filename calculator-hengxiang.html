@@ -21,12 +21,12 @@
   .card{background:#fff;border:1px solid #1E40AF;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
   .form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;}
   .field{display:flex;flex-direction:column;gap:6px;}
-  .field label{font-size:13px;color:var(--gray);font-weight:600;}
+  .field label{font-size:15px;color:var(--gray);font-weight:600;}
   .gender-group{display:flex;gap:8px;}
-  .gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;color:var(--gray);}
+  .gender-btn{padding:9px 20px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:17px;font-weight:600;color:var(--gray);}
   .gender-btn.active{background:var(--brown);color:#fff;border-color:var(--brown);}
-  input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;width:140px;}
-  .btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
+  input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:17px;width:140px;}
+  .btn{padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;}
   .btn:hover{background:#1E40AF;}
   .btn:disabled{opacity:.6;cursor:not-allowed;}
   .btn-dl{background:#1E40AF;margin-left:10px;}
@@ -78,39 +78,28 @@
   .dl-bar{display:flex;align-items:center;margin:14px 0;flex-wrap:wrap;}
   .dl-bar .tip{margin:0 0 0 12px;}
   .plan{padding:0 0 8px;background:#fff;}
-  .plan-title{text-align:center;font-size:24px;font-weight:800;color:#1E40AF;margin:6px 0 14px;letter-spacing:0;}
+  .plan-title{text-align:center;font-size:34px;font-weight:800;color:#1E40AF;margin:6px 0 14px;letter-spacing:0;}
   .plan-intro{display:flex;gap:0;border:2px solid #1E40AF;margin:0 0 14px;background:#fff;}
   .plan-intro>div{flex:1;min-width:0;padding:12px 14px;border-right:2px solid #1E40AF;}
   .plan-intro>div:last-child{border-right:0;}
-  .plan-intro h4{color:#1E40AF;font-size:14px;font-weight:700;margin-bottom:6px;}
-  .plan-intro p{font-size:12.5px;line-height:1.65;color:#1E293B;margin:0 0 4px;}
+  .plan-intro h4{color:#1E40AF;font-size:15px;font-weight:700;margin-bottom:6px;}
+  .plan-intro p{font-size:14px;line-height:1.7;color:#1E293B;margin:0 0 4px;}
   body.capturing .no-export{display:none !important;}
-body.capturing .plan-title{font-size:44px !important;line-height:1.3 !important;}
-body.capturing table{font-size:var(--cap-fs,28px) !important;min-width:0 !important;width:100% !important;border-collapse:collapse;}
-body.capturing thead th{line-height:1.15 !important;white-space:normal !important;padding:8px 4px !important;}
-body.capturing tbody td{white-space:nowrap !important;padding:8px 4px !important;}
-body.capturing .plan-intro{font-size:26px !important;}
-body.capturing .plan-intro p{font-size:24px !important;line-height:1.8 !important;}
-body.capturing .plan-intro h4{font-size:24px !important;}
-body.capturing .exp-foot-bar{display:block !important;box-sizing:border-box;margin:18px 0 0;padding:14px 16px;font-size:18px !important;color:#64748B;border-top:2px solid #E2E8F0;text-align:center;letter-spacing:.5px;}
-.exp-foot-bar{display:none;}
+body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
+body.capturing .plan{padding:28px 32px 4px !important;background:#fff !important;}
+body.capturing .plan-title{padding:0 20px !important;}
+body.capturing .plan-intro{flex-direction:row !important;}
+body.capturing .plan-intro>div:last-child{border-right:0 !important;}
+body.capturing table{font-size:17px !important;width:100% !important;}
+body.capturing thead th{position:static !important;}
+body.capturing tbody td{white-space:nowrap !important;}
+body.capturing .table-scroll{overflow-x:visible !important;}
 body.capturing .key-metrics{display:none !important;}
-body.capturing .km-card{padding:18px 8px !important;border-radius:14px !important;border-width:2px !important;}
-body.capturing .km-label{font-size:18px !important;margin-bottom:8px !important;}
-body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
 
-  body.capturing .wrap{max-width:1000px !important;width:1000px !important;margin:0 auto !important;}
-  body.capturing .plan{padding:28px 0 4px !important;position:fixed !important;top:0 !important;left:0 !important;width:100vw !important;z-index:99999 !important;background:#fff !important;box-shadow:0 4px 24px rgba(0,0,0,.15) !important;display:flex !important;flex-direction:column !important;align-items:center !important;}
-  body.capturing .plan-title{margin-top:0 !important;padding:0 20px !important;width:100% !important;max-width:1000px !important;}
-  body.capturing .plan-intro{max-width:1000px !important;width:calc(100% - 64px) !important;}
-  body.capturing .table-scroll{max-width:1000px !important;width:calc(100% - 64px) !important;}
-  body.capturing .plan > *{max-width:1000px !important;width:100% !important;box-sizing:border-box !important;}
-  /* 与中行/宏安一致：强制公司介绍+产品简介横向双栏，保证整图顶部完整 */
-  body.capturing .plan-intro{flex-direction:row !important;}
-  body.capturing .plan-intro>div{border-right:2px solid #1E40AF !important;}
-  body.capturing .plan-intro>div:last-child{border-right:0 !important;}
-  body.capturing .table-scroll{overflow:visible !important;}
-  body.capturing thead th{position:static !important;}
+/* 底部免责声明（与盈满鑫/宏安统一标准） */
+.plan-foot-note{margin-top:10px;padding-top:8px;border-top:1px solid #E2E8F0;color:#64748B;font-size:13px;line-height:1.65;}
+.plan-foot-source{margin-top:4px;color:#94A3B8;font-size:12px;text-align:center;letter-spacing:.4px;}
+
   @media(max-width:768px){
     .dl-bar{flex-direction:column;align-items:stretch;}
     .dl-bar .btn-dl,.dl-bar .btn-dl-secondary{margin:10px 0 0 0 !important;width:100%;}
@@ -220,6 +209,8 @@ body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
         <tbody id="resultBody"></tbody>
       </table>
     </div>
+    <div class="plan-foot-note">⚠ 本计划书基于保证利益演示（非分红型），生存总利益=关爱金/年金+现金价值，不代表实际收益。具体以保险合同条款为准。</div>
+    <div class="plan-foot-source">新华资料库 xinhua-hub｜计划书仅供演示与沟通使用</div>
   </div>
 </div>
 <div style="text-align:center;padding:16px;font-size:12px;color:#64748B;line-height:1.8;">
@@ -539,63 +530,43 @@ async function downloadImage(){
   const tbody=document.getElementById('resultBody');
   if(!tbody||!tbody.innerHTML){showToast('请先生成利益演示');return;}
   const plan=document.getElementById('planArea');
-  const wrap=plan.closest('.wrap');
-  const tableScroll=plan.querySelector('.table-scroll');
-  const oldWrapWidth=wrap?wrap.style.width:'';
-  const oldWrapMaxWidth=wrap?wrap.style.maxWidth:'';
-  const oldPlanWidth=plan.style.width;
-  const oldPlanMinWidth=plan.style.minWidth;
-  const oldPlanOverflow=plan.style.overflow;
-  const oldPlanHeight=plan.style.height;
-  const oldScrollOverflow=tableScroll?tableScroll.style.overflow:'';
-  const oldScrollOverflowX=tableScroll?tableScroll.style.overflowX:'';
-  const oldScrollHeight=tableScroll?tableScroll.style.height:'';
-  document.body.classList.add('capturing');
-  if(wrap){wrap.style.width='1000px';wrap.style.maxWidth='1000px';}
-  plan.style.width='1000px';plan.style.minWidth='1000px';
-  plan.style.overflow='visible';plan.style.height='auto';
-  if(tableScroll){tableScroll.style.overflow='visible';tableScroll.style.overflowX='visible';tableScroll.style.height='auto';}
   const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;
   window.scrollTo(0,0);
-  plan.scrollTop=0;
-  void plan.offsetHeight; // 强制回流，确保 scrollHeight 与最新布局一致
+  document.body.classList.add('capturing');
+  let introBoxes=[];
+  let introOldHeights=[];
+  let mainTable=null;
+  let mainTableOldFs='';
   try{
-    // V3.0 导出图底部信息：新华资料库 + 生成日期
-    let _expFooter = document.getElementById('expFootBar');
-    if(!_expFooter){ _expFooter = document.createElement('div'); _expFooter.id='expFootBar'; _expFooter.className='exp-foot-bar'; plan.appendChild(_expFooter); }
-    { const d=new Date(); const p=n=>String(n).padStart(2,'0'); _expFooter.textContent='新华资料库 xinhua-hub ｜ 生成日期：'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
-    // 根据实际数字长度动态降字号，避免1000万大金额换行/挤压（任务0）
+    // 直接截取在线结果区域 #planArea，做到网页看到什么、下载就是什么
+    const intro=plan.querySelector('.plan-intro');
+    introBoxes=intro?Array.from(intro.querySelectorAll(':scope > div')):[];
+    introOldHeights=introBoxes.map(b=>b.style.height);
+    if(introBoxes.length===2){
+      const h=Math.max(introBoxes[0].offsetHeight,introBoxes[1].offsetHeight);
+      introBoxes.forEach(b=>b.style.height=h+'px');
+    }
+    // 大金额字号自适应：检查表格单元格是否溢出，溢出则降字号（17px→14px）
     (function fitPlanTables(){
-      const fit = (sel, start, min, varName) => {
-        const t = document.querySelector(sel);
-        if(!t) return;
-        let fs = start;
-        const cells = Array.from(t.querySelectorAll('tbody td, tbody th'));
-        const overflow = () => cells.some(c => c.scrollWidth > c.clientWidth + 1);
-        do{
-          t.style.setProperty(varName, fs+'px', 'important');
-          if(!overflow()) break;
-          fs -= 1;
-        } while(fs >= min);
-      };
-      fit('table', 28, 14, '--cap-fs');
+      mainTable=plan.querySelector('table');
+      if(!mainTable) return;
+      mainTableOldFs=mainTable.style.fontSize;
+      const cells=Array.from(mainTable.querySelectorAll('tbody td'));
+      const hasOverflow=()=>cells.some(c=>c.scrollWidth>c.clientWidth+1);
+      let fs=17;
+      while(fs>14 && hasOverflow()){
+        fs-=1;
+        mainTable.style.fontSize=fs+'px';
+      }
     })();
-    const captureW=1000;
+    const captureW=plan.offsetWidth||1200;
     const captureH=plan.scrollHeight;
     const isWechatEnv=/MicroMessenger/i.test(navigator.userAgent);
-    const maxScale=2;
     const maxCanvasPixels=isWechatEnv?8000000:16000000;
-    let captureScale=maxScale;
+    let captureScale=2;
     if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}
     captureScale=Math.max(1.0,captureScale);
-    // x:0,y:0 显式从 #planArea 元素左上角（即蓝色标题）开始截取，杜绝顶部被裁切
-    // 导出前强制公司介绍/产品简介双栏等高（html2canvas 对 flex stretch 支持不稳，用显式高度兜底）
-    (function(){var rows=plan.querySelectorAll('.intro-row, .plan-intro');rows.forEach(function(r){var ks=[].slice.call(r.children).filter(function(c){return c.tagName==='DIV';});if(ks.length===2){var h=Math.max(ks[0].offsetHeight,ks[1].offsetHeight);ks[0].style.height=h+'px';ks[1].style.height=h+'px';}});})();
-    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,x:0,y:0,logging:false});
-    if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
-    plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
-    if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
-    document.body.classList.remove('capturing');
+    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:document.documentElement.scrollWidth,windowHeight:document.documentElement.scrollHeight,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
     window.scrollTo(0,oldScrollTop);
     const filename='恒享人生理财计划书.png';
     const _blob=await new Promise(r=>canvas.toBlob(r,'image/png'));
@@ -609,12 +580,11 @@ async function downloadImage(){
     const a=document.createElement('a');a.href=_blobUrl;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);
     showToast('计划书已下载');
-  }catch(e){
-    if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
-    plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
-    if(tableScroll){tableScroll.style.overflow=oldScrollOverflow;tableScroll.style.overflowX=oldScrollOverflowX;tableScroll.style.height=oldScrollHeight;}
-    document.body.classList.remove('capturing');window.scrollTo(0,oldScrollTop);
-    showError('图片生成失败：'+e.message);
+  }finally{
+    if(mainTable) mainTable.style.fontSize=mainTableOldFs;
+    introBoxes.forEach((b,i)=>{b.style.height=introOldHeights[i];});
+    document.body.classList.remove('capturing');
+    window.scrollTo(0,oldScrollTop);
   }
 }
 function showImagePreview(url,fn){
