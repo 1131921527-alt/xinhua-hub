@@ -56,7 +56,7 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 
 .top-info{display:block;}
 .info-table{width:100%;border-collapse:collapse;font-size:14px;border:2px solid var(--primary);table-layout:auto;}
-.info-table th,.info-table td{border:1px solid var(--primary);padding:8px 6px;text-align:center;white-space:nowrap;}
+.info-table th,.info-table td{border:1px solid var(--primary);padding:8px 6px;text-align:center;vertical-align:middle;white-space:nowrap;}
 .info-table th{background:var(--primary);color:#fff;font-weight:700;}
 .info-table td{background:#fff;color:#1E293B;font-weight:600;}
 .info-table td.label{background:var(--primary-bg);color:var(--primary);font-weight:700;}
@@ -87,7 +87,7 @@ body.capturing .info-table td{white-space:nowrap !important;}
 body.capturing .intro-row,.body.capturing .stats-row,.body.capturing .stat-inline-box{font-size:26px !important;line-height:1.7 !important;}
 body.capturing .reserve-merged{font-size:28px !important;font-weight:800 !important;color:#475569 !important;letter-spacing:1px !important;}
 body.capturing .exp-foot-bar{display:block !important;box-sizing:border-box;margin:18px 0 0;padding:14px 16px;font-size:18px !important;color:#64748B;border-top:2px solid #E2E8F0;text-align:center;letter-spacing:.5px;}
-body.capturing .key-metrics{display:flex !important;gap:18px !important;margin:24px 0 18px !important;}
+body.capturing .key-metrics{display:none !important;}
 body.capturing .km-card{padding:18px 8px !important;border-radius:14px !important;border-width:2px !important;}
 body.capturing .km-label{font-size:18px !important;margin-bottom:8px !important;}
 body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
@@ -470,8 +470,8 @@ function generate(){
   document.getElementById('statRate').textContent = (currentRate * 100).toFixed(2) + '%';
 
   updateFormText();
-}
   (function(){var km=document.getElementById('keyMetrics');if(!km)return;var lr=rows[rows.length-1];document.getElementById('kmMaturity').textContent=fmt(lr.survival);document.getElementById('kmCum').textContent=fmt(lastSurvival-totalPrem);document.getElementById('kmRate').textContent=((lastSurvival-totalPrem)/(totalPrem*maxYear)*100).toFixed(2)+'%';})();
+}
 
 async function downloadImage(){
   document.body.classList.add('capturing');

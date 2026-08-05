@@ -39,7 +39,7 @@ table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;}
 thead th{background:#1E40AF;color:#fff;padding:11px 8px;text-align:center;font-weight:700;font-size:17px;position:sticky;top:0;}
 tbody td{font-size:17px;padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
 /* 表格边框统一：与宏安/宏愿/盈满鑫一致，全网格 1px #1E40AF（2026-08-05 V4验收） */
-#resultTable th,#resultTable td{border:1px solid #1E40AF;}
+#resultTable th,#resultTable td{border:1px solid #1E40AF;vertical-align:middle;}
 tbody tr.row-5y{background:#EFF6FF;}
 tbody tr.row-last{background:#DBEAFE;}
 tbody tr.row-5y td,tbody tr.row-last td{background:transparent;}
@@ -106,7 +106,7 @@ body.capturing table{min-width:0 !important;font-size:var(--cap-fs,28px) !import
 body.capturing thead th{position:static !important;font-size:calc(var(--cap-fs,28px) + 2px) !important;line-height:1.25 !important;padding:10px 4px !important;white-space:normal !important;}
 body.capturing tbody td{font-size:var(--cap-fs,28px) !important;padding:8px 4px !important;white-space:nowrap !important;}
 body.capturing .table-scroll{overflow:visible !important;}
-body.capturing .key-metrics{display:flex !important;gap:18px !important;margin:24px 0 18px !important;}
+body.capturing .key-metrics{display:none !important;}
 body.capturing .km-card{padding:18px 8px !important;border-radius:14px !important;border-width:2px !important;}
 body.capturing .km-label{font-size:18px !important;margin-bottom:8px !important;}
 body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
