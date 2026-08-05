@@ -41,8 +41,8 @@ body.capturing .no-export{display:none !important;}
 /* 抓图时强制桌面布局（覆盖 @media(max-width:768px) 的竖排/缩字号等） */
 body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
 body.capturing .plan{padding:28px 32px 4px !important;}
-body.capturing .intro-row{flex-direction:row !important;}
-body.capturing .intro-row>.section:first-child{margin-right:-2px !important;margin-bottom:0 !important;}
+body.capturing .plan-intro{flex-direction:row !important;}
+body.capturing .plan-intro>div:last-child{border-right:0 !important;}
 body.capturing .side-stats{flex-direction:row !important;border-top:0 !important;}
 body.capturing .stat-box{border-right:2px solid #1E40AF !important;border-bottom:0 !important;}
 body.capturing .stat-box:last-child{border-right:0 !important;}
@@ -58,8 +58,6 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .section p{font-size:16px;line-height:1.7;color:#1E293B;margin:0 0 6px 0;}
 .section p:last-child{margin-bottom:0;}
 .section p strong{color:var(--primary);font-weight:700;}
-/* 产品简介字号放大2级 */
-.intro-row > .section:nth-child(2) p{font-size:18px;line-height:1.75;}
 
 .case-info{font-size:17px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
 
@@ -79,12 +77,18 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   .stat-box{border-right:0;border-bottom:2px solid var(--primary);}
   .stat-box:last-child{border-bottom:0;}
 }
-.intro-row{display:flex;align-items:stretch;gap:0;}
-.intro-row > .section{flex:1;min-width:0;margin-bottom:0;}
-.intro-row > .section:first-child{margin-right:-2px;position:relative;z-index:1;}
+/* 公司介绍/产品简介 双栏（与宏御一致的对齐版式：外层单边框 + 竖线分隔） */
+.plan-intro{display:flex;gap:0;border:2px solid var(--primary);margin:0 0 16px;background:#fff;}
+.plan-intro>div{flex:1;min-width:0;padding:12px 14px;border-right:2px solid var(--primary);box-sizing:border-box;}
+.plan-intro>div:last-child{border-right:0;}
+.plan-intro h4{color:var(--primary);font-size:15px;font-weight:700;margin-bottom:8px;}
+.plan-intro p{font-size:14px;line-height:1.7;color:#1E293B;margin:0 0 4px;}
+.plan-intro p:last-child{margin-bottom:0;}
+.plan-intro p strong{color:var(--primary);font-weight:700;}
 @media(max-width:768px){
-  .intro-row{flex-direction:column;}
-  .intro-row > .section:first-child{margin-right:0;margin-bottom:-2px;z-index:1;}
+  .plan-intro{flex-direction:column;}
+  .plan-intro>div{border-right:0;border-bottom:2px solid var(--primary);}
+  .plan-intro>div:last-child{border-bottom:0;}
 }
 
 .main-table{width:100%;border-collapse:collapse;font-size:19px;table-layout:fixed;}
@@ -283,16 +287,16 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   <div id="planArea" class="plan">
     <div class="plan-title">盈满鑫两全保险 · 分红型 · 理财计划书</div>
 
-    <div class="intro-row">
-      <div class="section">
-        <div class="section-head"><span></span>公司介绍</div>
+    <div class="plan-intro">
+      <div>
+        <h4>公司介绍</h4>
         <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
         <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
         <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》《财富》500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
       </div>
 
-      <div class="section">
-        <div class="section-head"><span></span>产品简介</div>
+      <div>
+        <h4>产品简介</h4>
         <p><strong>投保年龄：</strong>0-75周岁，3年交支持6年/8年/10年，5年交支持10年/15年</p>
         <p><strong>身故保障：</strong>安心理财之余，最高160%赔付比例，额外提供身故保障</p>
         <p><strong>满期领取：</strong>被保险人生存至保险期间届满，按基本保险金额（高于所交保费）给付满期生存保险金</p>

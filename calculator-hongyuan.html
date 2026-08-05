@@ -39,7 +39,7 @@ body.capturing .plan-title{font-size:44px !important;line-height:1.3 !important;
 body.capturing .main-table{font-size:var(--cap-fs,28px) !important;min-width:0 !important;width:100% !important;border-collapse:collapse;}
 body.capturing .main-table thead th{line-height:1.25 !important;white-space:normal !important;padding:10px 4px !important;}
 body.capturing .main-table tbody td{white-space:nowrap !important;padding:8px 4px !important;}
-body.capturing .intro-row,.body.capturing .side-stats{font-size:26px !important;line-height:1.7 !important;}
+body.capturing .plan-intro,.body.capturing .side-stats{font-size:26px !important;line-height:1.7 !important;}
 body.capturing .reserve-cell{font-size:28px !important;font-weight:800 !important;color:#475569 !important;letter-spacing:1px !important;}
 body.capturing .exp-foot-bar{display:block !important;box-sizing:border-box;margin:18px 0 0;padding:14px 16px;font-size:18px !important;color:#64748B;border-top:2px solid #E2E8F0;text-align:center;letter-spacing:.5px;}
 .exp-foot-bar{display:none;}
@@ -52,7 +52,7 @@ body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
 body.capturing .wrap{max-width:1000px !important;width:1000px !important;}
 body.capturing .plan{padding:28px 0 4px !important;position:fixed !important;top:0 !important;left:0 !important;width:100vw !important;z-index:99999 !important;background:#fff !important;box-shadow:0 4px 24px rgba(0,0,0,.15) !important;display:flex !important;flex-direction:column !important;align-items:center !important;}
 body.capturing .plan > *{max-width:1000px !important;width:100% !important;box-sizing:border-box !important;}
-body.capturing .intro-row{flex-direction:row !important;width:calc(100% - 64px) !important;}
+body.capturing .plan-intro{flex-direction:row !important;width:calc(100% - 64px) !important;}
 body.capturing .side-stats{flex-direction:row !important;border-top:0 !important;width:calc(100% - 64px) !important;}
 body.capturing .plan-title{padding:0 20px !important;width:100% !important;}
 body.capturing .main-table{min-width:100% !important;width:calc(100% - 64px) !important;}
@@ -68,8 +68,6 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
 .section p{font-size:14px;line-height:1.7;color:#1E293B;margin:0 0 6px 0;}
 .section p:last-child{margin-bottom:0;}
 .section p strong{color:var(--primary);font-weight:700;}
-/* 产品简介字号放大2级 */
-.intro-row > .section:nth-child(2) p{font-size:16px;line-height:1.75;}
 
 .case-info{font-size:15px;font-weight:700;color:#1E293B;margin:14px 0 10px;}
 
@@ -89,12 +87,18 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
   .stat-box{border-right:0;border-bottom:2px solid var(--primary);}
   .stat-box:last-child{border-bottom:0;}
 }
-.intro-row{display:flex;align-items:stretch;gap:0;}
-.intro-row > .section{flex:1;min-width:0;margin-bottom:0;}
-.intro-row > .section:first-child{margin-right:-2px;position:relative;z-index:1;}
+/* 公司介绍/产品简介 双栏（与宏御一致的对齐版式：外层单边框 + 竖线分隔） */
+.plan-intro{display:flex;gap:0;border:2px solid var(--primary);margin:0 0 16px;background:#fff;}
+.plan-intro>div{flex:1;min-width:0;padding:12px 14px;border-right:2px solid var(--primary);box-sizing:border-box;}
+.plan-intro>div:last-child{border-right:0;}
+.plan-intro h4{color:var(--primary);font-size:15px;font-weight:700;margin-bottom:8px;}
+.plan-intro p{font-size:14px;line-height:1.7;color:#1E293B;margin:0 0 4px;}
+.plan-intro p:last-child{margin-bottom:0;}
+.plan-intro p strong{color:var(--primary);font-weight:700;}
 @media(max-width:768px){
-  .intro-row{flex-direction:column;}
-  .intro-row > .section:first-child{margin-right:0;margin-bottom:-2px;z-index:1;}
+  .plan-intro{flex-direction:column;}
+  .plan-intro>div{border-right:0;border-bottom:2px solid var(--primary);}
+  .plan-intro>div:last-child{border-bottom:0;}
 }
 .case-info{display:none;}
 
@@ -229,16 +233,16 @@ body.capturing .info-table th,body.capturing .info-table td{padding:8px 6px !imp
   <div id="planArea" class="plan">
     <div class="plan-title">宏愿人生养老年金 · 分红型 · 理财计划</div>
 
-    <div class="intro-row">
-      <div class="section">
-        <div class="section-head"><span></span>公司介绍</div>
+    <div class="plan-intro">
+      <div>
+        <h4>公司介绍</h4>
         <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
         <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
         <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
       </div>
 
-      <div class="section">
-        <div class="section-head"><span></span>产品简介</div>
+      <div>
+        <h4>产品简介</h4>
         <p><strong>双轨增值：</strong>依托央企红利分配，红利可进入累计生息账户二次增值；现金价值稳步增长，收益清晰可靠</p>
         <p><strong>领取灵活：</strong>女性55岁起领，可选55/60/65/70岁，月领年领可调；支持保单贷款，适配50岁以上客群</p>
         <p><strong>属性多元：</strong>稳定养老现金流为核心，现金价值具备定向传承属性，一单覆盖养老与传承</p>
