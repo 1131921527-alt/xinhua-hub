@@ -370,10 +370,14 @@ function toggleViewMode(){
   if(DATA) generate();
 }
 
-// 70岁及以上客户自动切换为全部显示，避免"60岁后每5年"等模式把高龄客户的计划书压成几行
+// 60岁及以上客户自动切换为全部显示，避免"60岁后每5年"等模式把高龄客户的计划书压成几行
+// 60岁以下则回到默认"60岁后每5年"（仅当之前被高龄逻辑强制为全部时回退，尊重用户手动切换）
 function syncViewModeByAge(age){
-  if(age >= 70 && viewMode !== 'all'){
+  if(age >= 60 && viewMode !== 'all'){
     viewMode = 'all';
+    document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
+  } else if(age < 60 && viewMode === 'all'){
+    viewMode = '60';
     document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
   }
 }
