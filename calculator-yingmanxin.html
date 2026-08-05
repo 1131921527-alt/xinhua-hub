@@ -370,6 +370,14 @@ function toggleViewMode(){
   if(DATA) generate();
 }
 
+// 70岁及以上客户自动切换为全部显示，避免"60岁后每5年"等模式把高龄客户的计划书压成几行
+function syncViewModeByAge(age){
+  if(age >= 70 && viewMode !== 'all'){
+    viewMode = 'all';
+    document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
+  }
+}
+
 const PERIOD_OPTIONS = {
   3: [6, 8, 10],
   5: [10, 15]
@@ -488,6 +496,8 @@ function generate(){
   if(age < 0 || age > 75){ errEl.textContent = '投保年龄超出范围（0-75周岁）'; errEl.classList.add('show'); return; }
   if(premium < 10000){ errEl.textContent = '年交保费最低1万元'; errEl.classList.add('show'); return; }
   if(premium > 10000000){ errEl.textContent = '年交保费最高1000万元'; errEl.classList.add('show'); return; }
+
+  syncViewModeByAge(age);
 
   const scale = premium / 1000;
   const totalPrem = premium * payTerm;
