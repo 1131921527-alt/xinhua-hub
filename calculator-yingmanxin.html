@@ -932,6 +932,8 @@ async function downloadImage(){
   document.body.classList.add('capturing');
   let introBoxes = [];
   let introOldHeights = [];
+  let reserveCell = null;
+  let reserveOldHTML = '';
   try{
     // 直接截取在线结果区域 #planArea，做到网页看到什么、下载就是什么
     // html2canvas 对 flex stretch 支持不稳，抓图前临时把公司/产品双栏写死等高，再恢复
@@ -941,6 +943,12 @@ async function downloadImage(){
     if(introBoxes.length === 2){
       const h = Math.max(introBoxes[0].offsetHeight, introBoxes[1].offsetHeight);
       introBoxes.forEach(b => b.style.height = h + 'px');
+    }
+    // html2canvas 对 rowspan 合并单元格内的纯文本支持不稳，临时包一层 span 保证“储备期”渲染
+    reserveCell = plan.querySelector('.reserve-cell');
+    if(reserveCell){
+      reserveOldHTML = reserveCell.innerHTML;
+      reserveCell.innerHTML = '<span style="display:inline-block;position:relative;z-index:1;">' + reserveOldHTML + '</span>';
     }
     const captureW = plan.offsetWidth || 1200;
     const captureH = plan.scrollHeight;
@@ -984,6 +992,7 @@ async function downloadImage(){
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);
     if(typeof showToast==='function') showToast('计划书已下载');
   }finally{
+    if(reserveCell) reserveCell.innerHTML = reserveOldHTML;
     introBoxes.forEach((b, i) => { b.style.height = introOldHeights[i]; });
     document.body.classList.remove('capturing');
     window.scrollTo(0, oldScrollTop);
