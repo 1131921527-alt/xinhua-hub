@@ -161,10 +161,13 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-title{text-align:center;font-size:28px;font-weight:800;color:var(--primary);margin:0 0 12px;letter-spacing:1px;}
 .exp-row2{display:table;width:100%;table-layout:fixed;border:2px solid var(--primary);border-collapse:collapse;margin-bottom:8px;box-sizing:border-box;}
 .exp-box{border:2px solid var(--primary);background:#fff;padding:8px 10px;margin-bottom:8px;box-sizing:border-box;}
-.exp-row2 > .exp-box{display:table-cell;width:50%;vertical-align:top;border:0;margin-bottom:0;padding:8px 10px;box-sizing:border-box;}
+.exp-row2 > .exp-box{display:table-cell;width:50%;vertical-align:top;border:0;margin-bottom:0;padding:10px 12px;box-sizing:border-box;}
 .exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
-.exp-h{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:6px 8px;margin:-8px -10px 8px;box-sizing:border-box;}
-.exp-b{font-size:15px;line-height:1.75;color:#1E293B;margin-top:2px;}
+.exp-h{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:6px 10px;margin:-10px -12px 10px;box-sizing:border-box;}
+.exp-b{font-size:15px;line-height:1.8;color:#1E293B;margin-top:4px;}
+.exp-b p{margin:0 0 8px 0;}
+.exp-b p:last-child{margin-bottom:0;}
+.exp-b strong{color:var(--primary);font-weight:700;}
 /* 导出表格统一强制垂直居中（html2canvas 对 vertical-align 支持不稳，inline 兜底见 fitExportTable） */
 .exp-info th,.exp-info td,.exp-main th,.exp-main td,.exp-dep th,.exp-dep td,.exp-dep tfoot td,.exp-combo td{vertical-align:middle !important;}
 .exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:19px;border:2px solid var(--primary);box-sizing:border-box;}
@@ -553,13 +556,15 @@ function generate(){
   // 储备期读取统一产品规则配置（盈满鑫：按原 Excel 计划书口径，储备期=交费期+1年）
   const RULE = window.getProductRule('yingmanxin');
   const reserveYears = window.resolveReserveYears(RULE, payTerm);
+  // 储备期在 viewMode 过滤后的实际显示行数（避免 rowspan 大于实际行数导致布局错乱）
+  const reserveDisplayCount = displayRows.filter(r => r.yr <= reserveYears).length;
   tbody.innerHTML = displayRows.map((r, idx) => {
     const isReserve = r.yr <= reserveYears;
-    // 储备期合并单元格：仅首行( yr=1 )输出 rowspan，后续储备期行省略该列 td
+    // 储备期合并单元格：过滤后首条储备期行输出 rowspan，后续储备期行省略该列 td
     let yieldCell;
     if(isReserve){
-      yieldCell = r.yr === 1
-        ? `<td class="col-rate reserve-cell col-expected" rowspan="${reserveYears}">储备期</td>`
+      yieldCell = (idx === 0 && reserveDisplayCount > 0)
+        ? `<td class="col-rate reserve-cell col-expected" rowspan="${reserveDisplayCount}">储备期</td>`
         : '';
     } else {
       yieldCell = `<td class="col-rate col-expected">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
@@ -661,12 +666,14 @@ function buildExport(rows, dep, p, reserveYears){
   const dateNice = (() => { const d2 = new Date(); const m2 = String(d2.getMonth()+1).padStart(2,'0'); const dday = String(d2.getDate()).padStart(2,'0'); return d2.getFullYear()+'-'+m2+'-'+dday; })();
 
   const displayRows = filterByView(rows);
+  // viewMode 过滤后，储备期实际显示行数可能与 reserveYears 不同，rowspan 必须按实际行数
+  const reserveDisplayCount = displayRows.filter(r => r.yr <= reserveYears).length;
   const benefitBody = displayRows.map((r, idx) => {
     const isReserve = r.yr <= reserveYears;
     let yieldCell;
     if(isReserve){
-      yieldCell = idx === 0
-        ? `<td class="exp-reserve" rowspan="${reserveYears}" aria-label="储备期"></td>`
+      yieldCell = (idx === 0 && reserveDisplayCount > 0)
+        ? `<td class="exp-reserve" rowspan="${reserveDisplayCount}">储备期</td>`
         : '';
     } else {
       yieldCell = `<td>${r.yieldVal === null ? '－' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
@@ -700,11 +707,20 @@ function buildExport(rows, dep, p, reserveYears){
     <div class="exp-row2">
       <div class="exp-box">
         <div class="exp-h">公司介绍</div>
-        <div class="exp-b">成立：1996年，国有控股上市险企（上海/香港两地上市）<br>大股东：中央汇金、中国宝武钢铁<br>评级：连续九年惠誉"A"级、穆迪"A2"级，世界500强企业</div>
+        <div class="exp-b">
+          <p><strong>成立背景：</strong>1996年于人民大会堂创立，国有控股上市险企（上海/香港两地上市）</p>
+          <p><strong>主要股东：</strong>中央汇金、中国宝武钢铁</p>
+          <p><strong>荣誉评级：</strong>连续九年惠誉"A"级、穆迪"A2"级，世界500强企业</p>
+        </div>
       </div>
       <div class="exp-box">
         <div class="exp-h">产品简介</div>
-        <div class="exp-b">投保年龄0-75周岁：3年交支持6/8/10年，5年交支持10/15年<br>满期领取：生存至期满按基本保额（高于所交保费）给付满期金<br>身故保障：最高160%赔付；鑫享红利：享保单红利分配</div>
+        <div class="exp-b">
+          <p><strong>投保规则：</strong>0-75周岁；3年交支持6/8/10年，5年交支持10/15年</p>
+          <p><strong>满期领取：</strong>生存至期满按基本保额（高于所交保费）给付满期金</p>
+          <p><strong>身故保障：</strong>最高160%赔付比例</p>
+          <p><strong>红利分配：</strong>享有保单红利分配机会，共享保司经营盈利</p>
+        </div>
       </div>
     </div>
 
@@ -821,33 +837,14 @@ function buildExport(rows, dep, p, reserveYears){
 async function downloadImage(){
   const plan = document.getElementById('exportRoot');
   if(!plan || !currentParams){ if(typeof showToast==='function') showToast('请先生成利益演示'); return; }
-  const reserveCell = plan.querySelector('.exp-reserve');
-  let reserveLabelBox = null;
   // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
+  document.body.classList.add('capturing');
   try{
-    // 计算储备期合并单元格的中心位置，用于 html2canvas 渲染后在新 canvas 上绘制"储备期"文字
-    // 注意：html2canvas 对 rowspan 合并单元格的文字不渲染（已知问题），必须由我们手动画
-    if(reserveCell && reserveCell.rowSpan > 1){
-      const planRect = plan.getBoundingClientRect();
-      const cellRect = reserveCell.getBoundingClientRect();
-      const reserveRows = plan.querySelectorAll('.exp-main tbody tr');
-      const firstReserveRow = reserveRows[0] ? reserveRows[0].getBoundingClientRect() : cellRect;
-      const lastReserveRow = reserveRows[reserveCell.rowSpan - 1]
-        ? reserveRows[reserveCell.rowSpan - 1].getBoundingClientRect()
-        : cellRect;
-      reserveLabelBox = {
-        left: cellRect.left - planRect.left,
-        top: firstReserveRow.top - planRect.top,
-        width: cellRect.width,
-        height: lastReserveRow.bottom - firstReserveRow.top
-      };
-    }
     const captureW = plan.offsetWidth || 1500;
     const captureH = plan.scrollHeight;
-    const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
-    const captureScale = 2;   // 微信2倍、其他3倍，保证微信转发后仍清晰
+    const captureScale = 2;   // 2倍图，保证微信转发后仍清晰
     const srcCanvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
@@ -860,28 +857,6 @@ async function downloadImage(){
       scrollY: 0,
       logging: false
     });
-    // 把 html2canvas 输出拷贝到新 canvas，再在新 canvas 上 fillText（html2canvas 返回的 canvas 上 fillText 不生效）
-    const canvas = document.createElement('canvas');
-    canvas.width = srcCanvas.width;
-    canvas.height = srcCanvas.height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(srcCanvas, 0, 0);
-    if(reserveLabelBox){
-      const scaleX = canvas.width / captureW;
-      const scaleY = canvas.height / captureH;
-      ctx.save();
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.fillStyle = '#1E40AF';
-      ctx.font = `700 ${20 * scaleY}px Arial, "Microsoft YaHei", sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(
-        '储备期',
-        (reserveLabelBox.left + reserveLabelBox.width / 2) * scaleX,
-        (reserveLabelBox.top + reserveLabelBox.height / 2) * scaleY
-      );
-      ctx.restore();
-    }
     window.scrollTo(0, oldScrollTop);
     const p = currentParams;
     const payTermLabel = p.payTerm === 3 ? '3年交' : '5年交';
@@ -889,7 +864,7 @@ async function downloadImage(){
     const filename = `盈满鑫两全保险_${p.age}_${payTermLabel}_${p.premium}_${dateStr}.png`;
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     // 无条件先生成 blob，确保手机端/桌面端都能拿到（修复手机端 blob 为 null 导致下载无反应）
-    const _blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
+    const _blob = await new Promise(r=>srcCanvas.toBlob(r,'image/png'));
     const _blobUrl = URL.createObjectURL(_blob);
     if(!isMobile && window.showSaveFilePicker){
       try{
