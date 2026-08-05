@@ -23,3 +23,9 @@ tests/**/*.png
 
 # 用户自行打包的本地归档，不跟踪
 qa/screenshots/*.rar
+
+# 临时调试日志（Playwright 脚本 stdout，无长期价值）
+qalogs*.txt
+
+# 一次性排查用的候选方案对比图（保留本地磁盘，不进版本库）
+qa/screenshots/*-debug/
