@@ -288,7 +288,6 @@ body.capturing .table-scroll{overflow-x:visible !important;}
         <div class="section-head"><span></span>公司介绍</div>
         <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
         <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
-        <p style="background:#EFF6FF;border-left:3px solid #1E40AF;padding:8px 10px;border-radius:6px;font-size:15px;line-height:1.7;color:#334155;"><strong>💡大白话：</strong>中投公司是国家拿出外汇储备成立的"国家队投资部"，专门帮国家去全球投资赚钱，管着上万亿美元资产，是全球最大主权财富基金之一；中央汇金是中投旗下管国内金融牌照的平台，代表国家当工农中建几大银行和新华保险的大股东，说白了就是"国家队股东代表"。</p>
         <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》《财富》500强企业，连续九年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
       </div>
 
@@ -834,13 +833,8 @@ function buildExport(rows, dep, p, reserveYears){
       setBody(fontSize);
     }
     // 真正垂直居中兜底：html2canvas 对 vertical-align 支持不稳，
-    // 表头用 flex 居中（含两行 main/sub），数据单元格用 line-height=格高强制单行文本居中
-    headerCells.forEach(c => {
-      c.style.display = 'flex';
-      c.style.flexDirection = 'column';
-      c.style.justifyContent = 'center';
-      c.style.alignItems = 'center';
-    });
+    // 表头回归 table-cell + verticalAlign 由 CSS 控制，避免 display:flex 破坏表格列宽；
+    // 数据单元格用 line-height=格高强制单行文本居中
     table.querySelectorAll('tbody tr').forEach(tr => {
       const cells = Array.from(tr.querySelectorAll('td'));
       let maxH = 0;
