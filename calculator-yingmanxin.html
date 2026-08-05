@@ -638,7 +638,7 @@ function generate(){
   window.currentParams = currentParams;   // 暴露便于调试与自动化测试
   window.currentDeposit = currentDeposit;
   renderLiveDeposit(currentDeposit, currentParams);
-  buildExport(rows, currentDeposit, currentParams, reserveYears);
+  // buildExport(rows, currentDeposit, currentParams, reserveYears); // 2026-08-05 改为直接截取在线 #planArea，不再生成独立导出模板
   (function(){var km=document.getElementById('keyMetrics');if(!km)return;var d=currentDeposit;var mb=d.maturityBenefit,tp=d.totalPrem;document.getElementById('kmMaturity').textContent=fmt(mb);document.getElementById('kmCum').textContent=fmt(mb-tp);document.getElementById('kmRate').textContent=(d.comboAnnualized*100).toFixed(2)+'%';})();
 }
 
@@ -841,11 +841,9 @@ function buildExport(rows, dep, p, reserveYears){
       fontSize -= 1;
       setBody(fontSize);
     }
-    // 真正垂直居中兜底：html2canvas 对 vertical-align 支持不稳，
-    // 数据单元格用 line-height=格高强制单行文本居中。
-    // 关键点：rowspan 合并格的高度必须等于跨行总高度，否则会把首行撑高，并在底部留下白缝。
-    // 因此先取「没有 rowspan 的行」的普通单元格最大高度作为统一行高，再强制所有普通格等高、
-    // 合并格等于 行高×跨行数。
+    // 导出表格垂直居中兜底：统一普通数据行高，保留均匀的上下留白。
+    // rowspan 合并格交给浏览器按实际跨行高度计算，不再强设「总行高」，
+    // 避免储备期单元格把第一年撑高、并在合并区底部产生白缝。
     const rowsOfSection = new Map();
     ['tbody','tfoot'].forEach(tag => {
       const section = table.querySelector(tag);
@@ -876,31 +874,34 @@ function buildExport(rows, dep, p, reserveYears){
       });
       normalH = minH === Infinity ? 0 : minH;
     }
-    // 强制所有普通单元格为统一行高并垂直居中
+    // 强制所有普通单元格为统一行高并垂直居中。
+    // 不再用「line-height = 格高」，该做法会让中文字形视觉偏下。
     rowsOfSection.forEach(rows => {
       rows.forEach(tr => {
+        if(normalH > 0) tr.style.height = normalH + 'px';
         Array.from(tr.querySelectorAll('td')).forEach(c => {
           if(c.rowSpan > 1) return;
           const h = normalH || c.clientHeight;
           c.style.height = h + 'px';
-          c.style.lineHeight = h + 'px';
-          c.style.paddingTop = '0';
-          c.style.paddingBottom = '0';
+          c.style.lineHeight = '1.25';
+          c.style.paddingTop = '2px';
+          c.style.paddingBottom = '2px';
           c.style.boxSizing = 'border-box';
+          c.style.verticalAlign = 'middle';
         });
       });
     });
-    // 强制 rowspan 合并单元格高度 = 跨行总高度，使其不额外撑高首行，并消除底部白缝
+    // 合并格只保留标准垂直居中；不设高度和等高 line-height。
     rowsOfSection.forEach(rows => {
-      rows.forEach((tr, rowIndex) => {
+      rows.forEach(tr => {
         Array.from(tr.querySelectorAll('td')).forEach(c => {
-          if(c.rowSpan > 1 && normalH > 0){
-            const totalH = normalH * c.rowSpan;
-            c.style.height = totalH + 'px';
-            c.style.lineHeight = totalH + 'px';
+          if(c.rowSpan > 1){
+            c.style.height = 'auto';
+            c.style.lineHeight = '1.25';
             c.style.paddingTop = '0';
             c.style.paddingBottom = '0';
             c.style.boxSizing = 'border-box';
+            c.style.verticalAlign = 'middle';
           }
         });
       });
@@ -922,22 +923,33 @@ function buildExport(rows, dep, p, reserveYears){
 }
 
 async function downloadImage(){
-  const plan = document.getElementById('exportRoot');
-  if(!plan || !currentParams){ if(typeof showToast==='function') showToast('请先生成利益演示'); return; }
+  if(!currentParams){ if(typeof showToast==='function') showToast('请先生成利益演示'); return; }
+  const plan = document.getElementById('planArea');
+  if(!plan){ if(typeof showToast==='function') showToast('未找到计划书区域'); return; }
   // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
   document.body.classList.add('capturing');
+  let introBoxes = [];
+  let introOldHeights = [];
   try{
-    const captureW = plan.offsetWidth || 1500;
+    // 直接截取在线结果区域 #planArea，做到网页看到什么、下载就是什么
+    // html2canvas 对 flex stretch 支持不稳，抓图前临时把公司/产品双栏写死等高，再恢复
+    const intro = plan.querySelector('.plan-intro');
+    introBoxes = intro ? Array.from(intro.querySelectorAll(':scope > div')) : [];
+    introOldHeights = introBoxes.map(b => b.style.height);
+    if(introBoxes.length === 2){
+      const h = Math.max(introBoxes[0].offsetHeight, introBoxes[1].offsetHeight);
+      introBoxes.forEach(b => b.style.height = h + 'px');
+    }
+    const captureW = plan.offsetWidth || 1200;
     const captureH = plan.scrollHeight;
-    const captureScale = 2;   // 2倍图，保证微信转发后仍清晰
     const srcCanvas = await html2canvas(plan, {
-      scale: captureScale,
+      scale: 2,
       backgroundColor: '#fff',
       useCORS: true,
-      windowWidth: captureW,
-      windowHeight: captureH,
+      windowWidth: document.documentElement.scrollWidth,
+      windowHeight: document.documentElement.scrollHeight,
       width: captureW,
       height: captureH,
       scrollX: 0,
@@ -950,7 +962,6 @@ async function downloadImage(){
     const dateStr = (() => { const d=new Date(); const m=String(d.getMonth()+1).padStart(2,'0'); const day=String(d.getDate()).padStart(2,'0'); return ''+d.getFullYear()+m+day; })();
     const filename = `盈满鑫两全保险_${p.age}_${payTermLabel}_${p.premium}_${dateStr}.png`;
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-    // 无条件先生成 blob，确保手机端/桌面端都能拿到（修复手机端 blob 为 null 导致下载无反应）
     const _blob = await new Promise(r=>srcCanvas.toBlob(r,'image/png'));
     const _blobUrl = URL.createObjectURL(_blob);
     if(!isMobile && window.showSaveFilePicker){
@@ -961,8 +972,6 @@ async function downloadImage(){
         return;
       }catch(e){ if(e.name==='AbortError') return; }
     }
-    // 手机端 & 桌面降级：data URL 确保兼容
-    // 微信/手机端：页面内显示图片，提示长按保存；桌面：直接下载
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     if(isWechatEnv2 || isMobile2){
@@ -975,6 +984,7 @@ async function downloadImage(){
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);
     if(typeof showToast==='function') showToast('计划书已下载');
   }finally{
+    introBoxes.forEach((b, i) => { b.style.height = introOldHeights[i]; });
     document.body.classList.remove('capturing');
     window.scrollTo(0, oldScrollTop);
   }
