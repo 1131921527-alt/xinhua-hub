@@ -55,12 +55,6 @@
           "type": "calculator",
           "description": "关爱金年金利益演示 → 完整利益演示 → 可下载计划书图片",
           "url": "calculator-hengxiang.html"
-        },
-        {
-          "name": "盈满鑫 · 产品解读（一页通+MDRT解读）",
-          "type": "card",
-          "description": "原版一页通PDF + 产品形态速览 + 核心卖点解读 + 客户画像 + 话术 + 在线测算入口",
-          "url": "intro-yingmanxin.html"
         }
       ]
     },
@@ -131,6 +125,12 @@
           "type": "card",
           "description": "宏御世家分红型增额终身寿险知识问答，微信直读文字版",
           "url": "card-hongyu.html"
+        },
+        {
+          "name": "盈满鑫 · 产品解读（一页通+MDRT解读）",
+          "type": "card",
+          "description": "原版一页通PDF + 产品形态速览 + 核心卖点解读 + 客户画像 + 话术 + 在线测算入口",
+          "url": "intro-yingmanxin.html"
         }
       ]
     },
