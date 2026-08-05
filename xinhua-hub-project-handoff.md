@@ -417,7 +417,38 @@ html2canvas 截 #planArea → 手机弹预览图长按保存 / 桌面直接下�
 
 ---
 
-## 附：快速上手清单
+## 附一：项目内 AI 文档索引（⚠️ 有重叠，注意分工）
+
+项目里目前有多份面向「AI 接手」的文档，是不同时间、不同会话生成的，**内容有重叠**。建议按下表理解分工，后续可考虑合并精简：
+
+| 文档 | 行数 | 定位 | 是否进 Git |
+|------|------|------|-----------|
+| `xinhua-hub-project-handoff.md`（本文档） | 430+ | **最全的交接说明**：项目/页面/演算器/规范/踩坑/待办/规则 | ✅ 已提交 |
+| `AI-development-rules.md` | 153 | 八条**强制协作规则**（改代码前必读） | ⚠️ 未跟踪 |
+| `PROJECT_CONTEXT.md` | 140 | 项目上下文速览（另一会话于 2026-08-06 00:03 生成） | ⚠️ 未跟踪 |
+| `docs/AI_HANDOVER_GUIDE.md` | — | 旧版接管说明（2026-07-30），**部分内容已过时**，见 6.3 | ✅ 已提交 |
+| `.workbuddy/memory/MEMORY.md` | — | 项目长期记忆（最权威的约定沉淀） | ❌ 被 gitignore |
+
+> **推荐阅读顺序**：本文档 → `AI-development-rules.md` → `.workbuddy/memory/MEMORY.md` → 最近日期的 `.workbuddy/memory/YYYY-MM-DD.md`
+
+---
+
+## 附二：交接时的工作区状态（2026-08-06 00:07 快照）
+
+⚠️ **交接时工作区并非完全干净**，新接手方请先确认以下内容：
+
+**1. `calculator-yingmanxin.html` 有未提交改动**（+7 / -3 行，非本次交接文档产生）：
+- `.plan-title` margin `20px→16px`、`.section` margin `16px→12px`、`.section-head` padding `9px→8px`（间距压缩）
+- 新增底部两个块：`.plan-foot-note`（免责声明：「本计划书基于假设利率测算，演示收益不代表实际收益…」）+ `.plan-foot-source`（署名：「新华资料库 xinhua-hub｜计划书仅供演示与沟通使用」）
+- **状态：未验收、未提交**。接手后请先决定「继续完善并验收提交」或「`git checkout` 回滚」。
+
+**2. 两份未跟踪文档**：`AI-development-rules.md`、`PROJECT_CONTEXT.md` 尚未 `git add`，仅存在于本地磁盘。若希望跨设备/跨账号通过仓库获取，需要提交入库。
+
+**3. 已提交并推送的最新状态**：commit `6e659e5`（含本交接文档）。
+
+---
+
+## 附三：快速上手清单
 
 新 AI 接手时按此顺序做：
 
