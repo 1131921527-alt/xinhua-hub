@@ -403,6 +403,8 @@ async function downloadImage(){
       captureScale = Math.floor(Math.sqrt(maxCanvasPixels / (captureW * captureH)) * 10) / 10;
     }
     captureScale = Math.max(1.0, captureScale);
+    // 导出前强制公司介绍/产品简介双栏等高（html2canvas 对 flex stretch 支持不稳，用显式高度兜底）
+    (function(){var rows=plan.querySelectorAll('.intro-row, .plan-intro');rows.forEach(function(r){var ks=[].slice.call(r.children).filter(function(c){return c.tagName==='DIV';});if(ks.length===2){var h=Math.max(ks[0].offsetHeight,ks[1].offsetHeight);ks[0].style.height=h+'px';ks[1].style.height=h+'px';}});})();
     const canvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',

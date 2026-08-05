@@ -45,7 +45,9 @@
   .col-ann{color:#2563EB;font-weight:600;}
   /* 储备期列：遵循 2026-07-24 招行规范（前5年逐行独立 td，浅蓝底居中灰字，与宏安/宏御/宏愿对齐） */
   #resultTable .col-rate{text-align:center;color:#64748B;font-weight:600;white-space:nowrap;}
-  #resultTable td.col-rate.reserve-cell{background:#DBEAFE;}
+  /* 储备期合并单元格：浅蓝底 + 垂直水平居中（html2canvas 对 rowspan vertical-align 支持差，用 span flex 兜底） */
+  #resultTable td.col-rate.reserve-cell{background:#DBEAFE;padding:0;text-align:center;vertical-align:middle;}
+  #resultTable td.col-rate.reserve-cell > span{display:flex;align-items:center;justify-content:center;height:100%;color:#64748B;font-weight:700;white-space:nowrap;}
   .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
   .err.show{display:block;}
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:12px 22px;border-radius:24px;opacity:0;transition:.3s;font-size:14px;z-index:99;}
@@ -119,7 +121,7 @@ body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
   }
 
   /* ===== V3.1 结果页核心指标卡（手机首屏突出满期/累计/年化） ===== */
-  .key-metrics{display:flex;gap:8px;margin:14px 0 6px;}
+  .key-metrics{display:none !important;}
   .km-card{flex:1;background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%);border:1px solid #BFDBFE;border-radius:10px;padding:10px 6px;text-align:center;box-sizing:border-box;}
   .km-label{font-size:12px;color:#1E40AF;font-weight:700;margin-bottom:4px;line-height:1.1;}
   .km-val{font-size:17px;font-weight:800;color:#1E3A8A;line-height:1.15;word-break:break-word;}
@@ -194,11 +196,6 @@ body.capturing .km-val{font-size:32px !important;line-height:1.2 !important;}
 
   <div id="planArea" class="plan">
     <div class="plan-title">恒享人生 · 年金保险 · 理财计划</div>
-<div class="key-metrics" id="keyMetrics">
-      <div class="km-card"><div class="km-label">满期收益</div><div class="km-val" id="kmMaturity">—</div></div>
-      <div class="km-card"><div class="km-label">累计收益</div><div class="km-val" id="kmCum">—</div></div>
-      <div class="km-card"><div class="km-label">年化单利</div><div class="km-val" id="kmRate">—</div></div>
-    </div>
     <div class="plan-intro">
       <div>
         <h4>公司介绍</h4>
@@ -294,10 +291,15 @@ async function generate(){
       const tr=document.createElement('tr');
       if(rowClass) tr.className=rowClass;
 
-      // 储备期列：前5年显示"储备期"（浅蓝底，逐行独立 td），之后显示"-"
-      const reserveCell = yr <= reserveYears
-        ? `<td class="col-rate reserve-cell">储备期</td>`
-        : `<td class="col-rate">-</td>`;
+      // 储备期列：前5年合并为一个单元格（rowspan），区域内垂直+水平居中；后续储备期行由 rowspan 覆盖，不再输出该列 td
+      let reserveCell;
+      if(yr <= reserveYears){
+        reserveCell = (idx === 0)
+          ? `<td class="col-rate reserve-cell" rowspan="${reserveYears}"><span>储备期</span></td>`
+          : '';
+      } else {
+        reserveCell = `<td class="col-rate">-</td>`;
+      }
 
       let cells=`<td>${yr}</td><td>${curAge}</td>`;
       cells+=`<td>${fmt(cum*scale)}</td>`;
@@ -587,6 +589,8 @@ async function downloadImage(){
     if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}
     captureScale=Math.max(1.0,captureScale);
     // x:0,y:0 显式从 #planArea 元素左上角（即蓝色标题）开始截取，杜绝顶部被裁切
+    // 导出前强制公司介绍/产品简介双栏等高（html2canvas 对 flex stretch 支持不稳，用显式高度兜底）
+    (function(){var rows=plan.querySelectorAll('.intro-row, .plan-intro');rows.forEach(function(r){var ks=[].slice.call(r.children).filter(function(c){return c.tagName==='DIV';});if(ks.length===2){var h=Math.max(ks[0].offsetHeight,ks[1].offsetHeight);ks[0].style.height=h+'px';ks[1].style.height=h+'px';}});})();
     const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,x:0,y:0,logging:false});
     if(wrap){wrap.style.width=oldWrapWidth;wrap.style.maxWidth=oldWrapMaxWidth;}
     plan.style.width=oldPlanWidth;plan.style.minWidth=oldPlanMinWidth;plan.style.overflow=oldPlanOverflow;plan.style.height=oldPlanHeight;
