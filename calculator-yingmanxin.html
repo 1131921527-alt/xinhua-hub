@@ -51,9 +51,9 @@ body.capturing .main-table{font-size:19px !important;min-width:100% !important;}
 body.capturing .table-scroll{overflow-x:visible !important;}
 
 .plan{padding:28px 32px 4px;background:#fff;}
-.plan-title{text-align:center;font-size:34px;font-weight:800;color:var(--primary);margin-bottom:20px;letter-spacing:0;padding:0 20px;overflow:visible;box-sizing:border-box;}
-.section{margin-bottom:16px;border:2px solid var(--primary);background:#fff;padding:16px;}
-.section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:9px 16px;font-size:19px;font-weight:700;margin:-16px -16px 12px -16px;}
+.plan-title{text-align:center;font-size:34px;font-weight:800;color:var(--primary);margin-bottom:16px;letter-spacing:0;padding:0 20px;overflow:visible;box-sizing:border-box;}
+.section{margin-bottom:12px;border:2px solid var(--primary);background:#fff;padding:16px;}
+.section-head{display:flex;align-items:center;background:var(--primary);color:#fff;padding:8px 16px;font-size:19px;font-weight:700;margin:-16px -16px 12px -16px;}
 .section-head span{display:inline-block;width:3px;height:17px;background:#fff;margin-right:8px;}
 .section p{font-size:16px;line-height:1.7;color:#1E293B;margin:0 0 6px 0;}
 .section p:last-child{margin-bottom:0;}
@@ -158,6 +158,8 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .combo-table .cv{text-align:right;font-weight:700;color:#1E293B;}
 .combo-hl{background:#DBEAFE;}
 .combo-hl .cv{color:var(--primary);font-weight:800;font-size:18px;}
+.plan-foot-note{margin-top:10px;padding-top:8px;border-top:1px solid #E2E8F0;color:#64748B;font-size:13px;line-height:1.65;}
+.plan-foot-source{margin-top:4px;color:#94A3B8;font-size:12px;text-align:center;letter-spacing:.4px;}
 
 /* ============ 独立隐藏导出模板（高清 PNG，不直接截取网页）============ */
 #exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
@@ -351,6 +353,8 @@ body.capturing .table-scroll{overflow-x:visible !important;}
     </div>
     <!-- 定存收益明细 + 组合计划结果（实时页展示，与导出图数据一致） -->
     <div class="section" id="liveDepositSection"></div>
+    <div class="plan-foot-note">⚠ 本计划书基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
+    <div class="plan-foot-source">新华资料库 xinhua-hub｜计划书仅供演示与沟通使用</div>
   </div>
 </div>
 
