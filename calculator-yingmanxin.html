@@ -159,9 +159,9 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 #exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
 .exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:30px;line-height:1.5;}
 .exp-title{text-align:center;font-size:32px;font-weight:800;color:var(--primary);margin:0 0 16px;letter-spacing:1px;}
-.exp-row2{display:flex;border:2px solid var(--primary);margin-bottom:8px;box-sizing:border-box;}
+.exp-row2{display:table;width:100%;table-layout:fixed;border:2px solid var(--primary);border-collapse:collapse;margin-bottom:8px;box-sizing:border-box;}
 .exp-box{border:2px solid var(--primary);background:#fff;padding:8px 10px;margin-bottom:8px;box-sizing:border-box;}
-.exp-row2 > .exp-box{flex:1;border:0;margin-bottom:0;}
+.exp-row2 > .exp-box{display:table-cell;width:50%;vertical-align:top;border:0;margin-bottom:0;padding:8px 10px;box-sizing:border-box;}
 .exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
 .exp-h{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:6px 8px;margin:-8px -10px 6px;box-sizing:border-box;}
 .exp-b{font-size:15px;line-height:1.45;color:#1E293B;}
@@ -801,6 +801,16 @@ function buildExport(rows, dep, p, reserveYears){
   };
   fitExportTable(root.querySelector('.exp-info'), 'td', 19, 12);
   fitExportTable(root.querySelector('.exp-main'), 'tbody td:not(.exp-reserve)', 16, 12);
+  // 公司介绍/产品简介两栏底部强制对齐：html2canvas 对 flex stretch 支持不稳，用显式等高兜底
+  const row2 = root.querySelector('.exp-row2');
+  if (row2) {
+    const boxes = row2.querySelectorAll(':scope > .exp-box');
+    if (boxes.length === 2) {
+      const h = Math.max(boxes[0].offsetHeight, boxes[1].offsetHeight);
+      boxes[0].style.height = h + 'px';
+      boxes[1].style.height = h + 'px';
+    }
+  }
 }
 
 async function downloadImage(){
