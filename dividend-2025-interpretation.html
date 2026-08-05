@@ -129,6 +129,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .compare-row{flex-direction:column}
 .toc{top:52px}
 }
+
+/* 累计红利柱状图 */
+.mod-cap{font-size:12px;color:var(--text-light);margin:2px 0 16px}
+.chart-wrap{position:relative;margin:14px 0 4px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 12px 12px}
+.chart-svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-svg .grid{stroke:#E2E8F0;stroke-width:1}
+.chart-svg .axis-label{fill:var(--text-light);font-size:11px}
+.chart-svg .x-label{fill:var(--text-light);font-size:11px;font-weight:600}
+.chart-svg .bar{transition:opacity .15s;cursor:pointer}
+.chart-svg .bar:hover,.chart-svg .bar.active{opacity:.82}
+.chart-legend{display:flex;gap:18px;justify-content:center;margin:2px 0 6px;flex-wrap:wrap}
+.chart-legend span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-light)}
+.chart-legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.chart-tip{position:absolute;pointer-events:none;background:rgba(30,41,59,.94);color:#fff;font-size:12px;line-height:1.5;padding:8px 10px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.2);opacity:0;transform:translate(-50%,-110%);transition:opacity .12s;white-space:nowrap;z-index:5}
+.chart-tip b{color:#93C5FD}
+.chart-cap{font-size:12.5px;color:var(--text-light);text-align:center;margin:6px 0 0}
+@media(max-width:640px){
+.chart-svg .axis-label,.chart-svg .x-label{font-size:10px}
+.chart-legend span{font-size:11.5px}
+}
 </style>
 </head>
 <body>
@@ -391,13 +411,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 
   <h3>💰 真实案例：宏御世家（分红型）100万 · 3年交 · 40岁女性</h3>
   <p style="font-size:13.5px;">按新华保险2025年红利实现率118%测算，118%与100%实现率下"累计红利"对比（单位：元）：</p>
-  <div class="table-scroll">
-  <table class="data-table">
-    <tr><th>保单年度</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th></tr>
-    <tr><td>118%累计红利</td><td class="num">5,253</td><td class="num">24,356</td><td class="num">65,792</td><td class="num">123,776</td><td class="num">169,628</td><td class="num">431,609</td><td class="num">1,153,203</td><td class="num">2,227,587</td><td class="num">3,796,934</td><td class="num">6,054,261</td><td class="num">9,263,463</td></tr>
-    <tr><td>100%累计红利</td><td class="num">4,452</td><td class="num">20,641</td><td class="num">55,756</td><td class="num">104,895</td><td class="num">143,753</td><td class="num">365,771</td><td class="num">977,291</td><td class="num">1,887,786</td><td class="num">3,217,741</td><td class="num">5,130,730</td><td class="num">7,850,393</td></tr>
-  </table>
+  <div class="chart-wrap" id="divChartWrap">
+    <div class="chart-legend">
+      <span><i style="background:#1D4ED8"></i>118%实现率累计红利</span>
+      <span><i style="background:#93C5FD"></i>100%实现率累计红利</span>
+    </div>
+    <div id="divChart"></div>
+    <p class="chart-cap">柱状图（对数刻度）用于直观展示118%与100%红利实现率下的累计红利差异，单位：元。</p>
   </div>
+  <details class="product" style="margin-top:8px">
+    <summary>📋 查看原始数据（累计红利明细表）</summary>
+    <div class="p-body">
+      <div class="table-scroll">
+      <table class="data-table">
+        <tr><th>保单年度</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th></tr>
+        <tr><td>118%累计红利</td><td class="num">5,253</td><td class="num">24,356</td><td class="num">65,792</td><td class="num">123,776</td><td class="num">169,628</td><td class="num">431,609</td><td class="num">1,153,203</td><td class="num">2,227,587</td><td class="num">3,796,934</td><td class="num">6,054,261</td><td class="num">9,263,463</td></tr>
+        <tr><td>100%累计红利</td><td class="num">4,452</td><td class="num">20,641</td><td class="num">55,756</td><td class="num">104,895</td><td class="num">143,753</td><td class="num">365,771</td><td class="num">977,291</td><td class="num">1,887,786</td><td class="num">3,217,741</td><td class="num">5,130,730</td><td class="num">7,850,393</td></tr>
+      </table>
+      </div>
+    </div>
+  </details>
   <div class="success-box">
     <strong>不增加一分保费，118%比100%多出的"超额红利"：</strong>
     <ul style="margin-left:18px;margin-top:8px;">
@@ -454,7 +487,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
     <div class="stat-item"><div class="value sm">363亿</div><div class="label">归母净利润<br>（同比 +38.3%）</div></div>
   </div>
 
-  <h3>📈 投资能力</h3>
+  <h3>📈 投资能力（2025年度）</h3>
   <div class="stats-grid">
     <div class="stat-item"><div class="value">6.6%</div><div class="label">总投资收益率</div></div>
     <div class="stat-item"><div class="value sm">6.9%</div><div class="label">综合投资收益率</div></div>
@@ -462,12 +495,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
     <div class="stat-item"><div class="value sm">34.7%</div><div class="label">净资产收益率 ROE<br>（+8.8pct）</div></div>
     <div class="stat-item"><div class="value sm">2.8%</div><div class="label">净投资收益率</div></div>
   </div>
+  <p class="mod-cap">数据来源：新华保险公开披露数据（2025年度）</p>
 
-  <h3>🛡️ 风险抵御能力</h3>
+  <h3>🛡️ 风险抵御能力（2025年度）</h3>
   <div class="stats-grid">
     <div class="stat-item"><div class="value sm">135.11%</div><div class="label">核心偿付能力<br>充足率</div></div>
     <div class="stat-item"><div class="value sm">210.47%</div><div class="label">综合偿付能力<br>充足率</div></div>
   </div>
+  <p class="mod-cap">数据来源：新华保险公开披露数据（2025年度）</p>
   <div class="note-box">📌 监管要求对照：核心偿付能力充足率不低于 <strong>50%</strong>、综合偿付能力充足率不低于 <strong>100%</strong>。新华两项指标分别达 135.11% 与 210.47%，安全边际充足。</div>
 
   <p style="font-size:12.5px;color:var(--text-light)">注：以上经营与投资数据引自公司公开披露（2025年度），具体以正式财报/公告为准；本页仅作能力展示，不构成任何收益承诺或投资建议。</p>
@@ -515,6 +550,72 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+})();
+</script>
+
+<script>
+// 累计红利对比柱状图（对数刻度，118%/100% 两组，悬停/点击显示数值）
+(function(){
+  var years=[1,2,3,4,5,10,20,30,40,50,60];
+  var v118=[5253,24356,65792,123776,169628,431609,1153203,2227587,3796934,6054261,9263463];
+  var v100=[4452,20641,55756,104895,143753,365771,977291,1887786,3217741,5130730,7850393];
+  var host=document.getElementById('divChart');
+  if(!host) return;
+  var wrap=document.getElementById('divChartWrap');
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function fmt(n){return '¥'+n.toLocaleString('en-US');}
+  var W=760,H=380,m={l:52,r:14,t:18,b:44};
+  var plotW=W-m.l-m.r, plotH=H-m.t-m.b, baseY=m.t+plotH;
+  var logMin=3, logMax=7;
+  function yFor(v){var n=(logMax-Math.log10(v))/(logMax-logMin);return m.t+n*plotH;}
+  var gW=plotW/years.length;
+  var svg=el('svg',{viewBox:'0 0 '+W+' '+H,'class':'chart-svg',preserveAspectRatio:'xMidYMid meet'});
+  [4,5,6,7].forEach(function(p){
+    var y=yFor(Math.pow(10,p));
+    svg.appendChild(el('line',{x1:m.l,y1:y,x2:W-m.r,y2:y,'class':'grid'}));
+    var tx=el('text',{x:m.l-8,y:y+4,'class':'axis-label','text-anchor':'end'});
+    tx.textContent=(p===4?'1万':p===5?'10万':p===6?'100万':'1000万');
+    svg.appendChild(tx);
+  });
+  var at=el('text',{x:14,y:m.t+plotH/2,'class':'axis-label','text-anchor':'middle',transform:'rotate(-90 14 '+(m.t+plotH/2)+')'});
+  at.textContent='累计红利（对数刻度·元）';
+  svg.appendChild(at);
+  var tip=document.createElement('div');tip.className='chart-tip';wrap.appendChild(tip);
+  function showTip(e,label,val){
+    tip.innerHTML='<div style="font-weight:700;margin-bottom:2px">'+label+'</div><b>'+val+'</b>';
+    var r=wrap.getBoundingClientRect();
+    var cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+    var cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+    tip.style.left=cx+'px';tip.style.top=cy+'px';tip.style.opacity='1';
+  }
+  function hideTip(){tip.style.opacity='0';}
+  years.forEach(function(yr,i){
+    var cx=m.l+gW*(i+0.5);
+    var bw=Math.min(20,gW*0.34), gap=4;
+    var x1=cx-bw-gap/2, x2=cx+gap/2;
+    [['100',v100[i],'#93C5FD'],['118',v118[i],'#1D4ED8']].forEach(function(b){
+      var yT=yFor(b[1]);
+      var rect=el('rect',{x:(b[0]==='100'?x1:x2),y:yT,width:bw,height:baseY-yT,rx:2,'class':'bar',fill:b[2]});
+      rect.dataset.label='第'+yr+'年度 · '+b[0]+'%实现率';
+      rect.dataset.val=fmt(b[1]);
+      var h=function(e){showTip(e,rect.dataset.label,rect.dataset.val);};
+      rect.addEventListener('mouseenter',h);
+      rect.addEventListener('mousemove',h);
+      rect.addEventListener('touchstart',h,{passive:true});
+      rect.addEventListener('click',h);
+      rect.addEventListener('mouseleave',hideTip);
+      svg.appendChild(rect);
+    });
+    var xl=el('text',{x:cx,y:baseY+18,'class':'x-label','text-anchor':'middle'});
+    xl.textContent=yr;
+    svg.appendChild(xl);
+  });
+  var xl2=el('text',{x:m.l+plotW/2,y:H-6,'class':'axis-label','text-anchor':'middle'});
+  xl2.textContent='保单年度';
+  svg.appendChild(xl2);
+  host.appendChild(svg);
+  wrap.addEventListener('touchstart',function(e){if(!e.target.classList.contains('bar'))hideTip();},{passive:true});
 })();
 </script>
 </body>
