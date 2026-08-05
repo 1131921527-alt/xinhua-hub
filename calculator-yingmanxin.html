@@ -187,7 +187,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .exp-main thead .exp-th-sub{font-size:12px;margin-top:1px;font-weight:500;}
 .exp-main tbody tr:nth-child(even){background:#F0F9FF;}
 .exp-main .exp-total{background:#DBEAFE;}
-.exp-main .exp-reserve{background:#DBEAFE;color:#475569;font-weight:800;text-align:center;vertical-align:middle;font-size:20px;letter-spacing:1px;}
+.exp-main .exp-reserve{background:#DBEAFE;color:#475569;font-weight:800;text-align:center;vertical-align:middle;font-size:15px;letter-spacing:1px;padding:4px 2px;box-sizing:border-box;}
 .exp-dep tfoot td{border:1px solid var(--primary);padding:7px 2px;vertical-align:middle;box-sizing:border-box;}
 .exp-dep .exp-foot-label{text-align:right;font-weight:700;background:var(--primary-bg);color:var(--primary);}
 .exp-dep .exp-foot-val{font-weight:800;color:var(--primary);}
@@ -811,7 +811,6 @@ function buildExport(rows, dep, p, reserveYears){
     const allCells = Array.from(table.querySelectorAll('th, td'));
     const valueCells = Array.from(table.querySelectorAll(cellSelector));
     const headerCells = Array.from(table.querySelectorAll('thead th'));
-    // 强制所有单元格垂直居中（html2canvas 对 vertical-align 支持不稳，inline 兜底）
     allCells.forEach(c => { c.style.verticalAlign = 'middle'; });
     const hasOverflow = () => valueCells.some(cell => cell.scrollWidth > cell.clientWidth + 1);
     // 表头固定较小字号（13-14px），避免字段拥挤
@@ -833,9 +832,32 @@ function buildExport(rows, dep, p, reserveYears){
       fontSize -= 1;
       setBody(fontSize);
     }
+    // 真正垂直居中兜底：html2canvas 对 vertical-align 支持不稳，
+    // 表头用 flex 居中（含两行 main/sub），数据单元格用 line-height=格高强制单行文本居中
+    headerCells.forEach(c => {
+      c.style.display = 'flex';
+      c.style.flexDirection = 'column';
+      c.style.justifyContent = 'center';
+      c.style.alignItems = 'center';
+    });
+    table.querySelectorAll('tbody tr').forEach(tr => {
+      const cells = Array.from(tr.querySelectorAll('td'));
+      let maxH = 0;
+      cells.forEach(c => { maxH = Math.max(maxH, c.clientHeight); });
+      if(maxH > 0){
+        cells.forEach(c => {
+          c.style.height = maxH + 'px';
+          c.style.lineHeight = maxH + 'px';
+          c.style.paddingTop = '0';
+          c.style.paddingBottom = '0';
+          c.style.boxSizing = 'border-box';
+        });
+      }
+    });
   };
   fitExportTable(root.querySelector('.exp-info'), 'td', 16, 12, 14);
-  fitExportTable(root.querySelector('.exp-main'), 'tbody td:not(.exp-reserve)', 16, 12, 14);
+  fitExportTable(root.querySelector('.exp-main'), 'tbody td', 16, 12, 14);
+  fitExportTable(root.querySelector('.exp-dep'), 'td', 15, 12, 14);
   // 公司介绍/产品简介两栏底部强制对齐：html2canvas 对 flex stretch 支持不稳，用显式等高兜底
   const row2 = root.querySelector('.exp-row2');
   if (row2) {
