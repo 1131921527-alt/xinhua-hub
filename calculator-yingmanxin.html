@@ -158,41 +158,45 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 /* ============ 独立隐藏导出模板（高清 PNG，不直接截取网页）============ */
 #exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
 .exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:30px;line-height:1.5;}
-.exp-title{text-align:center;font-size:32px;font-weight:800;color:var(--primary);margin:0 0 16px;letter-spacing:1px;}
+.exp-title{text-align:center;font-size:28px;font-weight:800;color:var(--primary);margin:0 0 12px;letter-spacing:1px;}
 .exp-row2{display:table;width:100%;table-layout:fixed;border:2px solid var(--primary);border-collapse:collapse;margin-bottom:8px;box-sizing:border-box;}
 .exp-box{border:2px solid var(--primary);background:#fff;padding:8px 10px;margin-bottom:8px;box-sizing:border-box;}
 .exp-row2 > .exp-box{display:table-cell;width:50%;vertical-align:top;border:0;margin-bottom:0;padding:8px 10px;box-sizing:border-box;}
 .exp-row2 > .exp-box:first-child{border-right:2px solid var(--primary);}
-.exp-h{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:6px 8px;margin:-8px -10px 6px;box-sizing:border-box;}
-.exp-b{font-size:15px;line-height:1.45;color:#1E293B;}
+.exp-h{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:6px 8px;margin:-8px -10px 8px;box-sizing:border-box;}
+.exp-b{font-size:15px;line-height:1.75;color:#1E293B;margin-top:2px;}
+/* 导出表格统一强制垂直居中（html2canvas 对 vertical-align 支持不稳，inline 兜底见 fitExportTable） */
+.exp-info th,.exp-info td,.exp-main th,.exp-main td,.exp-dep th,.exp-dep td,.exp-dep tfoot td,.exp-combo td{vertical-align:middle !important;}
 .exp-info{width:100%;border-collapse:collapse;table-layout:fixed;font-size:19px;border:2px solid var(--primary);box-sizing:border-box;}
-.exp-info th,.exp-info td{border:1px solid var(--primary);padding:5px 3px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-info th,.exp-info td{border:1px solid var(--primary);padding:7px 3px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-info th{font-size:15px;}
 .exp-info th{background:var(--primary-bg);color:var(--primary);font-weight:700;}
-.exp-stats{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
-.exp-stats span{background:var(--primary-bg);border:1px solid #BFDBFE;color:var(--primary);padding:5px 10px;font-weight:700;font-size:18px;border-radius:6px;}
+.exp-stats{margin-top:8px;background:#F8FAFC;border:1px solid #E2E8F0;border-left:3px solid var(--primary);border-radius:4px;padding:7px 10px;font-size:13.5px;color:#475569;line-height:1.6;box-sizing:border-box;}
+.exp-stats span{display:inline;background:none;border:none;color:#334155;font-weight:600;font-size:13.5px;padding:0;margin:0;border-radius:0;}
+.exp-stats span + span::before{content:"｜";color:#94A3B8;font-weight:400;margin:0 6px;}
 .exp-main,.exp-dep{width:100%;border-collapse:collapse;table-layout:fixed;font-size:18px;box-sizing:border-box;margin-top:2px;}
-.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:4px 1px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
+.exp-main th,.exp-main td,.exp-dep th,.exp-dep td{border:1px solid var(--primary);padding:6px 2px;text-align:center;vertical-align:middle;box-sizing:border-box;font-weight:600;color:#1E293B;}
 .exp-main tbody td{white-space:nowrap;}
 .exp-info td{white-space:nowrap;}
 .exp-main th,.exp-dep th{background:var(--primary);color:#fff;font-weight:700;}
-.exp-main thead th{font-size:13px;line-height:1.25;padding:4px 1px;white-space:normal;word-break:break-word;}
+.exp-main thead th{font-size:14px;line-height:1.25;padding:6px 1px;white-space:normal;word-break:break-word;}
 .exp-main thead .exp-th-main,.exp-main thead .exp-th-sub{display:block;white-space:normal;}
 .exp-main thead .exp-th-sub{font-size:12px;margin-top:1px;font-weight:500;}
 .exp-main tbody tr:nth-child(even){background:#F0F9FF;}
 .exp-main .exp-total{background:#DBEAFE;}
 .exp-main .exp-reserve{background:#DBEAFE;color:#475569;font-weight:800;text-align:center;vertical-align:middle;font-size:20px;letter-spacing:1px;}
-.exp-dep tfoot td{border:1px solid var(--primary);padding:5px 2px;vertical-align:middle;box-sizing:border-box;}
+.exp-dep tfoot td{border:1px solid var(--primary);padding:7px 2px;vertical-align:middle;box-sizing:border-box;}
 .exp-dep .exp-foot-label{text-align:right;font-weight:700;background:var(--primary-bg);color:var(--primary);}
 .exp-dep .exp-foot-val{font-weight:800;color:var(--primary);}
 .exp-combo{width:100%;border-collapse:collapse;table-layout:fixed;font-size:20px;box-sizing:border-box;}
-.exp-combo td{border:1px solid var(--primary);padding:4px 6px;vertical-align:middle;box-sizing:border-box;width:25%;}
+.exp-combo td{border:1px solid var(--primary);padding:6px 6px;vertical-align:middle;box-sizing:border-box;width:25%;}
 .exp-combo .cl{background:var(--primary-bg);color:var(--primary);font-weight:700;}
 .exp-combo .cv{text-align:right;font-weight:700;color:#1E293B;}
 .exp-combo .hl{background:#DBEAFE;}
 .exp-combo .hl .cv{color:var(--primary);font-weight:800;font-size:18px;}
 .exp-note{margin-top:8px;padding:8px 10px;background:var(--primary-bg);border:1px solid #BFDBFE;border-radius:8px;font-size:17px;color:#334155;line-height:1.7;box-sizing:border-box;}
-.exp-foot{margin-top:12px;font-size:17px;color:#64748B;line-height:1.8;border-top:1px solid #E2E8F0;padding-top:10px;box-sizing:border-box;}
-.exp-foot2{margin-top:8px;font-size:17px;color:#64748B;text-align:center;letter-spacing:.5px;}
+.exp-foot{margin-top:8px;font-size:15px;color:#64748B;line-height:1.7;border-top:1px solid #E2E8F0;padding-top:8px;box-sizing:border-box;}
+.exp-foot2{margin-top:6px;font-size:14px;color:#94A3B8;text-align:center;letter-spacing:.5px;}
 
   /* ===== V3.1 结果页核心指标卡（手机首屏突出满期/累计/年化） ===== */
   .key-metrics{display:flex;gap:8px;margin:14px 0 6px;}
@@ -780,27 +784,38 @@ function buildExport(rows, dep, p, reserveYears){
   </div>`;
 
   // 按本次测算的实际数字自动缩放：10万保持清晰大字，最高1000万仍不得串格。
-  // 修复：把字号直接写到每个单元格 inline-style，避免 theme.css 等全局选择器覆盖。
-  const fitExportTable = (table, cellSelector, startSize, minSize) => {
+  // 修复：把字号/垂直居中直接写到每个单元格 inline-style，避免 theme.css 等全局选择器覆盖；
+  //      表头固定较小字号（13-14px），不再被数据缩放覆盖导致「保证身故保险金」等字段拥挤。
+  const fitExportTable = (table, cellSelector, bodyStart, bodyMin, headerSize) => {
     if(!table) return;
-    let fontSize = startSize;
     const allCells = Array.from(table.querySelectorAll('th, td'));
     const valueCells = Array.from(table.querySelectorAll(cellSelector));
+    const headerCells = Array.from(table.querySelectorAll('thead th'));
+    // 强制所有单元格垂直居中（html2canvas 对 vertical-align 支持不稳，inline 兜底）
+    allCells.forEach(c => { c.style.verticalAlign = 'middle'; });
     const hasOverflow = () => valueCells.some(cell => cell.scrollWidth > cell.clientWidth + 1);
-    const setAll = (fs) => {
-      allCells.forEach(c => {
-        c.style.fontSize = fs + 'px';
-        c.style.lineHeight = '1.35';
-      });
-    };
-    setAll(fontSize);
-    while(fontSize > minSize && hasOverflow()){
+    // 表头固定较小字号（13-14px），避免字段拥挤
+    const setHeader = (fs) => headerCells.forEach(c => {
+      c.style.fontSize = fs + 'px';
+      c.style.lineHeight = '1.25';
+      c.querySelectorAll('.exp-th-main').forEach(s => s.style.fontSize = fs + 'px');
+      c.querySelectorAll('.exp-th-sub').forEach(s => s.style.fontSize = (fs - 2) + 'px');
+    });
+    // 数据单元格按实际数字长度动态缩放（16px 起步，最低 13px）
+    const setBody = (fs) => valueCells.forEach(c => {
+      c.style.fontSize = fs + 'px';
+      c.style.lineHeight = '1.4';
+    });
+    setHeader(headerSize);
+    let fontSize = bodyStart;
+    setBody(fontSize);
+    while(fontSize > bodyMin && hasOverflow()){
       fontSize -= 1;
-      setAll(fontSize);
+      setBody(fontSize);
     }
   };
-  fitExportTable(root.querySelector('.exp-info'), 'td', 19, 12);
-  fitExportTable(root.querySelector('.exp-main'), 'tbody td:not(.exp-reserve)', 16, 12);
+  fitExportTable(root.querySelector('.exp-info'), 'td', 16, 12, 14);
+  fitExportTable(root.querySelector('.exp-main'), 'tbody td:not(.exp-reserve)', 16, 12, 14);
   // 公司介绍/产品简介两栏底部强制对齐：html2canvas 对 flex stretch 支持不稳，用显式等高兜底
   const row2 = root.querySelector('.exp-row2');
   if (row2) {
