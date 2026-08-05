@@ -1,0 +1,13 @@
+PC hscroll: {'hscroll': False, 'docWidth': 1280, 'winWidth': 1280}
+Mobile hscroll: {'hscroll': False, 'docWidth': 390, 'winWidth': 390}
+DOM checks: {'smart': {'top': 455.546875, 'height': 239.375}, 'pd': {'top': 708.921875, 'height': 400.734375}, 'qa': {'top': 1123.65625, 'height': 159.984375}, 'train': {'top': 1297.640625, 'height': 458.765625}, 'bonus': {'top': 1770.40625, 'height': 234.375}, 'pwPresent': False, 'hub': {'top': 320.546875, 'height': 135}, 'search': {'top': 2014.78125, 'height': 90}, 'screenHeight': 844}
+First screen height: 844px
+hub-intro: first screen
+smart planner: first screen
+product calculators: first screen
+sales QA: second screen
+training: second screen
+bonus zone: below second screen
+search: below second screen
+preview wall present: False
+PASS: True

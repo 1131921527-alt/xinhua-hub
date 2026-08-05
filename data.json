@@ -16,19 +16,6 @@
       ]
     },
     {
-      "id": "sales-qa",
-      "name": "产品答疑",
-      "icon": "💬",
-      "items": [
-        {
-          "name": "产品答疑实战手册（QA手册）",
-          "type": "card",
-          "description": "投顾视角 · 7大板块全覆盖：产品专项答疑+通用问题+超龄客户处理+口岸/南方客群+极端案例攻坚+关系维护实战+KYC方法论",
-          "url": "product-qa-handbook.html"
-        }
-      ]
-    },
-    {
       "id": "product-calculators",
       "name": "产品测算",
       "icon": "🏦",
@@ -78,37 +65,15 @@
       ]
     },
     {
-      "id": "vip-service",
-      "name": "增值服务",
-      "icon": "👑",
+      "id": "sales-qa",
+      "name": "产品答疑",
+      "icon": "💬",
       "items": [
         {
-          "name": "新华尊/新华瑞 · 增值服务总览",
+          "name": "产品答疑实战手册（QA手册）",
           "type": "card",
-          "description": "新华尊高客权益 + 新华瑞标保权益 + 和睦家医疗体检（深分7月新增） | 权益一览图 + 小程序码 + 使用流程 + 服务项目 + 体检套餐",
-          "url": "zengzhi.html",
-          "subsection": "新华尊/新华瑞"
-        },
-        {
-          "name": "居家养老 · 3000分护理包（供应商）",
-          "type": "card",
-          "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供（仅2026年6月上线版本，后续根据额度开放情况更新。）",
-          "url": "jujia.html",
-          "subsection": "居家服务"
-        },
-        {
-          "name": "润华松鹤颐养中心 - 介绍",
-          "type": "pdf",
-          "description": "重点合作养老项目 | 深圳福田下梅林核心区位 | 医养配套完善 | 合作保司总保费满100万锁定入住资格",
-          "url": "files/养老社区/润华松鹤一页通.pdf",
-          "subsection": "养老社区"
-        },
-        {
-          "name": "公司养老社区价格汇总表",
-          "type": "excel",
-          "description": "各养老社区价格汇总表",
-          "url": "files/养老社区/附件2：公司养老社区价格汇总表(0827).xls",
-          "subsection": "养老社区"
+          "description": "投顾视角 · 7大板块全覆盖：产品专项答疑+通用问题+超龄客户处理+口岸/南方客群+极端案例攻坚+关系维护实战+KYC方法论",
+          "url": "product-qa-handbook.html"
         }
       ]
     },
@@ -144,27 +109,15 @@
       ]
     },
     {
-      "id": "workflow",
-      "name": "操作流程",
-      "icon": "🔄",
+      "id": "knowledge-card",
+      "name": "保险知识卡",
+      "icon": "🃏",
       "items": [
         {
-          "name": "电子回执回访操作流程",
-          "type": "calculator",
-          "description": "先签回执再签回访·含操作链接+流程图+分系统指引",
-          "url": "huifang.html"
-        },
-        {
-          "name": "保单复效操作流程",
-          "type": "calculator",
-          "description": "扫码或点击进入保单复效操作指引",
-          "url": "fuxing.html"
-        },
-        {
-          "name": "客户获取电子保单和纸质保单的方式",
-          "type": "pdf",
-          "description": "电子保单和纸质保单获取方式说明",
-          "url": "files/操作流程/客户获取电子保单和纸质保单的方式.pdf"
+          "name": "保险知识卡 · 利率与分红政策图解",
+          "type": "card",
+          "description": "预定利率/演示利率/分红实现率专有词汇 + 预定利率调整时间线 + 演示利率时间线 + 630政策解读 + 为什么主流是1.75%保底+分红 + 官方来源",
+          "url": "insurance-knowledge-card.html"
         }
       ]
     },
@@ -178,19 +131,6 @@
           "type": "card",
           "description": "宏御世家分红型增额终身寿险知识问答，微信直读文字版",
           "url": "card-hongyu.html"
-        }
-      ]
-    },
-    {
-      "id": "knowledge-card",
-      "name": "保险知识卡",
-      "icon": "🃏",
-      "items": [
-        {
-          "name": "保险知识卡 · 利率与分红政策图解",
-          "type": "card",
-          "description": "预定利率/演示利率/分红实现率专有词汇 + 预定利率调整时间线 + 演示利率时间线 + 630政策解读 + 为什么主流是1.75%保底+分红 + 官方来源",
-          "url": "insurance-knowledge-card.html"
         }
       ]
     },
@@ -283,6 +223,85 @@
           "type": "clause",
           "url": "clause-hengxiang.html",
           "description": "恒享人生条款文字版，微信直读免下载"
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "name": "操作流程",
+      "icon": "🔄",
+      "items": [
+        {
+          "name": "电子回执回访操作流程",
+          "type": "calculator",
+          "description": "先签回执再签回访·含操作链接+流程图+分系统指引",
+          "url": "huifang.html"
+        },
+        {
+          "name": "保单复效操作流程",
+          "type": "calculator",
+          "description": "扫码或点击进入保单复效操作指引",
+          "url": "fuxing.html"
+        },
+        {
+          "name": "客户获取电子保单和纸质保单的方式",
+          "type": "pdf",
+          "description": "电子保单和纸质保单获取方式说明",
+          "url": "files/操作流程/客户获取电子保单和纸质保单的方式.pdf"
+        }
+      ]
+    },
+    {
+      "id": "vip-service",
+      "name": "增值服务",
+      "icon": "👑",
+      "items": [
+        {
+          "name": "新华尊/新华瑞 · 增值服务总览",
+          "type": "card",
+          "description": "新华尊高客权益 + 新华瑞标保权益 + 和睦家医疗体检（深分7月新增） | 权益一览图 + 小程序码 + 使用流程 + 服务项目 + 体检套餐",
+          "url": "zengzhi.html",
+          "subsection": "新华尊/新华瑞"
+        },
+        {
+          "name": "居家养老 · 3000分护理包（供应商）",
+          "type": "card",
+          "description": "2026年6月新上线限时权益 | 居家照护+日常生活+健康管理三大权益 | 含3000分护理包明细 | 保单犹豫期后次月生效，2年有效 | 第三方供应商提供（仅2026年6月上线版本，后续根据额度开放情况更新。）",
+          "url": "jujia.html",
+          "subsection": "居家服务"
+        },
+        {
+          "name": "润华松鹤颐养中心 - 介绍",
+          "type": "pdf",
+          "description": "重点合作养老项目 | 深圳福田下梅林核心区位 | 医养配套完善 | 合作保司总保费满100万锁定入住资格",
+          "url": "files/养老社区/润华松鹤一页通.pdf",
+          "subsection": "养老社区"
+        },
+        {
+          "name": "公司养老社区价格汇总表",
+          "type": "excel",
+          "description": "各养老社区价格汇总表",
+          "url": "files/养老社区/附件2：公司养老社区价格汇总表(0827).xls",
+          "subsection": "养老社区"
+        }
+      ]
+    },
+    {
+      "id": "training",
+      "name": "培训资料",
+      "icon": "🎓",
+      "items": [
+        {
+          "name": "新华在售产品培训",
+          "type": "ppt",
+          "description": "2026年4月在售产品培训材料 · 在线浏览（无需下载）",
+          "url": "files/公司介绍/2604新华在售产品培训.html"
+        },
+        {
+          "name": "新华保险投资实力介绍（新华资管）",
+          "type": "ppt",
+          "description": "新华资产管理公司投资实力、资产配置、投资业绩介绍 · 在线浏览（无需下载）",
+          "url": "files/公司介绍/新华保险投资实力介绍（新华资管）.html"
         }
       ]
     },
@@ -437,25 +456,6 @@
           "type": "excel",
           "description": "演算表",
           "url": "files/演算器/S10宏安世家终身寿险（分红型）演算表(6).xls"
-        }
-      ]
-    },
-    {
-      "id": "training",
-      "name": "培训资料",
-      "icon": "🎓",
-      "items": [
-        {
-          "name": "新华在售产品培训",
-          "type": "ppt",
-          "description": "2026年4月在售产品培训材料 · 在线浏览（无需下载）",
-          "url": "files/公司介绍/2604新华在售产品培训.html"
-        },
-        {
-          "name": "新华保险投资实力介绍（新华资管）",
-          "type": "ppt",
-          "description": "新华资产管理公司投资实力、资产配置、投资业绩介绍 · 在线浏览（无需下载）",
-          "url": "files/公司介绍/新华保险投资实力介绍（新华资管）.html"
         }
       ]
     }

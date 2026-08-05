@@ -999,34 +999,69 @@
     .pd-grid, .pw-grid, .bonus-grid { grid-template-columns: 1fr; }
   }
 
-  /* ===== 核心工具中心（V4.0） ===== */
-  .core-tools { padding: 14px 16px 4px; }
-  .ct-title {
-    font-size: 15px; font-weight: 700; color: var(--text);
-    margin: 0 0 12px 4px; display: flex; align-items: center; gap: 6px;
+  /* ===== 新华Hub 介绍（V4.0） ===== */
+  .hub-intro {
+    margin: 12px 16px 0;
+    background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);
+    border: 1px solid #BFDBFE;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
   }
-  .ct-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .ct-card {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--card-bg); border-radius: var(--radius-lg);
-    padding: 16px; box-shadow: var(--shadow); border: 1px solid var(--border);
-    text-decoration: none; transition: transform .2s, box-shadow .2s;
+  .hub-intro-body { flex: 1; min-width: 0; }
+  .hub-intro-title { font-size: 15px; font-weight: 700; color: #1E3A8A; margin-bottom: 3px; }
+  .hub-intro p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .hub-intro-btn {
+    flex-shrink: 0;
+    background: var(--primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
   }
-  .ct-card:active { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-  .ct-icon {
-    width: 46px; height: 46px; border-radius: 14px; flex: none;
-    display: flex; align-items: center; justify-content: center; font-size: 24px;
-    color: #fff; box-shadow: var(--shadow-sm);
+  .hub-intro-btn:active { background: var(--primary-dark); }
+
+  /* ===== 销售问答快捷入口（V4.0） ===== */
+  .qa-zone {
+    margin: 14px 16px 10px;
+    background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid #FBCFE8;
+    box-shadow: var(--shadow);
   }
-  .ct-i1 { background: linear-gradient(135deg, #2563EB, #1E40AF); }
-  .ct-i2 { background: linear-gradient(135deg, #7C3AED, #5B21B6); }
-  .ct-i3 { background: linear-gradient(135deg, #059669, #047857); }
-  .ct-i4 { background: linear-gradient(135deg, #EA580C, #C2410C); }
-  .ct-text { flex: 1; min-width: 0; }
-  .ct-name { font-size: 15px; font-weight: 700; color: var(--text); }
-  .ct-desc { font-size: 11px; color: var(--text-3); margin-top: 2px; line-height: 1.4; }
-  .ct-arrow { font-size: 22px; color: var(--text-4); flex: none; }
-  @media (max-width: 360px) { .ct-grid { grid-template-columns: 1fr; } }
+  .qa-zone-title {
+    font-size: 15px; font-weight: 700; color: #831843;
+    margin-bottom: 4px; display: flex; align-items: center; gap: 6px;
+  }
+  .qa-zone-desc { font-size: 12px; color: #9D174D; opacity: 0.85; margin-bottom: 12px; }
+  .qa-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .qa-btn {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(219,39,119,0.18);
+    border-radius: 10px;
+    padding: 12px 10px;
+    color: #831843;
+    text-decoration: none;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .qa-btn:active { background: #fff; transform: scale(0.97); }
+  .qa-btn span { font-size: 10px; opacity: 0.75; font-weight: 500; }
+  @media (max-width: 360px) { .qa-grid { grid-template-columns: 1fr; } }
 
 </style>
 </head>
@@ -1064,144 +1099,13 @@
   </div>
 </div>
 
-<!-- 核心工具中心（V4.0：四大核心入口，30秒直达） -->
-<div class="core-tools">
-  <div class="ct-title">🚀 核心工具</div>
-  <div class="ct-grid">
-    <a class="ct-card" href="javascript:void(0)" onclick="scrollToSection('.pd-section')">
-      <div class="ct-icon ct-i1">🧮</div>
-      <div class="ct-text"><div class="ct-name">产品演算器</div><div class="ct-desc">5 款主力产品一键测算</div></div>
-      <div class="ct-arrow">›</div>
-    </a>
-    <a class="ct-card" href="javascript:void(0)" onclick="scrollToSection('#trainingZone')">
-      <div class="ct-icon ct-i2">🎓</div>
-      <div class="ct-text"><div class="ct-name">培训中心</div><div class="ct-desc">话术库 / 培训资料</div></div>
-      <div class="ct-arrow">›</div>
-    </a>
-    <a class="ct-card" href="javascript:void(0)" onclick="scrollToSection('.bonus-zone')">
-      <div class="ct-icon ct-i3">📈</div>
-      <div class="ct-text"><div class="ct-name">红利实现率</div><div class="ct-desc">2025 官方数据查询</div></div>
-      <div class="ct-arrow">›</div>
-    </a>
-    <a class="ct-card" href="sales-qa.html">
-      <div class="ct-icon ct-i4">💬</div>
-      <div class="ct-text"><div class="ct-name">销售问答</div><div class="ct-desc">异议处理 / 分红话术</div></div>
-      <div class="ct-arrow">›</div>
-    </a>
+<!-- 新华Hub 介绍（V4.0：首页先说明这是谁、提供什么） -->
+<div class="hub-intro">
+  <div class="hub-intro-body">
+    <div class="hub-intro-title">🏢 新华Hub · 银保资料与工具中心</div>
+    <p>面向招行私行渠道，聚合产品测算、智能计划书、培训资料与销售问答，随时查、随时发。</p>
   </div>
-</div>
-
-<!-- 产品直达（V3.0：30秒内找到产品） -->
-<div class="pd-section">
-  <div class="pd-title">🎯 产品演算器直达</div>
-  <div class="pd-grid">
-    <a class="pd-card" href="calculator-hongan.html">
-      <div class="pd-name">宏安世家</div>
-      <div class="pd-tags"><span class="pd-tag">终身寿</span><span class="pd-tag hl">分红型</span></div>
-      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
-    </a>
-    <a class="pd-card" href="calculator-yingmanxin.html">
-      <div class="pd-name">盈满鑫</div>
-      <div class="pd-tags"><span class="pd-tag">两全险</span><span class="pd-tag hl">交3保6/8</span></div>
-      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
-    </a>
-    <a class="pd-card" href="calculator-hengxiang.html">
-      <div class="pd-name">恒享人生</div>
-      <div class="pd-tags"><span class="pd-tag">年金险</span><span class="pd-tag">关爱金</span></div>
-      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
-    </a>
-    <a class="pd-card" href="calculator-hongyu.html">
-      <div class="pd-name">宏御世家</div>
-      <div class="pd-tags"><span class="pd-tag">终身寿</span><span class="pd-tag hl">分红型</span></div>
-      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
-    </a>
-    <a class="pd-card" href="calculator-hongyuan.html">
-      <div class="pd-name">宏愿人生</div>
-      <div class="pd-tags"><span class="pd-tag">养老金</span><span class="pd-tag hl">分红型</span></div>
-      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
-    </a>
-    <a class="pd-card" href="intro-yingmanxin.html">
-      <div class="pd-name">盈满鑫解读</div>
-      <div class="pd-tags"><span class="pd-tag">一页通</span><span class="pd-tag">话术</span></div>
-      <div class="pd-btn">查看资料 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
-    </a>
-  </div>
-</div>
-
-<!-- 专业产品墙（导出图统一展示） -->
-<div class="pw-section">
-  <div class="pw-title">📋 计划书预览墙 <span class="pw-sub">点击看大图</span></div>
-  <div class="pw-grid">
-    <div class="pw-card" onclick="openLightbox('assets/preview/hongan-full.jpg','宏安世家 · 计划书')">
-      <div class="pw-img-wrap"><img src="assets/preview/hongan-card.jpg" alt="宏安世家计划书" loading="lazy"></div>
-      <div class="pw-info">
-        <div class="pw-name">宏安世家终身寿险</div>
-        <div class="pw-date">分红型 · 终身保障</div>
-      </div>
-    </div>
-    <div class="pw-card" onclick="openLightbox('assets/preview/yingmanxin-full.jpg','盈满鑫 · 计划书')">
-      <div class="pw-img-wrap"><img src="assets/preview/yingmanxin-card.jpg" alt="盈满鑫计划书" loading="lazy"></div>
-      <div class="pw-info">
-        <div class="pw-name">盈满鑫两全保险</div>
-        <div class="pw-date">分红型 · 交3保6/8/10/15</div>
-      </div>
-    </div>
-    <div class="pw-card" onclick="openLightbox('assets/preview/hengxiang-full.jpg','恒享人生 · 计划书')">
-      <div class="pw-img-wrap"><img src="assets/preview/hengxiang-card.jpg" alt="恒享人生计划书" loading="lazy"></div>
-      <div class="pw-info">
-        <div class="pw-name">恒享人生年金险</div>
-        <div class="pw-date">关爱金年金 · 稳定现金流</div>
-      </div>
-    </div>
-    <div class="pw-card" onclick="openLightbox('assets/preview/hongyu-full.jpg','宏御世家 · 计划书')">
-      <div class="pw-img-wrap"><img src="assets/preview/hongyu-card.jpg" alt="宏御世家计划书" loading="lazy"></div>
-      <div class="pw-info">
-        <div class="pw-name">宏御世家终身寿险</div>
-        <div class="pw-date">分红型 · 终身保障</div>
-      </div>
-    </div>
-    <div class="pw-card" onclick="openLightbox('assets/preview/hongyuan-full.jpg','宏愿人生 · 计划书')">
-      <div class="pw-img-wrap"><img src="assets/preview/hongyuan-card.jpg" alt="宏愿人生计划书" loading="lazy"></div>
-      <div class="pw-info">
-        <div class="pw-name">宏愿人生养老年金</div>
-        <div class="pw-date">分红型 · 55/60/65/70岁起领</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 培训中心专区（V3.1：聚合话术库/培训资料，强化工具属性） -->
-<div class="training-zone" id="trainingZone">
-  <div class="training-zone-title">🎓 培训中心</div>
-  <div class="training-zone-desc">销售话术 · 答疑手册 · 产品培训 · 投资实力 · 知识卡</div>
-  <div class="training-grid">
-    <a class="training-btn" href="sales-qa.html">💬 销售话术QA手册<span>客户异议/分红话术/养老传承</span></a>
-    <a class="training-btn" href="product-qa-handbook.html">📘 产品答疑实战<span>7大板块全覆盖</span></a>
-    <a class="training-btn" href="files/公司介绍/2604新华在售产品培训.html">🏫 在售产品培训<span>2026年4月版</span></a>
-    <a class="training-btn" href="files/公司介绍/新华保险投资实力介绍（新华资管）.html">📊 投资实力介绍<span>新华资管资产配置</span></a>
-    <a class="training-btn" href="insurance-knowledge-card.html">🃏 保险知识卡<span>利率与分红政策图解</span></a>
-  </div>
-</div>
-
-<!-- 红利实现率专区入口（消除孤立页） -->
-<div class="bonus-zone">
-  <div class="bonus-zone-title">📈 红利实现率专区</div>
-  <div class="bonus-zone-desc">2025年度数据 · 深度解读 · 详细说明 · 培训资料</div>
-  <div class="bonus-grid">
-    <a class="bonus-btn" href="dividend.html">🔍 官方查询台<span>同步官网公开信息披露</span></a>
-    <a class="bonus-btn" href="dividend-2025-interpretation.html">📰 2025深度解读<span>128%/82%/233%数据背景</span></a>
-    <a class="bonus-btn" href="hongli-realization.html">📖 详细说明<span>概念科普/市场背景/FAQ</span></a>
-    <a class="bonus-btn" href="dividend-2025-report.html">📊 培训/报告<span>红利实现率解读报告</span></a>
-  </div>
-</div>
-
-<div class="home-spacer"></div>
-
-<div class="search-wrap">
-  <div class="search-box">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="search" placeholder="搜索资料名称…">
-  </div>
+  <a class="hub-intro-btn" href="company-intro.html">了解公司 ›</a>
 </div>
 
 <!-- 智能计划书快捷生成 -->
@@ -1241,6 +1145,85 @@
       <button class="ap-back-btn" id="apBackBtn">返回修改</button>
       <button class="ap-confirm-btn" id="apConfirmBtn">确认生成</button>
     </div>
+  </div>
+</div>
+
+<!-- 产品直达（V3.0：30秒内找到产品） -->
+<div class="pd-section">
+  <div class="pd-title">🧮 产品在线测算</div>
+  <div class="pd-grid">
+    <a class="pd-card" href="calculator-hongan.html">
+      <div class="pd-name">宏安世家</div>
+      <div class="pd-tags"><span class="pd-tag">终身寿</span><span class="pd-tag hl">分红型</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-yingmanxin.html">
+      <div class="pd-name">盈满鑫</div>
+      <div class="pd-tags"><span class="pd-tag">两全险</span><span class="pd-tag hl">交3保6/8</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-hengxiang.html">
+      <div class="pd-name">恒享人生</div>
+      <div class="pd-tags"><span class="pd-tag">年金险</span><span class="pd-tag">关爱金</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-hongyu.html">
+      <div class="pd-name">宏御世家</div>
+      <div class="pd-tags"><span class="pd-tag">终身寿</span><span class="pd-tag hl">分红型</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="calculator-hongyuan.html">
+      <div class="pd-name">宏愿人生</div>
+      <div class="pd-tags"><span class="pd-tag">养老金</span><span class="pd-tag hl">分红型</span></div>
+      <div class="pd-btn">进入测算 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+    <a class="pd-card" href="intro-yingmanxin.html">
+      <div class="pd-name">盈满鑫解读</div>
+      <div class="pd-tags"><span class="pd-tag">一页通</span><span class="pd-tag">话术</span></div>
+      <div class="pd-btn">查看资料 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
+    </a>
+  </div>
+</div>
+
+<!-- 销售问答快捷入口 -->
+<div class="qa-zone">
+  <div class="qa-zone-title">💬 销售问答知识库</div>
+  <div class="qa-zone-desc">客户异议 · 分红话术 · 养老传承 · 产品答疑</div>
+  <div class="qa-grid">
+    <a class="qa-btn" href="sales-qa.html">📘 销售话术QA手册<span>异议处理与场景话术</span></a>
+    <a class="qa-btn" href="product-qa-handbook.html">🎯 产品答疑实战<span>7大板块全覆盖</span></a>
+  </div>
+</div>
+
+<!-- 培训中心专区（V3.1：聚合话术库/培训资料，强化工具属性） -->
+<div class="training-zone" id="trainingZone">
+  <div class="training-zone-title">🎓 培训中心</div>
+  <div class="training-zone-desc">销售话术 · 答疑手册 · 产品培训 · 投资实力 · 知识卡</div>
+  <div class="training-grid">
+    <a class="training-btn" href="sales-qa.html">💬 销售话术QA手册<span>客户异议/分红话术/养老传承</span></a>
+    <a class="training-btn" href="product-qa-handbook.html">📘 产品答疑实战<span>7大板块全覆盖</span></a>
+    <a class="training-btn" href="files/公司介绍/2604新华在售产品培训.html">🏫 在售产品培训<span>2026年4月版</span></a>
+    <a class="training-btn" href="files/公司介绍/新华保险投资实力介绍（新华资管）.html">📊 投资实力介绍<span>新华资管资产配置</span></a>
+    <a class="training-btn" href="insurance-knowledge-card.html">🃏 保险知识卡<span>利率与分红政策图解</span></a>
+  </div>
+</div>
+
+<!-- 红利实现率专区入口（消除孤立页） -->
+<div class="bonus-zone">
+  <div class="bonus-zone-title">📈 红利实现率专区</div>
+  <div class="bonus-zone-desc">2025年度数据 · 深度解读 · 详细说明 · 培训资料</div>
+  <div class="bonus-grid">
+    <a class="bonus-btn" href="dividend.html">🔍 官方查询台<span>同步官网公开信息披露</span></a>
+    <a class="bonus-btn" href="dividend-2025-interpretation.html">📰 2025深度解读<span>128%/82%/233%数据背景</span></a>
+    <a class="bonus-btn" href="hongli-realization.html">📖 详细说明<span>概念科普/市场背景/FAQ</span></a>
+    <a class="bonus-btn" href="dividend-2025-report.html">📊 培训/报告<span>红利实现率解读报告</span></a>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="搜索资料名称…">
   </div>
 </div>
 
@@ -1537,13 +1520,17 @@ function renderContent(query) {
   
   let html = '';
   let totalItems = 0;
-  
+
+  // 首页「全部」视图下，已在顶部静态区域展示的分类不再重复列出，避免重复入口
+  const HIDDEN_IN_ALL = ['company-intro','product-calculators','sales-qa','training'];
+
   // VIP Benefits System overview (only for vip-service category)
   if (activeCategory === 'vip-service' && !query) {
     html += renderVIPOverview();
   }
-  
+
   categories.forEach(cat => {
+    if (activeCategory === 'all' && !query && HIDDEN_IN_ALL.includes(cat.id)) return;
     let items = cat.items || [];
     
     if (query) {
