@@ -35,6 +35,25 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .bonus-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
 .tip{font-size:14px;color:#64748B;margin-top:10px;}
 .dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
+.export-style-picker{display:flex;align-items:center;gap:8px;color:#475569;font-size:13px;font-weight:700;}
+.export-style-picker select{width:auto;min-width:170px;padding:9px 10px;font-size:13px;color:#1E40AF;background:#fff;border:1.5px solid #1E40AF;}
+.one-page-export-root{position:fixed;left:-20000px;top:0;width:1000px;background:#fff;color:#1E293B;padding:34px 38px;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+.one-page-export-root .one-title{margin:0 0 22px;text-align:center;color:#1E3A8A;font-size:30px;line-height:1.2;font-weight:800;}
+.one-page-export-root .one-section{margin:0 0 16px;border:2px solid #1E40AF;border-radius:6px;overflow:hidden;background:#fff;}
+.one-page-export-root .one-head{padding:9px 14px;background:#1E40AF;color:#fff;font-size:18px;line-height:1.25;font-weight:800;}
+.one-page-export-root .one-body{padding:13px 16px;font-size:15px;line-height:1.7;}
+.one-page-export-root .one-body p{margin:0 0 7px;}.one-page-export-root .one-body p:last-child{margin-bottom:0;}
+.one-page-export-root .one-body strong{color:#1E40AF;}
+.one-page-export-root .one-case{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #1E40AF;}
+.one-page-export-root .one-case div{padding:9px 8px;text-align:center;border-right:1px solid #1E40AF;font-size:14px;}.one-page-export-root .one-case div:last-child{border-right:0;}
+.one-page-export-root .one-case b{display:block;color:#1E40AF;font-size:12px;margin-bottom:3px;}
+.one-page-export-root table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;}
+.one-page-export-root th,.one-page-export-root td{border:1px solid #1E40AF;text-align:center;vertical-align:middle;padding:7px 4px;word-break:break-word;}
+.one-page-export-root th{background:#1E40AF;color:#fff;font-weight:800;}.one-page-export-root td{font-weight:600;}
+.one-page-export-root tbody tr:nth-child(even) td{background:#EFF6FF;}.one-page-export-root .one-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+.one-page-export-root .one-summary p{margin:0;padding:9px 11px;background:#EFF6FF;border-left:4px solid #3B82F6;font-size:14px;line-height:1.5;}
+.one-page-export-root .one-risk{font-size:12px;line-height:1.6;color:#64748B;}
+@media(max-width:768px){.export-style-picker{width:100%;}.export-style-picker select{flex:1;}.one-page-export-root{width:1000px;}}
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--primary-bg);}
 body.capturing .no-export{display:none !important;}
@@ -286,6 +305,12 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   <div class="err" id="errorMsg"></div>
 
   <div class="dl-bar">
+    <label class="export-style-picker">下载样式
+      <select id="exportStyle" aria-label="下载图片样式">
+        <option value="standard" selected>样式二：标准计划书</option>
+        <option value="onepage">样式一：盈满鑫一页通</option>
+      </select>
+    </label>
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
     <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：60岁后每5年</button>
     <span class="tip">导出效果图同款版式</span>
@@ -361,6 +386,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 <!-- 独立隐藏高清导出模板：下载时由 html2canvas 截取，不直接截取网页界面 -->
 <div id="exportRoot" aria-hidden="true"></div>
 
+<div id="onePageExportRoot" class="one-page-export-root" aria-hidden="true"></div>
 <canvas id="renderCanvas" style="display:none;"></canvas>
 
 <script>
@@ -926,7 +952,43 @@ function buildExport(rows, dep, p, reserveYears){
   }
 }
 
+function buildOnePageExport(){
+  const root=document.getElementById('onePageExportRoot');
+  root.innerHTML='';
+  const title=document.createElement('h1'); title.className='one-title'; title.textContent='新华保险盈满鑫一页通'; root.appendChild(title);
+  const addSection=(heading,body)=>{const s=document.createElement('section');s.className='one-section';const h=document.createElement('div');h.className='one-head';h.textContent=heading;s.appendChild(h);s.appendChild(body);root.appendChild(s);return s;};
+  const intro=document.createElement('div');intro.className='one-body';
+  document.querySelectorAll('.intro-row .section').forEach(sec=>{const copy=sec.cloneNode(true);copy.querySelectorAll('.section-head').forEach(h=>h.remove());copy.querySelectorAll('p').forEach(p=>intro.appendChild(p));});
+  addSection('公司介绍及产品介绍',intro);
+  const params=document.createElement('div');params.className='one-case';
+  [['被保险人','VIP'],['性别',document.getElementById('infoGender')?.textContent||'-'],['年龄',document.getElementById('infoAge')?.textContent||'-'],['缴费期间',document.getElementById('infoTerm')?.textContent||'-'],['年交保费',document.getElementById('infoPremium')?.textContent||'-'],['基本保额',document.getElementById('infoSa')?.textContent||'-'],['保险期间',document.getElementById('infoPeriod')?.textContent||'-'],['分红领取方式','累计生息']].forEach(([k,v])=>{const d=document.createElement('div');d.innerHTML='<b>'+k+'</b>'+v;params.appendChild(d);});
+  addSection('案例演示与投保参数',params);
+  const tableWrap=document.createElement('div');tableWrap.className='one-body';const table=document.getElementById('resultTable')?.cloneNode(true);if(table){table.removeAttribute('id');table.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));tableWrap.appendChild(table);}addSection('核心年度利益表',tableWrap);
+  const summary=document.createElement('div');summary.className='one-summary';
+  const rows=[...document.querySelectorAll('#resultTable tbody tr')];const last=rows[rows.length-1];const cells=last?[...last.cells].map(c=>c.textContent.trim()):[];
+  const premium=document.getElementById('infoPremium')?.textContent||'-';const period=document.getElementById('infoPeriod')?.textContent||'-';
+  [['短期规划','当前方案为'+premium+'元年交，缴费期间'+(document.getElementById('infoTerm')?.textContent||'-')+'，保险期间'+period+'。'],['利益演示','年度现金价值、红利现价及预期年化单利以当前利益演示表为准。'],['案例优势','参数和利益数据均读取当前演算结果，随每次重新生成自动更新。'],['重点结果',cells.length?'末行满期/现金价值数据：'+cells.slice(-3).join(' / '):'当前结果尚未生成。']].forEach(([k,v])=>{const p=document.createElement('p');p.innerHTML='<strong>'+k+'：</strong>'+v;summary.appendChild(p);});
+  const sumBody=document.createElement('div');sumBody.className='one-body';sumBody.appendChild(summary);addSection('案例优势总结',sumBody);
+  const risk=document.createElement('div');risk.className='one-body one-risk';risk.textContent='风险提示：本计划书基于当前输入参数和演示假设生成，演示利益不代表实际收益。分红型产品红利具有不确定性，具体以保险合同及保险公司公布信息为准。';addSection('风险提示和免责声明',risk);
+  return root;
+}
+
+async function downloadOnePageImage(){
+  const root=buildOnePageExport();const oldPos=root.style.position,oldLeft=root.style.left,oldTop=root.style.top,oldDisplay=root.style.display;root.style.display='block';root.style.position='absolute';root.style.left='0';root.style.top='0';
+  const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;window.scrollTo(0,0);
+  try{
+    const captureW=1000,captureH=root.scrollHeight,isWechat=/MicroMessenger/i.test(navigator.userAgent),maxPixels=isWechat?8000000:16000000;
+    let scale=Math.min(isWechat?2.5:3,Math.sqrt(maxPixels/(captureW*captureH)));scale=Math.max(1,Math.floor(scale*10)/10);
+    const canvas=await html2canvas(root,{scale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('PNG生成失败');
+    const filename='盈满鑫一页通.png';const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
+    if(!isMobile&&window.showSaveFilePicker){try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}}
+    const url=URL.createObjectURL(blob);if(isMobile||/MicroMessenger/i.test(navigator.userAgent)){showImagePreview(url,filename);if(typeof showToast==='function')showToast('长按图片即可保存到相册');return;}const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);
+  }finally{root.style.position=oldPos;root.style.left=oldLeft;root.style.top=oldTop;root.style.display=oldDisplay;window.scrollTo(0,oldScrollTop);}
+}
+
 async function downloadImage(){
+  if(document.getElementById('exportStyle')?.value==='onepage'){await downloadOnePageImage();return;}
   if(!currentParams){ if(typeof showToast==='function') showToast('请先生成利益演示'); return; }
   const plan = document.getElementById('planArea');
   if(!plan){ if(typeof showToast==='function') showToast('未找到计划书区域'); return; }
