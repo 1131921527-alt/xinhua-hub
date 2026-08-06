@@ -72,6 +72,12 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:var(--gray);line-height:1.8;}
 
+/* TOC (T023) */
+.toc-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.toc-link{display:inline-block;background:#EFF6FF;border:1.5px solid #2563EB;border-radius:20px;padding:6px 14px;font-size:13px;color:#1E40AF;text-decoration:none;font-weight:600;line-height:1.4;white-space:nowrap;}
+.toc-link:hover{background:#DBEAFE;}
+html{scroll-behavior:smooth;}
+
 @media(max-width:768px){
   .hero{padding:22px 18px;} .hero h1{font-size:22px;}
   .key-grid{grid-template-columns:repeat(2,1fr);}
@@ -95,9 +101,28 @@ tbody tr:nth-child(even){background:#F0F9FF;}
   <p style="margin-top:14px;font-size:14px;line-height:1.7;opacity:.94;max-width:560px;">适合：希望中短期锁定收益、想要"保底+分红"、又保留一定流动性的客户。新华保险当前主推的中短期分红险，交3保6 / 交3保8 两种期限灵活可选。</p>
 </div>
 
+
+<!-- 目录锚点 (T023) -->
+<div class="section toc">
+  <div class="section-title"><div class="icon">📑</div> 本页目录 · 一键直达</div>
+  <div class="toc-nav">
+    <a class="toc-link" href="#sec-company">公司底气</a>
+    <a class="toc-link" href="#sec-overview">一句话看懂</a>
+    <a class="toc-link" href="#sec-form">产品形态</a>
+    <a class="toc-link" href="#sec-sellpoints">核心卖点</a>
+    <a class="toc-link" href="#sec-dividend">分红实现率118%</a>
+    <a class="toc-link" href="#sec-timeline">演示时间线</a>
+    <a class="toc-link" href="#sec-vsbank">对比银行定存</a>
+    <a class="toc-link" href="#sec-customers">适用客户</a>
+    <a class="toc-link" href="#sec-talk">成交话术</a>
+    <a class="toc-link" href="#sec-calc">在线测算</a>
+    <a class="toc-link" href="#sec-risk">风险提示</a>
+    <a class="toc-link" href="#sec-resources">相关资源</a>
+  </div>
+</div>
+
 <!-- 公司底气（卖盈满鑫前先看公司） -->
-<div class="section" style="border:2px solid #2563EB;">
-  <div class="section-title"><div class="icon">🏛️</div> 卖盈满鑫之前，先看新华保险的底气</div>
+<div class="section" id="sec-company" style="border:2px solid #2563EB;"><div class="section-title"><div class="icon">🏛️</div> 卖盈满鑫之前，先看新华保险的底气</div>
   <p style="font-size:14px;color:#475569;margin-bottom:14px;line-height:1.8;">客户常问"凭什么把钱放新华？"——这是成交前必过的关。盈满鑫是新华保险的产品，公司的实力和分红水平，就是这份保单的"靠山"。建议先点开下面三块搞懂公司，再回来讲产品：</p>
   <div class="target-grid">
     <a class="target-card" href="company-intro.html">
@@ -119,8 +144,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 核心四要素（精简版产品介绍 V1.5） -->
-<div class="section">
-  <div class="section-title"><div class="icon">✅</div> 一句话看懂盈满鑫</div>
+<div class="section" id="sec-overview"><div class="section-title"><div class="icon">✅</div> 一句话看懂盈满鑫</div>
   <div class="key-grid">
     <div class="key-item"><div class="val">分红型两全险</div><div class="label">产品类型</div></div>
     <div class="key-item"><div class="val">3年交</div><div class="label">交费方式</div></div>
@@ -130,8 +154,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 原版资料下载 -->
-<div class="section">
-  <div class="section-title"><div class="icon">📄</div> 原版一页通资料</div>
+<div class="section" id="sec-pdf"><div class="section-title"><div class="icon">📄</div> 原版一页通资料</div>
   <p style="font-size:14px;color:#475569;margin-bottom:10px;">以下为新华保险官方产品宣传资料PDF，可直接下载或转发：</p>
   <div class="pdf-links">
     <a class="pdf-link" href="files/产品介绍/盈满鑫_交3保6累计生息+定存.pdf" target="_blank">📎 交3保6 累计生息+定存</a>
@@ -140,8 +163,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 产品形态 -->
-<div class="section">
-  <div class="section-title"><div class="icon">💡</div> 产品形态速览</div>
+<div class="section" id="sec-form"><div class="section-title"><div class="icon">💡</div> 产品形态速览</div>
   <div class="key-grid">
     <div class="key-item"><div class="val">28天-75岁</div><div class="label">投保年龄</div></div>
     <div class="key-item"><div class="val">3年 / 5年</div><div class="label">交费方式</div></div>
@@ -153,8 +175,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 核心卖点 -->
-<div class="section">
-  <div class="section-title"><div class="icon">🔥</div> 核心卖点解读</div>
+<div class="section" id="sec-sellpoints"><div class="section-title"><div class="icon">🔥</div> 核心卖点解读</div>
 
   <div class="highlight">
     <h3>🎯 交3保8 · 推荐首选组合</h3>
@@ -191,8 +212,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 分红实现率 + 100%演算 -->
-<div class="section" style="border-left:5px solid var(--gold);">
-  <div class="section-title"><div class="icon">📊</div> 分红实现率118% · 盈满鑫按100%演算</div>
+<div class="section" id="sec-dividend" style="border-left:5px solid var(--gold);"><div class="section-title"><div class="icon">📊</div> 分红实现率118% · 盈满鑫按100%演算</div>
   <div class="highlight" style="border-color:var(--gold);">
     <h3>🔑 最关键的一句大白话</h3>
     <p>新华保险<strong>去年（2025）大部分分红产品的红利实现率达到118%</strong>——意思是：公司实际分给客户的红利，平均是当初演示假设（100%）的1.18倍。<br>
@@ -218,8 +238,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 时间线 -->
-<div class="section">
-  <div class="section-title"><div class="icon">📊</div> 交3保8 · 30岁女性10万/年 演示时间线</div>
+<div class="section" id="sec-timeline"><div class="section-title"><div class="icon">📊</div> 交3保8 · 30岁女性10万/年 演示时间线</div>
   <div class="timeline">
     <div class="tl-item"><div class="tl-dot">Y1</div><div class="tl-content"><strong>第1年</strong>：交10万，现金价值68,130元，年度红利1,115元<br>资金尚在建仓期，分红开始累积</div></div>
     <div class="tl-item"><div class="tl-dot">Y2</div><div class="tl-content"><strong>第2年</strong>：交10万，现金价值163,120元，累计分红3,490元<br>已交20万，现金价值已超8成</div></div>
@@ -250,8 +269,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 对比银行 -->
-<div class="section">
-  <div class="section-title"><div class="icon">⚖️</div> 与银行定存对比</div>
+<div class="section" id="sec-vsbank"><div class="section-title"><div class="icon">⚖️</div> 与银行定存对比</div>
   <div class="table-wrap">
     <table>
       <thead><tr><th>对比项</th><th>盈满鑫(交3保8)</th><th>银行3年定存</th><th>银行5年定存</th></tr></thead>
@@ -276,8 +294,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 适用客户 -->
-<div class="section">
-  <div class="section-title"><div class="icon">🎯</div> 适用客户画像</div>
+<div class="section" id="sec-customers"><div class="section-title"><div class="icon">🎯</div> 适用客户画像</div>
   <div class="target-grid">
     <div class="target-card">
       <div class="emoji">👨‍💼</div>
@@ -313,8 +330,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 话术 -->
-<div class="section">
-  <div class="section-title"><div class="icon">💬</div> 一分钟成交话术</div>
+<div class="section" id="sec-talk"><div class="section-title"><div class="icon">💬</div> 一分钟成交话术</div>
 
   <div class="scenario">
     <h4>场景1：对比定存</h4>
@@ -336,18 +352,22 @@ tbody tr:nth-child(even){background:#F0F9FF;}
     正常预期下，按100%实现率演算，8年总利益35万出头，年化2.3%~2.5%；而公司去年实际实现率118%，正常年景还能更高。<br>
     下有保底兜底，上有分红弹性，比定存多一个向上机会。"</p>
   </div>
+
+  <div class="highlight" style="border-color:#2563EB;">
+    <h3>💬 不会讲？这里有现成话术库</h3>
+    <p>上面是盈满鑫的成交话术示范。更多产品的「客户异议处理 / 分红险话术 / 养老规划 / 财富传承」话术，都在 <a href="sales-qa.html" style="color:#1E40AF;font-weight:700;">销售问答中心 →</a>，随时查、随时用。</p>
+  </div>
+
 </div>
 
 <!-- 在线测算 -->
-<div class="section">
-  <div class="section-title"><div class="icon">🧮</div> 在线测算</div>
+<div class="section" id="sec-calc"><div class="section-title"><div class="icon">🧮</div> 在线测算</div>
   <p style="margin-bottom:10px;font-size:14px;color:#475569;">输入年龄、性别、保费即可生成完整利益演示表，支持下载计划书图片：</p>
   <a href="calculator-yingmanxin.html" style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#2563EB,#1E40AF);color:#fff;border-radius:10px;font-size:16px;font-weight:700;text-decoration:none;">🧮 进入盈满鑫在线测算器</a>
 </div>
 
 <!-- 风险提示 -->
-<div class="section">
-  <div class="section-title"><div class="icon">⚠️</div> 风险提示</div>
+<div class="section" id="sec-risk"><div class="section-title"><div class="icon">⚠️</div> 风险提示</div>
   <p style="font-size:14px;color:#475569;line-height:1.8;">
     保险产品不同于银行存款，不等同于理财产品的保本保收益。红利分配来源于保险公司实际经营成果，可能为 0，过往演示不代表未来表现。
     投保前请仔细阅读保险条款、产品说明书与投保提示书，重点关注保险责任、责任免除、退保费用及现金价值变动。具体以保险合同为准。
@@ -355,8 +375,7 @@ tbody tr:nth-child(even){background:#F0F9FF;}
 </div>
 
 <!-- 相关培训与资源（T095 交叉引用） -->
-<div class="section">
-  <div class="section-title"><div class="icon">🔗</div> 相关培训与资源</div>
+<div class="section" id="sec-resources"><div class="section-title"><div class="icon">🔗</div> 相关培训与资源</div>
   <div class="pdf-links">
     <a class="pdf-link" href="company-intro.html">🏛️ 公司介绍·股东实力</a>
     <a class="pdf-link" href="training.html">🎓 培训中心</a>
