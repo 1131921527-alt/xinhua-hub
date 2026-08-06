@@ -37,23 +37,63 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
 .export-style-picker{display:flex;align-items:center;gap:8px;color:#475569;font-size:13px;font-weight:700;}
 .export-style-picker select{width:auto;min-width:170px;padding:9px 10px;font-size:13px;color:#1E40AF;background:#fff;border:1.5px solid #1E40AF;}
-.one-page-export-root{position:fixed;left:-20000px;top:0;width:1000px;background:#fff;color:#1E293B;padding:34px 38px;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
-.one-page-export-root .one-title{margin:0 0 22px;text-align:center;color:#1E3A8A;font-size:30px;line-height:1.2;font-weight:800;}
-.one-page-export-root .one-section{margin:0 0 16px;border:2px solid #1E40AF;border-radius:6px;overflow:hidden;background:#fff;}
-.one-page-export-root .one-head{padding:9px 14px;background:#1E40AF;color:#fff;font-size:18px;line-height:1.25;font-weight:800;}
-.one-page-export-root .one-body{padding:13px 16px;font-size:15px;line-height:1.7;}
-.one-page-export-root .one-body p{margin:0 0 7px;}.one-page-export-root .one-body p:last-child{margin-bottom:0;}
-.one-page-export-root .one-body strong{color:#1E40AF;}
-.one-page-export-root .one-case{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #1E40AF;}
-.one-page-export-root .one-case div{padding:9px 8px;text-align:center;border-right:1px solid #1E40AF;font-size:14px;}.one-page-export-root .one-case div:last-child{border-right:0;}
-.one-page-export-root .one-case b{display:block;color:#1E40AF;font-size:12px;margin-bottom:3px;}
-.one-page-export-root table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;}
-.one-page-export-root th,.one-page-export-root td{border:1px solid #1E40AF;text-align:center;vertical-align:middle;padding:7px 4px;word-break:break-word;}
-.one-page-export-root th{background:#1E40AF;color:#fff;font-weight:800;}.one-page-export-root td{font-weight:600;}
-.one-page-export-root tbody tr:nth-child(even) td{background:#EFF6FF;}.one-page-export-root .one-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
-.one-page-export-root .one-summary p{margin:0;padding:9px 11px;background:#EFF6FF;border-left:4px solid #3B82F6;font-size:14px;line-height:1.5;}
-.one-page-export-root .one-risk{font-size:12px;line-height:1.6;color:#64748B;}
+/* 一页通宣传单根容器（无外框/无卡片，靠标题条、表格撑结构，更接近印刷品） */
+.one-page-export-root{position:fixed;left:-20000px;top:0;width:1000px;background:#fff;color:#1E293B;padding:30px 38px 26px;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+/* 主标题：左右蓝色短横装饰 + 大字号蓝字（参考图风格） */
+.one-page-export-root .one-title{position:relative;text-align:center;color:#1E40AF;font-size:40px;line-height:1.2;font-weight:900;letter-spacing:6px;margin:0 0 8px;padding:0 0 14px;}
+.one-page-export-root .one-title::before,.one-page-export-root .one-title::after{content:"";position:absolute;bottom:0;width:130px;height:3px;background:linear-gradient(90deg,transparent,#1E40AF,transparent);}
+.one-page-export-root .one-title::before{left:50px;}
+.one-page-export-root .one-title::after{right:50px;}
+.one-page-export-root .one-sub{text-align:center;color:#64748B;font-size:14px;margin:0 0 20px;letter-spacing:.5px;}
+/* 分节横条：左侧深蓝竖条 + 浅蓝底（参考图宣传单风格） */
+.one-page-export-root .one-sec{margin:0 0 14px;}
+.one-page-export-root .one-sec-h{color:#1E40AF;font-size:23px;font-weight:900;padding:9px 12px 9px 16px;margin:0 0 11px;border-left:6px solid #1E40AF;background:#EFF6FF;}
+.one-page-export-root .one-sec-b{padding:2px 8px 4px;}
+/* 公司/产品介绍 prose（宣传单写法） */
+.one-page-export-root .one-prose p{font-size:16.5px;line-height:1.95;color:#1E293B;margin:0 0 9px;text-align:justify;}
+.one-page-export-root .one-prose p:last-child{margin-bottom:0;}
+.one-page-export-root .one-prose strong{color:#1E40AF;font-weight:700;}
+.one-page-export-root .one-prose .bracket-label{color:#1E40AF;font-weight:900;font-size:17.5px;}
+/* 产品亮点（4 条）：2×2，去圆角卡片，改浅底+左侧蓝条（更接近宣传单） */
+.one-page-export-root .one-points{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;}
+.one-page-export-root .one-point{display:flex;gap:10px;align-items:flex-start;background:#F8FAFC;border-left:4px solid #1E40AF;padding:10px 12px;}
+.one-page-export-root .one-point .num{flex:none;width:26px;height:26px;background:#1E40AF;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;border-radius:3px;}
+.one-page-export-root .one-point .pt{font-size:16px;line-height:1.85;}
+.one-page-export-root .one-point .pt b{color:#1E40AF;display:block;font-size:18px;font-weight:900;margin-bottom:3px;}
+/* 案例演示：产品全名一行突出 + prose（参考图风格） */
+.one-page-export-root .one-case-product{color:#1E40AF;font-size:17px;font-weight:900;margin:0 0 8px;border-left:5px solid #1E40AF;padding:3px 0 3px 10px;}
+.one-page-export-root .one-case{font-size:14px;line-height:1.9;color:#334155;text-align:justify;}
+.one-page-export-root .one-case strong{color:#1E40AF;}
+/* 购买理由：上下蓝边的居中短句（非满底色横条） */
+.one-page-export-root .one-reason{color:#1E40AF;font-size:17px;font-weight:800;text-align:center;padding:9px 10px;letter-spacing:2px;margin:0 0 14px;background:#EFF6FF;border-top:2px solid #1E40AF;border-bottom:2px solid #1E40AF;}
+/* 参数 4 列表 */
+.one-page-export-root .one-params{width:100%;border-collapse:collapse;table-layout:fixed;font-size:17px;}
+.one-page-export-root .one-params th,.one-page-export-root .one-params td{border:1px solid #1E40AF;padding:10px 6px;text-align:center;vertical-align:middle;}
+.one-page-export-root .one-params th{background:#1E40AF;color:#fff;font-weight:700;font-size:16px;}
+.one-page-export-root .one-params td{background:#fff;color:#1E40AF;font-weight:800;font-size:20px;}
+/* 利益演示主表（保留：表头突出 + 满期行突出 + 年化单利芯片） */
+.one-page-export-root .one-benefit-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14.5px;}
+.one-page-export-root .one-benefit-table th,.one-page-export-root .one-benefit-table td{border:1px solid #1E40AF;text-align:center;vertical-align:middle;padding:8px 3px;word-break:break-word;}
+.one-page-export-root .one-benefit-table thead th{background:#1E40AF;color:#fff;font-weight:800;line-height:1.25;font-size:16px;border-bottom:3px solid #1E3A8A;}
+.one-page-export-root .one-benefit-table thead th.col-expected{background:#3B82F6;}
+.one-page-export-root .one-benefit-table thead th.sub{background:#3B82F6;font-weight:600;font-size:13px;}
+.one-page-export-root .one-benefit-table tbody td{font-weight:600;color:#1E293B;}
+.one-page-export-root .one-benefit-table tbody tr:nth-child(even) td{background:#EFF6FF;}
+.one-page-export-root .one-benefit-table tbody tr.maturity td{background:#1E40AF !important;color:#fff !important;font-weight:800;}
+.one-page-export-root .one-benefit-table tbody tr.maturity td.col-expected{background:#fff !important;color:#1E40AF !important;font-weight:900;border-radius:4px;}
+.one-page-export-root .one-benefit-table .reserve-cell{color:#64748B;white-space:nowrap;}
+/* 底部总结（1/2/3/4 编号）：垂直编号列表 + 虚线分隔，弱化卡片感 */
+.one-page-export-root .one-summary{display:block;border-top:2px solid #1E40AF;padding-top:10px;}
+.one-page-export-root .one-sum-item{display:flex;gap:10px;align-items:flex-start;padding:7px 0 7px 0;font-size:16px;line-height:1.9;border-bottom:1px dashed #BFDBFE;}
+.one-page-export-root .one-sum-item:last-child{border-bottom:none;}
+.one-page-export-root .one-sum-item .n{flex:none;width:24px;height:24px;background:#1E40AF;color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;border-radius:3px;}
+.one-page-export-root .one-sum-item b{color:#1E40AF;}
+/* 风险提示（保留但顶部蓝色细线强调置底） */
+.one-page-export-root .one-risk{font-size:14px;line-height:1.9;color:#475569;margin-top:8px;border-top:1px solid #BFDBFE;padding-top:10px;}
+.one-page-export-root .one-risk b{color:#1E40AF;}
 @media(max-width:768px){.export-style-picker{width:100%;}.export-style-picker select{flex:1;}.one-page-export-root{width:1000px;}}
+/* 在线预览：把隐藏导出模板临时展示到页面主区域，与样式二 #planArea 二选一显示 */
+.one-page-export-root.is-preview{position:static!important;left:auto!important;top:auto!important;width:100%;max-width:1000px;margin:18px auto 0;display:block;box-shadow:0 2px 14px rgba(30,64,175,.12);}
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--primary-bg);}
 body.capturing .no-export{display:none !important;}
@@ -306,7 +346,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 
   <div class="dl-bar">
     <label class="export-style-picker">下载样式
-      <select id="exportStyle" aria-label="下载图片样式">
+      <select id="exportStyle" aria-label="下载图片样式" onchange="switchStyle()">
         <option value="standard" selected>样式二：标准计划书</option>
         <option value="onepage">样式一：盈满鑫一页通</option>
       </select>
@@ -381,12 +421,13 @@ body.capturing .table-scroll{overflow-x:visible !important;}
     <div class="plan-foot-note">⚠ 本计划书基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
     <div class="plan-foot-source">新华资料库 xinhua-hub｜计划书仅供演示与沟通使用</div>
   </div>
+
+<div id="onePageExportRoot" class="one-page-export-root" aria-hidden="true"></div>
+
 </div>
 
 <!-- 独立隐藏高清导出模板：下载时由 html2canvas 截取，不直接截取网页界面 -->
 <div id="exportRoot" aria-hidden="true"></div>
-
-<div id="onePageExportRoot" class="one-page-export-root" aria-hidden="true"></div>
 <canvas id="renderCanvas" style="display:none;"></canvas>
 
 <script>
@@ -670,6 +711,12 @@ function generate(){
   renderLiveDeposit(currentDeposit, currentParams);
   // buildExport(rows, currentDeposit, currentParams, reserveYears); // 2026-08-05 改为直接截取在线 #planArea，不再生成独立导出模板
   (function(){var km=document.getElementById('keyMetrics');if(!km)return;var d=currentDeposit;var mb=d.maturityBenefit,tp=d.totalPrem;document.getElementById('kmMaturity').textContent=fmt(mb);document.getElementById('kmCum').textContent=fmt(mb-tp);document.getElementById('kmRate').textContent=(d.comboAnnualized*100).toFixed(2)+'%';})();
+
+  // 若当前处于“样式一”在线预览，同步刷新一页通（保证改输入后点生成，预览也跟着变）
+  if(document.getElementById('exportStyle') && document.getElementById('exportStyle').value==='onepage'){
+    const op=document.getElementById('onePageExportRoot');
+    if(op && op.classList.contains('is-preview')){ buildOnePageExport(); }
+  }
 }
 
 // ---------- 实时页：定存明细 + 组合计划 ----------
@@ -955,26 +1002,124 @@ function buildExport(rows, dep, p, reserveYears){
 function buildOnePageExport(){
   const root=document.getElementById('onePageExportRoot');
   root.innerHTML='';
-  const title=document.createElement('h1'); title.className='one-title'; title.textContent='新华保险盈满鑫一页通'; root.appendChild(title);
-  const addSection=(heading,body)=>{const s=document.createElement('section');s.className='one-section';const h=document.createElement('div');h.className='one-head';h.textContent=heading;s.appendChild(h);s.appendChild(body);root.appendChild(s);return s;};
-  const intro=document.createElement('div');intro.className='one-body';
-  document.querySelectorAll('.intro-row .section').forEach(sec=>{const copy=sec.cloneNode(true);copy.querySelectorAll('.section-head').forEach(h=>h.remove());copy.querySelectorAll('p').forEach(p=>intro.appendChild(p));});
-  addSection('公司介绍及产品介绍',intro);
-  const params=document.createElement('div');params.className='one-case';
-  [['被保险人','VIP'],['性别',document.getElementById('infoGender')?.textContent||'-'],['年龄',document.getElementById('infoAge')?.textContent||'-'],['缴费期间',document.getElementById('infoTerm')?.textContent||'-'],['年交保费',document.getElementById('infoPremium')?.textContent||'-'],['基本保额',document.getElementById('infoSa')?.textContent||'-'],['保险期间',document.getElementById('infoPeriod')?.textContent||'-'],['分红领取方式','累计生息']].forEach(([k,v])=>{const d=document.createElement('div');d.innerHTML='<b>'+k+'</b>'+v;params.appendChild(d);});
-  addSection('案例演示与投保参数',params);
-  const tableWrap=document.createElement('div');tableWrap.className='one-body';const table=document.getElementById('resultTable')?.cloneNode(true);if(table){table.removeAttribute('id');table.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));tableWrap.appendChild(table);}addSection('核心年度利益表',tableWrap);
+
+  // 通用分节：蓝色横条标题 + 正文节点
+  const addSec=(heading,bodyNode)=>{
+    const s=document.createElement('section');s.className='one-sec';
+    const h=document.createElement('div');h.className='one-sec-h';h.textContent=heading;
+    const b=document.createElement('div');b.className='one-sec-b';b.appendChild(bodyNode);
+    s.appendChild(h);s.appendChild(b);root.appendChild(s);return s;
+  };
+
+  // 现场参数（全部读取实时演算结果，不写死）
+  const genderTxt=document.getElementById('infoGender')?.textContent||'-';
+  const ageTxt=document.getElementById('infoAge')?.textContent||'-';
+  const termTxt=document.getElementById('infoTerm')?.textContent||'-';
+  const premTxt=document.getElementById('infoPremium')?.textContent||'-';
+  const saTxt=document.getElementById('infoSa')?.textContent||'-';
+  const periodTxt=document.getElementById('infoPeriod')?.textContent||'-';
+  const bonusTxt=document.getElementById('infoBonusMode')?.textContent||'交清增额';
+  const ageNum=document.getElementById('age')?.value||'40';
+  const genderWord=currentGender===1?'女士':'先生';
+
+  // 1. 顶部主标题
+  const title=document.createElement('h1');title.className='one-title';title.textContent='新华保险盈满鑫一页通';
+  const sub=document.createElement('div');sub.className='one-sub';sub.textContent='盈满鑫两全保险（分红型） · 一页通';
+  root.appendChild(title);root.appendChild(sub);
+
+  // 2. 公司介绍（参考图：4 个【】分节 prose，宣传单写法）
+  const intro=document.createElement('div');intro.className='one-prose';
+  intro.innerHTML=
+    '<p><span class="bracket-label">【头部公司，国有背景】</span>新华保险成立于1996年9月北京，中投旗下管理的专业化国有大型寿险企业；主要股东：中央汇金（与中农工建四大行同属一个股东）、中国宝武钢铁。2011年（A 股代码：601336，H 股代码：01336）A+H 股同步上市。公司在 A+H 模式之下，有利于长期发展。</p>'+
+    '<p><span class="bracket-label">【砥砺深耕，载誉前行】</span>连续多年入围“《福布斯》世界 500 强”，连续多年进入“全球最具价值保险品牌 100 强”，连续二十年入围《中国 500 最具价值品牌》前 100 名，连续 9 年惠誉财务实力评级（IFS）A 级。</p>'+
+    '<p><span class="bracket-label">【安全稳健，守信不渝】</span>2025 年总资产超 1.8 万亿，2025 年综合偿付能力充足率 210.47%，2025 年总投资收益率 6.6%；自上市以来累计现金分红超 380 亿元，2025 年中期分红同比增长 24%，与投资者共享发展成果。</p>'+
+    '<p><span class="bracket-label">【履行责任，国企担当】</span>服务国家战略：主动服务实体经济和国家大局，公司服务金融“五大文章”相关投资余额超 4500 亿，同比增长 25%。</p>';
+  addSec('一、公司介绍',intro);
+
+  // 3. 产品亮点（4 条简洁卖点，结合盈满鑫真实特征）
+  const points=document.createElement('div');points.className='one-points';
+  [['交得短，拿得快','只要交 3 年或 5 年，钱就开始替你稳稳增值，不占长年现金流。'],
+   ['满期给一笔确定的钱','活到约定年限，直接领回基本保额（比交进去的保费还多），落袋为安。'],
+   ['人走了钱也在','最高 1.6 倍身故赔付，万一有事，留给家人的不只是思念。'],
+   ['越放越值钱','现金价值（保证+红利）年年涨，预期年化单利白纸黑字看得见。']].forEach((d,i)=>{
+    const el=document.createElement('div');el.className='one-point';
+    el.innerHTML='<div class="num">'+(i+1)+'</div><div class="pt"><b>'+d[0]+'</b>'+d[1]+'</div>';
+    points.appendChild(el);
+  });
+  addSec('二、产品亮点',points);
+
+  // 5. 参数小表（横向，读取实时结果）
+  const params=document.createElement('table');params.className='one-params';
+  params.innerHTML='<tr><th>交费方式</th><th>保险期间</th><th>年交保费</th><th>基本保险金额</th></tr>'+
+    '<tr><td>'+termTxt+'</td><td>'+periodTxt+'</td><td>'+premTxt+'元</td><td>'+saTxt+'元</td></tr>';
+  addSec('三、投保参数',params);
+
+  // 6. 利益演示主表（克隆实时表，去除 id，套用专用样式）
+  const tableWrap=document.createElement('div');
+  const srcTable=document.getElementById('resultTable');
+  if(srcTable){
+    const t=srcTable.cloneNode(true);
+    t.removeAttribute('id');t.className='one-benefit-table';
+    t.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
+    t.querySelectorAll('td,th').forEach(n=>n.removeAttribute('style')); // 去红：原表现金价值/年化单利内联红色
+    t.querySelectorAll('tr.row-positive').forEach(n=>n.classList.remove('row-positive')); // 去全局浅蓝行高亮，改由 .maturity 控
+    const mrow=t.querySelector('tbody tr:last-child'); if(mrow) mrow.classList.add('maturity');
+    tableWrap.appendChild(t);
+  }
+  addSec('四、利益演示表（保单年度）',tableWrap);
+
+  // 7. 底部总结（动态拼接实时结果，不编造）
+  const rows=[...document.querySelectorAll('#resultTable tbody tr')];
+  const periodNum=parseInt(periodTxt,10);
+  const finalRow=rows.find(r=>parseInt(r.cells[0].textContent,10)===periodNum)||rows[rows.length-1];
+  let cvTotalTxt='-',yieldTxt='-',deathExpTxt='-';
+  if(finalRow){
+    cvTotalTxt=finalRow.cells[8]?finalRow.cells[8].textContent:'-';   // 现金价值 保证+红利
+    yieldTxt=finalRow.cells[9]?finalRow.cells[9].textContent:'-';     // 预期年化单利
+    deathExpTxt=finalRow.cells[4]?finalRow.cells[4].textContent:'-';  // 预期身故保险金
+  }
   const summary=document.createElement('div');summary.className='one-summary';
-  const rows=[...document.querySelectorAll('#resultTable tbody tr')];const last=rows[rows.length-1];const cells=last?[...last.cells].map(c=>c.textContent.trim()):[];
-  const premium=document.getElementById('infoPremium')?.textContent||'-';const period=document.getElementById('infoPeriod')?.textContent||'-';
-  [['短期规划','当前方案为'+premium+'元年交，缴费期间'+(document.getElementById('infoTerm')?.textContent||'-')+'，保险期间'+period+'。'],['利益演示','年度现金价值、红利现价及预期年化单利以当前利益演示表为准。'],['案例优势','参数和利益数据均读取当前演算结果，随每次重新生成自动更新。'],['重点结果',cells.length?'末行满期/现金价值数据：'+cells.slice(-3).join(' / '):'当前结果尚未生成。']].forEach(([k,v])=>{const p=document.createElement('p');p.innerHTML='<strong>'+k+'：</strong>'+v;summary.appendChild(p);});
-  const sumBody=document.createElement('div');sumBody.className='one-body';sumBody.appendChild(summary);addSection('案例优势总结',sumBody);
-  const risk=document.createElement('div');risk.className='one-body one-risk';risk.textContent='风险提示：本计划书基于当前输入参数和演示假设生成，演示利益不代表实际收益。分红型产品红利具有不确定性，具体以保险合同及保险公司公布信息为准。';addSection('风险提示和免责声明',risk);
+  [['短期缴费，快速积累','只交'+termTxt+'，'+periodTxt+'一到，整笔利益就开始为你干活——满足短期定向积累需求，不压现金流。'],
+   ['现价增值快，解除担忧','选择'+termTxt+'，以当前演示红利情况下，资金很快即可突破所交保费，越放越值钱。'],
+   ['额外附加最高 1.6 倍身故金','身价保障乐享无忧，最终利益保证；万一有事，家人拿到的是'+deathExpTxt+'元的兜底。'],
+   ['收益高，见利快','以当前演示年化单利约'+yieldTxt+'，期满总体利益显著高于所交保费，账算得清清楚楚。']].forEach((d,i)=>{
+    const el=document.createElement('div');el.className='one-sum-item';
+    el.innerHTML='<div class="n">'+(i+1)+'</div><div><b>'+d[0]+'：</b>'+d[1]+'</div>';
+    summary.appendChild(el);
+  });
+  addSec('五、方案亮点',summary);
+
+  // 8. 风险提示和免责声明（完整，置底）
+  const risk=document.createElement('div');risk.className='one-risk';
+  risk.innerHTML='<b>风险提示与免责声明：</b>本资料为产品宣传与利益演示之用，不构成保险合同内容，具体以《新华保险盈满鑫两全保险（分红型）条款》及保险合同为准。本计划书基于假设利率与100%红利实现率测算，演示利益（含红利部分）不代表实际收益；分红型产品红利分配来源于保险公司实际经营成果，具有不确定性，可能为0，实际分红以保险公司当年公布为准。身故保险金、满期金等具体给付以条款约定及投保时核保结论为准。投保人应充分了解产品特征与自身风险承受能力，理性投保。';
+  addSec('六、风险提示和免责声明',risk);
+
   return root;
 }
 
+// 在线预览切换：样式一/样式二 二选一显示在页面主区域（不影响导出逻辑）
+function switchStyle(){
+  const sel=document.getElementById('exportStyle');
+  const v=sel?sel.value:'standard';
+  const plan=document.getElementById('planArea');
+  const one=document.getElementById('onePageExportRoot');
+  if(!one) return;
+  if(v==='onepage'){
+    if(!currentParams && typeof generate==='function'){ generate(); }
+    buildOnePageExport();
+    if(plan) plan.style.display='none';
+    one.classList.add('is-preview');
+    one.style.display='block';
+    if(plan){ const y=(plan.getBoundingClientRect().top+window.pageYOffset)-80; window.scrollTo(0, Math.max(0,y)); }
+  }else{
+    one.classList.remove('is-preview');
+    one.style.display='none';
+    if(plan) plan.style.display='';
+  }
+}
+
 async function downloadOnePageImage(){
-  const root=buildOnePageExport();const oldPos=root.style.position,oldLeft=root.style.left,oldTop=root.style.top,oldDisplay=root.style.display;root.style.display='block';root.style.position='absolute';root.style.left='0';root.style.top='0';
+  const root=buildOnePageExport();const oldPos=root.style.position,oldLeft=root.style.left,oldTop=root.style.top,oldDisplay=root.style.display,oldWidth=root.style.width;root.style.display='block';root.style.position='absolute';root.style.left='0';root.style.top='0';root.style.width='1000px';
   const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;window.scrollTo(0,0);
   try{
     const captureW=1000,captureH=root.scrollHeight,isWechat=/MicroMessenger/i.test(navigator.userAgent),maxPixels=isWechat?8000000:16000000;
@@ -984,7 +1129,7 @@ async function downloadOnePageImage(){
     const filename='盈满鑫一页通.png';const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
     if(!isMobile&&window.showSaveFilePicker){try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}}
     const url=URL.createObjectURL(blob);if(isMobile||/MicroMessenger/i.test(navigator.userAgent)){showImagePreview(url,filename);if(typeof showToast==='function')showToast('长按图片即可保存到相册');return;}const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);
-  }finally{root.style.position=oldPos;root.style.left=oldLeft;root.style.top=oldTop;root.style.display=oldDisplay;window.scrollTo(0,oldScrollTop);}
+  }finally{root.style.position=oldPos;root.style.left=oldLeft;root.style.top=oldTop;root.style.display=oldDisplay;root.style.width=oldWidth;window.scrollTo(0,oldScrollTop);}
 }
 
 async function downloadImage(){
