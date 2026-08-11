@@ -52,7 +52,10 @@ blockquote p{font-size:17px;color:var(--primary);margin:0}
 .small-note{font-size:13px;color:var(--text-light);margin-top:-4px}
 .compact-card p:last-child{margin-bottom:0}
 @media(max-width:640px){
+html,body{width:100% !important;max-width:100% !important;overflow-x:hidden !important}
 .container{padding:12px;min-width:0;width:100%}.header h1{font-size:18px;line-height:1.35;width:100%;white-space:normal !important}.header{padding:24px 12px;margin-bottom:16px;width:100%}.header .subtitle{font-size:13px;width:100%;white-space:normal !important}.card{padding:16px;margin-bottom:14px;border-radius:8px;max-width:100%;width:100%;overflow:hidden}.card h2{font-size:18px;line-height:1.4;white-space:normal !important}.card h3{font-size:16px;line-height:1.45;white-space:normal !important}.card p,.card li,.header *{white-space:normal !important;max-width:100%;overflow-wrap:anywhere;word-break:break-all}
+.header h1,.header .subtitle,.header .meta,.card h2,.card h3,.card p,.card li{display:block !important;min-width:0 !important;width:auto !important}
+.container *{max-width:100% !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:break-all !important}
 .stats-grid{grid-template-columns:1fr}.data-table{font-size:11px}
 .data-table th,.data-table td{padding:6px 8px;white-space:nowrap}.compare-row{flex-direction:column}
 .table-scroll,.data-table{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
