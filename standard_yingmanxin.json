@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "product": "新华人寿盈满鑫两全保险（分红型）",
+    "version": "1.0",
+    "created_at": "2026-08-13 16:14:36",
+    "unit": "addcv_per_1000_premium 为每千元保费对应的红利现价（元），与 data_yingmanxin_addcv.json 口径一致",
+    "fields": {
+      "gender": "0=男，1=女",
+      "age": "投保年龄（周岁）",
+      "pay_term": "交费期间（年）",
+      "period": "保险期间（年）",
+      "bonus_mode": "红利领取方式（add=交清增额）",
+      "premium_example": "示例年交保费（元）",
+      "addcv_per_1000_premium": "红利现价，每千元保费对应金额（元）",
+      "display_value_1m_premium": "按示例保费100万折算后的展示金额（元）",
+      "source": "标准数据来源"
+    }
+  },
+  "cases": [
+    {
+      "gender": 1,
+      "age": 62,
+      "pay_term": 3,
+      "period": 6,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 11.23,
+          "display_value_1m_premium": 11230.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 35.103,
+          "display_value_1m_premium": 35103.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 72.216,
+          "display_value_1m_premium": 72216.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 111.033,
+          "display_value_1m_premium": 111033.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 151.615,
+          "display_value_1m_premium": 151615.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 194.035,
+          "display_value_1m_premium": 194035.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    },
+    {
+      "gender": 1,
+      "age": 65,
+      "pay_term": 3,
+      "period": 6,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 11.23,
+          "display_value_1m_premium": 11230.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 35.103,
+          "display_value_1m_premium": 35103.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 72.207,
+          "display_value_1m_premium": 72207.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 111.004,
+          "display_value_1m_premium": 111004.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 151.566,
+          "display_value_1m_premium": 151566.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 193.93,
+          "display_value_1m_premium": 193930.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    },
+    {
+      "gender": 1,
+      "age": 68,
+      "pay_term": 3,
+      "period": 6,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 11.23,
+          "display_value_1m_premium": 11230.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 35.103,
+          "display_value_1m_premium": 35103.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 72.187,
+          "display_value_1m_premium": 72187.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 110.953,
+          "display_value_1m_premium": 110953.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 151.441,
+          "display_value_1m_premium": 151441.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 193.721,
+          "display_value_1m_premium": 193721.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    },
+    {
+      "gender": 1,
+      "age": 70,
+      "pay_term": 3,
+      "period": 6,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 11.23,
+          "display_value_1m_premium": 11230.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 35.092,
+          "display_value_1m_premium": 35092.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 72.165,
+          "display_value_1m_premium": 72165.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 110.883,
+          "display_value_1m_premium": 110883.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 151.31,
+          "display_value_1m_premium": 151310.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 193.506,
+          "display_value_1m_premium": 193506.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    },
+    {
+      "gender": 0,
+      "age": 65,
+      "pay_term": 3,
+      "period": 6,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 11.23,
+          "display_value_1m_premium": 11230.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 35.093,
+          "display_value_1m_premium": 35093.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 72.155,
+          "display_value_1m_premium": 72155.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 110.863,
+          "display_value_1m_premium": 110863.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 151.279,
+          "display_value_1m_premium": 151279.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 193.464,
+          "display_value_1m_premium": 193464.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    },
+    {
+      "gender": 0,
+      "age": 70,
+      "pay_term": 3,
+      "period": 6,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 11.23,
+          "display_value_1m_premium": 11230.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 35.082,
+          "display_value_1m_premium": 35082.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 72.091,
+          "display_value_1m_premium": 72091.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 110.686,
+          "display_value_1m_premium": 110686.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 150.915,
+          "display_value_1m_premium": 150915.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 192.834,
+          "display_value_1m_premium": 192834.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    },
+    {
+      "gender": 1,
+      "age": 62,
+      "pay_term": 3,
+      "period": 8,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 11.15,
+          "display_value_1m_premium": 11150.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 34.942,
+          "display_value_1m_premium": 34942.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 71.958,
+          "display_value_1m_premium": 71958.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 110.685,
+          "display_value_1m_premium": 110685.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 151.175,
+          "display_value_1m_premium": 151175.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 193.49,
+          "display_value_1m_premium": 193490.0
+        },
+        "7": {
+          "addcv_per_1000_premium": 237.706,
+          "display_value_1m_premium": 237706.0
+        },
+        "8": {
+          "addcv_per_1000_premium": 283.853,
+          "display_value_1m_premium": 283853.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    },
+    {
+      "gender": 1,
+      "age": 62,
+      "pay_term": 5,
+      "period": 10,
+      "bonus_mode": "add",
+      "premium_example": 1000000,
+      "data": {
+        "1": {
+          "addcv_per_1000_premium": 10.29,
+          "display_value_1m_premium": 10290.0
+        },
+        "2": {
+          "addcv_per_1000_premium": 33.155,
+          "display_value_1m_premium": 33155.0
+        },
+        "3": {
+          "addcv_per_1000_premium": 69.18,
+          "display_value_1m_premium": 69180.0
+        },
+        "4": {
+          "addcv_per_1000_premium": 118.968,
+          "display_value_1m_premium": 118968.0
+        },
+        "5": {
+          "addcv_per_1000_premium": 183.14,
+          "display_value_1m_premium": 183140.0
+        },
+        "6": {
+          "addcv_per_1000_premium": 250.218,
+          "display_value_1m_premium": 250218.0
+        },
+        "7": {
+          "addcv_per_1000_premium": 320.323,
+          "display_value_1m_premium": 320323.0
+        },
+        "8": {
+          "addcv_per_1000_premium": 393.523,
+          "display_value_1m_premium": 393523.0
+        },
+        "9": {
+          "addcv_per_1000_premium": 469.998,
+          "display_value_1m_premium": 469998.0
+        },
+        "10": {
+          "addcv_per_1000_premium": 549.772,
+          "display_value_1m_premium": 549772.0
+        }
+      },
+      "source": "官方在线下载《新华人寿盈满鑫两全保险（分红型）利益演示》模板"
+    }
+  ]
+}
