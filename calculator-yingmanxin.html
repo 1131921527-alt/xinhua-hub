@@ -533,9 +533,10 @@ function depositRateByTerm(term){
 function computeDeposit(rows, payTerm, period, premium){
   const items = [];
   let depositTotal = 0;
-  // 续期保费（第 k=2..payTerm 年）：闲置年限 = 交费期 - k + 1
+  // 续期保费（第 k=2..payTerm 年）：闲置年限 = k - 1，与标准模板一致
+  // 例：3年交时，第2年保费→1年定存，第3年保费→2年定存
   for(let k = 2; k <= payTerm; k++){
-    const term = payTerm - k + 1;
+    const term = k - 1;
     const rate = depositRateByTerm(term);
     const interest = Math.round(premium * rate * term);
     depositTotal += interest;
