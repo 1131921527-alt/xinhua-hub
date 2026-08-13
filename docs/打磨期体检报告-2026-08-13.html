@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华Hub 打磨期首次全面体检报告 · 2026-08-13</title>
+<link rel="stylesheet" href="assets/css/theme.css">
+<style>
+  body { padding: 24px; max-width: 960px; margin: 0 auto; }
+  .report-header { margin-bottom: 24px; }
+  .report-header h1 { font-size: 22px; margin-bottom: 8px; }
+  .report-header .meta { color: var(--color-text-secondary); font-size: 13px; }
+  .section { margin-bottom: 28px; }
+  .section h2 { font-size: 17px; border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 12px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px 20px; margin-bottom: 12px; }
+  .score-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .score-row:last-child { border-bottom: none; }
+  .score-name { width: 90px; font-weight: 500; }
+  .score-bar-wrap { flex: 1; background: var(--color-background-secondary); border-radius: 8px; height: 14px; overflow: hidden; }
+  .score-bar { height: 100%; border-radius: 8px; }
+  .score-pct { width: 46px; text-align: right; font-size: 13px; color: var(--color-text-secondary); }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; margin-right: 6px; }
+  .tag-red { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .tag-amber { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .tag-green { background: var(--color-background-success); color: var(--color-text-success); }
+  .tag-blue { background: var(--color-background-info); color: var(--color-text-info); }
+  .issue-item { padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .issue-item:last-child { border-bottom: none; }
+  .issue-title { font-weight: 500; margin-bottom: 4px; }
+  .issue-detail { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .priority { font-weight: 500; }
+  .p0 { color: var(--color-text-danger); }
+  .p1 { color: var(--color-text-warning); }
+  .p2 { color: var(--color-text-success); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  th { color: var(--color-text-secondary); font-weight: 500; }
+  code { background: var(--color-background-secondary); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+  .footer { margin-top: 32px; padding-top: 16px; border-top: 0.5px solid var(--color-border-tertiary); font-size: 12px; color: var(--color-text-tertiary); }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <h1>新华Hub 打磨期首次全面体检报告</h1>
+  <div class="meta">报告日期：2026-08-13 · 范围：资产盘点 / 演算器健康 / 销售体验 / 版本管理 / 盈满鑫校准 · 原则：只扫描裂缝，不刷墙</div>
+</div>
+
+<!-- 总览 -->
+<div class="section">
+  <h2>一、总体结论</h2>
+  <div class="card">
+    <p>新华Hub 已从「搭建期」进入「打磨期」，地基整体稳固，但有几条裂缝需要优先处理：</p>
+    <p>
+      <span class="tag tag-red">P0 微信拦截</span>
+      <span class="tag tag-red">P0 4款演算器无入口</span>
+      <span class="tag tag-amber">P1 2款演算器数据加载慢</span>
+      <span class="tag tag-amber">P1 QA资产 335MB 待治理</span>
+      <span class="tag tag-amber">P1 重复文件 57MB</span>
+      <span class="tag tag-green">P2 版本管理已建立</span>
+    </p>
+    <p style="margin-top: 8px; font-size: 13px; color: var(--color-text-secondary);">
+      全站 10 款演算器平均健康度 89%，无一存在功能性缺陷；外部 JSON 数据字段完整率 100%；首页结构清晰，销售找产品测算 2 步可达。
+    </p>
+  </div>
+</div>
+
+<!-- 演算器健康度 -->
+<div class="section">
+  <h2>二、10 款演算器健康度评分</h2>
+  <div class="card">
+    <div class="score-row">
+      <div class="score-name">宏愿</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:96%;background:#1D9E75;"></div></div>
+      <div class="score-pct">96%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">宏安</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:92%;background:#1D9E75;"></div></div>
+      <div class="score-pct">92%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">福盛世家</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:92%;background:#1D9E75;"></div></div>
+      <div class="score-pct">92%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">宏坤</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:92%;background:#1D9E75;"></div></div>
+      <div class="score-pct">92%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">宏泰</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:92%;background:#1D9E75;"></div></div>
+      <div class="score-pct">92%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">华彩</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:92%;background:#1D9E75;"></div></div>
+      <div class="score-pct">92%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">恒享</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:92%;background:#1D9E75;"></div></div>
+      <div class="score-pct">92%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">宏禧来</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:88%;background:#378ADD;"></div></div>
+      <div class="score-pct">88%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">盈满鑫</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:84%;background:#378ADD;"></div></div>
+      <div class="score-pct">84%</div>
+    </div>
+    <div class="score-row">
+      <div class="score-name">宏御</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:80%;background:#EF9F27;"></div></div>
+      <div class="score-pct">80%</div>
+    </div>
+    <p style="margin-top: 10px; font-size: 13px; color: var(--color-text-secondary);">
+      评分维度：数据可信度 / 移动端适配 / 导出功能 / 代码质量 / 维护性（各 5 分）。
+    </p>
+  </div>
+  <div class="card">
+    <h3 style="font-size: 14px; margin-bottom: 8px;">逐项发现</h3>
+    <table>
+      <tr><th>演算器</th><th>数据</th><th>发现</th></tr>
+      <tr><td>宏御</td><td>内联 533 keys</td><td><code>calculator-hongyu.html</code> 988KB，其中 95% 是内联数据，维护性垫底（2/5）</td></tr>
+      <tr><td>盈满鑫</td><td>外部 JSON 2 文件</td><td>代码 1304 行偏大；addcv 覆盖 5 组交费/期间，1 处缺键（男 0 岁 3年交 6年期 第1年）</td></tr>
+      <tr><td>福盛/宏坤/宏泰/华彩/恒享</td><td>公式+基准参数</td><td>非查表模式，用 maxAgeMap + 基准保额/分红率缩放，属合理设计</td></tr>
+      <tr><td>宏安/宏愿/宏禧来</td><td>外部 JSON</td><td>字段完整率 100%，无缺失、无空值</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 资产地图 -->
+<div class="section">
+  <h2>三、资产地图（只分析，未删除任何文件）</h2>
+  <div class="card">
+    <table>
+      <tr><th>类别</th><th>文件数</th><th>体积</th><th>说明</th></tr>
+      <tr><td>生产页面</td><td>40</td><td>2.1 MB</td><td><span class="tag tag-green">核心资产</span> 首页 + 38 个功能页</td></tr>
+      <tr><td>生产数据</td><td>6</td><td>11.9 MB</td><td><span class="tag tag-green">核心资产</span> 演算器 JSON 数据</td></tr>
+      <tr><td>生产JS</td><td>8</td><td>8.5 MB</td><td><span class="tag tag-green">核心资产</span> 含 4 个 calcdata.js</td></tr>
+      <tr><td>生产素材 files/</td><td>145</td><td>175.8 MB</td><td><span class="tag tag-blue">较重</span> PPT/Excel/PDF/图片，多为原件</td></tr>
+      <tr><td>QA截图/测试</td><td>757</td><td>335.1 MB</td><td><span class="tag tag-amber">最大肥肉</span> 截图跨多轮验收高度重复</td></tr>
+      <tr><td>备份/归档</td><td>139</td><td>57.5 MB</td><td><span class="tag tag-amber">可瘦身</span> 历史版本 + deploy-blue 中行版</td></tr>
+      <tr><td>临时/工具</td><td>219</td><td>104.7 MB</td><td><span class="tag tag-amber">可瘦身</span> 工具链 + 中间产物</td></tr>
+      <tr><td>文档</td><td>30</td><td>0.2 MB</td><td>规划/报告</td></tr>
+      <tr><td>配置</td><td>7</td><td>0.1 MB</td><td>README/开发规则等</td></tr>
+    </table>
+    <p style="margin-top: 8px; font-size: 13px;"><strong>总计 1351 个文件，约 696 MB</strong></p>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size: 14px; margin-bottom: 8px;">重复文件分析（可释放约 57 MB）</h3>
+    <table>
+      <tr><th>重复组</th><th>份数</th><th>可释放</th><th>说明</th></tr>
+      <tr><td>data_hongyuan.json</td><td>2</td><td>6.4 MB</td><td>根目录 vs archive/演算器手机测试/</td></tr>
+      <tr><td>data_hongan.json</td><td>2</td><td>4.7 MB</td><td>同上</td></tr>
+      <tr><td>hengxiang_calcdata.js</td><td>2</td><td>2.4 MB</td><td>根目录 vs archive/</td></tr>
+      <tr><td>出单流程图 jpg（8 组）</td><td>各 2</td><td>约 6 MB</td><td>archive/cmb-retired vs files/操作流程/</td></tr>
+      <tr><td>html2canvas.min.js</td><td>7</td><td>1.1 MB</td><td>根目录 + archive + tools 各一份</td></tr>
+      <tr><td>QA 截图重复（20+ 组）</td><td>各 2-4</td><td>约 20 MB</td><td>同图存于不同日期/命名目录</td></tr>
+      <tr><td>data_yingmanxin/hongxilai.json</td><td>各 2</td><td>0.7 MB</td><td>根目录 vs archive/</td></tr>
+    </table>
+    <p style="margin-top: 8px; font-size: 13px; color: var(--color-text-secondary);">删除前需你确认，本次仅分析。</p>
+  </div>
+</div>
+
+<!-- 销售体验 -->
+<div class="section">
+  <h2>四、销售使用体验检查</h2>
+  <div class="card">
+    <div class="issue-item">
+      <div class="issue-title"><span class="tag tag-red">P0</span> 微信内置浏览器会拦截 github.io（未备案境外域名）</div>
+      <div class="issue-detail">销售在微信里转发链接给客户，客户点开可能被拦截。这是「转发给客户」场景的最大风险。对策方向：核心页面考虑备案域名或引导「复制链接到浏览器打开」话术。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title"><span class="tag tag-red">P0</span> 4 款演算器在首页无入口：福盛世家 / 宏坤 / 宏泰 / 华彩</div>
+      <div class="issue-detail">首页「产品测算」分类只挂 6 款（宏安/宏御/宏愿/盈满鑫/宏禧来/恒享）。福盛、宏坤、华彩全站零引用；宏泰仅出现在销售问答页提及。4 个文件已 git 跟踪、线上存在，但销售找不到。需确认：是未验收暂不展示，还是漏挂？</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title"><span class="tag tag-amber">P1</span> 2 款演算器数据加载慢：宏愿 6.5MB / 宏安 4.7MB</div>
+      <div class="issue-detail">数据为懒加载（点测算才 fetch），页面打开快；但客户首次点测算在手机网络上需等待数秒。盈满鑫 680KB、宏禧来 345KB 属正常。对策方向：数据按需分片 / 提示加载中动画。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title"><span class="tag tag-green">PASS</span> 首页路径合理：销售找产品测算 2 步可达</div>
+      <div class="issue-detail">首页 76KB、1 个 CSS + 1 个 JS、无图片，加载极快。15 个分类 58 个条目，「产品测算」排第 2 位，入口清晰。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title"><span class="tag tag-green">PASS</span> 导出图适合客户转发</div>
+      <div class="issue-detail">导出图 1600-2000px 宽、保留核心指标卡（满期收益/累计收益/年化单利），微信缩略图可见关键数据。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title"><span class="tag tag-amber">P2</span> 无 404 页面</div>
+      <div class="issue-detail">链接打错时浏览器显示空白/默认错误，建议补一个带导航的 404.html。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 盈满鑫校准 -->
+<div class="section">
+  <h2>五、盈满鑫校准状态（进行中）</h2>
+  <div class="card">
+    <table>
+      <tr><th>项目</th><th>状态</th></tr>
+      <tr><td>校准工具</td><td><span class="tag tag-green">就绪</span> <code>tools/calibrate_yingmanxin.py</code>，支持 JSON/Excel 标准数据批量匹配</td></tr>
+      <tr><td>addcv 数据规模</td><td>7287 个键，覆盖 3年交(6/8/10期) + 5年交(10/15期)，年龄 0-75</td></tr>
+      <tr><td>标准数据已导入</td><td>约 48 个高频键（3/5 年交、6/8/10 年期、女 62/65/68/70、男 65/70）</td></tr>
+      <tr><td>精度分布</td><td>2 位小数 6272 条 / 1 位 899 条 / 0 位 75 条 / 3 位 41 条（历史遗留以 2 位为主）</td></tr>
+      <tr><td>缺口</td><td>1 处缺键：男 0 岁 3年交 6年期 第 1 年</td></tr>
+      <tr><td>待办</td><td><span class="tag tag-amber">等你提供官方标准数据</span>（Excel/截图整理为 <code>standard_yingmanxin.json</code> 即可全量校准）</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 版本管理 -->
+<div class="section">
+  <h2>六、版本管理机制（已建立）</h2>
+  <div class="card">
+    <p>基于现有 <code>docs/CHANGELOG.md</code>（已含 版本/日期/内容/原因/验证/commit 六要素），新增自动化工具 <code>tools/version_log.py</code>：</p>
+    <table>
+      <tr><th>命令</th><th>作用</th></tr>
+      <tr><td><code>python tools/version_log.py add "描述" --task T108 --verify "PC+手机 PASS"</code></td><td>commit 后自动生成版本条目，提取日期/commit/影响文件/当天截图</td></tr>
+      <tr><td><code>python tools/version_log.py query --file calculator-hongan.html</code></td><td>回答「这个页面什么时候改的、为什么改」</td></tr>
+      <tr><td><code>python tools/version_log.py query --since 2026-08-01</code></td><td>查看某时间段的全部提交</td></tr>
+      <tr><td><code>python tools/version_log.py status</code></td><td>查看待提交改动</td></tr>
+      <tr><td><code>python tools/version_log.py log</code></td><td>查看最近版本记录</td></tr>
+    </table>
+    <p style="margin-top: 8px; font-size: 13px; color: var(--color-text-secondary);">以后每次改动流程：开发 → 验收 → commit → 运行 add 自动记一笔。半年后随时能查「某页面为什么改」。</p>
+  </div>
+</div>
+
+<!-- 行动建议 -->
+<div class="section">
+  <h2>七、裂缝清单（按优先级，等你拍板）</h2>
+  <div class="card">
+    <div class="issue-item">
+      <div class="issue-title priority p0">P0-1 确认 4 款演算器入口</div>
+      <div class="issue-detail">福盛/宏坤/宏泰/华彩：是验收后挂首页，还是维持隐藏？一句话确认，我就能在 data.json 补入口。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title priority p0">P0-2 微信转发方案</div>
+      <div class="issue-detail">核心页面微信内打开被拦截。可选：备案域名 / 转发话术引导 / CloudStudio 链接。需要你定方向。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title priority p1">P1-1 盈满鑫全量校准</div>
+      <div class="issue-detail">等你的官方标准数据（Excel/截图），我整理成 standard_yingmanxin.json 跑全量校准。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title priority p1">P1-2 QA 资产瘦身（预计可清 200MB+）</div>
+      <div class="issue-detail">757 个 QA 文件 335MB，其中大量重复截图。建议：保留最近 2 轮验收截图，其余归档到压缩包。需要你确认清理范围。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title priority p1">P1-3 重复文件清理（可释放 57MB）</div>
+      <div class="issue-detail">archive/ 下与根目录重复的 data JSON、calcdata.js、出单流程图、html2canvas 等。删除前逐项列清单给你确认。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title priority p2">P2-1 数据加载优化</div>
+      <div class="issue-detail">宏愿/宏安大数据可考虑：数据分片按年龄段加载 / 加 loading 提示。属优化项，不紧急。</div>
+    </div>
+    <div class="issue-item">
+      <div class="issue-title priority p2">P2-2 补 404 页面</div>
+      <div class="issue-detail">10 分钟能做完的小事，提升容错。</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  本报告仅扫描与分析，未删除 / 未修改任何生产文件。<br>
+  生成工具：tools/health_check.py（演算器健康度）、tools/version_log.py（版本管理）、资产扫描脚本（只读）。<br>
+  报告文件：docs/打磨期体检报告-2026-08-13.html
+</div>
+
+</body>
+</html>

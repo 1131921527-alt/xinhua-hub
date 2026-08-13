@@ -18,6 +18,8 @@ tools/*
 # 盈满鑫专用校准/验证工具（纳入版本库，便于质量保障）
 !tools/calibrate_yingmanxin.py
 !tools/verify_yingmanxin.py
+!tools/health_check.py
+!tools/version_log.py
 backup/
 archive/
 
