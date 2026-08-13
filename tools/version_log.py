@@ -36,10 +36,10 @@ SCREENSHOT_DIR = os.path.join(BASE_DIR, "qa", "screenshots")
 
 
 def run_git(*args):
-    """运行 git 命令并返回输出"""
+    """运行 git 命令并返回输出（禁用 quotepath，保证中文文件名以 UTF-8 输出）"""
     try:
         result = subprocess.run(
-            ["git"] + list(args),
+            ["git", "-c", "core.quotepath=false"] + list(args),
             cwd=BASE_DIR,
             capture_output=True,
             text=True,
@@ -97,13 +97,13 @@ def add_entry(description, task=None, verify=None, extra_files=None):
     screenshots = get_today_screenshots()
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # 整理影响页面
+    # 整理影响文件（页面/数据/脚本类）
     impact_files = []
     for f in files:
-        if f.endswith((".html", ".json", ".js", ".css")):
+        if f.endswith((".html", ".json", ".js", ".css", ".py", ".md")):
             impact_files.append(f)
 
-    # 组装条目
+    # 组装条目（每个元素独立成行）
     lines = []
     lines.append("")
     lines.append(f"### V5.0 · {today} · {description[:40]}{'…' if len(description) > 40 else ''}")
@@ -121,6 +121,8 @@ def add_entry(description, task=None, verify=None, extra_files=None):
     lines.append(f"- **commit**：`{head['short']}`（{head['subject']}）")
     lines.append("")
 
+    entry_text = "\n".join(lines) + "\n"
+
     # 追加到 CHANGELOG.md（插到"历史基线"之前，保持倒序）
     try:
         with open(CHANGELOG, "r", encoding="utf-8") as f:
@@ -128,9 +130,9 @@ def add_entry(description, task=None, verify=None, extra_files=None):
 
         anchor = "## 历史基线"
         if anchor in content:
-            new_content = content.replace(anchor, "".join(lines) + "\n" + anchor, 1)
+            new_content = content.replace(anchor, entry_text + "\n" + anchor, 1)
         else:
-            new_content = content.rstrip() + "\n" + "".join(lines)
+            new_content = content.rstrip() + "\n" + entry_text
 
         with open(CHANGELOG, "w", encoding="utf-8") as f:
             f.write(new_content)
