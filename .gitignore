@@ -14,7 +14,10 @@ files/中行资料/suitability_enlarged_segments/
 files/中行资料/segments/suitability_*.png
 
 # 本地辅助目录（保留在磁盘，不进版本库，避免仓库膨胀）
-tools/
+tools/*
+# 盈满鑫专用校准/验证工具（纳入版本库，便于质量保障）
+!tools/calibrate_yingmanxin.py
+!tools/verify_yingmanxin.py
 backup/
 archive/
 
