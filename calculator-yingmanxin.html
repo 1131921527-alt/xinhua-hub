@@ -110,9 +110,9 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 /* PNG 导出态：只增强长图可读性，不影响一页通在线预览 */
 .one-page-export-root.is-exporting{text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased;}
 .one-page-export-root.is-exporting .one-plan-bar .pi .pv{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
-.one-page-export-root.is-exporting .one-benefit-table{font-size:14px;line-height:1.28;}
+.one-page-export-root.is-exporting .one-benefit-table{font-size:14px;line-height:1.25;}
 .one-page-export-root.is-exporting .one-benefit-table th,.one-page-export-root.is-exporting .one-benefit-table td{padding:5px 3px 7px;vertical-align:middle;}
-.one-page-export-root.is-exporting .one-benefit-table thead th{font-size:15px;line-height:1.22;padding:6px 3px 8px;}
+.one-page-export-root.is-exporting .one-benefit-table thead th{font-size:15px;line-height:1.18;padding:6px 3px 8px;}
 .one-page-export-root.is-exporting .one-benefit-table thead th.col-weak{font-size:12.8px;color:#475569;font-weight:650;}
 .one-page-export-root.is-exporting .one-benefit-table tbody td{font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
 .one-page-export-root.is-exporting .one-benefit-table tbody td.col-weak{color:#64748B;font-weight:600;}
@@ -135,15 +135,15 @@ body.capturing .stat-box{border-right:2px solid #1E40AF !important;border-bottom
 body.capturing .stat-box:last-child{border-right:0 !important;}
 body.capturing .plan-title{padding:0 20px !important;line-height:1.15 !important;transform:translateY(-1px);}
 body.capturing #planArea{text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased;}
-body.capturing .info-table{font-size:17px !important;line-height:1.4 !important;}
-body.capturing .info-table th,body.capturing .info-table td{padding:8px 5px 10px !important;vertical-align:middle !important;}
+body.capturing .info-table{font-size:17px !important;line-height:1.35 !important;}
+body.capturing .info-table th,body.capturing .info-table td{padding:7px 5px 9px !important;vertical-align:middle !important;}
 body.capturing .info-table td,body.capturing .stat-val{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
-body.capturing .main-table{font-size:19.5px !important;line-height:1.28 !important;min-width:100% !important;}
+body.capturing .main-table{font-size:19.5px !important;line-height:1.24 !important;min-width:100% !important;}
 body.capturing .main-table th,body.capturing .main-table td{padding:4px 3px 6px !important;text-align:center !important;vertical-align:middle !important;}
-body.capturing .main-table thead th{line-height:1.22 !important;padding:5px 3px 7px !important;}
+body.capturing .main-table thead th{line-height:1.18 !important;padding:5px 3px 7px !important;}
 body.capturing .main-table thead th.sub{font-size:18.5px !important;}
 body.capturing .main-table tbody td{font-weight:650 !important;white-space:nowrap;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
-body.capturing .dep-table,body.capturing .combo-table{font-size:17px !important;line-height:1.32 !important;}
+body.capturing .dep-table,body.capturing .combo-table{font-size:17px !important;line-height:1.28 !important;}
 body.capturing .dep-table th,body.capturing .dep-table td,body.capturing .combo-table td{padding:7px 7px 9px !important;text-align:center !important;vertical-align:middle !important;}
 body.capturing .dep-table td,body.capturing .combo-table .cv{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
 body.capturing .combo-table .cv{text-align:center !important;font-size:18px;font-weight:750;}
@@ -1209,8 +1209,8 @@ async function downloadOnePageImage(){
   const root=buildOnePageExport();const oldPos=root.style.position,oldLeft=root.style.left,oldTop=root.style.top,oldDisplay=root.style.display,oldWidth=root.style.width,oldTransform=root.style.transform,wasExporting=root.classList.contains('is-exporting');root.classList.add('is-exporting');root.style.display='block';root.style.position='absolute';root.style.left='0';root.style.top='0';root.style.width='1000px';root.style.transform='';
   const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;window.scrollTo(0,0);
   try{
-    const captureW=1000,captureH=root.scrollHeight,isWechat=/MicroMessenger/i.test(navigator.userAgent),maxPixels=isWechat?8000000:16000000;
-    let scale=Math.min(isWechat?2.5:3,Math.sqrt(maxPixels/(captureW*captureH)));scale=Math.max(1,Math.floor(scale*10)/10);
+    const captureW=1000,captureH=root.scrollHeight,isWechat=/MicroMessenger/i.test(navigator.userAgent),maxPixels=isWechat?12000000:22000000;
+    let scale=Math.min(isWechat?3:3.6,Math.sqrt(maxPixels/(captureW*captureH)));scale=Math.max(1,Math.floor(scale*10)/10);
     const canvas=await html2canvas(root,{scale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('PNG生成失败');
     const filename='盈满鑫一页通.png';const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
@@ -1251,7 +1251,7 @@ async function downloadImage(){
     const captureW = plan.offsetWidth || 1200;
     const captureH = plan.scrollHeight;
     const srcCanvas = await html2canvas(plan, {
-      scale: 2,
+      scale: 2.4,
       backgroundColor: '#fff',
       useCORS: true,
       windowWidth: document.documentElement.scrollWidth,
