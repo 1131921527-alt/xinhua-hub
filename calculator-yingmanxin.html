@@ -260,6 +260,26 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .plan-foot-note{margin-top:10px;padding-top:8px;border-top:1px solid #E2E8F0;color:#64748B;font-size:13px;line-height:1.65;}
 .plan-foot-source{margin-top:4px;color:#94A3B8;font-size:12px;text-align:center;letter-spacing:.4px;}
 
+/* 在线标准计划书：仅缩小 #planArea，避免影响一页通与导出态 */
+body:not(.capturing) #planArea .plan-title{font-size:30px;}
+body:not(.capturing) #planArea .plan-intro p{font-size:13px;line-height:1.6;}
+body:not(.capturing) #planArea .section-head{font-size:18px;line-height:1.35;}
+body:not(.capturing) #planArea .info-table{font-size:15px;}
+body:not(.capturing) #planArea .info-table th,body:not(.capturing) #planArea .info-table td{padding:7px 5px;}
+body:not(.capturing) #planArea .main-table{font-size:18px;}
+body:not(.capturing) #planArea .main-table th,body:not(.capturing) #planArea .main-table td{padding:5px 2px;}
+body:not(.capturing) #planArea .dep-table,body:not(.capturing) #planArea .combo-table{font-size:15px;}
+body:not(.capturing) #planArea .dep-table th,body:not(.capturing) #planArea .dep-table td,body:not(.capturing) #planArea .combo-table td{padding:7px 8px;}
+
+@media(max-width:768px){
+  body:not(.capturing) #planArea .plan-title{font-size:26px;}
+  body:not(.capturing) #planArea .info-table{font-size:13px;}
+  body:not(.capturing) #planArea .info-table th,body:not(.capturing) #planArea .info-table td{padding:7px 3px;}
+  body:not(.capturing) #planArea .main-table{font-size:16px;}
+  body:not(.capturing) #planArea .main-table th,body:not(.capturing) #planArea .main-table td{padding:5px 3px;}
+  body:not(.capturing) #planArea .dep-table,body:not(.capturing) #planArea .combo-table{font-size:14px;}
+}
+
 /* ============ 独立隐藏导出模板（高清 PNG，不直接截取网页）============ */
 #exportRoot{position:absolute;left:-9999px;top:0;width:800px;background:#fff;z-index:-1;pointer-events:none;}
 .exp-wrap{width:800px;box-sizing:border-box;background:#fff;color:#1E293B;font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:30px;line-height:1.5;}
@@ -1151,6 +1171,7 @@ function buildOnePageExport(){
   addSec('四、利益演示表（保单年度）',tableWrap);
 
   // 6. 风险提示（固定 3 条：虚拟案例 / 内部学习不作为收益承诺 / 分红不确定性）
+  if(false){
   const risk=document.createElement('div');risk.className='one-risk';
   risk.innerHTML=
     '<b>风险提示：</b>'+
@@ -1159,6 +1180,7 @@ function buildOnePageExport(){
     '<div class="one-risk-item">3、分红保险红利水平具有不确定性，实际红利以保险公司公布为准。</div>';
   addSec('五、风险提示和免责声明',risk);
 
+  }
   return root;
 }
 
