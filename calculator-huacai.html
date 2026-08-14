@@ -42,21 +42,18 @@ tbody tr.row-5y{background:#EFF6FF;}
 tbody tr.row-last{background:#DBEAFE;}
 tbody tr.row-5y td,tbody tr.row-last td{background:transparent;}
 tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
-.col-cv{font-weight:800;color:#1E40AF;}
-.col-rate{color:#1E40AF;font-weight:700;}
-.col-guarantee{color:#1E40AF;font-weight:600;}
+      .col-cv{font-weight:800;color:#1E40AF;}
+      .col-guarantee{color:#1E40AF;font-weight:600;}
 .col-paidup{color:#1E40AF;font-weight:600;}
 .col-total{color:#1E40AF;font-weight:700;}
 .col-dividend{color:#1E40AF;font-weight:600;}
 .col-survival{color:#1E40AF;font-weight:700;}
 .col-death{color:#475569;font-weight:600;}
 .col-num{font-weight:600;color:#1E293B;}
-.rate-reserve{color:#94A3B8;font-weight:700;}
-.rate-up{color:#1E40AF;}
+      .rate-up{color:#1E40AF;}
 .side-label{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:8px;font-size:14px;font-weight:700;color:#1E40AF;text-align:center;padding:10px 4px;background:#EFF6FF;border:1px solid #93C5FD;}
 .pay-merge{vertical-align:middle;text-align:center;color:#94A3B8;font-weight:600;}
-.reserve-cell{background:#F5F5F5 !important;color:#888;font-weight:800;text-align:center;vertical-align:middle;}
-.err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
+      .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px;font-weight:600;}
 .err.show{display:block;}
 .tip{font-size:12px;color:var(--gray);margin-top:8px;}
 .dl-bar{display:flex;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
@@ -216,7 +213,6 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
             <th>累积<br>红利</th>
             <th>生存总利益<br>（红利演示）</th>
             <th>身故总利益<br>（红利演示）</th>
-            <th>阶段</th>
           </tr>
         </thead>        <tbody id="resultBody"></tbody>
       </table>
@@ -342,11 +338,6 @@ async function generate() {
       const isLast = (yr === totalYears);
       const rowClass = isLast ? 'row-last' : (is5y ? 'row-5y' : '');
 
-      // 储备期读取统一产品规则配置（华彩：fixed 前5年；showRate=false → 储备期后显示 "-"）
-      const RULE = window.getProductRule('huacai');
-      const reserveYears = window.resolveReserveYears(RULE, paymentYears);
-      const rateCell = yr <= reserveYears ? '<td class="col-rate rate-reserve reserve-merge"><span class="reserve-cell">储备期</span></td>' : '<td class="col-rate">-</td>';
-
       // 左侧竖排标签
       let sideLabelCell = '';
       if (yr === 1) {
@@ -370,7 +361,6 @@ async function generate() {
         <td class="col-dividend">${fmt(cumDiv)}</td>
         <td class="col-survival">${fmt(survDiv)}</td>
         <td class="col-death">${fmt(deathDiv)}</td>
-        ${rateCell}
       </tr>`;
     }
 
@@ -378,7 +368,6 @@ async function generate() {
     document.getElementById('errorMsg').classList.remove('show');
     // 应用显示密度过滤
     if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y60'); }
-    applyReserveRowspan();
   } catch(e) {
     showError('计算出错：' + e.message);
   } finally {
@@ -386,42 +375,16 @@ async function generate() {
   }
 }
 
-// 将逐行的“储备期”合并为一个 rowspan 居中单元格
-// 须在全部行构建完毕、且显示密度过滤（filterRowsByAge）执行之后调用
-function applyReserveRowspan(){
-  const tbody = document.getElementById('resultBody');
-  if(!tbody) return;
-  const rows = Array.from(tbody.querySelectorAll('tr'));
-  const reserveCells = Array.from(tbody.querySelectorAll('td.reserve-merge'));
-  // 复位：恢复全部储备单元格并显示、清除 rowspan
-  reserveCells.forEach(td => { td.style.display = ''; td.removeAttribute('rowspan'); });
-  // 统计可见的储备期行（连续块，位于表格顶部）
-  const visible = [];
-  for(const tr of rows){
-    if(tr.style.display === 'none') continue;
-    const cell = tr.querySelector('td.reserve-merge');
-    if(cell) visible.push(cell); else break;
-  }
-  if(visible.length > 0){
-    const n = visible.length;
-    visible.forEach((cell, i) => {
-      if(i === 0) cell.setAttribute('rowspan', String(n));
-      else cell.style.display = 'none';
-    });
-  }
-}
-
-// 显示密度切换：先执行行过滤，再重算储备期合并单元格
+// 显示密度切换：先执行行过滤
 function applyDisplayMode(mode){
   if(typeof filterRowsByAge === 'function'){ filterRowsByAge(mode); }
-  applyReserveRowspan();
 }
 
 // Copy table
 function copyTable() {
   const tbody = document.getElementById('resultBody');
   if (!tbody || !tbody.innerHTML) { showToast('请先生成利益演示'); return; }
-  let text = '保单年度\t年龄\t当年保险费\t累计保险费\t关爱金/年金\t累计关爱金/年金\t满期生存保险金\t身故保险金\t现金价值\t累积红利\t生存总利益(红利)\t身故总利益(红利)\t阶段\n';
+  let text = '保单年度\t年龄\t当年保险费\t累计保险费\t关爱金/年金\t累计关爱金/年金\t满期生存保险金\t身故保险金\t现金价值\t累积红利\t生存总利益(红利)\t身故总利益(红利)\n';
   tbody.querySelectorAll('tr').forEach(row => {
     const vals = Array.from(row.querySelectorAll('td')).map(c=>c.textContent.trim());
     text += vals.join('\t') + '\n';
@@ -430,252 +393,6 @@ function copyTable() {
 }
 
 // Download image
-function _legacyDownloadImage() {
-  const tbody = document.getElementById('resultBody');
-  if (!tbody || !tbody.innerHTML) { showToast('请先生成利益演示'); return; }
-  showLoading(true);
-
-  setTimeout(() => {
-    try {
-      const canvas = document.getElementById('renderCanvas');
-      const ctx = canvas.getContext('2d');
-      const age = parseInt(document.getElementById('age').value);
-      const term = parseInt(document.getElementById('term').value);
-      const premium = parseInt(document.getElementById('premium').value);
-      const dividendMode = document.getElementById('dividendMode').value;
-      const dividendRate = parseFloat(document.getElementById('dividendRate').value) || 2.5;
-      const genderLabel = currentGender===0?'男':'女';
-      const termLabel = {1:'一次交清',3:'3年交',5:'5年交',10:'10年交'}[term];
-      const scale = premium/1000;
-
-      // ===== 尺寸常量（统一规范） =====
-      const PAD=22, DPR=4, TITLE_H=80, INFO_H=150, PARAM_H=52, SUBHDR_H=40, HEADER_H=68, ROW_H=42, FOOTER_H=44;
-      const COLORS={
-        titleGrad:['#1E40AF','#1E40AF','#1E40AF'],
-        companyBg:'#EFF6FF', productBg:'#EFF6FF', paramBg:'#EFF6FF',
-        subHeader:'#1E40AF', tableHeader:'#1E40AF',
-        rowWhite:'#FFFFFF', rowAlt:'#F0F9FF', reserveBg:'#F1F5F9', reserveBorder:'#CBD5E1',
-        textDark:'#1E293B', textGray:'#475569', textLight:'#64748B', textMuted:'#94A3B8',
-        accentBlue:'#1E40AF', accentRed:'#1E40AF', lineColor:'#E2E8F0'
-      };
-
-      // ===== 表头 13 列（华彩专属） =====
-      const colWidths=[48,42,72,72,76,84,64,88,70,76,94,88,80];
-      const totalW=colWidths.reduce((a,b)=>a+b,0);
-      const hdrs=[
-        '保单\n年度','年龄','当年\n保险费','累计\n保险费','关爱金\n年金','累计关爱金\n年金',
-        '年领\n红利','红利利益演示\n(年末红利)','聚积\n红利','保证利益演示\n(现价)','生存\n总利益','红利利益演示\n(总计)','阶段\n(储备期)'
-      ];
-
-      // ===== 构建展示行（与 generate 一致 + 派生红利列） =====
-      const dlRows=[];
-      let prevCumDiv=0;
-      for(let yr=1;;yr++){
-        const r=HC_DATA[`${currentGender}_${age}_${term}_${yr}`];
-        if(!r) break;
-        const ca=age+yr;
-        // 下载默认5年模式：60岁起每5年一行
-        if(ca>=60&&(ca-60)%5!==0)continue;
-        const cumDiv=Math.round((r.div_cum||0)*scale);
-        const annualDiv=Math.round(cumDiv-prevCumDiv);
-        prevCumDiv=cumDiv;
-        dlRows.push({
-          yr:yr, age:ca,
-          currP:Math.round((r.prem||0)*scale), cumP:Math.round((r.cum_prem||0)*scale),
-          aAnn:(r.annuity||0)>0?Math.round(r.annuity*scale):0, cAnn:Math.round((r.annuity_cum||0)*scale),
-          cv:Math.round((r.cv||0)*scale), cumDiv:cumDiv, annualDiv:annualDiv,
-          survDiv:Math.round(((r.cv||0)+(r.div_cum||0)+(r.annuity_cum||0))*scale),
-          deathDiv:Math.round((Math.max((r.death||0),(r.cv||0)+(r.annuity_cum||0))+(r.div_cum||0))*scale)
-        });
-      }
-
-      const canvasW=totalW+PAD*2;
-      const canvasH=TITLE_H+INFO_H+PARAM_H+SUBHDR_H+HEADER_H+dlRows.length*ROW_H+10+30+10;  // 10=footer前距, 30=2行文字高, 10=底留白
-      canvas.width=canvasW*DPR; canvas.height=canvasH*DPR;
-      canvas.style.width=canvasW+'px'; canvas.style.height=canvasH+'px';
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.scale(DPR,DPR);
-
-      // 背景
-      ctx.fillStyle='#FFFFFF'; ctx.fillRect(0,0,canvasW,canvasH);
-      ctx.textBaseline='alphabetic';
-
-      // ===== 标题栏（蓝渐变） =====
-      const grad=ctx.createLinearGradient(0,0,canvasW,0);
-      grad.addColorStop(0,COLORS.titleGrad[0]); grad.addColorStop(0.5,COLORS.titleGrad[1]); grad.addColorStop(1,COLORS.titleGrad[2]);
-      ctx.fillStyle=grad; ctx.fillRect(0,0,canvasW,TITLE_H);
-      ctx.fillStyle='#FFFFFF'; ctx.textAlign='center';
-      ctx.font='bold 26px "PingFang SC","Microsoft YaHei",sans-serif';
-      ctx.fillText('华彩鎏金年金保险（分红型） 利益演示', canvasW/2, 40);
-      ctx.font='14px "PingFang SC","Microsoft YaHei",sans-serif';
-      ctx.fillText('利益演示计划书 · 数据源自官方演算表', canvasW/2, 64);
-
-      // ===== 公司介绍区（左右两栏） =====
-      const infoY=TITLE_H, infoX=PAD, infoW=canvasW-PAD*2, colGap=20, infoColW=(infoW-colGap)/2;
-      function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.fill();}
-
-      // 左：公司背景
-      ctx.fillStyle=COLORS.companyBg; rr(infoX, infoY+4, infoColW, INFO_H-8, 8);
-      ctx.fillStyle=COLORS.subHeader; ctx.font='bold 17px "PingFang SC"'; ctx.textAlign='left';
-      ctx.fillText('公司背景', infoX+14, infoY+28);
-      const compLines=['成立1996年9月','中央汇金(中农工建4行同属大股东)、中国宝武钢铁','接近1.9万亿总资产 偿付能力210%','A+H股上市 全球最具价值保险品牌100强','国内主流大型险企老六家之一','连续九年获惠誉A级 穆迪A2级'];
-      ctx.fillStyle=COLORS.textGray; ctx.font='13px "PingFang SC"';
-      compLines.forEach((l,i)=>{ctx.fillText(l, infoX+14, infoY+48+i*15);});
-
-      // 右：产品特点
-      const rx=infoX+infoColW+colGap;
-      ctx.fillStyle=COLORS.productBg; rr(rx, infoY+4, infoColW, INFO_H-8, 8);
-      ctx.fillStyle='#9A3412'; ctx.font='bold 17px "PingFang SC"';
-      ctx.fillText('产品特点', rx+14, infoY+28);
-      const prodLines=['年金保险 第5年关爱金第6年起年金','满期返保费 至105周岁','身故保障 现金价值较大者','分红累积生息 共享经营成果','保单贷款80% 减保取现 灵活规划'];
-      ctx.fillStyle=COLORS.textGray; ctx.font='13px "PingFang SC"';
-      prodLines.forEach((l,i)=>{ctx.fillText(l, rx+14, infoY+48+i*15);});
-
-      // ===== 参数栏（两行：含基本保额/红利领取方式/生息利率） =====
-      const paramY=infoY+INFO_H;
-      const totalP=premium*(term===1?1:term);
-      const baseAmount=(()=>{const r=HC_DATA[`${currentGender}_${age}_${term}_5`]; return r?Math.round(r.annuity*scale):0;})();
-      ctx.fillStyle=COLORS.paramBg; ctx.fillRect(PAD, paramY, canvasW-PAD*2, PARAM_H);
-      ctx.fillStyle=COLORS.textDark; ctx.font='bold 14px "PingFang SC"'; ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText(`性别 ${genderLabel}  年龄 ${age}周岁  交费方式 ${termLabel}  保费 ${premium.toLocaleString()}元  总保费 ${totalP.toLocaleString()}元`, canvasW/2, paramY+18);
-      ctx.fillText(`基本保额 ${baseAmount.toLocaleString()}元  红利领取方式 ${dividendMode}  生息利率 ${dividendRate}%  至105周岁`, canvasW/2, paramY+36);
-      ctx.textBaseline='alphabetic';
-
-      // ===== 子标题栏 =====
-      const sHdrY=paramY+PARAM_H;
-      ctx.fillStyle=COLORS.subHeader; ctx.fillRect(PAD, sHdrY, canvasW-PAD*2, SUBHDR_H);
-      ctx.fillStyle='#FFFFFF'; ctx.font='bold 20px "PingFang SC"'; ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText('利 益 演 示 表', canvasW/2, sHdrY+SUBHDR_H/2);
-      ctx.textBaseline='alphabetic';
-
-      // ===== 表头 =====
-      const tblX=PAD, tblY=sHdrY+SUBHDR_H;
-      const ftY=tblY+HEADER_H+dlRows.length*ROW_H+10;   // footer紧贴表格（tblY 已声明）
-      ctx.fillStyle=COLORS.tableHeader; ctx.fillRect(tblX, tblY, totalW, HEADER_H);
-      ctx.fillStyle='#FFFFFF'; ctx.font='bold 15px "PingFang SC"'; ctx.textAlign='center'; ctx.textBaseline='middle';
-      let hx=tblX;
-      hdrs.forEach((h,i)=>{
-        const lines=h.split('\n'), cx2=hx+colWidths[i]/2, lh=16, n=lines.length;
-        lines.forEach((ln,k)=>{ ctx.fillText(ln, cx2, tblY+HEADER_H/2+(k-(n-1)/2)*lh); });
-        hx+=colWidths[i];
-      });
-      ctx.textBaseline='alphabetic';
-
-      // ===== 储备期定位（读取统一产品规则配置：华彩 fixed 前5年） =====
-      const RULE = window.getProductRule('huacai');
-      const reserveYears = window.resolveReserveYears(RULE, 0);
-      const reserveColIdx=colWidths.length-1;
-      const reserveColX=tblX+colWidths.slice(0,reserveColIdx).reduce((a,b)=>a+b,0);
-      let reserveStartIdx=-1, reserveCount=0, reserveCellX=0;
-      dlRows.forEach((r,i)=>{ if(r.yr<=reserveYears){ if(reserveStartIdx===-1)reserveStartIdx=i; reserveCount++; } });
-
-      // ===== 表格数据行 =====
-      const HL_EXCLUDE=['#1E40AF','#7C3AED','#1E40AF','#1E40AF'];
-      const MAT_EXCLUDE=['#1E40AF','#7C3AED','#1E40AF','#1E40AF'];
-      ctx.textBaseline='middle';
-      dlRows.forEach((r,idx)=>{
-        const y=tblY+HEADER_H+idx*ROW_H;
-        const isHL=(r.yr===5), isMat=(r.yr===70), isRes=(r.yr<=reserveYears);
-        // 行背景
-        ctx.fillStyle=(isHL||isMat)?'#EFF6FF':(idx%2===0?COLORS.rowWhite:COLORS.rowAlt);
-        ctx.fillRect(tblX, y, totalW, ROW_H);
-        // 行边框
-        ctx.strokeStyle=COLORS.lineColor; ctx.lineWidth=0.5;
-        ctx.beginPath(); ctx.moveTo(tblX, y+ROW_H); ctx.lineTo(tblX+totalW, y+ROW_H); ctx.stroke();
-        if(isHL||isMat){
-          ctx.strokeStyle='#93C5FD'; ctx.lineWidth=1.5;
-          ctx.strokeRect(tblX+0.5, y+0.5, totalW-1, ROW_H-1);
-        }
-
-        const colorFor=(c)=> (isHL||isMat)&&!['#1E40AF','#1E40AF'].includes(c)?'#1E40AF':c;
-
-        const vals=[
-          {t:r.yr,            c:COLORS.textDark, f:'bold 16px "PingFang SC"'},
-          {t:r.age,           c:COLORS.textGray, f:'15px "PingFang SC"'},
-          {t:r.currP>0?fmt(r.currP):'-', c:COLORS.textGray, f:'13px "PingFang SC"'},
-          {t:fmt(r.cumP),     c:COLORS.textGray, f:'13px "PingFang SC"'},
-          {t:r.aAnn>0?fmt(r.aAnn):'-', c:COLORS.textLight, f:'13px "PingFang SC"'},
-          {t:r.cAnn>0?fmt(r.cAnn):'0', c:COLORS.textLight, f:'13px "PingFang SC"'},
-          {t:fmt(r.annualDiv),c:COLORS.accentBlue, f:'13px "PingFang SC"'},
-          {t:fmt(r.annualDiv),c:COLORS.accentBlue, f:'13px "PingFang SC"'},
-          {t:fmt(r.cumDiv),   c:COLORS.accentBlue, f:'bold 13px "PingFang SC"'},
-          {t:fmt(r.cv),       c:COLORS.accentBlue, f:'bold 14px "PingFang SC"'},
-          {t:fmt(r.survDiv),  c:(isHL||isMat)?'#1E40AF':'#1E40AF', f:`bold ${isHL||isMat?'16':'15'}px "PingFang SC"`},
-          {t:fmt(r.survDiv),  c:'#1E40AF', f:'13px "PingFang SC"'},
-          {t:'',               c:COLORS.textMuted, f:'14px "PingFang SC"'}
-        ];
-        let cellX=tblX;
-        vals.forEach((v,i)=>{
-          const px=cellX+colWidths[i]/2;
-          if(i===reserveColIdx){ if(isRes) reserveCellX=px; cellX+=colWidths[i]; return; }
-          ctx.fillStyle=colorFor(v.c); ctx.font=v.f; ctx.textAlign='center';
-          ctx.fillText(String(v.t), px, y+ROW_H/2);
-          cellX+=colWidths[i];
-        });
-      });
-      ctx.textBaseline='alphabetic';
-
-      // ===== 储备期合并单元格（两阶段：绘制在所有行之上） =====
-      if(reserveStartIdx>=0 && reserveCount>0 && reserveCellX>0){
-        const y0=tblY+HEADER_H+reserveStartIdx*ROW_H;
-        const blockH=reserveCount*ROW_H;
-        ctx.fillStyle=COLORS.reserveBg;
-        ctx.fillRect(reserveColX, y0, colWidths[reserveColIdx], blockH);
-        ctx.strokeStyle=COLORS.reserveBorder; ctx.lineWidth=1;
-        ctx.strokeRect(reserveColX+0.5, y0+0.5, colWidths[reserveColIdx]-1, blockH-1);
-        ctx.fillStyle=COLORS.textMuted;
-        ctx.font='bold 17px "PingFang SC"'; ctx.textAlign='center'; ctx.textBaseline='middle';
-        ctx.fillText('储备期', reserveCellX, y0+blockH/2);
-        ctx.textBaseline='alphabetic';
-      }
-
-      // ===== 页脚 =====
-      ctx.fillStyle=COLORS.textMuted; ctx.font='12px "PingFang SC"'; ctx.textAlign='center';
-      ctx.fillText('本计划书数据源自官方演算表，仅供参考，具体利益以保险合同条款和正式计划书为准。', canvasW/2, ftY);
-      ctx.fillText(`红利演示为基于公司经营假设的预期值，实际红利可能高于或低于演示值。假设红利领取方式为${dividendMode}。`, canvasW/2, ftY+15);
-
-      // ===== 导出（超清toBlob + 桌面保存） =====
-      const _fn=`华彩鎏金_${genderLabel}${age}岁_${termLabel}_保费${premium}元.png`;
-      canvas.toBlob(async function(blob){
-        const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-        if(!isMobile && window.showSaveFilePicker){
-          try{
-            const h=await window.showSaveFilePicker({suggestedName:_fn, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
-            const w=await h.createWritable(); await w.write(blob); await w.close();
-            showToast('已保存到所选位置'); showLoading(false); return;
-          }catch(e){ if(e.name==='AbortError'){ showLoading(false); return; } }
-        }
-        const dataUrl = canvas.toDataURL('image/png');
-        // 微信内置浏览器屏蔽自动下载，直接弹窗显示图片让用户长按保存
-        const isWechat = /MicroMessenger/i.test(navigator.userAgent);
-        if (isWechat && typeof window.showBrowserOpenPrompt === 'function') {
-          window.showBrowserOpenPrompt(dataUrl, _fn);
-          showLoading(false);
-          return;
-        }
-        function dataUrlToBlobUrl(url){var p=url.split(','),bs=atob(p[1]),ab=new ArrayBuffer(bs.length),ia=new Uint8Array(ab);for(var i=0;i<bs.length;i++)ia[i]=bs.charCodeAt(i);return URL.createObjectURL(new Blob([ab],{type:'image/png'}));}
-        const blobUrl = dataUrlToBlobUrl(dataUrl);
-        if(isMobile){
-          const _a=document.createElement('a'); _a.href=blobUrl; _a.download=_fn;
-          _a.style.display='none'; document.body.appendChild(_a); _a.click(); document.body.removeChild(_a);
-          setTimeout(()=>{
-            const win=window.open('','_blank');
-            if(win)win.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+_fn+'</title><style>body{margin:0;display:flex;justify-content:center;background:#f5f5f5;}img{max-width:100%;height:auto;}</style></head><body><img src="'+blobUrl+'"></body></html>');
-          },600);
-          showLoading(false);
-        }else{
-          const url=URL.createObjectURL(blob);
-          const a=document.createElement('a'); a.href=url; a.download=_fn;
-          document.body.appendChild(a); a.click();
-          setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 2000);
-          showToast('计划书已下载');
-          if(typeof showBrowserOpenPrompt==='function'){ try{ showBrowserOpenPrompt(url, _fn); }catch(e){} }
-          showLoading(false);
-        }
-      },'image/png');
-    }catch(e){ showError('图片生成失败：'+e.message); showLoading(false); }
-  },200);
-}
 
 
 // Enter key support
