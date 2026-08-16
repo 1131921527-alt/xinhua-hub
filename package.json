@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "html2canvas": "^1.4.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  },
+  "scripts": {
+    "verify:topics": "node tools/verify_topics.js"
+  }
+}

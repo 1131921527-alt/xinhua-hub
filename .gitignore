@@ -8,6 +8,8 @@ node_modules/
 .workbuddy/
 package.json
 package-lock.json
+!package.json
+!package-lock.json
 nul
 files/中行资料/suitability_enlarged.png
 files/中行资料/suitability_enlarged_segments/
@@ -20,6 +22,7 @@ tools/*
 !tools/verify_yingmanxin.py
 !tools/health_check.py
 !tools/version_log.py
+!tools/verify_topics.js
 backup/
 archive/
 
