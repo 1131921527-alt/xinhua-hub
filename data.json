@@ -7,12 +7,18 @@
       "name": "公司介绍",
       "icon": "🏢",
       "items": [
-        {
-          "name": "新华保险公司介绍 2026",
-          "type": "link",
-          "description": "2026年最新版公司整体介绍 · 网页版可转发",
-          "url": "company-intro.html"
-        }
+      {
+        "name": "新华保险公司介绍 2026",
+        "type": "link",
+        "description": "2026年最新版公司整体介绍 · 网页版可转发",
+        "url": "company-intro.html"
+      },
+      {
+        "name": "为什么我会关注新华保险？",
+        "type": "link",
+        "description": "客户可直接阅读和长截图的新华公司背景与经营逻辑",
+        "url": "about-xinhua.html"
+      }
       ]
     },
     {
@@ -124,6 +130,12 @@
           "type": "dividend",
           "description": "概念科普/市场背景/年度成绩单/产品案例/118%计算/客户FAQ/投资实力，一站式图文解读",
           "url": "hongli-realization.html"
+        },
+        {
+          "name": "新华的分红，到底怎么样？",
+          "type": "dividend",
+          "description": "客户可直接阅读和长截图的分红逻辑、历史表现与盈满鑫入口",
+          "url": "dividend-xinhua.html"
         },
         {
           "name": "📊 红利实现率解读报告（培训资料）",
