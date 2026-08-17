@@ -861,6 +861,7 @@
     font-size: 15px; font-weight: 700; color: var(--text);
     margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
   }
+  .pd-subtitle { font-size: 12px; color: var(--text-secondary); margin: -4px 0 10px; line-height: 1.5; }
   .pd-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
   }
@@ -1041,6 +1042,7 @@
   @media (max-width: 640px) {
   .header { width: 100%; max-width: 100%; overflow: hidden; }
     .header h1 { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+    .card-name, .card-desc { min-width: 0; overflow-wrap: anywhere; word-break: break-word; white-space: normal; }
     .hub-intro-actions { grid-template-columns: 1fr; }
     .hub-intro { padding: 14px; }
     .hub-intro p { font-size: 13px; }
@@ -1173,6 +1175,7 @@
 <!-- 产品直达（V3.0：30秒内找到产品） -->
 <div class="pd-section">
   <div class="pd-title">🧮 产品在线测算</div>
+  <div class="pd-subtitle">各产品结构与适用场景不同，按客户需求分别测算，不作简单高低比较。</div>
   <div class="pd-grid">
     <a class="pd-card" href="calculator-hongan.html">
       <div class="pd-name">宏安世家</div>
@@ -1220,9 +1223,8 @@
 <!-- 培训中心专区（V3.1：聚合话术库/培训资料，强化工具属性） -->
 <div class="training-zone" id="trainingZone">
   <div class="training-zone-title">🎓 培训中心</div>
-  <div class="training-zone-desc">销售话术 · 答疑手册 · 产品培训 · 投资实力 · 知识卡</div>
+  <div class="training-zone-desc">养老问答 · 在售产品培训 · 投资实力 · 知识卡</div>
   <div class="training-grid">
-    <a class="training-btn" href="sales-qa-fenhong.html">💬 分红险话术<span>分红不确定/实现率答疑</span></a>
     <a class="training-btn" href="sales-qa-yanglao.html">🏡 养老规划问答<span>养老客户沟通要点</span></a>
     <a class="training-btn" href="files/公司介绍/2604新华在售产品培训.html">🏫 在售产品培训<span>2026年4月版</span></a>
     <a class="training-btn" href="files/公司介绍/新华保险投资实力介绍（新华资管）.html">📊 投资实力介绍<span>新华资管资产配置</span></a>
@@ -1233,13 +1235,12 @@
 <!-- 红利实现率专区入口（消除孤立页） -->
 <div class="bonus-zone">
   <div class="bonus-zone-title">📚 分红资料库</div>
-  <div class="bonus-zone-desc">官方查询、年度披露、详细说明与培训资料</div>
+  <div class="bonus-zone-desc">官方查询、年度披露、详细说明与培训报告；客户版请从顶部“看懂新华分红”进入</div>
   <div class="bonus-grid">
     <a class="bonus-btn" href="dividend.html">🔍 官方查询台<span>同步官网公开信息披露</span></a>
     <a class="bonus-btn" href="dividend-2025-interpretation.html">📰 2025深度解读<span>128%/82%/233%数据背景</span></a>
     <a class="bonus-btn" href="hongli-realization.html">📖 详细说明<span>概念科普/市场背景/FAQ</span></a>
     <a class="bonus-btn" href="dividend-2025-report.html">📊 培训/报告<span>红利实现率解读报告</span></a>
-    <a class="bonus-btn" href="dividend-xinhua.html">📘 看懂新华分红<span>分红逻辑与盈满鑫案例</span></a>
   </div>
 </div>
 
