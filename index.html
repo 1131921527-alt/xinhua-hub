@@ -73,6 +73,8 @@
     background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
+  .header { overflow: hidden; max-width: 100%; box-sizing: border-box; }
+  .header h1 { white-space: normal !important; overflow-wrap: anywhere !important; word-break: break-word !important; }
   .header-content { position: relative; z-index: 1; }
   .header h1 { font-size: 21px; font-weight: 700; letter-spacing: 0.5px; }
   .header p { font-size: 12px; opacity: 0.8; margin-top: 3px; }
@@ -1026,6 +1028,23 @@
     white-space: nowrap;
   }
   .hub-intro-btn:active { background: var(--primary-dark); }
+  .hub-intro { display: block; }
+  .hub-intro-body { width: 100%; }
+  .hub-intro-actions { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 12px; }
+  .hub-intro-actions .hub-intro-btn { display: block; text-align: center; }
+  .bonus-zone { background: #F8FAFC; color: var(--text); border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .bonus-zone-title { color: var(--text); }
+  .bonus-zone-desc { color: var(--text-secondary); }
+  .bonus-btn { background: #fff; border-color: var(--border); color: var(--primary); }
+  .bonus-btn span { color: var(--text-secondary); }
+  .bonus-zone .bonus-btn:active { background: var(--primary-light); }
+  @media (max-width: 640px) {
+  .header { width: 100%; max-width: 100%; overflow: hidden; }
+    .header h1 { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+    .hub-intro-actions { grid-template-columns: 1fr; }
+    .hub-intro { padding: 14px; }
+    .hub-intro p { font-size: 13px; }
+  }
 
   /* ===== 销售问答快捷入口（V4.0） ===== */
   .qa-zone {
@@ -1105,9 +1124,9 @@
     <div class="hub-intro-title">🏢 新华Hub · 银保资料与工具中心</div>
     <p>面向银行渠道，聚合产品测算、智能计划书、培训资料与销售问答，随时查、随时发。</p>
   </div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+  <div class="hub-intro-actions">
     <a class="hub-intro-btn" href="about-xinhua.html">认识新华 ›</a>
-    <a class="hub-intro-btn" href="company-intro.html">完整公司资料 ›</a>
+    <a class="hub-intro-btn" href="dividend-xinhua.html">看懂新华分红 ›</a>
   </div>
 </div>
 
@@ -1213,8 +1232,8 @@
 
 <!-- 红利实现率专区入口（消除孤立页） -->
 <div class="bonus-zone">
-  <div class="bonus-zone-title">📈 红利实现率专区</div>
-  <div class="bonus-zone-desc">2025年度数据 · 深度解读 · 详细说明 · 培训资料</div>
+  <div class="bonus-zone-title">📚 分红资料库</div>
+  <div class="bonus-zone-desc">官方查询、年度披露、详细说明与培训资料</div>
   <div class="bonus-grid">
     <a class="bonus-btn" href="dividend.html">🔍 官方查询台<span>同步官网公开信息披露</span></a>
     <a class="bonus-btn" href="dividend-2025-interpretation.html">📰 2025深度解读<span>128%/82%/233%数据背景</span></a>
