@@ -1228,6 +1228,10 @@ window.addEventListener('resize', function(){
 });
 
 async function downloadOnePageImage(){
+  const frame=document.getElementById('onePreviewFrame');
+  const oldFrameDisplay=frame?frame.style.display:'';
+  const oldFrameHeight=frame?frame.style.height:'';
+  if(frame){frame.style.display='block';frame.style.height='auto';}
   const root=buildOnePageExport();const oldPos=root.style.position,oldLeft=root.style.left,oldTop=root.style.top,oldDisplay=root.style.display,oldWidth=root.style.width,oldTransform=root.style.transform,wasExporting=root.classList.contains('is-exporting');root.classList.add('is-exporting');root.style.display='block';root.style.position='absolute';root.style.left='0';root.style.top='0';root.style.width='1000px';root.style.transform='';
   const oldScrollTop=window.pageYOffset||document.documentElement.scrollTop;window.scrollTo(0,0);
   try{
@@ -1238,7 +1242,7 @@ async function downloadOnePageImage(){
     const filename='盈满鑫一页通.png';const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
     if(!isMobile&&window.showSaveFilePicker){try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}}
     const url=URL.createObjectURL(blob);if(isMobile||/MicroMessenger/i.test(navigator.userAgent)){showImagePreview(url,filename);if(typeof showToast==='function')showToast('长按图片即可保存到相册');return;}const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);
-  }finally{root.style.position=oldPos;root.style.left=oldLeft;root.style.top=oldTop;root.style.display=oldDisplay;root.style.width=oldWidth;root.style.transform=oldTransform;if(!wasExporting)root.classList.remove('is-exporting');window.scrollTo(0,oldScrollTop);}
+  }finally{root.style.position=oldPos;root.style.left=oldLeft;root.style.top=oldTop;root.style.display=oldDisplay;root.style.width=oldWidth;root.style.transform=oldTransform;if(!wasExporting)root.classList.remove('is-exporting');if(frame){frame.style.display=oldFrameDisplay;frame.style.height=oldFrameHeight;}window.scrollTo(0,oldScrollTop);}
 }
 
 async function downloadImage(){
