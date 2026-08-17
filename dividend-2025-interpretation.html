@@ -121,11 +121,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .toc-panel.open{display:flex}
 }
 @media(max-width:640px){
-.header h1{font-size:21px}.header{padding:32px 16px}.card{padding:18px}
-.stats-grid{grid-template-columns:repeat(2,1fr)}
+.container{padding:0 10px 24px}
+.header{padding:24px 14px;margin:6px 0 16px}
+.header h1{width:100%;max-width:310px;margin-left:auto;margin-right:auto;font-size:18px;line-height:1.3;margin-bottom:8px;overflow-wrap:anywhere;word-break:break-all;white-space:normal}
+.header .subtitle{font-size:13px;line-height:1.5;margin-bottom:10px;overflow-wrap:anywhere;word-break:break-all;white-space:normal}
+.header .meta{font-size:11px;line-height:1.5;overflow-wrap:anywhere;word-break:break-all;white-space:normal}
+.card{padding:13px;margin-bottom:12px;border-radius:9px}
+.card h2{font-size:17px;line-height:1.35;margin-bottom:10px;gap:6px}
+.card h3{font-size:15px;line-height:1.4;margin:12px 0 7px}
+.card p{font-size:13px;line-height:1.55;margin-bottom:8px;overflow-wrap:anywhere;word-break:break-all;white-space:normal}
+.card ul,.card ol{margin-left:18px}
+.card li{font-size:13px;line-height:1.5;margin-bottom:4px}
+.concept-card{padding:12px;margin:10px 0}
+.formula-box{padding:12px;font-size:13px;line-height:1.6;margin:10px 0;overflow-wrap:anywhere;word-break:break-all;white-space:normal}
+.highlight-num{font-size:22px;margin:10px 0}
+.stats-grid{grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+.stat-item{padding:10px 6px;border-radius:8px}
+.stat-item .value{font-size:22px}
+.stat-item.hero .value{font-size:28px}
+.stat-item .label{font-size:11px;line-height:1.35;margin-top:3px}
+.detail-module{padding:10px 12px;margin:10px 0}
+.detail-module h3{font-size:14px;margin-bottom:7px}
+.detail-module li{font-size:12.5px;line-height:1.45;margin-bottom:4px}
+.product-grid{gap:8px;margin:10px 0}
+.product>summary{padding:11px 12px;gap:6px}
+.product .p-name{font-size:14px;overflow-wrap:anywhere}
+.product .p-badge{font-size:11px;padding:3px 8px}
+.product .p-body{padding:4px 12px 12px}
+.product .p-body h4{font-size:13px;margin:10px 0 3px}
+.product .p-body p{font-size:12.5px;line-height:1.5}
+.faq details{margin:8px 0}
+.faq summary{padding:11px 12px;font-size:14px}
+.faq .a{padding:4px 12px 12px;font-size:13px;line-height:1.5}
+.compare-row{gap:8px;margin:10px 0}
+.compare-item{min-width:0;padding:12px}
+.compare-item .cv{font-size:21px}
+.compare-item .cl{font-size:12px}
 .stats-hero{grid-template-columns:repeat(3,1fr)}
-.stat-item.hero .value{font-size:30px}
-.data-table{font-size:11px}.data-table th,.data-table td{padding:6px 7px}
+.data-table{font-size:10px}.data-table th,.data-table td{padding:5px 5px}
+.success-box,.warning-box,.note-box,.disclaimer{padding:10px 12px;margin:10px 0;font-size:12.5px;line-height:1.5}
 .compare-row{flex-direction:column}
 .toc{top:52px}
 }
