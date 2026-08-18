@@ -73,6 +73,40 @@
 .key-metrics .km .km-label { font-size: 12px; opacity: .85; }
 .key-metrics .km .km-value { font-size: 17px; font-weight: 700; margin-top: 3px; font-variant-numeric: tabular-nums; }
 
+/* ---------- 表格与指标卡对齐基线 ----------
+   统一采用对称盒模型和单一行高，避免不同演算器在手机/导出态
+   因默认 inline 基线造成文字视觉下沉。各页面的字号、列宽和导出
+   尺寸仍由页面自身样式控制，这里只提供对齐规则。 */
+.plan-table th, .plan-table td,
+.result-table th, .result-table td,
+#resultTable th, #resultTable td,
+.info-table th, .info-table td,
+.main-table th, .main-table td,
+.dep-table th, .dep-table td,
+.combo-table th, .combo-table td {
+  box-sizing: border-box;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.25;
+}
+
+.key-metrics .km {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-box .stat-label,
+.stat-box .stat-val,
+.stat-inline-box span,
+.stat-inline-box strong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+
 /* ---------- 导出容器基线（各演算器具体样式在各自 .exp-* 类） ---------- */
 .exp-wrap { background: #fff; }
 

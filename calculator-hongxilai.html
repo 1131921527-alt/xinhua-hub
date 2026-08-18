@@ -142,6 +142,65 @@ body.capturing .table-scroll{overflow-x:visible !important;}
   .stat-inline-box{border-right:0;border-bottom:2px solid var(--primary);}
   .stat-inline-box:last-child{border-bottom:0;}
 }
+/* 宏禧来版式统一：与公共演算器基线一致，网页与导出态共用 */
+.intro-row{gap:12px;align-items:stretch;}
+.intro-row > .section:first-child{margin-right:0;}
+.intro-row > .section:nth-child(2) p{font-size:14px;line-height:1.7;}
+.intro-row > .section{margin-bottom:0;}
+.intro-row .section-head{min-height:40px;align-items:center;line-height:1.35;}
+.info-table{table-layout:fixed;}
+.info-table th,.info-table td{padding:9px 4px;line-height:1.3;vertical-align:middle;white-space:normal;overflow-wrap:anywhere;}
+.info-table-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+body.capturing .info-table-scroll{overflow:visible;}
+.info-table th:nth-child(1),.info-table td:nth-child(1){width:10%;}
+.info-table th:nth-child(2),.info-table td:nth-child(2){width:8%;}
+.info-table th:nth-child(3),.info-table td:nth-child(3){width:9%;}
+.info-table th:nth-child(4),.info-table td:nth-child(4){width:16%;}
+.info-table th:nth-child(5),.info-table td:nth-child(5){width:10%;}
+.info-table th:nth-child(6),.info-table td:nth-child(6){width:14%;}
+.info-table th:nth-child(7),.info-table td:nth-child(7){width:16%;}
+.info-table th:nth-child(8),.info-table td:nth-child(8){width:17%;}
+.stats-row{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0;}
+.stat-inline-box{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:48px;}
+.stat-inline-box span,.stat-inline-box strong{display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;white-space:normal;padding:8px 6px;}
+.main-table{table-layout:fixed;line-height:1.3;}
+.main-table th,.main-table td{padding:8px 4px;line-height:1.3;vertical-align:middle;}
+.main-table th{white-space:normal;overflow-wrap:anywhere;}
+.main-table td{white-space:nowrap;}
+.main-table th,.main-table td{border-color:#CBD5E1;}
+.main-table thead th{border-color:#fff;}
+.main-table thead tr:first-child th{height:48px;}
+.main-table thead tr:nth-child(2) th{height:40px;}
+.main-table tbody td{height:40px;}
+.main-table th:nth-child(1),.main-table td:nth-child(1){width:8%;}
+.main-table th:nth-child(2),.main-table td:nth-child(2){width:10%;}
+.main-table th:nth-child(3),.main-table td:nth-child(3){width:13%;}
+.main-table th:nth-child(4),.main-table td:nth-child(4){width:13%;}
+.main-table th:nth-child(5),.main-table td:nth-child(5){width:10%;}
+.main-table th:nth-child(6),.main-table td:nth-child(6){width:10%;}
+.main-table th:nth-child(7),.main-table td:nth-child(7){width:13%;}
+.main-table th:nth-child(8),.main-table td:nth-child(8){width:16%;}
+.main-table th:nth-child(9),.main-table td:nth-child(9){width:7%;}
+@media(max-width:768px){
+  .intro-row{gap:0;}
+  .intro-row > .section:first-child{margin-bottom:0;}
+  .intro-row > .section{min-height:275px;}
+  .stats-row{grid-template-columns:1fr 1fr;flex-direction:row;border-top:2px solid var(--primary);}
+  .stat-inline-box{grid-template-columns:1fr;min-height:78px;border-right:2px solid var(--primary);border-bottom:0;}
+  .stat-inline-box:last-child{border-right:0;}
+  .info-table{font-size:13px;min-width:760px;}
+  .info-table th,.info-table td{padding:8px 3px;}
+}
+/* 双栏导出统一为一个连续模块：共享中间边界，不留卡片间隙 */
+.intro-row{gap:0;align-items:stretch;}
+.intro-row > .section:first-child{margin-right:0;}
+.intro-row > .section:first-child{border-right-width:1px;}
+.intro-row > .section:nth-child(2){border-left-width:1px;}
+body.capturing .intro-row > .section:first-child{margin-right:0 !important;}
+@media(max-width:768px){
+  .intro-row > .section:first-child{border-right-width:2px;}
+  .intro-row > .section:nth-child(2){border-left-width:2px;}
+}
 </style>
 </head>
 <body>
@@ -216,6 +275,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 
     <div class="section">
       <div class="case-info no-export" id="caseInfo">VIP女士，今年40岁，购买100万8年期宏禧来 （分红型），预计满期总利益<span class="em">1209405</span>元</div>
+      <div class="info-table-scroll">
       <table class="info-table">
         <tr>
           <th>被保人</th><th>性别</th><th>年龄</th><th>一次交清保险费</th><th>保险期间</th><th>红利领取方式</th><th>演示累积生息利率</th><th>基本保额</th>
@@ -225,6 +285,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
           <td id="infoPeriod">8年</td><td>累积生息</td><td id="infoRate">2.50%</td><td id="infoSa">1100500元</td>
         </tr>
       </table>
+      </div>
 
       <div class="stats-row" style="margin-top:10px; margin-bottom:10px;">
         <div class="stat-inline-box"><span>2025年度红利实现率</span><strong>118%</strong></div>
@@ -233,6 +294,7 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 
       <div class="table-scroll">
         <table class="main-table" id="resultTable">
+          <colgroup><col style="width:7%"><col style="width:9%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:13%"><col style="width:17%"><col style="width:6%"></colgroup>
           <thead>
             <tr>
               <th rowspan="2">保单<br>年度</th>

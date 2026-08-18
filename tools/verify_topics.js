@@ -8,7 +8,7 @@ const PORT = 8927;
 const TARGETS = process.argv.slice(2).length ? process.argv.slice(2) : ['about-xinhua.html', 'dividend-xinhua.html'];
 const VIEWPORTS = [{name:'390', width:390, height:844}, {name:'430', width:430, height:844}, {name:'1440', width:1440, height:900}];
 const REQUIRED = {
-  'about-xinhua.html': ['为什么我会关注新华保险？','中央汇金到底是干什么的','新华的投资能力怎么样'],
+  'about-xinhua.html': ['新华保险是一家什么样的公司？','中央汇金到底是干什么的','新华的投资能力怎么样'],
   'dividend-xinhua.html': ['新华的分红，到底怎么样？','红利实现率怎么看','盈满鑫身故保障']
 };
 function startServer(){
