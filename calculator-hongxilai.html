@@ -95,10 +95,11 @@ body.capturing .table-scroll{overflow-x:visible !important;}
 .main-table td.reserve-cell{
   background:#DBEAFE;
   padding:0;
+  position:relative;
 }
 .main-table td.reserve-cell > span{
-  display:flex;align-items:center;justify-content:center;height:100%;
-  color:#64748B;font-weight:700;white-space:nowrap;
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  height:auto;min-height:0;color:#64748B;font-weight:700;white-space:nowrap;
 }
 
 .row-positive td{background:#DBEAFE !important;color:var(--primary) !important;}
