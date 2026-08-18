@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="description" content="新华Hub 培训中心 — 产品培训 / 分红解读 / 销售话术 / 公司实力 / 知识卡，数据驱动，持续更新。">
-<title>培训中心 · 新华Hub</title>
+<meta name="description" content="新华Hub 知识资料库 — 产品说明 / 分红解读 / 公司实力 / 知识卡，数据驱动，持续更新。">
+<title>知识资料库 · 新华Hub</title>
 <link rel="stylesheet" href="assets/css/theme.css">
 <style>
   .train-header {
@@ -75,8 +75,8 @@
 <body>
 <div class="app-container">
   <div class="train-header">
-    <h1>🎓 培训中心</h1>
-    <p>产品培训 · 分红解读 · 销售话术 · 公司实力 · 知识卡</p>
+<h1>🎓 知识资料库</h1>
+<p>产品说明 · 分红解读 · 公司实力 · 知识卡</p>
   </div>
 
   <div class="filter-bar" id="filterBar"></div>
@@ -88,14 +88,14 @@
     <div class="rel-grid">
       <a class="rel-card" href="intro-yingmanxin.html">💡 盈满鑫产品解读</a>
       <a class="rel-card" href="dividend.html">📈 红利实现率解读</a>
-      <a class="rel-card" href="sales-qa.html">💬 销售问答中心</a>
-      <a class="rel-card" href="company-intro.html">🏢 公司实力介绍</a>
+<a class="rel-card" href="sales-qa.html">💬 常见问题说明</a>
+      <a class="rel-card" href="about-xinhua.html">🏢 认识新华</a>
     </div>
   </div>
 
   <div class="bottom-nav">
     <a href="index.html"><span class="bn-icon">🏠</span>首页</a>
-    <a href="training.html" class="active"><span class="bn-icon">🎓</span>培训</a>
+    <a href="training.html" class="active"><span class="bn-icon">🎓</span>资料</a>
     <a href="sales-qa.html"><span class="bn-icon">💬</span>问答</a>
     <a href="dividend.html"><span class="bn-icon">📈</a></a>
   </div>
@@ -149,7 +149,7 @@ function render(list) {
         <div class="course-tags">${(c.tags || []).map(t => `<span class="tag">${t}</span>`).join("")}</div>
         <div class="course-actions">
           <a class="btn btn-primary btn-block" href="${c.link || c.page || "#"}">查看</a>
-          ${c.ppt ? `<a class="btn btn-outline btn-block" href="${c.ppt}">PPT</a>` : ""}
+          ${c.ppt ? `<a class="btn btn-outline btn-block" href="${c.ppt}">原始资料</a>` : ""}
         </div>
       </div>
     </div>`).join("");

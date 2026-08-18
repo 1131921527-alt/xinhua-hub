@@ -946,7 +946,7 @@
   .bonus-btn span { font-size: 10px; opacity: 0.8; font-weight: 500; }
   .home-spacer { height: 120px; }
 
-  /* ===== 培训中心专区（V3.1） ===== */
+  /* ===== 知识资料库专区（V3.1） ===== */
   .training-zone {
     margin: 14px 16px 10px;
     background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 60%, #3B82F6 100%);
@@ -1124,7 +1124,7 @@
 <div class="hub-intro">
   <div class="hub-intro-body">
     <div class="hub-intro-title">🏢 新华Hub · 银保资料与工具中心</div>
-    <p>面向银行渠道，聚合产品测算、智能计划书、培训资料与销售问答，随时查、随时发。</p>
+<p>汇集产品测算、计划书、知识说明与数据查询，方便统一查阅。</p>
   </div>
   <div class="hub-intro-actions">
     <a class="hub-intro-btn" href="about-xinhua.html">认识新华 ›</a>
@@ -1212,22 +1212,22 @@
 
 <!-- 销售问答快捷入口 -->
 <div class="qa-zone">
-  <div class="qa-zone-title">💬 销售问答知识库</div>
-  <div class="qa-zone-desc">客户异议 · 分红话术 · 养老传承 · 产品答疑</div>
+<div class="qa-zone-title">💬 常见问题知识库</div>
+<div class="qa-zone-desc">产品说明 · 分红解读 · 养老传承 · 常见问题</div>
   <div class="qa-grid">
-    <a class="qa-btn" href="sales-qa.html">🎯 销售问答中心<span>产品知识库 · 问答 · 话术</span></a>
-    <a class="qa-btn" href="sales-qa-yiyi.html">💡 客户异议处理<span>常见拒绝应对话术</span></a>
+<a class="qa-btn" href="sales-qa.html">🎯 常见问题说明<span>产品知识库 · 问答 · 合规说明</span></a>
+<a class="qa-btn" href="sales-qa-yiyi.html">💡 常见问题<span>重点问题与规则说明</span></a>
   </div>
 </div>
 
-<!-- 培训中心专区（V3.1：聚合话术库/培训资料，强化工具属性） -->
+<!-- 知识资料专区 -->
 <div class="training-zone" id="trainingZone">
-  <div class="training-zone-title">🎓 培训中心</div>
-  <div class="training-zone-desc">养老问答 · 在售产品培训 · 投资实力 · 知识卡</div>
+<div class="training-zone-title">🎓 知识资料库</div>
+  <div class="training-zone-desc">养老问答 · 在售产品总览 · 投资实力 · 知识卡</div>
   <div class="training-grid">
     <a class="training-btn" href="sales-qa-yanglao.html">🏡 养老规划问答<span>养老客户沟通要点</span></a>
-    <a class="training-btn" href="files/公司介绍/2604新华在售产品培训.html">🏫 在售产品培训<span>2026年4月版</span></a>
-    <a class="training-btn" href="files/公司介绍/新华保险投资实力介绍（新华资管）.html">📊 投资实力介绍<span>新华资管资产配置</span></a>
+    <a class="training-btn" href="files/公司介绍/2604新华在售产品说明.html">🏫 在售产品总览<span>现行产品形态与规则</span></a>
+    <a class="training-btn" href="files/公司介绍/新华保险投资实力介绍（新华资管）.html">📊 投资实力与资产配置<span>新华资管长期投资能力</span></a>
     <a class="training-btn" href="insurance-knowledge-card.html">🃏 保险知识卡<span>利率与分红政策图解</span></a>
   </div>
 </div>
@@ -1235,12 +1235,10 @@
 <!-- 红利实现率专区入口（消除孤立页） -->
 <div class="bonus-zone">
   <div class="bonus-zone-title">📚 分红资料库</div>
-  <div class="bonus-zone-desc">官方查询、年度披露、详细说明与培训报告；客户版请从顶部“看懂新华分红”进入</div>
+<div class="bonus-zone-desc">官方查询、年度披露与详细说明</div>
   <div class="bonus-grid">
     <a class="bonus-btn" href="dividend.html">🔍 官方查询台<span>同步官网公开信息披露</span></a>
-    <a class="bonus-btn" href="dividend-2025-interpretation.html">📰 2025深度解读<span>128%/82%/233%数据背景</span></a>
     <a class="bonus-btn" href="hongli-realization.html">📖 详细说明<span>概念科普/市场背景/FAQ</span></a>
-    <a class="bonus-btn" href="dividend-2025-report.html">📊 培训/报告<span>红利实现率解读报告</span></a>
   </div>
 </div>
 
@@ -1546,7 +1544,7 @@ function renderContent(query) {
   let totalItems = 0;
 
   // 首页「全部」视图下，已在顶部静态区域展示的分类不再重复列出，避免重复入口
-  const HIDDEN_IN_ALL = ['company-intro','product-calculators','sales-qa','training'];
+  const HIDDEN_IN_ALL = ['company-intro','product-calculators','sales-qa','training','bonusrate'];
 
   // VIP Benefits System overview (only for vip-service category)
   if (activeCategory === 'vip-service' && !query) {

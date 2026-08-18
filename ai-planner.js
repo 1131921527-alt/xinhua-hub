@@ -748,7 +748,7 @@
         // 标题栏
         '<div style="background:linear-gradient(135deg,#1D4ED8,#2563EB);padding:18px 20px;text-align:center;">' +
           '<div style="font-size:17px;font-weight:700;color:#fff;letter-spacing:0.5px;">计划书图片已生成</div>' +
-          '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">长按图片即可保存到相册</div>' +
+          '<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">长按图片即可保存图片</div>' +
         '</div>' +
     // 图片预览区（放大，方便微信查看）
     '<div style="padding:12px;text-align:center;background:#f8fafc;overflow:auto;max-height:60vh;">' +
@@ -757,13 +757,13 @@
     // 提示文字
     '<div style="padding:10px 20px 2px;">' +
       '<div style="font-size:13px;color:#475569;line-height:1.6;text-align:center;">' +
-        '📤 点「转发到微信保存」→ 选「文件传输助手」<br/>' +
-        '💾 在聊天里长按图片即可保存到相册' +
+        '📤 点「保存图片」→ 选「文件传输助手」<br/>' +
+        '💾 在聊天里长按图片即可保存图片' +
       '</div>' +
     '</div>' +
         // 按钮区
         '<div style="padding:12px 20px 20px;display:flex;flex-direction:column;gap:10px;">' +
-          '<button id="browserPromptSave" style="width:100%;padding:14px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;font-size:16px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;">📤 转发到微信保存</button>' +
+          '<button id="browserPromptSave" style="width:100%;padding:14px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;font-size:16px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;">📤 保存图片</button>' +
           '<div style="display:flex;gap:10px;">' +
             '<button id="browserPromptCopy" style="flex:1;padding:13px 0;border-radius:10px;border:1.5px solid #2563EB;background:#fff;color:#2563EB;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">📋 复制链接</button>' +
             '<button id="browserPromptClose" style="flex:1;padding:13px 0;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#64748B;font-size:15px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">关闭</button>' +
@@ -862,7 +862,7 @@
       if (navigator.share) {
         navigator.share({ files: [file], title: '新华保险理财计划书', text: '新华保险理财计划书' })
           .then(function() {
-            showPageToast('已调起转发，发到「文件传输助手」后长按图片即可保存');
+            showPageToast('图片已生成，请按系统提示保存');
           })
           .catch(function(e) {
             console.warn('wechat share failed:', e);
@@ -931,10 +931,10 @@
       }
     }
 
-    // 微信里按钮文案改为「转发到微信保存」；非微信保持「保存到相册」
+    // 微信里按钮文案改为「保存图片」；非微信保持「保存图片」
     if (saveBtn) {
       saveBtn.style.display = 'block';
-      saveBtn.textContent = isWechat ? '📤 转发到微信保存' : '📥 保存到相册';
+      saveBtn.textContent = isWechat ? '📤 保存图片' : '📥 保存图片';
     }
 
     if (overlay) {
@@ -963,7 +963,7 @@
             '<style>*{margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;background:#000;padding:10px;box-sizing:border-box;}img{max-width:100vw;max-height:88vh;object-fit:contain;border-radius:8px;background:#fff;}' +
             '.tip{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-family:-apple-system,sans-serif;white-space:nowrap;}' +
             '.tip2{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.95);color:#1E40AF;padding:8px 16px;border-radius:20px;font-size:13px;font-family:-apple-system,sans-serif;font-weight:700;white-space:nowrap;}</style></head>' +
-            '<body><div class="tip2">📥 长按图片保存到相册</div><img src="' + srcUrl + '" alt="plan"/>' +
+            '<body><div class="tip2">📥 长按图片保存图片</div><img src="' + srcUrl + '" alt="plan"/>' +
             '<div class="tip">若长按无效，点右上角「在浏览器中打开」</div></body></html>'
           );
           newWin.document.close();
