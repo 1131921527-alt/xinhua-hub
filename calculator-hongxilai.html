@@ -40,6 +40,8 @@ body.capturing .no-export{display:none !important;}
 body.capturing .wrap{max-width:1100px !important;width:1100px !important;}
 body.capturing .plan{padding:28px 32px 4px !important;}
 body.capturing .intro-row{flex-direction:row !important;}
+body.capturing .intro-row{display:grid !important;grid-template-columns:1fr 1fr !important;align-items:stretch !important;gap:0 !important;}
+body.capturing .intro-row > .section{width:auto !important;margin:0 !important;align-self:stretch !important;}
 body.capturing .intro-row>.section:first-child{margin-right:-2px !important;margin-bottom:0 !important;}
 body.capturing .stats-row{flex-direction:row !important;border-top:0 !important;}
 body.capturing .stat-inline-box{border-right:2px solid #1E40AF !important;border-bottom:0 !important;}
@@ -456,7 +458,6 @@ async function downloadImage(){
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
   try{
-    const captureH = plan.scrollHeight;
     const isWechatEnv = /MicroMessenger/i.test(navigator.userAgent);
     // 微信/移动端 Canvas 像素限制保护：微信保存 PNG 有宽高/总像素上限，限制更严
     const maxScale = isWechatEnv ? 2.5 : 4;
@@ -468,6 +469,7 @@ async function downloadImage(){
     captureScale = Math.max(1.0, captureScale);
     // 导出前强制公司介绍/产品简介双栏等高（html2canvas 对 flex stretch 支持不稳，用显式高度兜底）
     (function(){var rows=plan.querySelectorAll('.intro-row, .plan-intro');rows.forEach(function(r){var ks=[].slice.call(r.children).filter(function(c){return c.tagName==='DIV';});if(ks.length===2){var h=Math.max(ks[0].offsetHeight,ks[1].offsetHeight);ks[0].style.height=h+'px';ks[1].style.height=h+'px';}});})();
+    const captureH = plan.scrollHeight;
     const canvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
