@@ -168,9 +168,19 @@
         {value:1, label:'趸交'}, {value:3, label:'3年交'}, {value:5, label:'5年交'},
         {value:8, label:'8年交'}, {value:10, label:'10年交'}, {value:15, label:'15年交'}, {value:20, label:'20年交'}
       ];
+      // 盈满鑫：交费方式仅 3/5 年交；保险期间仅 6/8/10 年（与 data_yingmanxin.json 口径一致）
+      var yingmanxinPayModeOptions = [
+        {value:3, label:'3年交'}, {value:5, label:'5年交'}
+      ];
+      var yingmanxinPeriodOptions = [
+        {value:6, label:'6年期'}, {value:8, label:'8年期'}, {value:10, label:'10年期'}
+      ];
       var periodOptions = [
         {value:8, label:'8年期'}, {value:10, label:'10年期'}, {value:15, label:'15年期'},
         {value:20, label:'20年期'}, {value:30, label:'30年期'}
+      ];
+      var hongxilaiPeriodOptions = [
+        {value:6, label:'6年期'}, {value:8, label:'8年期'}, {value:10, label:'10年期'}
       ];
       var annuityAgeOptions = [
         {value:50, label:'50岁起领'}, {value:55, label:'55岁起领'}, {value:60, label:'60岁起领'},
@@ -179,8 +189,18 @@
       var options = {};
       var params = product.params || ['term'];
       if (params.indexOf('term') !== -1) options.term = termOptions;
-      if (params.indexOf('payMode') !== -1) options.payMode = payModeOptions;
-      if (params.indexOf('period') !== -1) options.period = periodOptions;
+      if (params.indexOf('payMode') !== -1) {
+        options.payMode = product.file === 'calculator-yingmanxin.html' ? yingmanxinPayModeOptions : payModeOptions;
+      }
+      if (params.indexOf('period') !== -1) {
+        if (product.file === 'calculator-yingmanxin.html') {
+          options.period = yingmanxinPeriodOptions;
+        } else if (product.file === 'calculator-hongxilai.html') {
+          options.period = hongxilaiPeriodOptions;
+        } else {
+          options.period = periodOptions;
+        }
+      }
       if (params.indexOf('annuityAge') !== -1) options.annuityAge = annuityAgeOptions;
       return options;
     }
@@ -226,12 +246,16 @@
       var premiumWan = result.premium ? (result.premium / 10000) : '';
       document.getElementById('apPremiumInput').value = premiumWan;
 
-      // 产品相关下拉
+      // 产品相关下拉（默认值与真实测算器入口保持一致）
       var opts = getProductOptions(result.product);
-      if (opts.term) fillSelect(document.getElementById('apTermSelect'), opts.term, result.termVal || 3);
-      if (opts.payMode) fillSelect(document.getElementById('apPayModeSelect'), opts.payMode, result.payMode || 3);
-      if (opts.period) fillSelect(document.getElementById('apPeriodSelect'), opts.period, result.period || 8);
-      if (opts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), opts.annuityAge, result.annuityAge || 60);
+      var defaultTerm = 3;
+      var defaultPayMode = result.product.file === 'calculator-yingmanxin.html' ? 3 : 3;
+      var defaultPeriod = result.product.file === 'calculator-yingmanxin.html' ? 6 : (result.product.file === 'calculator-hongxilai.html' ? 6 : 8);
+      var defaultAnnuityAge = 60;
+      if (opts.term) fillSelect(document.getElementById('apTermSelect'), opts.term, result.termVal || defaultTerm);
+      if (opts.payMode) fillSelect(document.getElementById('apPayModeSelect'), opts.payMode, result.payMode || defaultPayMode);
+      if (opts.period) fillSelect(document.getElementById('apPeriodSelect'), opts.period, result.period || defaultPeriod);
+      if (opts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), opts.annuityAge, result.annuityAge || defaultAnnuityAge);
 
       // 年金领取方式
       if ((result.product.params || []).indexOf('annuityMode') !== -1) {
@@ -248,10 +272,14 @@
         }
         updateModalRows(newProduct);
         var newOpts = getProductOptions(newProduct);
-        if (newOpts.term) fillSelect(document.getElementById('apTermSelect'), newOpts.term, 3);
-        if (newOpts.payMode) fillSelect(document.getElementById('apPayModeSelect'), newOpts.payMode, 3);
-        if (newOpts.period) fillSelect(document.getElementById('apPeriodSelect'), newOpts.period, 8);
-        if (newOpts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), newOpts.annuityAge, 60);
+        var newDefaultTerm = 3;
+        var newDefaultPayMode = newProduct.file === 'calculator-yingmanxin.html' ? 3 : 3;
+        var newDefaultPeriod = newProduct.file === 'calculator-yingmanxin.html' ? 6 : (newProduct.file === 'calculator-hongxilai.html' ? 6 : 8);
+        var newDefaultAnnuityAge = 60;
+        if (newOpts.term) fillSelect(document.getElementById('apTermSelect'), newOpts.term, newDefaultTerm);
+        if (newOpts.payMode) fillSelect(document.getElementById('apPayModeSelect'), newOpts.payMode, newDefaultPayMode);
+        if (newOpts.period) fillSelect(document.getElementById('apPeriodSelect'), newOpts.period, newDefaultPeriod);
+        if (newOpts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), newOpts.annuityAge, newDefaultAnnuityAge);
         if ((newProduct.params || []).indexOf('annuityMode') !== -1) {
           document.getElementById('apAnnuityModeSelect').value = 'month';
         }
