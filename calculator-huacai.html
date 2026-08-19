@@ -103,6 +103,7 @@ tbody tr.row-5y:hover,tbody tr.row-last:hover{filter:brightness(.97);}
 <script src="product-rules.js"></script>
 </head>
 <body>
+<a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="wrap">
   <div class="title-bar">
     <h1>华彩鎏金年金保险（分红型）· 利益演示计算器</h1>
@@ -453,7 +454,7 @@ async function downloadImage(){
     const isWechatEnv2=/MicroMessenger/i.test(navigator.userAgent);
     if(isWechatEnv2||isMobile){showImagePreview(_blobUrl,filename);showToast('长按图片即可保存到相册');return;}
     if(!isMobile&&window.showSaveFilePicker){
-      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}
+      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){/* 失败或取消时继续走下方传统下载兜底 */}
     }
     const a=document.createElement('a');a.href=_blobUrl;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);

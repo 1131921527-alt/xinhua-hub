@@ -93,6 +93,7 @@
 <script src="product-rules.js"></script>
 </head>
 <body>
+<a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="wrap">
   <div class="title-bar">
     <h1>宏泰世家（分红型）终身寿险 · 利益演示计算器</h1>
@@ -607,7 +608,7 @@ function _legacyDownloadImage(){
         const h=await window.showSaveFilePicker({suggestedName:_fn, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
         const w=await h.createWritable(); await w.write(blob); await w.close();
         showToast('已保存到所选位置 ✅'); return;
-      }catch(e){ if(e.name==='AbortError') return; }
+      }catch(e){ /* 失败或取消时继续走下方传统下载兜底 */ }
     }
     const dataUrl = canvas.toDataURL('image/png');
     // 微信内置浏览器屏蔽自动下载，直接弹窗显示图片让用户长按保存
@@ -690,7 +691,7 @@ async function downloadImage(){
     const isWechatEnv2=/MicroMessenger/i.test(navigator.userAgent);
     if(isWechatEnv2||isMobile){showImagePreview(_blobUrl,filename);showToast('长按图片即可保存到相册');return;}
     if(!isMobile&&window.showSaveFilePicker){
-      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}
+      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){/* 失败或取消时继续走下方传统下载兜底 */}
     }
     const a=document.createElement('a');a.href=_blobUrl;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);

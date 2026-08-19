@@ -351,6 +351,8 @@ body:not(.capturing) #planArea .dep-table th,body:not(.capturing) #planArea .dep
 </style>
 </head>
 <body>
+<a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
+<div class="calc-cover-banner"><img src="assets/preview/yingmanxin-card.jpg" alt="盈满鑫"><div class="calc-cover-overlay"><span>盈满鑫两全保险（分红型）</span></div></div>
 <div class="wrap">
   <div class="input-card">
     <div class="form-row">
@@ -1249,7 +1251,7 @@ async function downloadOnePageImage(){
     const canvas=await html2canvas(root,{scale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('PNG生成失败');
     const filename='盈满鑫一页通.png';const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
-    if(!isMobile&&window.showSaveFilePicker){try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}}
+    if(!isMobile&&window.showSaveFilePicker){try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(blob);await w.close();return;}catch(e){/* 失败或取消时继续走下方传统下载兜底 */}}
     const url=URL.createObjectURL(blob);if(isMobile||/MicroMessenger/i.test(navigator.userAgent)){showImagePreview(url,filename);if(typeof showToast==='function')showToast('长按图片即可保存到相册');return;}const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);
   }finally{root.style.position=oldPos;root.style.left=oldLeft;root.style.top=oldTop;root.style.display=oldDisplay;root.style.width=oldWidth;root.style.transform=oldTransform;if(!wasExporting)root.classList.remove('is-exporting');if(frame){frame.style.display=oldFrameDisplay;frame.style.height=oldFrameHeight;}window.scrollTo(0,oldScrollTop);}
 }
@@ -1311,7 +1313,7 @@ async function downloadImage(){
         const w = await h.createWritable(); await w.write(_blob); await w.close();
         URL.revokeObjectURL(_blobUrl);
         return;
-      }catch(e){ if(e.name==='AbortError') return; }
+      }catch(e){ /* 失败或取消时继续走下方传统下载兜底 */ }
     }
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;

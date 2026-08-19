@@ -129,6 +129,8 @@ body.capturing .key-metrics{display:none !important;}
 <script src="product-rules.js"></script>
 </head>
 <body>
+<a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
+<div class="calc-cover-banner"><img src="assets/preview/hongyu-card.jpg" alt="宏御世家"><div class="calc-cover-overlay"><span>宏御世家终身寿险（分红型）</span></div></div>
 <div class="wrap">
   <div class="title-bar">
     <h1>宏御世家 终身寿险（分红型）· 利益演示计算器</h1>
@@ -1049,7 +1051,7 @@ async function downloadImage(){
     let captureScale=2;
     if(captureW*captureH*captureScale*captureScale>maxCanvasPixels){captureScale=Math.floor(Math.sqrt(maxCanvasPixels/(captureW*captureH))*10)/10;}
     captureScale=Math.max(1.0,captureScale);
-    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:document.documentElement.scrollWidth,windowHeight:document.documentElement.scrollHeight,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
+    const canvas=await html2canvas(plan,{scale:captureScale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
     window.scrollTo(0,oldScrollTop);
     const filename='宏御世家理财计划书.png';
     const _blob=await new Promise(r=>canvas.toBlob(r,'image/png'));
@@ -1058,7 +1060,7 @@ async function downloadImage(){
     const isWechatEnv2=/MicroMessenger/i.test(navigator.userAgent);
     if(isWechatEnv2||isMobile){showImagePreview(_blobUrl,filename);showToast('长按图片即可保存到相册');return;}
     if(!isMobile&&window.showSaveFilePicker){
-      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){if(e.name==='AbortError')return;}
+      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){/* 失败或取消时继续走下方传统下载兜底 */}
     }
     const a=document.createElement('a');a.href=_blobUrl;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);

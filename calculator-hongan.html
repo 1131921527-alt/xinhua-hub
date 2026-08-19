@@ -170,6 +170,8 @@ body.capturing .key-metrics{display:none !important;}
 </style>
 </head>
 <body>
+<a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
+<div class="calc-cover-banner"><img src="assets/preview/hongan-card.jpg" alt="宏安世家"><div class="calc-cover-overlay"><span>宏安世家终身寿险（分红型）</span></div></div>
 <div class="wrap">
   <div class="input-card">
     <div class="form-row">
@@ -539,7 +541,7 @@ async function downloadImage(){
         const w = await h.createWritable(); await w.write(_blob); await w.close();
         URL.revokeObjectURL(_blobUrl);
         return;
-      }catch(e){ if(e.name==='AbortError') return; }
+      }catch(e){ /* 失败或取消时继续走下方传统下载兜底 */ }
     }
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
