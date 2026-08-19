@@ -207,6 +207,7 @@ body.capturing .intro-row > .section:first-child{margin-right:0 !important;}
 </style>
 </head>
 <body>
+<a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="wrap">
   <div class="input-card">
     <div class="form-row">
@@ -462,6 +463,8 @@ async function downloadImage(){
     // 微信/移动端 Canvas 像素限制保护：微信保存 PNG 有宽高/总像素上限，限制更严
     const maxScale = isWechatEnv ? 2.5 : 4;
     const maxCanvasPixels = isWechatEnv ? 8000000 : 16000000;
+    // 先量高度（必须在计算 captureScale 前声明，否则 const 暂时性死区会抛错导致下载失败）
+    const captureH = plan.scrollHeight;
     let captureScale = maxScale;
     if (captureW * captureH * captureScale * captureScale > maxCanvasPixels) {
       captureScale = Math.floor(Math.sqrt(maxCanvasPixels / (captureW * captureH)) * 10) / 10;
@@ -469,7 +472,6 @@ async function downloadImage(){
     captureScale = Math.max(1.0, captureScale);
     // 导出前强制公司介绍/产品简介双栏等高（html2canvas 对 flex stretch 支持不稳，用显式高度兜底）
     (function(){var rows=plan.querySelectorAll('.intro-row, .plan-intro');rows.forEach(function(r){var ks=[].slice.call(r.children).filter(function(c){return c.tagName==='DIV';});if(ks.length===2){var h=Math.max(ks[0].offsetHeight,ks[1].offsetHeight);ks[0].style.height=h+'px';ks[1].style.height=h+'px';}});})();
-    const captureH = plan.scrollHeight;
     const canvas = await html2canvas(plan, {
       scale: captureScale,
       backgroundColor: '#fff',
@@ -499,7 +501,7 @@ async function downloadImage(){
         const w = await h.createWritable(); await w.write(_blob); await w.close();
         URL.revokeObjectURL(_blobUrl);
         return;
-      }catch(e){ if(e.name==='AbortError') return; }
+      }catch(e){ /* showSaveFilePicker 失败或用户取消时不 return，继续走下方传统下载兜底，确保任何桌面浏览器都能下下来 */ }
     }
     // 微信/手机端：页面内显示图片，提示长按保存；桌面：直接下载
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
