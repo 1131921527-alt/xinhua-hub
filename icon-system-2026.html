@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华保险资料库 · 现代化图标系统 2026</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#F4F6F9;color:#1f2937}
+  .wrap{max-width:1100px;margin:0 auto;padding:48px 24px 80px}
+  .hero{background:linear-gradient(135deg,#1B5E99,#4A9FD4);border-radius:24px;padding:40px 36px;color:#fff;box-shadow:0 18px 40px rgba(27,94,153,.25)}
+  .hero h1{font-size:30px;font-weight:700;letter-spacing:.5px}
+  .hero p{margin-top:10px;font-size:15px;line-height:1.7;opacity:.92}
+  .badges{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:999px;font-size:13px}
+  section{margin-top:44px}
+  .sec-title{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:700;color:#111827}
+  .sec-title .dot{width:10px;height:10px;border-radius:3px;background:#1B5E99}
+  .sec-desc{margin-top:6px;font-size:14px;color:#6b7280}
+  .grid{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px}
+  .cell{background:#fff;border:1px solid #eef1f5;border-radius:18px;padding:22px 14px;text-align:center;transition:.2s}
+  .cell:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.07);border-color:#dbe5f0}
+  .cell .glyph{width:56px;height:56px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
+  .cell .glyph svg{width:48px;height:48px}
+  .cell .name{font-size:14px;font-weight:600;color:#374151}
+  .cell .key{margin-top:3px;font-size:12px;color:#9ca3af;font-family:ui-monospace,monospace}
+  /* 文件卡片上的真实 chip 样式（取自 theme.css） */
+  .chips{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px}
+  .chip{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:14px;font-size:14px;font-weight:600}
+  .chip svg{width:24px;height:24px}
+  .icon-pdf{background:#FEF2F2;color:#DC2626}
+  .icon-ppt{background:#FFF7ED;color:#EA580C}
+  .icon-excel{background:#F0FDF4;color:#16A34A}
+  .icon-doc{background:#EFF6FF;color:#2563EB}
+  .icon-contract{background:#FEF3C7;color:#9333EA}
+  .icon-link{background:#EFF6FF;color:#2563EB}
+  .icon-image{background:#FDF4FF;color:#DB2777}
+  .icon-video{background:#FFF1F2;color:#E11D48}
+  .icon-calculator{background:#ECFEFF;color:#0891B2}
+  .icon-clause{background:#FAF5FF;color:#9333EA}
+  .icon-dividend{background:#F0FDF4;color:#16A34A}
+  .icon-card{background:#FEFCE8;color:#CA8A04}
+  .icon-default{background:#F1F5F9;color:#64748B}
+  .note{margin-top:30px;background:#fff;border:1px solid #eef1f5;border-left:4px solid #1B5E99;border-radius:12px;padding:16px 20px;font-size:13px;color:#4b5563;line-height:1.7}
+  .foot{margin-top:40px;text-align:center;font-size:12px;color:#9ca3af}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>新华保险资料库 · 现代化图标系统</h1>
+    <p>2026 重构版 —— 抛弃通用线性模板，改为「双色实心底 + 品牌色块」的扁平金融风格。<br>统一 24×24 网格、圆角几何、新华蓝 / 新华红 / 金 三主色系，识别度更高、更有定制感。</p>
+    <div class="badges">
+      <span class="badge">14 个业务分类图标</span>
+      <span class="badge">13 个文件类型图标</span>
+      <span class="badge">双色扁平 · Duotone</span>
+      <span class="badge">已应用至 index.html</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-title"><span class="dot"></span>业务分类图标（CAT_ICONS）</div>
+    <div class="sec-desc">用于首页标签页与栏目标题，每个分类对应一个定制金融场景符号。</div>
+    <div class="grid" id="catGrid"></div>
+  </section>
+
+  <section>
+    <div class="sec-title"><span class="dot"></span>文件类型图标（ICONS）</div>
+    <div class="sec-desc">用于资料卡片的文件标识。下方为网站真实 chip 样式预览。</div>
+    <div class="chips" id="chipRow"></div>
+  </section>
+
+  <div class="note">
+    <b>设计说明：</b>所有图标均为矢量 SVG，已写入网站 <code>index.html</code> 的 <code>ICONS</code> / <code>CAT_ICONS</code> 对象，首页立即生效。
+    配色沿用新华品牌：蓝 <code>#1B5E99</code> / <code>#4A9FD4</code>、红 <code>#C41E3A</code> / <code>#DC2626</code>、金 <code>#D97706</code> / <code>#CA8A04</code>，
+    双色采用「主色实底 + 同色系浅色高光」实现层次，避免免费图标库的单一描边观感。
+  </div>
+
+  <div class="foot">新华保险资料库 · 图标系统 2026 · 由 WorkBuddy 智能设计助手生成</div>
+</div>
+
+<script>
+const ICONS = {
+  pdf:'<svg viewBox="0 0 24 24" fill="none"><path d="M7 2h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#DC2626"/><path d="M15 2l5 5h-5z" fill="#FCA5A5"/><path d="M9 13h6M9 16h4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  ppt:'<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" fill="#EA580C"/><path d="M3 16h18v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#FDBA74"/><rect x="8" y="8" width="8" height="5" rx="1" fill="#FDBA74"/></svg>',
+  excel:'<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#16A34A"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke="#86EFAC" stroke-width="1.4"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none"><path d="M7 2h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#2563EB"/><path d="M15 2l5 5h-5z" fill="#93C5FD"/><path d="M9 13l1.5 1.6L13 12" stroke="#93C5FD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  contract:'<svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#9333EA"/><path d="M14 3l4 4h-4z" fill="#D8B4FE"/><circle cx="12" cy="15" r="3" fill="#D8B4FE"/><path d="M10.5 15l1 1 2-2" stroke="#9333EA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none"><path d="M9 15a4 4 0 0 0 6 0l2-2a4 4 0 0 0-6-6l-1 1" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M15 9a4 4 0 0 0-6 0l-2 2a4 4 0 0 0 6 6l1-1" stroke="#93C5FD" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>',
+  image:'<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" fill="#DB2777"/><circle cx="9" cy="10" r="2" fill="#F9A8D4"/><path d="M5 18l5-5 4 4 2-2 3 3" stroke="#F9A8D4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  video:'<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="14" height="12" rx="2" fill="#E11D48"/><path d="M17 10l4-2.5v9L17 14z" fill="#FB7185"/></svg>',
+  calculator:'<svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="2.5" fill="#0891B2"/><rect x="8.5" y="5" width="7" height="4" rx="1" fill="#67E8F9"/><circle cx="9.5" cy="12.5" r="1" fill="#67E8F9"/><circle cx="12" cy="12.5" r="1" fill="#67E8F9"/><circle cx="14.5" cy="12.5" r="1" fill="#67E8F9"/><circle cx="9.5" cy="15.5" r="1" fill="#67E8F9"/><circle cx="12" cy="15.5" r="1" fill="#67E8F9"/><circle cx="14.5" cy="15.5" r="1" fill="#67E8F9"/></svg>',
+  clause:'<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#9333EA"/><path d="M15 3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2" stroke="#D8B4FE" stroke-width="1.6" fill="none"/><path d="M8 8h5M8 11h5M8 14h3" stroke="#D8B4FE" stroke-width="1.3" stroke-linecap="round"/></svg>',
+  dividend:'<svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="9" rx="7" ry="3" fill="#DC2626"/><path d="M5 9v6c0 1.7 3.1 3 7 3s7-1.3 7-3V9" fill="#DC2626"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3" fill="#FCA5A5"/><path d="M12 4v4M10 6l2-2 2 2" stroke="#FCA5A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  card:'<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" fill="#CA8A04"/><path d="M3 10h18" stroke="#FDE047" stroke-width="1.6"/><circle cx="7" cy="14.5" r="1.3" fill="#FDE047"/><rect x="10" y="13.5" width="8" height="2" rx="1" fill="#FDE047"/></svg>',
+  default:'<svg viewBox="0 0 24 24" fill="none"><path d="M7 2h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#64748B"/><path d="M15 2l5 5h-5z" fill="#CBD5E1"/></svg>'
+};
+const CAT_ICONS = {
+  'company-intro':'<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" fill="#1B5E99"/><rect x="7" y="6" width="3" height="3" rx="0.8" fill="#7FB3D5"/><rect x="14" y="6" width="3" height="3" rx="0.8" fill="#7FB3D5"/><rect x="7" y="11" width="3" height="3" rx="0.8" fill="#7FB3D5"/><rect x="14" y="11" width="3" height="3" rx="0.8" fill="#7FB3D5"/><rect x="10.5" y="16" width="3" height="5" rx="0.8" fill="#7FB3D5"/></svg>',
+  'product-calculators':'<svg viewBox="0 0 24 24" fill="none"><path d="M12 2.5 4 5.5v6c0 5 3.5 9 8 10.5 4.5-1.5 8-5.5 8-10.5v-6z" fill="#C41E3A"/><path d="M12 8.5l1.4 2.9 3.1.4-2.3 2.2.6 3.1-2.8-1.5-2.8 1.5.6-3.1-2.3-2.2 3.1-.4z" fill="#F1A0AD"/></svg>',
+  'calculators':'<svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="2.5" fill="#0891B2"/><rect x="8.5" y="5" width="7" height="4" rx="1" fill="#67E8F9"/><circle cx="9.5" cy="12.5" r="1" fill="#67E8F9"/><circle cx="12" cy="12.5" r="1" fill="#67E8F9"/><circle cx="14.5" cy="12.5" r="1" fill="#67E8F9"/><circle cx="9.5" cy="15.5" r="1" fill="#67E8F9"/><circle cx="12" cy="15.5" r="1" fill="#67E8F9"/><circle cx="14.5" cy="15.5" r="1" fill="#67E8F9"/></svg>',
+  'vip-service':'<svg viewBox="0 0 24 24" fill="none"><path d="M3 8l3.5 3L12 5l5.5 6L21 8l-1.5 10h-15z" fill="#D97706"/><circle cx="12" cy="4.5" r="1.6" fill="#FCD34D"/><circle cx="6" cy="7" r="1.3" fill="#FCD34D"/><circle cx="18" cy="7" r="1.3" fill="#FCD34D"/></svg>',
+  'workflow':'<svg viewBox="0 0 24 24" fill="none"><path d="M4 11a8 8 0 0 1 13.7-5.3L20 8" stroke="#7C3AED" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 4v4h-4" stroke="#7C3AED" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M20 13a8 8 0 0 1-13.7 5.3L4 16" stroke="#C4B5FD" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20v-4h4" stroke="#C4B5FD" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'product-intro':'<svg viewBox="0 0 24 24" fill="none"><path d="M12 6C9.5 4 6.5 4 4 5v13c2.5-1 5.5-1 8 1 2.5-2 5.5-2 8-1V5c-2.5-1-5.5-1-8 1z" fill="#2563EB"/><path d="M12 6v13" stroke="#93C5FD" stroke-width="1.6"/></svg>',
+  'sales-qa':'<svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#E11D48"/><circle cx="9" cy="11" r="1.2" fill="#FB7185"/><circle cx="12.5" cy="11" r="1.2" fill="#FB7185"/><circle cx="16" cy="11" r="1.2" fill="#FB7185"/></svg>',
+  'product-compare':'<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="5" height="10" rx="1.5" fill="#DB2777"/><rect x="11" y="6" width="5" height="15" rx="1.5" fill="#F9A8D4"/><path d="M19 7l2 2-2 2" stroke="#DB2777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'product-rules':'<svg viewBox="0 0 24 24" fill="none"><path d="M12 3 5 5.5v5.5c0 4.5 3 7.8 7 9 4-1.2 7-4.5 7-9V5.5z" fill="#0D9488"/><path d="M9 12l2 2 4-4" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'templates':'<svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#B45309"/><path d="M14 3l4 4h-4z" fill="#F0B97A"/><path d="M9 11h6M9 14h6M9 17h4" stroke="#F0B97A" stroke-width="1.4" stroke-linecap="round"/></svg>',
+  'contracts':'<svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#9333EA"/><path d="M14 3l4 4h-4z" fill="#D8B4FE"/><circle cx="12" cy="15" r="3" fill="#D8B4FE"/><path d="M10.5 15l1 1 2-2" stroke="#9333EA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'dividend':'<svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="9" rx="7" ry="3" fill="#DC2626"/><path d="M5 9v6c0 1.7 3.1 3 7 3s7-1.3 7-3V9" fill="#DC2626"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3" fill="#FCA5A5"/><path d="M12 4v4M10 6l2-2 2 2" stroke="#FCA5A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'bonusrate':'<svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16h16" stroke="#16A34A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 15l3.5-4 3 2.5L20 7" stroke="#86EFAC" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M16 7h4v4" stroke="#16A34A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'excel-tables':'<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" fill="#475569"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16" stroke="#94A3B8" stroke-width="1.4"/></svg>'
+};
+const CAT_NAMES = {
+  'company-intro':'公司介绍', 'product-calculators':'产品测算', 'calculators':'在线演算',
+  'vip-service':'增值服务', 'workflow':'操作流程', 'product-intro':'产品介绍',
+  'sales-qa':'销售问答', 'product-compare':'产品对比', 'product-rules':'产品规则',
+  'templates':'手工单模板', 'contracts':'合同模板', 'dividend':'分红资料',
+  'bonusrate':'红利实现率', 'excel-tables':'演算表'
+};
+const ICON_NAMES = {
+  pdf:'PDF', ppt:'PPT', excel:'Excel', doc:'Word', contract:'合同', link:'链接',
+  image:'图片', video:'视频', calculator:'计算器', clause:'条款', dividend:'红利实现率',
+  card:'知识卡', default:'文件'
+};
+// 渲染分类图标
+const catGrid = document.getElementById('catGrid');
+Object.keys(CAT_ICONS).forEach(k=>{
+  const d = document.createElement('div'); d.className='cell';
+  d.innerHTML = '<div class="glyph">'+CAT_ICONS[k]+'</div><div class="name">'+(CAT_NAMES[k]||k)+'</div>';
+  catGrid.appendChild(d);
+});
+// 渲染文件类型 chip
+const chipRow = document.getElementById('chipRow');
+const order = ['pdf','ppt','excel','doc','contract','link','image','video','calculator','clause','dividend','card','default'];
+order.forEach(k=>{
+  const s = document.createElement('div'); s.className='chip icon-'+k;
+  s.innerHTML = ICONS[k] + '<span>'+ICON_NAMES[k]+'</span>';
+  chipRow.appendChild(s);
+});
+</script>
+</body>
+</html>
