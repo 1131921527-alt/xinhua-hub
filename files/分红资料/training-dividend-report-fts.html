@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>新华保险分红专题汇报解读 · 新华保险资料库</title>
+<style>
+:root{
+  --blue-900:#1E3A8A; --blue-800:#1E40AF; --blue-700:#1D4ED8;
+  --blue-600:#2563EB; --blue-500:#3B82F6; --blue-300:#93C5FD;
+  --blue-100:#DBEAFE; --blue-50:#EFF6FF;
+  --ink:#0F172A; --ink-2:#334155; --ink-3:#64748B; --ink-4:#94A3B8;
+  --white:#FFFFFF; --line:#E6EDF7; --line-2:#DBE6F5;
+  --shadow:0 10px 30px rgba(30,58,138,.10); --shadow-sm:0 4px 14px rgba(30,58,138,.08);
+  --gold:#D97706; --gold-bg:#FFF7ED; --green:#16A34A; --green-bg:#F0FDF4;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F4F8FE;color:var(--ink);line-height:1.7;word-break:break-word;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:linear-gradient(120deg,var(--blue-900),var(--blue-600));color:#fff;
+  box-shadow:0 4px 18px rgba(30,58,138,.25);}
+.topbar .back{font-size:13px;opacity:.92;white-space:nowrap;padding:6px 8px;border-radius:8px;}
+.topbar .back:active{background:rgba(255,255,255,.15);}
+.topbar .t{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .clock{font-size:12px;font-variant-numeric:tabular-nums;opacity:.95;white-space:nowrap;
+  background:rgba(255,255,255,.14);padding:5px 9px;border-radius:20px;}
+.topbar .dl{font-size:13px;font-weight:600;white-space:nowrap;background:#fff;color:var(--blue-700);
+  padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;cursor:pointer;border:none;}
+.topbar .dl:active{transform:scale(.96);}
+.subnav{position:sticky;top:53px;z-index:55;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;
+  display:flex;gap:6px;padding:8px 12px;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{height:0;}
+.subnav a{font-size:12.5px;color:var(--ink-2);white-space:nowrap;padding:6px 11px;border-radius:18px;
+  background:var(--blue-50);border:1px solid var(--line);}
+.subnav a:active{background:var(--blue-100);}
+#capture{background:#F4F8FE;padding-bottom:10px;}
+.hero{position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,#1E3A8A 0%,#1D4ED8 55%,#2563EB 100%);
+  padding:40px 20px 46px;}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(38px);opacity:.45;}
+.hero .b1{width:230px;height:230px;background:#60A5FA;top:-70px;right:-50px;}
+.hero .b2{width:180px;height:180px;background:#1E40AF;bottom:-70px;left:-40px;}
+.hero .inner{position:relative;max-width:1000px;margin:0 auto;}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:1px;background:rgba(255,255,255,.16);
+  padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.hero h1{font-size:26px;font-weight:800;line-height:1.3;letter-spacing:.5px;}
+.hero .sub{margin-top:10px;font-size:15px;opacity:.92;max-width:680px;}
+.hero .badge{margin-top:18px;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  padding:9px 14px;border-radius:12px;font-size:13px;}
+.hero .badge b{font-size:15px;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px;}
+.sec{padding:30px 0 6px;}
+.sec-head{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+.sec-head .ic{width:38px;height:38px;border-radius:11px;background:var(--blue-100);
+  color:var(--blue-700);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;}
+.sec-head h2{font-size:20px;font-weight:800;color:var(--ink);}
+.sec-head .en{font-size:12px;color:var(--ink-4);font-weight:600;letter-spacing:.5px;}
+.lead{color:var(--ink-2);font-size:15px;margin-bottom:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;
+  box-shadow:var(--shadow-sm);transition:transform .15s;}
+.card:hover{transform:translateY(-3px);}
+.card .ct{font-size:16px;font-weight:800;color:var(--blue-800);margin-bottom:6px;}
+.card .cd{font-size:13.5px;color:var(--ink-2);line-height:1.6;}
+.card .pill{display:inline-block;margin-top:10px;font-size:12px;color:var(--blue-700);
+  background:var(--blue-50);border:1px solid var(--line-2);padding:4px 10px;border-radius:14px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:6px 0 4px;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+.stat:before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue-600),var(--blue-500));}
+.stat .num{font-size:26px;font-weight:800;color:var(--blue-700);font-variant-numeric:tabular-nums;line-height:1.2;}
+.stat .num small{font-size:14px;font-weight:700;}
+.stat .lb{margin-top:6px;font-size:13px;color:var(--ink-2);}
+.stat .sb{margin-top:2px;font-size:11.5px;color:var(--ink-4);}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0;border-radius:14px;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+table.tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px;background:#fff;}
+table.tbl thead th{background:linear-gradient(120deg,var(--blue-800),var(--blue-600));color:#fff;
+  font-weight:700;padding:11px 12px;text-align:left;white-space:nowrap;font-size:13px;}
+table.tbl tbody td{padding:10px 12px;border-top:1px solid var(--line);color:var(--ink-2);vertical-align:top;}
+table.tbl tbody tr:nth-child(even){background:var(--blue-50);}
+table.tbl tbody tr.hl{background:var(--blue-100);}
+table.tbl tbody tr.hl td{color:var(--blue-800);font-weight:600;}
+table.tbl td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+table.tbl th.r{text-align:right;}
+table.tbl td.c{text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap;}
+table.tbl th.c{text-align:center;}
+.tbl-cap{font-size:12.5px;color:var(--ink-4);margin:8px 2px 0;}
+.callout{border-radius:14px;padding:15px 16px;margin:14px 0;font-size:14px;line-height:1.7;
+  display:flex;gap:12px;align-items:flex-start;}
+.callout .ci{font-size:18px;flex:none;line-height:1.4;}
+.callout.info{background:var(--blue-50);border:1px solid var(--line-2);color:var(--ink-2);}
+.callout.key{background:var(--blue-100);border:1px solid var(--blue-300);color:var(--blue-800);font-weight:600;}
+.callout.warn{background:#FFF7ED;border:1px solid #FED7AA;color:#9A3412;}
+.callout.ok{background:var(--green-bg);border:1px solid #BBF7D0;color:#166534;}
+.law{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;box-shadow:var(--shadow-sm);overflow:hidden;}
+.law .lh{padding:12px 16px;background:var(--blue-50);font-weight:800;color:var(--blue-800);font-size:14.5px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.law .lh .yr{font-size:11.5px;color:#fff;background:var(--blue-600);padding:2px 8px;border-radius:8px;}
+.law .lb{padding:12px 16px;font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+.law .lb b{color:var(--blue-800);}
+.foot{margin-top:26px;background:linear-gradient(120deg,var(--blue-900),var(--blue-700));
+  color:#fff;padding:26px 20px 34px;text-align:center;}
+.foot .slogan{font-size:17px;font-weight:800;letter-spacing:1px;}
+.foot .slogan small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:4px;letter-spacing:0;}
+.foot .disc{margin-top:14px;font-size:11.5px;line-height:1.7;opacity:.82;max-width:720px;margin-left:auto;margin-right:auto;}
+@media (max-width:560px){
+  .hero h1{font-size:22px;}
+  .sec-head h2{font-size:18px;}
+  .topbar .clock{display:none;}
+  table.tbl{min-width:520px;}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<input type="hidden" id="pageName" value="新华保险分红专题汇报解读">
+<div class="topbar">
+  <a class="back" href="../../index.html">← 返回</a>
+  <div class="t">新华保险分红专题汇报解读</div>
+  <div class="clock"><span id="clockText">--</span></div>
+  <button class="dl" id="dlBtn" onclick="downloadImage()">⬇ 下载图片</button>
+</div>
+<nav class="subnav"><div class="wrap" style="display:flex;gap:6px;padding:0;"><a href="#regulation">三份监管文件</a><a href="#byproduct">逐产品实现率</a><a href="#byyear">新华逐年总量</a><a href="#peers">9家同业对比</a><a href="#invest">投资配置结构</a><a href="#return">十年收益率</a><a href="#projects">国家级项目</a><a href="#read">这张表怎么读</a></div></nav>
+<div id="capture">
+  <header class="hero"><span class="blob b1"></span><span class="blob b2"></span>
+    <div class="inner"><span class="tag">分红解读 · 专题汇报</span><h1>新华保险分红专题汇报</h1><div class="sub">制度约束 + 逐产品实现率 + 9家同业五年对比 + 投资配置结构 · 数据最全的一份分红材料</div><div class="badge">📜 <b>2020-2024</b>&nbsp; 五年实现率全景 · 数据来自「13精」统计</div></div>
+  </header>
+
+  <section class="sec" id="regulation"><div class="wrap">
+    <div class="sec-head"><div class="ic">📜</div><div><h2>一、先懂规则：分红不是公司想分多少就分多少</h2><div class="en">REGULATORY FRAMEWORK</div></div></div>
+    <p class="lead">客户最大的疑虑是「分红是不是随便画的饼」。答案是：分红的全流程都在监管的硬约束下运行。汇报梳理了三份关键文件，它们分别管「怎么分」「怎么披露」「分多了也要管」。</p>
+    <div class="law">
+      <div class="lh"><span class="yr">2015</span>中国保监会93号文 ·《个人分红保险精算规定》（第五部分：账户价值和盈余分配）</div>
+      <div class="lb"><b>第十六条：</b>保险公司每一会计年度向保单持有人实际分配盈余的比例，<b>不低于当年可分配盈余的70%</b>——大头必须给客户，这是写进规定的硬约束。<br><b>第十七条：</b>分红保险账户要提取<b>分红保险特别储备</b>，逐年累积，权益共同属于保单持有人和股东，用于<b>平滑未来的分红水平</b>——丰年存一点，歉年补一点，分红不是过山车。</div>
+    </div>
+    <div class="law">
+      <div class="lh"><span class="yr">2022</span>中国银保监会24号文 ·《关于一年期以上人身保险产品信息披露规则》</div>
+      <div class="lb"><b>第十条：</b>保险公司应当于每年分红方案宣告后<b>15个工作日内</b>，在官网披露各分红型产品的<b>红利实现率</b>。现金分红披露现金红利实现率；增额红利披露增额红利实现率和终了红利实现率。<br>——所以每家公司的实现率都能在官网查到，本页后面的数据全部有据可查。</div>
+    </div>
+    <div class="law">
+      <div class="lh"><span class="yr">2025</span>国家金融监督总局人身保险监管司374号文 ·《关于分红险分红水平监管意见函》</div>
+      <div class="lb">分红不仅不能少分，<b>分多了也要说明白</b>。存在下列情形之一的，应充分论证拟分红水平的必要性、合理性和可持续性，提交资产负债管理委员会审定：<br>① 拟分红水平对应的投资收益率，超过公司分红账户<b>过去3年平均财务投资收益率和综合投资收益率中较低者</b>的；<br>② 分红保险账户<b>特别储备为负值</b>，或当期分红后特别储备将为负值的；<br>③ 设立不足三年的分红账户，拟分红水平（客户收益率，含预定利率和浮动收益率）超过人身保险业过去3年平均财务收益率（<b>3.20%</b>）的。<br>——这条新规意味着：分红水平要与真实投资能力匹配，不可持续的高分红会被监管叫停。<b>新华的分红是「有约束的真实」，不是「没有上限的承诺」。</b></div>
+    </div>
+    <div class="callout key"><span class="ci">💡</span><div><b>三份文件连起来讲给客户：</b>93号文保证「赚了钱至少70%归客户」；24号文保证「每家都得公开亮成绩单」；374号函保证「不许打肿脸充胖子」。制度设计让分红既有上行的空间，又有可持续的约束——这正是分红险和「刚性兑付幻觉产品」的本质区别。</div></div>
+  </div></section>
+
+  <section class="sec" id="byproduct"><div class="wrap">
+    <div class="sec-head"><div class="ic">📋</div><div><h2>二、逐产品实现率：老产品连续五年交卷</h2><div class="en">PRODUCT-BY-PRODUCT</div></div></div>
+    <p class="lead">汇报披露了新华主要分红产品的逐年实现率。看连续五年的数据，比看单一年份更能说明问题。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>产品名称</th><th class="c">2020年</th><th class="c">2021年</th><th class="c">2022年</th><th class="c">2023年</th><th class="c">2024年</th></tr></thead>
+      <tbody>
+        <tr><td>福享一生终身年金保险（分红型）</td><td class="c">252%</td><td class="c">252%</td><td class="c">226%</td><td class="c">204%</td><td class="c">204%</td></tr>
+        <tr><td>祥瑞一生终身寿险（分红型）</td><td class="c">171%</td><td class="c">171%</td><td class="c">153%</td><td class="c">130%</td><td class="c">130%</td></tr>
+        <tr><td>福如东海B款终身寿险（分红型）</td><td class="c">168%</td><td class="c">168%</td><td class="c">148%</td><td class="c">140%</td><td class="c">140%</td></tr>
+        <tr><td>宏耀世家终身寿险（分红型）</td><td colspan="4" style="text-align:center;color:var(--ink-3);">2024年四季度上线</td><td class="c">114%</td></tr>
+        <tr><td>盛世荣耀智赢版终身寿险（分红型）</td><td colspan="4" style="text-align:center;color:var(--ink-3);">—</td><td class="c">117%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout info"><span class="ci">💡</span><div><b>这张表怎么看：</b>① 老产品五年全部<b>远超100%</b>——演示的目标每年都超额兑现；② 2022-2024年实现率缓步下行（如福享一生252%→204%），这是全行业利率下行周期的共同现象，<b>下行后仍保持在100%以上</b>才是关键；③ 新上线的宏耀世家（114%）、盛世荣耀智赢版（117%）首年即超100%，新的分红账户同样兑现。</div></div>
+  </div></section>
+
+  <section class="sec" id="byyear"><div class="wrap">
+    <div class="sec-head"><div class="ic">📊</div><div><h2>三、新华逐年总量：81款产品的全貌</h2><div class="en">YEAR BY YEAR</div></div></div>
+    <p class="lead">把镜头拉远，看新华全部分红产品的整体分布——不只看明星产品，也看全队列。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th class="c">年份</th><th class="c">分红产品数量</th><th>整体实现率区间</th><th class="c">0-49%</th><th class="c">50-99%</th><th class="c">100-119%</th><th class="c">120-149%</th><th class="c">≥150%</th><th class="c">超100%占比</th></tr></thead>
+      <tbody>
+        <tr><td class="c">2020</td><td class="c">69</td><td>104%-300%</td><td class="c">—</td><td class="c">3</td><td class="c">11</td><td class="c">—</td><td class="c">55</td><td class="c"><b>100.0%</b></td></tr>
+        <tr><td class="c">2021</td><td class="c">73</td><td>104%-300%</td><td class="c">—</td><td class="c">3</td><td class="c">12</td><td class="c">—</td><td class="c">58</td><td class="c"><b>100.0%</b></td></tr>
+        <tr><td class="c">2022</td><td class="c">80</td><td>6%-270%</td><td class="c">10</td><td class="c">1</td><td class="c">6</td><td class="c">16</td><td class="c">47</td><td class="c">86.2%</td></tr>
+        <tr><td class="c">2023</td><td class="c">71</td><td>6%-233%</td><td class="c">11</td><td class="c">4</td><td class="c">12</td><td class="c">14</td><td class="c">30</td><td class="c">78.9%</td></tr>
+        <tr><td class="c">2024</td><td class="c">81</td><td>55%-233%</td><td class="c">—</td><td class="c">16</td><td class="c">17</td><td class="c">17</td><td class="c">31</td><td class="c">80.2%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">数据来自「13精」统计。2024年区间下限55%（2023年为6%），低实现率产品明显收敛。</p>
+    <div class="callout ok"><span class="ci">✅</span><div><b>两个关键读数：</b>① 2020、2021两年，新华全部产品实现率<b>无一低于100%</b>；② 2022-2024虽受行业环境影响，超100%占比仍稳定在78.9%-86.2%，且2024年最低实现率从6%抬升到55%，<b>尾部产品也在收敛</b>。同期补充数据：59款保额分红产品中56款增额红利实现率达100%（平均152%），7款在售现金分红产品全部超100%（平均117%，最高122%）。</div></div>
+  </div></section>
+
+  <section class="sec" id="peers"><div class="wrap">
+    <div class="sec-head"><div class="ic">⚖️</div><div><h2>四、9家同业五年对比：新华的位置</h2><div class="en">PEER COMPARISON</div></div></div>
+    <p class="lead">单看自己不够客观。汇报整理了新华与平安、国寿、太保、太平、泰康、阳光、人保、友邦九家公司2020-2024年的实现率分布，摘出「实现率超100%产品占比」这一核心指标正面对比。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>公司</th><th class="c">2020</th><th class="c">2021</th><th class="c">2022</th><th class="c">2023</th><th class="c">2024</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>新华</td><td class="c">100.0%</td><td class="c">100.0%</td><td class="c">86.2%</td><td class="c">78.9%</td><td class="c">80.2%</td></tr>
+        <tr><td>友邦</td><td class="c">100.0%</td><td class="c">100.0%</td><td class="c">100.0%</td><td class="c">0.0%</td><td class="c">38.0%</td></tr>
+        <tr><td>太平</td><td class="c">100.0%</td><td class="c">100.0%</td><td class="c">100.0%</td><td class="c">0.7%</td><td class="c">6.6%</td></tr>
+        <tr><td>泰康</td><td class="c">100.0%</td><td class="c">20.9%</td><td class="c">23.1%</td><td class="c">0.0%</td><td class="c">16.4%</td></tr>
+        <tr><td>人保</td><td class="c">84.7%</td><td class="c">50.8%</td><td class="c">47.2%</td><td class="c">3.7%</td><td class="c">0.0%</td></tr>
+        <tr><td>太保</td><td class="c">52.1%</td><td class="c">52.5%</td><td class="c">52.5%</td><td class="c">0.0%</td><td class="c">27.4%</td></tr>
+        <tr><td>国寿</td><td class="c">69.8%</td><td class="c">43.4%</td><td class="c">1.0%</td><td class="c">1.0%</td><td class="c">10.7%</td></tr>
+        <tr><td>平安</td><td class="c">40.8%</td><td class="c">41.5%</td><td class="c">42.2%</td><td class="c">0.0%</td><td class="c">9.5%</td></tr>
+        <tr><td>阳光</td><td class="c">—</td><td class="c">27.7%</td><td class="c">30.2%</td><td class="c">17.6%</td><td class="c">18.8%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">指标：当年实现率超100%的产品数量占比。完整数据（各公司产品数量、整体区间、五档分布）见原PDF第3页大表。数据来自「13精」统计。</p>
+    <div class="callout key"><span class="ci">🏆</span><div><b>对比结论：</b>五年看下来，<b>新华是唯一一家没有「断崖年份」的大型公司</b>——2020/2021全队列100%，2022-2024行业普遍跳水时仍守住八成上下的超100%占比。友邦、太平、泰康在2023年都出现占比归零式下滑；平安、国寿连续多年在低位。这正是「新华近5年平均红利实现率156.1%行业领先」这个总量结论背后的结构性原因。</div></div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>客观提醒：</b>实现率受各家演示利率假设差异影响（演示保守的公司实现率天然偏高），横向对比应作参考而非精确排名。同业数据为第三方「13精」统计口径。«同业对比数据建议引用时注明第三方来源»</div></div>
+  </div></section>
+
+  <section class="sec" id="invest"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏦</div><div><h2>五、实现率背后的投资配置结构</h2><div class="en">ASSET ALLOCATION</div></div></div>
+    <p class="lead">分红的钱来自投资。汇报披露了新华资产端的配置结构（数据来源：新华保险官网2025年度报告口径），一句话概括：<b>安全稳健打底，权益增厚，非标极小。</b></p>
+    <div class="stats">
+      <div class="stat"><div class="num">67.9<small>%</small></div><div class="lb">安全稳健类</div><div class="sb">现金2.3% + 定存16% + 债券及债务49.6%</div></div>
+      <div class="stat"><div class="num">21.2<small>%</small></div><div class="lb">权益类</div><div class="sb">基金9.4% + 股票11.8%</div></div>
+      <div class="stat"><div class="num">3.55<small>%</small></div><div class="lb">非标资产</div><div class="sb">绝大多数为AAA级</div></div>
+      <div class="stat"><div class="num">1.84<small>万亿</small></div><div class="lb">投资资产规模（2025年底）</div><div class="sb">全国仅8家万亿级险资</div></div>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="ct">固收底仓：占近七成</div><div class="cd">公司坚持长期资本、耐心资本充实固收底仓，债券及债务类占49.6%——这是分红「可持续」的压舱石。</div><span class="pill">压舱石</span></div>
+      <div class="card"><div class="ct">权益增厚：约两成</div><div class="cd">理性投资、价值投资、长期投资理念，积极布局权益底仓，稳定并增厚投资收益——这是实现率能长期超100%的进攻端。</div><span class="pill">进攻端</span></div>
+      <div class="card"><div class="ct">非标：仅3.55%</div><div class="cd">主要为股权计划、债权投资计划、信托计划、私募股权及未上市股权。存量绝大多数为AAA级，整体信用风险较小——比例小、资质高，不为收益牺牲安全。</div><span class="pill">严格风控</span></div>
+      <div class="card"><div class="ct">投研能力：稀缺资源</div><div class="cd">全国93家寿险公司中只有34家有投研能力，资产规模达万亿的仅8家，新华资管是其中之一，全球IPE排名前100强。</div><span class="pill">8家之一</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="return"><div class="wrap">
+    <div class="sec-head"><div class="ic">📉</div><div><h2>六、十年投资收益率：穿越一轮完整周期</h2><div class="en">10-YEAR RETURNS</div></div></div>
+    <p class="lead">财务投资收益率的十年曲线（2016-2025），比任何单年数字都有说服力。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th class="c">年份</th><th class="c">2016</th><th class="c">2017</th><th class="c">2018</th><th class="c">2019</th><th class="c">2020</th><th class="c">2021</th><th class="c">2022</th><th class="c">2023</th><th class="c">2024</th><th class="c">2025</th><th class="c">十年平均</th></tr></thead>
+      <tbody>
+        <tr><td class="c" style="font-weight:700;">财务投资收益率</td><td class="c">5.1</td><td class="c">5.2</td><td class="c">4.6</td><td class="c">4.9</td><td class="c">5.5</td><td class="c">5.9</td><td class="c">4.3</td><td class="c">1.8</td><td class="c">5.8</td><td class="c">6.6</td><td class="c"><b>4.97%</b></td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">单位：%。数据来自新华保险官网。另有口径：近三年财务投资收益率平均4.7%、综合投资收益率平均5.4%；近十年综合投资收益率平均5.0%。</p>
+    <div class="callout info"><span class="ci">💡</span><div><b>这张曲线讲什么：</b>十年里最难的2023年（1.8%）也能靠特别储备平滑分红（这正是93号文特别储备机制的用途），随后2024年5.8%、2025年6.6%强势回升。<b>长期平均4.97%的财务收益率，覆盖分红险1.75%保底 + 分红演示绰绰有余</b>——分红可持续性的最后一块拼图。</div></div>
+    <div class="callout ok"><span class="ci">✅</span><div>固收与股票的长期业绩补充：固收配置盘2012-2024年化5.6%；股票组合2012-2024年平均收益率8.6%。</div></div>
+  </div></section>
+
+  <section class="sec" id="projects"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏗️</div><div><h2>七、国家级项目投资：收益的实物载体</h2><div class="en">NATIONAL PROJECTS</div></div></div>
+    <p class="lead">得益于强大的股东背景，新华参与了多个国家级项目——这些是收益率数字背后看得见的资产。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">践行「新理念」：国家重大工程</div><div class="cd">中石油管道项目股权投资<b>85亿</b>，累计收益回报<b>170.44%</b>，全周期收益率6.86%；水力、光伏、风力等绿色金融投资<b>316亿</b>；京津冀、长三角、粤港澳大湾区三大经济圈战略投资<b>3500亿</b>。</div><span class="pill">国家工程</span></div>
+      <div class="card"><div class="ct">「新丝路」：一带一路建设</div><div class="cd">参与中法、中意、中英三支中欧双边基金，IRR达<b>5%-23%</b>；与黑石战略合作，通过中投平台投资<b>624处</b>「一带一路」沿线物流资产（覆盖17国），稳定分红 + 基建互联互通。</div><span class="pill">一带一路</span></div>
+      <div class="card"><div class="ct">中国银联股权投资</div><div class="cd">2018年新华出资<b>9.8亿</b>元成为银联股东，截至2024年末回报<b>2.67倍</b>、IRR达<b>17.1%</b>——支付清算命脉的长期红利。</div><span class="pill">金融基建</span></div>
+    </div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>口径提示：</b>银联回报另有材料载「2.52倍、年化14.27%」；中石油管道年化收益率另有材料载「6.6%」。不同材料统计时点可能不同，引用前建议统一核验。«该内容建议后续核验»</div></div>
+  </div></section>
+
+  <section class="sec" id="read"><div class="wrap">
+    <div class="sec-head"><div class="ic">🧭</div><div><h2>八、整份汇报浓缩成三句话</h2><div class="en">TAKEAWAYS</div></div></div>
+    <div class="steps">
+      <div class="st"><b>规则上，分红受三重制度约束</b><br>70%分配底线 + 15个工作日强制披露 + 分红水平须匹配真实投资能力。不是想分多少分多少，也不是想瞒就瞒。</div>
+      <div class="st"><b>数据上，新华五年答卷行业最稳</b><br>老产品五年实现率全部超100%；总量口径连续五年无断崖；9家同业对比中是唯一没有「归零年份」的大型公司；近5年平均156.1%。</div>
+      <div class="st"><b>来源上，投资端撑得起这份分红</b><br>近七成固收打底、两成权益增厚、非标仅3.55%且多为AAA；十年财务收益率平均4.97%，叠加鸿鹄基金、银联、中石油管道等国家级项目。</div>
+    </div>
+    <div class="callout info"><span class="ci">📎</span><div>本页为原PDF《新华保险分红专题汇报fts》（3页）的完整网页化解读，数据未做修改。原始文件：<a href="新华保险分红专题汇报fts.pdf" style="color:var(--blue-700);font-weight:600;text-decoration:underline;">新华保险分红专题汇报fts.pdf</a>（同目录）。相关延伸：2025年实现率背景解读见「红利实现率深度解读」页；投资操作细节见「新华保险投资实力介绍」页。</div></div>
+  </div></section>
+
+  <div class="foot"><div class="slogan">新华保险 保得长久 保得美好<small>NCI 新华保险 · A+H 上市 ·  Fortune 世界500强</small></div><div class="disc">本资料为资料阅读与交流使用，内容依据公开资料整理，仅供理解参考，不构成任何投资建议或收益承诺；红利实现率数据来自第三方「13精」统计及公司官网披露，具体以官方披露为准。分红型产品红利为非保证收益，过往业绩不代表未来表现。</div></div>
+</div>
+<script>
+(function(){
+  var clk=document.getElementById('clockText');
+  function tick(){
+    var n=new Date(),p=function(x){return (x<10?'0':'')+x;};
+    if(clk) clk.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+n.getHours()+'点'+p(n.getMinutes())+'分'+p(n.getSeconds())+'秒';
+    setTimeout(tick,1000);
+  }
+  tick();
+  window.downloadImage=function(){
+    var el=document.getElementById('capture');
+    var btn=document.getElementById('dlBtn');
+    if(!window.html2canvas){alert('图片组件未加载，请联网后重试');return;}
+    if(btn){btn.textContent='生成中…';btn.disabled=true;}
+    html2canvas(el,{scale:2,backgroundColor:'#F4F8FE',useCORS:true,logging:false}).then(function(c){
+      var a=document.createElement('a');
+      a.download=(document.getElementById('pageName')?document.getElementById('pageName').value:'xinhua')+'.png';
+      a.href=c.toDataURL('image/png');a.click();
+      if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}
+    }).catch(function(e){alert('生成失败：'+(e&&e.message?e.message:e));if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}});
+  };
+})();
+</script>
+</body>
+</html>

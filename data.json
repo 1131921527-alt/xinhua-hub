@@ -49,6 +49,12 @@
           "type": "calculator",
           "description": "趸交，6/8年期短期两全险，完整利益演示，可下载计划书图片",
           "url": "calculator-hongxilai.html"
+        },
+        {
+          "name": "宏达人生年金保险（分红型）在线演示",
+          "type": "calculator",
+          "description": "分红型年金利益演示，保险期间至105周岁，支持非个养与个人养老金投保，可下载计划书图片",
+          "url": "calculator-hongda.html"
         }
       ]
     },

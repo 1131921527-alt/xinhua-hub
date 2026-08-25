@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华 Hub V6.0 规划 · 任务分析与实施顺序</title>
+<style>
+  :root{
+    --primary:#1E40AF; --primary-l:#3B82F6; --bg:#F5F7FB; --card:#FFFFFF;
+    --ink:#1E293B; --muted:#64748B; --line:#E2E8F0; --radius:14px;
+    --p0:#DC2626; --p1:#D97706; --p2:#0891B2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;padding:20px;max-width:920px;margin:0 auto}
+  h1{font-size:26px;color:var(--primary);margin:8px 0 4px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .rule{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--radius);padding:14px 18px;margin:18px 0;font-size:14px}
+  .rule b{color:var(--primary)}
+  h2{font-size:19px;margin:28px 0 12px;color:var(--ink);border-left:4px solid var(--primary);padding-left:10px}
+  .task{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .task-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .tid{font-weight:700;font-size:16px}
+  .badge{font-size:12px;font-weight:700;padding:2px 10px;border-radius:20px;color:#fff}
+  .b-p0{background:var(--p0)} .b-p1{background:var(--p1)} .b-p2{background:var(--p2)}
+  .ttitle{font-size:16px;font-weight:600;flex:1}
+  .grid{display:grid;grid-template-columns:96px 1fr;gap:6px 14px;font-size:14px}
+  .grid dt{color:var(--muted);font-weight:600;text-align:right}
+  .grid dd{color:var(--ink)}
+  .grid dd ul{padding-left:18px;margin:2px 0}
+  .risk-h{color:var(--p0);font-weight:700}
+  .order{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:14px 0}
+  .step{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:none}
+  .num{flex:0 0 28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .step-body b{color:var(--primary)}
+  .why{color:var(--muted);font-size:13px;margin-top:2px}
+  .phase{font-size:13px;color:var(--muted);margin:14px 0 6px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}.grid dt{text-align:left}}
+</style>
+</head>
+<body>
+
+<h1>新华 Hub V6.0 规划</h1>
+<div class="sub">任务分析与实施顺序 · 2026-08-07 · 阶段：规划（不执行代码）</div>
+
+<div class="rule">
+  <b>本阶段流程</b>：所有优化任务先输出 5 点（修改目的 / 用户价值 / 影响文件 / 风险 / 验收标准），等泽少确认后再开发。<br>
+  <b>执行节奏</b>：先方案 → 确认 → 开发 → 验收 → 提交。禁止直接修改核心模块。<br>
+  <b>硬前置</b>：<span class="risk-h">T010 验收体系升级未完成前，不允许批量修改演算器。</span><br>
+  <b>禁止</b>：一次修改多个核心模块；任何改动影响已验收演算器。<br>
+  <b>红线（沿用）</b>：不动演算器公式/数据/算法/导出逻辑；样式只改 theme.css / calc-common.css；优先级 手机 &gt; 导出图 &gt; PC。
+</div>
+
+<h2>现状速览（盘点结论）</h2>
+<div class="rule" style="background:#FFF7ED;border-color:#FED7AA">
+  · 演算器 10 款，仅 <b>盈满鑫 1 款</b>达 V5 标准（在线预览实时切换 + 一页通模板），其余 9 款全缺。<br>
+  · 首页 24 个入口，但搜索框位置偏下且只过滤卡片（非全站搜索）；产品入口只放了 6 款，漏 4 款。<br>
+  · 培训中心仅 6 门课，分类不均，有重复指向。<br>
+  · sales-qa.html（55 个 Q&A）与 6 个子页大量重复。<br>
+  · 站内搜索、产品对比页 <b>完全空白</b>（有 search-plan.md 方案未落地）。<br>
+  · 验收体系漏 5 款演算器（宏禧来/宏泰/宏坤/福盛/华彩），且无 Console 错误断言。
+</div>
+
+<h2>P0 · 必须先做</h2>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T001</span><span class="badge b-p0">P0</span><span class="ttitle">演算器单产品迭代升级（一次只做一款）</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>把盈满鑫 V5 标准（在线预览实时切换 + 一页通下载模板）逐款复制到其他演算器。本轮只规划先做 3 款，其余后议；每款走完"开发→验收→复盘→形成模板"再启动下一款。</dd>
+    <dt>用户价值</dt><dd>理财经理常用的前 3 款产品先统一体验，导出图风格一致；每款复盘沉淀模板，降低后续复制成本。</dd>
+    <dt>影响文件</dt><dd>
+      <ul>
+        <li><b>T001-1 宏安世家</b>：calculator-hongan.html</li>
+        <li><b>T001-2 宏愿人生</b>：calculator-hongyuan.html</li>
+        <li><b>T001-3 恒享人生</b>：calculator-hengxiang.html</li>
+      </ul>
+      其余 6 款（hongyu/hongxilai/hongtai/hongkun/fusheng/huacai）本轮不动，等前 3 款模板稳定后再评估。<b>不动公式/数据/算法/导出逻辑。</b>
+    </dd>
+    <dt>风险</dt><dd class="risk-h">高→中。演算器布局/数据结构各异，一页通内容需按产品定制；逐款做能把回归范围锁死在 1 个文件，便于回滚。宏安/宏愿/恒享差距相对可控，恒享已部分接近 V5。</dd>
+    <dt>验收标准</dt><dd>每款：在线预览切换可用、一页通导出图 ≥1500px、手机端 0 横向滚动、导出 PNG 储备期文字+署名 OK、qa 全量 PASS。<b>一款复盘通过，才启动下一款。</b></dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T002</span><span class="badge b-p0">P0</span><span class="ttitle">产品页面标准化 · 先出规范 V1.0</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>建立产品 intro 页统一规范。目前只有 intro-yingmanxin 一个富页，其余产品缺 intro 页或结构不统一。本阶段<b>优先产出《新华Hub产品页面设计规范V1.0》</b>，不急着批量生产页面。</dd>
+    <dt>用户价值</dt><dd>统一"公司底气 / 产品亮点 / 案例 / 投保参数 / 利益演示 / 话术 / 风险"的章节定义、命名、锚点规则、视觉层级；后续所有产品页按同一套规范产出，新人也能快速复制。</dd>
+    <dt>影响文件</dt><dd>新增 docs/新华Hub产品页面设计规范V1.0.md；可能微调 intro-yingmanxin.html 作为规范样例（先确认再动）。theme.css 可加 intro 公共类（属于样式 token，允许）。</dd>
+    <dt>风险</dt><dd class="risk-h">低-中。规范未定稿前不扩页面，风险可控；主要风险是规范本身想得不够全，导致后续返工。需泽少确认规范后再落地。</dd>
+    <dt>验收标准</dt><dd>《新华Hub产品页面设计规范V1.0》文档产出并确认；包含章节清单、锚点命名规则、文案风格、移动端约束、数据标注规范；暂不动其他 intro 页。</dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T003</span><span class="badge b-p0">P0</span><span class="ttitle">首页规划</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>重规划首页首屏，围绕"理财经理每日工作台"（V5 §0）和客户流程四场景，而非按文件分类堆入口。</dd>
+    <dt>用户价值</dt><dd>打开即答五问：今天学什么 / 客户怎么分析 / 哪个产品 / 方案怎么生成 / 话术怎么说；首屏 3 秒可达核心入口。</dd>
+    <dt>影响文件</dt><dd>index.html（1882 行，首屏结构大改）；可能调整 data.json 卡片分类。需保留 4 大入口可达性和现有搜索框/动态渲染逻辑。</dd>
+    <dt>风险</dt><dd class="risk-h">中高。首页是全站流量入口，改动影响导航；产品入口当前只放 6 款漏 4 款，需补全；不能破坏 mobile_scenario_test 的首页检测。</dd>
+    <dt>验收标准</dt><dd>首屏手机端露出核心入口；4 大入口两屏内可达；0 横滚；定位句改为工作台；mobile_scenario_test 首页检测 PASS。</dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T004</span><span class="badge b-p0">P0</span><span class="ttitle">站内搜索方案</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>落地 docs/search-plan.md 方案 A（运行时索引），实现"搜养老→产品/话术/培训"导航型搜索。</dd>
+    <dt>用户价值</dt><dd>资料多了能关键词直达，不用逐级翻菜单；搜"养老/分红/客户异议"秒出相关内容。</dd>
+    <dt>影响文件</dt><dd>新增 assets/data/search-index.json + assets/js/search.js；改 index.html 搜索框接线；可能新增 search.html 结果页。<b>纯新增，不动现有逻辑。</b></dd>
+    <dt>风险</dt><dd class="risk-h">低-中。静态站只能元数据级搜索（可接受，导航型为主）；索引需随内容维护（可脚本半自动生成）。</dd>
+    <dt>验收标准</dt><dd>搜"养老"命中宏愿/养老规划页；"分红"命中红利区+分红险；"客户异议"命中异议页；搜索浮层手机端可用、0 横滚。</dd>
+  </dl>
+</div>
+
+<h2>P1 · 建议跟进</h2>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T005</span><span class="badge b-p1">P1</span><span class="ttitle">培训中心升级</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>培训仅 6 门课、分类不均（知识卡仅 1 门）、有重复（sales-qa 与 prod-qa-handbook 指向同页）。扩充内容体系 + 去重 + 加内容等级⭐。</dd>
+    <dt>用户价值</dt><dd>新人打开知道先学什么（⭐⭐⭐核心），课程覆盖更全，不重复。</dd>
+    <dt>影响文件</dt><dd>training.html + assets/data/training.json；去重涉及 sales-qa 体系（与 T006 交叉）。</dd>
+    <dt>风险</dt><dd class="risk-h">低。数据驱动，改 JSON 即渲染；去重需小心不删兼容旧链接。</dd>
+    <dt>验收标准</dt><dd>课程数提升、分类均衡、无重复指向、内容等级标识、交叉引用产品页；手机端 0 横滚。</dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T006</span><span class="badge b-p1">P1</span><span class="ttitle">销售问答优化</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>sales-qa.html（55 个 Q&A）与 6 个子页大量重复。按 V5 §1.1 去重，每知识点留一版；话术去"销售味"。</dd>
+    <dt>用户价值</dt><dd>找话术不重复、不混乱；表达专业（安全性/确定性/长期规划，禁"保证赚钱/零风险"）。</dd>
+    <dt>影响文件</dt><dd>sales-qa.html + sales-qa-fenhong/gaoke/yiyi/yanglao/chuancheng/hk.html；可能聚合为单窗口（T109 已规划）。</dd>
+    <dt>风险</dt><dd class="risk-h">中。重复内容删除涉及红线"不删可恢复数据"；须先出合并方案再动；不能断旧链接（product-qa-handbook 兼容跳转桩页要留）。</dd>
+    <dt>验收标准</dt><dd>重复块合并方案产出并确认；每 Q&A 唯一；话术无违规绝对词；旧链接兼容跳转；手机端 0 横滚。</dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T007</span><span class="badge b-p1">P1</span><span class="ttitle">产品对比页设计</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>V5 §1.3 要求横向比较中心，目前完全空白。新增产品对比工具。</dd>
+    <dt>用户价值</dt><dd>客户比价时一键对比"宏御 vs 盈满鑫"（缴费方式/期限/收益特点/适合客户/优势），临场不卡壳。</dd>
+    <dt>影响文件</dt><dd>新增 compare.html + assets/js/compare.js + assets/data/compare-data.json；产品页加"去对比"按钮。<b>纯新增。</b></dd>
+    <dt>风险</dt><dd class="risk-h">低。对比数据需人工核实（红线）；表格手机端易溢出需适配。</dd>
+    <dt>验收标准</dt><dd>至少一组产品对比可用；对比维度 5 项齐全；手机端表格不溢出；数据标"待核实"。</dd>
+  </dl>
+</div>
+
+<h2>P2 · 打磨与基建</h2>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T008</span><span class="badge b-p2">P2</span><span class="ttitle">移动端专项检查</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>移动端适配不均（福盛/宏坤/华彩仅 2 个 @media）；演算器 viewport 未锁定缩放。统一断点和触控体验。</dd>
+    <dt>用户价值</dt><dd>每款产品手机体验一致，无双指缩放错位。</dd>
+    <dt>影响文件</dt><dd>各 calculator-*.html 的 @media；theme.css 移动端断点。</dd>
+    <dt>风险</dt><dd class="risk-h">低。纯样式，不动逻辑；但量大需逐页。</dd>
+    <dt>验收标准</dt><dd>所有页手机端 0 横滚；热区 ≥44px；@media 断点统一。</dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T009</span><span class="badge b-p2">P2</span><span class="ttitle">资料索引系统</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>建全站资料索引（与 T004 搜索互补），按内容等级⭐分类导航。</dd>
+    <dt>用户价值</dt><dd>资料全景一目了然，老员工快速查、新人按等级学。</dd>
+    <dt>影响文件</dt><dd>新增索引页/数据；复用 search-index.json。</dd>
+    <dt>风险</dt><dd class="risk-h">低。纯新增。</dd>
+    <dt>验收标准</dt><dd>索引覆盖全站页；等级标识；与搜索互通。</dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T010</span><span class="badge b-p2">P2→P0 硬前置</span><span class="ttitle">自动验收体系升级</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>验收覆盖盲区——5 款演算器（宏禧来/宏泰/宏坤/福盛/华彩）未纳入自动验收和移动端场景测试；无 Console 错误断言。</dd>
+    <dt>用户价值</dt><dd>每次改动有自动安全网，不漏回归；全 10 款演算器都在保护范围内。</dd>
+    <dt>影响文件</dt><dd>qa/capture_acceptance.py（PAGES 加 5 款 + Console 断言）；qa/mobile_scenario_test.py（CALCS 加 5 款）。</dd>
+    <dt>风险</dt><dd class="risk-h">低。只加测试覆盖，不动业务代码。注意 .gitignore 忽略 *.py（capture_acceptance.py / mobile_scenario_test.py 已放行）。</dd>
+    <dt>验收标准</dt><dd>PAGES 覆盖全 10 款演算器；Console 错误断言生效；全量跑 PASS。</dd>
+  </dl>
+</div>
+
+<div class="task">
+  <div class="task-head"><span class="tid">T011</span><span class="badge b-p1">P1</span><span class="ttitle">新华Hub AI知识助手 · 架构规划</span></div>
+  <dl class="grid">
+    <dt>修改目的</dt><dd>为未来"输入客户需求/问题 → 返回产品资料、销售话术、培训内容、方案建议"的 AI 知识助手做架构规划。本阶段<b>只规划不开发</b>。</dd>
+    <dt>用户价值</dt><dd>明确 AI 助手在新华 Hub 中的入口形态、知识来源、召回链路、输出格式和安全边界；避免后续拍脑袋开发导致数据/话术风险。</dd>
+    <dt>影响文件</dt><dd>新增 docs/AI知识助手架构规划.md；可能涉及 data.json、training.json、sales-qa 体系的数据结构梳理（只读梳理，不动文件）。</dd>
+    <dt>风险</dt><dd class="risk-h">低（规划阶段）。主要风险是方案过于激进（如直接上 LLM 生成话术）触碰销售合规红线；需在规划里明确"只召回已有资料，不生成新话术"。</dd>
+    <dt>验收标准</dt><dd>架构规划文档产出；包含：用户输入示例、知识源清单、召回/排序策略、输出模板、入口位置、合规边界、技术选型建议、MVP 范围；泽少确认后封存，待下阶段再开发。</dd>
+  </dl>
+</div>
+
+<h2>实施顺序建议</h2>
+<div class="rule" style="background:#F0FDF4;border-color:#BBF7D0">
+  <b>核心原则</b>：先基建后功能；先标准定调再单点复制；一次只动一个核心模块；绝不影响已验收演算器。<br>
+  理由：T001 要碰多款演算器风险高，必须先用 T010 把验收网补全；T002 先出规范给 T001 一页通内容定调；演算器前 3 款（宏安→宏愿→恒享）各走一套"开发→验收→复盘"；AI 助手 T011 规划可并行，不阻塞主线。
+</div>
+
+<div class="order">
+  <div class="phase">第 0 阶段 · 硬前置（不做完不许动演算器）</div>
+  <div class="step"><div class="num">0</div><div class="step-body"><b>T010 自动验收体系升级</b><span class="badge b-p0" style="margin-left:8px">硬前置</span><div class="why">先把漏的 5 款演算器 + Console 断言补上。<span class="risk-h">T010 未完成前，禁止启动 T001。</span></div></div></div>
+
+  <div class="phase">第一阶段 · 标准定调</div>
+  <div class="step"><div class="num">1</div><div class="step-body"><b>T002 产品页面标准化</b><div class="why">先出《新华Hub产品页面设计规范V1.0》，给 T001 一页通和后续产品页定结构。规范确认前不批量生产页面。</div></div></div>
+
+  <div class="phase">第二阶段 · 演算器单产品迭代（一款一款做）</div>
+  <div class="step"><div class="num">2</div><div class="step-body"><b>T001-1 宏安世家</b><div class="why">先挑 gap 适中的练手；走完开发→验收→复盘→沉淀模板。</div></div></div>
+  <div class="step"><div class="num">3</div><div class="step-body"><b>T001-2 宏愿人生</b><div class="why">复用 T001-1 模板，验证模板可迁移性；一款过了再动这款。</div></div></div>
+  <div class="step"><div class="num">4</div><div class="step-body"><b>T001-3 恒享人生</b><div class="why">恒享已部分接近 V5，作为第三阶段验证"标准化收尾"。</div></div></div>
+  <div class="step"><div class="num">…</div><div class="step-body"><b>其余 6 款后议</b><div class="why">前 3 款稳定后，再评估是否继续复制；本轮不排。</div></div></div>
+
+  <div class="phase">第三阶段 · 体验补全（可与第二阶段并行不同文件）</div>
+  <div class="step"><div class="num">5</div><div class="step-body"><b>T004 站内搜索</b><div class="why">纯新增低风险，与演算器文件不同，可并行早做早受益。</div></div></div>
+  <div class="step"><div class="num">6</div><div class="step-body"><b>T003 首页规划</b><div class="why">等演算器前 3 款统一 + 搜索可用后，首页入口才完整。</div></div></div>
+
+  <div class="phase">第四阶段 · 内容整理</div>
+  <div class="step"><div class="num">7</div><div class="step-body"><b>T006 销售问答优化</b><div class="why">先出合并方案再动；去重与话术专业化独立于演算器。</div></div></div>
+  <div class="step"><div class="num">8</div><div class="step-body"><b>T005 培训中心升级</b><div class="why">与 T006 交叉（sales-qa 重复），建议 T006 后做。</div></div></div>
+  <div class="step"><div class="num">9</div><div class="step-body"><b>T007 产品对比页</b><div class="why">纯新增，客户价值高，可按需提前到第三阶段并行。</div></div></div>
+
+  <div class="phase">第五阶段 · 打磨与规划</div>
+  <div class="step"><div class="num">10</div><div class="step-body"><b>T008 移动端专项</b><div class="why">演算器统一后一并查移动端，避免重复返工。</div></div></div>
+  <div class="step"><div class="num">11</div><div class="step-body"><b>T009 资料索引</b><div class="why">内容稳定后建索引最准，放最后。</div></div></div>
+  <div class="step"><div class="num">并行</div><div class="step-body"><b>T011 AI知识助手规划</b><div class="why">本阶段只产出架构规划文档，不开发；可与主线并行，不阻塞。</div></div></div>
+</div>
+
+<h2>下一步</h2>
+<div class="rule">
+  这份是规划，<b>不执行代码</b>。请泽少确认：<br>
+  1. 调整后的实施顺序是否认可（尤其 T010 硬前置、T002 先出规范、T001 拆为三款单迭代）；<br>
+  2. 是否先从 <b>T010 自动验收体系升级</b>开始——确认后我再出该任务的<b>详细执行方案</b>（具体改哪些文件、怎么改、怎么测），等你点头才动手。
+</div>
+
+<footer>新华 Hub V6.0 规划文档 · 2026-08-07 · 腾讯龙虾🦞</footer>
+
+</body>
+</html>

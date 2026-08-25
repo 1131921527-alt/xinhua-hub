@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>招行在架产品对比分析 · 新华保险资料库</title>
+<style>
+:root{
+  --blue-900:#1E3A8A; --blue-800:#1E40AF; --blue-700:#1D4ED8;
+  --blue-600:#2563EB; --blue-500:#3B82F6; --blue-300:#93C5FD;
+  --blue-100:#DBEAFE; --blue-50:#EFF6FF;
+  --ink:#0F172A; --ink-2:#334155; --ink-3:#64748B; --ink-4:#94A3B8;
+  --white:#FFFFFF; --line:#E6EDF7; --line-2:#DBE6F5;
+  --shadow:0 10px 30px rgba(30,58,138,.10); --shadow-sm:0 4px 14px rgba(30,58,138,.08);
+  --gold:#D97706; --gold-bg:#FFF7ED; --green:#16A34A; --green-bg:#F0FDF4;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F4F8FE;color:var(--ink);line-height:1.7;word-break:break-word;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:linear-gradient(120deg,var(--blue-900),var(--blue-600));color:#fff;
+  box-shadow:0 4px 18px rgba(30,58,138,.25);}
+.topbar .back{font-size:13px;opacity:.92;white-space:nowrap;padding:6px 8px;border-radius:8px;}
+.topbar .back:active{background:rgba(255,255,255,.15);}
+.topbar .t{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .clock{font-size:12px;font-variant-numeric:tabular-nums;opacity:.95;white-space:nowrap;
+  background:rgba(255,255,255,.14);padding:5px 9px;border-radius:20px;}
+.topbar .dl{font-size:13px;font-weight:600;white-space:nowrap;background:#fff;color:var(--blue-700);
+  padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;cursor:pointer;border:none;}
+.topbar .dl:active{transform:scale(.96);}
+.subnav{position:sticky;top:53px;z-index:55;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;
+  display:flex;gap:6px;padding:8px 12px;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{height:0;}
+.subnav a{font-size:12.5px;color:var(--ink-2);white-space:nowrap;padding:6px 11px;border-radius:18px;
+  background:var(--blue-50);border:1px solid var(--line);}
+.subnav a:active{background:var(--blue-100);}
+#capture{background:#F4F8FE;padding-bottom:10px;}
+.hero{position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,#1E3A8A 0%,#1D4ED8 55%,#2563EB 100%);
+  padding:40px 20px 46px;}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(38px);opacity:.45;}
+.hero .b1{width:230px;height:230px;background:#60A5FA;top:-70px;right:-50px;}
+.hero .b2{width:180px;height:180px;background:#1E40AF;bottom:-70px;left:-40px;}
+.hero .inner{position:relative;max-width:1000px;margin:0 auto;}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:1px;background:rgba(255,255,255,.16);
+  padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.hero h1{font-size:27px;font-weight:800;line-height:1.3;letter-spacing:.5px;}
+.hero .sub{margin-top:10px;font-size:15px;opacity:.92;max-width:680px;}
+.hero .badge{margin-top:18px;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  padding:9px 14px;border-radius:12px;font-size:13px;}
+.hero .badge b{font-size:15px;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px;}
+.sec{padding:30px 0 6px;}
+.sec-head{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+.sec-head .ic{width:38px;height:38px;border-radius:11px;background:var(--blue-100);
+  color:var(--blue-700);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;}
+.sec-head h2{font-size:20px;font-weight:800;color:var(--ink);}
+.sec-head .en{font-size:12px;color:var(--ink-4);font-weight:600;letter-spacing:.5px;}
+.lead{color:var(--ink-2);font-size:15px;margin-bottom:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;
+  box-shadow:var(--shadow-sm);transition:transform .15s;}
+.card:hover{transform:translateY(-3px);}
+.card .ct{font-size:16px;font-weight:800;color:var(--blue-800);margin-bottom:6px;}
+.card .cd{font-size:13.5px;color:var(--ink-2);line-height:1.6;}
+.card .pill{display:inline-block;margin-top:10px;font-size:12px;color:var(--blue-700);
+  background:var(--blue-50);border:1px solid var(--line-2);padding:4px 10px;border-radius:14px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:6px 0 4px;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+.stat:before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue-600),var(--blue-500));}
+.stat .num{font-size:26px;font-weight:800;color:var(--blue-700);font-variant-numeric:tabular-nums;line-height:1.2;}
+.stat .num small{font-size:14px;font-weight:700;}
+.stat .lb{margin-top:6px;font-size:13px;color:var(--ink-2);}
+.stat .sb{margin-top:2px;font-size:11.5px;color:var(--ink-4);}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0;border-radius:14px;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+table.tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px;background:#fff;}
+table.tbl thead th{background:linear-gradient(120deg,var(--blue-800),var(--blue-600));color:#fff;
+  font-weight:700;padding:11px 12px;text-align:left;white-space:nowrap;font-size:13px;}
+table.tbl tbody td{padding:10px 12px;border-top:1px solid var(--line);color:var(--ink-2);vertical-align:top;}
+table.tbl tbody tr:nth-child(even){background:var(--blue-50);}
+table.tbl tbody tr.hl{background:var(--blue-100);}
+table.tbl tbody tr.hl td{color:var(--blue-800);font-weight:600;}
+table.tbl td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+table.tbl th.r{text-align:right;}
+.tbl-cap{font-size:12.5px;color:var(--ink-4);margin:8px 2px 0;}
+.callout{border-radius:14px;padding:15px 16px;margin:14px 0;font-size:14px;line-height:1.7;
+  display:flex;gap:12px;align-items:flex-start;}
+.callout .ci{font-size:18px;flex:none;line-height:1.4;}
+.callout.info{background:var(--blue-50);border:1px solid var(--line-2);color:var(--ink-2);}
+.callout.key{background:var(--blue-100);border:1px solid var(--blue-300);color:var(--blue-800);font-weight:600;}
+.callout.warn{background:#FFF7ED;border:1px solid #FED7AA;color:#9A3412;}
+.callout.ok{background:var(--green-bg);border:1px solid #BBF7D0;color:#166534;}
+.steps{counter-reset:s;margin:8px 0;}
+.steps .st{position:relative;padding:12px 14px 12px 52px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow-sm);}
+.steps .st:before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:12px;
+  width:28px;height:28px;border-radius:50%;background:var(--blue-600);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:14px;}
+.steps .st b{color:var(--blue-800);}
+.tier{border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow-sm);}
+.tier .tt{display:flex;align-items:center;gap:8px;font-size:15.5px;font-weight:800;margin-bottom:6px;}
+.tier .rank{font-size:12px;color:#fff;background:var(--blue-600);border-radius:8px;padding:2px 9px;}
+.tier .td{font-size:13.5px;color:var(--ink-2);line-height:1.7;}
+.tier.t1{border-left:5px solid #B45309;background:#FFFBEB;}
+.tier.t1 .rank{background:#B45309;}
+.tier.t2{border-left:5px solid var(--blue-700);}
+.tier.t3{border-left:5px solid var(--ink-3);}
+.tier .rank.xh{background:#166534;}
+.tier.t2 .tt .rank.xh{background:#166534;}
+.foot{margin-top:26px;background:linear-gradient(120deg,var(--blue-900),var(--blue-700));
+  color:#fff;padding:26px 20px 34px;text-align:center;}
+.foot .slogan{font-size:17px;font-weight:800;letter-spacing:1px;}
+.foot .slogan small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:4px;letter-spacing:0;}
+.foot .disc{margin-top:14px;font-size:11.5px;line-height:1.7;opacity:.82;max-width:720px;margin-left:auto;margin-right:auto;}
+@media (max-width:560px){
+  .hero h1{font-size:22px;}
+  .sec-head h2{font-size:18px;}
+  .topbar .clock{display:none;}
+  table.tbl{min-width:520px;}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<input type="hidden" id="pageName" value="招行在架产品对比分析">
+<div class="topbar">
+  <a class="back" href="../../index.html">← 返回</a>
+  <div class="t">招行在架产品对比分析</div>
+  <div class="clock"><span id="clockText">--</span></div>
+  <button class="dl" id="dlBtn" onclick="downloadImage()">⬇ 下载图片</button>
+</div>
+<nav class="subnav"><div class="wrap" style="display:flex;gap:6px;padding:0;"><a href="#caliber">测评口径</a><a href="#overview">产品概览</a><a href="#cashvalue">现金价值</a><a href="#keyindex">关键指标</a><a href="#tier">公司梯队</a><a href="#service">增值服务</a><a href="#strength">宏御竞争力</a><a href="#score">综合评分</a><a href="#others">其他产品</a><a href="#rational">理性看待</a></div></nav>
+<div id="capture">
+  <header class="hero"><span class="blob b1"></span><span class="blob b2"></span>
+    <div class="inner"><span class="tag">产品对比 · 2026年5月</span><h1>招行在架产品对比分析</h1><div class="sub">增额分红终身寿险 · 18款产品全维度对比 · 回本速度 / 现金价值 / 减保规则 / 公司实力 / 增值服务</div><div class="badge">📊 <b>18款产品</b>&nbsp; 测评口径：40岁女士 · 3年交 · 年缴100万</div></div>
+  </header>
+
+  <section class="sec" id="caliber"><div class="wrap">
+    <div class="sec-head"><div class="ic">📋</div><div><h2>一、先说清楚：这份对比是怎么测的</h2><div class="en">METHODOLOGY</div></div></div>
+    <p class="lead">任何产品对比，结论都取决于口径。这份材料统一按以下条件测算，看数字之前必须先记住它。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">投保人：40岁女士</div><div class="cd">年龄和性别直接影响费率与现金价值走势，换一个年龄结论可能不同。</div><span class="pill">统一变量</span></div>
+      <div class="card"><div class="ct">交费：3年期交</div><div class="cd">年缴100万、总保费300万。期缴产品回本速度与交费期强相关，5年交的排名会变化。</div><span class="pill">总保费300万</span></div>
+      <div class="card"><div class="ct">范围：18款产品</div><div class="cd">招商银行在架的增额分红终身寿险，覆盖新华、中信保诚、中意、大都会、友邦、平安、泰康、太保、国寿、人保、中英、阳光等公司。</div><span class="pill">招行渠道在架</span></div>
+      <div class="card"><div class="ct">时点：2026年5月</div><div class="cd">产品在架情况、演示利率、偿付能力数据均为材料制作时点的数据，引用前需确认最新状态。</div><span class="pill">数据时点需核验</span></div>
+    </div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>看对比表之前的三句话：</b>① 表中现金价值多为<b>「保证 + 分红演示」</b>的合并数字，演示不等于实际；② 每家公司分红实现率不同，演示高的产品实际未必高；③ 渠道在架产品会不定期调整，本文数据仅代表材料制作时点。</div></div>
+  </div></section>
+
+  <section class="sec" id="overview"><div class="wrap">
+    <div class="sec-head"><div class="ic">🗂️</div><div><h2>二、产品概览：一张表看懂门槛与规则</h2><div class="en">PRODUCT OVERVIEW</div></div></div>
+    <p class="lead">先把每款产品的<b>起购门槛、保额递增、回本年限、减保限制</b>放在一起。这四项决定了产品「能不能买、多久回本、钱好不好取」。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>公司</th><th>产品</th><th>起购门槛</th><th>保额递增</th><th class="r">回本</th><th>减保限制</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>新华人寿</td><td>宏御世家（分红型）</td><td>趸交5万 / 期缴2万</td><td>1.75% + 分红</td><td class="r">4年</td><td>20%/年 不限次</td></tr>
+        <tr><td>中信保诚</td><td>隽享承金B款</td><td>1万起</td><td>2% + 1.4%分红</td><td class="r">5年</td><td>20%/年</td></tr>
+        <tr><td>中意人寿</td><td>一生挚爱（盛世版）</td><td>1万起</td><td>2% + 1.4%分红</td><td class="r">5年</td><td>20%/年</td></tr>
+        <tr><td>大都会人寿</td><td>都会盛世（尊享版）</td><td>趸交50万 / 期交20万</td><td>1.75% + 分红</td><td class="r">4年</td><td>20%/年 不限次</td></tr>
+        <tr><td>友邦保险</td><td>盛世经典众享版</td><td>1万起</td><td>1.75% + 分红</td><td class="r">6年</td><td>领取不受限</td></tr>
+        <tr><td>平安人寿</td><td>盈尊优享A款</td><td>3年交5万</td><td>1.75% + 1.225%分红</td><td class="r">5年</td><td>20%/年</td></tr>
+        <tr><td>泰康人寿</td><td>步步高E款</td><td>趸交10万 / 期交1万</td><td>1.75% + 分红</td><td class="r">6年</td><td>20%/年</td></tr>
+        <tr><td>太平洋人寿</td><td>鑫福相伴（恒享25A）</td><td>期交3年5万</td><td>1.75% + 分红</td><td class="r">5年</td><td>20%/年 不限次</td></tr>
+        <tr><td>中国人寿</td><td>鸿耀金生（分红型）</td><td>期交1万</td><td>1.75% + 分红</td><td class="r">5年</td><td>20%/年 不限次</td></tr>
+        <tr><td>中国人保</td><td>臻传世家（分红型）</td><td>3年交2万</td><td>2.0% + 分红</td><td class="r">5年</td><td>20%/年</td></tr>
+        <tr><td>中英人寿</td><td>鑫悦未来2号</td><td>趸交5万 / 3年交3万</td><td>2% + 分红</td><td class="r">6年</td><td>20%/年</td></tr>
+        <tr><td>阳光人寿</td><td>臻盈倍致庆典版</td><td>趸交1万 / 期交5千</td><td>1.75% + 1.4%分红</td><td class="r">5年</td><td>20%/年</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">注：高亮行为新华宏御世家。表中为材料重点列示的12款，完整18款数据（含华泰鸿利满满、中宏宏盈人生、国鸿盈一生等）见原始 PPT 附录页。</p>
+    <div class="callout info"><span class="ci">💡</span><div><b>这张表怎么用：</b>客户第一句问的往往是「多少钱能买、多久能拿回来」。宏御世家<b>期缴2万起</b>在同级产品里门槛最低（对比大都会期交20万），配合<b>4年回本 + 20%/年不限次减保</b>，是最容易对中产及以上客户开口的组合。</div></div>
+  </div></section>
+
+  <section class="sec" id="cashvalue"><div class="wrap">
+    <div class="sec-head"><div class="ic">📈</div><div><h2>三、现金价值：回本速度与增长趋势</h2><div class="en">CASH VALUE</div></div></div>
+    <p class="lead">现金价值是客户退保或减保时真正能拿到的钱。先看回本速度，再看各年度增长。</p>
+    <div class="steps">
+      <div class="st"><b>回本速度梯队（3年交口径）</b><br>最快梯队：华泰鸿利满满（3年多）→ 第二梯队：大都会、<b>新华宏御世家、中宏宏盈人生</b>（4年）→ 第三梯队：其余9款（5年）→ 较慢：泰康/中英/友邦（6年）、国鸿盈一生（7年）。</div>
+      <div class="st"><b>第4年末：新华已回本</b><br>总保费300万的计划下，宏御世家第4年末现金价值约302.2万，已越过累计保费——4年回本名副其实。</div>
+      <div class="st"><b>第5年末现金价值排名（总保费300万）</b><br>大都会都会盛世315.1万（超保费5.0%）＞ 华泰鸿利满满314.0万（4.7%）＞ <b>新华宏御世家311.0万（3.7%）</b>＞ 中意一生挚爱308.2万（2.7%）＞ 中信保诚隽享承金307.3万（2.4%）。</div>
+      <div class="st"><b>长期视角</b><br>中信保诚（第50年约1377万）、中意盛世版（约1401万）长期演示收益领先，主要得益于2%保证利率 + 1.4%分红的演示结构——但演示高不等于拿得多，要看各家公司<b>历史分红实现率</b>。</div>
+    </div>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>年度</th><th class="r">新华宏御世家</th><th class="r">中信保诚B款</th><th class="r">中意盛世版</th><th class="r">大都会尊享</th><th class="r">平安盈尊优享</th><th class="r">友邦盛世经典</th></tr></thead>
+      <tbody>
+        <tr><td>第5年末</td><td class="r"><b>311.0万</b></td><td class="r">307.3万</td><td class="r">308.2万</td><td class="r">315.1万</td><td class="r">300.2万</td><td class="r">301.9万</td></tr>
+        <tr><td>第10年末</td><td class="r"><b>359.4万</b></td><td class="r">362.6万</td><td class="r">374.2万</td><td class="r">369.2万</td><td class="r">346.9万</td><td class="r">350.2万</td></tr>
+        <tr><td>第20年末</td><td class="r"><b>479.7万</b></td><td class="r">505.1万</td><td class="r">520.8万</td><td class="r">506.7万</td><td class="r">463.4万</td><td class="r">490.5万</td></tr>
+        <tr><td>第30年末</td><td class="r"><b>643.0万</b></td><td class="r">705.6万</td><td class="r">726.9万</td><td class="r">697.8万</td><td class="r">621.1万</td><td class="r">668.7万</td></tr>
+        <tr><td>第50年末</td><td class="r"><b>1,155.7万</b></td><td class="r">1,377.0万</td><td class="r">1,401.2万</td><td class="r">1,324.2万</td><td class="r">1,116.4万</td><td class="r">1,236.0万</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">口径：40岁女士、3年交、年缴100万。含分红演示部分，单位：万元。</p>
+    <div class="callout key"><span class="ci">🔍</span><div><b>怎么跟客户讲这张表：</b>新华宏御世家是「前快后稳」型——短期（第4-5年）表现优秀，长期增长稳健不激进；中信保诚、中意是「前慢后快」型——长期演示数字漂亮，但演示口径是2%+1.4%，能否兑现取决于各自分红实现率。两类产品没有绝对好坏，取决于客户资金规划是「中短期要灵活」还是「二三十年不动」。</div></div>
+  </div></section>
+
+  <section class="sec" id="keyindex"><div class="wrap">
+    <div class="sec-head"><div class="ic">🔧</div><div><h2>四、三个关键指标：递增率 · 减保 · 贷款利率</h2><div class="en">KEY INDEX</div></div></div>
+    <p class="lead">除了现金价值，这三个指标直接决定产品用起来的手感。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">保额递增率：1.75% vs 2.0%</div><div class="cd">新华为 1.75% + 分红（行业主流）；中信保诚、中意、太平、中英、人保为 2.0% 保证。保证利率差 0.25%，但分红才是长期收益的关键变量——新华历史分红实现率稳定（近5年平均156.1%，详见分红专题页）。</div><span class="pill">行业主流</span></div>
+      <div class="card"><div class="ct">减保灵活性：20%/年 不限次</div><div class="cd">最灵活的是中宏、友邦（领取不受限）；宏御世家为每年20%基本保额、不限次数，且红利可选领取（累计生息或交清增额）。华泰、平安等为20%/年。减保灵活意味着用钱节奏自己掌握。</div><span class="pill">不限次 + 红利可选</span></div>
+      <div class="card"><div class="ct">保单贷款利率：4.5%</div><div class="cd">最优惠：阳光（大单可至4.0%）；较低：华泰（4.2%）；主流：新华、太保、国寿、大都会、友邦均4.5%；偏高：中英5.48%、泰康/太平5%。不想减保时，保单贷款是不动本金周转资金的方式。</div><span class="pill">行业主流水平</span></div>
+    </div>
+    <div class="callout ok"><span class="ci">✅</span><div><b>小结：</b>宏御世家三项关键指标都在行业主流偏优区间——递增率主流、减保灵活度第一梯队（不限次）、贷款利率不高不低，没有明显短板。</div></div>
+  </div></section>
+
+  <section class="sec" id="tier"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏛️</div><div><h2>五、公司实力梯队与偿付能力</h2><div class="en">COMPANY TIER</div></div></div>
+    <p class="lead">分红险是一张二三十年的长期契约，公司本身的实力和安全性，重要性不亚于产品数字。</p>
+    <div class="tier t1"><div class="tt"><span class="rank">超一线</span>世界500强 TOP100 · 央企巨头</div><div class="td">中国人寿（500强第54位 · 副部级央企）、中国平安（500强第33位 · 全球保险资产第一）、太平洋人寿（500强第251位 · A+H+L三地上市）。</div></div>
+    <div class="tier t2"><div class="tt"><span class="rank">第一梯队</span>头部上市险企 <span class="rank xh">新华在此</span></div><div class="td"><b>新华保险（A+H上市 · 央企控股 · 中投直管）</b>、中国人保（新中国第一家保险公司 · 财政部控股）。老牌大公司背景，资产安全性和品牌公信力有保障。</div></div>
+    <div class="tier t3"><div class="tt"><span class="rank">第二梯队</span>合资 / 实力险企</div><div class="td">友邦、泰康、中信保诚、中意、中英、大都会、中宏、阳光。其中友邦偿付能力极为突出，泰康养老社区网络最大。</div></div>
+    <div class="tier t3"><div class="tt"><span class="rank">第三梯队</span>中小型公司</div><div class="td">华泰人寿、国鸿。产品数字可以做得激进，但公司规模与品牌知名度有限。</div></div>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>公司</th><th class="r">综合偿付能力</th><th class="r">核心偿付能力</th><th>风险评级</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>新华保险</td><td class="r">211.47%</td><td class="r">181%</td><td>AA</td></tr>
+        <tr><td>中国人寿</td><td class="r">207.76%</td><td class="r">153.34%</td><td>AAA</td></tr>
+        <tr><td>中国平安</td><td class="r">236%</td><td class="r">181%</td><td>A</td></tr>
+        <tr><td>太平洋人寿</td><td class="r">215%</td><td class="r">136%</td><td>AAA</td></tr>
+        <tr><td>友邦保险</td><td class="r">413.48%</td><td class="r">280.16%</td><td>AAA</td></tr>
+        <tr><td>中信保诚</td><td class="r">256%</td><td class="r">112.5%</td><td>BBB</td></tr>
+        <tr><td>泰康人寿</td><td class="r">321.20%</td><td class="r">224.38%</td><td>AA</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">数据为材料标注的「2025年最新」，各公司偿付能力按季度披露，引用前建议核验最新一期报告。</p>
+    <div class="callout info"><span class="ci">💡</span><div><b>偿付能力怎么看：</b>监管红线是综合偿付能力100%、核心50%。新华综合211.47%、核心181%、AA评级，处于充足且稳健的水平。值得注意的是中信保诚核心偿付能力112.5%相对偏紧、评级BBB——该公司产品演示数字虽高，安全边际指标却是第一梯队里偏弱的，这是对比时容易忽略的一面。</div></div>
+  </div></section>
+
+  <section class="sec" id="service"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏥</div><div><h2>六、增值服务与康养布局对比</h2><div class="en">VALUE-ADDED SERVICE</div></div></div>
+    <p class="lead">中高净值客户买大额保单，买的往往不只是数字，还有背后的服务体系。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>公司</th><th>健康管理</th><th>高客权益</th><th>养老布局</th><th>其他特色</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>新华保险</td><td>医疗绿通 + 红圈所律师 + 视频问诊 + 专家会诊</td><td>瑞中5级 + 新华尊3级（新钻/蓝钻/黑钻）</td><td>16城21社区 · 10城11旅居 · 自有康复医院</td><td>央企控股 · 1700+分支机构</td></tr>
+        <tr><td>中国平安</td><td>三私一检：私人医生/教练/营养师</td><td>金钻/黑钻私享服务</td><td>8城高端康养 · 居家三位一体管家</td><td>综合金融集团 · 全球品牌价值第一</td></tr>
+        <tr><td>泰康人寿</td><td>重疾绿通 + 海外二诊 + MR肿瘤筛查</td><td>保费门槛低，1万起享绿通</td><td>37城46项目 · 24城27社区 · 行业最大网络</td><td>连续6年500强 · 管理资产4.5万亿</td></tr>
+        <tr><td>太平洋</td><td>健享家7级会员体系</td><td>3000万以上5人共享全球医疗</td><td>太保家园13城15项目</td><td>500强第251位 · 三地上市</td></tr>
+        <tr><td>中国人寿</td><td>5级VIP体系 · 免疫力提升/亲子美育</td><td>1500万总保费重疾管理版服务</td><td>—</td><td>500强第54位 · 副部级央企</td></tr>
+        <tr><td>太平人寿</td><td>美年大健康体检 · 一站式医疗</td><td>多级会员体系</td><td>25省56市70家 · 行业最大之一</td><td>95年历史 · 四大保险央企</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout key"><span class="ci">🎯</span><div><b>服务对比的结论：</b>泰康胜在养老社区数量（37城最大网络），平安胜在综合金融；新华的差异化在于<b>「16城21家康养社区 + 10城11个旅居项目 + 自有北京康复医院」</b>的实体布局，加上瑞中、新华尊双高客权益体系——在康养实体供给上处于行业第一梯队。</div></div>
+  </div></section>
+
+  <section class="sec" id="strength"><div class="wrap">
+    <div class="sec-head"><div class="ic">💎</div><div><h2>七、宏御世家核心竞争力</h2><div class="en">CORE COMPETITIVENESS</div></div></div>
+    <p class="lead">把前面所有维度收拢，宏御世家的竞争力可以浓缩成六个标签。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">A+ 品牌实力</div><div class="cd">老六家头部险企，A+H股同步上市，中投公司直管，中央汇金 + 宝武控股。</div><span class="pill">第一梯队</span></div>
+      <div class="card"><div class="ct">4年回本速度</div><div class="cd">300万总保费第4年末现价约302.2万，全部18款产品中排前4，资金周转效率高。</div><span class="pill">前4名</span></div>
+      <div class="card"><div class="ct">20% 减保灵活</div><div class="cd">每年20%不限次，红利可选累计生息或交清增额，流动性优势明显。</div><span class="pill">不限次</span></div>
+      <div class="card"><div class="ct">16+10 康养布局</div><div class="cd">16城21家康养社区、10城11个旅居项目、自有北京康复医院、60家顶尖医疗合作。</div><span class="pill">实体康养</span></div>
+      <div class="card"><div class="ct">AA 经营稳健</div><div class="cd">偿付能力211.47%远超监管红线，央企控股资产安全，历史分红稳定可靠。</div><span class="pill">偿付211%</span></div>
+      <div class="card"><div class="ct">2万 门槛亲民</div><div class="cd">趸交仅5万起、期缴2万起，对比同级别产品门槛大幅降低。</div><span class="pill">同级最低</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="score"><div class="wrap">
+    <div class="sec-head"><div class="ic">⭐</div><div><h2>八、综合评分</h2><div class="en">OVERALL SCORE</div></div></div>
+    <p class="lead">材料对宏御世家做了八个维度的评分，五星制。评分是材料观点，供参考。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>评估维度</th><th>评分</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>品牌实力</td><td>★★★★★</td><td>老六家，央企控股，A+H上市，全国1700+分支机构</td></tr>
+        <tr><td>回本速度</td><td>★★★★☆</td><td>4年回本，位列18款产品前4名</td></tr>
+        <tr><td>现金价值（短期）</td><td>★★★★☆</td><td>第5年311万，排名前五</td></tr>
+        <tr><td>现金价值（长期）</td><td>★★★☆☆</td><td>中等水平，稳健不激进</td></tr>
+        <tr><td>减保灵活性</td><td>★★★★☆</td><td>20%/年不限次 + 红利灵活支取</td></tr>
+        <tr><td>增值服务</td><td>★★★★★</td><td>瑞中+新华尊双体系，16城康养全国领先</td></tr>
+        <tr><td>起购门槛</td><td>★★★★★</td><td>趸交5万/期缴2万，同级别最低</td></tr>
+        <tr><td>公司安全性</td><td>★★★★★</td><td>央企控股，偿付能力211%，AA评级</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout ok"><span class="ci">✅</span><div><b>材料结论：</b>宏御世家适合<b>看重品牌安全性、希望短期回本并享受高品质康养服务的中高净值客户</b>。翻译成大白话：钱要放得放心（央企+AA）、不想锁太久（4年回本）、还想顺手拿到康养服务资源——这三样都占的客户，就是它的目标客群。</div></div>
+  </div></section>
+
+  <section class="sec" id="others"><div class="wrap">
+    <div class="sec-head"><div class="ic">⚖️</div><div><h2>九、其他产品的亮点与短板（客观版）</h2><div class="en">FAIR VIEW</div></div></div>
+    <p class="lead">好的对比不能只讲自家好。每款产品都有自己命中的人群，也有需要提醒客户的注意事项。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>产品</th><th>核心优势</th><th>适合人群</th><th>注意事项</th></tr></thead>
+      <tbody>
+        <tr><td>华泰鸿利满满</td><td>3年最快回本，贷款利率4.2%</td><td>追求极致回本速度</td><td>公司规模较小，品牌知名度有限</td></tr>
+        <tr><td>中信保诚B款</td><td>长期现价极高，第50年约1377万</td><td>长期财富传承</td><td>核心偿付能力112.5%偏紧，风险评级BBB</td></tr>
+        <tr><td>中意一生挚爱</td><td>投资收益率行业领先，长期收益最高</td><td>追求极致长期收益</td><td>贷款利率4.8%偏高</td></tr>
+        <tr><td>友邦盛世经典</td><td>偿付能力413%第一，AAA评级，减保不受限</td><td>追求最高安全性</td><td>保额递增1.75%，回本需6年</td></tr>
+        <tr><td>平安盈尊优享</td><td>综合金融生态，居家养老三位一体</td><td>看重综合金融+养老</td><td>长期现价表现偏弱</td></tr>
+        <tr><td>泰康步步高</td><td>泰康之家37城最大养老社区网络</td><td>养老社区需求明确</td><td>回本需6年，贷款利率5%偏高</td></tr>
+        <tr><td>阳光臻盈倍致</td><td>贷款利率最低，大单可至4.0%</td><td>预算有限需保单贷款</td><td>公司品牌力一般</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout info"><span class="ci">💡</span><div><b>为什么敢把别家产品的优势列出来：</b>客户在银行货架前本来就能看到这些产品。主动讲清楚「每款产品命中的场景」，比回避对比更能建立信任——而宏御世家在「品牌+回本+门槛+康养」四项的均衡性，是它在这张货架上最稳的位置。</div></div>
+  </div></section>
+
+  <section class="sec" id="rational"><div class="wrap">
+    <div class="sec-head"><div class="ic">🧭</div><div><h2>十、理性看待这份对比</h2><div class="en">DISCLAIMER</div></div></div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>演示利益 ≠ 实际收益。</b>表中长期现金价值含分红演示部分，分红取决于公司实际投资表现。中信保诚、中意的演示结构（2%+1.4%）数字天然更高，但新华近5年平均红利实现率156.1%的行业记录，是把「演示」变成「实际」的关键背书。两类数字不能直接横比。</div></div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>数据时点：</b>本页数据出自2026年5月制作的对比材料。偿付能力按季披露、在架产品不定期调整、演示利率受监管政策影响——向客户引用任何数字前，请核验最新一期官方披露。</div></div>
+    <div class="callout info"><span class="ci">📌</span><div>本页为原 PPT（12页）的完整网页化解读，未修改任何数据。原始文件：<a href="招行在架产品对比分析.pptx" style="color:var(--blue-700);font-weight:600;text-decoration:underline;">招行在架产品对比分析.pptx</a>（同目录）。</div></div>
+  </div></section>
+
+  <div class="foot"><div class="slogan">新华保险 保得长久 保得美好<small>NCI 新华保险 · A+H 上市 ·  Fortune 世界500强</small></div><div class="disc">本资料为资料阅读与交流使用，内容依据公开资料整理，仅供理解参考，不构成任何投资建议或收益承诺；具体保险责任、利益演示及减保规则等均以产品条款、保险合同及监管披露为准。分红型产品红利为非保证收益，过往业绩不代表未来表现。同业产品对比数据引自第三方材料，可能存在口径差异。</div></div>
+</div>
+<script>
+(function(){
+  var clk=document.getElementById('clockText');
+  function tick(){
+    var n=new Date(),p=function(x){return (x<10?'0':'')+x;};
+    if(clk) clk.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+n.getHours()+'点'+p(n.getMinutes())+'分'+p(n.getSeconds())+'秒';
+    setTimeout(tick,1000);
+  }
+  tick();
+  window.downloadImage=function(){
+    var el=document.getElementById('capture');
+    var btn=document.getElementById('dlBtn');
+    if(!window.html2canvas){alert('图片组件未加载，请联网后重试');return;}
+    if(btn){btn.textContent='生成中…';btn.disabled=true;}
+    html2canvas(el,{scale:2,backgroundColor:'#F4F8FE',useCORS:true,logging:false}).then(function(c){
+      var a=document.createElement('a');
+      a.download=(document.getElementById('pageName')?document.getElementById('pageName').value:'xinhua')+'.png';
+      a.href=c.toDataURL('image/png');a.click();
+      if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}
+    }).catch(function(e){alert('生成失败：'+(e&&e.message?e.message:e));if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}});
+  };
+})();
+</script>
+</body>
+</html>

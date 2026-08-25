@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华 Hub · 内容资产审计报告（2026-08-06）</title>
+<style>
+:root{--blue:#1E40AF;--blue2:#2563EB;--bg:#F8FAFC;--card:#fff;--gray:#64748B;--line:#E2E8F0;--amber:#F59E0B;--red:#DC2626;--green:#16A34A;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:#1E293B;line-height:1.8;}
+.wrap{max-width:960px;margin:0 auto;padding:24px 18px 60px;}
+.hero{background:linear-gradient(135deg,#1E3A5F,#2563EB,#1E40AF);color:#fff;border-radius:16px;padding:30px 26px;margin-bottom:22px;}
+.hero h1{font-size:25px;font-weight:800;margin-bottom:6px;}
+.hero p{font-size:13px;opacity:.9;}
+.section{background:var(--card);border-radius:14px;padding:22px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.section h2{font-size:19px;font-weight:800;color:var(--blue);margin-bottom:12px;display:flex;align-items:center;gap:8px;border-left:5px solid var(--blue);padding-left:10px;}
+.section h3{font-size:15px;font-weight:700;color:#1D4ED8;margin:16px 0 8px;}
+.note{background:#EFF6FF;border:1px solid #93C5FD;border-radius:10px;padding:12px 14px;font-size:13px;color:#1E40AF;margin:10px 0;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0;}
+thead th{background:var(--blue);color:#fff;padding:10px 8px;text-align:left;font-weight:700;}
+tbody td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+tbody tr:nth-child(even){background:#F8FAFC;}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700;}
+.t-red{background:#FEE2E2;color:var(--red);}
+.t-amber{background:#FEF3C7;color:#B45309;}
+.t-green{background:#DCFCE7;color:var(--green);}
+.t-gray{background:#F1F5F9;color:var(--gray);}
+ul{margin:8px 0 8px 20px;} li{margin:4px 0;}
+.big{font-size:30px;font-weight:800;color:var(--blue);}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:10px 0;}
+.kpi{background:#EFF6FF;border-radius:10px;padding:14px;text-align:center;}
+.kpi .v{font-size:22px;font-weight:800;color:var(--blue);}
+.kpi .l{font-size:12px;color:var(--gray);margin-top:3px;}
+pre{background:#0F172A;color:#E2E8F0;padding:12px;border-radius:8px;overflow:auto;font-size:12px;}
+.footer{text-align:center;padding:18px;font-size:12px;color:var(--gray);line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>📋 新华 Hub · 内容资产审计报告</h1>
+  <p>审计日期：2026-08-06 ｜ 范围：xinhua-hub 全站静态内容 ｜ 性质：<b>仅审核、未修改任何代码</b></p>
+  <p>方法论：解析 data.json 导航源 → 断链/重复/孤儿页扫描 → 小页面空壳体检 → 全站正文 AI 腔/口语残留/遗留标记扫描 → 抽样精读</p>
+</div>
+
+<!-- 概览 -->
+<div class="section">
+  <h2>📊 一、审计概览（KPI）</h2>
+  <div class="grid2">
+    <div class="kpi"><div class="v">15</div><div class="l">导航分类</div></div>
+    <div class="kpi"><div class="v">58</div><div class="l">导航条目（data.json）</div></div>
+    <div class="kpi"><div class="v">40</div><div class="l">根目录 HTML 文件</div></div>
+    <div class="kpi"><div class="v">0</div><div class="l">断链（url 全部存在）</div></div>
+    <div class="kpi"><div class="v">0</div><div class="l">重复导航条目</div></div>
+    <div class="kpi"><div class="v">0</div><div class="l">空分类</div></div>
+    <div class="kpi"><div class="v">16</div><div class="l">导航未挂载的根页面</div></div>
+    <div class="kpi"><div class="v">3</div><div class="l">已发布页残留"待补/待核"标记</div></div>
+  </div>
+  <div class="note">✅ <b>结论先行</b>：站点链接结构是健康的（无断链、无重复、无空分类），不存在"空页面/标题有正文空"的硬伤。真正的问题在<b>结构组织（仓库式而非知识体系）</b>与<b>少量未闭环的内容标记</b>，属于"产品经理式整理"范畴，不影响上线使用。</div>
+</div>
+
+<!-- 内容完整性 -->
+<div class="section">
+  <h2>🔍 二、内容完整性</h2>
+
+  <h3>2.1 链接完整性 —— 通过</h3>
+  <p>data.json 共 58 条导航 url，逐一校验磁盘文件存在性：<b>0 条断链</b>；逐条比对分类归属：<b>0 条重复挂载</b>（每个页面只出现在 1 个分类下）。files/ 下的 PDF/Excel/图片资源引用亦全部存在。</p>
+
+  <h3>2.2 小页面空壳体检 —— 通过（无空壳）</h3>
+  <p>对体积偏小的页面逐一精读正文，结论是<b>均为真实内容页，非空壳</b>：</p>
+  <table>
+    <thead><tr><th>文件</th><th>体积</th><th>是否导航挂载</th><th>实际内容</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>fuxing.html</td><td>3.9K</td><td>✅ 操作流程</td><td>保单复效二维码+分步指引+平台区分</td><td><span class="tag t-green">正常</span></td></tr>
+      <tr><td>huifang.html</td><td>7.1K</td><td>✅ 操作流程</td><td>电子回执回访链接+安卓/iOS 提示+流程图</td><td><span class="tag t-green">正常</span></td></tr>
+      <tr><td>jujia.html</td><td>6.7K</td><td>✅ 增值服务</td><td>居家养老护理包 图片/PDF 双视图切换器</td><td><span class="tag t-green">正常</span></td></tr>
+      <tr><td>product-qa-handbook.html</td><td>1.5K</td><td>⚠️ 未挂载</td><td>合并重定向页（自动跳 sales-qa.html）</td><td><span class="tag t-gray">遗留重定向</span></td></tr>
+      <tr><td>training.html</td><td>7.1K</td><td>⚠️ 未挂载</td><td>培训中心页（fetch assets/data/training.json）</td><td><span class="tag t-amber">见 3.2</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.3 孤儿页面（文件在、导航没挂）—— 16 个，分三类</h3>
+  <p>40 个根目录 HTML 中，仅 24 个被 data.json 挂载为导航条目。其余 16 个需分类处置：</p>
+  <table>
+    <thead><tr><th>类别</th><th>文件</th><th>说明与建议</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag t-gray">合理存在</span></td><td>index.html<br>mockup-v2.html / mockup-v2-revised.html / preview.html</td><td>index 是站点入口；mockup/preview 为设计稿/开发产物，本就不该进导航。<b>无需处理</b>。</td></tr>
+      <tr><td><span class="tag t-gray">遗留重定向</span></td><td>product-qa-handbook.html</td><td>已合并到销售问答中心，仅做跳转。建议保留或择机删除（确认无外链后）。</td></tr>
+      <tr><td><span class="tag t-amber">导航缺口</span></td><td>calculator-fusheng.html<br>calculator-hongkun.html<br>calculator-hongtai.html<br>calculator-huacai.html</td><td>4 个<b>已完工演算器</b>（32K–46K，含完整测算），目前仅被 sales-qa 页深度链接，<b>未进入顶部"产品测算"导航</b>。建议：要么补挂到产品测算，要么确认是暂未上架产品后标注草稿。</td></tr>
+      <tr><td><span class="tag t-amber">双入口冗余</span></td><td>training.html</td><td>培训中心页被 intro 页交叉链接，但与 data.json「培训资料」分类（2 个 PPT 链接）是<b>并行双入口</b>。见 §3.2。</td></tr>
+      <tr><td><span class="tag t-green">深度可达</span></td><td>sales-qa-chuancheng / -fenhong / -gaoke / -hk / -yanglao / -yiyi .html</td><td>6 个问答子页被 sales-qa.html 内部链接引用，用户可达，只是非顶部条目。<b>可接受</b>，但建议在问答中心内做清晰入口。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.4 已发布页残留"未闭环"标记 —— 需清理（3 处）</h3>
+  <table>
+    <thead><tr><th>文件</th><th>残留标记</th><th>位置/性质</th><th>风险</th></tr></thead>
+    <tbody>
+      <tr><td>sales-qa.html</td><td>"待补充" ×2</td><td>问答中心内 2 个板块标题写着"待补充"</td><td><span class="tag t-amber">读者可见的未完成板块</span></td></tr>
+      <tr><td>intro-yingmanxin.html</td><td>"固定保证利益1.0%~1.2%待条款核实"</td><td>第 237 行橙色备注框，对读者可见</td><td><span class="tag t-amber">内部核查 TODO 泄漏到发布页</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 网站结构 -->
+<div class="section">
+  <h2>🗂️ 三、网站结构（仓库式 → 知识体系）</h2>
+  <p>当前 15 个分类中，<b>产品相关类目被拆成 6 个孤岛</b>，呈现"文件仓库"而非"知识导航"特征：</p>
+  <table>
+    <thead><tr><th>产品相关分类</th><th>条目数</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>产品测算</td><td>6</td><td>演算器（仅 6 款，漏挂 4 款，见 §2.3）</td></tr>
+      <tr><td>产品介绍</td><td>2</td><td>知识卡 + 盈满鑫解读</td></tr>
+      <tr><td>产品对比</td><td>1</td><td>投保年龄/起售金额图</td></tr>
+      <tr><td>产品规则</td><td>12</td><td>条款文字版/PDF/PPT/减保规则</td></tr>
+      <tr><td>演算表</td><td>10</td><td>Excel 原文件</td></tr>
+      <tr><td>分红资料</td><td>1</td><td>分红专题汇报 PDF</td></tr>
+    </tbody>
+  </table>
+  <div class="note">⚠️ 用户感知准确：客户想找一个产品的"卖点/规则/测算/对比"，要在 6 个并列分类里跳来跳去。这正是"仓库不是知识体系"的典型症状。</div>
+
+  <h3>3.1 建议的 APP 式四大中心重组</h3>
+  <table>
+    <thead><tr><th>中心</th><th>合并来源分类</th><th>整合逻辑</th></tr></thead>
+    <tbody>
+      <tr><td><b>📦 产品中心</b></td><td>产品测算 + 产品介绍 + 产品对比 + 分红资料</td><td>以"产品"为主线，每个产品聚合：演算器 / 解读 / 对比 / 条款入口</td></tr>
+      <tr><td><b>💬 销售中心</b></td><td>产品答疑 + 销售问答子页 + 手工单模板 + 合同模板</td><td>以"成交动作"为主线：话术 / 答疑 / 出单物料 / 合同</td></tr>
+      <tr><td><b>📚 学习中心</b></td><td>红利实现率 + 保险知识卡 + 培训资料 + training.html</td><td>以"学习成长"为主线：红利知识 / 通识卡 / 培训课程</td></tr>
+      <tr><td><b>🛠️ 工具中心</b></td><td>产品规则（条款查询）+ 操作流程 + 演算表 + 增值服务</td><td>以"随时查/随时用"为主线：条款 / 操作 SOP / 演算表 / 增值服务</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--gray)">注：以上是<b>导航分组建议</b>，不动底层文件。data.json 重排即可见效，无需改页面代码。原"公司介绍"可置顶为全局入口。</p>
+
+  <h3>3.2 培训双入口冗余（明确问题）</h3>
+  <p>当前存在两套培训入口：① data.json「培训资料」挂 2 个 PPT 链接（files/公司介绍/*.html）；② training.html 基于 assets/data/training.json 的卡片式培训中心（被 intro 页链接）。两者内容定位重叠、入口分散。建议二选一并入「学习中心」。</p>
+</div>
+
+<!-- AI 内容质量 -->
+<div class="section">
+  <h2>🤖 四、AI 转换内容质量</h2>
+  <p>全站正文（剥离 script/style 后）扫描<b>AI 腔短语</b>（综上所述/值得注意的是/毋庸置疑…）与<b>口语录音残留</b>（嗯/那个/就是说/对吧…），并对代表页抽样精读：</p>
+
+  <h3>4.1 扫描结果</h3>
+  <div class="grid2">
+    <div class="kpi"><div class="v">≈0</div><div class="l">AI 腔短语命中（全站）</div></div>
+    <div class="kpi"><div class="v">0 处</div><div class="l">口语录音残留（语境复核）</div></div>
+  </div>
+  <p style="font-size:13px;color:var(--gray)">sales-qa.html 早期扫描命中 4 个口语词，经语境复核为误报（实际 0 处）。说明内容经过人工润色，未出现"录音直转未清理"或"AI 灌水套话"。</p>
+
+  <h3>4.2 抽样精读结论</h3>
+  <table>
+    <thead><tr><th>文件</th><th>质量评级</th><th>判定依据</th></tr></thead>
+    <tbody>
+      <tr><td>intro-yingmanxin.html（盈满鑫解读）</td><td><span class="tag t-green">高质量·保留</span></td><td>数据具体（28天-75岁/2.5%生息/各年度现价）、话术落地、合规提示到位；仅存 §2.4 的"待条款核实"标记与口径不一致（见 §4.3）。</td></tr>
+      <tr><td>dividend-2025-interpretation.html（红利深度解读）</td><td><span class="tag t-green">高质量·保留</span></td><td>脱胎于真实早会 PPT，标注 4 类资料来源，用"小华的果园"类比讲解，带数据说明与免责。人工精编，非 AI 灌水。</td></tr>
+      <tr><td>sales-qa.html（问答中心）</td><td><span class="tag t-green">高质量·保留</span></td><td>无口语残留、结构清晰；仅 2 处板块标"待补充"（见 §2.4）。</td></tr>
+      <tr><td>clause-*.html（条款文字版）</td><td><span class="tag t-green">高质量·保留</span></td><td>真实法条转写，专业术语准确，本不应有 AI 腔。</td></tr>
+      <tr><td>calculator-*.html（演算器）</td><td><span class="tag t-green">高质量·保留</span></td><td>测算逻辑严谨；页内"产品亮点/方案设计"文案与解读页存在<b>内容重复</b>（见 §4.4）。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.3 跨页数据口径不一致（需核对）</h3>
+  <ul>
+    <li><b>红利实现率口径</b>：盈满鑫解读页写"去年大部分分红产品实现率 <b>118%</b>"；红利解读页写"全系平均 <b>128%</b>、82% 产品≥100%"。两者可同时成立（118% 为某子集、128% 为全系均值），但<b>对外表述需统一锚点</b>，避免客户对比时困惑。</li>
+    <li><b>盈满鑫保底口径</b>：同页内混用"保底约 <b>1%</b>"（多处）与"固定保证利益 <b>1.0%~1.2%</b>"（第195/237行），且第237行自注"待条款核实"。<b>需以条款为准锁定单一表述</b>。</li>
+  </ul>
+
+  <h3>4.4 内容重复风险（产品经理式整理重点）</h3>
+  <ul>
+    <li>"产品亮点/核心卖点"文案在 <b>演算器页、盈满鑫解读页、一页通导出</b> 三处各自维护，改一处易漏两处。</li>
+    <li>建议：把"卖点/方案设计"抽成<b>单一内容源</b>（如 data.json 或独立片段），三处引用，杜绝漂移。</li>
+  </ul>
+</div>
+
+<!-- 问题清单 -->
+<div class="section">
+  <h2>✅ 五、问题清单与处置优先级</h2>
+  <table>
+    <thead><tr><th>#</th><th>问题</th><th>等级</th><th>建议处置</th><th>是否影响上线</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>sales-qa.html 2 处"待补充"板块</td><td><span class="tag t-amber">中</span></td><td>补全内容或先隐藏空板块</td><td>否（观感）</td></tr>
+      <tr><td>2</td><td>intro 页"待条款核实"标记外露</td><td><span class="tag t-amber">中</span></td><td>核实条款后改为确定表述</td><td>否（合规观感）</td></tr>
+      <tr><td>3</td><td>4 个完工演算器未进导航</td><td><span class="tag t-amber">中</span></td><td>补挂产品测算 或 标注草稿</td><td>否（可达但难找）</td></tr>
+      <tr><td>4</td><td>培训双入口冗余</td><td><span class="tag t-amber">中</span></td><td>合并入学习中心</td><td>否</td></tr>
+      <tr><td>5</td><td>15 分类仓库式、产品 6 孤岛</td><td><span class="tag t-amber">中</span></td><td>按四大中心重组 data.json</td><td>否（体验）</td></tr>
+      <tr><td>6</td><td>跨页数据口径不一致（118% vs 128%；保底 1% vs 1.0–1.2%）</td><td><span class="tag t-red">高</span></td><td>统一锚点、以条款锁定表述</td><td>否（但涉合规表述）</td></tr>
+      <tr><td>7</td><td>卖点文案三处重复维护</td><td><span class="tag t-amber">中</span></td><td>抽单一内容源引用</td><td>否</td></tr>
+      <tr><td>8</td><td>product-qa-handbook 遗留重定向</td><td><span class="tag t-gray">低</span></td><td>确认无外链后删除</td><td>否</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 结论 -->
+<div class="section">
+  <h2>🧭 六、结论与下一步</h2>
+  <p><b>核心判断</b>：新华 Hub 当前最大问题不是代码，而是<b>内容资产的"组织方式"与少量"未闭环标记"</b>。链接健康、无空壳、AI 内容质量整体过关，可放心继续使用。</p>
+  <h3>建议的整理节奏（产品经理式）</h3>
+  <ul>
+    <li><b>第 1 步（快、低风险）</b>：清理 2 处"待补充" + 1 处"待条款核实"；统一跨页数据口径（问题 1/2/6）。</li>
+    <li><b>第 2 步（中风险、纯配置）</b>：重组 data.json 为四大中心、补挂 4 个演算器、合并培训入口（问题 3/4/5）。</li>
+    <li><b>第 3 步（长效）</b>：把"卖点/方案设计"抽成单一内容源，三处引用（问题 7）；建立"发布前核查标记清零"规矩。</li>
+  </ul>
+  <div class="note">📌 本报告<b>未改动任何站点代码与数据</b>，仅新增此审计文件。待泽少确认整理方向后，再着手第 1–3 步的具体修改。</div>
+</div>
+
+<div class="footer">
+  新华 Hub 内容资产审计报告 ｜ 生成于 2026-08-06 ｜ 仅审核性质，未修改站点文件<br>
+  配套记忆已双写至 工作区 .workbuddy/memory 与 腾讯龙虾的成品/memory
+</div>
+
+</div>
+</body>
+</html>

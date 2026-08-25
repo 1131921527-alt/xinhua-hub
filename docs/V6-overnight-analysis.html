@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V6 通宵分析报告 · 4 份方案</title>
+<style>
+:root{--primary:#1E40AF;--primary-l:#3B82F6;--bg:#F5F7FB;--card:#FFFFFF;--ink:#1E293B;--muted:#64748B;--line:#E2E8F0;--radius:14px;--p0:#DC2626;--p1:#D97706;--ok:#059669;--warn:#D97706;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;padding:20px;max-width:960px;margin:0 auto}
+h1{font-size:24px;color:var(--primary);margin:8px 0 4px}
+h2{font-size:20px;margin:32px 0 12px;border-left:4px solid var(--primary);padding-left:10px}
+h3{font-size:16px;margin:20px 0 8px;color:var(--primary)}
+.sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+.rule{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--radius);padding:14px 18px;margin:14px 0;font-size:14px}
+.rule.warn{background:#FFF7ED;border-color:#FED7AA}
+.rule.ok{background:#F0FDF4;border-color:#BBF7D0}
+.rule b{color:var(--primary)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.grid{display:grid;grid-template-columns:100px 1fr;gap:6px 14px;font-size:14px}
+.grid dt{color:var(--muted);font-weight:600;text-align:right}
+.grid dd{color:var(--ink)}
+.grid dd ul{padding-left:18px;margin:2px 0}
+.risk{color:var(--p0);font-weight:700}
+.ok{color:var(--ok);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:center}
+th{background:var(--primary);color:#fff;font-weight:700}
+tr:nth-child(even){background:#F8FAFC}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;color:#fff;margin:0 2px}
+.t-p0{background:var(--p0)}.t-p1{background:var(--p1)}.t-ok{background:var(--ok)}.t-warn{background:var(--warn)}
+.toc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0}
+.toc a{display:inline-block;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:20px;padding:5px 14px;font-size:13px;color:#1E40AF;text-decoration:none;font-weight:600;margin:3px}
+code{background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:13px;color:#1E40AF}
+.section{margin:8px 0 4px;padding:10px 0;border-top:1px dashed var(--line)}
+.section:first-of-type{border-top:none}
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.grid dt{text-align:left}table{font-size:12px}}
+</style>
+</head>
+<body>
+
+<h1>🦞 V6 通宵分析报告</h1>
+<div class="sub">2026-08-07 04:30 ~ 08:00 · 研究员模式 · 未修改任何代码 · 未提交 GitHub</div>
+
+<div class="rule ok">
+  <b>今晚完成清单</b><br>
+  ✅ 任务1：T010 自动验收体系升级执行方案<br>
+  ✅ 任务2：T002 产品页面设计规范 V1.0（草案）<br>
+  ✅ 任务3：T001 三款演算器 V5 差距分析<br>
+  ✅ 任务4：T011 AI 知识助手 V1.0 架构方案<br>
+  <br>
+  <b>禁止事项全部遵守</b>：未改公式 / 未改数据 / 未批量复制一页通 / 未提交 GitHub / 未删文件
+</div>
+
+<div class="toc">
+  <b>📋 目录</b><br>
+  <a href="#t010">T010 验收体系升级方案</a>
+  <a href="#t002">T002 产品页面设计规范 V1.0</a>
+  <a href="#t001">T001 三款演算器差距分析</a>
+  <a href="#t011">T011 AI 知识助手架构</a>
+  <a href="#summary">汇总与下一步建议</a>
+</div>
+
+<!-- ==================== T010 ==================== -->
+<h2 id="t010">任务1 · T010 自动验收体系升级执行方案</h2>
+
+<h3>修改目的</h3>
+<p>当前验收体系存在覆盖盲区和断言缺失，无法为后续批量演算器升级提供安全网。需要补全覆盖面 + 加入 Console 错误断言，让每次改动都有自动回归保障。</p>
+
+<h3>用户价值</h3>
+<p>理财经理和泽少改完代码跑一遍脚本就知道：10 款演算器有没有横向滚动、有没有 JS 报错、导出图够不够宽、储备期和署名在不在。不用人工逐页点开检查。</p>
+
+<h3>现状分析</h3>
+
+<div class="card">
+<h3>📊 capture_acceptance.py 覆盖现状</h3>
+<table>
+<tr><th>类型</th><th>已覆盖（18 项）</th><th>缺失</th></tr>
+<tr><td>演算器</td><td>yingmanxin, hongan, hengxiang, hongyu, hongyuan（5 款）</td><td class="risk">hongxilai, hongtai, hongkun, fusheng, huacai（5 款）</td></tr>
+<tr><td>页面</td><td>home, dividend, hongli_2025, hongli_doc, sales_qa ×7, training, company</td><td class="risk">intro-yingmanxin.html</td></tr>
+<tr><td>横向滚动</td><td class="ok">✅ 手机端检查</td><td class="risk">❌ 桌面端未检查</td></tr>
+<tr><td>Console 错误</td><td class="risk">❌ 无断言</td><td>—</td></tr>
+<tr><td>导出 PNG</td><td class="ok">✅ 宽度≥1500px + 储备期 + 署名</td><td class="warn">⚠ 只查宽度不查高度</td></tr>
+<tr><td>导出内容</td><td>❌ 不检查指标卡数值</td><td>—</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>📊 mobile_scenario_test.py 覆盖现状</h3>
+<table>
+<tr><th>项目</th><th>现状</th><th>缺失</th></tr>
+<tr><td>演算器</td><td>同上 5 款</td><td class="risk">同缺 5 款</td></tr>
+<tr><td>金额档位</td><td class="ok">✅ 10w / 100w / 1000w 三档</td><td>—</td></tr>
+<tr><td>溢出检测</td><td class="ok">✅ 表格单元格 scrollWidth &gt; clientWidth</td><td>—</td></tr>
+<tr><td>微信预览</td><td class="ok">✅ 模拟微信聊天窗口</td><td>—</td></tr>
+<tr><td>Console 错误</td><td class="risk">❌ 无断言</td><td>—</td></tr>
+</table>
+</div>
+
+<h3>修改文件</h3>
+<dl class="grid">
+<dt>文件1</dt><dd><code>qa/capture_acceptance.py</code>（约 289 行）</dd>
+<dt>文件2</dt><dd><code>qa/mobile_scenario_test.py</code>（约 394 行）</dd>
+</dl>
+
+<h3>具体改动点</h3>
+
+<div class="card">
+<h3>① capture_acceptance.py 改动（5 处）</h3>
+
+<div class="section">
+<b>改动 1：PAGES 列表补 5 款演算器</b><br>
+在 PAGES 数组第 50 行后追加：
+<pre style="background:#F8FAFC;padding:10px;border-radius:8px;font-size:12px;overflow-x:auto">
+{"key":"hongxilai","file":"calculator-hongxilai.html","kind":"calc","label":"宏禧来演算器"},
+{"key":"hongtai",  "file":"calculator-hongtai.html",  "kind":"calc","label":"宏泰演算器"},
+{"key":"hongkun",  "file":"calculator-hongkun.html",  "kind":"calc","label":"宏坤演算器"},
+{"key":"fusheng",  "file":"calculator-fusheng.html",  "kind":"calc","label":"福盛世家演算器"},
+{"key":"huacai",   "file":"calculator-huacai.html",   "kind":"calc","label":"华彩演算器"},
+</pre>
+</div>
+
+<div class="section">
+<b>改动 2：PAGES 补 intro-yingmanxin.html</b><br>
+<pre style="background:#F8FAFC;padding:10px;border-radius:8px;font-size:12px;overflow-x:auto">
+{"key":"intro_ymx","file":"intro-yingmanxin.html","kind":"page","label":"盈满鑫产品解读"},
+</pre>
+</div>
+
+<div class="section">
+<b>改动 3：Console 错误断言</b><br>
+在桌面端和手机端 page 创建后，注册 console 消息收集：
+<pre style="background:#F8FAFC;padding:10px;border-radius:8px;font-size:12px;overflow-x:auto">
+# 在 pc = browser.new_page(...) 之后加：
+console_errors = []
+pc.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
+# 页面加载后检查：
+if console_errors:
+    problems.append(f"{key} pc: Console错误 {console_errors[:5]}")
+</pre>
+手机端同理。建议封装为 <code>collect_console_errors(page)</code> 工具函数，避免重复。
+</div>
+
+<div class="section">
+<b>改动 4：桌面端横向滚动检查</b><br>
+当前 <code>check_hscroll()</code> 只在手机端调用。在桌面端截图后也调一次：
+<pre style="background:#F8FAFC;padding:10px;border-radius:8px;font-size:12px;overflow-x:auto">
+# 桌面端 shot_full 后追加：
+ok_pc = check_hscroll(pc, key + "_pc")
+hscroll_ok.append((key + "_pc", ok_pc))
+</pre>
+</div>
+
+<div class="section">
+<b>改动 5：导出 PNG 高度检查</b><br>
+当前只检查 <code>w < 1500</code>。加入高度上限检查防止异常超大图：
+<pre style="background:#F8FAFC;padding:10px;border-radius:8px;font-size:12px;overflow-x:auto">
+if h > 20000:
+    problems.append(f"{key}: 导出高度 {h}px 异常，可能 html2canvas 重复渲染")
+</pre>
+</div>
+</div>
+
+<div class="card">
+<h3>② mobile_scenario_test.py 改动（2 处）</h3>
+
+<div class="section">
+<b>改动 1：CALCS 列表补 5 款演算器</b><br>
+在 CALCS 数组第 58 行后追加 5 条，<code>export_root</code> 统一填 <code>"#planArea"</code>，<code>kind</code> 填 <code>"live"</code>。<br>
+<span class="risk">⚠ 注意</span>：宏禧来 (hongxilai) 的 export_root 需确认是否也是 #planArea，需读代码核实后再填。
+</div>
+
+<div class="section">
+<b>改动 2：Console 错误断言</b><br>
+同 capture_acceptance.py，在每个 calc 页面 <code>p.goto()</code> 后注册 console 收集，跑完检查。
+</div>
+</div>
+
+<h3>风险</h3>
+<dl class="grid">
+<dt>风险等级</dt><dd class="ok">低。只加测试覆盖，不动业务代码。</dd>
+<dt>风险点1</dt><dd>5 款新演算器的导出函数名可能不叫 <code>downloadImage()</code>（宏御曾用 canvas 绘制）。需先确认每款的导出入口函数名。</dd>
+<dt>风险点2</dt><dd><code>.gitignore</code> 忽略 <code>*.py</code>，但 <code>capture_acceptance.py</code> 和 <code>mobile_scenario_test.py</code> 已放行（有 <code>!</code> 规则）。改动后能正常提交。</dd>
+<dt>风险点3</dt><dd>Console 断言可能误报：某些页面 console.warn 不应算 error。断言只抓 <code>msg.type == "error"</code>，忽略 warning/info。</dd>
+</dl>
+
+<h3>验收标准</h3>
+<ul>
+<li>capture_acceptance.py PAGES 覆盖全 10 款演算器 + intro-yingmanxin.html</li>
+<li>mobile_scenario_test.py CALCS 覆盖全 10 款演算器</li>
+<li>Console 错误断言生效（故意注入 <code>console.error('test')</code> 能被检出）</li>
+<li>桌面端横向滚动检查生效</li>
+<li>全量跑 PASS（0 横向滚动、0 Console error、0 导出异常）</li>
+<li>运行时间不超过 15 分钟（当前约 8 分钟，加 5 款预计 12-14 分钟）</li>
+</ul>
+
+<h3>预计执行步骤</h3>
+<ol>
+<li>读 5 款缺失演算器的导出函数名（grep <code>function download</code> / <code>downloadImage</code> / <code>toBlob</code>）</li>
+<li>改 capture_acceptance.py（5 处改动）</li>
+<li>改 mobile_scenario_test.py（2 处改动）</li>
+<li>本地跑 <code>python -u qa/capture_acceptance.py</code> 全量</li>
+<li>本地跑 <code>python -u qa/mobile_scenario_test.py</code> 全量</li>
+<li>确认全 PASS 后 git add + commit + push</li>
+<li>写日报</li>
+</ol>
+<p><b>预计耗时</b>：2-3 小时（含调试）</p>
+
+<!-- ==================== T002 ==================== -->
+<h2 id="t002">任务2 · T002 新华Hub产品页面设计规范 V1.0（草案）</h2>
+
+<div class="rule">
+  <b>说明</b>：本规范基于 <code>intro-yingmanxin.html</code>（目前唯一富页产品介绍）提炼，作为 V1.0 草案。泽少确认后定稿，后续所有产品 intro 页按此规范产出。
+</div>
+
+<h3>一、页面结构（8 个标准板块）</h3>
+
+<table>
+<tr><th>序号</th><th>板块名称</th><th>锚点 id</th><th>必填</th><th>说明</th></tr>
+<tr><td>1</td><td>Hero 区</td><td>—</td><td>✅</td><td>产品全名 + 副标题 + 标签（缴费方式/产品类型/亮点关键词）</td></tr>
+<tr><td>2</td><td>公司底气</td><td>sec-company</td><td>✅</td><td>新华保险实力数据（资产/排名/历史），通用模块，各页复用</td></tr>
+<tr><td>3</td><td>产品定位</td><td>sec-overview</td><td>✅</td><td>一句话定位 + 适合客户类型 + 核心参数（缴费期限/保障期限/起投门槛）</td></tr>
+<tr><td>4</td><td>产品亮点</td><td>sec-sellpoints</td><td>✅</td><td>4 条亮点，2×2 网格，每条标题+一句话说明</td></tr>
+<tr><td>5</td><td>案例演示</td><td>sec-customers</td><td>✅</td><td>2-3 个客户画像 + 对应方案，模拟真实客户场景</td></tr>
+<tr><td>6</td><td>投保参数 + 利益演示</td><td>sec-calc</td><td>✅</td><td>投保规则表 + 利益演示表（链接到在线演算器）</td></tr>
+<tr><td>7</td><td>成交话术</td><td>sec-talk</td><td>可选</td><td>一分钟成交话术 + 交叉链接 sales-qa.html</td></tr>
+<tr><td>8</td><td>风险提示</td><td>sec-risk</td><td>✅</td><td>产品风险等级 + 适合人群风险提示 + 免责声明</td></tr>
+</table>
+
+<h3>二、可选板块（按产品特点增减）</h3>
+<table>
+<tr><th>板块</th><th>锚点 id</th><th>适用产品</th></tr>
+<tr><td>PDF 资料下载</td><td>sec-pdf</td><td>有条款 PDF 的产品</td></tr>
+<tr><td>分红说明</td><td>sec-dividend</td><td>分红型产品</td></tr>
+<tr><td>与银行对比</td><td>sec-vsbank</td><td>有竞品对比数据的产品</td></tr>
+<tr><td>投保流程时间线</td><td>sec-timeline</td><td>复杂流程产品</td></tr>
+<tr><td>相关资料</td><td>sec-resources</td><td>有培训/条款关联的产品</td></tr>
+</table>
+
+<h3>三、视觉规范</h3>
+
+<div class="card">
+<h3>3.1 色彩</h3>
+<table>
+<tr><th>用途</th><th>色值</th><th>CSS 变量</th></tr>
+<tr><td>主色（标题/按钮/边框）</td><td style="color:#1E40AF;font-weight:700">#1E40AF</td><td>--primary</td></tr>
+<tr><td>亮蓝（高亮/次要按钮）</td><td style="color:#3B82F6;font-weight:700">#3B82F6</td><td>--primary-l</td></tr>
+<tr><td>浅蓝背景</td><td style="color:#EFF6FF;font-weight:700">#EFF6FF</td><td>--primary-bg</td></tr>
+<tr><td>正文</td><td style="color:#1E293B;font-weight:700">#1E293B</td><td>--ink</td></tr>
+<tr><td>辅助文字</td><td style="color:#64748B;font-weight:700">#64748B</td><td>--muted</td></tr>
+<tr><td>警告/风险</td><td style="color:#C00000;font-weight:700">#C00000</td><td>--red</td></tr>
+</table>
+<p><b>规则</b>：颜色统一引用 <code>assets/css/theme.css</code> 的 <code>:root</code> 变量，禁止页面内裸写色值。</p>
+</div>
+
+<div class="card">
+<h3>3.2 字号层级</h3>
+<table>
+<tr><th>层级</th><th>字号</th><th>用途</th></tr>
+<tr><td>H1（Hero 标题）</td><td>28px / 手机 22px</td><td>产品全名</td></tr>
+<tr><td>H2（板块标题）</td><td>20px</td><td>每个 section 的标题</td></tr>
+<tr><td>H3（子标题）</td><td>16px</td><td>板块内小节</td></tr>
+<tr><td>正文</td><td>15px / 行高 1.8</td><td>段落文字</td></tr>
+<tr><td>表格</td><td>14px</td><td>数据表格</td></tr>
+<tr><td>注释</td><td>12px</td><td>风险提示/免责</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>3.3 卡片 / 间距</h3>
+<ul>
+<li><b>板块卡片</b>：白底 + 14px 圆角 + 24px 内边距 + 0 1px 4px 阴影</li>
+<li><b>板块间距</b>：16px</li>
+<li><b>板块标题</b>：左侧 36px 蓝色圆角图标 + 20px 粗体标题</li>
+<li><b>高亮块</b>：浅蓝渐变背景 + 2px 蓝边框 + 12px 圆角</li>
+<li><b>表格</b>：表头深蓝白字 + 偶数行 #F0F9FF + 横向滚动时 overflow-x:auto</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>3.4 手机适配（390px）</h3>
+<ul>
+<li>Hero 标题降到 22px，内边距减到 18px</li>
+<li>亮点网格 2×2 → 单列</li>
+<li>客户画像网格 → 单列</li>
+<li>PDF 下载链接 → 纵向堆叠</li>
+<li>表格加 <code>.table-wrap{overflow-x:auto}</code> 水平滚动容器</li>
+<li>所有触控热区 ≥ 44px</li>
+<li>页面级 <code>scroll-behavior:smooth</code> + 锚点跳转</li>
+</ul>
+</div>
+
+<h3>四、动态生成 vs 人工核实</h3>
+
+<div class="card">
+<h3>4.1 必须动态生成（从 JSON 数据源渲染）</h3>
+<ul>
+<li><b>利益演示表</b>：从演算器 data_*.json 读取，不手写</li>
+<li><b>投保参数表</b>：缴费方式/期限/起投金额，从 data.json 产品信息读取</li>
+<li><b>红利实现率</b>：从 dividend.json 读取</li>
+<li><b>目录锚点</b>：TOC 链接自动从页面 section id 生成</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>4.2 必须人工核实（标"待条款核实"）</h3>
+<ul>
+<li><b>产品条款内容</b>：保障责任/免责条款/犹豫期 → 对照条款 PDF 逐项核实</li>
+<li><b>案例客户画像</b>：年龄/职业/需求 → 确保符合目标客户定位</li>
+<li><b>成交话术</b>：合规审查 → 禁"保证收益/零风险/稳赚不赔"等绝对词</li>
+<li><b>与银行对比数据</b>：利率/期限 → 对照银行官方最新公告</li>
+<li><b>风险等级</b>：对照产品说明书 R1-R5 分级</li>
+</ul>
+</div>
+
+<h3>五、页面间导航规范</h3>
+<ul>
+<li>每个 intro 页顶部有 TOC 目录（锚点直达）</li>
+<li>底部有"相关资源"区：链接到演算器、条款页、培训页、销售问答</li>
+<li>产品亮点区可链接到对比页（T007 完成后）</li>
+<li>所有 intro 页统一引用 <code>assets/css/theme.css</code></li>
+</ul>
+
+<!-- ==================== T001 ==================== -->
+<h2 id="t001">任务3 · T001 三款演算器 V5 差距分析</h2>
+
+<div class="rule">
+  <b>V5 标准定义</b>（以盈满鑫为基准）：<br>
+  ① 引用 calc-common.css ✅ &nbsp; ② toggleViewMode 在线预览切换 ✅ &nbsp; ③ one-page-export-root 一页通导出模板 ✅ &nbsp; ④ export-style-picker 导出样式选择 ✅ &nbsp; ⑤ key-metrics 核心指标卡（kmMaturity/kmCum/kmRate）✅
+</div>
+
+<h3>总体对比</h3>
+<table>
+<tr><th>特性</th><th>盈满鑫（V5标准）</th><th>宏安世家</th><th>宏愿人生</th><th>恒享人生</th></tr>
+<tr><td>calc-common.css</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td></tr>
+<tr><td>toggleViewMode</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td><td class="risk">❌</td></tr>
+<tr><td>一页通模板</td><td class="ok">✅</td><td class="risk">❌</td><td class="risk">❌</td><td class="risk">❌</td></tr>
+<tr><td>导出样式选择</td><td class="ok">✅</td><td class="risk">❌</td><td class="risk">❌</td><td class="risk">❌</td></tr>
+<tr><td>key-metrics 指标卡</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td></tr>
+<tr><td>验收脚本覆盖</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td></tr>
+<tr><td>移动端场景测试</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td><td class="ok">✅</td></tr>
+</table>
+
+<h3>T001-1 宏安世家（calculator-hongan.html）</h3>
+<dl class="grid">
+<dt>缺少功能</dt><dd>
+  <ul>
+    <li><b>一页通导出模板</b>（one-page-export-root）：盈满鑫有独立宣传单式模板，宏安没有</li>
+    <li><b>导出样式选择器</b>（export-style-picker）：盈满鑫可切换"样式一/样式二"，宏安只有一个样式</li>
+    <li><b>在线预览实时切换</b>：宏安有 toggleViewMode（"60岁后每5年"切换），但不是预览/下载切换，而是表格行聚合切换</li>
+  </ul>
+</dd>
+<dt>已有基础</dt><dd>
+  <ul>
+    <li>calc-common.css 已引用 ✅</li>
+    <li>key-metrics 指标卡已有（kmMaturity/kmCum/kmRate）✅</li>
+    <li>body.capturing 抓图样式已有 ✅</li>
+    <li>stats-row 横排指标条已有 ✅</li>
+    <li>HTML 结构与盈满鑫高度相似（input-card / form-row / plan / section）✅</li>
+  </ul>
+</dd>
+<dt>修改难度</dt><dd><b>中</b>。布局结构与盈满鑫最接近，一页通模板可直接从盈满鑫复制骨架再填宏安数据。主要工作量在定制一页通内容（公司介绍/产品亮点/案例文案）。</dd>
+<dt>风险等级</dt><dd class="ok">低-中。已有验收覆盖 + 场景测试，回归有保障。不动公式/数据。</dd>
+<dt>推荐改造顺序</dt><dd>
+  <ol>
+    <li>复制盈满鑫 one-page-export-root 骨架到 hongan</li>
+    <li>替换宏安专属文案（公司介绍/产品亮点/案例）</li>
+    <li>加 export-style-picker 选择器</li>
+    <li>改 downloadImage() 支持模板切换</li>
+    <li>加在线预览实时切换（.one-preview-frame）</li>
+    <li>验收：capture_acceptance + mobile_scenario_test 全 PASS</li>
+    <li>复盘：提炼"一页通复制模板"SOP</li>
+  </ol>
+</dd>
+</dl>
+
+<h3>T001-2 宏愿人生（calculator-hongyuan.html）</h3>
+<dl class="grid">
+<dt>缺少功能</dt><dd>
+  <ul>
+    <li><b>一页通导出模板</b>：同宏安，缺失</li>
+    <li><b>导出样式选择器</b>：同宏安，缺失</li>
+    <li><b>在线预览实时切换</b>：有 toggleViewMode（表格行聚合切换），但缺预览/下载切换</li>
+  </ul>
+</dd>
+<dt>已有基础</dt><dd>
+  <ul>
+    <li>calc-common.css 已引用 ✅</li>
+    <li>key-metrics 指标卡已有 ✅</li>
+    <li>side-stats + stat-box 指标条已有 ✅</li>
+    <li>HTML 结构与盈满鑫高度相似 ✅</li>
+    <li>body.capturing 抓图样式已有 ✅</li>
+  </ul>
+</dd>
+<dt>修改难度</dt><dd><b>中</b>。结构与宏安接近，一页通模板可复用 T001-1 沉淀的 SOP。宏愿是养老年金，案例文案侧重养老场景。</dd>
+<dt>风险等级</dt><dd class="ok">低-中。同宏安。验收覆盖已有。</dd>
+<dt>推荐改造顺序</dt><dd>
+  <ol>
+    <li>复用 T001-1 的 one-page-export-root 模板</li>
+    <li>替换宏愿专属文案（养老场景/年金领取/案例）</li>
+    <li>加 export-style-picker + downloadImage 模板切换</li>
+    <li>加在线预览实时切换</li>
+    <li>验收全 PASS</li>
+    <li>复盘：验证 SOP 可迁移性</li>
+  </ol>
+</dd>
+</dl>
+
+<h3>T001-3 恒享人生（calculator-hengxiang.html）</h3>
+<dl class="grid">
+<dt>缺少功能</dt><dd>
+  <ul>
+    <li><b>toggleViewMode</b>：完全缺失（无"60岁后每5年"切换按钮）</li>
+    <li><b>一页通导出模板</b>：缺失</li>
+    <li><b>导出样式选择器</b>：缺失</li>
+  </ul>
+</dd>
+<dt>已有基础</dt><dd>
+  <ul>
+    <li>calc-common.css 已引用 ✅</li>
+    <li>key-metrics 指标卡已有 ✅</li>
+    <li>body.capturing 抓图样式已有 ✅</li>
+    <li><b>但 HTML 结构差异较大</b>：恒享用 title-bar + card 结构（非 input-card），CSS 变量用 --brown/--brown2 而非 --primary，table 用 #resultTable id 而非 .main-table class</li>
+  </ul>
+</dd>
+<dt>修改难度</dt><dd class="risk"><b>中-高</b>。结构差异最大——title-bar/card 布局 vs 盈满鑫的 input-card/plan 布局；CSS 变量命名不同（--brown vs --primary）；表格选择器不同（#resultTable vs .main-table）。一页通模板仍可复制骨架，但适配工作量更大。</dd>
+<dt>风险等级</dt><dd class="warn"><b>中</b>。结构差异大意味着更多自定义代码，回归风险略高。但验收覆盖已有，且不动公式/数据。</dd>
+<dt>推荐改造顺序</dt><dd>
+  <ol>
+    <li>先统一 CSS 变量：--brown → --primary（低风险纯重命名）</li>
+    <li>加 toggleViewMode 功能</li>
+    <li>复制一页通模板 + 定制恒享文案</li>
+    <li>加 export-style-picker + 在线预览切换</li>
+    <li>验收全 PASS</li>
+    <li>复盘：沉淀"异构结构演算器适配"SOP</li>
+  </ol>
+</dd>
+</dl>
+
+<h3>三款推荐执行顺序</h3>
+<div class="rule ok">
+  <b>T001-1 宏安 → T001-2 宏愿 → T001-3 恒享</b><br>
+  理由：宏安/宏愿结构与盈满鑫最接近，先拿"低难度"练手沉淀 SOP；恒享结构差异大放最后，前两款的经验能降低风险。每款走完"开发→验收→复盘→形成模板"才启动下一款。
+</div>
+
+<!-- ==================== T011 ==================== -->
+<h2 id="t011">任务4 · T011 AI 知识助手 V1.0 架构方案</h2>
+
+<div class="rule warn">
+  <b>合规红线</b>：AI 助手<b>只召回已有资料</b>，不生成新话术、不给投资建议、不回答超出已有资料范围的问题。所有输出可溯源到站内具体页面。
+</div>
+
+<h3>目标场景</h3>
+<p>理财经理在手机上输入客户需求/问题，系统返回：产品建议 + 相关资料 + 话术 + 培训内容 + 方案入口。</p>
+
+<h3>示例：用户输入"客户60岁，想养老，预算20万"</h3>
+
+<div class="card">
+<h3>系统返回内容</h3>
+<table>
+<tr><th>返回模块</th><th>内容</th><th>数据来源</th></tr>
+<tr><td>产品建议</td><td>宏愿人生养老年金（分红型）→ 60岁趸交20万，次年领年金</td><td>data.json 产品库 + 演算器参数</td></tr>
+<tr><td>相关资料</td><td>intro-hongyuan 产品解读页 / clause-hongyuan 条款页</td><td>站内页面索引</td></tr>
+<tr><td>话术</td><td>"养老规划"分类下的 Q&A（sales-qa-yanglao.html）</td><td>sales-qa 体系</td></tr>
+<tr><td>培训内容</td><td>培训中心"养老规划"课程链接</td><td>training.json</td></tr>
+<tr><td>方案入口</td><td>宏愿演算器一键跳转（带预填参数）</td><td>calculator-hongyuan.html</td></tr>
+</table>
+</div>
+
+<h3>架构设计</h3>
+
+<div class="card">
+<h3>① 知识源清单（4 类）</h3>
+<table>
+<tr><th>类型</th><th>来源</th><th>格式</th><th>更新频率</th></tr>
+<tr><td>产品库</td><td>data.json + data_*.json</td><td>JSON</td><td>随产品上线更新</td></tr>
+<tr><td>话术库</td><td>sales-qa*.html</td><td>HTML→结构化提取</td><td>随话术优化更新</td></tr>
+<tr><td>培训库</td><td>training.json</td><td>JSON</td><td>随课程更新</td></tr>
+<tr><td>条款库</td><td>clause-*.html + PDF</td><td>HTML/PDF</td><td>低频</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>② 召回/排序策略</h3>
+<ul>
+<li><b>第一步：关键词匹配</b>。用户输入分词后匹配知识源标签（养老/分红/传承/高客/异议）</li>
+<li><b>第二步：产品筛选</b>。按用户输入的客户画像（年龄/预算/需求）匹配产品标签</li>
+<li><b>第三步：排序</b>。产品按匹配度排序；话术按标签相关度排序；培训按内容等级⭐排序</li>
+<li><b>第四步：组装返回</b>。每个模块取 Top 3，附跳转链接</li>
+</ul>
+<p><b>V1.0 不用 LLM</b>。纯规则匹配 + 标签索引，确保可控可溯源。V2.0 可考虑接入 LLM 做自然语言理解，但话术仍只召回不生成。</p>
+</div>
+
+<div class="card">
+<h3>③ 输出模板</h3>
+<pre style="background:#F8FAFC;padding:12px;border-radius:8px;font-size:13px;overflow-x:auto">
+{
+  "query": "客户60岁，想养老，预算20万",
+  "products": [
+    {"name":"宏愿人生养老年金（分红型）","reason":"60岁可趸交，次年领年金","link":"calculator-hongyuan.html?prem=200000&age=60"},
+    {"name":"盈满鑫两全保险（分红型）","reason":"中短期储备+满期金","link":"calculator-yingmanxin.html"}
+  ],
+  "materials": [
+    {"title":"宏愿人生产品解读","link":"intro-hongyuan.html"},
+    {"title":"宏愿人生条款","link":"clause-hongyuan.html"}
+  ],
+  "scripts": [
+    {"q":"客户说养老收益不如银行","a":"...","link":"sales-qa-yanglao.html#q3"}
+  ],
+  "training": [
+    {"title":"养老规划入门","level":"⭐⭐⭐","link":"training.html#course-yanglao"}
+  ],
+  "disclaimer":"以上内容来自站内已有资料，仅供内部培训参考，不代表投资建议。"
+}
+</pre>
+</div>
+
+<div class="card">
+<h3>④ 入口位置</h3>
+<ul>
+<li><b>首选</b>：首页首屏搜索框旁加"AI 助手"按钮（T003 首页规划时落地）</li>
+<li><b>备选</b>：独立 ai-assistant.html 页面</li>
+<li><b>移动端</b>：底部悬浮按钮，点击弹出全屏搜索面板</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>⑤ 合规边界</h3>
+<ul>
+<li><b>只召回不生成</b>：所有回答来自站内已有资料，AI 不创作新内容</li>
+<li><b>可溯源</b>：每条返回附具体页面链接，可点击核实</li>
+<li><b>不给投资建议</b>：不回答"该买哪个""哪个收益高"等判断性问题</li>
+<li><b>免责声明</b>：每次返回附"内部培训参考，不代表投资建议"</li>
+<li><b>话术合规</b>：召回的话术已经过 T006 去绝对词审查</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>⑥ 技术选型建议</h3>
+<table>
+<tr><th>方案</th><th>优点</th><th>缺点</th><th>推荐</th></tr>
+<tr><td>纯前端 JS（标签匹配）</td><td>零后端、静态站可用、快</td><td>无法理解自然语言</td><td class="ok">✅ V1.0 MVP</td></tr>
+<tr><td>前端 + 轻量 NLP（Fuse.js）</td><td>模糊匹配、容错好</td><td>需维护索引</td><td>✅ V1.5</td></tr>
+<tr><td>LLM API（接入大模型）</td><td>理解复杂问题</td><td>成本/延迟/合规风险</td><td>❌ V2.0+ 再考虑</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>⑦ MVP 范围</h3>
+<ul>
+<li>知识索引：建 search-index.json（产品标签 + 话术标签 + 培训标签 + 条款标签）</li>
+<li>前端：一个搜索面板，输入关键词 → 返回 4 模块卡片</li>
+<li>规则：10-15 个标签（养老/分红/传承/高客/中短期/教育金/异议/对比...）</li>
+<li>不做：自然语言理解、多轮对话、用户画像记忆</li>
+</ul>
+</div>
+
+<!-- ==================== 汇总 ==================== -->
+<h2 id="summary">汇总与下一步建议</h2>
+
+<div class="card">
+<h3>📋 完成的方案文档列表</h3>
+<table>
+<tr><th>#</th><th>任务</th><th>文档</th><th>状态</th></tr>
+<tr><td>1</td><td>T010 验收体系升级</td><td>本报告"任务1"章节</td><td class="ok">方案就绪</td></tr>
+<tr><td>2</td><td>T002 产品页面设计规范</td><td>本报告"任务2"章节</td><td class="ok">草案 V1.0</td></tr>
+<tr><td>3</td><td>T001 三款演算器差距分析</td><td>本报告"任务3"章节</td><td class="ok">分析完成</td></tr>
+<tr><td>4</td><td>T011 AI 知识助手架构</td><td>本报告"任务4"章节</td><td class="ok">规划完成</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>🔑 每个方案核心结论</h3>
+<ol>
+<li><b>T010</b>：capture_acceptance.py 缺 5 款演算器 + 无 Console 断言；mobile_scenario_test.py 同缺 5 款。改动 7 处，预计 2-3 小时，风险低。</li>
+<li><b>T002</b>：8 个标准板块 + 5 个可选板块；视觉统一引用 theme.css 变量；动态生成（利益演示/参数/红利）vs 人工核实（条款/案例/话术/对比/风险等级）边界明确。</li>
+<li><b>T001</b>：宏安/宏愿差距小（缺一页通+选择器），恒享差距大（还缺 toggleViewMode + 结构异构）。推荐顺序：宏安→宏愿→恒享。</li>
+<li><b>T011</b>：V1.0 纯前端标签匹配（不用 LLM），只召回不生成，4 模块返回（产品/资料/话术/培训），合规红线明确。</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>📌 下一步建议执行顺序</h3>
+<ol>
+<li><b>先确认 T010 方案</b> → 开发 → 验收 → 这是所有后续演算器改动的安全网</li>
+<li><b>确认 T002 规范 V1.0</b> → 定稿后作为产品页标准</li>
+<li><b>启动 T001-1 宏安世家</b> → 开发→验收→复盘→形成模板</li>
+<li><b>T001-2 宏愿人生</b> → 复用模板</li>
+<li><b>T001-3 恒享人生</b> → 异构适配</li>
+<li><b>T011 可并行</b> → 建索引 + 前端面板（与演算器迭代不冲突）</li>
+</ol>
+</div>
+
+<div class="rule">
+  <b>等泽少确认后</b>，先从 T010 开始出详细执行方案（具体到改哪行代码），点头后才动手。
+</div>
+
+<footer>新华 Hub V6 通宵分析报告 · 2026-08-07 · 腾讯龙虾🦞 · 研究员模式 · 未修改任何代码</footer>
+
+</body>
+</html>

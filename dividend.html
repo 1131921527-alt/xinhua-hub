@@ -53,6 +53,14 @@
   .guide a span{flex:1; color:var(--ink);}
   .guide a svg{flex:none;}
   .err{padding:30px; text-align:center; color:var(--sub); font-size:14px;}
+  /* 数字卡片 */
+  .div-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 2px 14px;}
+  .div-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;text-align:center;box-shadow:0 1px 3px rgba(15,23,42,.04);}
+  .div-stat .v{font-size:24px;font-weight:800;color:var(--blue-d);line-height:1.1;}
+  .div-stat .l{font-size:11px;color:var(--sub);margin-top:4px;line-height:1.4;}
+  .div-stat.hl{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-color:#BFDBFE;}
+  .div-stat.hl .v{font-size:28px;}
+  @media(max-width:480px){.div-stat .v{font-size:20px}.div-stat.hl .v{font-size:24px}}
   footer{text-align:center; font-size:11px; color:var(--sub); margin-top:20px; padding:0 16px;}
 </style>
 </head>
@@ -68,6 +76,11 @@
 </header>
 
 <div class="wrap">
+  <div class="div-stats">
+    <div class="div-stat hl"><div class="v">128%</div><div class="l">全系产品平均<br>红利实现率</div></div>
+    <div class="div-stat"><div class="v">97款</div><div class="l">披露产品数量<br>（现金+增额）</div></div>
+    <div class="div-stat"><div class="v">79%</div><div class="l">2024年实现率<br>≥100%产品占比</div></div>
+  </div>
   <div class="controls">
     <input class="search" id="q" placeholder="搜索产品名称，如：宏御 / 华彩 / 年金">
     <div class="chips" id="chips">
@@ -82,6 +95,16 @@
       <b>🔍 官网查询入口</b>
       <span>想查更多产品或历史年份？点此直接打开新华保险官网「红利实现率」披露页，在页面左上角搜索产品名称即可。</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+    <a href="dividend-2025-interpretation.html" style="margin-top:8px;background:#F0FDF4;border-color:#86EFAC;color:#166534;">
+      <b>📖 2025年分红深度解读</b>
+      <span>分红实现率怎么看？为什么有的产品超100%？新华投资实力如何？一篇讲透分红那些事。</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="hongli-realization.html" style="margin-top:8px;background:#FEF3C7;border-color:#FCD34D;color:#92400E;">
+      <b>💡 红利实现率概念科普</b>
+      <span>什么是红利实现率？和演示利率什么关系？客户常问的分红问题都在这里。</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
   <div id="list"></div>

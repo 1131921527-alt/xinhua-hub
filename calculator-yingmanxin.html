@@ -9,6 +9,7 @@
 <script src="ai-planner.js"></script>
 <script src="html2canvas.min.js"></script>
 <script src="product-rules.js"></script>
+<script src="display-rules.js"></script>
 <style>
 :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -503,11 +504,11 @@ let currentRate = 0.025;
 let DATA = null;
 let ADDATA = null;
 let currentBonusMode = 'add';   // 'add'=交清增额(默认) / 'cum'=累计生息
-let viewMode = '60';
+let viewMode = 'all';
 let currentDeposit = null;   // 定存+组合计算结果
 let currentParams = null;    // 当前演算参数（供导出模板/文件名使用）
 
-const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
+const VIEW_MODE_LABELS = { all: '全部显示', '5y60': '60岁后每5年', '5y70': '70岁后每5年', '5y75': '75岁后每5年' };
 
 function toggleViewMode(){
   const modes = ['all', '60', '70', '75'];
@@ -519,14 +520,11 @@ function toggleViewMode(){
 
 // 60岁及以上客户自动切换为全部显示，避免"60岁后每5年"等模式把高龄客户的计划书压成几行
 // 60岁以下则回到默认"60岁后每5年"（仅当之前被高龄逻辑强制为全部时回退，尊重用户手动切换）
+// 盈满鑫为短期两全险：全部保单年度均显示，不抽行
 function syncViewModeByAge(age){
-  if(age >= 60 && viewMode !== 'all'){
-    viewMode = 'all';
-    document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
-  } else if(age < 60 && viewMode === 'all'){
-    viewMode = '60';
-    document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
-  }
+  viewMode = 'all';
+  const btn = document.getElementById('viewModeBtn');
+  if (btn) btn.textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
 }
 
 const PERIOD_OPTIONS = {
@@ -708,13 +706,7 @@ function generate(){
   }
 
   const tbody = document.getElementById('resultBody');
-  let displayRows = rows.filter(r => {
-    if(viewMode === 'all') return true;
-    if(viewMode === '60') return r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0);
-    if(viewMode === '70') return r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0);
-    if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
-    return true;
-  });
+  let displayRows = window.filterDisplayRows(rows, viewMode);
   // 储备期读取统一产品规则配置（盈满鑫：按原 Excel 计划书口径，储备期=交费期+1年）
   const RULE = window.getProductRule('yingmanxin');
   const reserveYears = window.resolveReserveYears(RULE, payTerm);
@@ -820,12 +812,9 @@ function renderLiveDeposit(dep, p){
 }
 
 // ---------- 独立隐藏导出模板（高清 PNG，不直接截取网页）----------
+// 与网页演示共用同一套年份筛选规则（display-rules.js）
 function filterByView(rows){
-  if(viewMode === 'all') return rows;
-  if(viewMode === '60') return rows.filter(r => r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0));
-  if(viewMode === '70') return rows.filter(r => r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0));
-  if(viewMode === '75') return rows.filter(r => r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0));
-  return rows;
+  return window.filterDisplayRows(rows, viewMode);
 }
 
 function buildExport(rows, dep, p, reserveYears){

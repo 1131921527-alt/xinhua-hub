@@ -1172,6 +1172,7 @@
     <div class="ap-modal-row" id="apPeriodRow" style="display:none;"><span class="ap-label">保险期间</span><select class="ap-value" id="apPeriodSelect"></select></div>
     <div class="ap-modal-row" id="apAnnuityAgeRow" style="display:none;"><span class="ap-label">年金起领</span><select class="ap-value" id="apAnnuityAgeSelect"></select></div>
     <div class="ap-modal-row" id="apAnnuityModeRow" style="display:none;"><span class="ap-label">领取方式</span><select class="ap-value" id="apAnnuityModeSelect"><option value="month">月领</option><option value="year">年领</option></select></div>
+    <div class="ap-modal-row" id="apGeRow" style="display:none;"><span class="ap-label">业务类型</span><select class="ap-value" id="apGeSelect"><option value="0">非个养</option><option value="1">个人养老金</option></select></div>
     <div class="ap-modal-btns">
       <button class="ap-back-btn" id="apBackBtn">返回修改</button>
       <button class="ap-confirm-btn" id="apConfirmBtn">确认生成</button>
@@ -1469,7 +1470,8 @@ const PD_TAG_MAP = {
   'calculator-hongkun.html': [['养老险',''],['年金','']],
   'calculator-hongtai.html': [['终身寿',''],['分红型','hl']],
   'calculator-huacai.html': [['年金险',''],['分红型','hl']],
-  'calculator-hengxiang.html': [['年金险',''],['关爱金','']]
+  'calculator-hengxiang.html': [['年金险',''],['关爱金','']],
+  'calculator-hongda.html': [['年金险',''],['分红型','hl']]
 };
 function renderProductCards() {
   if (!DATA || !DATA.categories) return;

@@ -1,0 +1,32 @@
+  [pc] 横向滚动 PASS docW=1280 vw=1280
+  [pc] 样式二标准计划书/10w: 2400x2848 OK
+  [pc] 样式二标准计划书/100w: 2400x2848 OK
+  [pc] 样式二标准计划书/1000w: 2400x2848 OK
+  [pc] 样式一盈满鑫一页通/10w: 3000x3372 OK
+  [pc] 样式一盈满鑫一页通/100w: 3000x3372 OK
+  [pc] 样式一盈满鑫一页通/1000w: 3000x3372 OK
+  [mobile] 横向滚动 PASS docW=390 vw=390
+  [mobile] 样式二标准计划书/10w: 2400x2856 OK
+  [mobile] 样式二标准计划书/100w: 2400x2856 OK
+  [mobile] 样式二标准计划书/1000w: 2400x2856 OK
+  [mobile] 样式一盈满鑫一页通/10w: 3000x3420 OK
+  [mobile] 样式一盈满鑫一页通/100w: 3000x3420 OK
+  [mobile] 样式一盈满鑫一页通/1000w: 3000x3420 OK
+  样式一实时性: 克隆源年交保费 10w=100,000 | 100w=1,000,000 | 1000w=10,000,000
+  样式一实时性: 一页通年交保费值 10w=100,000 | 100w=1,000,000 | 1000w=10,000,000
+  样式一实时性: 重点结果 10w=重点结果：末行满期/现金价值数据：315,500 / 334,925 / 2.33% | 100w=重点结果：末行满期/现金价值数据：3,155,000 / 3,349,250 / 2.33% | 1000w=重点结果：末行满期/现金价值数据：31,550,000 / 33,492,500 / 2.33%
+  [实时性] PASS 三档年交保费随参数变化，未写死
+  [实时性] PASS 三档末行重点结果各不相同（数据随演算变化）
+  切换污染: onepage==onepage? True | standard==standard? True | onepage!=standard? True
+  [切换] PASS 两种样式切换后各自稳定、互不污染
+  微信预览 样式二标准计划书: 796x1688
+  微信预览 样式一盈满鑫一页通: 796x1688
+
+================ 验收汇总 ================
+产物总数: 18 张 / 11.6MB -> E:\workbuddyFIle\腾讯龙虾的成品\xinhua-hub\qa\screenshots\2026-08-06-dual-export
+Console 报错/警告: 2 条
+   [pc] warning: Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+   [mobile] warning: Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+问题项: 0
+存在需关注项 ⚠️
+清单: E:\workbuddyFIle\腾讯龙虾的成品\xinhua-hub\qa\screenshots\2026-08-06-dual-export\_manifest.txt

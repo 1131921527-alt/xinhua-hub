@@ -10,7 +10,7 @@
         {
           "name": "新华保险公司介绍 2026",
           "type": "link",
-          "description": "2026年最新版公司整体介绍 · 网页版可转发",
+          "description": "2026年最新版公司整体介绍 · 网页版便于查看",
           "url": "company-intro.html"
         },
         {
@@ -70,15 +70,15 @@
           "url": "calculator-hengxiang.html"
         },
         {
-          "name": "盈满鑫 · 产品解读（一页通+MDRT解读）",
+          "name": "盈满鑫 · 产品解读（一页通+重点解读）",
           "type": "card",
-          "description": "原版一页通PDF + 产品形态速览 + 核心卖点解读 + 客户画像 + 话术 + 在线测算入口",
+          "description": "原版一页通PDF + 产品形态速览 + 核心卖点解读 + 客户画像 + 表达参考 + 在线测算入口",
           "url": "intro-yingmanxin.html"
         },
         {
           "name": "中行2026年在售产品清单",
           "type": "card",
-          "description": "中国银行渠道2026年可销售的6款新华保险产品汇总表，含投保年龄、缴费规则、最低保费、保险期间及核心卖点",
+          "description": "中国银行渠道2026年在售的6款新华保险产品汇总表，含投保年龄、缴费规则、最低保费、保险期间及核心卖点",
           "url": "boc-product-list-2026.html"
         },
         {
@@ -90,7 +90,7 @@
         {
           "name": "宏愿人生投保指引（中国银行版）",
           "type": "card",
-          "description": "中国银行手机银行APP投保宏愿人生养老年金（分红型）全流程图解，含11步操作速览+28张步骤截图",
+          "description": "中国银行手机银行APP投保宏愿人生养老年金（分红型）全流程图解，含11步操作步骤速览",
           "url": "boc-hongyuan-guide.html"
         },
         {
@@ -551,14 +551,14 @@
     },
     {
       "id": "training",
-      "name": "培训资料",
+      "name": "资料资料",
       "icon": "🎓",
       "items": [
         {
-          "name": "新华在售产品培训",
+          "name": "新华在售产品说明",
           "type": "ppt",
-          "description": "2026年4月在售产品培训材料 · 在线浏览（无需下载）",
-          "url": "files/公司介绍/2604新华在售产品培训.html"
+          "description": "2026年4月在售产品说明材料 · 在线浏览（无需下载）",
+"url": "files/公司介绍/2604新华在售产品培训.html"
         },
         {
           "name": "新华保险投资实力介绍（新华资管）",

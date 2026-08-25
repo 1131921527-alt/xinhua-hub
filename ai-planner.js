@@ -14,6 +14,7 @@
     { names: ['宏泰','宏泰世家','s03'], file: 'calculator-hongtai.html', label: '宏泰世家', category: '分红型终身寿险', params: ['term'] },
     { names: ['宏愿','宏愿人生','s02'], file: 'calculator-hongyuan.html', label: '宏愿人生', category: '分红型养老年金', params: ['term','annuityAge','annuityMode'] },
     { names: ['宏禧来','s12','hongxilai'], file: 'calculator-hongxilai.html', label: '宏禧来', category: '分红型两全', params: ['period'] },
+    { names: ['宏达','宏达人生','s34','s341'], file: 'calculator-hongda.html', label: '宏达人生', category: '分红型年金', params: ['term','ge'] },
     { names: ['盈满鑫','yingmanxin'], file: 'calculator-yingmanxin.html', label: '盈满鑫', category: '分红型两全', params: ['payMode','period'] },
     { names: ['华彩','华彩鎏金','s24'], file: 'calculator-huacai.html', label: '华彩鎏金', category: '分红型年金', params: ['term'] },
     { names: ['宏坤','宏坤人生','s06'], file: 'calculator-hongkun.html', label: '宏坤人生', category: '分红型养老年金', params: ['term'] },
@@ -186,6 +187,9 @@
         {value:50, label:'50岁起领'}, {value:55, label:'55岁起领'}, {value:60, label:'60岁起领'},
         {value:65, label:'65岁起领'}, {value:70, label:'70岁起领'}
       ];
+      var geOptions = [
+        {value:0, label:'非个养'}, {value:1, label:'个人养老金'}
+      ];
       var options = {};
       var params = product.params || ['term'];
       if (params.indexOf('term') !== -1) options.term = termOptions;
@@ -202,6 +206,7 @@
         }
       }
       if (params.indexOf('annuityAge') !== -1) options.annuityAge = annuityAgeOptions;
+      if (params.indexOf('ge') !== -1) options.ge = geOptions;
       return options;
     }
 
@@ -212,6 +217,7 @@
       document.getElementById('apPeriodRow').style.display = params.indexOf('period') !== -1 ? 'flex' : 'none';
       document.getElementById('apAnnuityAgeRow').style.display = params.indexOf('annuityAge') !== -1 ? 'flex' : 'none';
       document.getElementById('apAnnuityModeRow').style.display = params.indexOf('annuityMode') !== -1 ? 'flex' : 'none';
+      document.getElementById('apGeRow').style.display = params.indexOf('ge') !== -1 ? 'flex' : 'none';
     }
 
     function showConfirmModal(result) {
@@ -256,6 +262,7 @@
       if (opts.payMode) fillSelect(document.getElementById('apPayModeSelect'), opts.payMode, result.payMode || defaultPayMode);
       if (opts.period) fillSelect(document.getElementById('apPeriodSelect'), opts.period, result.period || defaultPeriod);
       if (opts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), opts.annuityAge, result.annuityAge || defaultAnnuityAge);
+      if (opts.ge) fillSelect(document.getElementById('apGeSelect'), opts.ge, result.ge !== undefined ? result.ge : 0);
 
       // 年金领取方式
       if ((result.product.params || []).indexOf('annuityMode') !== -1) {
@@ -280,6 +287,7 @@
         if (newOpts.payMode) fillSelect(document.getElementById('apPayModeSelect'), newOpts.payMode, newDefaultPayMode);
         if (newOpts.period) fillSelect(document.getElementById('apPeriodSelect'), newOpts.period, newDefaultPeriod);
         if (newOpts.annuityAge) fillSelect(document.getElementById('apAnnuityAgeSelect'), newOpts.annuityAge, newDefaultAnnuityAge);
+        if (newOpts.ge) fillSelect(document.getElementById('apGeSelect'), newOpts.ge, 0);
         if ((newProduct.params || []).indexOf('annuityMode') !== -1) {
           document.getElementById('apAnnuityModeSelect').value = 'month';
         }
@@ -318,6 +326,8 @@
           val = parseInt(document.getElementById('apAnnuityAgeSelect').value);
         } else if (p === 'annuityMode') {
           val = document.getElementById('apAnnuityModeSelect').value;
+        } else if (p === 'ge') {
+          val = parseInt(document.getElementById('apGeSelect').value);
         }
         if (val !== null && val !== undefined && val !== '') {
           url += '&' + p + '=' + val;
@@ -501,6 +511,15 @@
       }
     }
 
+    // ge: 业务类型（个人养老金/非个养）
+    if (params.indexOf('ge') !== -1 && result.ge === undefined) {
+      if (/个人养老金|个养/.test(s)) {
+        result.ge = 1;
+      } else if (/非个养|普通版|非养老金/.test(s)) {
+        result.ge = 0;
+      }
+    }
+
     return result;
   }
 
@@ -525,6 +544,7 @@
     var payMode = parseInt(params.get('payMode'));
     var annuityAge = parseInt(params.get('annuityAge'));
     var annuityMode = params.get('annuityMode');
+    var ge = parseInt(params.get('ge'));
 
     // 延迟执行，等页面生成函数定义好
     setTimeout(function() {
@@ -538,6 +558,19 @@
           btns.forEach(function(b) {
             b.classList.toggle('active', parseInt(b.dataset.value) === gender);
           });
+        }
+
+        // 设置业务类型（个养/非个养）
+        if (ge === 0 || ge === 1) {
+          if (typeof currentGE !== 'undefined') {
+            currentGE = ge;
+          }
+          var geBtns = document.querySelectorAll('#geGroup .opt-btn');
+          if (geBtns.length) {
+            geBtns.forEach(function(b) {
+              b.classList.toggle('active', parseInt(b.dataset.value) === ge);
+            });
+          }
         }
 
         // 设置年龄
@@ -1060,9 +1093,13 @@
     else if (mode === '5y75') baseAge = 75;
     else if (mode === '5y') baseAge = 60; // legacy fallback
 
-    rows.forEach(function(row) {
+    var lastIdx = rows.length - 1;
+    rows.forEach(function(row, idx) {
       var cells = row.querySelectorAll('td');
       if (cells.length <= ageColIndex) return;
+
+      // 最后一年（满期/合同终止年）强制显示
+      if (idx === lastIdx) { row.style.display = ''; return; }
 
       var ageText = (cells[ageColIndex].textContent || '').trim().replace(/[^0-9]/g, '');
       var age = parseInt(ageText);

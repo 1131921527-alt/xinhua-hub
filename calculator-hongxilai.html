@@ -9,6 +9,7 @@
 <script src="ai-planner.js"></script>
 <script src="html2canvas.min.js"></script>
 <script src="product-rules.js"></script>
+<script src="display-rules.js"></script>
 <style>
 :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -328,12 +329,14 @@ body.capturing .intro-row > .section:first-child{margin-right:0 !important;}
 let currentGender = 1;
 let currentRate = 0.025;
 let DATA = null;
-let viewMode = '60';
+let viewMode = '5y60';
+let manualView = false;
 
-const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
+const VIEW_MODE_LABELS = { all: '全部显示', '5y60': '60岁后每5年', '5y70': '70岁后每5年', '5y75': '75岁后每5年' };
 
 function toggleViewMode(){
-  const modes = ['all', '60', '70', '75'];
+  manualView = true;
+  const modes = ['all', '5y60', '5y70', '5y75'];
   const idx = modes.indexOf(viewMode);
   viewMode = modes[(idx + 1) % modes.length];
   document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
@@ -403,13 +406,12 @@ function generate(){
   document.getElementById('caseInfo').innerHTML = `VIP${currentGender===1?'女士':'先生'}，今年${age}岁，购买${fmt(premium)}元${period}年期宏禧来 （分红型），预计满期总利益<span class="em" style="color:var(--primary)">${fmt(Math.round(last.survival))}</span>元`;
 
   // Render table
-  let displayRows = rows.filter(r => {
-    if(viewMode === 'all') return true;
-    if(viewMode === '60') return r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0);
-    if(viewMode === '70') return r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0);
-    if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
-    return true;
-  });
+  if (!manualView) {
+    viewMode = window.getDefaultDisplayMode('hongxilai', age);
+    const btn = document.getElementById('viewModeBtn');
+    if (btn) btn.textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
+  }
+  let displayRows = window.filterDisplayRows(rows, viewMode);
   let html = '';
   // 储备期读取统一产品规则配置（宏禧来：dynamic，规则 rate<=0）
   const RULE = window.getProductRule('hongxilai');

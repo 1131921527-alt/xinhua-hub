@@ -1,8 +1,8 @@
 {
-  "version": "1.0",
-  "updated": "2026-08-05",
+  "version": "1.1",
+  "updated": "2026-08-24",
   "description": "新华Hub 知识资料库课程数据结构。新增课程只需在此追加一条 course，training.html 自动渲染，无需改页面代码。",
-  "categories": ["产品说明", "分红解读", "表达参考", "公司实力", "知识卡"],
+  "categories": ["产品说明", "产品对比", "分红解读", "营销方法", "表达参考", "公司实力", "知识卡"],
   "courses": [
     {
       "id": "prod-train-2604",
@@ -93,6 +93,66 @@
       "notes": "",
       "cover": "assets/preview/hongyuan-card.jpg",
       "link": "insurance-knowledge-card.html"
+    },
+    {
+      "id": "zhaohang-compare",
+      "title": "招行在架产品对比分析（18款）",
+      "date": "2026-05",
+      "instructor": "新华保险",
+      "category": "产品对比",
+      "tags": ["产品对比", "18款横评", "宏御世家", "偿付能力"],
+      "summary": "招行渠道在架18款增额分红终身寿全维度对比：回本速度、现金价值、减保规则、公司梯队、增值服务。",
+      "ppt": "files/产品对比/招行在架产品对比分析.pptx",
+      "page": "files/产品对比/training-zhaohang-18-products-comparison.html",
+      "recording": "",
+      "notes": "",
+      "cover": "assets/preview/hongyu-card.jpg",
+      "link": "files/产品对比/training-zhaohang-18-products-comparison.html"
+    },
+    {
+      "id": "marketing-dual-drive",
+      "title": "行外吸金与保险营销双轮驱动",
+      "date": "2026-08",
+      "instructor": "新华课程",
+      "category": "营销方法",
+      "tags": ["行外吸金", "KYC四步", "客户价值矩阵", "客户筛选", "保单架构"],
+      "summary": "存款产能公式、四大吸金场景、客户价值矩阵、KYC速成四步、12类客户筛选、年金终身寿架构图谱。",
+      "ppt": "files/培训课程/main-training.pptx",
+      "page": "files/培训课程/training-marketing-dual-drive.html",
+      "recording": "",
+      "notes": "",
+      "cover": "assets/preview/hongan-card.jpg",
+      "link": "files/培训课程/training-marketing-dual-drive.html"
+    },
+    {
+      "id": "div-inv-intro",
+      "title": "公司分红与投资介绍",
+      "date": "2026",
+      "instructor": "新华保险",
+      "category": "公司实力",
+      "tags": ["中投汇金", "新华资管", "红利实现率", "标杆项目", "A股同业对比"],
+      "summary": "公司底盘、中投汇金股东背景、新华资管长期业绩、红利实现率132.6%/156.1%、鸿鹄银联等标杆项目。",
+      "ppt": "files/公司介绍/公司分红投资介绍.pdf",
+      "page": "files/公司介绍/training-dividend-investment-intro.html",
+      "recording": "",
+      "notes": "",
+      "cover": "assets/preview/yingmanxin-card.jpg",
+      "link": "files/公司介绍/training-dividend-investment-intro.html"
+    },
+    {
+      "id": "div-report-fts",
+      "title": "分红专题汇报（制度+五年数据）",
+      "date": "2026",
+      "instructor": "新华保险",
+      "category": "分红解读",
+      "tags": ["监管制度", "红利实现率", "9家同业对比", "投资配置", "70%分配"],
+      "summary": "三份监管文件解读、逐产品五年实现率、9家同业五年对比大表、投资配置结构与十年收益率。",
+      "ppt": "files/分红资料/新华保险分红专题汇报fts.pdf",
+      "page": "files/分红资料/training-dividend-report-fts.html",
+      "recording": "",
+      "notes": "",
+      "cover": "assets/preview/hongyuan-card.jpg",
+      "link": "files/分红资料/training-dividend-report-fts.html"
     }
   ]
 }

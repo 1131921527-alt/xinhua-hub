@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>行外吸金与保险营销双轮驱动 · 新华保险资料库</title>
+<style>
+:root{
+  --blue-900:#1E3A8A; --blue-800:#1E40AF; --blue-700:#1D4ED8;
+  --blue-600:#2563EB; --blue-500:#3B82F6; --blue-300:#93C5FD;
+  --blue-100:#DBEAFE; --blue-50:#EFF6FF;
+  --ink:#0F172A; --ink-2:#334155; --ink-3:#64748B; --ink-4:#94A3B8;
+  --white:#FFFFFF; --line:#E6EDF7; --line-2:#DBE6F5;
+  --shadow:0 10px 30px rgba(30,58,138,.10); --shadow-sm:0 4px 14px rgba(30,58,138,.08);
+  --gold:#D97706; --gold-bg:#FFF7ED; --green:#16A34A; --green-bg:#F0FDF4;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F4F8FE;color:var(--ink);line-height:1.7;word-break:break-word;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:linear-gradient(120deg,var(--blue-900),var(--blue-600));color:#fff;
+  box-shadow:0 4px 18px rgba(30,58,138,.25);}
+.topbar .back{font-size:13px;opacity:.92;white-space:nowrap;padding:6px 8px;border-radius:8px;}
+.topbar .back:active{background:rgba(255,255,255,.15);}
+.topbar .t{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .clock{font-size:12px;font-variant-numeric:tabular-nums;opacity:.95;white-space:nowrap;
+  background:rgba(255,255,255,.14);padding:5px 9px;border-radius:20px;}
+.topbar .dl{font-size:13px;font-weight:600;white-space:nowrap;background:#fff;color:var(--blue-700);
+  padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;cursor:pointer;border:none;}
+.topbar .dl:active{transform:scale(.96);}
+.subnav{position:sticky;top:53px;z-index:55;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;
+  display:flex;gap:6px;padding:8px 12px;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{height:0;}
+.subnav a{font-size:12.5px;color:var(--ink-2);white-space:nowrap;padding:6px 11px;border-radius:18px;
+  background:var(--blue-50);border:1px solid var(--line);}
+.subnav a:active{background:var(--blue-100);}
+#capture{background:#F4F8FE;padding-bottom:10px;}
+.hero{position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,#1E3A8A 0%,#1D4ED8 55%,#2563EB 100%);
+  padding:40px 20px 46px;}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(38px);opacity:.45;}
+.hero .b1{width:230px;height:230px;background:#60A5FA;top:-70px;right:-50px;}
+.hero .b2{width:180px;height:180px;background:#1E40AF;bottom:-70px;left:-40px;}
+.hero .inner{position:relative;max-width:1000px;margin:0 auto;}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:1px;background:rgba(255,255,255,.16);
+  padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.hero h1{font-size:26px;font-weight:800;line-height:1.3;letter-spacing:.5px;}
+.hero .sub{margin-top:10px;font-size:15px;opacity:.92;max-width:680px;}
+.hero .badge{margin-top:18px;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  padding:9px 14px;border-radius:12px;font-size:13px;}
+.hero .badge b{font-size:15px;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px;}
+.sec{padding:30px 0 6px;}
+.sec-head{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+.sec-head .ic{width:38px;height:38px;border-radius:11px;background:var(--blue-100);
+  color:var(--blue-700);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;}
+.sec-head h2{font-size:20px;font-weight:800;color:var(--ink);}
+.sec-head .en{font-size:12px;color:var(--ink-4);font-weight:600;letter-spacing:.5px;}
+.lead{color:var(--ink-2);font-size:15px;margin-bottom:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;
+  box-shadow:var(--shadow-sm);transition:transform .15s;}
+.card:hover{transform:translateY(-3px);}
+.card .ct{font-size:16px;font-weight:800;color:var(--blue-800);margin-bottom:6px;}
+.card .cd{font-size:13.5px;color:var(--ink-2);line-height:1.6;}
+.card .pill{display:inline-block;margin-top:10px;font-size:12px;color:var(--blue-700);
+  background:var(--blue-50);border:1px solid var(--line-2);padding:4px 10px;border-radius:14px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:6px 0 4px;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+.stat:before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue-600),var(--blue-500));}
+.stat .num{font-size:26px;font-weight:800;color:var(--blue-700);font-variant-numeric:tabular-nums;line-height:1.2;}
+.stat .num small{font-size:14px;font-weight:700;}
+.stat .lb{margin-top:6px;font-size:13px;color:var(--ink-2);}
+.stat .sb{margin-top:2px;font-size:11.5px;color:var(--ink-4);}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0;border-radius:14px;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+table.tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px;background:#fff;}
+table.tbl thead th{background:linear-gradient(120deg,var(--blue-800),var(--blue-600));color:#fff;
+  font-weight:700;padding:11px 12px;text-align:left;white-space:nowrap;font-size:13px;}
+table.tbl tbody td{padding:10px 12px;border-top:1px solid var(--line);color:var(--ink-2);vertical-align:top;}
+table.tbl tbody tr:nth-child(even){background:var(--blue-50);}
+table.tbl tbody tr.hl{background:var(--blue-100);}
+table.tbl tbody tr.hl td{color:var(--blue-800);font-weight:600;}
+.tbl-cap{font-size:12.5px;color:var(--ink-4);margin:8px 2px 0;}
+.callout{border-radius:14px;padding:15px 16px;margin:14px 0;font-size:14px;line-height:1.7;
+  display:flex;gap:12px;align-items:flex-start;}
+.callout .ci{font-size:18px;flex:none;line-height:1.4;}
+.callout.info{background:var(--blue-50);border:1px solid var(--line-2);color:var(--ink-2);}
+.callout.key{background:var(--blue-100);border:1px solid var(--blue-300);color:var(--blue-800);font-weight:600;}
+.callout.warn{background:#FFF7ED;border:1px solid #FED7AA;color:#9A3412;}
+.callout.ok{background:var(--green-bg);border:1px solid #BBF7D0;color:#166534;}
+.steps{counter-reset:s;margin:8px 0;}
+.steps .st{position:relative;padding:12px 14px 12px 52px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow-sm);}
+.steps .st:before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:12px;
+  width:28px;height:28px;border-radius:50%;background:var(--blue-600);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:14px;}
+.steps .st b{color:var(--blue-800);}
+.formula{background:#fff;border:2px dashed var(--blue-300);border-radius:16px;padding:20px 16px;
+  text-align:center;margin:10px 0;box-shadow:var(--shadow-sm);}
+.formula .fx{font-size:15.5px;font-weight:800;color:var(--blue-800);line-height:1.8;}
+.formula .fx b{color:#B45309;}
+.quote{background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:14px;
+  padding:16px 18px;margin:12px 0;box-shadow:var(--shadow-sm);}
+.quote .qt{font-size:13px;color:var(--gold);font-weight:800;margin-bottom:8px;}
+.quote .qb{font-size:14px;color:var(--ink-2);line-height:1.8;}
+.matrix{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:8px 0;}
+.mx{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow-sm);}
+.mx .mt{font-size:15px;font-weight:800;margin-bottom:6px;}
+.mx .md{font-size:13px;color:var(--ink-2);line-height:1.7;}
+.mx.core{border-left:5px solid #B45309;background:#FFFBEB;}
+.mx.keyp{border-left:5px solid var(--blue-600);}
+.mx.pot{border-left:5px solid var(--ink-3);}
+.mx .pill{display:inline-block;margin-top:8px;font-size:11.5px;background:var(--blue-50);color:var(--blue-700);
+  border:1px solid var(--line-2);padding:3px 9px;border-radius:12px;}
+.role{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;box-shadow:var(--shadow-sm);overflow:hidden;}
+.role .rh{padding:12px 16px;background:var(--blue-50);font-weight:800;color:var(--blue-800);font-size:15px;
+  display:flex;align-items:center;gap:8px;}
+.role .rb{padding:12px 16px;font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+.role .rb b{color:var(--blue-800);}
+.list-check{background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;margin:8px 0;box-shadow:var(--shadow-sm);}
+.list-check .li{display:flex;gap:10px;padding:9px 8px;border-bottom:1px dashed var(--line);font-size:13.5px;color:var(--ink-2);line-height:1.6;}
+.list-check .li:last-child{border-bottom:none;}
+.list-check .li .no{flex:none;width:24px;height:24px;border-radius:50%;background:var(--blue-100);color:var(--blue-700);
+  font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.list-check .li b{color:var(--ink);}
+.foot{margin-top:26px;background:linear-gradient(120deg,var(--blue-900),var(--blue-700));
+  color:#fff;padding:26px 20px 34px;text-align:center;}
+.foot .slogan{font-size:17px;font-weight:800;letter-spacing:1px;}
+.foot .slogan small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:4px;letter-spacing:0;}
+.foot .disc{margin-top:14px;font-size:11.5px;line-height:1.7;opacity:.82;max-width:720px;margin-left:auto;margin-right:auto;}
+@media (max-width:560px){
+  .hero h1{font-size:22px;}
+  .sec-head h2{font-size:18px;}
+  .topbar .clock{display:none;}
+  table.tbl{min-width:520px;}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<input type="hidden" id="pageName" value="行外吸金与保险营销双轮驱动培训">
+<div class="topbar">
+  <a class="back" href="../../index.html">← 返回</a>
+  <div class="t">行外吸金与保险营销双轮驱动</div>
+  <div class="clock"><span id="clockText">--</span></div>
+  <button class="dl" id="dlBtn" onclick="downloadImage()">⬇ 下载图片</button>
+</div>
+<nav class="subnav"><div class="wrap" style="display:flex;gap:6px;padding:0;"><a href="#formula">产能公式</a><a href="#four-scene">四大场景</a><a href="#phone">电话营销</a><a href="#matrix">客户价值矩阵</a><a href="#kyccore">KYC实操</a><a href="#three-forms">三张表</a><a href="#family">结构图四要点</a><a href="#structure">保单架构图谱</a><a href="#logic">分红险底层逻辑</a><a href="#platform">三大出单平台</a><a href="#screening">12类客户筛选</a><a href="#salon">沙龙模式</a></div></nav>
+<div id="capture">
+  <header class="hero"><span class="blob b1"></span><span class="blob b2"></span>
+    <div class="inner"><span class="tag">营销方法 · 实战培训</span><h1>行外吸金与保险营销双轮驱动</h1><div class="sub">实战培训完整解读 · 存款产能公式 / KYC四步法 / 客户价值矩阵 / 12类客户筛选 / 年金终身寿架构图谱</div><div class="badge">🎯 <b>双轮驱动</b>&nbsp; 行外吸金 × 保险营销 · 35页课件 + 讲师要点</div></div>
+  </header>
+
+  <section class="sec" id="formula"><div class="wrap">
+    <div class="sec-head"><div class="ic">🧮</div><div><h2>一、一切从一个公式开始</h2><div class="en">THE FORMULA</div></div></div>
+    <p class="lead">整场培训的地基是这一个公式。它把「存款规模怎么提升」拆成了可操作的三个乘数——机会、成交率、主动性，任何一项为零，结果就是零。</p>
+    <div class="formula"><div class="fx">存款规模产能提升 =（<b>厅堂营销机会</b> + <b>存量客户营销机会</b> + <b>外拓机会</b>）× <b>营销成交率</b> × <b>营销主动性</b></div></div>
+    <div class="grid">
+      <div class="card"><div class="ct">厅堂阵地 + 联动营销</div><div class="cd">客户就在眼前，抓住每一次接触。厅堂是「守株待兔」的主阵地，配合联动转介。</div><span class="pill">机会一</span></div>
+      <div class="card"><div class="ct">存量深度经营 + 优质客户走访</div><div class="cd">最被低估的金矿。已有客户的资产分布、他行到期情况，都是行外吸金的入口。</div><span class="pill">机会二</span></div>
+      <div class="card"><div class="ct">批量外拓推进</div><div class="cd">走出去。商圈、社区、企业的批量获客，是新增规模的主要来源。</div><span class="pill">机会三</span></div>
+      <div class="card"><div class="ct">技能 × 主动状态</div><div class="cd">公式后两项管「人」：营销技能靠训练固化，主动状态靠管理和氛围维持。方法和意愿缺一不可。</div><span class="pill">人的因素</span></div>
+    </div>
+    <div class="callout key"><span class="ci">💡</span><div><b>公式怎么用：</b>业绩不达标时，别笼统说「不努力」。先诊断：是<b>机会</b>不够（没名单、没流量），还是<b>成交率</b>不够（不会讲），还是<b>主动性</b>不够（不敢讲）？三个原因对应三套完全不同的解法。</div></div>
+  </div></section>
+
+  <section class="sec" id="four-scene"><div class="wrap">
+    <div class="sec-head"><div class="ic">🗺️</div><div><h2>二、行外吸金四大场景与对应策略</h2><div class="en">FOUR SCENARIOS</div></div></div>
+    <p class="lead">课程把行外吸金拆成四个典型场景，每个场景都有明确的客户特征和打法。核心思路：资产提升靠面谈，到期客户靠电话，配置吸金靠投教。</p>
+    <div class="matrix">
+      <div class="mx core"><div class="mt">场景一：行外吸金 · 老客户新资金</div><div class="md"><b>特征：</b>存量客户，资金在他行。<br><b>策略：</b>关键四句KYC（面谈策略）。<br><b>要点：</b>任何见面都记得做KYC——意识 + 四句话，把「他行还有多少钱、什么时候到期」问出来。</div><span class="pill">面谈策略</span></div>
+      <div class="mx keyp"><div class="mt">场景二：资产提升 · 临界客户</div><div class="md"><b>特征：</b>升金有礼，AUM临界（如40-50万）客户。<br><b>策略：</b>「名单制营销」+ 电话营销。<br><b>要点：</b>差一点就够档位的客户最有动力，配上权益钩子做定向邀约。</div><span class="pill">电话策略</span></div>
+      <div class="mx keyp"><div class="mt">场景三：到期求新增</div><div class="md"><b>特征：</b>理财/存单到期客户。<br><b>策略：</b>电话策略——<b>单笔求凑整，总额求凑整</b>。<br><b>要点：</b>到期就是最好的接触理由，顺理成章问「这笔钱怎么安排」。</div><span class="pill">电话策略</span></div>
+      <div class="mx pot"><div class="mt">场景四：资产配置吸金</div><div class="md"><b>特征：</b>有配置意识、资金分散的客户。<br><b>策略：</b>投教 + KYC + 财富金字塔实战训练。<br><b>要点：</b>用资产配置的框架做投资者教育，配置需求自然带出行外资金。</div><span class="pill">面谈策略</span></div>
+    </div>
+    <div class="callout info"><span class="ci">💡</span><div><b>关键四句KYC</b>是贯穿全场的基本功：任何与客户的见面（哪怕是办业务顺带聊两句），都要有意识地完成四句关键提问，持续摸清客户的资金全景。KYC不是一次性的问卷，是每次见面的习惯动作。</div></div>
+  </div></section>
+
+  <section class="sec" id="phone"><div class="wrap">
+    <div class="sec-head"><div class="ic">📞</div><div><h2>三、电话营销产能提升：六个管理动作</h2><div class="en">PHONE MARKETING</div></div></div>
+    <p class="lead">电话是银行人最常用的触达工具，但产能差距巨大。课程给出的答案是「能力复制」——把高产出的做法固化成可复制的项目流程。</p>
+    <div class="steps">
+      <div class="st"><b>名单</b><br>先解决「打给谁」。名单质量决定一半产能，按到期日、临界档位、大额活期等维度提前排好。</div>
+      <div class="st"><b>沉浸式打电话：固化「黄金一小时」</b><br>每天固定一到两小时全员集中外呼，形成节奏和氛围，避免「有空才打」。</div>
+      <div class="st"><b>练习电话技巧</b><br>开场白、异议应对、邀约话术，都要练到脱稿。技巧是练出来的，不是背出来的。</div>
+      <div class="st"><b>准确预期：定目标</b><br>每天打多少通、约到几个、促成几个，目标要具体到数字，预期才可管理。</div>
+      <div class="st"><b>训练模板固化（每周一练，分散练习）</b><br>把有效话术沉淀成模板，每周固定练习一次，分散在日常工作里持续打磨。</div>
+      <div class="st"><b>复盘</b><br>打完必须复盘：哪句被挂、哪个异议没接住、哪个约访成功了。不复盘的外呼只是体力活。</div>
+    </div>
+    <div class="callout ok"><span class="ci">✅</span><div><b>同时配套的功课：</b>外呼前必须摸清<b>客户的金融产品分布和他行产品到期情况</b>——带着情报打电话，接通率和转化率完全不是一个量级。</div></div>
+  </div></section>
+
+  <section class="sec" id="matrix"><div class="wrap">
+    <div class="sec-head"><div class="ic">🧩</div><div><h2>四、客户价值矩阵：存量客户分层经营</h2><div class="en">CUSTOMER VALUE MATRIX</div></div></div>
+    <p class="lead">存量客户不是一碗大锅饭。课程用两个维度——<b>AUM（管理资产规模）</b>和<b>重点产品配置数量</b>——把客户放进矩阵，分成三类，各自用不同打法。</p>
+    <div class="matrix">
+      <div class="mx core"><div class="mt">核心客户（A区）</div><div class="md"><b>特征：</b>AUM高、中收贡献高（重点产品配置多）。<br><b>目标：</b>客户MGM（转介绍）。<br><b>策略：</b>定期开展专业账户检视，积极响应需求，提升满意度，吸引客户转介绍。<br><b>重点产品：</b>保险、理财、资管钩子产品。</div><span class="pill">要中收、要效益</span></div>
+      <div class="mx keyp"><div class="mt">重点客户（B/D区 与 C/E区）</div><div class="md"><b>B/D区：</b>AUM高、中收贡献不足 → 目标是中收创造，用专业资产配置方式销售，逐步提升价值贡献，主推保险等高中收产品。<br><b>C/E区：</b>AUM不高、中收贡献高 → 目标是AUM提升，关注行外资金，提升「钱包份额」，主推存款、理财、大额存单。</div><span class="pill">向核心迁徙</span></div>
+      <div class="mx pot"><div class="mt">潜力客户（F/G区）</div><div class="md"><b>特征：</b>AUM不高、中收贡献不高。<br><b>策略：</b>潜力价值高的客户做资产配置式服务、吸引行外资金；价值有限的客户日常维护保持联络。持续关注、长期培育。</div><span class="pill">长期培育</span></div>
+    </div>
+    <div class="callout info"><span class="ci">📌</span><div><b>口径说明：</b>重点产品包括理财、保险、资管信托、基金、贵金属、国债、三方存管共7类；按客户配置数量分为 0-25 / 25-50 / 50-75 / 75-100 分位（分别对应配置0、1、2、3种及以上）。另有「生命周期」维度：AUM 40-50万的<b>临界客户</b>要加强联系，用服务和活动拉近关系，通过钩子产品吸引行外资金。</div></div>
+    <div class="quote"><div class="qt">讲师课堂要点</div><div class="qb">存量经营4项 + 潜客提升2项，都是<b>排好序的名单</b>——前6个必须做；后面9个用四步法做产能创收。存量经营里，「长维护」最重要。</div></div>
+  </div></section>
+
+  <section class="sec" id="kyccore"><div class="wrap">
+    <div class="sec-head"><div class="ic">🎤</div><div><h2>五、大客户KYC：两种面谈 + 速成四步</h2><div class="en">KYC IN PRACTICE</div></div></div>
+    <p class="lead">大客户的KYC分「非正式」和「正式」两种场景，课程给了两种场景各自的技能包。</p>
+    <div class="role"><div class="rh">🍵 非正式面谈（日常接触）</div><div class="rb"><b>1. 超强沟通方向感</b>——聊天就像填空题，每次闲聊都带着目的，聊完手里多一条信息；<br><b>2. 柔性沟通技巧</b>——善用开放式问题（打开话题）+ 封闭式问题（锁定确认）的组合；<br><b>3. 目标明确：五次成型</b>——信息不是一次问完的，规划好五次接触，每次补一块拼图。</div></div>
+    <div class="role"><div class="rh">🤝 正式面谈（约谈）</div><div class="rb"><b>1. 专业的自我介绍</b>——先确定沟通主场，让客户认可你的专业身份；<br><b>2. 9大类52个细项的梳理</b>——用完整的信息维度表做深度KYC；<br><b>3. 专业梳理关注点</b>——从信息里提炼出客户真正的风险点和需求点。</div></div>
+    <div class="sec-head" style="margin-top:20px;"><div class="ic">⚡</div><div><h2 style="font-size:17px;">高效KYC速成四步（一面成单）</h2><div class="en">4-STEP KYC</div></div></div>
+    <div class="steps">
+      <div class="st"><b>反客为主（有效的自我介绍）</b><br>不是被客户问，而是用专业身份引导对话节奏，把「推销者」变成「服务提供者」。</div>
+      <div class="st"><b>知己知彼（深度KYC）</b><br>用9大类52项维度表全面摸底，覆盖家庭、资产、负债、收入、意愿等。</div>
+      <div class="st"><b>梳理 - 分析 - 总结</b><br>把零散信息整理成家庭全景，分析出矛盾点和缺口，向客户做专业总结。</div>
+      <div class="st"><b>方案设计和落地</b><br>基于梳理结果给方案，趁热推动成交。</div>
+    </div>
+    <div class="quote"><div class="qt">自我介绍模板（反客为主示范）</div><div class="qb">「张总，我们银行最近在做客户服务升级活动，年底会给VIP高净值客群提供<b>家庭资产检视服务</b>。过去5年里，我们团队已经为超过<b>1000个高净值家庭</b>提供过资产配置和方案设计，积累了不少经验，帮客户清晰分析现在和未来的财富管理关注点，提前做整体预案。您要不要体验一下我们的资产配置服务？我们的资产配置服务一般分四步……」</div><div class="qb" style="margin-top:8px;font-size:12.5px;color:var(--ink-3);">注意这套话术的骨架：活动由头 → 服务定位 → 背书数字 → 引导体验 → 引出四步曲。换成自己的语言，骨架不变。</div></div>
+  </div></section>
+
+  <section class="sec" id="three-forms"><div class="wrap">
+    <div class="sec-head"><div class="ic">📊</div><div><h2>六、深度KYC的三张工具表</h2><div class="en">THREE FORMS</div></div></div>
+    <p class="lead">深度KYC不是想到哪问到哪，课程给出了三张结构化工具表，把客户的家底画出来。</p>
+    <div class="role"><div class="rh">👨‍👩‍👧 表一：家庭结构图</div><div class="rb">以客户为中心补齐<b>四层关系：父辈 → 平辈 → 子辈 → 孙辈</b>。画法有讲究：同一层有横线代表婚姻关系，无横线是兄弟姐妹；两根横线代表两段婚姻。约定：<b>父母已故的不画兄弟姐妹；离异无子女的不画前妻/夫</b>。<br><b>关键动作：</b>聊结构图时一定要适时了解收入情况——父辈了解退休金、社保、存量资金；平辈了解经济状况；核心家庭了解夫妻双方收入结构；子女了解年龄、学校、支出。</div></div>
+    <div class="role"><div class="rh">💰 表二：家庭年收支结构图</div><div class="rb">收入端按<b>来源（企业 / 房租 / 金融 / 其他）× 金额 × 趋势</b>填列；支出端按<b>贷款 / 教育 / 赡养 / 生活</b>填列；最后算出<b>年结余</b>。<br>看点：收入是否过度依赖单一来源？趋势是升是降？结余能力决定客户能拿出多少钱做长期规划。</div></div>
+    <div class="role"><div class="rh">🏦 表三：家庭资产负债表</div><div class="rb">资产端：房产 / 股权 / 金融产品 / 其他，关注<b>市值与分布</b>——特别留意有没有海外资产、孩子有没有在海外。<br>负债端：企业抵押贷 / 民间借贷 / 按揭贷款 / 其他，<b>主要看风险点在哪里，特别关注家企混同</b>（公司债务连带家庭资产的风险）。</div></div>
+  </div></section>
+
+  <section class="sec" id="family"><div class="wrap">
+    <div class="sec-head"><div class="ic">🔬</div><div><h2>七、家庭结构图实战：四个分析维度</h2><div class="en">FAMILY STRUCTURE ANALYSIS</div></div></div>
+    <p class="lead">画完图只是第一步，会分析才算真本事。课程给了四个分析维度。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">1. 关系结构</div><div class="cd">横看婚姻，纵看传承。识别两类风险：<b>身故风险</b>（经济支柱倒了怎么办）和<b>传承风险</b>（财富按什么路径给到想给的人）。</div><span class="pill">婚姻与传承</span></div>
+      <div class="card"><div class="ct">2. 年龄结构</div><div class="cd">标注每一个辈分每一个人的年龄，找出「时间点」和<b>刚需冲突</b>——几个人集中用钱的时间段。重点关注父母与子女年龄差30岁以上的家庭。</div><span class="pill">时间冲突</span></div>
+      <div class="card"><div class="ct">3. 身份背景</div><div class="cd">国籍、税收身份等，可能带来税收成本增加。涉外身份家庭对保单架构的合规性要求更高。</div><span class="pill">税务身份</span></div>
+      <div class="card"><div class="ct">4. 行业背景</div><div class="cd">客户的核心收入来源是什么？从今天到未来核心收入的走势如何？收入确定性越高，越适合长期交费规划。</div><span class="pill">收入走势</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="structure"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏛️</div><div><h2>八、年金险 / 终身寿架构解剖图谱</h2><div class="en">POLICY STRUCTURE MAP</div></div></div>
+    <p class="lead">这是全场培训信息密度最高的一张图：把一份保单拆成<b>投保人、被保险人、受益人</b>三个角色，再从<b>资产权利、法律权利、税收架构</b>三个维度看每个角色各有什么、各担什么。讲高客方案前，这张图必须吃透。</p>
+    <div class="role"><div class="rh">👤 投保人（Policy Owner）——保单的主人</div><div class="rb"><b>资产权利：</b>现金价值、分红、万能账户——保单里所有的「钱」原则上都归投保人。<br><b>法律权利：</b>参与指定受益人的权利、终止合同的权利、保单借款的权利、减额交清的权利、万能账户部分领取与年金转换权利。<br><b>税收架构：</b>资本利得税 / 所得税、遗产税、赠与税的考量点主要落在投保人身上。</div></div>
+    <div class="role"><div class="rh">🛡️ 被保险人（Insured Person）——保险标的</div><div class="rb"><b>资产权利：</b>生存年金、特别生存金、满期金——所有「活着领」的钱归被保险人。<br><b>法律权利：</b>指定受益人的权利（人身属性）。<br><b>税收架构：</b>所得税考量。</div></div>
+    <div class="role"><div class="rh">🎯 受益人（Beneficiary）——身故金的去向</div><div class="rb"><b>资产权利：</b>身故受益金（保费相关）。<br><b>法律权利：</b>放弃受益的权利。<br><b>税收架构：</b>遗产税、所得税考量（按现行政策，人身保险身故理赔金免征个税，但政策变化需持续关注）。</div></div>
+    <div class="callout key"><span class="ci">💡</span><div><b>这张图怎么用：</b>给客户讲方案时，先问清「这笔钱您希望谁控制、谁领取、谁继承」——三个问题的答案，直接决定投保人 / 被保险人 / 受益人怎么安排。架构对了，收益数字才有意义；架构错了，数字再高也留不住。</div></div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>合规提醒：</b>涉及税务的分析（遗产税、赠与税等）属于前瞻性讨论，我国目前未开征遗产税。对客户表达时应说明这是「架构上的前瞻安排」，不得渲染税负恐慌。</div></div>
+  </div></section>
+
+  <section class="sec" id="logic"><div class="wrap">
+    <div class="sec-head"><div class="ic">🌊</div><div><h2>九、分红保险的底层逻辑：行业盘子与需求匹配</h2><div class="en">WHY DIVIDEND INSURANCE</div></div></div>
+    <p class="lead">讲分红险之前，先看清整个行业的资金盘子——客户对「保险公司拿钱去干嘛」的疑虑，用行业级数据回答最有力。</p>
+    <div class="stats">
+      <div class="stat"><div class="num">36.23<small>万亿</small></div><div class="lb">保险业资金运用余额</div><div class="sb">截至2025年6月末</div></div>
+      <div class="stat"><div class="num">+8.9<small>%</small></div><div class="lb">较年初增长</div><div class="sb">上半年净增2.98万亿</div></div>
+      <div class="stat"><div class="num">32.60<small>万亿</small></div><div class="lb">人身险公司资金运用余额</div><div class="sb">占行业90.0%</div></div>
+      <div class="stat"><div class="num">22.2<small>%</small></div><div class="lb">占全市场163.06万亿AUM比重</div><div class="sb">已超越公募基金</div></div>
+    </div>
+    <p class="lead" style="margin-top:18px;">增长动力：负债端保费规模持续增长 + 资产端公允价值上升。保险资金已经是资本市场的压舱石级力量——这是分红险「长期、稳健」属性的行业底座。</p>
+    <div class="sec-head" style="margin-top:10px;"><div class="ic">🔗</div><div><h2 style="font-size:17px;">产品卖点与客户需求的一一对应</h2><div class="en">NEEDS MATCHING</div></div></div>
+    <p class="lead">课程用一张「风险—卖点」对照表，把客户的每类担忧对应到产品的解法。开口讲产品之前，先找到客户落在哪一格。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>客户的担忧 / 需求</th><th>产品的对应卖点</th></tr></thead>
+      <tbody>
+        <tr><td>利率持续下行，存款收益越来越低</td><td>1.75% 保底写进合同，长期锁定</td></tr>
+        <tr><td>理财暴雷、本金亏损的风险</td><td>保底 + 分红机制，下行有底</td></tr>
+        <tr><td>收益上行怕踏空</td><td>分红部分分享投资成果，上行不封顶</td></tr>
+        <tr><td>临时要用钱</td><td>20-80% 灵活度（减保 / 保单贷款）</td></tr>
+        <tr><td>股基操作不当造成亏损</td><td>专业机构代管，长期投资纪律</td></tr>
+        <tr><td>人生不同阶段的财富规划</td><td>阶段化现金流设计</td></tr>
+        <tr><td>生前财富传承（给谁、怎么给）</td><td>第二投保人 / 指定受益人安排</td></tr>
+        <tr><td>身后财富传承（定向、避免纠纷）</td><td>指定受益人的法律效力</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">卖点数字（如1.75%保底、20-80%灵活度）为课件示例口径，具体以在售产品条款为准。</p>
+  </div></section>
+
+  <section class="sec" id="platform"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏗️</div><div><h2>十、三大核心出单平台</h2><div class="en">THREE PLATFORMS</div></div></div>
+    <p class="lead">个人单打独斗产能有限，课程把保险营销组织化成三个平台，覆盖从小到大所有单量。</p>
+    <div class="matrix">
+      <div class="mx keyp"><div class="mt">散单：日常出单（人人会开口）</div><div class="md">每个柜面 / 理财经理都掌握三讲：<br>① 一讲<b>利率下行</b><br>② 二讲<b>养老规划</b><br>③ 三讲<b>子教婚嫁</b><br>人人会开口，聚沙成塔。</div><span class="pill">日常基本功</span></div>
+      <div class="mx core"><div class="mt">团单：「财富规划」客户沙龙（点点有活动）</div><div class="md">① 嘉年华<br>② 精品网沙<br>③ 节日主题活动<br>批量触达 + 现场氛围，是中单量的主产出平台。</div><span class="pill">批量转化</span></div>
+      <div class="mx core"><div class="mt">大单：高端沙龙 / 一对一（大单有突破）</div><div class="md">① 分行层面举办高端沙龙<br>② 优质客户一客一策<br>大客户需要专属场域和定制方案，不进大锅饭流程。</div><span class="pill">高客突破</span></div>
+    </div>
+    <div class="callout ok"><span class="ci">✅</span><div><b>三个平台的关系：</b>散单养手感、团单养规模、大单养突破。只靠散单做不大，只盯大单不稳——三线并行才是「双轮驱动」的完整含义。</div></div>
+  </div></section>
+
+  <section class="sec" id="screening"><div class="wrap">
+    <div class="sec-head"><div class="ic">🎯</div><div><h2>十一、12类客户筛选清单（保险盘户蓄客）</h2><div class="en">12-TYPE SCREENING</div></div></div>
+    <p class="lead">名单从哪来？课程直接给了12类筛选标签，都是银行系统里现成可查的维度。讲师特别强调：<b>高资低保的客户要重新梳理分析、做好任务分解、锁定目标客户。</b></p>
+    <div class="list-check">
+      <div class="li"><span class="no">1</span><div><b>有大量活期资金在卡上的客户</b>——资金闲置，预计会流失，导入资产配置。</div></div>
+      <div class="li"><span class="no">2</span><div><b>购买过期缴保险的客户</b>——用利率趋势 + 加保策略切入。</div></div>
+      <div class="li"><span class="no">3</span><div><b>推荐过2.5%固收类保险未成交的客户</b>——改推分红保险 + 会算账 + 「吃颗后悔药」。</div></div>
+      <div class="li"><span class="no">4</span><div><b>定期到期客户</b>——行外吸金 + 挪储的经典场景。</div></div>
+      <div class="li"><span class="no">5</span><div><b>之前参加过保险活动的客户</b>——有过接触，认知基础已在。</div></div>
+      <div class="li"><span class="no">6</span><div><b>系统内资产高的大客户</b>——重点经营对象。</div></div>
+      <div class="li"><span class="no">7</span><div><b>没有社保的商户</b>——保障缺口明确，需求真实。</div></div>
+      <div class="li"><span class="no">8</span><div><b>本月过生日的客户</b>——天然接触由头。</div></div>
+      <div class="li"><span class="no">9</span><div><b>关系比较好的客户</b>——信任基础好，先从熟人练手。</div></div>
+      <div class="li"><span class="no">10</span><div><b>子女未成年的客户</b>——子教 / 传承需求明确。</div></div>
+      <div class="li"><span class="no">11</span><div><b>40-59岁的低余额客户</b>——我行余额少，他行余额一定多，典型的「高资低保」。</div></div>
+      <div class="li"><span class="no">12</span><div><b>复杂家庭（如再婚等）客户</b>——保单架构设计的需求最强烈。</div></div>
+    </div>
+    <div class="callout key"><span class="ci">💡</span><div><b>用法：</b>这份清单的本质是「把感觉变成名单」。每周从12类里挑两三类，在系统里拉出具体客户名单，配合前面四大场景的策略逐类经营——保险蓄客就是这么滚起来的。</div></div>
+  </div></section>
+
+  <section class="sec" id="salon"><div class="wrap">
+    <div class="sec-head"><div class="ic">🎪</div><div><h2>十二、沙龙营销模式全景</h2><div class="en">SALON MARKETING</div></div></div>
+    <p class="lead">从网点到户外，课程把可用的活动形式做了全景梳理，按规模和客群分层使用。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">平台活动类</div><div class="cd">网点嘉年华、喜乐会——大流量、造氛围，适合散单蓄客。</div><span class="pill">大流量</span></div>
+      <div class="card"><div class="ct">网络沙龙类</div><div class="cd">网点网沙、分/支行网沙、主题网沙、流量网沙、高客网沙——线上批量触达，成本低、频次高。</div><span class="pill">线上批量</span></div>
+      <div class="card"><div class="ct">主题沙龙类</div><div class="cd">投资理财沙龙——专业内容驱动，适合有资产配置意识的客群。</div><span class="pill">专业内容</span></div>
+      <div class="card"><div class="ct">体验活动类</div><div class="cd">一日游、X天X晚活动（结合服务）、旅说会——深度陪伴，拉近关系。</div><span class="pill">关系深化</span></div>
+      <div class="card"><div class="ct">高客专属类</div><div class="cd">高客网沙、私董会、法税讲座——为高净值客群定制的专业场域，是大单的孵化器。</div><span class="pill">大单孵化</span></div>
+      <div class="card"><div class="ct">户外拓展类</div><div class="cd">户外网沙——走出网点，走进客户的生活场景。</div><span class="pill">场景延伸</span></div>
+    </div>
+    <div class="callout info"><span class="ci">📌</span><div>课程结尾只有一句话，也是全场最好的总结：<b>「日日行，不怕千万里；常常做，不怕千万事。」</b>营销没有奇迹，只有把名单、电话、面谈、沙龙这些动作日复一日做扎实。</div></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><div class="ic">📎</div><div><h2>附：关于本份资料</h2><div class="en">SOURCE</div></div></div>
+    <div class="callout info"><span class="ci">📌</span><div>本页为《行外吸金与保险营销双轮驱动实战培训》（35页课件，含讲师备注）的完整网页化解读，内容忠实于原课件，仅做结构重组便于阅读。原始文件：<a href="main-training.pptx" style="color:var(--blue-700);font-weight:600;text-decoration:underline;">main-training.pptx</a>（同目录）。课件中「常见异议处理（存款利率太低 / 我没钱 / 活动无所谓）」三页为现场讲解页，原稿未含文字内容，故本页未展开；配套的分红主题培训内容另见「红利实现率」系列页面。</div></div>
+  </div></section>
+
+  <div class="foot"><div class="slogan">新华保险 保得长久 保得美好<small>NCI 新华保险 · A+H 上市 ·  Fortune 世界500强</small></div><div class="disc">本资料为内部培训资料阅读与交流使用，仅供理解参考，不构成任何投资建议或收益承诺；文中营销方法引自培训课件，涉及产品收益、灵活度等数字为课件示例口径，具体以在售产品条款为准。分红型产品红利为非保证收益。</div></div>
+</div>
+<script>
+(function(){
+  var clk=document.getElementById('clockText');
+  function tick(){
+    var n=new Date(),p=function(x){return (x<10?'0':'')+x;};
+    if(clk) clk.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+n.getHours()+'点'+p(n.getMinutes())+'分'+p(n.getSeconds())+'秒';
+    setTimeout(tick,1000);
+  }
+  tick();
+  window.downloadImage=function(){
+    var el=document.getElementById('capture');
+    var btn=document.getElementById('dlBtn');
+    if(!window.html2canvas){alert('图片组件未加载，请联网后重试');return;}
+    if(btn){btn.textContent='生成中…';btn.disabled=true;}
+    html2canvas(el,{scale:2,backgroundColor:'#F4F8FE',useCORS:true,logging:false}).then(function(c){
+      var a=document.createElement('a');
+      a.download=(document.getElementById('pageName')?document.getElementById('pageName').value:'xinhua')+'.png';
+      a.href=c.toDataURL('image/png');a.click();
+      if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}
+    }).catch(function(e){alert('生成失败：'+(e&&e.message?e.message:e));if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}});
+  };
+})();
+</script>
+</body>
+</html>

@@ -9,6 +9,7 @@
 <script src="ai-planner.js"></script>
 <script src="html2canvas.min.js"></script>
 <script src="product-rules.js"></script>
+<script src="display-rules.js"></script>
 <style>
 :root{ --primary:#1E40AF; --primary-light:#3B82F6; --primary-bg:#EFF6FF; --gold:#C9A227; --gray:#475569; --line:#E2E8F0; }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -294,10 +295,11 @@ body.capturing .key-metrics{display:none !important;}
 <script>
 let currentGender = 1;
 let currentRate = 0.025;
-let viewMode = '60';
+let viewMode = '5y60';
+let manualView = false;
 let DATA = null;
 
-const VIEW_MODE_LABELS = { all: '全部显示', '60': '60岁后每5年', '70': '70岁后每5年', '75': '75岁后每5年' };
+const VIEW_MODE_LABELS = { all: '全部显示', '5y60': '60岁后每5年', '5y70': '70岁后每5年', '5y75': '75岁后每5年' };
 const TERM_CONFIG = {
   1: { label: '趸交', maleAge: '72', femaleAge: '68', minPrem: '20000', online: '18-64' },
   3: { label: '三年交', maleAge: '64', femaleAge: '68', minPrem: '20000', online: '18-59' },
@@ -319,7 +321,8 @@ function selectRate(el){
   if(DATA) generate();
 }
 function toggleViewMode(){
-  const modes = ['all', '60', '70', '75'];
+  manualView = true;
+  const modes = ['all', '5y60', '5y70', '5y75'];
   const idx = modes.indexOf(viewMode);
   viewMode = modes[(idx + 1) % modes.length];
   document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
@@ -415,14 +418,14 @@ function generate(){
   }
 
   const tbody = document.getElementById('resultBody');
-  let displayRows = rows.filter(r => {
-    if(r.yr <= term) return true;
-    if(viewMode === 'all') return true;
-    if(viewMode === '60') return r.ageEnd < 60 || (r.ageEnd >= 60 && (r.ageEnd - 60) % 5 === 0);
-    if(viewMode === '70') return r.ageEnd < 70 || (r.ageEnd >= 70 && (r.ageEnd - 70) % 5 === 0);
-    if(viewMode === '75') return r.ageEnd < 75 || (r.ageEnd >= 75 && (r.ageEnd - 75) % 5 === 0);
-    return true;
-  });
+  // 长期险按投保年龄自动选择显示密度；用户手动切换后不再强制
+  if (!manualView) {
+    viewMode = window.getDefaultDisplayMode('hongan', age);
+    const btn = document.getElementById('viewModeBtn');
+    if (btn) btn.textContent = '显示模式：' + VIEW_MODE_LABELS[viewMode];
+  }
+  // 储备期恒显示 + 统一年份抽样（display-rules.js）；最后一年强制显示已内含
+  let displayRows = rows.filter((r, i) => (r.yr <= term) || window.shouldDisplayRow(r, viewMode, rows.length, i));
   // 储备期读取统一产品规则配置（宏安：fixed，前5年）
   const RULE = window.getProductRule('hongan');
   const reserveYears = window.resolveReserveYears(RULE, 0);

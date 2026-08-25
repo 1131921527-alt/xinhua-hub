@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>新华保险分红与投资介绍 · 新华保险资料库</title>
+<style>
+:root{
+  --blue-900:#1E3A8A; --blue-800:#1E40AF; --blue-700:#1D4ED8;
+  --blue-600:#2563EB; --blue-500:#3B82F6; --blue-300:#93C5FD;
+  --blue-100:#DBEAFE; --blue-50:#EFF6FF;
+  --ink:#0F172A; --ink-2:#334155; --ink-3:#64748B; --ink-4:#94A3B8;
+  --white:#FFFFFF; --line:#E6EDF7; --line-2:#DBE6F5;
+  --shadow:0 10px 30px rgba(30,58,138,.10); --shadow-sm:0 4px 14px rgba(30,58,138,.08);
+  --gold:#D97706; --gold-bg:#FFF7ED; --green:#16A34A; --green-bg:#F0FDF4;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F4F8FE;color:var(--ink);line-height:1.7;word-break:break-word;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:linear-gradient(120deg,var(--blue-900),var(--blue-600));color:#fff;
+  box-shadow:0 4px 18px rgba(30,58,138,.25);}
+.topbar .back{font-size:13px;opacity:.92;white-space:nowrap;padding:6px 8px;border-radius:8px;}
+.topbar .back:active{background:rgba(255,255,255,.15);}
+.topbar .t{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .clock{font-size:12px;font-variant-numeric:tabular-nums;opacity:.95;white-space:nowrap;
+  background:rgba(255,255,255,.14);padding:5px 9px;border-radius:20px;}
+.topbar .dl{font-size:13px;font-weight:600;white-space:nowrap;background:#fff;color:var(--blue-700);
+  padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;cursor:pointer;border:none;}
+.topbar .dl:active{transform:scale(.96);}
+.subnav{position:sticky;top:53px;z-index:55;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;
+  display:flex;gap:6px;padding:8px 12px;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{height:0;}
+.subnav a{font-size:12.5px;color:var(--ink-2);white-space:nowrap;padding:6px 11px;border-radius:18px;
+  background:var(--blue-50);border:1px solid var(--line);}
+.subnav a:active{background:var(--blue-100);}
+#capture{background:#F4F8FE;padding-bottom:10px;}
+.hero{position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,#1E3A8A 0%,#1D4ED8 55%,#2563EB 100%);
+  padding:40px 20px 46px;}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(38px);opacity:.45;}
+.hero .b1{width:230px;height:230px;background:#60A5FA;top:-70px;right:-50px;}
+.hero .b2{width:180px;height:180px;background:#1E40AF;bottom:-70px;left:-40px;}
+.hero .inner{position:relative;max-width:1000px;margin:0 auto;}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:1px;background:rgba(255,255,255,.16);
+  padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.hero h1{font-size:26px;font-weight:800;line-height:1.3;letter-spacing:.5px;}
+.hero .sub{margin-top:10px;font-size:15px;opacity:.92;max-width:680px;}
+.hero .badge{margin-top:18px;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  padding:9px 14px;border-radius:12px;font-size:13px;}
+.hero .badge b{font-size:15px;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px;}
+.sec{padding:30px 0 6px;}
+.sec-head{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+.sec-head .ic{width:38px;height:38px;border-radius:11px;background:var(--blue-100);
+  color:var(--blue-700);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;}
+.sec-head h2{font-size:20px;font-weight:800;color:var(--ink);}
+.sec-head .en{font-size:12px;color:var(--ink-4);font-weight:600;letter-spacing:.5px;}
+.lead{color:var(--ink-2);font-size:15px;margin-bottom:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;
+  box-shadow:var(--shadow-sm);transition:transform .15s;}
+.card:hover{transform:translateY(-3px);}
+.card .ct{font-size:16px;font-weight:800;color:var(--blue-800);margin-bottom:6px;}
+.card .cd{font-size:13.5px;color:var(--ink-2);line-height:1.6;}
+.card .pill{display:inline-block;margin-top:10px;font-size:12px;color:var(--blue-700);
+  background:var(--blue-50);border:1px solid var(--line-2);padding:4px 10px;border-radius:14px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:6px 0 4px;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+.stat:before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue-600),var(--blue-500));}
+.stat .num{font-size:26px;font-weight:800;color:var(--blue-700);font-variant-numeric:tabular-nums;line-height:1.2;}
+.stat .num small{font-size:14px;font-weight:700;}
+.stat .lb{margin-top:6px;font-size:13px;color:var(--ink-2);}
+.stat .sb{margin-top:2px;font-size:11.5px;color:var(--ink-4);}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0;border-radius:14px;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+table.tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px;background:#fff;}
+table.tbl thead th{background:linear-gradient(120deg,var(--blue-800),var(--blue-600));color:#fff;
+  font-weight:700;padding:11px 12px;text-align:left;white-space:nowrap;font-size:13px;}
+table.tbl tbody td{padding:10px 12px;border-top:1px solid var(--line);color:var(--ink-2);vertical-align:top;}
+table.tbl tbody tr:nth-child(even){background:var(--blue-50);}
+table.tbl tbody tr.hl{background:var(--blue-100);}
+table.tbl tbody tr.hl td{color:var(--blue-800);font-weight:600;}
+table.tbl td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+table.tbl th.r{text-align:right;}
+.tbl-cap{font-size:12.5px;color:var(--ink-4);margin:8px 2px 0;}
+.callout{border-radius:14px;padding:15px 16px;margin:14px 0;font-size:14px;line-height:1.7;
+  display:flex;gap:12px;align-items:flex-start;}
+.callout .ci{font-size:18px;flex:none;line-height:1.4;}
+.callout.info{background:var(--blue-50);border:1px solid var(--line-2);color:var(--ink-2);}
+.callout.key{background:var(--blue-100);border:1px solid var(--blue-300);color:var(--blue-800);font-weight:600;}
+.callout.warn{background:#FFF7ED;border:1px solid #FED7AA;color:#9A3412;}
+.callout.ok{background:var(--green-bg);border:1px solid #BBF7D0;color:#166534;}
+.case{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:14px 0;
+  box-shadow:var(--shadow-sm);border-left:5px solid var(--gold);}
+.case .ch{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.case .ct2{font-size:13px;color:var(--ink-3);margin-bottom:10px;}
+.case .hl{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:12px;}
+.case .hl > div{background:var(--gold-bg);border:1px solid #FED7AA;border-radius:10px;padding:10px;text-align:center;}
+.case .hl .n{font-size:18px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;}
+.case .hl .l{font-size:11.5px;color:#9A3412;margin-top:2px;}
+.case .cb{font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+.case .cb b{color:var(--blue-800);}
+.foot{margin-top:26px;background:linear-gradient(120deg,var(--blue-900),var(--blue-700));
+  color:#fff;padding:26px 20px 34px;text-align:center;}
+.foot .slogan{font-size:17px;font-weight:800;letter-spacing:1px;}
+.foot .slogan small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:4px;letter-spacing:0;}
+.foot .disc{margin-top:14px;font-size:11.5px;line-height:1.7;opacity:.82;max-width:720px;margin-left:auto;margin-right:auto;}
+@media (max-width:560px){
+  .hero h1{font-size:22px;}
+  .sec-head h2{font-size:18px;}
+  .topbar .clock{display:none;}
+  table.tbl{min-width:520px;}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<input type="hidden" id="pageName" value="新华保险分红与投资介绍">
+<div class="topbar">
+  <a class="back" href="../../index.html">← 返回</a>
+  <div class="t">新华保险分红与投资介绍</div>
+  <div class="clock"><span id="clockText">--</span></div>
+  <button class="dl" id="dlBtn" onclick="downloadImage()">⬇ 下载图片</button>
+</div>
+<nav class="subnav"><div class="wrap" style="display:flex;gap:6px;padding:0;"><a href="#profile">公司概况</a><a href="#shareholder">股东背景</a><a href="#am">新华资管</a><a href="#longterm">长期业绩</a><a href="#realize">红利实现率</a><a href="#astock">A股同业对比</a><a href="#projects">标杆项目</a><a href="#verify">数据核验</a></div></nav>
+<div id="capture">
+  <header class="hero"><span class="blob b1"></span><span class="blob b2"></span>
+    <div class="inner"><span class="tag">公司实力 · 分红与投资</span><h1>新华保险分红与投资介绍</h1><div class="sub">公司底盘 / 中投汇金股东背景 / 新华资管长期业绩 / 红利实现率 / 标杆投资项目 一页读懂</div><div class="badge">🏛️ <b>1996年成立</b>&nbsp; 国有控股 · A+H上市 · 中投直管</div></div>
+  </header>
+
+  <section class="sec" id="profile"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏛️</div><div><h2>一、公司底盘：五个数字认识新华</h2><div class="en">COMPANY PROFILE</div></div></div>
+    <p class="lead">新华保险成立于1996年9月（于北京人民大会堂宣告成立），是全国性国有大型上市寿险公司，锚定「中国一流的以保险业务为核心的金融服务集团」的发展愿景。2011年12月成为<b>第一家A+H股同步上市的寿险公司</b>。</p>
+    <div class="stats">
+      <div class="stat"><div class="num">1727<small>亿</small></div><div class="lb">保费收入</div><div class="sb">材料口径</div></div>
+      <div class="stat"><div class="num">1.8<small>万亿</small></div><div class="lb">总资产（近）</div><div class="sb">国有控股上市险企</div></div>
+      <div class="stat"><div class="num">6.3<small>%</small></div><div class="lb">综合投资收益率</div><div class="sb">材料口径</div></div>
+      <div class="stat"><div class="num">256.01<small>%</small></div><div class="lb">综合偿付能力充足率</div><div class="sb">远超监管红线</div></div>
+      <div class="stat"><div class="num">A / A2</div><div class="lb">惠誉A级 · 穆迪A2级</div><div class="sb">国际评级</div></div>
+    </div>
+    <div class="callout info"><span class="ci">💡</span><div>公司连续多年入选《财富》和《福布斯》世界500强。这一页的五个数字是「公司是谁」的最短答案——保费看业务规模，总资产看家底，投资收益率看赚钱能力，偿付能力和评级看安全性。</div></div>
+  </div></section>
+
+  <section class="sec" id="shareholder"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏛️</div><div><h2>二、股东背景：为什么说新华是「国家队」</h2><div class="en">SHAREHOLDER</div></div></div>
+    <p class="lead">客户问「新华到底是谁家的公司」，答案分两层：直接股东是中央汇金和宝武钢铁等大型央企，再往上是中投公司直管。这层背景是新华资产安全性的底层背书。</p>
+    <div class="role">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;box-shadow:var(--shadow-sm);overflow:hidden;">
+        <div style="padding:12px 16px;background:var(--blue-50);font-weight:800;color:var(--blue-800);font-size:15px;">🏦 中央汇金投资有限责任公司（主要股东）</div>
+        <div style="padding:12px 16px;font-size:13.5px;color:var(--ink-2);line-height:1.8;">国家出资设立的国有独资公司。根据国务院授权，代表国家依法行使对国有商业银行等重点金融企业出资人的权利和义务，实现国有金融资产保值增值——被称为「金融国资委」。四大国有银行都由汇金控股，新华与工农商建同属一个「大股东体系」。</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;box-shadow:var(--shadow-sm);overflow:hidden;">
+        <div style="padding:12px 16px;background:var(--blue-50);font-weight:800;color:var(--blue-800);font-size:15px;">🌏 中国投资有限责任公司（直管公司）</div>
+        <div style="padding:12px 16px;font-size:13.5px;color:var(--ink-2);line-height:1.8;">2007年9月29日在北京成立，国务院批准设立的国有独资公司，注册资本金2000亿美元，是全球最大主权财富基金之一。五个身份：<b>全球最大主权财富基金之一 · 三家正部级央企之一 · 金融市场国家队主力 · 四大国有银行控股方 · 中金/汇金/中信建投等头部券商控股方</b>。2019年起，新华保险党组织关系划归中投公司直接管理。</div>
+      </div>
+    </div>
+    <div class="callout key"><span class="ci">💡</span><div><b>跟客户怎么讲：</b>「新华不是普通的股份制保险公司，它的背后是中央汇金和中投公司——跟四大国有银行同一个体系。您的保单背后的资金安全，背靠的是国家级的资产管理平台。」</div></div>
+  </div></section>
+
+  <section class="sec" id="am"><div class="wrap">
+    <div class="sec-head"><div class="ic">📈</div><div><h2>三、新华资管：分红的钱由谁打理</h2><div class="en">NCI ASSET MANAGEMENT</div></div></div>
+    <p class="lead">分红险的红利来自投资，投资由新华资产管理股份有限公司执行。它是国内首批获得保险资产管理牌照的专业机构之一，持有全面资产管理业务资质。</p>
+    <div class="stats">
+      <div class="stat"><div class="num">1.6<small>万亿+</small></div><div class="lb">管理资产规模</div><div class="sb">同比 +21.1%</div></div>
+      <div class="stat"><div class="num">8.5<small>%</small></div><div class="lb">综合投资收益率</div><div class="sb">同比 +5.9%</div></div>
+      <div class="stat"><div class="num">5.8<small>%</small></div><div class="lb">总投资收益率</div><div class="sb">同比 +4.0%</div></div>
+      <div class="stat"><div class="num">1<small>万亿+</small></div><div class="lb">投资资产规模超</div><div class="sb">业绩长期行业前列</div></div>
+    </div>
+    <p class="tbl-cap">数据为材料口径（2024年度），更新数据见本页「长期业绩」与年报披露。</p>
+    <div class="callout info"><span class="ci">📌</span><div>全国93家寿险公司中只有34家具备投研能力，资产规模达到万亿的仅8家——新华资管是其中之一。分红险演示利率能否兑现，取决于这8家级别的投资平台能不能长期稳定赚钱。</div></div>
+  </div></section>
+
+  <section class="sec" id="longterm"><div class="wrap">
+    <div class="sec-head"><div class="ic">🕰️</div><div><h2>四、长期业绩：穿越牛熊的两条曲线</h2><div class="en">LONG-TERM PERFORMANCE</div></div></div>
+    <p class="lead">短一年两年的收益率有运气成分，敢看12年维度的业绩才有说服力。材料给出了2012-2024年的两条核心曲线。</p>
+    <div class="grid">
+      <div class="card"><div class="ct">固收投资（2012-2024）</div><div class="cd">配置盘年化收益 <b>5.6%</b>，是分红安全垫的主要来源；交易盘累计净值增长 <b>119.09%</b>，超越同类公募基金指数30个百分点、超越中债综合财富总指数40个百分点。材料另载2012-2023年口径：交易盘累计增长102.22%、配置盘年化5.41%——不同年份统计口径的更新版本。</div><span class="pill">安全垫</span></div>
+      <div class="card"><div class="ct">股票投资（2012-2024）</div><div class="cd">组合平均收益率 <b>8.6%</b>，累计收益率高达 <b>193.49%</b>——超越偏股基金指数75个百分点、超越沪深300指数126个百分点。材料另载2012-2023年口径：平均8.73%、超越公募基金36个百分点、超越沪深300指数120个百分点。</div><span class="pill">超额收益</span></div>
+    </div>
+    <div class="callout ok"><span class="ci">✅</span><div><b>这两条曲线怎么用：</b>固收年化5.6%管「稳」，股票12年累计193%管「进」。<b>红利实现率长期领先的底层原因，就是这两条曲线</b>——固收打底提供可持续的分配基础，权益提供向上的弹性。</div></div>
+  </div></section>
+
+  <section class="sec" id="realize"><div class="wrap">
+    <div class="sec-head"><div class="ic">💎</div><div><h2>五、红利实现率：分红兑现的硬成绩单</h2><div class="en">DIVIDEND REALIZATION</div></div></div>
+    <p class="lead">演示利率只是「承诺的目标」，红利实现率才是「实际交卷的成绩」。这是判断分红险含金量最硬的指标。</p>
+    <div class="stats">
+      <div class="stat"><div class="num">132.6<small>%</small></div><div class="lb">2024年平均红利实现率</div><div class="sb">全部产品口径</div></div>
+      <div class="stat"><div class="num">156.1<small>%</small></div><div class="lb">近五年平均红利实现率</div><div class="sb">行业领先水平</div></div>
+      <div class="stat"><div class="num">152<small>%</small></div><div class="lb">59款保额分红产品平均</div><div class="sb">56款达到100%</div></div>
+      <div class="stat"><div class="num">117<small>%</small></div><div class="lb">7款在售现金分红平均</div><div class="sb">全部超100%，最高122%</div></div>
+    </div>
+    <div class="callout key"><span class="ci">💡</span><div><b>一句话解释实现率：</b>演示说分红100块，实际分到117块，实现率就是117%。新华2024年全部产品平均实现率132.6%、近五年平均156.1%——也就是说，过去五年演示的目标不但全部兑现，还普遍超额兑现。（逐年逐产品的完整实现率表，见「分红专题汇报」页面。）</div></div>
+  </div></section>
+
+  <section class="sec" id="astock"><div class="wrap">
+    <div class="sec-head"><div class="ic">📊</div><div><h2>六、A股同业对比：五大上市险企横评</h2><div class="en">A-SHARE COMPARISON</div></div></div>
+    <p class="lead">资本市场用真金白银投票。这张表把新华与平安、太保、国寿、人保放在同一张表上看股价表现和投资能力。</p>
+    <div class="tbl-scroll"><table class="tbl">
+      <thead><tr><th>指标</th><th class="r">新华</th><th class="r">平安</th><th class="r">太保</th><th class="r">国寿</th><th class="r">人保</th></tr></thead>
+      <tbody>
+        <tr><td>A股股价（材料时点）</td><td class="r"><b>67.8</b></td><td class="r">57.8</td><td class="r">35.5</td><td class="r">44.3</td><td class="r">8.4</td></tr>
+        <tr><td>A股近一年涨跌幅</td><td class="r" style="color:#166534;font-weight:700;">+41.30%</td><td class="r">+3.32%</td><td class="r">-3.53%</td><td class="r">+5.97%</td><td class="r">+18.87%</td></tr>
+        <tr><td>H股近一年涨跌幅</td><td class="r" style="color:#166534;font-weight:700;">+87.07%</td><td class="r">+19.21%</td><td class="r">+16.45%</td><td class="r">+48.61%</td><td class="r">+77.61%</td></tr>
+        <tr><td>总投资收益率（材料口径期间）</td><td class="r" style="background:var(--blue-50);font-weight:700;color:var(--blue-800);">8.6%</td><td class="r">3.1%</td><td class="r">5.2%</td><td class="r">6.4%</td><td class="r">5.4%</td></tr>
+        <tr><td>股票配置比例</td><td class="r" style="background:var(--blue-50);font-weight:700;color:var(--blue-800);">11.6%</td><td class="r">10.5%</td><td class="r">9.7%</td><td class="r">8.7%</td><td class="r">5.4%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tbl-cap">数据为材料制作时点口径（股价为10月31日快照，收益率期间详见原文件）。引用前请核对最新行情与定期报告。</p>
+    <div class="callout key"><span class="ci">🚀</span><div><b>这张表讲什么：</b>五家公司里，新华A股涨41.30%、H股涨87.07%双料领先，总投资收益率8.6%同样第一，股票配置比例11.6%也是最高——市场给新华的定价，本质上是在给它的<b>投资能力</b>定价。客户买了新华的分红险，等于搭上了这台收益率行业第一的投资引擎。</div></div>
+  </div></section>
+
+  <section class="sec" id="projects"><div class="wrap">
+    <div class="sec-head"><div class="ic">🏗️</div><div><h2>七、标杆投资项目：钱都投到哪去了</h2><div class="en">FLAGSHIP PROJECTS</div></div></div>
+    <p class="lead">抽象的收益率背后是一个个具体项目。这些案例让「长期投资、价值投资」变得可讲、可信。</p>
+    <div class="case"><div class="ch">🦢 鸿鹄志远私募基金</div><div class="ct2">我国首个险资私募证券投资基金 · 保险资金长期投资改革试点</div><div class="hl"><div><div class="n">500亿</div><div class="l">首期规模</div></div><div><div class="n">伊利/陕煤</div><div class="l">重仓标的</div></div><div><div class="n">中国电信</div><div class="l">重仓标的</div></div></div><div class="cb">由新华保险与中国人寿联合发起，首期500亿元投入市场，重仓伊利股份、陕西煤业、中国电信等高股息蓝筹。监管特批的「长钱长投」试点，是分红底仓收益的重要来源。</div></div>
+    <div class="case"><div class="ch">💳 中国银联股权投资</div><div class="ct2">2018年出资 · 战略股东席位</div><div class="hl"><div><div class="n">9.8亿</div><div class="l">出资金额</div></div><div><div class="n">2.67倍</div><div class="l">截至2024年回报倍数</div></div><div><div class="n">17.10%</div><div class="l">IRR</div></div></div><div class="cb">卡位支付清算核心枢纽，分享数字经济与消费升级红利，战略协同与财务回报双赢。</div></div>
+    <div class="case"><div class="ch">🛢️ 中石油管道项目</div><div class="ct2">国家能源命脉 · 战略投资</div><div class="hl"><div><div class="n">85亿</div><div class="l">战略投入</div></div><div><div class="n">3.46%</div><div class="l">持股比例</div></div></div><div class="cb">分享国家能源基础设施的稳定收益。</div></div>
+    <div class="case"><div class="ch">💉 维梧九期医疗基金</div><div class="ct2">2018年参与 · 医疗健康专项</div><div class="hl"><div><div class="n">114倍</div><div class="l">疫苗项目账面回报</div></div><div><div class="n">40倍</div><div class="l">DPI</div></div></div><div class="cb">疫情期间疫苗项目获得超114倍账面回报，是私募股权投资中极具代表性的案例。</div></div>
+    <div class="case"><div class="ch">🌍 黑石战略合作（一带一路物流）</div><div class="ct2">通过中投平台 · 跨境资产配置</div><div class="hl"><div><div class="n">624处</div><div class="l">物流资产</div></div><div><div class="n">17国</div><div class="l">覆盖国家</div></div></div><div class="cb">投资「一带一路」沿线物流资产，既获稳定分红，又支持基建互联互通。</div></div>
+    <div class="case"><div class="ch">🤝 双边基金矩阵（中法/中意/中英）</div><div class="ct2">中欧产业合作通道</div><div class="hl"><div><div class="n">5-23%</div><div class="l">IRR区间</div></div></div><div class="cb">深度参与三支中欧双边基金，实现战略协同与财务回报双赢。</div></div>
+    <div class="case"><div class="ch">🔬 硬科技与创新投资矩阵</div><div class="ct2">智集芯 · 中科创星 · 红杉 · 汉德工业4.0</div><div class="cb"><b>智集芯基金</b>：认缴10亿元，重点支持半导体、人工智能等战略新兴产业；<br><b>中科创星</b>：早期硬科技孵化，聚焦新材料、新能源、光电芯片；<br><b>创新投资矩阵</b>：参与新华-前海母基金、红杉资本、维梧基金等近千亿级私募投资，覆盖先进制造、生物医疗、新能源；<br><b>汉德工业4.0基金</b>：联合中投、中信等机构，布局智能制造、高端装备、先进材料、医疗技术、节能环保五大领域。</div></div>
+    <div class="callout ok"><span class="ci">✅</span><div><b>这些项目的共同点：</b>要么是国家级基础设施（管道、物流），要么是支付/消费命脉（银联），要么是硬科技卡位点（芯片、医疗）——全是<b>看得见、说得清、跑不掉</b>的资产。给客户讲分红底气，讲的就是这些项目组合。</div></div>
+  </div></section>
+
+  <section class="sec" id="verify"><div class="wrap">
+    <div class="sec-head"><div class="ic">🔍</div><div><h2>八、数据口径与核验提示</h2><div class="en">DATA NOTES</div></div></div>
+    <p class="lead">诚实标注数据差异，是专业的一部分。以下几处引用时需要注意口径。</p>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>1. 银联项目回报数据存在两个口径：</b>本材料（公司分红投资介绍）及分红专题汇报均载「2.67倍、IRR 17.10%」；而《新华保险投资实力介绍（新华资管）》PPT载「2.52倍、年化14.27%」。两组数字可能对应不同统计时点，引用前建议统一核验。«该内容建议后续核验»</div></div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>2. 管理资产规模不同时点：</b>本材料载「超1.6万亿、同比+21.1%」，投资实力介绍PPT载「2024年突破1.6万亿、2025上半年超1.7万亿」，分红专题汇报载「截至2025年底超1.84万亿」。趋势一致，引用时注明时点即可。</div></div>
+    <div class="callout warn"><span class="ci">⚠️</span><div><b>3. 中石油管道收益率口径：</b>本材料未给出收益率数字，投资实力介绍PPT载「全周期回报170.44%、年化6.6%」，分红专题汇报载「累计收益回报170.44%、全周期收益率6.86%」。6.6%与6.86%存在小幅差异。«该内容建议后续核验»</div></div>
+    <div class="callout info"><span class="ci">📎</span><div>本页为原PDF《公司分红投资介绍》（7页）的完整网页化解读，数据未做修改。原始文件：<a href="公司分红投资介绍.pdf" style="color:var(--blue-700);font-weight:600;text-decoration:underline;">公司分红投资介绍.pdf</a>（同目录）。单年度投资操作细节（2024债券波段、A股2700点加仓、OCI高股息激增等）另见《新华保险投资实力介绍（新华资管）》页面。</div></div>
+  </div></section>
+
+  <div class="foot"><div class="slogan">新华保险 保得长久 保得美好<small>NCI 新华保险 · A+H 上市 ·  Fortune 世界500强</small></div><div class="disc">本资料为资料阅读与交流使用，内容依据公开资料整理，仅供理解参考，不构成任何投资建议或收益承诺；具体保险责任、利益演示及分红水平以产品条款、保险合同及监管披露为准。分红型产品红利为非保证收益，过往业绩不代表未来表现。股价及收益率数据为材料制作时点数据。</div></div>
+</div>
+<script>
+(function(){
+  var clk=document.getElementById('clockText');
+  function tick(){
+    var n=new Date(),p=function(x){return (x<10?'0':'')+x;};
+    if(clk) clk.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+n.getHours()+'点'+p(n.getMinutes())+'分'+p(n.getSeconds())+'秒';
+    setTimeout(tick,1000);
+  }
+  tick();
+  window.downloadImage=function(){
+    var el=document.getElementById('capture');
+    var btn=document.getElementById('dlBtn');
+    if(!window.html2canvas){alert('图片组件未加载，请联网后重试');return;}
+    if(btn){btn.textContent='生成中…';btn.disabled=true;}
+    html2canvas(el,{scale:2,backgroundColor:'#F4F8FE',useCORS:true,logging:false}).then(function(c){
+      var a=document.createElement('a');
+      a.download=(document.getElementById('pageName')?document.getElementById('pageName').value:'xinhua')+'.png';
+      a.href=c.toDataURL('image/png');a.click();
+      if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}
+    }).catch(function(e){alert('生成失败：'+(e&&e.message?e.message:e));if(btn){btn.textContent='⬇ 下载图片';btn.disabled=false;}});
+  };
+})();
+</script>
+</body>
+</html>

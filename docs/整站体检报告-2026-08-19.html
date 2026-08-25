@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华Hub 整站体检报告 · 2026-08-19</title>
+<style>
+:root{
+  --primary:#1E40AF; --primary-2:#2563EB; --bg:#F5F7FB; --card:#FFFFFF;
+  --ink:#1E293B; --muted:#64748B; --line:#E2E8F0; --red:#DC2626; --amber:#D97706; --green:#059669;
+  --red-bg:#FEF2F2; --amber-bg:#FFFBEB; --green-bg:#ECFDF5; --blue-bg:#EFF6FF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+
+/* 封面 */
+.cover{background:linear-gradient(135deg,#1E40AF 0%,#1D4ED8 55%,#2563EB 100%);color:#fff;border-radius:18px;padding:40px 34px;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;top:-60%;right:-15%;width:320px;height:320px;background:rgba(255,255,255,.07);border-radius:50%}
+.cover h1{font-size:28px;letter-spacing:.5px;position:relative;z-index:1}
+.cover .sub{font-size:14px;opacity:.85;margin-top:8px;position:relative;z-index:1}
+.cover .meta{font-size:12px;opacity:.7;margin-top:14px;position:relative;z-index:1}
+.verdict{display:flex;align-items:center;gap:18px;margin-top:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:14px 18px;position:relative;z-index:1}
+.verdict .score{font-size:44px;font-weight:800;line-height:1}
+.verdict .vt{font-size:14px;font-weight:700}
+.verdict .vd{font-size:12px;opacity:.85;margin-top:4px;max-width:560px}
+
+/* 分区标题 */
+.sec{margin-top:40px}
+.sec-title{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;color:var(--primary);margin-bottom:6px}
+.sec-title .no{background:var(--primary);color:#fff;width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+.sec-desc{font-size:13px;color:var(--muted);margin-bottom:16px;padding-left:38px}
+
+/* 卡片 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+.card h3{font-size:16px;color:var(--ink);margin-bottom:10px}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;vertical-align:2px;margin-left:6px}
+.tag.p0{background:var(--red-bg);color:var(--red)}
+.tag.p1{background:var(--amber-bg);color:var(--amber)}
+.tag.p2{background:#F1F5F9;color:var(--muted)}
+.tag.ok{background:var(--green-bg);color:var(--green)}
+
+/* 统计条 */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.stat b{display:block;font-size:26px;color:var(--primary);line-height:1.2}
+.stat span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{background:var(--blue-bg);color:var(--primary);text-align:left;padding:9px 12px;font-size:12.5px;white-space:nowrap}
+td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#F8FAFC}
+.num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+
+/* 问题条目 */
+.issue{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.issue:last-child{border-bottom:none}
+.issue .badge{flex:0 0 auto;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800}
+.issue.p0 .badge{background:var(--red-bg);color:var(--red)}
+.issue.p1 .badge{background:var(--amber-bg);color:var(--amber)}
+.issue.p2 .badge{background:#F1F5F9;color:var(--muted)}
+.issue .body{flex:1}
+.issue .it{font-size:15px;font-weight:700}
+.issue .it .lvl{font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:1px}
+.lvl.p0{background:var(--red);color:#fff}.lvl.p1{background:var(--amber);color:#fff}.lvl.p2{background:#94A3B8;color:#fff}
+.issue .id{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.6}
+.issue .impact{margin-top:6px;font-size:12.5px;background:var(--bg);border-radius:8px;padding:7px 10px;color:#475569}
+.issue .impact b{color:var(--primary)}
+
+/* 套餐 */
+.pkg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.pkg-card{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column}
+.pkg-card.hot{border-color:var(--primary-2);background:var(--blue-bg)}
+.pkg-card .pn{font-size:15px;font-weight:800;color:var(--primary)}
+.pkg-card .pd{font-size:12px;color:var(--muted);margin:6px 0 12px;flex:1;line-height:1.6}
+.pkg-card ul{list-style:none;font-size:12.5px;color:#334155}
+.pkg-card li{padding:4px 0 4px 18px;position:relative}
+.pkg-card li::before{content:"✔";position:absolute;left:0;color:var(--green);font-size:11px}
+.pkg-card li.no::before{content:"✘";color:#CBD5E1}
+.pkg-card .risk{margin-top:12px;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+
+/* 拍板区 */
+.ask{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:12px;padding:18px 20px;margin-bottom:12px}
+.ask .q{font-weight:700;font-size:14.5px;margin-bottom:6px}
+.ask .o{font-size:13px;color:#475569;line-height:1.7}
+.ask .o b{color:var(--primary)}
+
+/* 保留项 */
+.keep{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.keep .k{background:var(--green-bg);border:1px solid #A7F3D0;border-radius:12px;padding:14px 16px}
+.keep .k b{color:var(--green);font-size:14px;display:block;margin-bottom:4px}
+.keep .k p{font-size:12.5px;color:#334155;line-height:1.6}
+
+.foot{text-align:center;font-size:12px;color:var(--muted);margin-top:40px;line-height:1.8}
+@media(max-width:720px){
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .pkg{grid-template-columns:1fr}
+  .keep{grid-template-columns:1fr}
+  .cover{padding:30px 22px}
+  .cover h1{font-size:23px}
+  .verdict{flex-direction:column;align-items:flex-start;gap:8px}
+  .sec-desc{padding-left:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="cover">
+  <h1>新华Hub · 整站体检报告</h1>
+  <div class="sub">风格统一性 · 图文丰富度 · 数字表达 · 重复冗余 —— 只体检，不动刀</div>
+  <div class="meta">检查日期：2026-08-19 ｜ 范围：根目录 42 个 HTML 页面 + files/ 业务资料 + 全部数据/脚本资产</div>
+  <div class="verdict">
+    <div class="score">B+</div>
+    <div>
+      <div class="vt">整体结论：底子很扎实，皮肤在老化，内容有富余</div>
+      <div class="vd">样式体系（theme.css 全覆盖）和内容质量（问答/公司介绍）做得相当好；短板是图片太少、演算器缺返回导航、死页面和旧文件堆积、首页有两套产品入口打架。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 一、整站地图 -->
+<div class="sec">
+  <div class="sec-title"><span class="no">1</span>整站地图：42 个页面都在干嘛</div>
+  <div class="sec-desc">全站分 7 类，实际"对客户可见"的核心页面约 30 个，其余是工具页、废弃页和历史资产。</div>
+  <div class="stat-row">
+    <div class="stat"><b>42</b><span>根目录 HTML 页面</span></div>
+    <div class="stat"><b>39</b><span>已统一引用 theme.css（93%）</span></div>
+    <div class="stat"><b>19</b><span>含图片的页面（45%）</span></div>
+    <div class="stat"><b>5</b><span>无任何入口的死页面</span></div>
+  </div>
+  <div class="card">
+    <table>
+      <tr><th>页面类型</th><th>数量</th><th>代表页面</th><th>状态</th></tr>
+      <tr><td>首页</td><td class="num">1</td><td>index.html</td><td>✅ 正常，智能计划书+产品直达+资料库三级结构</td></tr>
+      <tr><td>产品演算器</td><td class="num">10</td><td>calculator-宏安/宏御/宏愿/盈满鑫…</td><td>✅ 功能完整，⚠️ 9 款缺"返回"导航</td></tr>
+      <tr><td>产品条款文字版</td><td class="num">5</td><td>clause-宏泰/宏御/宏愿/华彩/恒享</td><td>✅ 微信直读用，无图纯文字属正常</td></tr>
+      <tr><td>销售问答</td><td class="num">7</td><td>sales-qa + 6 个子专题</td><td>✅ 结构最好的板块，Q&A 折叠+搜索</td></tr>
+      <tr><td>公司/产品介绍</td><td class="num">6</td><td>about-xinhua、intro-yingmanxin、知识卡…</td><td>✅ about-xinhua 数字卡片化是标杆</td></tr>
+      <tr><td>分红专题</td><td class="num">5</td><td>dividend、hongli-realization…</td><td>⚠️ 2 个解读页无入口（内容却很好）</td></tr>
+      <tr><td>流程/服务/工具</td><td class="num">8</td><td>回访、复效、增值服务、preview、training…</td><td>⚠️ training 有 1 处 HTML 标签错误</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 二、问题清单 -->
+<div class="sec">
+  <div class="sec-title"><span class="no">2</span>问题清单：按"值不值得改"分三档</div>
+  <div class="sec-desc">P0 先动手（影响日常使用）→ P1 提体验（泽少要的图文并茂/数字说明）→ P2 随手清（冗余瘦身）。</div>
+
+  <div class="card">
+    <h3>🔴 P0 硬伤 —— 影响使用，建议第一轮处理 <span class="tag p0">4 项</span></h3>
+
+    <div class="issue p0">
+      <div class="badge">1</div>
+      <div class="body">
+        <div class="it">演算器没有"返回资料库"入口<span class="lvl p0">P0</span></div>
+        <div class="id">10 款演算器里只有福盛世家有「← 返回资料库」按钮，其余 9 款从首页点进来后，没有返回按钮。客户/业务员测算完想回首页，只能靠手机浏览器左上角的后退键，体验断层。</div>
+        <div class="impact"><b>影响文件：</b>9 个 calculator-*.html ｜ <b>改法：</b>顶部加统一返回条（纯样式，不动公式/算法）｜ <b>风险：</b>极低，只加一行链接</div>
+      </div>
+    </div>
+
+    <div class="issue p0">
+      <div class="badge">2</div>
+      <div class="body">
+        <div class="it">首页两套产品入口并存，名单还对不上<span class="lvl p0">P0</span></div>
+        <div class="id">index.html 顶部静态写了 6 个产品直达卡片（宏安/盈满鑫/恒享/宏御/宏愿/宏禧来）；往下 data.json 又渲染一套分类（主流 5 款：宏安/宏御/宏愿/盈满鑫/宏禧来 + 历史 5 款）。两套名单不一致——恒享在静态卡片里是"直达"，在资料库分类里却归到"历史产品"；福盛/宏坤/宏泰/华彩在资料库有入口，静态区又没有。以后上新产品要改两个地方，容易漏。</div>
+        <div class="impact"><b>影响文件：</b>index.html + data.json ｜ <b>改法：</b>定一套为唯一来源（建议以 data.json 为准，首页静态区同步数据）｜ <b>风险：</b>低，但要先定规则</div>
+      </div>
+    </div>
+
+    <div class="issue p0">
+      <div class="badge">3</div>
+      <div class="body">
+        <div class="it">4 款演算器浏览器标签页标题显示乱码<span class="lvl p0">P0</span></div>
+        <div class="id">calculator-fusheng / hongkun / hongtai / hongyu 的 &lt;title&gt; 里残留 JS 模板变量（'+_fn+'、'+filename+'），打开页面时浏览器标签页会直接显示这段乱码，微信转发时缩略标题也不对。</div>
+        <div class="impact"><b>影响文件：</b>4 个演算器 ｜ <b>改法：</b>把 title 换成写死的产品名 ｜ <b>风险：</b>零</div>
+      </div>
+    </div>
+
+    <div class="issue p0">
+      <div class="badge">4</div>
+      <div class="body">
+        <div class="it">training.html 底部导航 HTML 标签没闭合<span class="lvl p0">P0</span></div>
+        <div class="id">`&lt;a href="dividend.html"&gt;&lt;span class="bn-icon"&gt;📈&lt;/a&gt;&lt;/a&gt;`——span 标签少了个 `&lt;/span&gt;`，浏览器可能把后面的结构都吞进去，导致底部导航显示异常。</div>
+        <div class="impact"><b>影响文件：</b>training.html ｜ <b>改法：</b>补闭合标签 ｜ <b>风险：</b>零</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🟠 P1 图文与阅读体验 —— 就是你说的"图文并茂+数字说明" <span class="tag p1">5 项</span></h3>
+
+    <div class="issue p1">
+      <div class="badge">5</div>
+      <div class="body">
+        <div class="it">全站图片太少：42 页只有 19 页有图，且大多 1~2 张<span class="lvl p1">P1</span></div>
+        <div class="id">销售问答 7 页、条款 5 页、分红解读、知识卡基本都是纯文字墙。客户刷手机时，一眼扫过去没有视觉锚点。这是"阅读体验"最大的短板。</div>
+        <div class="impact"><b>改法：</b>给内容页加配图/图示/封面图（用已有的产品封面，不新造素材）｜ <b>风险：</b>低，纯加图</div>
+      </div>
+    </div>
+
+    <div class="issue p1">
+      <div class="badge">6</div>
+      <div class="body">
+        <div class="it">现成的好图没用上：assets/preview 有 10 张产品封面图，全站几乎闲置<span class="lvl p1">P1</span></div>
+        <div class="id">宏安/宏御/宏愿/盈满鑫/恒享 每款产品都有一张 card 封面（1000×750）+ 一张 full 长图（900×2000+），只在培训中心用到了 1 张。首页产品卡片、演算器顶部、产品介绍页全都没配图——素材是现成的，纯属没摆上去。</div>
+        <div class="impact"><b>改法：</b>首页 6 个产品卡配封面图、演算器页头加产品卡图 ｜ <b>风险：</b>零，纯展示</div>
+      </div>
+    </div>
+
+    <div class="issue p1">
+      <div class="badge">7</div>
+      <div class="body">
+        <div class="it">数字都藏在文字里，没有"数字卡片"化<span class="lvl p1">P1</span></div>
+        <div class="id">对比标杆：about-xinhua.html 把「1996年成立 / 1.84万亿总资产 / 1958亿保费」做成了大数字卡片，一眼看懂。但销售问答、分红页、公司介绍里还有大量数字（评级、保费规模、实现率、投资收益率）是埋在段落里的小字，客户划屏就划过去了。</div>
+        <div class="impact"><b>改法：</b>把高频数字抽出来做成数字卡/要点条 ｜ <b>风险：</b>低，不动原文，只加视觉</div>
+      </div>
+    </div>
+
+    <div class="issue p1">
+      <div class="badge">8</div>
+      <div class="body">
+        <div class="it">首页"资料库"区全是文字卡片，层级扁平<span class="lvl p1">P1</span></div>
+        <div class="id">首页下半部分十几个分类的卡片都长得一样，靠 emoji 图标区分，视觉上没有"主次"。客户要找"演算器"和"条款"，得一路扫到底。</div>
+        <div class="impact"><b>改法：</b>重点分类（产品演示/分红/问答）做大卡片置顶，其余收进"更多资料" ｜ <b>风险：</b>中，涉及首页重构，先出设计稿确认</div>
+      </div>
+    </div>
+
+    <div class="issue p1">
+      <div class="badge">9</div>
+      <div class="body">
+        <div class="it">分红 2025 深度解读页做得很好，但没人找得到<span class="lvl p1">P1</span></div>
+        <div class="id">dividend-2025-interpretation.html（655 行深度解读）只在培训中心有入口，首页分红查询台没挂它；dividend-2025-report 和 dividend-xinhua 两个页面更是全站无人引用。</div>
+        <div class="impact"><b>改法：</b>把解读页接到分红查询台"深度解读"入口；两个废弃页归档 ｜ <b>风险：</b>零</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🟡 P2 冗余与瘦身 —— 不着急，但堆着碍事 <span class="tag p2">5 项</span></h3>
+
+    <div class="issue p2">
+      <div class="badge">10</div>
+      <div class="body">
+        <div class="it">6 个旧版演算器藏在 files/演算器/ 里，和线上演算器功能重复<span class="lvl p2">P2</span></div>
+        <div class="id">files/演算器/ 里有 7 月 17 日的旧版独立演算器（宏御 1.1M / 宏愿 2M / 宏泰 1M / 恒享 1.5M / 华彩 1.8M / 福盛 285K，共约 7.9MB），与根目录 calculator-*.html 是同一批产品的旧版本，首页没挂任何入口，纯占空间、还容易误导人。</div>
+        <div class="impact"><b>建议：</b>确认无历史引用后移到 archive/ 归档 ｜ <b>风险：</b>先查引用再动</div>
+      </div>
+    </div>
+
+    <div class="issue p2">
+      <div class="badge">11</div>
+      <div class="body">
+        <div class="it">5 个死页面：3 个有内容没人看，2 个是废弃稿<span class="lvl p2">P2</span></div>
+        <div class="id">dividend-2025-report（12KB 有内容）、dividend-xinhua（6.7KB 有内容）、product-qa-handbook（标题写着"已合并"）、mockup-v2 / mockup-v2-revised（盈满鑫设计稿，15KB×2）。这些页面在线上能直接访问，但没有任何入口。</div>
+        <div class="impact"><b>建议：</b>有内容的 2 个接到入口或归档；3 个废弃的移 archive/ ｜ <b>风险：</b>零</div>
+      </div>
+    </div>
+
+    <div class="issue p2">
+      <div class="badge">12</div>
+      <div class="body">
+        <div class="it">4 个旧数据文件无人引用，白占 2.6MB<span class="lvl p2">P2</span></div>
+        <div class="id">hongtai_calcdata.js（2.1MB）、hongyu_data.json（520KB）、hongtai_data.js、hongtai_calc_data.json——页面里没有任何引用，属于改版淘汰的数据。</div>
+        <div class="impact"><b>建议：</b>移 archive/ ｜ <b>风险：</b>零</div>
+      </div>
+    </div>
+
+    <div class="issue p2">
+      <div class="badge">13</div>
+      <div class="body">
+        <div class="it">本地资产膨胀：qa/ 293MB + outputs 7.7MB + export-png 2.5MB + backup 3.1MB<span class="lvl p2">P2</span></div>
+        <div class="id">qa/ 是验收截图和调试脚本（有保留价值），outputs/ 和 export-png/ 是盈满鑫改版期间的测试图（已过时），backup/ 是 8 月备份。合计 300+MB，如果这些没进 git 仓库问题不大，进了就是仓库包袱。</div>
+        <div class="impact"><b>建议：</b>确认 .gitignore 是否排除；outputs/export-png 可清 ｜ <b>风险：</b>清理前逐项确认（老规矩）</div>
+      </div>
+    </div>
+
+    <div class="issue p2">
+      <div class="badge">14</div>
+      <div class="body">
+        <div class="it">重复文案：公司简介散布在 14 个文件里<span class="lvl p2">P2</span></div>
+        <div class="id">"成立于1996年"在 14 个文件出现，"1.84万亿总资产"在 4 个页面出现。条款页里的公司介绍是合规必需不算冗余；但演算器/问答/公司介绍里的口径可以统一成一套措辞，避免客户看到两个版本。</div>
+        <div class="impact"><b>建议：</b>统一成 about-xinhua.html 的口径，其余页面引用 ｜ <b>风险：</b>低，但属内容改动，需你确认措辞</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 三、做得好的 -->
+<div class="sec">
+  <div class="sec-title"><span class="no">3</span>做得好的地方 —— 改的时候别碰坏这些</div>
+  <div class="sec-desc">体检不是只挑毛病，这几块是站得住的家底。</div>
+  <div class="keep">
+    <div class="k"><b>样式体系统一（93%）</b><p>39/42 页引用 theme.css，10 款演算器全部引用 calc-common.css。改颜色/圆角只动一处，这是很多站都做不到的。</p></div>
+    <div class="k"><b>about-xinhua 数字卡片标杆</b><p>1996年/A+H/1.84万亿/1958亿保费全部大数字卡片化，还有股东关系箭头图——这就是"数字说明"的标准答案。</p></div>
+    <div class="k"><b>销售问答交互完整</b><p>7 个问答页有折叠、搜索、分类、产品标签，内容本身就是你的"弹药库"，质量高。</p></div>
+    <div class="k"><b>首页安全与体验细节</b><p>XSS/路径穿越防护、返回滚动位置记忆、智能计划书快捷生成——工程底子比一般个人站好。</p></div>
+    <div class="k"><b>分红查询台有官方数据</b><p>dividend.html 直接对官方披露，2026.7.21 更新过 2025 年实现率，这是客户最认的硬资料。</p></div>
+    <div class="k"><b>封面素材已备好</b><p>assets/preview 5 款产品 × card/full 共 10 张图，尺寸规格统一，就等摆上页面。</p></div>
+  </div>
+</div>
+
+<!-- 四、改造方案 -->
+<div class="sec">
+  <div class="sec-title"><span class="no">4</span>改造方案：三档套餐，你选一个</div>
+  <div class="sec-desc">按你的规矩来：任何动工前，先出详细方案给你确认 → 开发 → 验收 → 提交。以下三档是工作量分级，不是必须一次做完。</div>
+
+  <div class="pkg">
+    <div class="pkg-card">
+      <div class="pn">A 套餐 · 修硬伤</div>
+      <div class="pd">半天量级，把影响日常使用的 4 个 P0 全修掉，不动任何布局和风格。</div>
+      <ul>
+        <li>9 款演算器加"返回资料库"导航</li>
+        <li>首页产品入口统一为 data.json 单一来源</li>
+        <li>4 款演算器 title 乱码修复</li>
+        <li>training.html 标签 bug 修复</li>
+        <li class="no">不加图、不改风格、不动内容</li>
+      </ul>
+      <div class="risk">影响：9+ 个演算器 + 首页，纯样式/文案级改动，零公式风险</div>
+    </div>
+    <div class="pkg-card hot">
+      <div class="pn">B 套餐 · 体验升级 <b style="color:#D97706">（推荐）</b></div>
+      <div class="pd">A 套餐 + 图文并茂改造，对应你这次提的核心诉求。</div>
+      <ul>
+        <li>含 A 套餐全部内容</li>
+        <li>首页产品卡配封面图（现成素材）</li>
+        <li>演算器页头加产品封面</li>
+        <li>问答/分红/知识卡页抽数字做卡片</li>
+        <li>分红解读页挂到查询台入口</li>
+        <li>死页面归档下线</li>
+      </ul>
+      <div class="risk">影响：首页 + 内容页 6~8 个 + 归档清理；不动演算器公式/数据/导出</div>
+    </div>
+    <div class="pkg-card">
+      <div class="pn">C 套餐 · 全面焕新</div>
+      <div class="pd">B 套餐 + 视觉体系重做 + 数据可视化，动静最大，建议最后做。</div>
+      <ul>
+        <li>含 B 套餐全部内容</li>
+        <li>theme.css 视觉升级（配色/卡片/间距一版刷新）</li>
+        <li>红利实现率趋势图等图表化</li>
+        <li>首页信息层级重构（重点区置顶）</li>
+        <li>全站图片补全（含新配图）</li>
+      </ul>
+      <div class="risk">影响：全站 40+ 页面样式引用；动 theme.css 需全站回归验收（T010 硬前置）</div>
+    </div>
+  </div>
+</div>
+
+<!-- 五、等你拍板 -->
+<div class="sec">
+  <div class="sec-title"><span class="no">5</span>需要你拍板的 6 个问题</div>
+  <div class="sec-desc">这几个决定影响方案怎么排，你回一句"按推荐来"或逐个挑都行。</div>
+
+  <div class="ask"><div class="q">① 套餐选哪个？</div><div class="o">推荐 <b>B 套餐（修硬伤 + 图文升级）</b>，正好覆盖你这次说的"风格优化、图文并茂、数字说明"。C 套餐涉及全站样式大改，按 V6 规矩得先过 T010 验收体系升级，可以放下一轮。</div></div>
+  <div class="ask"><div class="q">② 首页产品入口，听谁的？</div><div class="o">推荐 <b>以 data.json 分类为准</b>（你 8-13 定的"主流 5 款 / 历史 5 款"），首页静态产品卡删掉或改成读同一份数据。这样以后只改一处。</div></div>
+  <div class="ask"><div class="q">③ 死页面和旧文件，删还是藏？</div><div class="o">按老规矩推荐<b>移到 archive/ 归档</b>，不直接删除。涉及：5 个死页面 + 6 个旧演算器 + 4 个旧数据文件，约 11MB。归档后线上 URL 全部 404，不影响任何入口。</div></div>
+  <div class="ask"><div class="q">④ 分红 2025 深度解读页，挂哪？</div><div class="o">推荐挂到 <b>红利实现率查询台（dividend.html）</b>加一个"📖 深度解读"入口；同时把 dividend-2025-report / dividend-xinhua 两个孤儿页归档（内容重叠）。</div></div>
+  <div class="ask"><div class="q">⑤ 数字卡片化，先做哪几页？</div><div class="o">推荐先做 <b>sales-qa.html 开场公司段 + 分红问答 + 知识卡</b>这 3 处（客户最常看、数字最硬）。其余页排队。</div></div>
+  <div class="ask"><div class="q">⑥ 演算器加"返回资料库"，样式统一吗？</div><div class="o">推荐<b>统一加到 calc-common.css</b>，10 款演算器一次到位，后续新款自动继承，不用每页手写。</div></div>
+</div>
+
+<div class="foot">
+  本报告由体检脚本对 42 个页面逐一扫描生成，未修改任何线上文件。<br>
+  新华保险资料库 · 2026-08-19
+</div>
+
+</div>
+</body>
+</html>

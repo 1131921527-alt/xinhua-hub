@@ -156,6 +156,14 @@
   .cat-card.feat .ct{color:#fff;}
   .cat-card.feat .cd{color:rgba(255,255,255,.88);}
   @media(max-width:560px){.cat-grid{grid-template-columns:1fr;}}
+  /* 数字卡片 */
+  .fh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:760px;margin:0 auto 14px;padding:0 14px;}
+  .fh-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center;}
+  .fh-stat .v{font-size:22px;font-weight:800;color:var(--blue-d);line-height:1.1;}
+  .fh-stat .l{font-size:10.5px;color:var(--sub);margin-top:4px;line-height:1.4;}
+  .fh-stat.hl{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-color:#BFDBFE;}
+  .fh-stat.hl .v{font-size:26px;}
+  @media(max-width:560px){.fh-stats{grid-template-columns:repeat(2,1fr);}.fh-stat .v{font-size:20px}.fh-stat.hl .v{font-size:22px}}
 </style>
 </head>
 <body>
@@ -165,6 +173,12 @@
   <div class="sub">7款分红产品一句话定位</div>
   <span class="pill">产品资料与规则说明</span>
 </header>
+<div class="fh-stats">
+  <div class="fh-stat hl"><div class="v">156%</div><div class="l">近5年<br>实现率均值</div></div>
+  <div class="fh-stat"><div class="v">79%</div><div class="l">2024年实现率<br>≥100%占比</div></div>
+  <div class="fh-stat"><div class="v">7款</div><div class="l">在售<br>分红产品</div></div>
+  <div class="fh-stat"><div class="v">1.75%</div><div class="l">主流<br>保底利率</div></div>
+</div>
 <div class="wrap">
   <h3>宏安世家 · 一句话定位</h3>
     <div class="feat">

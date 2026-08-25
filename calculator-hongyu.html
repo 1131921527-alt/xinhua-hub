@@ -517,7 +517,10 @@ function filterRowsByAge(mode){
   const tbody = document.getElementById('resultBody');
   if(!tbody) return;
   const rows = Array.from(tbody.querySelectorAll('tr'));
-  rows.forEach(tr => {
+  const lastIdx = rows.length - 1;
+  rows.forEach((tr, idx) => {
+    // 最后一年（满期/合同终止年）强制显示
+    if (idx === lastIdx) { tr.style.display = ''; return; }
     const age = parseInt(tr.getAttribute('data-age') || '0', 10);
     let show = true;
     if(mode === '5y60'){ show = age < 60 || (age >= 60 && (age - 60) % 5 === 0); }
@@ -994,7 +997,10 @@ function filterRowsByAge(mode){
   const tbody = document.getElementById('resultBody');
   if(!tbody) return;
   const rows = Array.from(tbody.querySelectorAll('tr'));
-  rows.forEach(tr => {
+  const lastIdx = rows.length - 1;
+  rows.forEach((tr, idx) => {
+    // 最后一年（满期/合同终止年）强制显示
+    if (idx === lastIdx) { tr.style.display = ''; return; }
     const age = parseInt(tr.getAttribute('data-age') || '0', 10);
     if (isNaN(age)) { tr.style.display = ''; return; }
     let show = true;
