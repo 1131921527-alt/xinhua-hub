@@ -52,8 +52,8 @@ li{margin:4px 0;}
 <div class="kpis">
   <div class="kpi"><b>39</b><span>页面实跑</span></div>
   <div class="kpi"><b>0</b><span>JS 报错 / 404</span></div>
-  <div class="kpi"><b>13</b><span>已修复问题</span></div>
-  <div class="kpi"><b>5</b><span>待你确认</span></div>
+  <div class="kpi"><b>18</b><span>已修复问题</span></div>
+  <div class="kpi"><b>0</b><span>待你确认</span></div>
 </div>
 
 <!-- ============ 一、核心问题 ============ -->
@@ -173,15 +173,16 @@ li{margin:4px 0;}
 
 <!-- ============ 五、待确认 ============ -->
 <div class="card">
-  <h2>五、这 5 项我没动，需要你拍板 <span class="badge b-wait">待确认</span></h2>
-  <p style="font-size:13.5px;color:var(--muted);">都是<b>业务口径/官方数据</b>层面的疑问，我按「不猜、不瞎改」的原则保留原样，你确认后我一次改到位。</p>
+  <h2>五、这 5 项已按你的意见处理 <span class="badge b-ok">已闭环</span></h2>
   <table>
-    <tr><th>#</th><th>位置</th><th>疑点</th><th>我的判断</th></tr>
-    <tr><td>1</td><td>hongli-realization.html:206</td><td>「历史实现率案例」里写 <b>宏享世家 114%</b></td><td>站内 dividend.json 里 114% 对应的是 <b>宏耀世家</b>（2024年），没有宏享世家的记录 → 高度疑似张冠李戴，建议改「宏耀世家 114%」或删掉这条</td></tr>
-    <tr><td>2</td><td>sales-qa.html:402<br>sales-qa-gaoke.html:209</td><td>「经营投资有经营、市场和<b>翻新投入</b>等风险」</td><td>「翻新投入」语义不明，疑为「再投入 / 追加投入」，请按原始课件核对</td></tr>
-    <tr><td>3</td><td>insurance-knowledge-card.html:117</td><td>「分红型预定利率上限 2.0%」「万能型保证利率上限 1.5%」</td><td>与现行监管口径（分红型 1.75%）可能对不上，属监管数值，需按最新文件核对</td></tr>
-    <tr><td>4</td><td>products.json:123</td><td>「新华福盛世家终身寿险（非分红）」</td><td>演算器与官方均写作「福盛世家<b>（添翼版）</b>终身寿险」，是否补「添翼版」由你定</td></tr>
-    <tr><td>5</td><td>tools/保险通用工具/工资测算_v3.html:144</td><td><code>calcCommission()</code> 被调用 3 次但<b>全文件无定义</b> → 改点数/扣税率时不会触发计算</td><td>该页未挂在主站导航上，且不清楚业务规则，未擅自补函数。要不要修、按什么规则算，等你给口径</td></tr>
+    <tr><th>#</th><th>位置</th><th>处理</th></tr>
+    <tr><td>1</td><td>hongli-realization.html<br>「历史实现率案例」</td>
+        <td><b>已删除</b>归属存疑的 <code>宏享世家 114%</code>。<br>
+        <span style="color:var(--muted);">说明：恒享人生在站内是<b>固收非分红</b>年金（演算器标注"本演示基于保证利益（非分红型）"），本身没有红利实现率；站内 dividend.json 里 114% 对应的是<b>宏耀世家</b>（2024年）。所以这条既不能写"宏享世家"也不适合写"恒享人生"，先删掉避免讲错。要补回来的话，告诉我写哪款、多少，我一句就加上。</span></td></tr>
+    <tr><td>2</td><td>sales-qa.html:402<br>sales-qa-gaoke.html:209</td><td>「翻新投入」→ <b>「再投入」</b> <span class="badge b-fix">已改</span></td></tr>
+    <tr><td>3</td><td>insurance-knowledge-card.html:117</td><td>分红型预定利率上限 <b>2.0% → 1.75%</b>，并改写说明：「1.75% 是写进合同的保证部分；计划书上看到的更高数字是用 3.5% 演示利率算出来的，不是保证收益」<span class="badge b-fix">已改</span><br><span style="color:var(--muted);">普通型 2.0%（2025.9起）与万能型 1.5% 保持原样。</span></td></tr>
+    <tr><td>4</td><td>products.json:123</td><td>「新华福盛世家终身寿险（非分红）」→ <b>「新华福盛世家（添翼版）终身寿险（非分红）」</b> <span class="badge b-fix">已改</span></td></tr>
+    <tr><td>5</td><td>tools/保险通用工具/工资测算_v3.html</td><td><b>已从网站删除</b>（该函数 <code>calcCommission()</code> 调用 3 次却无定义，页面本来就没挂在导航上）<span class="badge b-ok">已删除</span><br><span style="color:var(--muted);">备份留在 <code>archive/已删除-2026-09-07/</code>，需要随时可恢复。同目录的「标保测算_v18.html」未动。</span></td></tr>
   </table>
 </div>
 
