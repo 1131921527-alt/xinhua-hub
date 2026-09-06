@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="55%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <g opacity="0.12" fill="none" stroke="#FFFFFF" stroke-width="2">
+    <circle cx="1040" cy="200" r="170"/>
+    <circle cx="1040" cy="200" r="115"/>
+  </g>
+  <g fill="#FFFFFF" opacity="0.10">
+    <rect x="700" y="120" width="40" height="120" rx="6"/>
+    <rect x="756" y="90" width="40" height="150" rx="6"/>
+    <rect x="812" y="60" width="40" height="180" rx="6"/>
+    <rect x="868" y="30" width="40" height="210" rx="6"/>
+  </g>
+  <text x="70" y="135" fill="#FFFFFF" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="68" font-weight="800">宏达人生</text>
+  <text x="70" y="174" fill="#BFDBFE" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="28" font-weight="600">年金保险（分红型）· 演算器</text>
+</svg>

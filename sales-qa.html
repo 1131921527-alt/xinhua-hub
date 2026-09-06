@@ -238,7 +238,7 @@
       <b>大白话讲：</b>上市不是光鲜，是"被监管"——A+H 两边的证监会、交易所、审计师、披露要求都盯着，财报造假代价极高。香港那一侧尤其严，国际机构投资者天天用脚投票。<br>
       <b>【待补充数据】</b> 2020.8—2025.8 A 股 / H 股股价走势 + 2025 年涨幅对比（口径来源：以上市公司公告/交易所披露为准，提供数据后补图）。<br><br>
       <span class="hl">② 评级硬——国际三大评级怎么说</span><br>
-      <b>事实：</b>连续九年获惠誉财务实力评级"A"级、穆迪"A2"级，都是投资级里很靠前的位置。<br>
+      <b>事实：</b>连续十年获惠誉财务实力评级"A"级、穆迪"A2"级，都是投资级里很靠前的位置。<br>
       <b>客户可能问：</b>"A 和 A2 哪个高？看不懂。"<br>
       <b>大白话讲：</b>评级分三等——投资级（最安全）、投机级、违约级。惠誉 A、穆迪 A2 都属于投资级里"中上等"。打个比方：像学生成绩里"良好偏优秀"。全球只有少数保险公司能长期拿到这个级别。<br>
       <b>客户可能问：</b>"为啥不是最高的 AAA？"<br>
@@ -1354,6 +1354,53 @@ document.querySelectorAll('.nav a').forEach(function(a){
       });
     }).catch(function(){ document.body.style.background=prevBg; showToast('生成失败'); });
   }); }
+})();
+</script>
+
+<!-- ===== 手机浏览优化：章节快速跳转 + 回到顶部（悬浮） ===== -->
+<div id="qnavFab" style="position:fixed;right:14px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:900;display:flex;flex-direction:column;gap:10px;">
+  <button id="qnavTop" aria-label="回到顶部" style="display:none;width:44px;height:44px;border-radius:50%;border:1px solid #DBEAFE;background:#fff;color:#1E40AF;font-size:18px;font-weight:800;box-shadow:0 4px 14px rgba(30,64,175,.22);cursor:pointer;">↑</button>
+  <button id="qnavBtn" aria-label="章节目录" style="width:52px;height:52px;border-radius:50%;border:none;background:#1E40AF;color:#fff;font-size:22px;box-shadow:0 6px 18px rgba(30,64,175,.35);cursor:pointer;">☰</button>
+</div>
+<div id="qnavSheet" style="display:none;position:fixed;inset:0;z-index:950;">
+  <div id="qnavMask" style="position:absolute;inset:0;background:rgba(15,23,42,.45);"></div>
+  <div id="qnavPanel" style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:16px 16px 0 0;max-height:72vh;overflow:auto;padding:16px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(15,23,42,.2);">
+    <div style="width:40px;height:4px;border-radius:2px;background:#E2E8F0;margin:0 auto 12px;"></div>
+    <div style="font-size:15px;font-weight:800;color:#1E40AF;margin-bottom:10px;">📑 章节目录</div>
+    <div id="qnavList" style="display:flex;flex-direction:column;gap:2px;"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var fabTop = document.getElementById('qnavTop');
+  var sheet = document.getElementById('qnavSheet');
+  var list = document.getElementById('qnavList');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.sec-title[id]'));
+  list.innerHTML = sections.map(function(sec, i){
+    var cntEl = sec.querySelector('.cnt');
+    var cnt = cntEl ? cntEl.textContent.replace(/\s+/g, ' ').trim() : '';
+    var name = (cntEl ? sec.textContent.replace(cntEl.textContent, '') : sec.textContent || '').replace(/\s+/g, ' ').trim();
+    if(cnt) name = name + ' · ' + cnt;
+    return '<a href="javascript:void(0)" data-i="' + i + '" style="display:flex;align-items:center;gap:8px;padding:11px 10px;border-radius:10px;font-size:14.5px;color:#1E293B;text-decoration:none;">'
+      + '<span style="flex:none;width:22px;height:22px;border-radius:6px;background:#EFF6FF;color:#1E40AF;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;">' + (i+1) + '</span>'
+      + '<span style="flex:1;min-width:0;">' + name + '</span></a>';
+  }).join('');
+  list.addEventListener('click', function(e){
+    var a = e.target.closest('a[data-i]');
+    if(!a) return;
+    var sec = sections[+a.dataset.i];
+    if(sec){
+      var y = sec.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
+    sheet.style.display = 'none';
+  });
+  document.getElementById('qnavBtn').addEventListener('click', function(){ sheet.style.display = 'block'; });
+  document.getElementById('qnavMask').addEventListener('click', function(){ sheet.style.display = 'none'; });
+  fabTop.addEventListener('click', function(){ window.scrollTo({top: 0, behavior: 'smooth'}); });
+  window.addEventListener('scroll', function(){
+    fabTop.style.display = (window.pageYOffset > 600) ? 'flex' : 'none';
+  }, {passive: true});
 })();
 </script>
 </body>

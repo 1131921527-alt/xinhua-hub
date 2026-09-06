@@ -48,6 +48,12 @@ PAGES = [
     {"key": "hengxiang",   "file": "calculator-hengxiang.html",         "kind": "calc", "label": "恒享人生演算器"},
     {"key": "hongyu",      "file": "calculator-hongyu.html",            "kind": "calc", "label": "宏御世家演算器"},
     {"key": "hongyuan",    "file": "calculator-hongyuan.html",          "kind": "calc", "label": "宏愿人生演算器"},
+    {"key": "hongda",      "file": "calculator-hongda.html",            "kind": "calc", "label": "宏达人生演算器"},
+    {"key": "hongxilai",   "file": "calculator-hongxilai.html",         "kind": "calc", "label": "宏禧来演算器"},
+    {"key": "fusheng",     "file": "calculator-fusheng.html",           "kind": "calc", "label": "福盛世家演算器"},
+    {"key": "hongkun",     "file": "calculator-hongkun.html",           "kind": "calc", "label": "宏坤人生演算器"},
+    {"key": "hongtai",     "file": "calculator-hongtai.html",           "kind": "calc", "label": "宏泰世家演算器"},
+    {"key": "huacai",      "file": "calculator-huacai.html",            "kind": "calc", "label": "华彩鎏金演算器"},
     {"key": "dividend",    "file": "dividend.html",                     "kind": "page", "label": "红利实现率查询台"},
     {"key": "hongli_2025", "file": "dividend-2025-interpretation.html", "kind": "page", "label": "2025红利深度解读"},
     {"key": "hongli_doc",  "file": "hongli-realization.html",           "kind": "page", "label": "红利实现率详细说明"},
@@ -133,10 +139,17 @@ def run_calc(page):
         try:
             page.click(sel, timeout=2500)
             # V3.1: 等待异步数据加载并填充核心指标卡（#kmMaturity 不再是占位符"—"）
-            page.wait_for_function("""() => {
-                const km = document.getElementById('kmMaturity');
-                return km && km.textContent !== '\u2014' && km.textContent !== '-';
-            }""", timeout=10000)
+            # 兼容无指标卡页面（如宏达人生）：以结果表格出现数据行为准
+            try:
+                page.wait_for_function("""() => {
+                    const km = document.getElementById('kmMaturity');
+                    return km && km.textContent !== '\u2014' && km.textContent !== '-';
+                }""", timeout=10000)
+            except Exception:
+                pass
+            page.wait_for_function(
+                "() => { const b = document.getElementById('resultBody');"
+                " return b && b.querySelectorAll('tr').length > 0; }", timeout=10000)
             return
         except Exception:
             continue

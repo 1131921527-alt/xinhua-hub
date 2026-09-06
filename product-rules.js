@@ -29,6 +29,9 @@ window.PRODUCT_RULES = {
   // 宏愿人生：前 5 年储备期，展示收益率
   hongyuan:   { reserveType: "fixed", reserveYears: 5, showRate: true },
 
+  // 宏达人生：第 5 个保单年度起开始给付关爱金，故前 4 年为储备期，展示收益率
+  hongda:     { reserveType: "fixed", reserveYears: 4, showRate: true },
+
   // 宏禧来：收益率 ≤ 0 阶段为储备期，展示收益率
   hongxilai:  { reserveType: "dynamic", rule: "rate<=0", showRate: true },
 
