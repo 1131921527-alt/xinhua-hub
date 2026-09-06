@@ -32,9 +32,19 @@ input,select{padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;f
 .rate-btn{padding:7px 14px;border:1.5px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:16px;font-weight:600;color:#64748B;}
 .rate-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
 .tip{font-size:14px;color:#64748B;margin-top:10px;}
-.dl-bar{display:flex;align-items:center;margin:18px 22px;flex-wrap:wrap;}
+.dl-bar{display:flex;align-items:center;margin:18px 22px 6px;flex-wrap:wrap;}
 .view-mode-btn{padding:10px 20px;background:#fff;color:var(--primary);border:1.5px solid var(--primary);border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-left:10px;}
 .view-mode-btn:hover{background:var(--primary-bg);}
+
+/* ===== 列显示开关 ===== */
+.col-toggles{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:10px 22px 0;padding:10px 12px;background:var(--primary-bg);border:1px solid #BFDBFE;border-radius:10px;}
+.col-toggles .ct-title{font-size:14px;font-weight:800;color:var(--primary);}
+.col-toggles label{display:inline-flex;align-items:center;gap:5px;font-size:14px;color:#1E293B;cursor:pointer;background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 9px;user-select:none;}
+.col-toggles label input{width:15px;height:15px;margin:0;accent-color:var(--primary);}
+.col-toggles label:hover{border-color:var(--primary-light);}
+.col-toggles .ct-reset{margin-left:auto;padding:5px 12px;border:1.5px solid var(--primary);background:#fff;color:var(--primary);border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;}
+.col-toggles .ct-reset:hover{background:var(--primary);color:#fff;}
+
 body.capturing .no-export{display:none !important;}
 /* 抓图时强制桌面布局（覆盖 @media(max-width:768px) 的竖排/缩字号等） */
 body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
@@ -57,7 +67,6 @@ body.capturing .key-metrics{display:none !important;}
 .section p{font-size:16px;line-height:1.7;color:#1E293B;margin:0 0 6px 0;}
 
 .case-info{display:none;}
-
 .top-info{display:block;}
 .info-table{width:100%;border-collapse:collapse;font-size:16px;border:2px solid var(--primary);table-layout:auto;}
 .info-table th,.info-table td{border:1px solid var(--primary);padding:8px 6px;text-align:center;vertical-align:middle;white-space:nowrap;}
@@ -69,7 +78,6 @@ body.capturing .key-metrics{display:none !important;}
 .stat-box:last-child{border-right:0;}
 .stat-box .stat-label{background:var(--primary);color:#fff;padding:10px 8px;font-size:15px;font-weight:700;white-space:nowrap;}
 .stat-box .stat-val{flex:1;text-align:center;padding:10px 8px;font-size:17px;font-weight:700;color:var(--primary);min-width:0;}
-/* 公司介绍/产品简介 双栏（与宏御一致的对齐版式：外层单边框 + 竖线分隔） */
 .plan-intro{display:flex;gap:0;border:2px solid var(--primary);margin:0 0 16px;background:#fff;}
 .plan-intro>div{flex:1;min-width:0;padding:12px 14px;border-right:2px solid var(--primary);box-sizing:border-box;}
 .plan-intro>div:last-child{border-right:0;}
@@ -78,8 +86,8 @@ body.capturing .key-metrics{display:none !important;}
 .plan-intro p:last-child{margin-bottom:0;}
 .plan-intro p strong{color:var(--primary);font-weight:700;}
 
-.main-table{width:100%;border-collapse:collapse;font-size:17px;table-layout:fixed;}
-.main-table th,.main-table td{border:1px solid #fff;padding:5px 2px;text-align:center;vertical-align:middle;}
+.main-table{width:100%;border-collapse:collapse;font-size:16px;table-layout:fixed;}
+.main-table th,.main-table td{border:1px solid #fff;padding:5px 3px;text-align:center;vertical-align:middle;}
 .main-table thead th{background:var(--primary);color:#fff;font-weight:700;}
 .main-table tbody tr:nth-child(even){background:#F0F9FF;}
 .main-table tbody tr:nth-child(odd){background:#fff;}
@@ -87,7 +95,7 @@ body.capturing .key-metrics{display:none !important;}
 .main-table .col-rate{background:#DBEAFE;color:var(--primary);}
 .main-table .col-total{background:#DBEAFE;}
 .main-table .col-annuity{color:var(--primary);font-weight:700;}
-.main-table .reserve-cell{color:#64748B;white-space:nowrap;}
+.main-table .reserve-cell{color:#64748B;white-space:nowrap;font-weight:700;}
 
 .row-positive td{background:#DBEAFE !important;color:var(--primary) !important;}
 .row-positive .col-rate{background:#BFDBFE !important;}
@@ -97,7 +105,6 @@ body.capturing .key-metrics{display:none !important;}
 .err.show{display:block;}
 .table-scroll{width:100%;overflow-x:auto;margin-top:14px;}
 
-/* 底部免责声明（与其他演算器统一标准） */
 .plan-foot-note{margin-top:10px;padding-top:8px;border-top:1px solid #E2E8F0;color:#64748B;font-size:13px;line-height:1.65;}
 .plan-foot-source{margin-top:4px;color:#94A3B8;font-size:12px;text-align:center;letter-spacing:.4px;}
 
@@ -112,15 +119,15 @@ body.capturing .key-metrics{display:none !important;}
   .side-stats{flex-direction:column;border-top:2px solid var(--primary);}
   .stat-box{border-right:0;border-bottom:2px solid var(--primary);}
   .stat-box:last-child{border-bottom:0;}
-  .main-table{font-size:15px;min-width:1180px;}
+  .main-table{font-size:14px;min-width:1280px;}
   .main-table th,.main-table td{padding:6px 3px;}
   .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .dl-bar{flex-direction:column;align-items:stretch;}
   .btn-dl{margin:10px 0 0 0;}
+  .col-toggles{margin:10px 12px 0;}
   body{padding:8px;}
   .wrap{border-radius:0;}
   .input-card{border-radius:0;border-left:0;border-right:0;margin:0 -8px 16px -8px;}
-  /* 移动端体验优化：整页禁止横向滑动，表格内部可横向滚动 */
   html, body { overflow-x: hidden; }
   .table-scroll { max-width: 100%; }
   .tip { font-size: 15px; }
@@ -195,7 +202,25 @@ body.capturing .key-metrics{display:none !important;}
   <div class="dl-bar">
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
     <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：60岁后每5年</button>
-    <span class="tip">导出效果图同款版式</span>
+    <span class="tip">列开关可隐藏列，下载图同步生效</span>
+  </div>
+
+  <div class="col-toggles no-export" id="colToggles">
+    <span class="ct-title">列显示：</span>
+    <label data-col="year"><input type="checkbox" checked>保单年度</label>
+    <label data-col="age"><input type="checkbox" checked>年龄</label>
+    <label data-col="prem"><input type="checkbox" checked>当年保费</label>
+    <label data-col="pay"><input type="checkbox" checked>关爱金/年金</label>
+    <label data-col="cumPay"><input type="checkbox" checked>累计年金</label>
+    <label data-col="mat"><input type="checkbox" checked>满期生存保险金</label>
+    <label data-col="cv"><input type="checkbox" checked>现金价值</label>
+    <label data-col="death"><input type="checkbox" checked>身故总利益</label>
+    <label data-col="div"><input type="checkbox" checked>年度红利</label>
+    <label data-col="divRate"><input type="checkbox" checked>红利返还比例</label>
+    <label data-col="divCum"><input type="checkbox" checked>红利累积生息</label>
+    <label data-col="surv"><input type="checkbox" checked>生存总利益</label>
+    <label data-col="rate"><input type="checkbox" checked>当年收益率</label>
+    <button class="ct-reset" onclick="resetCols()">全部显示</button>
   </div>
 
   <div id="planArea" class="plan">
@@ -208,7 +233,6 @@ body.capturing .key-metrics{display:none !important;}
         <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
         <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续十年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
       </div>
-
       <div>
         <h4>产品简介</h4>
         <p><strong>投保年龄：</strong>28天-75周岁；趸交线上18-58周岁（5万元起售），3年交线上18-56周岁，5年交线上18-54周岁（期交1万元起售）</p>
@@ -239,18 +263,19 @@ body.capturing .key-metrics{display:none !important;}
         <table class="main-table" id="resultTable">
           <thead>
             <tr>
-              <th>保单<br>年度</th>
-              <th>年龄<br>(年末)</th>
-              <th>当年保费<br>(年初)</th>
-              <th>关爱金<br>年金</th>
-              <th>累计关爱金<br>年金</th>
-              <th>满期生存<br>保险金</th>
-              <th>现金<br>价值</th>
-              <th>身故<br>总利益</th>
-              <th>年度<br>红利</th>
-              <th>红利<br>累积生息</th>
-              <th>生存<br>总利益</th>
-              <th>总收益<br>当年增速</th>
+              <th data-col="year">保单<br>年度</th>
+              <th data-col="age">年龄<br>(年末)</th>
+              <th data-col="prem">当年保费<br>(年初)</th>
+              <th data-col="pay">关爱金<br>年金</th>
+              <th data-col="cumPay">累计<br>年金</th>
+              <th data-col="mat">满期生存<br>保险金</th>
+              <th data-col="cv">现金<br>价值</th>
+              <th data-col="death">身故<br>总利益</th>
+              <th data-col="div">年度<br>红利</th>
+              <th data-col="divRate">红利<br>返还比例</th>
+              <th data-col="divCum">红利<br>累积生息</th>
+              <th data-col="surv">生存<br>总利益</th>
+              <th data-col="rate">当年<br>收益率</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -267,12 +292,13 @@ body.capturing .key-metrics{display:none !important;}
 <script>
 let CALC_DATA = null;
 let currentGender = 1;   // 0=男, 1=女（与 data_hongda.json 键一致）
-let currentGE = 0;       // 0=非个养, 1=个人养老金
 let currentRate = 0.025; // 演示累积生息利率
 let currentViewMode = '5y60';
 let allRows = [];
+let reserveEnd = 0;
 
 const VIEW_MODE_LABELS = { all: '全部显示', '5y60': '60岁后每5年', '5y70': '70岁后每5年', '5y75': '75岁后每5年' };
+const COL_STORE_KEY = 'hongda_cols';
 
 /* ---------- 投保年龄上限（业务类型 × 性别 × 交费期） ---------- */
 function getMaxAge(isGE, gender, term){
@@ -328,18 +354,15 @@ function fmt(n){ if(n === null || n === undefined || isNaN(n)) return '-'; retur
 
 /* ---------- 数据加载 ---------- */
 fetch('data_hongda.json').then(r => r.json()).then(obj => {
-  CALC_DATA = obj.data;
+  CALC_DATA = obj;
   refreshAgeLimit();
 }).catch(err => {
   showErr('数据文件 data_hongda.json 加载失败：' + err.message);
 });
 
-/** 取某组合第 t 保单年度的行（数据按年度升序，直接索引） */
-function lookup(g, age, term, t){
-  const arr = CALC_DATA && CALC_DATA[`${g}_${age}_${term}`];
-  if(!arr) return null;
-  const row = arr[t - 1];
-  return (row && row[0] === t) ? row : null;
+/** 取某组合数据对象（{n,sa,ann[],cumAnn[],mat[],cv[],death[],hl[],hlCum[]}） */
+function lookup(g, age, term){
+  return CALC_DATA && CALC_DATA[`${g}_${age}_${term}`];
 }
 
 function generate(){
@@ -370,49 +393,58 @@ function generate(){
     if(term !== 1 && prem > 12000){ showErr('个人养老金业务期交每年最高 12000 元。'); return; }
   }
 
+  const o = lookup(g, age, term);
+  if(!o){ showErr(`暂无该组合演示数据（${g === 1 ? '女' : '男'} / ${age}周岁 / ${termLabel(term)}），请调整后重试。`); return; }
+
   const shares = prem / 1000;      // 数据按每份 1000 元归一化
   const totalPrem = prem * term;
-  const Nyears = 105 - age;
+  const Nyears = o.n;
+  const basicSa = o.sa * shares;
 
-  if(!lookup(g, age, term, 1)){ showErr(`暂无该组合演示数据（${g === 1 ? '女' : '男'} / ${age}周岁 / ${termLabel(term)}），请调整后重试。`); return; }
-
-  // 基本保险金额 = 第 5 个保单年度给付的关爱金（官方口径：关爱金按基本保险金额给付）
-  const row5 = lookup(g, age, term, 5);
-  const basicSa = row5 ? row5[3] * shares : 0;
-
-  /* ---------- 逐年计算（沿用官方 Excel 口径） ---------- */
+  /* ---------- 逐年计算（沿用官方 Excel 口径 + 红利实现率/生息利率切换） ---------- */
   allRows = [];
   let cumDivPrev = 0, cumAnnuityPrev = 0, prevSurv = 0;
 
   for(let t = 1; t <= Nyears; t++){
-    const row = lookup(g, age, term, t);
-    if(!row) break;
-    const c7 = row[1], c8 = row[2], c9 = row[3], c10 = row[4],
-          c11 = row[5], c12 = row[6], c13 = row[7], c17 = row[9];
-
-    const premYr     = c7 * shares;
-    const annuity    = c9 * shares;
-    const cumAnnuity = c10 * shares;
-    const maturity   = c11 * shares;
-    const deathBase  = c12 * shares;
-    const cvRaw      = c13 * shares;
-    const divYr      = c17 * K3 * shares;
+    const premYr     = (t <= term) ? prem : 0;
+    const annuity    = o.ann[t-1] * shares;
+    const cumAnnuity = o.cumAnn[t-1] * shares;
+    const maturity   = o.mat[t-1] * shares;
+    const deathBase  = o.death[t-1] * shares;
+    const cv         = o.cv[t-1] * shares;
+    const divYr      = o.hl[t-1] * K3 * shares;
     const ageEnd     = age + t;
 
     // 红利累积生息：按所选利率逐年滚存
     const cumDiv = (t === 1) ? divYr : divYr + cumDivPrev * (1 + K4);
-    // 满期年现金价值已含当年年金与满期金，累计年金取上一年度值，避免重复计入
-    const cumAnnuityUsed = (t < Nyears) ? cumAnnuity : cumAnnuityPrev;
 
-    const deathTotal = deathBase + cumAnnuityPrev + cumDiv;
-    const survTotal  = cvRaw + cumAnnuityUsed + cumDiv;
+    const deathTotal = deathBase + cumAnnuity + cumDiv;
+    // 生存总利益：现价 + 累计年金 + 红利累积生息（第满期年再加满期金）
+    let survTotal = cv + cumAnnuity + cumDiv;
+    if(t === Nyears) survTotal += maturity;
 
-    // 总收益当年增速 =（本年生存总利益 - 上年）/ 累计保费（与宏愿人生等演算器口径一致）
-    const yieldVal = (t === 1) ? null : (survTotal - prevSurv) / totalPrem;
+    // 总收益当年增速 =（本年生存总利益 - 上年）/ 累计保费
+    let yieldVal = null;
+    if(t > 1 && t !== Nyears){
+      yieldVal = (survTotal - prevSurv) / totalPrem;
+    }
+    // 红利返还比例 = 年度红利 ÷ 当年累计保费 × 100%
+    const cumPremPaid = Math.min(t, term) * prem;
+    const divRate = (divYr > 0 && cumPremPaid > 0) ? (divYr / cumPremPaid * 100) : null;
 
-    allRows.push({ t, ageEnd, premYr, annuity, cumAnnuity, maturity, cv: cvRaw, deathTotal, divYr, cumDiv, survTotal, yieldVal });
+    allRows.push({ t, ageEnd, premYr, annuity, cumAnnuity, maturity, cv, deathTotal, divYr, cumDiv, divRate, survTotal, yieldVal });
 
     cumDivPrev = cumDiv; cumAnnuityPrev = cumAnnuity; prevSurv = survTotal;
+  }
+
+  // 动态储备期：交费期内 或 当年收益率虚高(>8%) 一律归入储备期（直到收益稳定）
+  // 最后一年因含满期金、收益率异常，不参与判定
+  reserveEnd = 0;
+  for(let t = 1; t < Nyears; t++){
+    const r = allRows[t-1];
+    const isPayYear = t <= term;
+    const ratePct = (r.yieldVal === null) ? null : r.yieldVal * 100;
+    if(isPayYear || ratePct === null || ratePct > 8){ reserveEnd = t; }
   }
 
   document.getElementById('infoGender').textContent = g === 1 ? '女' : '男';
@@ -427,7 +459,6 @@ function generate(){
   document.getElementById('caseInfo').textContent =
     `VIP${genderStr}，今年${age}周岁，${termLabel(term)}、年交${fmt(prem)}元，购买宏达人生年金保险（分红型），保险期间至105周岁`;
 
-  // 年份显示规则：与全站演算器统一（display-rules.js）
   currentViewMode = window.getDefaultDisplayMode('hongda', age);
   document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[currentViewMode];
   renderTable();
@@ -439,38 +470,73 @@ function renderTable(){
   if(!allRows.length){ body.innerHTML = ''; return; }
 
   const displayRows = window.filterDisplayRows(allRows, currentViewMode);
-  // 储备期：第 5 个保单年度起开始给付关爱金，故前 4 年为储备期（读取统一产品规则）
-  const RULE = window.getProductRule('hongda');
-  const reserveYears = window.resolveReserveYears(RULE, 0);
-  // 累计保费（用于"生存总利益已超累计保费"高亮）
-  const lastTotalPrem = allRows.reduce((s, r) => s + (r.premYr > 0 ? r.premYr : 0), 0);
+  // 储备期在"当年收益率"列合并为一个单元格
+  const shownReserve = displayRows.filter(r => r.t <= reserveEnd);
+  const reserveCount = shownReserve.length;
 
   body.innerHTML = displayRows.map((r, idx) => {
-    const isReserve = r.t <= reserveYears;
-    const yieldCell = isReserve
-      ? (idx === 0 ? `<td class="col-rate" rowspan="${Math.min(reserveYears, displayRows.length)}"><span class="reserve-cell">储备期</span></td>` : '')
-      : `<td class="col-rate">${(r.yieldVal * 100).toFixed(2) + '%'}</td>`;
-    const rowClass = r.survTotal > (allRows[allRows.length - 1].premYr > 0 ? 0 : 0) && r.survTotal > (allRows[0].premYr > 0 ? allRows[0].premYr * countPayYears() : 0) ? 'row-positive' : '';
-    return `<tr class="${rowClass}">
-      <td>${r.t}</td>
-      <td>${r.ageEnd}</td>
-      <td>${r.premYr > 0 ? fmt(r.premYr) : '-'}</td>
-      <td class="col-annuity">${r.annuity > 0 ? fmt(r.annuity) : '-'}</td>
-      <td>${r.cumAnnuity > 0 ? fmt(r.cumAnnuity) : '-'}</td>
-      <td>${r.maturity > 0 ? fmt(r.maturity) : '-'}</td>
-      <td>${fmt(r.cv)}</td>
-      <td>${fmt(r.deathTotal)}</td>
-      <td>${r.divYr > 0 ? fmt(r.divYr) : '-'}</td>
-      <td>${r.cumDiv > 0 ? fmt(r.cumDiv) : '-'}</td>
-      <td class="col-total">${fmt(r.survTotal)}</td>
-      ${yieldCell}
-    </tr>`;
+    const isReserve = r.t <= reserveEnd;
+    let rateCell;
+    if(isReserve){
+      rateCell = (r.t === displayRows[0].t)
+        ? `<td data-col="rate" class="col-rate" rowspan="${reserveCount}"><span class="reserve-cell">储备期</span></td>`
+        : '';
+    } else {
+      rateCell = `<td data-col="rate" class="col-rate">${r.yieldVal === null ? '−' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
+    }
+    // 当年收益率（储备期合并时删掉其余行的 reserve 列，这里统一累加 HTML）
+    const stdCells = `
+      <td data-col="year">${r.t}</td>
+      <td data-col="age">${r.ageEnd}</td>
+      <td data-col="prem">${r.premYr > 0 ? fmt(r.premYr) : '-'}</td>
+      <td data-col="pay" class="col-annuity">${r.annuity > 0 ? fmt(r.annuity) : '-'}</td>
+      <td data-col="cumPay">${r.cumAnnuity > 0 ? fmt(r.cumAnnuity) : '-'}</td>
+      <td data-col="mat">${r.maturity > 0 ? fmt(r.maturity) : '-'}</td>
+      <td data-col="cv">${fmt(r.cv)}</td>
+      <td data-col="death">${fmt(r.deathTotal)}</td>
+      <td data-col="div">${r.divYr > 0 ? fmt(r.divYr) : '-'}</td>
+      <td data-col="divRate">${r.divRate === null ? '-' : r.divRate.toFixed(2) + '%'}</td>
+      <td data-col="divCum">${r.cumDiv > 0 ? fmt(r.cumDiv) : '-'}</td>
+      <td data-col="surv" class="col-total">${fmt(r.survTotal)}</td>`;
+    const isPositive = r.survTotal > totalPremValue();
+    const rowClass = isPositive ? 'row-positive' : '';
+    return `<tr class="${rowClass}">${stdCells}${rateCell}</tr>`;
   }).join('');
 }
 
-function countPayYears(){
-  const term = parseInt(document.getElementById('term').value, 10);
-  return isNaN(term) ? 1 : term;
+function totalPremValue(){
+  return allRows.reduce((s, r) => s + (r.premYr > 0 ? r.premYr : 0), 0);
+}
+
+/* ================= 列显示开关 ================= */
+function initColToggles(){
+  const stored = {};
+  try{ Object.assign(stored, JSON.parse(localStorage.getItem(COL_STORE_KEY) || '{}')); }catch(e){}
+  document.querySelectorAll('#colToggles label').forEach(label => {
+    const col = label.dataset.col;
+    const cb = label.querySelector('input');
+    if(stored[col] === false){ cb.checked = false; }
+    cb.addEventListener('change', () => {
+      toggleCol(col, cb.checked);
+      saveCols();
+    });
+    toggleCol(col, cb.checked);
+  });
+}
+function toggleCol(col, show){
+  document.querySelectorAll(`[data-col="${col}"]`).forEach(el => { el.style.display = show ? '' : 'none'; });
+}
+function resetCols(){
+  document.querySelectorAll('#colToggles label').forEach(label => {
+    const cb = label.querySelector('input'); cb.checked = true;
+    toggleCol(label.dataset.col, true);
+  });
+  try{ localStorage.removeItem(COL_STORE_KEY); }catch(e){}
+}
+function saveCols(){
+  const map = {};
+  document.querySelectorAll('#colToggles label').forEach(l => { map[l.dataset.col] = l.querySelector('input').checked; });
+  try{ localStorage.setItem(COL_STORE_KEY, JSON.stringify(map)); }catch(e){}
 }
 
 async function downloadImage(){
@@ -480,6 +546,15 @@ async function downloadImage(){
   window.scrollTo(0, 0);
   document.body.classList.add('capturing');
   let introBoxes = [], introOldHeights = [], mainTable = null, mainTableOldFs = '';
+  // 预先取文件句柄（必须在用户手势内同步调用，否则 showSaveFilePicker 会因激活过期被拒）
+  let fileHandle = null;
+  const filename = '宏达人生理财计划书.png';
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+  const canSaveDialog = !isMobile && window.showSaveFilePicker;
+  if(canSaveDialog){
+    try{ fileHandle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: 'PNG图片', accept: { 'image/png': ['.png'] } }] }); }
+    catch(e){ fileHandle = null; } // 用户取消或暂不支持 → 走传统下载
+  }
   try{
     const intro = plan.querySelector('.plan-intro');
     introBoxes = intro ? Array.from(intro.querySelectorAll(':scope > div')) : [];
@@ -488,15 +563,14 @@ async function downloadImage(){
       const h = Math.max(introBoxes[0].offsetHeight, introBoxes[1].offsetHeight);
       introBoxes.forEach(b => b.style.height = h + 'px');
     }
-    // 大金额字号自适应：17px→13px
     (function fitPlanTables(){
       mainTable = plan.querySelector('.main-table');
       if(!mainTable) return;
       mainTableOldFs = mainTable.style.fontSize;
       const cells = Array.from(mainTable.querySelectorAll('tbody td'));
       const hasOverflow = () => cells.some(c => c.scrollWidth > c.clientWidth + 1);
-      let fs = 17;
-      while(fs > 13 && hasOverflow()){
+      let fs = 16;
+      while(fs > 11 && hasOverflow()){
         fs -= 1;
         mainTable.style.fontSize = fs + 'px';
       }
@@ -511,42 +585,30 @@ async function downloadImage(){
     }
     captureScale = Math.max(1.0, captureScale);
     const canvas = await html2canvas(plan, {
-      scale: captureScale,
-      backgroundColor: '#fff',
-      useCORS: true,
+      scale: captureScale, backgroundColor: '#fff', useCORS: true,
       windowWidth: document.documentElement.scrollWidth,
       windowHeight: document.documentElement.scrollHeight,
-      width: captureW,
-      height: captureH,
-      scrollX: 0,
-      scrollY: 0,
-      logging: false
+      width: captureW, height: captureH, scrollX: 0, scrollY: 0, logging: false
     });
     window.scrollTo(0, oldScrollTop);
-    const filename = '宏达人生理财计划书.png';
-    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-    const _blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
-    const _blobUrl = URL.createObjectURL(_blob);
-    if(!isMobile && window.showSaveFilePicker){
-      try{
-        const h = await window.showSaveFilePicker({suggestedName: filename, types: [{description: 'PNG图片', accept: {'image/png': ['.png']}}]});
-        const w = await h.createWritable(); await w.write(_blob); await w.close();
-        URL.revokeObjectURL(_blobUrl);
-        return;
-      }catch(e){ /* 失败或取消时继续走下方传统下载兜底 */ }
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const blobUrl = URL.createObjectURL(blob);
+    if(fileHandle){
+      try{ const w = await fileHandle.createWritable(); await w.write(blob); await w.close(); URL.revokeObjectURL(blobUrl); toast('计划书已保存'); return; }
+      catch(e){ URL.revokeObjectURL(blobUrl); fileHandle = null; }
     }
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     if(isWechatEnv2 || isMobile2){
-      showImagePreview(_blobUrl, filename);
+      showImagePreview(blobUrl, filename);
       toast('长按图片即可保存到相册');
       return;
     }
-    const a = document.createElement('a'); a.href = _blobUrl; a.download = filename;
+    const a = document.createElement('a'); a.href = blobUrl; a.download = filename;
     a.style.display = 'none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(_blobUrl), 3000);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
     toast('计划书已下载');
-  }finally{
+  } finally {
     if(mainTable) mainTable.style.fontSize = mainTableOldFs;
     introBoxes.forEach((b, i) => { b.style.height = introOldHeights[i]; });
     document.body.classList.remove('capturing');
@@ -575,6 +637,8 @@ function showImagePreview(url, fn){
   openBtn.href = url; openBtn.download = fn;
   ov.style.display = 'flex';
 }
+
+document.addEventListener('DOMContentLoaded', initColToggles);
 </script>
 </body>
 </html>
