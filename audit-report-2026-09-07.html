@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>新华资料库 · 全站代码检查报告 2026-09-07</title>
+<style>
+:root{--primary:#1E40AF;--primary-light:#3B82F6;--bg:#F8FAFC;--card:#fff;--border:#E2E8F0;--text:#0F172A;--muted:#64748B;--ok:#16A34A;--warn:#D97706;--err:#DC2626;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding:16px;}
+.wrap{max-width:1080px;margin:0 auto;}
+.hero{background:linear-gradient(135deg,#1E40AF,#3B82F6);color:#fff;border-radius:16px;padding:24px 22px;margin-bottom:16px;}
+.hero h1{margin:0 0 6px;font-size:22px;}
+.hero p{margin:0;opacity:.92;font-size:13.5px;}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 18px;}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;}
+.kpi b{display:block;font-size:24px;color:var(--primary);line-height:1.2;}
+.kpi span{font-size:12px;color:var(--muted);}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px;}
+.card h2{margin:0 0 14px;font-size:17px;display:flex;align-items:center;gap:8px;border-left:4px solid var(--primary);padding-left:10px;}
+.card h3{margin:18px 0 8px;font-size:15px;color:var(--primary);}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:#EFF6FF;color:#1E3A8A;font-weight:700;white-space:nowrap;}
+tr:nth-child(even) td{background:#FAFBFD;}
+code{background:#F1F5F9;padding:1px 5px;border-radius:4px;font-size:12.5px;color:#B91C1C;word-break:break-all;}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:700;}
+.b-ok{background:#DCFCE7;color:#15803D;}
+.b-fix{background:#FEF3C7;color:#B45309;}
+.b-wait{background:#E0E7FF;color:#3730A3;}
+.b-err{background:#FEE2E2;color:#B91C1C;}
+ul{margin:6px 0 6px 20px;padding:0;}
+li{margin:4px 0;}
+.note{background:#F0FDF4;border-left:4px solid var(--ok);padding:10px 14px;border-radius:8px;font-size:13.5px;margin:10px 0;}
+.warn{background:#FFFBEB;border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;font-size:13.5px;margin:10px 0;}
+.foot{text-align:center;color:var(--muted);font-size:12.5px;padding:14px 0 30px;}
+@media(max-width:640px){
+  .kpis{grid-template-columns:repeat(2,1fr);}
+  body{padding:12px;}
+  table{font-size:12px;} th,td{padding:6px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>🔍 新华资料库 · 全站代码检查报告</h1>
+  <p>检查日期：2026-09-07 ｜ 范围：39 个在用页面 + 11 个演算器 ｜ 方式：真实浏览器实跑 + 静态扫描</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><b>39</b><span>页面实跑</span></div>
+  <div class="kpi"><b>0</b><span>JS 报错 / 404</span></div>
+  <div class="kpi"><b>13</b><span>已修复问题</span></div>
+  <div class="kpi"><b>5</b><span>待你确认</span></div>
+</div>
+
+<!-- ============ 一、核心问题 ============ -->
+<div class="card">
+  <h2>一、核心问题：10 个演算器「下载图片」选不了保存位置 <span class="badge b-fix">已修复</span></h2>
+
+  <p><b>现象：</b>宏达人生演算器点「下载理财计划书图片」会先弹出 Windows「另存为」对话框，可以自己选文件夹；但其余 10 个演算器点了之后<b>对话框不弹，图片被静默丢进浏览器默认下载目录</b>。</p>
+
+  <p><b>根因（代码层面）：</b>这 10 个页面的 <code>showSaveFilePicker()</code>（就是弹「另存为」的那个接口）被写在 <code>await html2canvas(...)</code> <b>之后</b>。浏览器有个安全规则：这个接口必须在<b>用户点击的那一下</b>（手势有效期内）调用；一旦中间 await 过（等截图渲染完，通常要 1～3 秒），用户手势就过期了，浏览器直接拒绝，代码被 catch 掉后只能走默认下载。</p>
+
+  <div class="note"><b>修复方案（与宏达人生完全一致）：</b>把「取文件句柄」提到最前面——点下按钮后<b>立刻</b>弹另存为让你选位置，选完再慢慢渲染图片，渲染好直接写进你选的那个文件。另外补了一条：<b>在另存为里点「取消」= 中止导出</b>，不会白渲染一张图，也不会偷偷下载。</div>
+
+  <h3>修复明细（10 个页面 + 宏达优化）</h3>
+  <table>
+    <tr><th>页面</th><th>修复前</th><th>修复后</th><th>默认文件名</th></tr>
+    <tr><td>calculator-fusheng.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>福盛世家理财计划书.png</td></tr>
+    <tr><td>calculator-hengxiang.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>恒享人生理财计划书.png</td></tr>
+    <tr><td>calculator-hongan.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>宏安世家理财计划书.png</td></tr>
+    <tr><td>calculator-hongkun.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>宏坤人生理财计划书.png</td></tr>
+    <tr><td>calculator-hongtai.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>宏泰世家理财计划书.png</td></tr>
+    <tr><td>calculator-hongxilai.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>宏禧来理财计划书.png</td></tr>
+    <tr><td>calculator-hongyu.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>宏御世家理财计划书.png</td></tr>
+    <tr><td>calculator-hongyuan.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>宏愿人生理财计划书.png</td></tr>
+    <tr><td>calculator-huacai.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>华彩理财计划书.png</td></tr>
+    <tr><td>calculator-yingmanxin.html</td><td>渲染后取句柄</td><td>点击即取句柄</td><td>盈满鑫理财计划书.png / 盈满鑫一页通.png</td></tr>
+    <tr><td>calculator-hongda.html</td><td>已是正确写法</td><td>补「取消即中止」</td><td>宏达人生理财计划书.png</td></tr>
+  </table>
+
+  <h3>实测结果（模拟点击 → 拦截文件接口 → 校验产物）</h3>
+  <table>
+    <tr><th>验证项</th><th>结果</th></tr>
+    <tr><td>11 个演算器点击下载时，是否正确先弹「另存为」</td><td><span class="badge b-ok">11/11 通过</span></td></tr>
+    <tr><td>调用顺序是否为 取句柄 → 渲染 → 写入 → 关闭</td><td><span class="badge b-ok">12/12 路径全通过</span></td></tr>
+    <tr><td>产物是否为合法 PNG（文件头 89504e47）</td><td><span class="badge b-ok">12/12 全部合法</span></td></tr>
+    <tr><td>导出体积</td><td>0.91 MB ~ 2.40 MB，均正常</td></tr>
+    <tr><td>过程中 JS 报错</td><td><span class="badge b-ok">0</span></td></tr>
+  </table>
+  <p style="font-size:12.5px;color:var(--muted);">说明：盈满鑫有「标准版 / 一页通」两种导出，两条路径分别验证通过。</p>
+</div>
+
+<!-- ============ 二、演算器在线测算 ============ -->
+<div class="card">
+  <h2>二、11 个演算器「在线测算」全面体检 <span class="badge b-ok">全部通过</span></h2>
+  <table>
+    <tr><th>检查项</th><th>方法</th><th>结果</th></tr>
+    <tr><td>参数遍历</td><td>自动遍历每个下拉框的全部选项 + 保费/年龄多组数值，共 <b>143 个用例</b></td><td><span class="badge b-ok">0 个 NaN / undefined / Infinity</span></td></tr>
+    <tr><td>越界校验</td><td>故意填年龄 10000 等极端值</td><td><span class="badge b-ok">60 次均正确拦截并提示</span>（如「投保年龄须在0~75周岁」）</td></tr>
+    <tr><td>表头与数据列对齐</td><td>按 rowspan/colspan 还原真实网格后比对</td><td><span class="badge b-ok">11/11 完全对齐</span>（含宏达储备期合并单元格）</td></tr>
+    <tr><td>手机端横向溢出</td><td>390×844 视口实测</td><td><span class="badge b-ok">0 px 溢出</span></td></tr>
+    <tr><td>JS 运行时报错</td><td>打开 → 生成 → 切换模式全程监听</td><td><span class="badge b-ok">0</span></td></tr>
+  </table>
+  <div class="note"><b>结论：</b>在线测算逻辑（数据取数、公式、储备期合并、显示模式切换、手机适配）全部正常，未发现计算错误。宏达人生的列开关 + 导出跟随筛选是独有能力，其余页面的表格为固定全列，无列开关功能，不存在同类 bug。</div>
+  <div class="warn"><b>顺带发现（不影响使用）：</b>福盛/恒享/宏坤/宏泰/宏御 5 个页面里各有一段名为 <code>_legacyDownloadImage()</code> 的旧下载函数，定义了但<b>从未被调用</b>（死代码）。已保留未动，后续可清理。</div>
+</div>
+
+<!-- ============ 三、错别字与术语 ============ -->
+<div class="card">
+  <h2>三、错别字 / 术语错误 <span class="badge b-fix">13 处已修复</span></h2>
+
+  <h3>3.1 术语写反：把「演示利率 3.5%」写成「预定利率 3.5%」（4 处）<span class="badge b-err">最该改</span></h3>
+  <p>站内自己就有标准口径（《红利实现率解读》和《三个关键数字》都写明：<b>预定利率 = 1.75%（保证部分）、演示利率 = 3.5%（分红演示假设）</b>，浮动部分 =（3.5% − 1.75%）× 70% = 1.225%）。这 4 处写成「预定利率 3.5%」与站内口径直接矛盾，是<b>会给客户讲错</b>的地方。</p>
+  <table>
+    <tr><th>文件</th><th>原文</th><th>已改为</th></tr>
+    <tr><td>card-hongyu.html:83</td><td>以<b>预定利率</b> 3.5% 演示</td><td>以<b>演示利率</b> 3.5% 演示</td></tr>
+    <tr><td>sales-qa.html:623</td><td>1.75%保底+分红（<b>预定利率</b>3.5%档）</td><td>（<b>演示利率</b>3.5%档）</td></tr>
+    <tr><td>sales-qa-fenhong.html:199</td><td>1.75%保底+分红（<b>预定利率</b>3.5%档）</td><td>（<b>演示利率</b>3.5%档）</td></tr>
+    <tr><td>sales-qa.html:1056</td><td>1.75%保底+1.2%分红演示（<b>预定利率</b>3.5%）</td><td>（<b>演示利率</b>3.5%）</td></tr>
+  </table>
+
+  <h3>3.2 纯错别字（3 处）</h3>
+  <table>
+    <tr><th>文件</th><th>原文</th><th>已改为</th></tr>
+    <tr><td>sales-qa.html:261</td><td>做<b>大辈</b>客户（73岁场景）</td><td>做<b>大龄</b>客户</td></tr>
+    <tr><td>clause-hongyu.html:290</td><td>具体可<b>登陆</b>本公司主页</td><td>可<b>登录</b>本公司主页</td></tr>
+    <tr><td>clause-hongtai.html:301</td><td>具体可<b>登陆</b>本公司主页</td><td>可<b>登录</b>本公司主页</td></tr>
+  </table>
+
+  <h3>3.3 产品名漏「保险」二字（3 处）</h3>
+  <table>
+    <tr><th>文件</th><th>原文</th><th>已改为</th></tr>
+    <tr><td>dividend-2025-interpretation.html:371</td><td>宏坤人生养老年金（分红型）</td><td>宏坤人生养老年金<b>保险</b>（分红型）</td></tr>
+    <tr><td>dividend-2025-interpretation.html:387</td><td>宏瑞人生养老年金（分红型）</td><td>宏瑞人生养老年金<b>保险</b>（分红型）</td></tr>
+    <tr><td>dividend-2025-interpretation.html:403</td><td>宏愿人生养老年金（A款）</td><td>宏愿人生养老年金<b>保险</b>（A款）</td></tr>
+  </table>
+
+  <h3>3.4 产品类型写反（products.json · 2 处）<span class="badge b-err">重要</span></h3>
+  <p>以官方条款 PDF 封面为准核对：<code>clause-hongtai.html</code> 封面是「宏泰世家<b>终身寿险</b>（分红型）」，<code>clause-hongyuan.html</code> 封面是「宏愿人生<b>养老年金保险</b>（分红型）」—— 而 products.json 里这两个产品的类型<b>正好写反了</b>，已连同介绍话术一起改正：</p>
+  <table>
+    <tr><th>产品</th><th>原文</th><th>已改为</th></tr>
+    <tr><td>宏泰世家</td><td>新华宏泰世家<b>年金保险</b>（分红型）／长期分红年金<br><span style="color:var(--muted)">话术：「活到老领到老…与生命等长的现金流」</span></td><td>新华宏泰世家<b>终身寿险</b>（分红型）／分红型增额终身寿<br><span style="color:var(--muted)">话术改为「前5年储备期后利益持续增长…含交通意外保障，适合中长期财富规划与传承」</span></td></tr>
+    <tr><td>宏愿人生</td><td>新华宏愿人生<b>终身寿险</b>（分红型）／长期分红增额终身寿/年金</td><td>新华宏愿人生<b>养老年金保险</b>（分红型）／分红型养老年金保险<br><span style="color:var(--muted)">话术改为「约定年龄起领年金，活到老领到老」</span></td></tr>
+  </table>
+
+  <h3>3.5 其他（2 处）</h3>
+  <table>
+    <tr><th>文件</th><th>问题</th><th>处理</th></tr>
+    <tr><td>index.html:1208</td><td>「在售产品总览」按钮指向 <code>2604新华在售产品说明.html</code>，文件实际叫 <code>2604新华在售产品培训.html</code> → <b>点了打不开</b></td><td><span class="badge b-fix">已改为正确文件名</span></td></tr>
+    <tr><td>calculator-hongtai.html:8</td><td>网页标题「宏泰世家（分红型）利益演示计算器」缺「终身寿险」，与页面大标题不一致</td><td><span class="badge b-fix">已补齐</span></td></tr>
+  </table>
+</div>
+
+<!-- ============ 四、全站体检 ============ -->
+<div class="card">
+  <h2>四、全站 39 个页面体检 <span class="badge b-ok">全绿</span></h2>
+  <table>
+    <tr><th>检查项</th><th>结果</th></tr>
+    <tr><td>页面加载 JS 报错（pageerror）</td><td><span class="badge b-ok">0</span></td></tr>
+    <tr><td>控制台 error</td><td><span class="badge b-ok">0</span></td></tr>
+    <tr><td>资源 404（图片 / JS / JSON）</td><td><span class="badge b-ok">0</span></td></tr>
+    <tr><td>站内链接有效性（198 条）</td><td><span class="badge b-ok">仅 1 条失效，已修复</span></td></tr>
+    <tr><td>onclick 调用了未定义的函数</td><td><span class="badge b-ok">0</span>（index 一处为内联 if 语句，属误报）</td></tr>
+    <tr><td>data.json 等数据文件可读性</td><td><span class="badge b-ok">全部 JSON 解析正常</span></td></tr>
+    <tr><td>乱码字符</td><td><span class="badge b-ok">无</span></td></tr>
+  </table>
+  <p style="font-size:12.5px;color:var(--muted);">扫描已排除 archive/、backup/、dev-archive/、node_modules/、qa/ 等归档目录（这些不动）。</p>
+</div>
+
+<!-- ============ 五、待确认 ============ -->
+<div class="card">
+  <h2>五、这 5 项我没动，需要你拍板 <span class="badge b-wait">待确认</span></h2>
+  <p style="font-size:13.5px;color:var(--muted);">都是<b>业务口径/官方数据</b>层面的疑问，我按「不猜、不瞎改」的原则保留原样，你确认后我一次改到位。</p>
+  <table>
+    <tr><th>#</th><th>位置</th><th>疑点</th><th>我的判断</th></tr>
+    <tr><td>1</td><td>hongli-realization.html:206</td><td>「历史实现率案例」里写 <b>宏享世家 114%</b></td><td>站内 dividend.json 里 114% 对应的是 <b>宏耀世家</b>（2024年），没有宏享世家的记录 → 高度疑似张冠李戴，建议改「宏耀世家 114%」或删掉这条</td></tr>
+    <tr><td>2</td><td>sales-qa.html:402<br>sales-qa-gaoke.html:209</td><td>「经营投资有经营、市场和<b>翻新投入</b>等风险」</td><td>「翻新投入」语义不明，疑为「再投入 / 追加投入」，请按原始课件核对</td></tr>
+    <tr><td>3</td><td>insurance-knowledge-card.html:117</td><td>「分红型预定利率上限 2.0%」「万能型保证利率上限 1.5%」</td><td>与现行监管口径（分红型 1.75%）可能对不上，属监管数值，需按最新文件核对</td></tr>
+    <tr><td>4</td><td>products.json:123</td><td>「新华福盛世家终身寿险（非分红）」</td><td>演算器与官方均写作「福盛世家<b>（添翼版）</b>终身寿险」，是否补「添翼版」由你定</td></tr>
+    <tr><td>5</td><td>tools/保险通用工具/工资测算_v3.html:144</td><td><code>calcCommission()</code> 被调用 3 次但<b>全文件无定义</b> → 改点数/扣税率时不会触发计算</td><td>该页未挂在主站导航上，且不清楚业务规则，未擅自补函数。要不要修、按什么规则算，等你给口径</td></tr>
+  </table>
+</div>
+
+<!-- ============ 六、已排除 ============ -->
+<div class="card">
+  <h2>六、已排查、确认「不是问题」的项</h2>
+  <ul>
+    <li>「宏大人生」——全站用法均为正确的「<b>宏达</b>人生」，无错别字</li>
+    <li>「为目的的」「锁不了了」「红利利益」「生存总利益」「终身身故」「由其监护人」——均为合法术语/语法，非重复字或用错</li>
+    <li>「宏腾世家 / 宏瑞人生 / 宏享世家 / 宏耀世家 / 宏悦来 / 宏盈来 / 宏裕来」——均为新华真实在售产品名，不是错别字</li>
+    <li>各 clause-*.html 条款编号不同（如「第十五条保单贷款」vs「第十七条保单贷款」）——不同产品条款，属正常</li>
+    <li>dividend.json 全部 11 条产品的年度与实现率数值——与官方披露一致</li>
+  </ul>
+</div>
+
+<div class="foot">
+  报告生成时间：2026-09-07 ｜ 检查方式：Chromium 真实浏览器实跑 + 静态扫描 ｜ 新华资料库 xinhua-hub
+</div>
+
+</div>
+</body>
+</html>

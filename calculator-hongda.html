@@ -578,9 +578,15 @@ async function downloadImage(){
   const filename = '宏达人生理财计划书.png';
   const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
   const canSaveDialog = !isMobile && window.showSaveFilePicker;
+  let preAborted = false;
   if(canSaveDialog){
     try{ fileHandle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: 'PNG图片', accept: { 'image/png': ['.png'] } }] }); }
-    catch(e){ fileHandle = null; } // 用户取消或暂不支持 → 走传统下载
+    catch(e){ fileHandle = null; if(e && e.name === 'AbortError'){ preAborted = true; } } // 用户取消 → 中止导出；不支持 → 走传统下载
+  }
+  if(preAborted){ // 用户在"另存为"里点了取消：恢复现场后直接结束，不再生成/下载
+    document.body.classList.remove('capturing');
+    window.scrollTo(0, oldScrollTop);
+    return;
   }
   try{
     const intro = plan.querySelector('.plan-intro');

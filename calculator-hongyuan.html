@@ -463,6 +463,21 @@ function generate(){
 async function downloadImage(){
   const plan = document.getElementById('planArea');
   if(!plan){ if(typeof showToast==='function') showToast('未找到计划书区域'); return; }
+  // 【统一下载逻辑】预先取文件句柄：必须在用户手势内同步调用，
+  // await 之后再调 showSaveFilePicker 会被浏览器以"激活已过期"拒绝（无法选择保存位置）
+  let _fileHandle = null, _preAborted = false;
+  const _preFilename = '宏愿人生理财计划书.png';
+  const _preMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if(!_preMobile && window.showSaveFilePicker){
+    try{
+      _fileHandle = await window.showSaveFilePicker({ suggestedName: _preFilename, types: [{ description: 'PNG图片', accept: { 'image/png': ['.png'] } }] });
+    }catch(e){
+      _fileHandle = null;
+      if(e && e.name === 'AbortError'){ _preAborted = true; }
+    }
+  }
+  if(_preAborted){ return; }  // 用户在"另存为"里点了取消 → 中止导出
+
   // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   window.scrollTo(0,0);
@@ -519,13 +534,11 @@ async function downloadImage(){
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     const _blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
     const _blobUrl = URL.createObjectURL(_blob);
-    if(!isMobile && window.showSaveFilePicker){
+    if(_fileHandle){
       try{
-        const h = await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
-        const w = await h.createWritable(); await w.write(_blob); await w.close();
-        URL.revokeObjectURL(_blobUrl);
+        const w = await _fileHandle.createWritable(); await w.write(_blob); await w.close(); URL.revokeObjectURL(_blobUrl);
         return;
-      }catch(e){ /* 失败或取消时继续走下方传统下载兜底 */ }
+      }catch(e){ /* 写入失败则继续走下方传统下载兜底 */ }
     }
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;

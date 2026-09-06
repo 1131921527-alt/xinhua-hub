@@ -1228,6 +1228,21 @@ window.addEventListener('resize', function(){
 });
 
 async function downloadOnePageImage(){
+  // 【统一下载逻辑】预先取文件句柄：必须在用户手势内同步调用，
+  // await 之后再调 showSaveFilePicker 会被浏览器以"激活已过期"拒绝（无法选择保存位置）
+  let _fileHandle = null, _preAborted = false;
+  const _preFilename = '盈满鑫一页通.png';
+  const _preMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if(!_preMobile && window.showSaveFilePicker){
+    try{
+      _fileHandle = await window.showSaveFilePicker({ suggestedName: _preFilename, types: [{ description: 'PNG图片', accept: { 'image/png': ['.png'] } }] });
+    }catch(e){
+      _fileHandle = null;
+      if(e && e.name === 'AbortError'){ _preAborted = true; }
+    }
+  }
+  if(_preAborted){ return; }  // 用户在"另存为"里点了取消 → 中止导出
+
   const frame=document.getElementById('onePreviewFrame');
   const oldFrameDisplay=frame?frame.style.display:'';
   const oldFrameHeight=frame?frame.style.height:'';
@@ -1240,7 +1255,12 @@ async function downloadOnePageImage(){
     const canvas=await html2canvas(root,{scale,backgroundColor:'#fff',useCORS:true,windowWidth:captureW,windowHeight:captureH+100,width:captureW,height:captureH,scrollX:0,scrollY:0,logging:false});
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('PNG生成失败');
     const filename='盈满鑫一页通.png';const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
-    if(!isMobile&&window.showSaveFilePicker){try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(blob);await w.close();return;}catch(e){/* 失败或取消时继续走下方传统下载兜底 */}}
+    if(_fileHandle){
+      try{
+        const w = await _fileHandle.createWritable(); await w.write(blob); await w.close();
+        return;
+      }catch(e){ /* 写入失败则继续走下方传统下载兜底 */ }
+    }
     const url=URL.createObjectURL(blob);if(isMobile||/MicroMessenger/i.test(navigator.userAgent)){showImagePreview(url,filename);if(typeof showToast==='function')showToast('长按图片即可保存到相册');return;}const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);
   }finally{root.style.position=oldPos;root.style.left=oldLeft;root.style.top=oldTop;root.style.display=oldDisplay;root.style.width=oldWidth;root.style.transform=oldTransform;if(!wasExporting)root.classList.remove('is-exporting');if(frame){frame.style.display=oldFrameDisplay;frame.style.height=oldFrameHeight;}window.scrollTo(0,oldScrollTop);}
 }
@@ -1248,6 +1268,21 @@ async function downloadOnePageImage(){
 async function downloadImage(){
   if(document.getElementById('exportStyle')?.value==='onepage'){await downloadOnePageImage();return;}
   if(!currentParams){ if(typeof showToast==='function') showToast('请先生成利益演示'); return; }
+  // 【统一下载逻辑】预先取文件句柄：必须在用户手势内同步调用，
+  // await 之后再调 showSaveFilePicker 会被浏览器以"激活已过期"拒绝（无法选择保存位置）
+  let _fileHandle = null, _preAborted = false;
+  const _preFilename = '盈满鑫理财计划书.png';
+  const _preMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if(!_preMobile && window.showSaveFilePicker){
+    try{
+      _fileHandle = await window.showSaveFilePicker({ suggestedName: _preFilename, types: [{ description: 'PNG图片', accept: { 'image/png': ['.png'] } }] });
+    }catch(e){
+      _fileHandle = null;
+      if(e && e.name === 'AbortError'){ _preAborted = true; }
+    }
+  }
+  if(_preAborted){ return; }  // 用户在"另存为"里点了取消 → 中止导出
+
   const plan = document.getElementById('planArea');
   if(!plan){ if(typeof showToast==='function') showToast('未找到计划书区域'); return; }
   // 强制回到页面顶部，避免 html2canvas 以当前滚动视口截取
@@ -1296,13 +1331,11 @@ async function downloadImage(){
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     const _blob = await new Promise(r=>srcCanvas.toBlob(r,'image/png'));
     const _blobUrl = URL.createObjectURL(_blob);
-    if(!isMobile && window.showSaveFilePicker){
+    if(_fileHandle){
       try{
-        const h = await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
-        const w = await h.createWritable(); await w.write(_blob); await w.close();
-        URL.revokeObjectURL(_blobUrl);
+        const w = await _fileHandle.createWritable(); await w.write(_blob); await w.close(); URL.revokeObjectURL(_blobUrl);
         return;
-      }catch(e){ /* 失败或取消时继续走下方传统下载兜底 */ }
+      }catch(e){ /* 写入失败则继续走下方传统下载兜底 */ }
     }
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);
     const isMobile2 = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;

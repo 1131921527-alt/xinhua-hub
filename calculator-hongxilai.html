@@ -441,6 +441,21 @@ function generate(){
 }
 
 async function downloadImage(){
+  // 【统一下载逻辑】预先取文件句柄：必须在用户手势内同步调用，
+  // await 之后再调 showSaveFilePicker 会被浏览器以"激活已过期"拒绝（无法选择保存位置）
+  let _fileHandle = null, _preAborted = false;
+  const _preFilename = '宏禧来理财计划书.png';
+  const _preMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if(!_preMobile && window.showSaveFilePicker){
+    try{
+      _fileHandle = await window.showSaveFilePicker({ suggestedName: _preFilename, types: [{ description: 'PNG图片', accept: { 'image/png': ['.png'] } }] });
+    }catch(e){
+      _fileHandle = null;
+      if(e && e.name === 'AbortError'){ _preAborted = true; }
+    }
+  }
+  if(_preAborted){ return; }  // 用户在"另存为"里点了取消 → 中止导出
+
   document.body.classList.add('capturing');
   const plan = document.getElementById('planArea');
   const wrap = plan.closest('.wrap');
@@ -500,13 +515,11 @@ async function downloadImage(){
     // 无条件先生成 blob，确保手机端/桌面端都能拿到（修复手机端 blob 未定义导致下载无反应）
     const _blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
     const _blobUrl = URL.createObjectURL(_blob);
-    if(!isMobile && window.showSaveFilePicker){
+    if(_fileHandle){
       try{
-        const h = await window.showSaveFilePicker({suggestedName:filename, types:[{description:'PNG图片', accept:{'image/png':['.png']}}]});
-        const w = await h.createWritable(); await w.write(_blob); await w.close();
-        URL.revokeObjectURL(_blobUrl);
+        const w = await _fileHandle.createWritable(); await w.write(_blob); await w.close(); URL.revokeObjectURL(_blobUrl);
         return;
-      }catch(e){ /* showSaveFilePicker 失败或用户取消时不 return，继续走下方传统下载兜底，确保任何桌面浏览器都能下下来 */ }
+      }catch(e){ /* 写入失败则继续走下方传统下载兜底 */ }
     }
     // 微信/手机端：页面内显示图片，提示长按保存；桌面：直接下载
     const isWechatEnv2 = /MicroMessenger/i.test(navigator.userAgent);

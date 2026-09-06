@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="assets/css/theme.css">
 <link rel="stylesheet" href="assets/css/calc-common.css">
-<title>宏泰世家（分红型）利益演示计算器</title>
+<title>宏泰世家终身寿险（分红型）利益演示计算器</title>
 <style>
   :root{
     --blue:#1E40AF; --blue2:#3B82F6; --gray:#64748B; --graybg:#F1F5F9;
@@ -653,6 +653,21 @@ try{generate();}catch(e){console.error('init:',e);showError('初始化出错：'
 async function downloadImage(){
   const tbody=document.getElementById('resultBody');
   if(!tbody||!tbody.innerHTML){showToast('请先生成利益演示');return;}
+  // 【统一下载逻辑】预先取文件句柄：必须在用户手势内同步调用，
+  // await 之后再调 showSaveFilePicker 会被浏览器以"激活已过期"拒绝（无法选择保存位置）
+  let _fileHandle = null, _preAborted = false;
+  const _preFilename = '宏泰世家理财计划书.png';
+  const _preMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if(!_preMobile && window.showSaveFilePicker){
+    try{
+      _fileHandle = await window.showSaveFilePicker({ suggestedName: _preFilename, types: [{ description: 'PNG图片', accept: { 'image/png': ['.png'] } }] });
+    }catch(e){
+      _fileHandle = null;
+      if(e && e.name === 'AbortError'){ _preAborted = true; }
+    }
+  }
+  if(_preAborted){ return; }  // 用户在"另存为"里点了取消 → 中止导出
+
   const plan=document.getElementById('planArea');
   const wrap=plan.closest('.wrap');
   const tableScroll=plan.querySelector('.table-scroll');
@@ -693,8 +708,11 @@ async function downloadImage(){
     const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||window.innerWidth<768;
     const isWechatEnv2=/MicroMessenger/i.test(navigator.userAgent);
     if(isWechatEnv2||isMobile){showImagePreview(_blobUrl,filename);showToast('长按图片即可保存到相册');return;}
-    if(!isMobile&&window.showSaveFilePicker){
-      try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'PNG图片',accept:{'image/png':['.png']}}]});const w=await h.createWritable();await w.write(_blob);await w.close();return;}catch(e){/* 失败或取消时继续走下方传统下载兜底 */}
+    if(_fileHandle){
+      try{
+        const w = await _fileHandle.createWritable(); await w.write(_blob); await w.close();
+        return;
+      }catch(e){ /* 写入失败则继续走下方传统下载兜底 */ }
     }
     const a=document.createElement('a');a.href=_blobUrl;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(_blobUrl),3000);
