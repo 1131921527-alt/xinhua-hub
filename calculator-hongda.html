@@ -296,6 +296,8 @@ let currentRate = 0.025; // 演示累积生息利率
 let currentViewMode = '5y60';
 let allRows = [];
 let reserveEnd = 0;
+// 列可见性状态：col -> boolean（默认全部 true，指定列在 init 时置 false）
+const colState = {};
 
 const VIEW_MODE_LABELS = { all: '全部显示', '5y60': '60岁后每5年', '5y70': '70岁后每5年', '5y75': '75岁后每5年' };
 const COL_STORE_KEY = 'hongda_cols';
@@ -502,6 +504,8 @@ function renderTable(){
     const rowClass = isPositive ? 'row-positive' : '';
     return `<tr class="${rowClass}">${stdCells}${rateCell}</tr>`;
   }).join('');
+  // 重新渲染后应用列隐藏状态（tbody 重建会清掉 display:none，必须重刷）
+  applyColState();
 }
 
 function totalPremValue(){
@@ -515,16 +519,27 @@ function initColToggles(){
   document.querySelectorAll('#colToggles label').forEach(label => {
     const col = label.dataset.col;
     const cb = label.querySelector('input');
-    if(stored[col] === false){ cb.checked = false; }
+    // 初始可见性：HTML 默认勾（true）则可见；未勾（mat/divRate）则不可见；localStorage 里存过 false 也强制不可见
+    const visible = (stored[col] === false) ? false : (cb.checked !== false);
+    cb.checked = visible;
+    colState[col] = visible;
     cb.addEventListener('change', () => {
       toggleCol(col, cb.checked);
       saveCols();
     });
-    toggleCol(col, cb.checked);
+  });
+  applyColState();
+}
+// 统一对表格表头/单元格应用列显隐
+function applyColState(){
+  Object.keys(colState).forEach(col => {
+    const show = !!colState[col];
+    document.querySelectorAll(`#resultTable [data-col="${col}"]`).forEach(el => { el.style.display = show ? '' : 'none'; });
   });
 }
 function toggleCol(col, show){
-  // 只作用于表格内的单元格/表头，绝不隐藏"列开关"按钮自身（按钮的 label 也带 data-col）
+  colState[col] = show;
+  // 只作用于表格内的单元格/表头，绝不隐藏"列开关"按钮自身
   document.querySelectorAll(`#resultTable [data-col="${col}"]`).forEach(el => { el.style.display = show ? '' : 'none'; });
 }
 function resetCols(){
