@@ -212,11 +212,11 @@ body.capturing .key-metrics{display:none !important;}
     <label data-col="prem"><input type="checkbox" checked>当年保费</label>
     <label data-col="pay"><input type="checkbox" checked>关爱金/年金</label>
     <label data-col="cumPay"><input type="checkbox" checked>累计年金</label>
-    <label data-col="mat"><input type="checkbox" checked>满期生存保险金</label>
+    <label data-col="mat"><input type="checkbox">满期生存保险金</label>
     <label data-col="cv"><input type="checkbox" checked>现金价值</label>
     <label data-col="death"><input type="checkbox" checked>身故总利益</label>
     <label data-col="div"><input type="checkbox" checked>年度红利</label>
-    <label data-col="divRate"><input type="checkbox" checked>红利返还比例</label>
+    <label data-col="divRate"><input type="checkbox">红利返还比例</label>
     <label data-col="divCum"><input type="checkbox" checked>红利累积生息</label>
     <label data-col="surv"><input type="checkbox" checked>生存总利益</label>
     <label data-col="rate"><input type="checkbox" checked>当年收益率</label>
@@ -524,7 +524,8 @@ function initColToggles(){
   });
 }
 function toggleCol(col, show){
-  document.querySelectorAll(`[data-col="${col}"]`).forEach(el => { el.style.display = show ? '' : 'none'; });
+  // 只作用于表格内的单元格/表头，绝不隐藏"列开关"按钮自身（按钮的 label 也带 data-col）
+  document.querySelectorAll(`#resultTable [data-col="${col}"]`).forEach(el => { el.style.display = show ? '' : 'none'; });
 }
 function resetCols(){
   document.querySelectorAll('#colToggles label').forEach(label => {
