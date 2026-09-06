@@ -100,6 +100,8 @@ body.capturing .key-metrics{display:none !important;}
 .row-positive td{background:#DBEAFE !important;color:var(--primary) !important;}
 .row-positive .col-rate{background:#BFDBFE !important;}
 .row-positive .col-total{background:#BFDBFE !important;}
+/* 回本年：红利利益首次超过累计保费，该数字加粗突出 */
+.cell-breakeven{font-weight:900 !important;font-size:1.06em;color:#0b3d91 !important;background:#BFDBFE !important;outline:2px solid var(--primary);outline-offset:-2px;}
 
 .err{display:none;background:#FEE2E2;color:#B91C1C;padding:10px 14px;border-radius:8px;margin:0 22px 12px;font-size:14px;font-weight:600;}
 .err.show{display:block;}
@@ -298,6 +300,7 @@ let currentRate = 0.025; // 演示累积生息利率
 let currentViewMode = '5y60';
 let allRows = [];
 let reserveEnd = 0;
+let breakevenT = 0;      // 回本年：红利利益首次超过累计保费的保单年度（该行数字加粗）
 // 列可见性状态：col -> boolean（默认全部 true，指定列在 init 时置 false）
 const colState = {};
 
@@ -451,6 +454,11 @@ function generate(){
     if(isPayYear || ratePct === null || ratePct > 8){ reserveEnd = t; }
   }
 
+  // 回本年：红利利益（生存总利益）首次超过累计保费的保单年度
+  breakevenT = 0;
+  const bk = allRows.find(r => r.survD > totalPrem);
+  if(bk) breakevenT = bk.t;
+
   document.getElementById('infoGender').textContent = g === 1 ? '女' : '男';
   document.getElementById('infoAge').textContent = age + '周岁';
   document.getElementById('infoTerm').textContent = termLabel(term);
@@ -502,7 +510,7 @@ function renderTable(){
       <td data-col="deathG" class="col-total">${fmt(r.deathG)}</td>
       <td data-col="deathD" class="col-total">${fmt(r.deathD)}</td>
       <td data-col="survG" class="col-total">${fmt(r.survG)}</td>
-      <td data-col="survD" class="col-total">${fmt(r.survD)}</td>`;
+      <td data-col="survD" class="col-total${r.t === breakevenT ? ' cell-breakeven' : ''}">${fmt(r.survD)}</td>`;
     const isPositive = r.survD > totalPremValue();
     const rowClass = isPositive ? 'row-positive' : '';
     return `<tr class="${rowClass}">${stdCells}${rateCell}</tr>`;
