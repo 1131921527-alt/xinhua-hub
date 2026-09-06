@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>新华资料库 · 手机端专项检查报告 2026-09-07</title>
+<style>
+:root{--primary:#1E40AF;--primary-light:#3B82F6;--bg:#F8FAFC;--card:#fff;--border:#E2E8F0;--text:#0F172A;--muted:#64748B;--ok:#16A34A;--warn:#D97706;--err:#DC2626;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding:16px;}
+.wrap{max-width:1080px;margin:0 auto;}
+.hero{background:linear-gradient(135deg,#1E40AF,#3B82F6);color:#fff;border-radius:16px;padding:24px 22px;margin-bottom:16px;}
+.hero h1{margin:0 0 6px;font-size:22px;}
+.hero p{margin:0;opacity:.92;font-size:13.5px;}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 18px;}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;}
+.kpi b{display:block;font-size:24px;color:var(--primary);line-height:1.2;}
+.kpi span{font-size:12px;color:var(--muted);}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px;}
+.card h2{margin:0 0 14px;font-size:17px;display:flex;align-items:center;gap:8px;border-left:4px solid var(--primary);padding-left:10px;}
+.card h3{margin:18px 0 8px;font-size:15px;color:var(--primary);}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:#EFF6FF;color:#1E3A8A;font-weight:700;white-space:nowrap;}
+tr:nth-child(even) td{background:#FAFBFD;}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:700;}
+.b-ok{background:#DCFCE7;color:#15803D;}
+.b-fix{background:#FEF3C7;color:#B45309;}
+.b-wait{background:#E0E7FF;color:#3730A3;}
+.b-err{background:#FEE2E2;color:#B91C1C;}
+ul{margin:6px 0 6px 20px;padding:0;}
+li{margin:4px 0;}
+.note{background:#F0FDF4;border-left:4px solid var(--ok);padding:10px 14px;border-radius:8px;font-size:13.5px;margin:10px 0;}
+.warn{background:#FFFBEB;border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;font-size:13.5px;margin:10px 0;}
+.foot{text-align:center;color:var(--muted);font-size:12.5px;padding:14px 0 30px;}
+code{background:#F1F5F9;padding:1px 5px;border-radius:4px;font-size:12.5px;color:#B91C1C;word-break:break-all;}
+@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr);}body{padding:12px;}table{font-size:12px;}th,td{padding:6px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>📱 新华资料库 · 手机端专项检查报告</h1>
+  <p>检查日期：2026-09-07 ｜ 范围：39 个在用页面 + 11 个演算器（含盈满鑫一页通）｜ 设备：iPhone 13 真机视口模拟（390×844）</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><b>39</b><span>页面手机端实跑</span></div>
+  <div class="kpi"><b>0</b><span>横向溢出 / JS 报错</span></div>
+  <div class="kpi"><b>12</b><span>演算器专项测试</span></div>
+  <div class="kpi"><b>0</b><span>在线测算 / 下载异常</span></div>
+</div>
+
+<!-- ============ 一、结论 ============ -->
+<div class="card">
+  <h2>一、检查结论</h2>
+  <div class="note">
+    ✅ <b>全站手机端运行正常。</b> 在 iPhone 13（390×844）真实视口模拟下：39 个页面均无横向溢出、无 JS 报错、无未定义按钮、无 404；11 个演算器（含盈满鑫一页通）的「在线测算」与「下载图片」均与网页端逻辑一致，图片预览层正常弹出，可长按保存。无需任何代码修改。
+  </div>
+  <h3>本次与上一轮（桌面端）检查的关系</h3>
+  <ul>
+    <li>上一轮 <code>audit-report-2026-09-07.html</code> 已覆盖桌面端全站代码、错别字、演算器在线测算与下载逻辑，修复 18 处问题。</li>
+    <li>本轮是<b>专门补做的手机端口验证</b>，目标是确认「手机上在线测算 + 下载图片」与网页端体验一致、页面在窄屏下不破版。</li>
+  </ul>
+</div>
+
+<!-- ============ 二、全站布局体检 ============ -->
+<div class="card">
+  <h2>二、全站页面手机端布局体检（390×844）</h2>
+  <p style="font-size:13.5px;color:var(--muted);margin:4px 0 10px;">检测项：① 横向溢出（<code>scrollWidth - innerWidth &gt; 2</code> 视为破版）② JS 运行时报错 ③ 控制台错误 ④ 内联 <code>onclick</code> 指向的未定义函数 ⑤ 资源 404。全部页面 <code>innerWidth=390</code>，即已正确按手机视口渲染。</p>
+  <table>
+    <thead><tr><th>页面</th><th>视口宽</th><th>横向溢出</th><th>状态</th></tr></thead>
+    <tbody>
+      <tr><td>about-xinhua.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>audit-report-2026-09-07.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-fusheng.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hengxiang.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hongan.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hongda.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hongkun.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hongtai.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hongxilai.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hongyu.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-hongyuan.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-huacai.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>calculator-yingmanxin.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>card-hongyu.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>clause-hengxiang.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>clause-hongtai.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>clause-hongyu.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>clause-hongyuan.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>clause-huacai.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>company-intro.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>dividend-2025-interpretation.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>dividend.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>fuxing.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>hongli-realization.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>huifang.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>icon-system-2026.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>index.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>insurance-knowledge-card.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>intro-yingmanxin.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>jujia.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>preview.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>sales-qa-chuancheng.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>sales-qa-fenhong.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>sales-qa-gaoke.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>sales-qa-hk.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>sales-qa-yanglao.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>sales-qa-yiyi.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>sales-qa.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>training.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+      <tr><td>zengzhi.html</td><td>390</td><td>0</td><td><span class="badge b-ok">正常</span></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--muted);margin-top:8px;">说明：<code>index.html</code> 在静态扫描中出现 <code>undef=["if"]</code> 属误报——其内联 <code>onclick</code> 为 <code>onclick="if(...){...}"</code> 形式的条件执行，并非调用名为 <code>if</code> 的函数，已在上一轮核实为无害。</p>
+</div>
+
+<!-- ============ 三、演算器专项 ============ -->
+<div class="card">
+  <h2>三、演算器手机端「在线测算 + 下载图片」专项</h2>
+  <p style="font-size:13.5px;color:var(--muted);margin:4px 0 10px;">流程：手机视口 → 点击「生成利益演示」→ 校验表格行数（rows）与渲染（html2canvas 是否执行）→ 点击「下载」→ 校验预览层是否弹出（<code>imgPreviewOverlay</code> 显示 flex）、预览图是否为 blob、是否生成下载用 blob、有无横向溢出、有无 JS 报错。</p>
+  <table>
+    <thead><tr><th>演算器</th><th>数据行</th><th>渲染</th><th>预览层</th><th>预览图</th><th>下载 blob</th><th>溢出</th><th>JS 错</th></tr></thead>
+    <tbody>
+      <tr><td>宏达人生</td><td>29</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>福盛世家</td><td>65</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>恒享人生</td><td>59</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>宏安世家</td><td>29</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>宏坤人生</td><td>65</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>宏泰世家</td><td>65</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>宏禧来</td><td>8</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>宏御世家</td><td>65</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>宏愿人生</td><td>27</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>华彩人生</td><td>65</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>盈满鑫（默认）</td><td>6</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>盈满鑫（一页通）</td><td>6</td><td>✅</td><td>✅</td><td>blob</td><td>1</td><td>0</td><td>0</td></tr>
+    </tbody>
+  </table>
+  <div class="note">12 项全部通过：在线测算产出完整数据表，下载图片在手机端弹出全屏预览层（提示「长按图片即可保存到相册」），与网页端「另存为」体验一致。</div>
+</div>
+
+<!-- ============ 四、下载行为一致性 ============ -->
+<div class="card">
+  <h2>四、手机端 vs 网页端 下载行为</h2>
+  <table>
+    <thead><tr><th>场景</th><th>手机端（iOS / Android）</th><th>网页端（桌面 Chrome）</th></tr></thead>
+    <tbody>
+      <tr><td>判定方式</td><td><code>navigator.userAgent</code> 含 Mobile / iPhone，或 <code>innerWidth &lt; 768</code></td><td>同上判定为桌面</td></tr>
+      <tr><td>下载交互</td><td>页面内全屏预览层 + 长按保存 / 「用浏览器打开」</td><td>浏览器原生「另存为」对话框，指定文件名保存</td></tr>
+      <tr><td>图片来源</td><td colspan="2" style="text-align:center;">同一套 html2canvas 截取 <code>#planArea</code> → PNG blob，所见即所得</td></tr>
+      <tr><td>取消处理</td><td colspan="2" style="text-align:center;">用户在「另存为」点取消（AbortError）→ 直接中止，不渲染不下载</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--muted);margin-top:8px;">结论：两端下载的「图片内容」完全一致（同一渲染管线），仅交互外壳因平台能力不同而适配，符合「和网页端一样正常使用」的要求。</p>
+</div>
+
+<!-- ============ 五、方法论更正 ============ -->
+<div class="card">
+  <h2>五、本轮方法论更正（重要透明说明）</h2>
+  <div class="warn">
+    ⚠️ 第一版手机端扫描脚本误用了 <code>isMobile:true</code> 但未附带设备描述符，导致 Playwright 未真正切换 UA 与视口：浏览器 UA 仍是桌面 Chrome、<code>innerWidth</code> 实测 1008px。在该错误环境下，下载逻辑按「桌面」分支走、且未弹出预览层，一度误报恒享人生 / 宏御世家「下载无预览」。已修正为使用 Playwright 内置 <code>devices['iPhone 13']</code> 设备描述符（UA=iPhone、视口 390×844、isMobile、触摸），重新实跑后全部通过——前述「2 处异常」为测试环境假阳性，<b>非站点代码缺陷</b>。
+  </div>
+  <p style="font-size:13.5px;margin:6px 0;">修正后复测结果：39 页布局 0 异常、12 项演算器专项 0 异常，本报告数据均来自该正确环境。</p>
+</div>
+
+<div class="foot">新华资料库 · 手机端专项检查报告 ｜ 生成于 2026-09-07 ｜ 检测工具：Playwright + iPhone 13 视口模拟（真浏览器实跑）</div>
+
+</div>
+</body>
+</html>
