@@ -210,15 +210,16 @@ body.capturing .key-metrics{display:none !important;}
     <label data-col="year"><input type="checkbox" checked>保单年度</label>
     <label data-col="age"><input type="checkbox" checked>年龄</label>
     <label data-col="prem"><input type="checkbox" checked>当年保费</label>
-    <label data-col="pay"><input type="checkbox" checked>关爱金/年金</label>
-    <label data-col="cumPay"><input type="checkbox" checked>累计年金</label>
-    <label data-col="mat"><input type="checkbox">满期生存保险金</label>
-    <label data-col="cv"><input type="checkbox" checked>现金价值</label>
-    <label data-col="death"><input type="checkbox" checked>身故总利益</label>
+    <label data-col="pay"><input type="checkbox" checked>①关爱金年金</label>
+    <label data-col="cumPay"><input type="checkbox" checked>②累计关爱金年金</label>
     <label data-col="div"><input type="checkbox" checked>年度红利</label>
-    <label data-col="divRate"><input type="checkbox">红利返还比例</label>
-    <label data-col="divCum"><input type="checkbox" checked>红利累积生息</label>
-    <label data-col="surv"><input type="checkbox" checked>生存总利益</label>
+    <label data-col="divCum"><input type="checkbox" checked>③红利累积生息</label>
+    <label data-col="cv"><input type="checkbox" checked>④现金价值</label>
+    <label data-col="death"><input type="checkbox" checked>⑤身故保险金</label>
+    <label data-col="deathG"><input type="checkbox" checked>身故保证利益</label>
+    <label data-col="deathD"><input type="checkbox" checked>身故预期利益</label>
+    <label data-col="survG"><input type="checkbox" checked>保证利益</label>
+    <label data-col="survD"><input type="checkbox" checked>红利利益</label>
     <label data-col="rate"><input type="checkbox" checked>当年收益率</label>
     <button class="ct-reset" onclick="resetCols()">全部显示</button>
   </div>
@@ -266,15 +267,16 @@ body.capturing .key-metrics{display:none !important;}
               <th data-col="year">保单<br>年度</th>
               <th data-col="age">年龄<br>(年末)</th>
               <th data-col="prem">当年保费<br>(年初)</th>
-              <th data-col="pay">关爱金<br>年金</th>
-              <th data-col="cumPay">累计<br>年金</th>
-              <th data-col="mat">满期生存<br>保险金</th>
-              <th data-col="cv">现金<br>价值</th>
-              <th data-col="death">身故<br>总利益</th>
+              <th data-col="pay">①<br>关爱金<br>年金</th>
+              <th data-col="cumPay">②<br>累计关爱金<br>年金</th>
               <th data-col="div">年度<br>红利</th>
-              <th data-col="divRate">红利<br>返还比例</th>
-              <th data-col="divCum">红利<br>累积生息</th>
-              <th data-col="surv">生存<br>总利益</th>
+              <th data-col="divCum">③<br>红利<br>累积生息</th>
+              <th data-col="cv">④<br>现金价值<br>(年末)</th>
+              <th data-col="death">⑤<br>身故<br>保险金</th>
+              <th data-col="deathG">身故<br>保证利益<br>(②+⑤)</th>
+              <th data-col="deathD">身故<br>预期利益<br>(②+③+⑤)</th>
+              <th data-col="survG">保证利益<br>(②+④)</th>
+              <th data-col="survD">红利利益<br>(②+③+④)</th>
               <th data-col="rate">当年<br>收益率</th>
             </tr>
           </thead>
@@ -405,38 +407,38 @@ function generate(){
 
   /* ---------- 逐年计算（沿用官方 Excel 口径 + 红利实现率/生息利率切换） ---------- */
   allRows = [];
-  let cumDivPrev = 0, cumAnnuityPrev = 0, prevSurv = 0;
+  let cumDivPrev = 0, prevSurvD = 0;
 
   for(let t = 1; t <= Nyears; t++){
     const premYr     = (t <= term) ? prem : 0;
-    const annuity    = o.ann[t-1] * shares;
-    const cumAnnuity = o.cumAnn[t-1] * shares;
-    const maturity   = o.mat[t-1] * shares;
-    const deathBase  = o.death[t-1] * shares;
-    const cv         = o.cv[t-1] * shares;
-    const divYr      = o.hl[t-1] * K3 * shares;
+    const annuity    = o.ann[t-1] * shares;          // ①关爱金年金
+    const cumAnnuity = o.cumAnn[t-1] * shares;        // ②累计关爱金年金
+    const maturity   = o.mat[t-1] * shares;           // 满期生存保险金
+    const deathBase  = o.death[t-1] * shares;         // ⑤身故保险金
+    const cv         = o.cv[t-1] * shares;            // ④现金价值
+    const divYr      = o.hl[t-1] * K3 * shares;       // 年度红利
     const ageEnd     = age + t;
 
-    // 红利累积生息：按所选利率逐年滚存
-    const cumDiv = (t === 1) ? divYr : divYr + cumDivPrev * (1 + K4);
+    // ③红利累积生息：按所选利率逐年滚存，每期四舍五入到整数（与官方展示表逐期一致）
+    const cumDiv = Math.round((t === 1) ? divYr : divYr + cumDivPrev * (1 + K4));
 
-    const deathTotal = deathBase + cumAnnuity + cumDiv;
-    // 生存总利益：现价 + 累计年金 + 红利累积生息（第满期年再加满期金）
-    let survTotal = cv + cumAnnuity + cumDiv;
-    if(t === Nyears) survTotal += maturity;
+    // 四列利益（严格按官方展示表口径）
+    let survG = cumAnnuity + cv;                                   // 保证利益(②+④)
+    let survD = cumAnnuity + cumDiv + cv;                          // 红利利益(②+③+④)
+    // 身故保证/预期：领取关爱金前(②=0)按身故保险金⑤/③+⑤；领取后按②+④/②+③+④
+    const deathG = (cumAnnuity === 0) ? deathBase : (cumAnnuity + cv);   // 身故保证利益
+    const deathD = (cumAnnuity === 0) ? (cumDiv + deathBase) : (cumAnnuity + cumDiv + cv); // 身故预期利益
+    if(t === Nyears){ survG += maturity; survD += maturity; } // 满期年加满期金
 
-    // 总收益当年增速 =（本年生存总利益 - 上年）/ 累计保费
+    // 当年收益率 =（本年红利利益 - 上年红利利益）/ 累计保费
     let yieldVal = null;
     if(t > 1 && t !== Nyears){
-      yieldVal = (survTotal - prevSurv) / totalPrem;
+      yieldVal = (survD - prevSurvD) / totalPrem;
     }
-    // 红利返还比例 = 年度红利 ÷ 当年累计保费 × 100%
-    const cumPremPaid = Math.min(t, term) * prem;
-    const divRate = (divYr > 0 && cumPremPaid > 0) ? (divYr / cumPremPaid * 100) : null;
 
-    allRows.push({ t, ageEnd, premYr, annuity, cumAnnuity, maturity, cv, deathTotal, divYr, cumDiv, divRate, survTotal, yieldVal });
+    allRows.push({ t, ageEnd, premYr, annuity, cumAnnuity, maturity, cv, deathBase, deathG, deathD, survG, survD, divYr, cumDiv, yieldVal });
 
-    cumDivPrev = cumDiv; cumAnnuityPrev = cumAnnuity; prevSurv = survTotal;
+    cumDivPrev = cumDiv; prevSurvD = survD;
   }
 
   // 动态储备期：交费期内 或 当年收益率虚高(>8%) 一律归入储备期（直到收益稳定）
@@ -493,14 +495,15 @@ function renderTable(){
       <td data-col="prem">${r.premYr > 0 ? fmt(r.premYr) : '-'}</td>
       <td data-col="pay" class="col-annuity">${r.annuity > 0 ? fmt(r.annuity) : '-'}</td>
       <td data-col="cumPay">${r.cumAnnuity > 0 ? fmt(r.cumAnnuity) : '-'}</td>
-      <td data-col="mat">${r.maturity > 0 ? fmt(r.maturity) : '-'}</td>
-      <td data-col="cv">${fmt(r.cv)}</td>
-      <td data-col="death">${fmt(r.deathTotal)}</td>
       <td data-col="div">${r.divYr > 0 ? fmt(r.divYr) : '-'}</td>
-      <td data-col="divRate">${r.divRate === null ? '-' : r.divRate.toFixed(2) + '%'}</td>
       <td data-col="divCum">${r.cumDiv > 0 ? fmt(r.cumDiv) : '-'}</td>
-      <td data-col="surv" class="col-total">${fmt(r.survTotal)}</td>`;
-    const isPositive = r.survTotal > totalPremValue();
+      <td data-col="cv">${fmt(r.cv)}</td>
+      <td data-col="death">${fmt(r.deathBase)}</td>
+      <td data-col="deathG" class="col-total">${fmt(r.deathG)}</td>
+      <td data-col="deathD" class="col-total">${fmt(r.deathD)}</td>
+      <td data-col="survG" class="col-total">${fmt(r.survG)}</td>
+      <td data-col="survD" class="col-total">${fmt(r.survD)}</td>`;
+    const isPositive = r.survD > totalPremValue();
     const rowClass = isPositive ? 'row-positive' : '';
     return `<tr class="${rowClass}">${stdCells}${rateCell}</tr>`;
   }).join('');
