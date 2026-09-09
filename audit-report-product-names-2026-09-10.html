@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>新华资料库 · 产品名核对报告 2026-09-10</title>
+<style>
+:root{--primary:#1E40AF;--primary-light:#3B82F6;--bg:#F8FAFC;--card:#fff;--border:#E2E8F0;--text:#0F172A;--muted:#64748B;--ok:#16A34A;--warn:#D97706;--err:#DC2626;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding:16px;}
+.wrap{max-width:1080px;margin:0 auto;}
+.hero{background:linear-gradient(135deg,#1E40AF,#3B82F6);color:#fff;border-radius:16px;padding:24px 22px;margin-bottom:16px;}
+.hero h1{margin:0 0 6px;font-size:22px;}
+.hero p{margin:0;opacity:.92;font-size:13.5px;}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 18px;}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;}
+.kpi b{display:block;font-size:24px;color:var(--primary);line-height:1.2;}
+.kpi span{font-size:12px;color:var(--muted);}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px;}
+.card h2{margin:0 0 14px;font-size:17px;display:flex;align-items:center;gap:8px;border-left:4px solid var(--primary);padding-left:10px;}
+.card h3{margin:18px 0 8px;font-size:15px;color:var(--primary);}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:#EFF6FF;color:#1E3A8A;font-weight:700;white-space:nowrap;}
+tr:nth-child(even) td{background:#FAFBFD;}
+code{background:#F1F5F9;padding:1px 5px;border-radius:4px;font-size:12.5px;color:#B91C1C;word-break:break-all;}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:700;}
+.b-ok{background:#DCFCE7;color:#15803D;}
+.b-warn{background:#FEF3C7;color:#B45309;}
+.note{background:#F0FDF4;border-left:4px solid var(--ok);padding:10px 14px;border-radius:8px;font-size:13.5px;margin:10px 0;}
+.warn{background:#FFFBEB;border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;font-size:13.5px;margin:10px 0;}
+ul{margin:6px 0 6px 20px;padding:0;}
+li{margin:4px 0;}
+.foot{text-align:center;color:var(--muted);font-size:12.5px;padding:14px 0 30px;}
+@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr);}body{padding:12px;}table{font-size:12px;}th,td{padding:6px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>🔎 新华资料库 · 产品名核对报告</h1>
+  <p>核对日期：2026-09-10 ｜ 触发：用户在「盈满鑫在线测算」看到「鑫鸿福」 ｜ 核对范围：11 个演算器 + 产品数据源 + 线上部署页</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><b>11</b><span>演算器产品名核对</span></div>
+  <div class="kpi"><b>11/11</b><span>全部正确</span></div>
+  <div class="kpi"><b>0</b><span>「鑫鸿福」串名</span></div>
+  <div class="kpi"><b>✅</b><span>无需修改</span></div>
+</div>
+
+<div class="card">
+  <h2>一、结论</h2>
+  <div class="note">
+    ✅ <b>全站产品名全部正确，未发现任何「盈满鑫被写成鑫鸿福」的串名。</b> 盈满鑫在线测算页从上到下（标题、封面横幅、计划书标题、提示语、一页通标题、导出文件名）全部为「盈满鑫两全保险（分红型）」。
+  </div>
+  <div class="warn">
+    ⚠️ 用户截图中顶部的「鑫鸿福分红型保险 ＋ 搜索按钮 ＋ 🔒锁 ＋ 刷新」这一行，是<b>手机浏览器自带的地址栏/搜索框</b>（用户曾在该浏览器搜索过「鑫鸿福分红型保险」），<b>并非网站内容</b>。网站页面本身不含「鑫鸿福」三字，盈满鑫演算器页上也没有任何搜索框。
+  </div>
+</div>
+
+<div class="card">
+  <h2>二、11 个演算器产品名核对（页面自报 vs 应报）</h2>
+  <table>
+    <thead><tr><th>演算器页</th><th>页面渲染的产品名</th><th>应报名称</th><th>结果</th></tr></thead>
+    <tbody>
+      <tr><td>calculator-hongda.html</td><td>宏达人生年金保险（分红型）</td><td>宏达人生</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-fusheng.html</td><td>福盛世家（添翼版）终身寿险</td><td>福盛世家（添翼版）</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-hengxiang.html</td><td>恒享人生年金保险</td><td>恒享人生</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-hongan.html</td><td>宏安世家终身寿险（分红型）</td><td>宏安世家</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-hongkun.html</td><td>宏坤人生养老年金保险</td><td>宏坤人生</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-hongtai.html</td><td>宏泰世家终身寿险（分红型）</td><td>宏泰世家</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-hongxilai.html</td><td>宏禧来（分红型）</td><td>宏禧来</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-hongyu.html</td><td>宏御世家终身寿险（分红型）</td><td>宏御世家</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-hongyuan.html</td><td>宏愿人生养老年金（分红型）</td><td>宏愿人生</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-huacai.html</td><td>华彩鎏金年金保险（分红型）</td><td>华彩鎏金</td><td><span class="badge b-ok">正确</span></td></tr>
+      <tr><td>calculator-yingmanxin.html</td><td>盈满鑫两全保险（分红型）</td><td>盈满鑫</td><td><span class="badge b-ok">正确</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>三、核对过的数据源</h2>
+  <ul>
+    <li><code>products.json</code>（产品资料结构化数据）——10 个产品名 + 全称 + 演算器链接，全部正确。</li>
+    <li><code>data.json</code>（资料库首页「🧮 产品在线测算」卡片，单一数据源）——10 个产品「名称 → 演算器页」映射全部正确，盈满鑫 → <code>calculator-yingmanxin.html</code>。</li>
+    <li><code>index.html</code>（资料库首页）——搜索框为占位符「搜索资料名称…」，产品直达卡片由 data.json 渲染，无硬编码串名。</li>
+    <li><b>线上部署页</b>（<code>https://1131921527-alt.github.io/xinhua-hub/calculator-yingmanxin.html</code>）——实测标题 =「盈满鑫两全保险（分红型） · 在线演算器」；全页「盈满鑫」出现 14 次，「鑫鸿福」0 次；无搜索框。</li>
+  </ul>
+</div>
+
+<div class="foot">新华资料库 · 产品名核对报告 ｜ 生成于 2026-09-10 ｜ 结论：无需修改（截图中的「鑫鸿福」为浏览器搜索栏，非网站内容）</div>
+
+</div>
+</body>
+</html>
