@@ -1,299 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="assets/css/theme.css">
-<title>红利实现率：分红险的确定性答案 | 新华保险资料库</title>
-<style>
-:root{--primary:#1D4ED8;--primary-light:#DBEAFE;--primary-dark:#1E40AF;--text:#1E293B;--text-light:#64748B;--bg:#F8FAFC;--card-bg:#FFFFFF;--border:#E2E8F0;--success:#16A34A;--warning:#D97706;--danger:#DC2626}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;color:var(--text);background:var(--bg);line-height:1.7;overflow-x:hidden}
-.container{max-width:900px;width:100%;margin:0 auto;padding:20px}
-.header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:48px 20px;border-radius:12px;margin-bottom:32px;text-align:center;max-width:100%;overflow:hidden}
-.header h1{font-size:28px;font-weight:700;margin-bottom:12px;white-space:normal !important;overflow-wrap:anywhere;word-break:break-all}
-.header .subtitle{font-size:16px;opacity:.9;margin-bottom:16px;white-space:normal !important;overflow-wrap:anywhere;word-break:break-all}
-.header .meta{font-size:13px;opacity:.75;line-height:1.6}
-.card{background:var(--card-bg);border-radius:10px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--border)}
-.card h2{font-size:20px;color:var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.card h3{font-size:17px;color:var(--text);margin:20px 0 10px}
-.card p{margin-bottom:12px;color:var(--text-light)}
-.card ul,.card ol{margin-left:20px;color:var(--text-light)}
-.card li{margin-bottom:6px}
-.orchard-card{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-left:4px solid #F59E0B;border-radius:8px;padding:24px;margin:20px 0}
-.orchard-card h3{color:#B45309;margin-top:0}
-.orchard-card .step{display:flex;gap:16px;margin:14px 0;align-items:flex-start}
-.orchard-card .step-num{width:36px;height:36px;background:#F59E0B;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:15px}
-.orchard-card .step-text{flex:1}
-.orchard-card .highlight{font-size:24px;font-weight:700;color:#B45309;text-align:center;margin:18px 0}
-.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
-.data-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px}
-.data-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
-.data-table tr:nth-child(even){background:var(--bg)}
-.data-table .num{font-weight:700;color:var(--primary);text-align:right}
-.formula-box{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:20px;margin:16px 0;font-family:'Courier New',Consolas,monospace;text-align:center;font-size:15px;line-height:1.8}
-.product-tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.product-tag{background:var(--primary-light);color:var(--primary);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}
-.product-tag.high{background:#DCFCE7;color:#15803D}
-.warning-box{background:#FEF2F2;border-left:4px solid var(--danger);padding:16px 20px;border-radius:6px;margin:16px 0;font-size:14px}
-.success-box{background:#F0FDF4;border-left:4px solid var(--success);padding:16px 20px;border-radius:6px;margin:16px 0;font-size:14px}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:20px 0}
-.stat-item{background:var(--bg);border-radius:8px;padding:20px;text-align:center}
-.stat-item .value{font-size:28px;font-weight:700;color:var(--primary)}
-.stat-item .label{font-size:13px;color:var(--text-light);margin-top:4px}
-.disclaimer{background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;padding:20px;font-size:13px;color:#92400E;margin-top:32px}
-.disclaimer ul{margin:10px 0 0 18px}
-blockquote{border-left:4px solid var(--primary);padding:16px 20px;background:var(--bg);border-radius:0 8px 8px 0;font-style:normal}
-blockquote p{font-size:17px;color:var(--primary);margin:0}
-.compare-row{display:flex;gap:16px;margin:16px 0}
-.compare-item{flex:1;border-radius:8px;padding:18px;text-align:center}
-.compare-item .cv{font-size:22px;font-weight:700}
-.compare-item .cl{font-size:13px;color:var(--text-light);margin-top:4px}
-.small-note{font-size:13px;color:var(--text-light);margin-top:-4px}
-.compact-card p:last-child{margin-bottom:0}
-.customer-zone{margin:0 0 28px}
-.zone-label{font-size:13px;color:var(--primary);font-weight:700;letter-spacing:.08em;margin:0 0 10px;padding-left:4px}
-.customer-card{background:#fff;border:2px solid #93C5FD;border-radius:12px;padding:28px;margin-bottom:18px;box-shadow:0 4px 14px rgba(30,64,175,.08)}
-.customer-card h2{color:var(--primary-dark);font-size:24px;line-height:1.35;margin:4px 0 18px}
-.customer-card h3{color:var(--primary);font-size:17px;margin:18px 0 8px}
-.customer-card p{color:var(--text);margin-bottom:12px}
-.customer-card .lead{font-size:17px;color:var(--text);font-weight:600}
-.customer-kicker{display:inline-block;color:#fff;background:var(--primary);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700}
-.customer-callout{background:#EFF6FF;border-left:4px solid var(--primary);border-radius:6px;padding:13px 15px;margin-top:18px;color:var(--text)}
-.key-number-grid,.principle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
-.key-number-card,.principle-card{background:#F8FAFC;border:1px solid #BFDBFE;border-radius:9px;padding:15px;text-align:center}
-.key-number-card strong,.principle-card strong{display:block;color:var(--primary-dark);font-size:16px;margin-bottom:5px}
-.key-number-card span,.principle-card span{display:block;color:var(--text-light);font-size:13px;line-height:1.55}
-.key-number-card .formula{display:block;color:var(--primary);font-size:19px;font-weight:700;margin:4px 0 6px}
-.calculation-note{background:#EFF6FF;border-left:4px solid var(--primary);border-radius:7px;padding:13px 15px;margin-top:14px;color:var(--text);font-size:14px}
-.timeline,.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-.timeline>div,.compare-grid>div{background:#F8FAFC;border:1px solid #BFDBFE;border-radius:8px;padding:12px;text-align:center}
-.timeline b,.compare-grid b{display:block;color:var(--primary-dark);margin-bottom:4px}
-.timeline span,.compare-grid span{display:block;font-size:13px;color:var(--text-light)}
-.compare-grid{grid-template-columns:repeat(2,1fr)}
-.customer-link{display:inline-block;background:var(--primary);color:#fff;text-decoration:none;padding:9px 15px;border-radius:7px;font-weight:600;margin:4px 0 8px}
-.customer-end{text-align:center;color:#64748B;font-size:12px;margin-top:20px;padding-top:12px;border-top:1px dashed #BFDBFE}
-@media(max-width:640px){
-html,body{width:100vw !important;min-width:0 !important;max-width:100vw !important;overflow-x:hidden !important}
-.container{padding:10px;min-width:0 !important;width:100vw !important;max-width:100vw !important;overflow:hidden}.header h1{font-size:17px;line-height:1.3;width:100% !important;max-width:100% !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:break-word !important}.header{padding:18px 10px;margin-bottom:12px;width:100% !important;max-width:100% !important;min-width:0 !important}.header .subtitle{font-size:12px;line-height:1.5;width:100% !important;max-width:100% !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:break-word !important}.header .meta{font-size:11px;line-height:1.5}.card{padding:13px;margin-bottom:10px;border-radius:8px;max-width:100%;width:100%;overflow:hidden}.card h2{font-size:16px;line-height:1.35;margin-bottom:10px;white-space:normal !important}.card h3{font-size:14.5px;line-height:1.4;margin:13px 0 7px;white-space:normal !important}.card p,.card li,.header *{font-size:13px;line-height:1.55;white-space:normal !important;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
-.header h1,.header .subtitle,.header .meta,.card h2,.card h3,.card p,.card li{display:block !important;min-width:0 !important;width:auto !important}
-.container *{max-width:100% !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:break-word !important}
-.orchard-card{padding:14px 12px;margin:12px 0}.orchard-card .step{gap:9px;margin:10px 0}.orchard-card .step-num{width:30px;height:30px;font-size:13px}.orchard-card .step-text{font-size:14px;line-height:1.55}.orchard-card .highlight{font-size:20px;line-height:1.3;margin:12px 0}.formula-box{padding:12px;font-size:13px;line-height:1.6}.warning-box,.success-box{padding:12px 14px;font-size:12.5px}.stats-grid{grid-template-columns:1fr;gap:9px;margin:12px 0}.stat-item{padding:12px}.stat-item .value{font-size:23px}.data-table{font-size:11px}
-.data-table th,.data-table td{padding:5px 6px;white-space:nowrap}.compare-row{flex-direction:column;gap:9px}.compare-item{padding:13px}.compare-item .cv{font-size:20px}
-.table-scroll,.data-table{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
-.product-tags{gap:6px}.product-tag{font-size:12px;padding:6px 10px}.one-line{overflow-wrap:anywhere}
-.customer-card{padding:18px 14px;margin-bottom:14px}.customer-card h2{font-size:20px}.customer-card .lead{font-size:15px}.timeline,.compare-grid{grid-template-columns:1fr;gap:8px}.customer-card p{font-size:14px}.customer-link{font-size:14px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
-.customer-card,.customer-card *{min-width:0 !important;max-width:100% !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:break-word !important}
-.key-number-grid,.principle-grid{grid-template-columns:1fr;gap:8px}.key-number-card,.principle-card{padding:12px;text-align:left}.key-number-card .formula{font-size:18px}
-}
-</style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>红利实现率：如何看懂分红 · 新华资料库</title>
+<meta name="description" content="分清预定利率、演示利率、红利实现率与保单实际收益，查询已核验的产品年度披露，并下载图片。">
 <link rel="icon" href="favicon.ico"><link rel="stylesheet" href="assets/css/knowledge-topics.css">
-<script src="html2canvas.min.js" defer></script>
-<script src="assets/js/knowledge-topics.js" defer></script>
+<script src="html2canvas.min.js" defer></script><script src="assets/js/knowledge-topics.js" defer></script><script src="assets/js/official-dividends.js" defer></script>
+<style>body{margin:0;background:#f3f6fa}.kt-example-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.kt-example-grid>div{border:1px solid #c8d9ef;border-radius:10px;padding:15px;text-align:center}.kt-example-grid strong{display:block;color:#1e40af;font-size:25px}.kt-example-grid span{font-size:13px;color:#607087}.kt-steps{padding-left:23px}.kt-steps li{margin:12px 0;padding-left:5px}.kt-archive{font-size:13px;color:#607087}.knowledge .kt-concepts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.knowledge .kt-concept{padding:15px;border-radius:10px;background:#f0f5fb}.kt-concept strong{color:#1e40af;display:block;margin-bottom:7px}.kt-concept p{font-size:13px;margin:0}.kt-concept .kt-note{margin-top:8px}@media(max-width:640px){.knowledge .kt-concepts{grid-template-columns:1fr}.kt-example-grid{gap:6px}.kt-example-grid>div{padding:11px 5px}.kt-example-grid strong{font-size:22px}}.knowledge.kt-export .kt-concepts{grid-template-columns:repeat(3,minmax(0,1fr))}</style>
 </head>
-<body>
-<div class="container">
+<body><main class="knowledge kt-shell">
+<div class="kt-toolbar"><a class="kt-button" href="index.html">← 返回资料库</a><a class="kt-button" href="about-xinhua.html">认识新华</a><a class="kt-button" href="content-composer.html">组合资料图片</a></div>
+<header class="kt-hero" id="top"><div class="kt-kicker" style="color:#b5cef6">分红知识 · 产品年度披露</div><h1>红利实现率：如何看懂分红</h1><p>先分清数字，再查产品与年份，最后回到自己的保单利益。</p></header>
+<nav class="kt-navigation" aria-label="页面目录"><a href="#dividend-key-numbers">三个数字</a><a href="#verified-rate-center">2025产品数据</a><a href="#dividend-example">怎么算红利</a><a href="#actual-return">怎么看实际收益</a><a href="#account-logic">分红机制</a></nav>
 
-<!-- A. Header -->
-<div class="header">
-<h1>红利实现率：读懂分红险浮动利益</h1>
-<p class="subtitle">用红利实现率读懂分红险"浮动收益"的真实兑现程度</p>
+<section class="kt-panel" id="dividend-key-numbers">
+<h2>分红险中的三个关键数字</h2><div class="kt-toolbar" data-no-export><button class="kt-button" id="download-concepts">下载概念说明图片</button></div>
+<div class="kt-concepts">
+<article class="kt-concept"><strong>01 预定利率</strong><p>保证利益定价相关参数。具体能领取的保证利益，以合同的现金价值、保险金及领取条件为准。</p><p class="kt-note">以此前资料中的1.75%参数为例：不等于所交保费每年保证获得1.75%。不同版本不能混用。</p></article>
+<article class="kt-concept"><strong>02 演示利率</strong><p>用于利益演示的精算假设，不是实际公布红利，也不是对客户保证的年收益。</p><p class="kt-note">此前资料中的3.50%是示例参数，不自动代表所有当前产品或所有报告期。</p></article>
+<article class="kt-concept"><strong>03 红利实现率</strong><p>实际公布红利 ÷ 对应演示红利，反映该产品该分红年度的演示兑现比例。</p><p class="kt-note">不能直接拿它乘全部保费、保证利益或公司整体投资收益。</p></article>
 </div>
-
-<section class="knowledge" id="verified-rate-center" aria-label="已核验产品红利实现率查询"><p>正在加载官方核验数据…</p></section>
-<section class="card compact-card" id="dividend-key-numbers">
-<h2>分红险中的三个关键数字</h2>
-<div class="key-number-grid">
-<div class="key-number-card"><strong>预定利率</strong><span class="formula">当前按 1.75%</span><span>用于计算合同保证利益，属于保证部分；未来预定利率可能调整，具体以当时合同和监管规定为准。</span></div>
-<div class="key-number-card"><strong>演示利率</strong><span class="formula">当前按 3.50%</span><span>用于演示非保证分红的假设水平，不等于保证收益，也不代表未来实际分红。</span></div>
-<div class="key-number-card"><strong>红利实现率</strong><span class="formula">实际分红金额 ÷ 演示分红金额</span><span>例如118%，表示实际分红超过演示水平，具体以产品披露口径为准。</span></div>
-</div>
-<div class="calculation-note"><strong>客户可以这样看：</strong>保证利益按合同约定的1.75%预定利率等参数计算；演示部分按当前3.50%的演示利率展示，实际分红要看公司经营结果。红利实现率再用“实际分红金额 ÷ 演示分红金额”计算。</div>
+<div class="kt-warning">预定利率、演示利率、红利实现率、实际保单收益率是不同指标。不能仅用前三个数字相加相乘，就认定自己的实际年收益。</div>
+<p class="kt-source">依据：<a href="https://static-cdn.newchinalife.com/ncl/pdf/20250627/e540a6a1-9930-48b8-869b-5b27562fa07a.pdf" target="_blank" rel="noopener">新华保险分红保险盈余计算方法公告</a>；具体产品以条款及正式利益演示为准。1.75%/3.50%保留为原资料参数例子，不作为当前产品统一数据。</p>
 </section>
 
-<div class="card compact-card">
-<h2><span>🧮</span> 这组数字怎么计算？</h2>
-<p>下面是帮助理解“保证部分 + 浮动红利”的<strong>示例口径</strong>，不是对具体保单收益的承诺。</p>
-<div class="formula-box">浮动部分 =（演示利率 − 预定利率）× 70%</div>
-<p style="text-align:center;">（3.50% − 1.75%）× 70% = <strong>1.225%</strong></p>
-<div class="formula-box">按100%实现率的示例收益率<br>＝ 1.75% ＋ 1.225% × 100% ≈ <strong>2.98%</strong></div>
-<div class="formula-box">按118%实现率的示例收益率<br>＝ 1.75% ＋ 1.225% × 118% ≈ <strong>3.20%</strong></div>
-<p class="small-note">因此，118%实现率对应的示例收益率约为3.20%，不是“收益率118%”。实际保单利益仍以具体产品条款、利益演示和公司实际公布的红利为准。</p>
-</div>
+<section id="verified-rate-center" aria-label="已核验产品红利实现率查询"><p>正在加载官方核验数据…</p></section>
+<details class="kt-panel"><summary>查看其他保险公司：逐家官网核验与产品查询</summary><div id="official-comparison"><p>正在加载逐家官方披露…</p></div></details>
 
-<!-- B. Why dividend insurance is back -->
-<div class="card">
-<h2><span>🔥</span> 为什么分红险重新成为市场主力</h2>
+<section class="kt-panel" id="dividend-example">
+<h2>用金额看懂118%，比直接看收益率更清楚</h2>
+<p class="kt-intro">下面只演示红利金额之间的关系，不对应某一款产品或某一张保单。</p>
+<div class="kt-example-grid"><div><span>对应演示红利</span><strong>1000元</strong></div><div><span>红利实现率</span><strong>118%</strong></div><div><span>对应实际红利</span><strong>1180元</strong></div></div>
+<p class="kt-note">算式：1000元 × 118% = 1180元。若对应演示红利为1000元、实际为500元，实现率就是50%。</p>
+<div class="kt-warning">这里的“118%”只作用于对应演示红利，不作用于全部本金。真实保单应采用公司公布的实际红利；现金分红、增额分红和终了红利要按各自披露口径阅读。</div>
+<details class="kt-archive"><summary>此前资料中的2.98% / 3.20%算术例子，为什么不能当作保单收益？</summary><p>原例以（3.50% − 1.75%）× 70% = 1.225%，再计算1.75% + 1.225% × 100% ≈ 2.98%，或1.75% + 1.225% × 118% ≈ 3.20%。</p><p>这些数字的算术结果不变，但这不是正式保单收益计算公式。可分配盈余、用于演示的计算基础、保费与现金价值不是同一金额；70%的盈余分配概念也不能直接解释为“投资利差乘70%就归客户”。不能据此推算客户真实到期收益或年化收益。</p></details>
+</section>
 
-<h3>低利率时代，优质稳健资产极度稀缺</h3>
-<p>国内理财产品早已打破刚兑，银行五年期定存利率降至 <strong>1.3%</strong>。在全球进入低利率、高波动的经济新常态下，优质稳健资产变得极度稀缺。</p>
+<section class="kt-panel" id="actual-return">
+<h2>要知道自己实际拿到多少，需要看什么？</h2>
+<ol class="kt-steps">
+<li><strong>核对投入：</strong>每次交费的金额和日期，包括交费期间、保险期间及产品版本。</li>
+<li><strong>核对保证利益：</strong>从正式计划书、现金价值表和合同中读取对应年度的金额，不把预定利率当作保费收益率。</li>
+<li><strong>核对非保证利益：</strong>使用公司实际公布的红利；已领取、留存生息、购买交清增额保险的处理方式不同，不能重复相加。</li>
+<li><strong>统一现金流口径：</strong>分别看累计投入、实际领取和期末利益；需要年化比较时，按真实收支日期计算，而不是简单把几个利率相加。</li>
+</ol>
+<a class="kt-button primary" href="index.html">返回资料库选择对应产品在线测算</a>
+<p class="kt-note">未公布的未来红利只能做明确假设的演示；实际结果不保证。不同产品不能套用同一实现率或另一产品的演算器。</p>
+</section>
 
-<h3>市场波动成为常态</h3>
-<p>以韩国为例：总人口5000多万，股票账户超过1亿个。2025年6月19日韩国综合指数创历史新高9385点，一个月跌掉近1/3。<strong>73%</strong> 的散户在牛市亏钱——牛市和破产之间，可能只隔着1个交易日。</p>
+<section id="account-logic" data-knowledge-module="logic"></section>
 
-<div class="stats-grid">
-<div class="stat-item"><div class="value">2160亿</div><div class="label">2026Q1 全行业<br>分红险保费规模</div></div>
-<div class="stat-item"><div class="value">82%</div><div class="label">储蓄类寿险新单中<br>分红险占比</div></div>
-<div class="stat-item"><div class="value">+17.8%</div><div class="label">同比增幅</div></div>
-<div class="stat-item"><div class="value">六成</div><div class="label">相关产品自<br>2025年起上市</div></div>
-</div>
-
-<h3>"保证利益 + 浮动红利"的核心优势</h3>
-<ul>
-<li><strong>保证利益岿然不动：</strong>即便市场波动，保证收益部分由行业统一的预定利率决定，不受影响</li>
-<li><strong>盈余共享机制：</strong>监管要求保险公司将实际经营成果优于精算假设的盈余，拿出 <strong>70%</strong> 分给保单持有人</li>
-<li><strong>投资平滑准备金：</strong>分红险特有的平滑机制，穿越周期拿到相对平稳回报</li>
-<li><strong>可配置权益类资产：</strong>追求更好浮动收益的同时，拥有上扬的财富曲线</li>
-</ul>
-</div>
-
-<!-- C. What is dividend realization rate -->
-<div class="card">
-<h2><span>🍎</span> 什么是红利实现率</h2>
-
-<p><strong>红利实现率反映的是分红险"浮动收益部分"的实际兑现程度。</strong></p>
-<p>由于分红险的保证收益部分由行业统一的预定利率决定，真正拉开差距的正是浮动部分。红利实现率就是衡量这部分兑现程度的硬指标。</p>
-
-<div class="orchard-card">
-<h3>🌳 果园收成案例：一眼看懂红利实现率</h3>
-
-<div class="step">
-<div class="step-num">1</div>
-<div class="step-text"><strong>预计收成：</strong>果农小华根据今年情况，在《收成预计书》里保守估计——明年能比往年多结出 <strong>1000斤</strong> 苹果。<br><span style="color:#92400E;font-size:13px;">→ 这相当于投保时，保险计划书演示的红利水平</span></div>
-</div>
-
-<div class="step">
-<div class="step-num">2</div>
-<div class="step-text"><strong>实际收成：</strong>一年过去，小华把树上摘下来的苹果一过秤——竟然比往年多了 <strong>1180斤</strong>！<br><span style="color:#92400E;font-size:13px;">→ 这相当于保险公司真正发给客户的红利</span></div>
-</div>
-
-<div class="step">
-<div class="step-num">3</div>
-<div class="step-text"><strong>计算实现率：</strong>实际 ÷ 预计 = 1180 ÷ 1000 = <strong>118%</strong></div>
-</div>
-
-<div class="highlight">✨ 红利实现率 = 118%</div>
-
-<p style="text-align:center;color:#92400E;font-size:14px;">实现率超过100% = 到手比当初保守预计还要多<br>这不是冰冷的数字，而是一家保险公司对承诺的兑现程度</p>
-</div>
-
-<div class="compare-row">
-<div class="compare-item" style="background:#FEF2F2;">
-<div class="cv" style="color:#DC2626;">50%</div>
-<div class="cl">普通果园 · 只多收了500斤</div>
-<div style="font-size:12px;color:#DC2626;margin-top:6px;">客户大失所望 😞</div>
-</div>
-<div class="compare-item" style="background:#F0FDF4;">
-<div class="cv" style="color:#16A34A;">118%</div>
-<div class="cl">优秀果园 · 多收了180斤</div>
-<div style="font-size:12px;color:#16A34A;margin-top:6px;">实际兑现高于演示值</div>
-</div>
-</div>
-</div>
-
-<!-- D. New China Life 2025 results -->
-<div class="card">
-<h2><span>🏆</span> 新华保险红利实现率表现</h2>
-<p>历史案例与 2025 年度官方披露分开阅读，不能混用比较。</p>
-
-<div class="stats-grid">
-<div class="stat-item"><div class="value">97款</div><div class="label">全系分红产品</div></div>
-<div class="stat-item"><div class="value">128%</div><div class="label">平均红利实现率</div></div>
-<div class="stat-item"><div class="value">80款</div><div class="label">实现率 ≥100%<br>（占比82%）</div></div>
-<div class="stat-item"><div class="value">56+</div><div class="label">连续5年超100%<br>达成产品数</div></div>
-</div>
-
-<h3>历史实现率案例</h3>
-<p class="small-note">不同产品、不同年度和不同红利机制下，实现率可能存在差异，仅作背景参考。</p>
-<div class="product-tags">
-<span class="product-tag">吉星高照B款 100%</span>
-<span class="product-tag">宏坤人生 118%</span>
-<span class="product-tag high">福享一生 204%</span>
-</div>
-
-<div style="margin:14px 0;padding:14px 16px;background:#F0FDF4;border-left:4px solid var(--success);border-radius:8px;">
-  <h3 style="margin-top:0;color:#15803D;">新华保险2025年度现金红利实现率</h3>
-  <p style="font-size:13.5px;margin:8px 0;">数据来源：新华保险官网公开披露。多款现金分红型产品官方披露为 <b>118%</b>。</p>
-  <div class="product-tags">
-    <span class="product-tag high">宏泰世家终身寿险（分红型） 118%</span>
-    <span class="product-tag high">宏禧来两全保险（分红型） 118%</span>
-    <span class="product-tag high">盛世荣耀庆典版终身寿险（分红型） 118%</span>
-    <span class="product-tag high">盛世恒盈年金保险（分红型） 118%</span>
-    <span class="product-tag high">财富恒盈年金保险（分红型） 118%</span>
-  </div>
-  <p style="font-size:13px;color:var(--text-light);margin-top:8px;">注：现金红利与保额分红（增额红利）口径不同，不能混合比较；红利实现率为历史数据，不代表未来。</p>
-</div>
-<p style="font-size:13px;color:var(--text-light)">请以新华保险官网最新披露及具体产品正式资料为准。</p>
-</div>
-
-<!-- E-H：旧公式、重复案例、监管长文和重复比较已从客户可见页面移除。 -->
-
-<div class="card compact-card">
-<h2>118%应该怎么理解</h2>
-<p><strong>118%表示当期实际派发红利达到计划书演示红利的118%。</strong></p>
-<p>它反映当期浮动利益的兑现情况，但不能单独代表产品未来收益，也不能代替对保证利益、长期稳定性、公司投资经营能力和分红方式的综合判断。</p>
-</div>
-
-<!-- I. Company strength -->
-<div class="card">
-<h2><span>🏦</span> 新华保险：万亿资产的长期主义底座</h2>
-<p>红利实现率超过100%的自信，根植于新华保险底层坚实的投资根基。作为资产破万亿的头部险企，拥有极其稀缺的"大体量、长周期"资金优势。</p>
-
-<h3>2025年核心经营指标（创历史新高）</h3>
-<table class="data-table">
-<tr><th>指标</th><th>数值</th><th>同比变化</th><th>指标解读</th></tr>
-<tr><td>总资产</td><td class="num">1.9万亿元</td><td>+12.2%</td><td>规模与价值增长</td></tr>
-<tr><td>原保险保费收入</td><td class="num">1958.71亿元</td><td>+14.9%</td><td>量价齐升</td></tr>
-<tr><td>长期险首年保费</td><td class="num">577.82亿元</td><td>+48.9%</td><td>业务增长"源头活水"</td></tr>
-<tr><td>归母净利润</td><td class="num">363亿元</td><td>+38.3%</td><td>盈利能力显著提升</td></tr>
-<tr><td>内含价值</td><td class="num">2878.4亿元</td><td>+11.4%</td><td>长期价值核心体现</td></tr>
-<tr><td>新业务价值</td><td class="num">98.42亿元</td><td>+57.4%</td><td>新业务盈利潜力爆发</td></tr>
-<tr><td>总投资收益率</td><td class="num">6.6%</td><td>+0.8pct</td><td>量、率、稳统一</td></tr>
-<tr><td>综合投资收益率</td><td class="num">6.9%</td><td>—</td><td>老七家同口径维度</td></tr>
-<tr><td>投资资产规模</td><td class="num">1.84万亿元</td><td>+13%</td><td>规模与收益率双突破</td></tr>
-<tr><td>股东分红</td><td class="num">85.16亿元</td><td>+7.9%</td><td>中期+末期</td></tr>
-<tr><td>每股股息</td><td class="num">2.73元/股</td><td>+7.9%</td><td>股东回报稳步增长</td></tr>
-</table>
-<p style="font-size:12px;color:var(--text-light);margin-top:8px;">注：本表原保险保费收入、长期险首年保费、内含价值、新业务价值采用原始资料精确值（1958.71亿 / 577.82亿 / 2878.4亿 / 98.42亿元）；总资产、归母净利润、投资收益率等为页面展示四舍五入值，精确值以正式资料为准。</p>
-
-<h3>偿付能力充足、风险抵御能力佳</h3>
-<div class="stats-grid">
-<div class="stat-item"><div class="value">2013.62亿</div><div class="label">核心资本<br>强劲增长</div></div>
-<div class="stat-item"><div class="value">3136.72亿</div><div class="label">实际资本<br>风险抵御坚实</div></div>
-</div>
-<p style="font-size:13px;color:var(--text-light)">有效覆盖最低资本要求，整体偿付能力充足率维持在高水平区间。</p>
-
-<h3>长期股权投资布局</h3>
-<ul>
-<li><strong>杭州银行：</strong>2025年1月24日通过杭银转债转股（转股价11.35元/股）</li>
-<li><strong>北京控股：</strong>2025年3月26日通过二级市场集中竞价方式增持</li>
-<li><strong>持有待售交易性金融资产：</strong>安井食品、中国动力、东山精密</li>
-</ul>
-</div>
-
-<!-- Source note: keep the data provenance at the end, away from the first screen. -->
-<div class="card source-note">
-<h2><span>📑</span> 资料说明</h2>
-<p>数据来源：新华保险官网公开披露、公司正式资料及相关监管文件；具体以最新正式披露和保险合同约定为准。</p>
-</div>
-
-<!-- J. Disclaimer -->
-<div class="disclaimer">
-<strong>⚠️ 风险提示</strong>
-<ul>
-<li>页面内容仅用于产品与数据说明，不构成任何形式的收益承诺或投资建议</li>
-<li>红利实现率数据来源于新华保险官方披露及公开行业报告，具体以公司最新公告为准</li>
-<li>过往表现不代表未来收益，分红险的浮动红利部分取决于公司实际经营成果</li>
-<li>演示利率仅为计划书演示用途，不代表实际收益承诺</li>
-<li>投保前请仔细阅读产品条款、产品说明书及投保提示书</li>
-</ul>
-</div>
-
-<p style="text-align:center;color:var(--text-light);font-size:13px;margin-top:24px;padding-bottom:16px;">
-百年契约，与光同行 —— 新华保险<br>
-数据更新于 2026 年 7 月 · 以公司正式披露为准
-</p>
-
-</div>
-</body>
-</html>
+<section class="kt-panel">
+<h2>查询时，固定核对四件事</h2>
+<div class="kt-contract"><div><strong>产品 + 版本</strong><p>同一公司、相似名称，不代表同一保单机制或同一分红账户。</p></div><div><strong>分红年度</strong><p>披露年份、分红年度和历史统计期间可能不同，要看表格标注。</p></div><div><strong>红利类型</strong><p>现金、增额、终了红利不能混在一起求平均或直接比较。</p></div><div><strong>官方来源</strong><p>产品级正式披露优先于没有样本范围说明的公司平均值与行业排名。</p></div></div>
+<p><a href="https://www.newchinalife.com/node/2360" target="_blank" rel="noopener">打开新华保险官网产品历史查询 →</a></p>
+<p class="kt-source">数据维护：每条记录绑定产品、年度、类型和来源。页面不再展示未核清口径的96/97款及平均实现率统计。公司背景、经营与投资数据统一见<a href="about-xinhua.html">认识新华</a>，不在此重复。</p>
+</section>
+<footer class="kt-note" style="padding:4px 6px 22px">本页用于知识和公开数据说明，不构成收益承诺。公司过往投资表现、历史红利与演示假设均不能保证未来结果。核对更新：2026年10月24日。</footer>
+</main></body></html>

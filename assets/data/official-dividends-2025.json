@@ -1,0 +1,8007 @@
+{
+  "checkedOn": "2026-10-24",
+  "year": 2025,
+  "method": "逐家官方产品查询；保留官网年度、红利类型和适用范围。不计算跨公司均值、排名或超过100%的产品占比；披露记录条数不等于产品款数。",
+  "companies": [
+    {
+      "id": "xinhua",
+      "name": "新华人寿保险股份有限公司",
+      "url": "https://www.newchinalife.com/node/2360",
+      "period": "官网分红年度2025；具体保单适用范围以官网说明为准"
+    },
+    {
+      "id": "pingan",
+      "name": "中国平安人寿保险股份有限公司",
+      "url": "https://life.pingan.com/p/#/profit-percent",
+      "note": "已访问官方披露入口；查询服务返回异常，未采用原材料中的汇总数字。"
+    },
+    {
+      "id": "chinalife",
+      "name": "中国人寿保险股份有限公司",
+      "url": "https://www.e-chinalife.com/xxpl/fhxhlsxlpl/",
+      "period": "官网分红年度2025；当期值与自2013年起累计值分开"
+    },
+    {
+      "id": "cpic",
+      "name": "中国太平洋人寿保险股份有限公司",
+      "url": "https://service.cpic.com.cn/static/bonus/bonus.html",
+      "period": "官网分红期间2025；按现金/保额红利及保单生效日期分别查询"
+    },
+    {
+      "id": "taiping",
+      "name": "太平人寿保险有限公司",
+      "url": "https://life.cntaiping.com/info-fhxbxcphlsxl/",
+      "note": "已访问官方披露入口；本次访问返回错误，未采用原材料中的汇总数字。"
+    },
+    {
+      "id": "taikang",
+      "name": "泰康人寿保险有限责任公司",
+      "url": "https://www.taikanglife.com/publicinfonew/specialinfo/dividendRealization/dividendRealization.html",
+      "period": "官网2025分红年度：2025-07-01至2026-06-30；适用于2025-07-01之前生效的保单"
+    },
+    {
+      "id": "sunshine",
+      "name": "阳光人寿保险股份有限公司",
+      "url": "https://www.sinosig.com/v/pilu?type=sx&tabIndex=10001_30",
+      "period": "2025年宣告：适用于2025-06-01至2026-05-31到达保单周年日的保单"
+    },
+    {
+      "id": "picc",
+      "name": "中国人民人寿保险股份有限公司",
+      "url": "https://www.picclife.com/picclifewebsite/picclife/channel/dividendsSecond.html?id=8aff073988508dad01889357b11d0045",
+      "period": "官网分红期间2025；月度分红产品不混入年度记录"
+    },
+    {
+      "id": "aia",
+      "name": "友邦人寿保险有限公司",
+      "url": "https://www.aia.com.cn/zh-cn/gongkaixinxipilou/zhuanxiangxinxi/xinxingchanpin/fenhongbaoxian",
+      "period": "官网分红年度2025；按现金/增额红利及红利来源分别记录"
+    }
+  ],
+  "records": [
+    {
+      "company": "chinalife",
+      "product": "国寿鑫益传家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SDK"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫多宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SDS"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿年丰鑫悦年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SEG"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿锦绣前程少儿两全保险（分红型）（2025版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SER"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿泰人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SEU"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫悦宝年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SEV"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫越传家终身寿险（分红型）（2025版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SEZ"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿年丰鑫盈养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SFD"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿瑞鑫年金保险（分红型）（2025版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SFJ"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫越稳赢养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SFS"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫益年年年金保险（分红型）（越享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SFU"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫越稳赢养老年金保险（分红型）（越享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SFV"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿臻耀传家终身寿险（分红型）（2025版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SFX"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿耀一生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SGA"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿耀金生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SGB"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿安宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SGF"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫享盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SGI"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫益年年年金保险（分红型）（2025版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SHE"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫越传家终身寿险（分红型）（庆典版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SHJ"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫越稳赢养老年金保险（分红型）（2025版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SHT"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫鸿延年养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SJB"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫鸿福养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SJJ"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫鸿福养老年金保险（分红型）（越享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SJM"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿年丰传家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "官网产品代码 SJX"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫鸿宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 80,
+      "scope": "官网产品代码 SAA"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫稳盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 80,
+      "scope": "官网产品代码 SAV"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫鸿盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SCR"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫意两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SCS"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿盈一生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SCZ"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫耀呈祥年金保险（分红型）（2024版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SDG"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫益丰年养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SDL"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿臻耀传家终身寿险（分红型）（2024版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SDN"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫稳盈两全保险（分红型）（至尊版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SEA"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫益金生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SED"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫益年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "官网产品代码 SEF"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫耀呈祥年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SZ2"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿臻耀传家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SZ3"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿分红两全保险",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 81,
+      "scope": "官网产品代码 409"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿分红终身保险",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 81,
+      "scope": "官网产品代码 410"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿金彩明天两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 49,
+      "scope": "官网产品代码 411"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿金彩明天两全保险（B款）（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 412"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿瑞鑫两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 43,
+      "scope": "官网产品代码 413"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿富两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 415"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿丰B两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 42,
+      "scope": "官网产品代码 420"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿智力人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 46,
+      "scope": "官网产品代码 422"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿康两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 423"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿安享一生两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 42,
+      "scope": "官网产品代码 427"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福星少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "官网产品代码 430"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿康两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 37,
+      "scope": "官网产品代码 431"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 437"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿盛终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 51,
+      "scope": "官网产品代码 438"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福瑞人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 440"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄双喜两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 37,
+      "scope": "官网产品代码 442"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄尊享两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 39,
+      "scope": "官网产品代码 443"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄满堂养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 449"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿新鸿泰两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 453"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福满一生两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 454"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄金尊两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 455"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄呈祥两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 456"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿新鸿泰金典版两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 457"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄宝宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 458"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿育才少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 459"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿美满人生至尊版年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 460"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿松鹤颐年年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 461"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿绿荫呵护少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 462"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿安欣无忧两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 473"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄鑫尊两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 475"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿康福两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 477"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫裕养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 485"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福寿年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 489"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿瑞鑫两全保险（分红型）（2013版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 500"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿金如意年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 505"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿福稳盈年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 511"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫如意年金保险（分红型）（铂金版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 519"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿颐享金生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 525"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿瑞鑫两全保险（分红型）（典藏版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 526"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿安欣无忧两全保险（分红型）（2015版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 535"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫福一生两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 548"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿福两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 549"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫福今生两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 550"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿福至尊年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 553"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫悦一生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 554"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫福赢家年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 555"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福瑞安康年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 565"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福瑞安康年金保险（分红型）（优享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 580"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿盛世延年养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 581"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿盛世尊享年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 582"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿盛世臻享年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 583"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫耀一生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 584"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿相伴永远养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 L03"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿千禧理财两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "官网产品代码 S50"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿盛终身保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 81,
+      "scope": "官网产品代码 S63"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿祥两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 81,
+      "scope": "官网产品代码 S65"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿运少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 57,
+      "scope": "官网产品代码 S66"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿福相伴两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 48,
+      "scope": "官网产品代码 S69"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿瑞两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "官网产品代码 S70"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿星少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 61,
+      "scope": "官网产品代码 S71"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿康宁重大疾病保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "官网产品代码 S72"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿盛终身保险（分红型）（2003版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "官网产品代码 S73"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿泰两全保险（分红型）（2003版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 51,
+      "scope": "官网产品代码 S74"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿祥两全保险（分红型）（2003版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 63,
+      "scope": "官网产品代码 S75"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿宇两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 67,
+      "scope": "官网产品代码 S76"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿鑫两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "官网产品代码 S77"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿裕鑫两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "官网产品代码 S80"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿丰两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 S81"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿裕两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 S84"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿丰两全保险（分红型）（2005版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 S86"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿金鑫两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "官网产品代码 S91"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿美满人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 45,
+      "scope": "官网产品代码 S92"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿美满一生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 S93"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿盛世臻品年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 SA3"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫禧一生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 SA4"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿富满今生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 SC3"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿岁岁赢少儿年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 SC6"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿安心宝少儿年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "官网产品代码 SC7"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福瑞安康年金保险（分红型）（尊享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SE3"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿岁岁盈少儿年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SE6"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿安鑫宝少儿年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SE7"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿金榜题名少儿年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SE8"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿福禄满堂养老年金保险（分红型）（优享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SF6"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿广育人生少儿年金保险（分红型）（A款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SF7"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿财富传家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SH5"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫玉满堂年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SH6"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫玉少儿年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SH7"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿瑞鑫年金保险（分红型）（庆典版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SJ1"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿锦绣前程年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SK3"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿如意传家两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SK4"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿金色人生养老年金保险（分红型）（典藏版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SN1"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫享福养老年金保险（分红型）（A款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SN3"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫享福养老年金保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SN4"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿瑞鑫年金保险（分红型）（盛典版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SO8"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鑫裕呈祥年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SR3"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿颐养安康养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 SW4"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿寿年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 Y21"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿鸿禧年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "官网产品代码 Y22"
+    },
+    {
+      "company": "chinalife",
+      "product": "国寿个人养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 49,
+      "scope": "官网产品代码 Y24"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康康悦人生两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康世纪长乐B款终身寿险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 36,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康嘉悦人生（赢家版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康嘉悦人生（赢家版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康颐养有约年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康颐养有约年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康附加初中教育金两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫福年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "2018.06.30（含）之前；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫福年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "2018.06.30（含）之前；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫福年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "2018.06.30（不含）之后；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫福年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "2018.06.30（不含）之后；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康安享晚年年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 36,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "松鹤延年两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐泰年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐泰年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云康悦两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康红运年年终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康精灵宝贝年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康精灵宝贝年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康金利两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康员福两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "2018.06.30（含）之前；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "2018.06.30（含）之前；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "2018.06.30（不含）之后；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "2018.06.30（不含）之后；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生E款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生E款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享百岁C款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享百岁C款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康永福人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康安享人生两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康阳光旅程少儿两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康盛世人生B款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康长寿人生3.0版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康长寿人生3.0版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康基本两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康金满仓D款两全保险（分红型）非五年期※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云永泰终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云永泰终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康松鹤延年B款两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康新天福两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 36,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫2018年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "2018.06.30（含）之前；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫2018年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "2018.06.30（含）之前；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫2018年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "2018.06.30（不含）之后；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫2018年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "2018.06.30（不含）之后；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云康顺两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享百岁养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享百岁养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康尊享岁月养老年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康尊享岁月养老年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康希望之星两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康富足人生B款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康富足人生B款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康世纪长乐（2003）终身寿险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 36,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康e爱家养老无忧终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康e爱家养老无忧终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐宝少儿两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（优选版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（优选版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康松鹤延年（2003）两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康盛世人生2008年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康恒盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康红运年年2025终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康千里马两全保险（分红型）B款非五年期※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐养百岁B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐养百岁B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐增寿（超越版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康嘉悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康嘉悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫瑞人生两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫瑞人生两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐福2018两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐福2014两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康满堂红两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（少儿版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（少儿版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康丰盈3.0版两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康长寿人生A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康长寿人生A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康附加大学教育金两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生2020（成人版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生2020（成人版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享新生活养老年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享新生活养老年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福人生2025年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福人生2025年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康健康人生终身寿险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康金满仓B款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐福两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐泰年年（荣耀版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐泰年年（荣耀版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（成人版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（成人版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（智选版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（智选版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康永利两全保险A款（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康吉祥两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康e顺人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康e顺人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康康银盛世终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康康银盛世终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐康两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福人生B款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福人生B款年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康汇赢年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康汇赢年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云康乐两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康畅赢人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康畅赢人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享悦年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享悦年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康千里马两全保险（分红型）C款非五年期※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康步步高3.0版B款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康新天寿两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 36,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康福寿延年B款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康福寿延年B款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "2018.06.30（含）之前；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "2018.06.30（含）之前；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "2018.06.30（不含）之后；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福享佑B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "2018.06.30（不含）之后；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康岁月有约养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康岁月有约养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（爱家版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康惠赢人生（爱家版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生C款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生C款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云顺意两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康新天寿（2003）两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 36,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康禧悦人生B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康禧悦人生B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康泰盈人生A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康泰盈人生A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫年年D款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫年年D款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康步步高3.0版A款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫享世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康世纪之星B款（2003）两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康臻品世家年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康臻品世家年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康永利两全保险B款（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康睿赢年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康睿赢年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云顺意B款两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康优雅人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康优雅人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康嘉悦人生（2024版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康嘉悦人生（2024版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康保盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福金升年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福金升年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康安享人生B款两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康禧悦人生A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康禧悦人生A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "世纪之星两全保险（分红型）A款※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康尊享岁月B款养老年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康尊享岁月B款养老年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "世纪宝贝两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生（少儿版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生（少儿版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康金利两全保险B款（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康富足人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康富足人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫享人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫享人生年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生2020（少儿版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智赢人生2020（少儿版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康赢悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "2018.06.30（含）之前；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康赢悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "2018.06.30（含）之前；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康赢悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "2018.06.30（不含）之后；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康赢悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "2018.06.30（不含）之后；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享岁月养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐享岁月养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康岁月有约2024Ⅱ养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康岁月有约2024Ⅱ养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生B款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生B款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "世纪长乐终身分红保险※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康鑫享世家2025终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云永泰（2014）终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康祥云永泰（2014）终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生D款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康财富人生D款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康家倍保两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福人生A款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康幸福人生A款终身年金保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康保盈3.0版两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康家倍保大学教育金两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康智慧宝贝终身保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 42,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康生命关爱重大疾病终身保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 36,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康丰盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐金两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫年年B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康乐鑫年年B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康泰盈人生B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康泰盈人生B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 100,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康金悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 43,
+      "scope": "不区分销售期间；长寿分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康金悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "不区分销售期间；个人分红账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康康佑人生两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "taikang",
+      "product": "泰康附加高中教育金两全保险（分红型）※",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 28,
+      "scope": "不区分销售期间；不区分账户"
+    },
+    {
+      "company": "aia",
+      "product": "友邦常青树终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 44,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦常青树终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 46,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世创享家至尊版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 37,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生（2020）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生2018版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 45,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生2024荣耀版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生2024荣耀版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 105,
+      "scope": "红利来源：利差；保单生效年度：2024"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生2025荣耀版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生荣耀（2020）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生荣耀尊享版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 49,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生升级版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世金生育英才（2020）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典2020终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 45,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典2025终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典2025尊享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典乐享2017终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 44,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典乐享2020终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典乐享2021终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典乐享2024终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典乐享2024终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 105,
+      "scope": "红利来源：利差；保单生效年度：2024"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典乐享2025终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典乐享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 32,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典荣耀2020终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 45,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典荣耀2021终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典荣耀2024终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典荣耀2024终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 105,
+      "scope": "红利来源：利差；保单生效年度：2024"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典荣耀尊享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 41,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典鑫享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典优享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 30,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典悦享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 28,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世经典尊享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 36,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世梦想家至尊版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世未来2025A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世未来年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世盈佳（2024）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世盈佳（2024）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 105,
+      "scope": "红利来源：利差；保单生效年度：2024"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世盈佳2024荣耀版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世盈佳2025A款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世盈佳荣耀版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦传世盈佳终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加常春藤系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 38,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“附加常春藤”系列产品包括友邦附加常春藤五十周岁养老两全保险（分红型），友邦附加常春藤五十五周岁养老两全保险（分红型），友邦附加常春藤六十周岁养老两全保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加常春藤系列产品（2003.08版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 81,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“附加常春藤”系列产品（2003.08版）包括友邦附加常春藤五十周岁养老两全保险（分红型）（2003.08版），友邦附加常春藤五十五周岁养老两全保险（分红型）（2003.08版），友邦附加常春藤六十周岁养老两全保险（分红型）（2003.08版）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加金色年华II年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加康盈无忧两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 33,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加天之骄子大学教育年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 43,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加天之骄子大学教育年金保险（分红型）（2003.08版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 86,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加天之英才高中教育年金保险（分红型）（2003.08版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 73,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加增利宝趸交年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 53,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加智汇英才A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 47,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦附加智汇英才B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 47,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦恒赢金生（2020）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦恒赢金生2018版年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 46,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦鸿丰宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦鸿盈宝B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦鸿盈宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦黄金未来A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 40,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦黄金未来B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 41,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦节节高分期给付两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 59,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金彩未来年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金丰宝B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金丰宝年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 49,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福A款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福A款”系列产品包括友邦金福A款十年年金保险（分红型），友邦金福A款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福A款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 42,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福A款”系列产品包括友邦金福A款十年年金保险（分红型），友邦金福A款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福B款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福B款”系列产品包括友邦金福B款十年年金保险（分红型），友邦金福B款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福B款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 41,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福B款”系列产品包括友邦金福B款十年年金保险（分红型），友邦金福B款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福C款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 31,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福C款”系列产品包括友邦金福C款十年年金保险（分红型），友邦金福C款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福C款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 41,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福C款”系列产品包括友邦金福C款十年年金保险（分红型），友邦金福C款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福D款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 38,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福D款”系列产品包括友邦金福D款十年年金保险（分红型），友邦金福D款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福D款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 45,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金福D款”系列产品包括友邦金福D款十年年金保险（分红型），友邦金福D款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福尊享A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 29,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福尊享A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福尊享B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 29,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金福尊享B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金色成长A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 68,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金色成长B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 68,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金色年华II两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 57,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金色年华II年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 55,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金色年华两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 69,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金色人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 60,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧A款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 32,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧A款”系列产品包括友邦金世无忧A款十年年金保险（分红型），友邦金世无忧A款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧A款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧A款”系列产品包括友邦金世无忧A款十年年金保险（分红型），友邦金世无忧A款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧B款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧B款”系列产品包括友邦金世无忧B款十年年金保险（分红型），友邦金世无忧B款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧B款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧B款”系列产品包括友邦金世无忧B款十年年金保险（分红型），友邦金世无忧B款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧C款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 29,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧C款”系列产品包括友邦金世无忧C款十年年金保险（分红型），友邦金世无忧C款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧C款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧C款”系列产品包括友邦金世无忧C款十年年金保险（分红型），友邦金世无忧C款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧D款系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 32,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧D款”系列产品包括友邦金世无忧D款十年年金保险（分红型），友邦金世无忧D款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金世无忧D款系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“金世无忧D款”系列产品包括友邦金世无忧D款十年年金保险（分红型），友邦金世无忧D款二十年年金保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金喜多多两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金喜年年II精英两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 38,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金喜年年II两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金喜年年II年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金喜年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 37,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金喜年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦金喜洋洋年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 34,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦聚宝盆II两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 65,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦聚宝盆两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 69,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦聚财宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦聚富宝A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 48,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦聚富宝B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 48,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦康乐无忧两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 32,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦利享年年（2025）A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦利享年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦年年宝A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 36,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦年年宝B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 38,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦年年宝C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 32,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦年年红系列产品",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 61,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“年年红”系列产品包括友邦年年红二十年期两全保险（分红型），友邦年年红二十五年期两全保险（分红型），友邦年年红五十岁两全保险（分红型），友邦年年红五十周岁两全保险（分红型），友邦年年红五十五岁两全保险（分红型），友邦年年红五十五周岁两全保险（分红型），友邦年年红六十岁两全保险（分红型），友邦年年红六十周岁两全保险（分红型），友邦年年红六十五岁两全保险（分红型），友邦年年红六十五周岁两全保险（分红型），友邦年年红八十岁两全保险（分红型），友邦年年红八十周岁两全保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦年年红系列产品（2003.08版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 80,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“年年红”系列产品（2003.08版）包括友邦年年红二十年期两全保险（分红型）（2003.08版），友邦年年红二十五年期两全保险（分红型）（2003.08版），友邦年年红五十周岁两全保险（分红型）（2003.08版），友邦年年红五十五周岁两全保险（分红型）（2003.08版），友邦年年红六十周岁两全保险（分红型）（2003.08版），友邦年年红六十五周岁两全保险（分红型）（2003.08版）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦年年有余年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 27,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盛世经典众享版3.0终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盛世经典众享版3.1终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 104,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盛世经典众享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盛世经典众优版3.0终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盛世经典众优版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦鑫友相伴青春版年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦鑫友相伴尊享版养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 104,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盈如意顺心2026终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盈如意顺心版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盈如意星享2026终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盈如意星享版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦盈添利两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦永丰宝B款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 35,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦永丰宝C款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 47,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦永丰宝D款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦永丰宝E款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦永丰宝年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 41,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦育才宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 50,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦育英宝系列产品",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 45,
+      "scope": "红利来源：全差；按红利分配年度披露；[\"“育英宝”系列产品包括友邦育英宝五十五岁两全保险（分红型），友邦育英宝六十岁两全保险（分红型）。\"]"
+    },
+    {
+      "company": "aia",
+      "product": "友邦月月派年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 39,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦悦享丰盈终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 118,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦悦享恒耀终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦悦享恒裕终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "红利来源：利差；保单生效年度：2025"
+    },
+    {
+      "company": "aia",
+      "product": "友邦智汇英才两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 49,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "aia",
+      "product": "友邦尊享年年有余年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 29,
+      "scope": "红利来源：全差；按红利分配年度披露"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿颐享金升养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 104,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金玺阳光终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 97,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光颐养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 97,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金佑人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻盈倍致（尊享版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿i保养乐多A款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿i保玺多多D款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 97,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金岁阳光D款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光玺2024（典藏版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光玺B款（典藏版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻玺阳光（菁英版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光玺2024（臻享版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金稳盈E款两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光金禧A款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光玺B款（臻享版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿i保玺多多C款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻盈倍致（荣耀版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻盈倍致（龙腾版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻盈倍致（2.0版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻玺阳光终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光鸿终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 100,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光玺（臻享版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 77,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿i保玺多多终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 88,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻盈倍致B款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金稳盈C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光玺终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿颐养阳光养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 60,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光伴年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻盈倍致终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金稳盈B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光鑫年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富臻享年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光尊A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金稳盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金满盈（尊享版）两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻悦终身寿险（分红型）-年度红利",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿臻悦终身寿险（分红型）-终了红利",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金满盈B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿乐享金生年金保险（分红型）-2018年6月30日（不含）之后生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿乐享金生年金保险（分红型）-2018年6月30日（含）之前生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿利享年年年金保险（分红型）-2018年6月30日（不含）之后生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿利享年年年金保险（分红型）-2018年6月30日（含）之前生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿浦爱臻传终身寿险（分红型）-年度红利",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿浦爱臻传终身寿险（分红型）-终了红利",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富智赢年金保险（分红型，成人版）-2018年6月30日（不含）之后生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富智赢年金保险（分红型，成人版）-2018年6月30日（含）之前生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富智赢年金保险（分红型，少儿版）-2018年6月30日（不含）之后生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富智赢年金保险（分红型，少儿版）-2018年6月30日（含）之前生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金满盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富传家A款年金保险（分红型）-2018年6月30日（不含）之后生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富传家A款年金保险（分红型）-2018年6月30日（含）之前生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富传家B款年金保险（分红型）-2018年6月30日（不含）之后生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富传家B款年金保险（分红型）-2018年6月30日（含）之前生效的保单",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿浦爱传家年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 38,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿富贵鑫益年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿稳盈人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿创富一号年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光财富年金保险C款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富至尊两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿富贵金升年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金岁阳光年金保险B款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿爱你一生婚姻两全保险A款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿爱你一生婚姻两全保险B款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光财富年金保险B款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿富贵年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光宝宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿传家保少儿年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿好兆投成人年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光安康两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿随心保两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿乐享人生年金保险A款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿乐享人生年金保险B款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿乐享人生年金保险C款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金岁阳光年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿年年红两全保险（分红型）-年度红利",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿年年红两全保险（分红型）-终了红利",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 40,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金富年年终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿附加富贵权益两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿富贵满堂两全保险A款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿富贵满堂两全保险B款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿e缕阳光888两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿尊享财富两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿大富翁两全保险A款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿大富翁两全保险B款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光财富两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿十全十美两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿财富年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿鸿福齐添年金保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 39,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光十年两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿添富年年两全保险B款（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿添富年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 25,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金色阳光888少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿金色阳光888两全保险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 36,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光宝贝终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "sunshine",
+      "product": "阳光人寿阳光人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "2025年宣告；保单周年日2025-06-01至2026-05-31"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·少年智年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·少年智年金保险（分红型）B款",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·样样红年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·满堂红年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·满堂红（尊享版）两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·状元红年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·状元红（尊享版）两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·老来福年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·老来福年金保险（分红型）B款",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·财富升年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "东方红·财富升（尊享版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "乐享安康两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 41,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "利享年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "利赢年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "利赢年年年金保险（分红型）B款",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "利赢年年年金保险（分红型）C款",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "利赢年年年金保险（分红型）（2018版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2018年7月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "利赢年年年金保险（分红型）（2018版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2018年7月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "吉利宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "吉祥安康两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 41,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "吉祥年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "大唐人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保启航未来A款年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 83,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保嘉传未来（2024版）养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保福有余（2024）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 126,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保蛮好人生（传世S）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 131,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保蛮好人生（传世）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 145,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保蛮好人生（至尊S）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 127,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保蛮好人生（至尊）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 127,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保蛮好的人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保蛮好的人生（职域卓越）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫悦人生A年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫悦人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫满溢终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 126,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福年年（尊享版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 75,
+      "scope": "2024年7月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福年年（尊享版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 83,
+      "scope": "2024年7月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福相伴A终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 129,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福相伴B终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 129,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福相伴终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 69,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福相伴（典藏版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 129,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福相伴（臻享版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 130,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福美满A款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫福美满B款养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫禧人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫禧年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫红利2.0两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫红利3.0两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 58,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫红利A两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 125,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫红利（臻享版）两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 125,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫红利（龙腾版）两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫长虹年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保鑫长虹（G款）年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 124,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保长相伴（传世2024S）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 131,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保长相伴（传世2024）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 145,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保长相伴（传世版）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 73,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太保长相伴（至尊2024）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 127,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太平盛世康健一生重大疾病保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 84,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "太平盛世状元红两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 65,
+      "scope": "2011年3月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "太平盛世状元红两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 46,
+      "scope": "2011年3月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "太平盛世长虹两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 66,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "安享年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家幸福一生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 65,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家福寿延年年金保险A款（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家福寿延年年金保险B款（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家英才成长两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家英才成长两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家金玉人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 58,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家金玉满堂两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 66,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家鸿福年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家鸿运年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "智惠安享年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "状元宝宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 46,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "盛世典藏年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "福享安康两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "福惠安享年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红利发两全保险C款（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红利发两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红利来两全保险A款（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 65,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红利来两全保险B款（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红利来两全保险C款（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红福多两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 59,
+      "scope": "2011年4月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "红福多两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 41,
+      "scope": "2011年4月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "红福宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 58,
+      "scope": "2011年4月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "红福宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 41,
+      "scope": "2011年4月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "红福寿年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红福来两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红福盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "红葵花少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "老来福年金保险（分红型）（2018版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2018年7月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "老来福年金保险（分红型）（2018版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2018年7月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "聚宝盆年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2018年7月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "聚宝盆年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2018年7月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "至尊安享年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "至尊鑫满意年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "财智双赢年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金源宝两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 66,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金玉人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 58,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金玉人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "鑫满意年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鑫红利两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鑫诚意年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "银福年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "附加大学教育金两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "附加守护安康两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "附加少年智教育金两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "附加少年智教育金两全保险（分红型）（2017版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "附加未来星教育金两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2018年7月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "附加未来星教育金两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2018年7月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "附加老来福养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "领先一号两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿享年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿利年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 58,
+      "scope": "2010年4月16日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿利年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 41,
+      "scope": "2010年4月16日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿发年年全能定投年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿发年年全能年金保险（分红型）A款（2013版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿发年年全能年金保险（分红型）B款（2013版）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿庆人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿瑞年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2010年4月16日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿瑞年年年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2010年4月16日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿福人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2010年4月16日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿福人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2010年4月16日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿运人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 57,
+      "scope": "2010年4月16日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿运人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "2010年4月16日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿鑫人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿鑫人生两全保险（分红型）B款",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "鸿鑫人生两全保险（分红型）C款",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 40,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "传家宝终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2018年7月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "传家宝终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 36,
+      "scope": "2018年7月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "传家宝终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2018年7月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "传家宝终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 73,
+      "scope": "2018年7月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家岁岁登高终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "小康之家岁岁登高终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 88,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "恒泰人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "恒泰人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 44,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "福惠人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "福惠人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 45,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金享人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金享人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 47,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金享人生终身寿险（分红型）B款",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金享人生终身寿险（分红型）B款",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 47,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 44,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）A款（2014版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）A款（2014版）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 44,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）A款（2017版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）A款（2017版）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 42,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）A款（2018版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）A款（2018版）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 86,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）B款（2014版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）B款（2014版）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 44,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）B款（2017版）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金佑人生终身寿险（分红型）B款（2017版）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 42,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金尊人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金尊人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 45,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2010年4月14日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 96,
+      "scope": "2010年4月14日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2010年4月14日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 59,
+      "scope": "2010年4月14日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2010年4月14日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 91,
+      "scope": "2010年4月14日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2010年4月14日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 54,
+      "scope": "2010年4月14日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2010年4月14日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 84,
+      "scope": "2010年4月14日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2010年4月14日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金泰人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 51,
+      "scope": "2010年4月14日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 59,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（A款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 48,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 54,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（B款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 45,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 51,
+      "scope": "2011年1月1日之前"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "金瑞人生（C款）终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 42,
+      "scope": "2011年1月1日及之后"
+    },
+    {
+      "company": "cpic",
+      "product": "银泰人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 70,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "cpic",
+      "product": "银泰人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 45,
+      "scope": "官网未区分生效日期"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险附加教育年金保险（分红型）（A款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险精彩人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险金鼎富贵两全保险（分红型）（E款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险如意保两全保险（分红型）-2018-7-1及之后生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫禧两全保险（分红型）（D款）-2018-7-1及之后生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险财寿延年年金保险（分红型）-2018-7-1之前生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险财寿延年年金保险（分红型）-2018-7-1及之后生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险尊赢人生年金保险（分红型）-2018-7-1之前生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 13,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险尊赢人生年金保险（分红型）-2018-7-1及之后生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 19,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫盈人生年金保险（分红型）-2018-7-1之前生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫盈人生年金保险（分红型）-2018-7-1及之后生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险金色前程教育年金保险（分红型）-2018-7-1之前生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险金色前程教育年金保险（分红型）-2018-7-1及之后生效的保单",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险金世富贵两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫安两全保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫安两全保险（分红型）（D款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫安两全保险（分红型）（C款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 79,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险如意保两全保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险丰盛人生两全保险（分红型）（A款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险丰盛人生两全保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福满人间两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福进万家两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险金色年华两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险惠民两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福贵盈门两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险惠民幸福二号两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫享生活两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 13,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险康乐无忧两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险附加教育年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险附加金色年华年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险附加金色年华高中教育年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险附加金色年华大学教育年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险附加金色年华研究生教育年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险附加福寿生活养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险长寿安康年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险畅享人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险盛世富贵年金保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险至尊人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福寿年丰年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险兴福人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险安享人生个人养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险畅享人生年金保险（分红型）（C款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险美好生活年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险美好生活年金保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险智赢生活年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫享至尊年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 13,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险美好赢家年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险金鼎富贵两全保险（B款）（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福寿延年养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险优享生活年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险温暖人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险温馨人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险美满鑫家年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险大爱传世终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 68,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险荣耀世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 50,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险岁悦风华养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险盛世富贵两全保险（分红型）（A款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 35,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险聚享福终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福禄满堂终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福禄满堂终身寿险（分红型）（尊享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险臻传世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险臻传世家终身寿险（分红型）（尊享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福禄满堂终身寿险（分红型）（庆典版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫享嘉2025养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险聚稳盈养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险臻传世家终身寿险（分红型）（如意版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 114,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险聚享福2.0终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险聚稳盈2.0养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险锦绣人生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险锦绣人生终身寿险（分红型）（A款）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫享嘉2025养老年金保险（分红型）（财富版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险锦绣人生终身寿险（分红型）（尊享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险锦绣人生终身寿险（分红型）（典藏版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险财寿金生（庆典版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险财富金生（庆典版）年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险惠享相伴2025终身寿险（分红型）（职域版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福禄满堂2025终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险福禄满堂2025终身寿险（分红型）（尊享版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险财寿福禄2025终身寿险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险鑫鸿两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险如意红两全保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险财寿尊悦养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险尊越长红养老年金保险（分红型）（典藏版）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "picc",
+      "product": "人保寿险尊越长红养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "当期红利实现率（官网未另列红利类别）",
+      "rate": 118,
+      "scope": "分红期间：2025年"
+    },
+    {
+      "company": "xinhua",
+      "product": "财富恒盈年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏腾世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世恒盈年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世荣耀庆典版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏禧来两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏御世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏安世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏坤人生养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏瑞人生养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世安盈卓越版养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世美满两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世荣耀卓越版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏泰世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏愿人生养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 118,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏享世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世安盈养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏图世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "新华尊悦终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "金镶玉年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏裕来两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世荣耀智赢版终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏耀世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏盈来两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏悦来两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏盈金生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏福来两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "宏运来两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 67,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "盛世荣耀终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "稳得福两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "稳得盈两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 30,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "美利金生A款终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福享金生A款终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "成长阳光少儿教育年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣耀世家终身寿险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "美利金生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福享金生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "华利人生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "美利人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "现金红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣逸人生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 186,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣逸人生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 33,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣尚人生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 150,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣尚人生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 34,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜盈宝瑞两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 108,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜盈宝瑞两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 115,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜盈宝顺两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 123,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜盈宝顺两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 58,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣耀人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 154,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣耀人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 107,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "至尊荣御年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 159,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "至尊荣御年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 39,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣享人生养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 233,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "荣享人生养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 31,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜金富贵年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 164,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜金富贵年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 53,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜金钱柜年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 211,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜金钱柜年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 55,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜新C款两全保险（分红型） （适用2009年9月30日以后的保单）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 182,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜新C款两全保险（分红型） （适用2009年9月30日以后的保单）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 107,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜新C款两全保险（分红型） （适用2009年9月30日及以前的保单）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 169,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜新C款两全保险（分红型） （适用2009年9月30日及以前的保单）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 50,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "喜相逢两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 200,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "喜相逢两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 140,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜·喜满多两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 115,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜·喜满多两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 54,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜·养老无忧两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 146,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜·养老无忧两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 62,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜·望子成龙两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 95,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜·望子成龙两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 42,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 104,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 97,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（C款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 81,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（C款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 97,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（分红型）（B款）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 172,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（分红型）（A款）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 220,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "红双喜两全保险（分红型）（A款）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 154,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "健乐增额终身重大疾病保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 171,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "健乐增额终身重大疾病保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 166,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福享一生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 204,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福享一生终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 15,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福禄递增年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 162,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福禄递增年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 31,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "祥和万家特享款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 107,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "祥和万家特享款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 61,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊贵一生B款终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 195,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊贵一生B款终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 35,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊贵一生A款终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 177,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊贵一生A款终身年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 37,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "祥和万家两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "祥和万家两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 95,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "祥瑞一生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 130,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "祥瑞一生终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 85,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊尚人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 173,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊尚人生两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 18,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥至尊两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 106,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥至尊两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 164,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "百年好合两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 159,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "百年好合两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 34,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊贵人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 168,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊贵人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 20,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "锦绣一生养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 117,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "锦绣一生养老年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 57,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "好利年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 215,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "好利年年两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 21,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥如意C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 105,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥如意C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 127,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥如意B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 92,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥如意B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 129,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥如意A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 106,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉祥如意A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 114,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "成长快乐少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 120,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "成长快乐少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 30,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福禄相随两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 116,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福禄相随两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 25,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊享人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 172,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "尊享人生年金保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 33,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉星高照C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 136,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉星高照C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 65,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉星高照B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 100,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉星高照B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 105,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉星高照A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 125,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉星高照A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 164,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "幸福年年A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 192,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "幸福年年A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 16,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉利相伴C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 213,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉利相伴C款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 25,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉利相伴B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 131,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉利相伴B款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 39,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉利相伴A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 144,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉利相伴A款两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 62,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "富贵人生两全保险（C款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 193,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "富贵人生两全保险（C款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 40,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "富贵人生两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 208,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "富贵人生两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 30,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "成长阳光少儿两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 129,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "成长阳光少儿两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 18,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福如东海C款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 129,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福如东海C款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 144,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "锦绣年华养老年金保险（B款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 186,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "锦绣年华养老年金保险（B款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 173,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "锦绣年华养老年金保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 206,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "锦绣年华养老年金保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 86,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福如东海B款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 140,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福如东海B款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 168,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福如东海A款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 104,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "福如东海A款终身寿险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 73,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉庆有余两全保险（A款）（分红型） （适用2006年6月30日以后的保单）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 129,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉庆有余两全保险（A款）（分红型） （适用2006年6月30日以后的保单）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 171,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉庆有余两全保险（A款）（分红型） （适用2006年6月30日及以前的保单）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 153,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉庆有余两全保险（A款）（分红型） （适用2006年6月30日及以前的保单）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 195,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "美满安康两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 207,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "美满安康两全保险（A款）（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 24,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "阳光灿烂少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 169,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "阳光灿烂少儿两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 32,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉庆有余两全保险（分红型）",
+      "year": 2025,
+      "kind": "增额红利实现率",
+      "rate": 126,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    },
+    {
+      "company": "xinhua",
+      "product": "吉庆有余两全保险（分红型）",
+      "year": 2025,
+      "kind": "终了红利实现率",
+      "rate": 162,
+      "scope": "官网产品维度；单张保单可能因年龄、性别、交费方式及保单年度而不同"
+    }
+  ]
+}

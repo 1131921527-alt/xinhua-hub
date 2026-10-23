@@ -1,0 +1,10 @@
+'use strict';
+document.addEventListener('DOMContentLoaded',async()=>{
+ const host=document.getElementById('official-comparison');if(!host)return;
+ const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ try{const response=await fetch('assets/data/official-dividends-2025.json');if(!response.ok)throw Error('官方披露数据暂时无法加载');const d=await response.json();
+ host.innerHTML=`<h2>逐家官网核验：2025产品披露</h2><p>不以公司平均值替代具体产品，不混用现金、增额与终了红利。以下覆盖原资料实际比较的九家内地寿险公司；没有取到官方数值的公司不填数字，也不参与排名。</p><div class="kt-query" data-no-export><label>保险公司<select id="official-company">${d.companies.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('')}</select></label><label>产品关键词<input id="official-product" type="search" placeholder="输入产品名称" autocomplete="off"></label></div><div id="official-results"></div><p class="kt-note">${esc(d.method)} 核验日期：${esc(d.checkedOn)}。此处为官网披露快照，后续调整以官方为准。</p>`;
+ const render=()=>{const id=document.getElementById('official-company').value,c=d.companies.find(c=>c.id===id),q=document.getElementById('official-product').value.trim(),rows=d.records.filter(r=>r.company===id&&(!q||r.product.includes(q)));document.getElementById('official-results').innerHTML=`<h3>${esc(c.name)}</h3><p class="kt-note">${esc(c.period||c.note)}</p>${c.note?'':`<p class="kt-note">匹配 ${rows.length} 条披露记录。同一产品可能有多种红利或适用范围，不等于 ${rows.length} 款产品。</p><div class="kt-table-wrap kt-official-table"><table><thead><tr><th>产品</th><th>年度</th><th>红利类别</th><th>实现率</th><th>适用范围 / 口径</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.product)}</td><td>${r.year}</td><td>${esc(r.kind)}</td><td class="rate">${r.rate}%</td><td>${esc(r.scope)}</td></tr>`).join('')}</tbody></table></div>`}<p class="kt-source">原始依据：<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)}官方查询</a></p>`;};
+ document.getElementById('official-company').addEventListener('change',render);document.getElementById('official-product').addEventListener('input',render);render();
+ }catch(e){host.textContent=e.message;}
+});
