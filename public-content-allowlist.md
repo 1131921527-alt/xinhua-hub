@@ -74,7 +74,7 @@ about-xinhua.html、calculator-fusheng.html、calculator-hongan.html、calculato
 
 - assets/preview/*.jpg（5 张：hengxiang / hongan / hongyu / hongyuan / yingmanxin 产品预览图）
 - images/hongyu-card-overview.jpeg（根目录，card-hongyu.html 引用）
-- files/增值服务/*.jpg（5 张：新华尊权益一览/新华瑞权益一览/居家养老护理包/新华尊使用流程/新华尊小程序二维码）
+- files/增值服务/ 已审查通用图片：新华尊权益一览、新华瑞权益一览、居家养老护理包、新华尊通用小程序码。禁止以目录通配符重新加入含账户姓名/头像的“新华尊使用流程指引.jpg”；网页使用通用文字步骤。
 - files/originals/增值服务/居家养老3000分护理包.png
 - files/产品对比/在售产品投保年龄及起售金额.jpg（公开产品信息图）
 - files/产品规则/交清增额释义.png（公开产品规则图）

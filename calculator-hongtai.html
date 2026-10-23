@@ -33,6 +33,10 @@
   #paramBar{display:none;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:14px;}
   #paramBar span{background:var(--graybg);padding:5px 12px;border-radius:20px;font-weight:600;color:var(--blue);}
   .table-scroll{overflow-x:auto;}
+  #resultTable th,#resultTable td{vertical-align:middle;line-height:1.5}
+  #resultTable .additional-benefit{display:none}
+  #planArea.full-benefits #resultTable .additional-benefit{display:table-cell}
+  body.capturing [data-no-export]{display:none!important}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;}
   thead th{background:#1E40AF;color:#fff;padding:10px 8px;text-align:center;font-weight:700;font-size:13px;position:sticky;top:0;}
   tbody td{font-size:17px;padding:9px 6px;text-align:center;border-bottom:1px solid var(--line);}
@@ -79,6 +83,10 @@
   body.capturing .wrap{max-width:1200px !important;width:1200px !important;}
   body.capturing .plan{padding:0 !important;}
   body.capturing .table-scroll{overflow:visible !important;}
+  body.capturing .plan-intro{flex-direction:row!important;align-items:stretch!important}
+  body.capturing .plan-intro>div{border-bottom:0!important;border-right:2px solid #1E40AF!important}
+  body.capturing .plan-intro>div:last-child{border-right:0!important}
+  body.capturing .plan-title{font-size:24px!important}
   body.capturing thead th{position:static !important;}
   @media(max-width:768px){
     .dl-bar{flex-direction:column;align-items:stretch;}
@@ -91,6 +99,7 @@
 </style>
 <script src="html2canvas.min.js"></script>
 <script src="product-rules.js"></script>
+<script src="assets/js/hongtai-engine.js"></script>
 </head>
 <body>
 <a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
@@ -128,9 +137,10 @@
       </div>
       <div class="field">
         <label>显示密度</label>
-        <select id="displayMode" onchange="if(typeof filterRowsByAge==='function'){filterRowsByAge(this.value);}">
+        <select id="displayMode" onchange="applyHongtaiRows(this.value)">
+          <option value="miniapp" selected>一页通：前25年＋每5年</option>
           <option value="all">显示全部</option>
-          <option value="5y60" selected>60岁起每5年一行</option>
+          <option value="5y60">60岁起每5年一行</option>
           <option value="5y70">70岁起每5年一行</option>
           <option value="5y75">75岁起每5年一行</option>
         </select>
@@ -155,47 +165,44 @@
     <div class="plan-intro">
       <div>
         <h4>公司介绍</h4>
-        <p>2011年国内首家A+H股同步上市，连续多年入围财富福布斯世界500强。</p>
-        <p>惠誉国际信用评级A级（强劲），穆迪财务实力评级A3级。</p>
-        <p>由中央汇金、中国宝武钢铁控股，总资产1.69万亿元，偿付能力充足率217%。</p>
+        <p>新华人寿保险股份有限公司，1996年成立，总部北京。</p>
+        <p>国有控股上市寿险公司，2011年A股、H股同步上市。</p>
+        <p>中央汇金为主要股东。最新经营、投资及资本数据见“认识新华”专题。</p>
       </div>
       <div>
-        <h4>产品亮点</h4>
-        <p>✅ 收益稳健：保额年1.75%复利+分红不低于70%盈余分配</p>
-        <p>✅ 身故/全残保障，可减保或贷现金价值80%</p>
-        <p>✅ 客运列车及航空意外身故或全残额外赔付1.5倍基本保额</p>
+        <h4>产品简介</h4>
+        <p>宏泰世家终身寿险（分红型），本页按原版正式Excel、交清增额方式演示。</p>
+        <p>保证现金价值、身故利益与非保证红利分别列示，不将分红作为保证收益。</p>
+        <p>额外责任可展开查看，具体责任、限额和给付条件以合同及正式演示为准。</p>
       </div>
     </div>
     <div id="paramBar"></div>
-    <div style="margin-bottom:12px;">
+    <div class="no-export" style="margin-bottom:12px;">
       <div style="display:inline-flex;align-items:center;gap:8px;border:2px solid #1E40AF;background:#fff;padding:10px 16px;border-radius:8px;font-size:14px;margin-right:10px;"><span style="color:#64748B;font-weight:600;white-space:nowrap;">2025年度红利实现率</span><strong style="color:#1E40AF;font-size:18px;font-weight:700;">118%</strong></div>
     </div>
+    <label style="display:block;font-size:13px;margin-bottom:10px" data-no-export><input type="checkbox" style="width:auto" onchange="document.getElementById('planArea').classList.toggle('full-benefits',this.checked)"> 显示额外责任字段（客运列车/航空、预期身故）</label>
     <div class="table-scroll">
       <table id="resultTable">
         <thead>
           <tr>
-            <th rowspan="2">保单年度</th>
-            <th rowspan="2">年龄<br>（年末）</th>
-            <th rowspan="2">当年保费<br>（年初）</th>
-            <th rowspan="2">客运列车及航空<br>意外身故或全残<br>保险金</th>
-            <th rowspan="2">保证身价<br>保险金</th>
-            <th colspan="2">红利利益演示</th>
-            <th colspan="2">生存总利益（年末）</th>
-            <th rowspan="2">当年<br>收益率</th>
-            <th rowspan="2">阶段</th>
-          </tr>
-          <tr>
-            <th>预期身价<br>保险金</th>
+            <th>保单年度</th>
+            <th>年龄<br>（年末）</th>
+            <th>当年保费<br>（年初）</th>
+            <th>保证利益<br>现金价值</th>
+            <th>身故保险金<br>（保证部分）</th>
             <th>红利现价</th>
-            <th>现金价值<br>（保证部分）</th>
-            <th>现金价值<br>（保证+红利）</th>
+            <th>预期生存<br>总利益</th>
+            <th>总利益<br>年增长率</th>
+            <th class="additional-benefit">客运列车及航空<br>额外责任</th>
+            <th class="additional-benefit">预期身故<br>保险金</th>
           </tr>
         </thead>
         <tbody id="resultBody"></tbody>
       </table>
     </div>
+    <div style="margin-top:10px;padding:12px;border-top:1px solid #E2E8F0;color:#64748B;font-size:13px;line-height:1.65;">总利益年增长率＝（本年末生存总利益－上年末生存总利益）÷本年累计已交保费，仅在交费期后展示；不是年化单利或IRR。演示使用正式Excel原假设，不将历史118%自动乘入未来红利。分红不保证，具体以保险合同及公司实际公布为准。来源：原版《新华人寿 宏泰世家（分红型）》利益演示Excel。</div>
   </div>
-    <div style="margin-top:10px;padding-top:8px;border-top:1px solid #E2E8F0;color:#64748B;font-size:13px;line-height:1.65;">⚠ 演示数据基于假设利率测算，不代表实际收益。分红部分为非保证利益，实际以保险公司当年公布为准，具体以保险合同条款为准。</div>
+    <details data-no-export style="font-size:12px;color:#64748b"><summary>内部校准记录</summary>partially_verified：女49岁、一次交清600万元、交清增额，2026-10-24所收小程序图片的32个可见年度、8列共256项逐项一致；其他参数组合未宣称小程序全量核验。原始数据表不变，已恢复正式Excel的交清增额递推与身故给付映射。</details>
     <div style="margin-top:4px;color:#94A3B8;font-size:12px;text-align:center;letter-spacing:.4px;">新华资料库 xinhua-hub｜宏泰世家理财计划书仅供演示与沟通使用</div>
 
 </div>
@@ -233,41 +240,15 @@ function fmt(n){
 
 // —— 获取演算数据 ——
 // 优先用已验证的 hongtai_full.json（女49/3年/50万基准）
-// 其他组合：按保费比例缩放（基础为50万）；年龄/交费方式变化暂用基准近似
+// Each combination uses its own official source rows, never an age/term approximation.
 function getRows(){
-  const premium=parseInt(document.getElementById('premium').value)||500000;
-  const scale=premium/1000;
-  const age=parseInt(document.getElementById('age').value);
-  const term=parseInt(document.getElementById('term').value);
-  const g=currentGender;
-  const rows=[];
-  for(let yr=1;;yr++){
-    const key=`${g}_${age}_${term}_${yr}`;
-    const d=HONGTAI_DATA?HONGTAI_DATA[key]:null;
-    if(!d) break;
-    const cv=d.cv, paidup=d.paidup_cv, sa=d.sa_death;
-    const cumPremAtYr=Math.round((d.cum_prem||0)*scale);
-    const cvTotal=cv+paidup;
-    const expAmt=sa+paidup;
-    let rate=null;
-    const totalPrem=premium*term;
-    if(yr>term && cvTotal*scale>cumPremAtYr && totalPrem>0){
-      const n=yr-(term-1)/2;
-      rate=(cvTotal*scale-cumPremAtYr)/(cumPremAtYr*n);
-    }
-    rows.push({
-      yr, age:age+yr,
-      prem: Math.round((d.prem||0)*scale),
-      exempt: Math.round((d.exempt_accident||0)*scale),
-      guar_amt: Math.round(sa*scale),
-      exp_amt: Math.round(expAmt*scale),
-      div_pv: Math.round((paidup||0)*scale),
-      cv_guar: Math.round(cv*scale),
-      cv_total: Math.round(cvTotal*scale),
-      rate_raw: rate
-    });
-  }
-  return rows;
+  return HongtaiEngine.calculate(HONGTAI_DATA,{gender:currentGender,age:parseInt(document.getElementById('age').value),term:parseInt(document.getElementById('term').value),premium:parseInt(document.getElementById('premium').value)});
+}
+
+function applyHongtaiRows(mode){
+  if(mode!=='miniapp'){if(typeof filterRowsByAge==='function')filterRowsByAge(mode);return;}
+  const rows=[...document.querySelectorAll('#resultBody tr')];
+  rows.forEach((row,index)=>{const year=Number(row.cells[0].textContent);row.style.display=year<=25||year%5===0||index===rows.length-1?'':'none';});
 }
 
 async function generate(){
@@ -302,7 +283,7 @@ async function generate(){
     const paymentYears=term;
     // 储备期读取统一产品规则配置（宏泰：fixed，前5年），与缴费期解耦
     const RULE = window.getProductRule('hongtai');
-    const reserveYears = window.resolveReserveYears(RULE, paymentYears);
+    const reserveYears = paymentYears; // Sample: payment period only, not an invented fixed five-year reserve period.
     const maxYear=rows.length;
 
     // 第一遍：找出缴费期可见的首行
@@ -334,38 +315,30 @@ async function generate(){
       } else {
         cells+=`<td>-</td>`;
       }
-      cells+=`<td>${fmt(row.exempt)}</td>`;
+      cells+=`<td class="col-cv">${fmt(row.cv_guar)}</td>`;
       cells+=`<td>${fmt(row.guar_amt)}</td>`;
-      cells+=`<td>${fmt(row.exp_amt)}</td>`;
       cells+=`<td>${row.div_pv>0?fmt(row.div_pv):'-'}</td>`;
       // 现金价值（保证部分）
       const isPayback=yr===paymentYears;
-      if(isPayback) cells+=`<td class="col-cv">${fmt(row.cv_guar)}</td>`;
-      else cells+=`<td class="col-cv">${fmt(row.cv_guar)}</td>`;
       // 现金价值（保证+红利）
       if(isPayback) cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
       else cells+=`<td class="col-cv">${fmt(row.cv_total)}</td>`;
       // 收益率 - 前5年合并居中显示"储备期"，第6年起显示收益率
-      if(isFirstPay){
-        cells+=`<td class="pay-merge" rowspan="${reserveYears}">储备期</td>`;
+      if(yr <= reserveYears){
+        cells+=`<td class="pay-merge">交费期</td>`;
       } else if(yr > reserveYears){
         const rv=row.rate_raw;
         if(rv!==null&&rv!==undefined&&typeof rv==='number') cells+=`<td class="col-rate">${(rv*100).toFixed(2)}%</td>`;
         else cells+=`<td></td>`;
       }
       // 左侧竖排标签
-      if(isFirstPay){
-        cells+=`<td class="side-label" rowspan="${paymentYears}">不再缴费</td>`;
-      } else if(yr===paymentYears+1){
-        const longTermRowspan=maxYear-paymentYears;
-        if(longTermRowspan>0) cells+=`<td class="side-label" rowspan="${longTermRowspan}">长期收益</td>`;
-      }
+      cells+=`<td class="additional-benefit">${fmt(row.exempt)}</td><td class="additional-benefit">${fmt(row.exp_amt)}</td>`;
       tr.innerHTML=cells;
       body.appendChild(tr);
       prevCV=row.cv_total;
     });
     // 应用显示密度过滤
-    if(typeof filterRowsByAge==='function'){ filterRowsByAge(window.getDisplayMode?window.getDisplayMode():'5y60'); }
+    applyHongtaiRows(document.getElementById('displayMode').value);
   }catch(e){showError('生成出错：'+e.message);}
   btn.disabled=false; btn.textContent='生成利益演示';
 }

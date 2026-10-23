@@ -6,6 +6,7 @@
     "playwright": "^1.62.1"
   },
   "scripts": {
-    "verify:topics": "node tools/verify_topics.js"
+    "verify:topics": "node tools/verify_topics.js",
+    "verify:calibration": "node tests/calculator-calibration.js"
   }
 }

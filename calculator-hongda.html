@@ -200,6 +200,7 @@ body.capturing .key-metrics{display:none !important;}
   </div>
 
   <div class="err" id="errorMsg"></div>
+  <div style="margin:12px 16px;padding:12px;border:1px solid #f3c46c;background:#fff8eb;border-radius:8px;font-size:14px;line-height:1.7"><strong>当前累积生息分支暂不提供在线结果。</strong>2026-10-24真实样本核对发现逐期舍入与105岁满期年利益归属差异，正在等待原版正式Excel核验。未将锦泰版或图片数字替代原版公式，不输出有争议的结果或PNG。状态：calculation_pending。</div>
 
   <div class="dl-bar">
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
@@ -373,6 +374,13 @@ function lookup(g, age, term){
 }
 
 function generate(){
+  // Safety gate: preserve source data and formulas; do not release known-conflicting benefits.
+  // TEST-HONGDA-F-55-105-LUMP-100W-001: cumulative-dividend rounding and terminal-year double-counting.
+  allRows=[];
+  document.getElementById('resultBody').innerHTML='';
+  showErr('当前累积生息分支仍在原版公式核验中，暂不提供在线测算。请补充旧版宏达人生正式Excel，不使用锦泰版替代。');
+  return;
+  /* Existing formulas retained below for audit and verified recovery, not executed while pending. */
   hideErr();
   if(!CALC_DATA){ showErr('数据尚未加载完成，请稍候。'); return; }
   const g = currentGender;
@@ -567,6 +575,8 @@ function saveCols(){
 }
 
 async function downloadImage(){
+  showErr('公式核验尚未完成，暂不生成计划书图片，避免导出有争议的利益结果。');
+  return;
   const plan = document.getElementById('planArea');
   if(!plan){ toast('未找到计划书区域'); return; }
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="assets/css/theme.css">
 <title>新华尊/新华瑞 · 增值服务总览</title>
+<link rel="stylesheet" href="assets/css/knowledge-topics.css">
+<script src="html2canvas.min.js" defer></script><script src="assets/js/knowledge-topics.js" defer></script>
 <style>
 :root{--primary:#2563EB;--primary-dark:#1D4ED8;--bg:#F8FAFC;--card:#FFFFFF;--text:#1E293B;--text2:#64748B;--border:#E2E8F0;--green:#16A34A;--orange:#EA580C;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -91,10 +93,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 
   <!-- 一句话记住规则 -->
   <div class="note-box" style="background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-color:#F59E0B;">
-    ⚡ <b>一句话记住规则</b><br>
-    <b>新华瑞</b> → 限本人，每年1次，<span style="color:#D97706;">四星五星享爱康国宾体检</span><br>
-    <b>新华尊</b> → 可绑定家人扫码共享，体检走<span style="color:#D97706;">瑞慈</span>（黑钻额外+三甲）<br>
-    <b style="color:#D97706">权益终身有效</b> → 只要现金价值＞当年标保即可
+    <b>先分清两种等级口径</b><br>
+    <b>新华瑞</b>：2026权益表使用“折算保费”，不能直接当作累计总保费。<br>
+    <b>新华尊</b>：按已交保费及表列的新单路径区分钻级，具体等级由小程序实名认证后显示。<br>
+    服务次数、使用人、有效期和机构范围分别核对，不从等级名称推导“终身有效”或所有服务都能共享。
   </div>
 
   <!-- ==================== 和睦家（2026年7月新增·深圳分公司）==================== -->
@@ -102,7 +104,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
     <div class="section-title">🏥 和睦家 · 医疗体检权益 <span style="font-size:11px;background:#16A34A;color:#fff;padding:2px 8px;border-radius:10px;margin-left:6px;">2026年7月新增·深分</span></div>
 
     <div class="note-box green">
-      🆕 <b>新华本月新增权益（深分提供）</b><br>
+      <b>2026年7月专项资料（不代表当前仍开放）</b><br>
       💉 <b>100×3 的新单客户</b> 可享受 <b>和睦家权益体检</b> 一次<br>
       👪 可指定给 <b>一个家人</b> 使用<br>
       ⏳ 时效性：<b>一年内有效</b><br>
@@ -111,7 +113,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 
     <div style="font-size:12px;color:var(--text2);line-height:1.8;background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:12px 14px;">
       <b style="color:var(--primary);">适用说明：</b><br>
-      · 适用对象：当月新单且满足「100万 × 3年交」标准的客户<br>
+      · 原页面所列专项标准为「当月新单、100万 × 3年交」；此处仅保留2026年7月历史口径，当前是否发放须核对对应通知<br>
       · 权益内容：和睦家（Harmony Family）医疗体检服务 1 次<br>
       · 使用方式：权益可指定给本人或一名家庭成员，自发放起一年内有效<br>
       · 归属：深圳分公司专属增值服务，与新华尊/新华瑞体系独立核算
@@ -124,14 +126,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 
     <!-- 星级对照 -->
     <div class="note-box blue">
-      📊 <b>2026年星级对照表（按总保费）</b><br>
-      <span class="tag tag-blue">★ 一星 总保费 10万~50万</span>
-      <span class="tag tag-blue">★★ 二星 总保费 50万~100万</span>
-      <span class="tag tag-blue">★★★ 三星 总保费 100万~200万</span><br>
-      <span class="tag" style="background:#DBEAFE;color:#2563EB;border:2px solid #2563EB;">★★★★ 四星 总保费 200万~300万 ✅爱康国宾体检</span>
-      <span class="tag" style="background:#DBEAFE;color:#1D4ED8;border:2px solid #1D4ED8;">★★★★★ 五星 总保费 300万+ ✅爱康国宾体检</span><br>
+      <b>2026年星级对照表（折算保费，不是累计总保费）</b><br>
+      <span class="tag tag-blue">★ 一星 1万—5万</span>
+      <span class="tag tag-blue">★★ 二星 5万—10万</span>
+      <span class="tag tag-blue">★★★ 三星 10万—20万</span><br>
+      <span class="tag tag-blue">★★★★ 四星 20万—30万</span>
+      <span class="tag tag-blue">★★★★★ 五星 30万及以上</span><br>
       <span style="font-size:11px;color:#64748B;margin-top:4px;display:inline-block;">
-        💡 四星/五星 = 每年1次·限本人·终身有效 | 权益项目：健康管理+财税法商+商旅贵宾+居家养老+康养生态+子女教育+深圳专属
+        原图未说明折算方法及全部边界条件，不能用“总保费÷10”自行认定星级。四星/五星健康体检列为1次/年；具体使用范围与有效期以实际权益为准。
       </span>
     </div>
 
@@ -154,11 +156,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
     <!-- 钻级对照 -->
     <div class="note-box" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);border-color:#FED7AA;">
       📊 <b>2026年钻级对照表</b><br>
-      <span class="tag tag-orange">💎 新钻 500~1000万 或 年交≥100万 → 瑞慈一档</span><br>
-      <span class="tag tag-orange">💠 蓝钻 1000~2000万 → 瑞慈二档</span><br>
-      <span class="tag" style="background:#1E293B;color:#F8FAFC;border:2px solid #1E293B;">🖤 黑钻 2000万+ → 瑞慈三档+三甲</span><br>
+      <span class="tag tag-orange">新钻：原图列已交500万（含）—1000万区间，或近一年年交100万路径</span><br>
+      <span class="tag tag-orange">蓝钻：原图列已交1000万（含）—2000万</span><br>
+      <span class="tag" style="background:#1E293B;color:#F8FAFC;border:2px solid #1E293B;">黑钻：已交2000万及以上</span><br>
       <span style="font-size:11px;color:#64748B;margin-top:4px;display:inline-block;">
-        💡 100万×3年客户 → 可享<b>4年新华尊新钻体检</b>，第5年起转为<b>新华瑞五星体检</b>
+        原图列示的等级与次数不构成永久权益承诺，不据此推导“交100万×3年一定享4年新钻、第5年转五星”。须核对当期权益规则与小程序实际显示。
       </span>
     </div>
 
@@ -193,10 +195,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 
     <!-- 使用流程 -->
     <div class="viewer" id="zun-flow">
-      <a href="preview.html?file=files%2F增值服务%2F新华尊使用流程指引.jpg&title=新华尊使用流程指引&type=jpg">
-        <img src="files/增值服务/新华尊使用流程指引.jpg" alt="使用流程" loading="lazy">
-      </a>
-      <p style="font-size:12px;color:var(--text2);margin-top:8px;">点击放大查看完整操作步骤</p>
+      <ol style="text-align:left;line-height:1.9;padding-left:22px;font-size:14px"><li>微信搜索“新华尊”小程序，或扫描本页官方通用小程序码。</li><li>进入首页，完成注册及实名认证，查看匹配的等级与权益。</li><li>选择具体服务，核对可用次数、使用人、服务城市和有效期后提交预约。</li><li>在“我的订单”查看结果；家庭版服务的绑定人数与共享范围按具体项目核对。</li></ol>
+      <p class="section-desc">流程截图不直接公开；网页只保留通用步骤，不展示截图中的姓名、头像等账户信息。</p>
     </div>
 
     <!-- 服务项目介绍PDF -->
@@ -219,7 +219,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
     <div class="section-title">🏠 居家养老 · 护理包（供应商提供）</div>
 
     <div class="note-box green">
-      🏥 <b>3000分护理包</b> — 保单犹豫期后次月生效，<b>2年有效</b><br>
+      <b>护理权益按权益函核对</b> — 资料载明：一般在犹豫期后次月发函，<b>自共享之家发函之日起2年有效</b>，不是从交费日直接起算。<br>
       <span style="font-size:11px;">⚠️ 护理包由第三方供应商提供服务，与总公司增值服务独立运营</span>
     </div>
 
@@ -240,6 +240,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
   </div>
 
 </div>
+<div class="container knowledge"><section class="kt-panel" id="service-explainer"><h2>服务项目怎么使用？</h2><p>以下说明来自《新华尊服务项目介绍》2024年2月版，只解释项目内容和限制；2026等级与年度次数看上方权益表，旧版说明不覆盖新表。</p><div class="kt-contract">
+<div><strong>健康体检｜第4页</strong><p>提供商业机构及部分三甲医院资源，原资料不提供未成年人体检。机构与套餐须按实际权益核对。</p></div>
+<div><strong>评估改善｜第5页</strong><p>面向亚健康、婴幼儿、女性、男性及老年照护等需求，提供远程评估与指导；不是疾病诊断或治疗承诺。</p></div>
+<div><strong>视频问诊｜第6—7页</strong><p>原版家庭服务限3人绑定、7×24小时在线；不含精神心理咨询及代开药。2026新增心理咨询应按独立权益项目理解。</p></div>
+<div><strong>就医协助｜第8页</strong><p>提供就诊机构、科室建议与陪诊协助；每次限1人，不含复诊及产科、口腔科、医美整形相关科室。</p></div>
+<div><strong>检查、住院与手术速通｜第9页</strong><p>是预约协调服务，不承诺一定有号或床位。检查加急不接受5个工作日内预约、不含胃肠镜；住院/手术加急不接受10个工作日内预约。需相应申请或预约资料。</p></div>
+<div><strong>专家与海外协助｜第10—12页</strong><p>国内/国际会诊需既往诊疗资料；海外就医受签证及政策影响，过程中费用由客户承担。疫苗预约仅协调，疫苗、检查等费用自付。</p></div>
+<div><strong>财税、法律与私享律师｜第16—17页</strong><p>原版每次限1人、1小时以内，不含刑事及行政法律领域；私享律师面谈有城市范围。咨询服务不等于涉税或司法结果保证。</p></div>
+<div><strong>商旅服务｜第20页</strong><p>高铁、国内/国际机场提供贵宾室等服务；每次限1人，2岁以下儿童可免费携同。各站厅营业时间及项目可能调整。</p></div></div>
+<div class="kt-warning">2026表中的居家安全监测、适老改造和上门服务标明客户自付费；康养入住权或优先名额不等于免费入住。旅居项目及城市数量属于表中时点，不代表实时可预约库存。</div>
+<p class="kt-source">来源：<a href="files/增值服务/新华尊服务项目介绍.pdf">《新华尊服务项目介绍》原PDF（2024年2月）</a>；上方2026权益原图。两份本次PDF与已有文件SHA256相同，直接复用。核对日期：2026-10-24。</p>
+</section><button class="kt-button" onclick="KnowledgeTopics.exportPNG(document.getElementById('service-explainer'),'新华尊-服务项目说明')">下载服务项目说明图片</button><p class="kt-note">资料库保留原始资料与时间口径，实际可用权益以当期规则、权益函及预约页面为准。</p></div>
 
 <script>
 // 新华尊切换

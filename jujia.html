@@ -138,7 +138,8 @@
     <a class="back" href="./">← 返回</a>
     <h2>居家养老权益服务</h2>
   </div>
-  <p class="vendor-note">📌 <strong>备注：</strong>仅2026.6上线版本，后续根据额度开放情况更新。</p>
+  <p class="vendor-note"><strong>资料版本：</strong>护理包按2026年6月上线资料保留，当前开放额度以实际权益函为准。原PDF未标完整发布日期。</p>
+  <details style="background:white;padding:12px 16px;font-size:14px;line-height:1.7;flex-shrink:0"><summary>先看权益范围、有效期与预约步骤</summary><div style="max-height:240px;overflow:auto"><p><strong>三类服务：</strong>居家照护（住院陪护、康复护理、适老改造）、日常生活（保洁、生活协助）、健康管理（陪诊、理疗按摩、监测）。客户在实际额度内选择兑换。</p><p><strong>有效期：</strong>从共享之家发函日起2年；一般在保单犹豫期后的次月发函，不是从交费日统一起算。</p><ol style="padding-left:22px"><li>等待并核对“护理产品权益函”，确认额度、发函日及使用范围。</li><li>有需求时通过权益函或原PDF载明的专属服务渠道预约，不在本网站提交身份证或病历。</li><li>服务前确认时间、内容、兑换额度与自费项目；完成后核对工单和费用，并通过供应商确认服务及保险责任。</li></ol><p style="font-size:12px;color:#64748b">来源：《居家养老权益服务一页通》第1—2页。服务项目及历史参考报价见原PDF；不视为保险赔付或当前价格保证。</p></div></details>
   <div class="toggle-bar">
     <button class="toggle-btn active" id="btnImg" onclick="showImg()">📋 护理包明细</button>
     <button class="toggle-btn" id="btnPdf" onclick="showPdf()">📄 权益一页通</button>
@@ -189,7 +190,7 @@ function showPdf() {
   document.getElementById('btnPdf').classList.add('active');
   document.getElementById('btnImg').classList.remove('active');
   currentMode = 'pdf';
-  if (!pdfView.src) {
+  if (!pdfView.getAttribute('src')) {
     loading.classList.remove('hidden');
     pdfView.src = 'files/增值服务/居家养老权益服务一页通.pdf#view=FitH';
     pdfView.onload = () => { loading.classList.add('hidden'); };
