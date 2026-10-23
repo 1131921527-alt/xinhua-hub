@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-24",
+  "sources": {
+    "H1-2026": {"sourceId":"SRC-20261023-011","name":"新华保险2026年半年度报告","file":"files/公司介绍/新华保险2026年半年度报告.pdf","url":"https://static-cdn.newchinalife.com/ncl/pdf/20260827/d56b5a07-3382-4bc4-8412-a7f460cd0050.pdf","date":"2026-08-27","status":"confirmed"},
+    "DIV-2025": {"sourceId":"SRC-20261023-012","name":"新华保险官网现金红利实现率披露","url":"https://www.newchinalife.com/info/55321_2?BrowsAgent=2&p0=22","date":"2026-10-24核对","status":"confirmed"},
+    "COMPANY-PDF": {"sourceId":"COMPANY-DIVIDEND-PDF","name":"公司分红投资介绍","file":"files/公司介绍/公司分红投资介绍.pdf","date":"资料未注明日期，案例保留原报告期","status":"confirmed"}
+  },
+  "metrics": [
+    {"id":"assets","name":"总资产","value":"1.9581","unit":"万亿元","meaning":"看公司整体经营规模，不等于利润","period":"2026年6月30日","source":"H1-2026","page":"印刷第13页，原值1,958,077百万元","status":"confirmed"},
+    {"id":"premium","name":"原保险保费收入","value":"1295.70","unit":"亿元","meaning":"看寿险主业在这一期间的业务规模","period":"2026年上半年","source":"H1-2026","page":"印刷第13—14页","status":"confirmed"},
+    {"id":"profit","name":"归母净利润","value":"227.93","unit":"亿元","meaning":"看归属于母公司股东的当期经营成果","period":"2026年上半年","source":"H1-2026","page":"印刷第13页，原值22,793百万元","status":"confirmed"},
+    {"id":"embedded","name":"内含价值","value":"3103.84","unit":"亿元","meaning":"看现有业务的长期价值，不等于可分红金额","period":"2026年6月30日","source":"H1-2026","page":"印刷第13、20页","status":"confirmed"},
+    {"id":"invested","name":"投资资产","value":"1.9019","unit":"万亿元","meaning":"看参与长期配置的资产规模，与总资产口径不同","period":"2026年6月30日","source":"H1-2026","page":"印刷第31页，原值1,901,854百万元","status":"confirmed"},
+    {"id":"totalReturn","name":"年化总投资收益率","value":"6.7","unit":"%","meaning":"包含经常性收益、交易价差及相关市场价值变动","period":"2026年上半年","source":"H1-2026","page":"印刷第30、32页","status":"confirmed"},
+    {"id":"comprehensiveReturn","name":"年化综合投资收益率","value":"6.4","unit":"%","meaning":"在总投资收益基础上进一步考虑其他综合收益等变动","period":"2026年上半年","source":"H1-2026","page":"印刷第30、32页","status":"confirmed"},
+    {"id":"solvency","name":"综合偿付能力充足率","value":"195.74","unit":"%","meaning":"看实际资本相对于最低资本的覆盖程度，不是收益率","period":"2026年6月30日","source":"H1-2026","page":"印刷第34页","status":"confirmed"},
+    {"id":"coreSolvency","name":"核心偿付能力充足率","value":"126.21","unit":"%","meaning":"看核心资本相对于最低资本的覆盖程度","period":"2026年6月30日","source":"H1-2026","page":"印刷第34页","status":"confirmed"}
+  ],
+  "allocation": {"source":"H1-2026","page":"印刷第31页，按投资对象分类","period":"2026年6月30日","status":"confirmed","items":[["债券",51.3],["股票",13.2],["基金",12.4],["定期存款",11.9],["其他金融投资",5.0],["长期股权投资",3.3],["现金及现金等价物",1.7],["投资性房地产",0.6],["其他投资资产",0.6]]},
+  "longTerm": {"source":"COMPANY-PDF","page":"第7页","period":"2012—2024年历史业绩","status":"confirmed","items":[["固收配置盘年化业绩","5.6%"],["固收交易盘累计净值增长","119.09%"],["股票组合平均收益率","8.6%"],["股票组合累计收益率","193.49%"]]},
+  "history": {"source":"H1-2026","page":"印刷第4、13、31页","period":"2025年末／2025年度历史口径","items":[["总资产","1.8995万亿元"],["原保险保费收入","1958.71亿元"],["内含价值","2878.40亿元"],["投资资产","1.8412万亿元"]]},
+  "rates": [
+    {"product":"宏泰世家终身寿险（分红型）","year":2025,"rate":118,"kind":"现金红利实现率","source":"DIV-2025","location":"官网分红型保险表，宏泰世家行","status":"confirmed"},
+    {"product":"宏禧来两全保险（分红型）","year":2025,"rate":118,"kind":"现金红利实现率","source":"DIV-2025","location":"官网分红型保险表，宏禧来行","status":"confirmed"},
+    {"product":"盛世荣耀庆典版终身寿险（分红型）","year":2025,"rate":118,"kind":"现金红利实现率","source":"DIV-2025","location":"官网分红型保险表，盛世荣耀庆典版行","status":"confirmed"},
+    {"product":"盛世恒盈年金保险（分红型）","year":2025,"rate":118,"kind":"现金红利实现率","source":"DIV-2025","location":"官网分红型保险表，盛世恒盈行","status":"confirmed"},
+    {"product":"财富恒盈年金保险（分红型）","year":2025,"rate":118,"kind":"现金红利实现率","source":"DIV-2025","location":"官网分红型保险表，财富恒盈行","status":"confirmed"}
+  ],
+  "modules": [
+    {"id":"identity","title":"新华公司身份","source":"H1-2026","page":"印刷第2—4页","period":"公司历史与性质","status":"confirmed"},
+    {"id":"ownership","title":"中央汇金与股东背景","source":"COMPANY-PDF","page":"第1—3页","period":"资料所载股权及管理关系","status":"confirmed"},
+    {"id":"operation","title":"2026经营数据","source":"H1-2026","page":"印刷第13—14、34、116页","period":"2026年上半年／2026年6月30日","status":"confirmed"},
+    {"id":"investment","title":"投资实力与资产结构","source":"H1-2026","page":"印刷第30—32页","period":"2026年上半年／2026年6月30日","status":"confirmed"},
+    {"id":"logic","title":"投资与分红逻辑","source":"COMPANY-PDF","page":"第4—7页","period":"概念说明","status":"confirmed"},
+    {"id":"rates","title":"2025红利实现率","source":"DIV-2025","page":"分红型保险表","period":"2025分红年度","status":"confirmed"}
+  ]
+}

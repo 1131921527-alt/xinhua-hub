@@ -5,11 +5,12 @@ const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
 const PORT = 8927;
-const TARGETS = process.argv.slice(2).length ? process.argv.slice(2) : ['about-xinhua.html', 'dividend-xinhua.html'];
+const TARGETS = process.argv.slice(2).length ? process.argv.slice(2) : ['about-xinhua.html', 'hongli-realization.html', 'content-composer.html'];
 const VIEWPORTS = [{name:'390', width:390, height:844}, {name:'430', width:430, height:844}, {name:'1440', width:1440, height:900}];
 const REQUIRED = {
-  'about-xinhua.html': ['新华保险是一家什么样的公司？','中央汇金到底是干什么的','新华投资能力'],
-  'dividend-xinhua.html': ['新华的分红，到底怎么样？','红利实现率怎么看','盈满鑫身故保障']
+  'about-xinhua.html': ['新华保险是一家什么样的公司？','中央汇金与股东背景','投资实力与资产结构'],
+  'hongli-realization.html': ['分红险中的三个关键数字','2025红利实现率','宏泰世家'],
+  'content-composer.html': ['内容拼装器','客户版','专业版','简洁版']
 };
 function startServer(){
   const server=http.createServer((req,res)=>{const rel=decodeURIComponent((req.url||'/').split('?')[0]);const file=path.resolve(ROOT,'.'+(rel==='/'?'/index.html':rel));if(!file.startsWith(ROOT)||!fs.existsSync(file)||fs.statSync(file).isDirectory()){res.writeHead(404);return res.end('Not found');}const ext=path.extname(file);const types={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};res.writeHead(200,{'Content-Type':types[ext]||'application/octet-stream'});fs.createReadStream(file).pipe(res);});return new Promise(resolve=>server.listen(PORT,'127.0.0.1',()=>resolve(server)));}
