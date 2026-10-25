@@ -61,6 +61,10 @@ body.capturing .main-table tbody td{white-space:nowrap !important;padding:5px 3p
 body.capturing .main-table thead th{padding:6px 3px !important;white-space:normal !important;}
 body.capturing .table-scroll{overflow-x:visible !important;}
 body.capturing .key-metrics{display:none !important;}
+body.capturing .plan{padding-bottom:32px!important;}
+body.capturing .main-table tbody td{height:38px!important;line-height:1.6!important;padding:7px 3px!important;vertical-align:middle!important;font-size:16px!important;}
+body.capturing .main-table thead th{height:88px!important;line-height:1.5!important;padding:10px 4px!important;vertical-align:middle!important;font-size:15px!important;}
+body.capturing .plan-foot-source,body.capturing .plan-foot-note{padding:8px 4px!important;margin:8px 0!important;line-height:1.8!important;}
 
 .plan{padding:28px 32px 4px;background:#fff;}
 .plan-title{text-align:center;font-size:34px;font-weight:800;color:var(--primary);margin-bottom:16px;letter-spacing:0;padding:0 20px;overflow:visible;box-sizing:border-box;}
@@ -201,11 +205,11 @@ body.capturing .key-metrics{display:none !important;}
   </div>
 
   <div class="err" id="errorMsg"></div>
-  <div style="margin:12px 16px;padding:12px;border:1px solid #f3c46c;background:#fff8eb;border-radius:8px;font-size:14px;line-height:1.7"><strong>当前累积生息分支暂不提供在线结果。</strong>2026-10-24真实样本核对发现逐期舍入与105岁满期年利益归属差异，正在等待原版正式Excel核验。未将锦泰版或图片数字替代原版公式，不输出有争议的结果或PNG。状态：calculation_pending。</div>
+  <div class="no-export" style="margin:12px 16px;padding:12px;border:1px solid #c3d6ef;background:#f0f6ff;border-radius:8px;font-size:14px;line-height:1.7"><strong>已恢复原版Excel累积生息演示。</strong>本页依原Excel逐年取整；小程序样本采用保留中间精度、最终显示取整，女55岁/趸交100万元样本累计红利最大相差7元，原因已定位，不通过改写图片数字消除差异。状态：partially_verified；不适用于锦泰版。</div>
 
   <div class="dl-bar">
     <button class="btn btn-dl" onclick="downloadImage()">下载理财计划书图片</button>
-    <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：60岁后每5年</button>
+    <button class="view-mode-btn" id="viewModeBtn" onclick="toggleViewMode()">显示模式：一页通常用年份</button>
     <span class="tip">列开关可隐藏列，下载图同步生效</span>
   </div>
 
@@ -214,17 +218,18 @@ body.capturing .key-metrics{display:none !important;}
     <label data-col="year"><input type="checkbox" checked>保单年度</label>
     <label data-col="age"><input type="checkbox" checked>年龄</label>
     <label data-col="prem"><input type="checkbox" checked>当年保费</label>
-    <label data-col="pay"><input type="checkbox" checked>①关爱金年金</label>
-    <label data-col="cumPay"><input type="checkbox" checked>②累计关爱金年金</label>
+    <label data-col="pay"><input type="checkbox" checked>关爱金/年金/满期金</label>
+    <label data-col="cumPay"><input type="checkbox">累计关爱金年金</label>
     <label data-col="div"><input type="checkbox" checked>年度红利</label>
     <label data-col="divCum"><input type="checkbox" checked>③红利累积生息</label>
     <label data-col="cv"><input type="checkbox" checked>④现金价值</label>
-    <label data-col="death"><input type="checkbox" checked>⑤身故保险金</label>
-    <label data-col="deathG"><input type="checkbox" checked>身故保证利益</label>
-    <label data-col="deathD"><input type="checkbox" checked>身故预期利益</label>
+    <label data-col="death"><input type="checkbox">身故保险金</label>
+    <label data-col="deathG"><input type="checkbox">身故保证利益</label>
+    <label data-col="deathD"><input type="checkbox">身故预期利益</label>
+    <label data-col="cashflow"><input type="checkbox" checked>红利+当年给付</label>
     <label data-col="survG"><input type="checkbox" checked>保证利益</label>
     <label data-col="survD"><input type="checkbox" checked>红利利益</label>
-    <label data-col="rate"><input type="checkbox" checked>当年收益率</label>
+    <label data-col="rate"><input type="checkbox" checked>总利益年增长率</label>
     <button class="ct-reset" onclick="resetCols()">全部显示</button>
   </div>
 
@@ -234,13 +239,13 @@ body.capturing .key-metrics{display:none !important;}
     <div class="plan-intro">
       <div>
         <h4>公司介绍</h4>
-        <p><strong>成立日期：</strong>1996年9月人民大会堂</p>
-        <p><strong>主要股东：</strong>中央汇金（与中农工建4大银行同属一个大股东）、中国宝武钢铁</p>
-        <p><strong>荣誉地位：</strong>全国性大型寿险公司，国有控股上市险企（上海、香港同步上市），全球最具价值保险品牌100强，《福布斯》全球上市公司2000强，《财富》中国500强企业，连续十年获惠誉财务实力评级"A"级、穆迪"A2"级</p>
+        <p>新华人寿保险股份有限公司，1996年成立，总部北京。</p>
+        <p>国有控股上市寿险公司，2011年A股、H股同步上市。</p>
+        <p>中央汇金为主要股东。最新经营与投资数据见“认识新华”专题。</p>
       </div>
       <div>
         <h4>产品简介</h4>
-        <p><strong>投保年龄：</strong>28天-75周岁；趸交线上18-58周岁（5万元起售），3年交线上18-56周岁，5年交线上18-54周岁（期交1万元起售）</p>
+        <p><strong>产品版本：</strong>宏达人生原版，非锦泰版。本页依据原版正式Excel演示；不代表渠道准入审批。</p>
         <p><strong>关爱金 + 年金：</strong>第5个保单年度按基本保险金额给付关爱金，第6个保单年度起每年按累计保费的1.75%给付年金，年领，现金流稳定</p>
         <p><strong>满期领取：</strong>生存至保险期满（年满105周岁后的首个保单周年日），按已交保费给付满期生存保险金，同时共享保单红利分配</p>
       </div>
@@ -259,7 +264,7 @@ body.capturing .key-metrics{display:none !important;}
           </tr>
         </table>
         <div class="side-stats">
-          <div class="stat-box"><div class="stat-label">2025年度红利实现率</div><div class="stat-val">118%</div></div>
+          <div class="stat-box"><div class="stat-label">本次红利演示比例（假设）</div><div class="stat-val" id="statDividendRate">100%</div></div>
           <div class="stat-box"><div class="stat-label">演示累积生息利率</div><div class="stat-val" id="statRate">2.50%</div></div>
         </div>
       </div>
@@ -271,17 +276,18 @@ body.capturing .key-metrics{display:none !important;}
               <th data-col="year">保单<br>年度</th>
               <th data-col="age">年龄<br>(年末)</th>
               <th data-col="prem">当年保费<br>(年初)</th>
-              <th data-col="pay">①<br>关爱金<br>年金</th>
+              <th data-col="pay">年金<br>（含满期金）</th>
               <th data-col="cumPay">②<br>累计关爱金<br>年金</th>
               <th data-col="div">年度<br>红利</th>
-              <th data-col="divCum">③<br>红利<br>累积生息</th>
-              <th data-col="cv">④<br>现金价值<br>(年末)</th>
+              <th data-col="divCum">红利<br>累积生息</th>
+              <th data-col="cv">现金价值<br>(年末)</th>
               <th data-col="death">⑤<br>身故<br>保险金</th>
               <th data-col="deathG">身故<br>保证利益<br>(②+⑤)</th>
               <th data-col="deathD">身故<br>预期利益<br>(②+③+⑤)</th>
-              <th data-col="survG">保证利益<br>(②+④)</th>
-              <th data-col="survD">红利利益<br>(②+③+④)</th>
-              <th data-col="rate">当年<br>收益率</th>
+              <th data-col="survG">保证生存<br>总利益</th>
+              <th data-col="survD">预期生存<br>总利益</th>
+              <th data-col="cashflow">红利+当年<br>给付金额</th>
+              <th data-col="rate">总利益<br>年增长率</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -289,24 +295,25 @@ body.capturing .key-metrics{display:none !important;}
       </div>
     </div>
     <div class="plan-foot-note">⚠ 本计划书基于假设利率测算，演示收益不代表实际收益。分红型产品红利具有不确定性，某些年度可能为零，实际分红以保险公司当年公布为准，具体以保险合同条款为准。</div>
-    <div class="plan-foot-source">新华资料库 xinhua-hub｜计划书仅供演示与沟通使用</div>
+    <div class="plan-foot-source">来源：原版《新华人寿 宏达人生年金保险（分红型）利益演示》Excel，SRC-20261025-001。按原表逐年取整；与小程序保留中间精度的口径可能有小额差异。满期年现金价值显示0，当年给付含年金与满期金。总利益年增长率＝相邻年度预期生存总利益之差÷本方案累计投入保费，不是年化单利或IRR。分红不保证，具体以合同及公司正式计划书为准。</div>
   </div>
 </div>
 
 <canvas id="renderCanvas" style="display:none;"></canvas>
 
+<script src="assets/js/hongda-engine.js"></script>
 <script>
 let CALC_DATA = null;
 let currentGender = 1;   // 0=男, 1=女（与 data_hongda.json 键一致）
 let currentRate = 0.025; // 演示累积生息利率
-let currentViewMode = '5y60';
+let currentViewMode = 'miniapp';
 let allRows = [];
 let reserveEnd = 0;
 let breakevenT = 0;      // 回本年：红利利益首次超过累计保费的保单年度（该行数字加粗）
 // 列可见性状态：col -> boolean（默认全部 true，指定列在 init 时置 false）
 const colState = {};
 
-const VIEW_MODE_LABELS = { all: '全部显示', '5y60': '60岁后每5年', '5y70': '70岁后每5年', '5y75': '75岁后每5年' };
+const VIEW_MODE_LABELS = { miniapp:'一页通常用年份', all: '全部显示', '5y60': '60岁后每5年', '5y70': '70岁后每5年', '5y75': '75岁后每5年' };
 const COL_STORE_KEY = 'hongda_cols';
 
 /* ---------- 投保年龄上限（业务类型 × 性别 × 交费期） ---------- */
@@ -346,7 +353,7 @@ function refreshAgeLimit(){
   generate();
 }
 function toggleViewMode(){
-  const modes = ['all', '5y60', '5y70', '5y75'];
+  const modes = ['miniapp','all', '5y60', '5y70', '5y75'];
   const idx = modes.indexOf(currentViewMode);
   currentViewMode = modes[(idx + 1) % modes.length];
   document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[currentViewMode];
@@ -375,13 +382,8 @@ function lookup(g, age, term){
 }
 
 function generate(){
-  // Safety gate: preserve source data and formulas; do not release known-conflicting benefits.
-  // TEST-HONGDA-F-55-105-LUMP-100W-001: cumulative-dividend rounding and terminal-year double-counting.
   allRows=[];
   document.getElementById('resultBody').innerHTML='';
-  showErr('当前累积生息分支仍在原版公式核验中，暂不提供在线测算。请补充旧版宏达人生正式Excel，不使用锦泰版替代。');
-  return;
-  /* Existing formulas retained below for audit and verified recovery, not executed while pending. */
   hideErr();
   if(!CALC_DATA){ showErr('数据尚未加载完成，请稍候。'); return; }
   const g = currentGender;
@@ -418,49 +420,12 @@ function generate(){
   const basicSa = o.sa * shares;
 
   /* ---------- 逐年计算（沿用官方 Excel 口径 + 红利实现率/生息利率切换） ---------- */
-  allRows = [];
-  let cumDivPrev = 0, prevSurvD = 0;
-
-  for(let t = 1; t <= Nyears; t++){
-    const premYr     = (t <= term) ? prem : 0;
-    const annuity    = o.ann[t-1] * shares;          // ①关爱金年金
-    const cumAnnuity = o.cumAnn[t-1] * shares;        // ②累计关爱金年金
-    const maturity   = o.mat[t-1] * shares;           // 满期生存保险金
-    const deathBase  = o.death[t-1] * shares;         // ⑤身故保险金
-    const cv         = o.cv[t-1] * shares;            // ④现金价值
-    const divYr      = o.hl[t-1] * K3 * shares;       // 年度红利
-    const ageEnd     = age + t;
-
-    // ③红利累积生息：按所选利率逐年滚存，每期四舍五入到整数（与官方展示表逐期一致）
-    const cumDiv = Math.round((t === 1) ? divYr : divYr + cumDivPrev * (1 + K4));
-
-    // 四列利益（严格按官方展示表口径）
-    let survG = cumAnnuity + cv;                                   // 保证利益(②+④)
-    let survD = cumAnnuity + cumDiv + cv;                          // 红利利益(②+③+④)
-    // 身故保证/预期：领取关爱金前(②=0)按身故保险金⑤/③+⑤；领取后按②+④/②+③+④
-    const deathG = (cumAnnuity === 0) ? deathBase : (cumAnnuity + cv);   // 身故保证利益
-    const deathD = (cumAnnuity === 0) ? (cumDiv + deathBase) : (cumAnnuity + cumDiv + cv); // 身故预期利益
-    if(t === Nyears){ survG += maturity; survD += maturity; } // 满期年加满期金
-
-    // 当年收益率 =（本年红利利益 - 上年红利利益）/ 累计保费
-    let yieldVal = null;
-    if(t > 1 && t !== Nyears){
-      yieldVal = (survD - prevSurvD) / totalPrem;
-    }
-
-    allRows.push({ t, ageEnd, premYr, annuity, cumAnnuity, maturity, cv, deathBase, deathG, deathD, survG, survD, divYr, cumDiv, yieldVal });
-
-    cumDivPrev = cumDiv; prevSurvD = survD;
-  }
-
-  // 动态储备期：交费期内 或 当年收益率虚高(>8%) 一律归入储备期（直到收益稳定）
-  // 最后一年因含满期金、收益率异常，不参与判定
+  allRows = HongdaEngine.calculate(CALC_DATA,{gender:g,age,term,premium:prem,dividendRate:K3,interestRate:K4});
+  // Only actual contribution years are labeled as the payment period; do not hide high growth figures.
   reserveEnd = 0;
   for(let t = 1; t < Nyears; t++){
-    const r = allRows[t-1];
     const isPayYear = t <= term;
-    const ratePct = (r.yieldVal === null) ? null : r.yieldVal * 100;
-    if(isPayYear || ratePct === null || ratePct > 8){ reserveEnd = t; }
+    if(isPayYear){ reserveEnd = t; }
   }
 
   // 回本年：红利利益（生存总利益）首次超过累计保费的保单年度
@@ -475,12 +440,13 @@ function generate(){
   document.getElementById('infoTotalPrem').textContent = fmt(totalPrem);
   document.getElementById('infoSa').textContent = fmt(basicSa);
   document.getElementById('statRate').textContent = (K4 * 100).toFixed(2) + '%';
+  document.getElementById('statDividendRate').textContent = (K3 * 100).toFixed(0) + '%';
 
   const genderStr = g === 1 ? '女士' : '先生';
   document.getElementById('caseInfo').textContent =
     `VIP${genderStr}，今年${age}周岁，${termLabel(term)}、年交${fmt(prem)}元，购买宏达人生年金保险（分红型），保险期间至105周岁`;
 
-  currentViewMode = window.getDefaultDisplayMode('hongda', age);
+  currentViewMode = 'miniapp';
   document.getElementById('viewModeBtn').textContent = '显示模式：' + VIEW_MODE_LABELS[currentViewMode];
   renderTable();
 }
@@ -490,7 +456,7 @@ function renderTable(){
   if(!body) return;
   if(!allRows.length){ body.innerHTML = ''; return; }
 
-  const displayRows = window.filterDisplayRows(allRows, currentViewMode);
+  const displayRows = currentViewMode==='miniapp'?allRows.filter(r=>r.t<=25||r.t%5===0||r.t===allRows.length):window.filterDisplayRows(allRows, currentViewMode);
   // 储备期在"当年收益率"列合并为一个单元格
   const shownReserve = displayRows.filter(r => r.t <= reserveEnd);
   const reserveCount = shownReserve.length;
@@ -500,7 +466,7 @@ function renderTable(){
     let rateCell;
     if(isReserve){
       rateCell = (r.t === displayRows[0].t)
-        ? `<td data-col="rate" class="col-rate" rowspan="${reserveCount}"><span class="reserve-cell">储备期</span></td>`
+        ? `<td data-col="rate" class="col-rate" rowspan="${reserveCount}"><span class="reserve-cell">交费期</span></td>`
         : '';
     } else {
       rateCell = `<td data-col="rate" class="col-rate">${r.yieldVal === null ? '−' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
@@ -519,7 +485,7 @@ function renderTable(){
       <td data-col="deathG" class="col-total">${fmt(r.deathG)}</td>
       <td data-col="deathD" class="col-total">${fmt(r.deathD)}</td>
       <td data-col="survG" class="col-total">${fmt(r.survG)}</td>
-      <td data-col="survD" class="col-total${r.t === breakevenT ? ' cell-breakeven' : ''}">${fmt(r.survD)}</td>`;
+      <td data-col="survD" class="col-total${r.t === breakevenT ? ' cell-breakeven' : ''}">${fmt(r.survD)}</td><td data-col="cashflow">${fmt(r.divYr+r.annuity)}</td>`;
     const isPositive = r.survD > totalPremValue();
     const rowClass = isPositive ? 'row-positive' : '';
     return `<tr class="${rowClass}">${stdCells}${rateCell}</tr>`;
@@ -552,6 +518,8 @@ function initColToggles(){
 }
 // 统一对表格表头/单元格应用列显隐
 function applyColState(){
+  const order=['year','age','prem','cv','pay','survG','div','divCum','cashflow','survD','rate','cumPay','death','deathG','deathD'];
+  document.querySelectorAll('#resultTable tr').forEach(row=>order.forEach(key=>{const cell=row.querySelector('[data-col="'+key+'"]');if(cell)row.append(cell)}));
   Object.keys(colState).forEach(col => {
     const show = !!colState[col];
     document.querySelectorAll(`#resultTable [data-col="${col}"]`).forEach(el => { el.style.display = show ? '' : 'none'; });
@@ -576,8 +544,7 @@ function saveCols(){
 }
 
 async function downloadImage(){
-  showErr('公式核验尚未完成，暂不生成计划书图片，避免导出有争议的利益结果。');
-  return;
+  if(!allRows.length){showErr('请先生成有效演示结果。');return;}
   const plan = document.getElementById('planArea');
   if(!plan){ toast('未找到计划书区域'); return; }
   const oldScrollTop = window.pageYOffset || document.documentElement.scrollTop;

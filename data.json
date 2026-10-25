@@ -21,6 +21,12 @@
       "icon": "🏦",
       "items": [
         {
+          "name": "宏禧乐安悦版两全保险（分红型）在线演示",
+          "type": "calculator",
+          "description": "趸交5/6/7/8年，支持累积生息与购买交清增额保险；依据原Excel计算，可下载完整PNG，渠道准入另行核对",
+          "url": "calculator-hongxile.html"
+        },
+        {
           "name": "宏安世家终身寿险（分红型）在线演示",
           "type": "calculator",
           "description": "趸交/3年/5年/10年交，含特定公共交通意外及全残保障，完整利益演示，红利可选累计生息(利率可调)/交清增额",

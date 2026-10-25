@@ -13,8 +13,8 @@ if(file==='calculator-hongtai.html'){
  const exported=width<768?(async()=>{await p.locator('button[onclick="downloadImage()"]').first().click();await p.waitForSelector('#ipImg',{state:'visible',timeout:90000});const downloaded=p.waitForEvent('download',{timeout:90000});await p.locator('#ipOpen').click();return downloaded;})():(async()=>{const d=p.waitForEvent('download',{timeout:90000});await p.locator('button[onclick="downloadImage()"]').first().click();return d;})();
  const dl=await exported;const fileOut=path.join(out,'hongtai-export-'+width+'.png');await dl.saveAs(fileOut);assert.equal(await dl.failure(),null);const bytes=fs.readFileSync(fileOut);assert.equal(bytes.toString('hex',0,8),'89504e470d0a1a0a');console.log('PNG',width,bytes.readUInt32BE(16),bytes.readUInt32BE(20));
 }else if(file==='calculator-hongda.html'){
- await p.waitForTimeout(300);await p.locator('button[onclick="generate()"]').first().click();assert.equal(await p.locator('#resultBody tr').count(),0);assert((await p.locator('#errorMsg').innerText()).includes('公式核验'));assert((await p.locator('body').innerText()).includes('calculation_pending'));
- await p.screenshot({path:path.join(out,'hongda-pending-'+width+'.png'),fullPage:true});
+ await p.waitForFunction(()=>typeof CALC_DATA!=='undefined'&&CALC_DATA);await p.locator('button[onclick="generate()"]').first().click();assert((await p.locator('#resultBody tr').count())>0);assert((await p.locator('body').innerText()).includes('partially_verified'));
+ await p.screenshot({path:path.join(out,'hongda-'+width+'.png'),fullPage:true});
 }else if(file==='zengzhi.html'){
  assert((await p.locator('body').innerText()).includes('折算保费'));assert.equal(await p.locator('img[src*="新华尊使用流程"]').count(),0);await p.screenshot({path:path.join(out,'service-'+width+'.png'),fullPage:true});
  if(width===390){const downloaded=p.waitForEvent('download',{timeout:90000});await p.getByRole('button',{name:'下载服务项目说明图片'}).click();await(await downloaded).saveAs(path.join(out,'service-explainer.png'));}

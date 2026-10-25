@@ -7,6 +7,6 @@
   },
   "scripts": {
     "verify:topics": "node tools/verify_topics.js",
-    "verify:calibration": "node tests/calculator-calibration.js"
+    "verify:calibration": "node tests/calculator-calibration.js && node tests/desktop-calculators.js"
   }
 }

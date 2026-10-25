@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>宏禧乐安悦版 · 在线利益演示</title><link rel="stylesheet" href="assets/css/theme.css"><link rel="stylesheet" href="assets/css/hongxile-verified.css"></head>
+<body><main><a href="index.html">← 返回新华资料库</a><header><p>两全保险（分红型）· 安悦版</p><h1>宏禧乐安悦版在线测算</h1><p>一次交清，5 / 6 / 7 / 8年；保证利益与非保证红利分开看。</p></header>
+<aside>已恢复：累积生息、购买交清增额保险。依据本次原Excel完整公式及基础数据计算。准确性：pending_verification（已有Excel验证，尚无本产品小程序实测样本）。</aside>
+<form id="form"><div class="fields">
+<label>性别<select id="sex"><option value="1">女</option><option value="0">男</option></select></label>
+<label>投保年龄（周岁）<input id="age" type="number" min="0" max="82" step="1" value="40" required></label>
+<label>交费方式<input value="一次交清" readonly></label>
+<label>保险期间<select id="period"><option value="5">5年</option><option value="6" selected>6年</option><option value="7">7年</option><option value="8">8年</option></select></label>
+<label>保费（元）<input id="premium" type="number" min="10000" step="1000" value="100000" required></label>
+<label>红利方式<select id="dividendMode"><option value="accumulation">累积生息</option><option value="paidup">购买交清增额保险</option></select></label>
+</div><p class="meta">男最高80岁、女最高82岁；0周岁须出生满28日。本页为产品通用演示，不能据此推导中行或招行线上均开放所有组合。</p>
+<button id="generate" disabled>资料加载中…</button><button type="button" id="download" disabled>下载理财计划书图片</button></form><p id="error" role="alert"></p>
+<section id="plan"><h2>宏禧乐安悦版 · 利益演示</h2><p id="parameters"></p><p id="modeNotice" class="meta"></p><div class="table-scroll"><table id="resultTable"><thead id="head"></thead><tbody id="rows"></tbody></table></div>
+<p class="foot">保证利益以合同为准，保单红利不保证，可能为零。累积生息演示使用Excel中的2.50%，不代表未来保证利率。预期年化单利＝（年末总利益－趸交保费）÷趸交保费÷已过保单年度，非IRR；负值依原表留空。满期金与满期年度现金价值不重复相加。</p>
+<p class="foot">来源：SRC-20261025-002《新华人寿 宏禧乐安悦版（分红型）利益演示(7).xlsx》；原表AL/AM/AP、BA/BB及B—K列。核验日期：2026-10-25。网页与PNG使用同一份计算结果。</p></section></main>
+<script src="html2canvas.min.js"></script><script src="assets/js/hongxile-anyue-verified-engine.js"></script><script src="assets/js/hongxile-verified-page.js"></script></body></html>

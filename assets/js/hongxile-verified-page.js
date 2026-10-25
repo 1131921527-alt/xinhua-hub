@@ -1,0 +1,14 @@
+'use strict';
+const $=id=>document.getElementById(id);let data=null,currentResult=null;
+const number=v=>Number(v).toLocaleString('zh-CN',{maximumFractionDigits:1});
+function clear(){currentResult=null;window.currentHongxileResult=null;$('download').disabled=true;$('rows').innerHTML='';$('parameters').textContent='输入已变更，请重新生成演示。';}
+function render(){const r=currentResult,paid=r.input.dividendMode==='paidup';$('parameters').textContent=`${r.input.sex?'女':'男'}${r.input.age}周岁 / 趸交${number(r.input.premium)}元 / ${r.input.period}年 / ${paid?'购买交清增额保险':'累积生息'} / 基本保额${number(r.basicSumAssured)}元`;
+ $('modeNotice').textContent=paid?'红利先购买交清增额保额，再按当年现价因子换算；非保证利益单列。':'红利按照2.50%演示累积生息，逐年按原Excel取整。';
+ const headers=['保单年度','当年保费','累计保费','满期生存保险金','保证身故保险金',paid?'预期身故保险金':'年度红利',paid?'红利现价':'累积红利','现金价值保证部分','预期生存总利益','预期年化单利'];
+ $('head').innerHTML='<tr>'+headers.map(t=>'<th>'+t+'</th>').join('')+'</tr>';
+ $('rows').innerHTML=r.rows.map(row=>'<tr>'+[row.year,row.premium,row.totalPremium,row.maturityBenefit,row.deathBenefit,row.dividendValue,row.dividendCashValue,row.guaranteedCashValue,row.totalBenefit].map(v=>'<td>'+number(v)+'</td>').join('')+'<td>'+(row.annualSimpleRate===null?'—':(row.annualSimpleRate*100).toFixed(2)+'%')+'</td></tr>').join('');$('download').disabled=false;
+}
+$('form').onsubmit=e=>{e.preventDefault();$('error').textContent='';try{currentResult=HongxileAnyueEngine.calculate(data,{sex:Number($('sex').value),age:Number($('age').value),period:Number($('period').value),premium:Number($('premium').value),dividendMode:$('dividendMode').value});window.currentHongxileResult=currentResult;render()}catch(err){clear();$('error').textContent=err.message}};
+$('form').addEventListener('input',clear);$('sex').addEventListener('change',()=>{$('age').max=$('sex').value==='0'?'80':'82'});
+$('download').onclick=async()=>{if(!currentResult)return;const button=$('download');button.disabled=true;let host;try{await document.fonts.ready;host=document.createElement('div');host.style.cssText='position:absolute;left:-20000px;top:0';const clone=$('plan').cloneNode(true);clone.classList.add('export-plan');host.append(clone);document.body.append(host);const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#fff',windowWidth:1400});const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));if(!blob)throw Error('无法生成PNG');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`宏禧乐安悦版-${currentResult.input.period}年-${currentResult.input.dividendMode}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000)}catch(e){$('error').textContent='导出失败：'+e.message}finally{host?.remove();button.disabled=false}};
+(async()=>{try{const r=await fetch('assets/data/hongxile-anyue.json');if(!r.ok)throw Error('资料加载失败');data=await r.json();$('generate').disabled=false;$('generate').textContent='生成利益演示';$('form').requestSubmit()}catch(e){$('error').textContent=e.message}})();
