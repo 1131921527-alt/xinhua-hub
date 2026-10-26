@@ -1,0 +1,354 @@
+{
+  "updatedAt": "2026-10-26",
+  "trackedHtml": 59,
+  "connected": 14,
+  "scope": "仅已登记的正式内容页；未把历史报告、原件查看器和计算器输入区自动纳入",
+  "pages": [
+    {
+      "file": "about-xinhua.html",
+      "status": "connected_and_tested",
+      "root": "#company-content",
+      "formats": [
+        "png",
+        "mobile-pdf",
+        "a4-pdf",
+        "pptx"
+      ]
+    },
+    {
+      "file": "audit-report-2026-09-07.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "audit-report-mobile-2026-09-07.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "audit-report-product-names-2026-09-10.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "calculator-fusheng.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hengxiang.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongan.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongda.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongkun.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongtai.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongxilai.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongxile.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongyu.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-hongyuan.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-huacai.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "calculator-yingmanxin.html",
+      "status": "not_connected",
+      "reason": "已保留既有理财计划书导出；本轮不改演算公式或结果导出逻辑"
+    },
+    {
+      "file": "card-hongyu.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "clause-hengxiang.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "clause-hongtai.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "clause-hongyu.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "clause-hongyuan.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "clause-huacai.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "company-intro.html",
+      "status": "not_connected",
+      "reason": "历史公司/分红专题；新版正式主题页已接入，旧稿须先核对内容口径"
+    },
+    {
+      "file": "content-composer.html",
+      "status": "connected_and_tested",
+      "root": "#composer-preview",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "dividend-2025-interpretation.html",
+      "status": "not_connected",
+      "reason": "历史公司/分红专题；新版正式主题页已接入，旧稿须先核对内容口径"
+    },
+    {
+      "file": "dividend.html",
+      "status": "not_connected",
+      "reason": "导航/跳转/互动查询或待单独适配的正式入口，保留现有功能"
+    },
+    {
+      "file": "docs/V6-overnight-analysis.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "docs/V6.0-PLAN.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "docs/内容资产审计报告_2026-08-06.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "docs/打磨期体检报告-2026-08-13.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "docs/整站体检报告-2026-08-19.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "files/产品介绍/新华宏御世家_知识问答卡片 (6).html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "files/产品对比/training-zhaohang-18-products-comparison.html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "files/产品规则/荣尊世家减保规则.html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "files/公司介绍/2604新华在售产品培训.html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "files/公司介绍/training-dividend-investment-intro.html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "files/公司介绍/新华保险投资实力介绍（新华资管）.html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "files/分红资料/training-dividend-report-fts.html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "files/培训课程/training-marketing-dual-drive.html",
+      "status": "not_connected",
+      "reason": "原件转换/培训HTML，需单独核对现行口径、渠道和隐私"
+    },
+    {
+      "file": "fuxing.html",
+      "status": "not_connected",
+      "reason": "操作流程含截图/二维码，须独立隐私和图片清晰度审查后接入"
+    },
+    {
+      "file": "hongli-realization.html",
+      "status": "connected_and_tested",
+      "root": "main",
+      "formats": [
+        "png",
+        "mobile-pdf",
+        "a4-pdf",
+        "pptx"
+      ]
+    },
+    {
+      "file": "huifang.html",
+      "status": "not_connected",
+      "reason": "操作流程含截图/二维码，须独立隐私和图片清晰度审查后接入"
+    },
+    {
+      "file": "icon-system-2026.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "index.html",
+      "status": "not_connected",
+      "reason": "导航/跳转/互动查询或待单独适配的正式入口，保留现有功能"
+    },
+    {
+      "file": "insurance-knowledge-card.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "intro-yingmanxin.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png",
+        "mobile-pdf",
+        "a4-pdf",
+        "pptx"
+      ]
+    },
+    {
+      "file": "jujia.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "preview.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "qa/acceptance-report.html",
+      "status": "not_connected",
+      "reason": "技术/QA报告，不是对客正式内容页"
+    },
+    {
+      "file": "sales-qa-chuancheng.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "sales-qa-fenhong.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "sales-qa-gaoke.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "sales-qa-hk.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "sales-qa-yanglao.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "sales-qa-yiyi.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "sales-qa.html",
+      "status": "connected_and_tested",
+      "root": ".wrap",
+      "formats": [
+        "png"
+      ]
+    },
+    {
+      "file": "training.html",
+      "status": "not_connected",
+      "reason": "导航/跳转/互动查询或待单独适配的正式入口，保留现有功能"
+    },
+    {
+      "file": "xlsx/index.html",
+      "status": "not_connected",
+      "reason": "原PDF/图片/文件查看器，保留原件下载，不截取iframe冒充正文"
+    },
+    {
+      "file": "zengzhi.html",
+      "status": "connected_and_tested",
+      "root": "body",
+      "formats": [
+        "png"
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@
   },
   "scripts": {
     "verify:topics": "node tools/verify_topics.js",
+    "verify:exports": "node tests/content-export.spec.cjs",
     "verify:calibration": "node tests/calculator-calibration.js && node tests/desktop-calculators.js"
   }
 }
