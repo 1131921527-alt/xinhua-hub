@@ -1,10 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-24",
+  "updatedAt": "2026-10-26",
   "sources": {
     "H1-2026": {"sourceId":"SRC-20261023-011","name":"新华保险2026年半年度报告","file":"files/公司介绍/新华保险2026年半年度报告.pdf","url":"https://static-cdn.newchinalife.com/ncl/pdf/20260827/d56b5a07-3382-4bc4-8412-a7f460cd0050.pdf","date":"2026-08-27","status":"confirmed"},
     "DIV-2025": {"sourceId":"SRC-20261023-012","name":"新华保险官网现金红利实现率披露","url":"https://www.newchinalife.com/info/55321_2?BrowsAgent=2&p0=22","date":"2026-10-24核对","status":"confirmed"},
-    "COMPANY-PDF": {"sourceId":"COMPANY-DIVIDEND-PDF","name":"公司分红投资介绍","file":"files/公司介绍/公司分红投资介绍.pdf","date":"资料未注明日期，案例保留原报告期","status":"confirmed"}
+    "COMPANY-PDF": {"sourceId":"COMPANY-DIVIDEND-PDF","name":"公司分红投资介绍","file":"files/公司介绍/公司分红投资介绍.pdf","date":"资料未注明日期，案例保留原报告期","status":"confirmed"},
+    "EQUITY-2026": {"sourceId":"OFFICIAL-EQUITY-20260630","name":"新华保险官网股东股权披露","url":"https://www.newchinalife.com/spage/cn/shareholderEquity/","date":"2026-06-30，官网更新2026-08-27","status":"confirmed"},
+    "CIC": {"sourceId":"CIC-ANNUAL-2023","name":"中投公司2023年度报告","url":"https://www.china-inv.cn/chinainven/xhtml/Media/2023CN.pdf","date":"2023年报，公司历史及职责说明","status":"confirmed"},
+    "BAOWU": {"sourceId":"SASAC-BAOWU-20221101","name":"国务院国资委：中国宝武投资公司改革","url":"https://wap.sasac.gov.cn/n2588020/n2588072/n2591064/n26201039/c26330748/content.html","date":"2022-11-01，公司性质及改革背景","status":"confirmed"}
+  },
+  "ownership": {
+    "asOf":"2026-06-30","period":"截至2026年6月30日","status":"confirmed","totalShares":3119546600,"denominator":"新华保险已发行股份总数（A股与H股合计）",
+    "cic":{"name":"中国投资有限责任公司","short":"中投公司","description":"2007年成立的中国主权财富基金机构，承担国家外汇资金多元化投资等职能。中央汇金是其全资子公司。","source":"CIC","location":"印刷第11—12、43—44页"},
+    "huijin":{"name":"中央汇金投资有限责任公司","short":"中央汇金","directPct":"31.34","shares":977530534,"description":"中投公司的全资子公司。根据国务院授权，对国有重点金融企业进行股权投资，通过行使出资人权利履行股东职责，推动国有金融资产保值增值。它不是商业银行，也不直接经营新华保险的日常业务。","assetCompany":"中央汇金资产管理有限责任公司","assetPct":"0.91","assetShares":28249200,"relationship":"全资子公司","source":"H1-2026","location":"印刷第56—57页"},
+    "baowu":{"name":"中国宝武钢铁集团有限公司","short":"中国宝武","directPct":"12.09","shares":377162581,"description":"中央直接管理的国有重要骨干企业，由宝钢、武钢等钢铁产业资源联合重组发展而来，2022年正式转为国有资本投资公司，是新华保险的重要国有股东。中国宝武不隶属于中央汇金。","subsidiary":"华宝投资有限公司","subsidiaryPct":"1.94","subsidiaryShares":60503300,"subsidiaryClass":"H股","relationship":"全资子公司","combinedPct":"14.03","combinedBasis":"公开权益披露口径：中国宝武直接持有A股，加上通过全资子公司华宝投资持有的H股，合计占新华保险已发行股份总数14.03%；不是中国宝武直接持股比例。","source":"H1-2026","location":"印刷第56—57页及注3"},
+    "nomineeNote":"香港中央结算（代理人）有限公司属于名义持有人，代表不同客户与结算系统参与者持股，不能当作单一最终实益股东。华宝投资的1.94%已从该名义持股披露数量中扣除，避免重复计算。",
+    "huijinBasis":"中央汇金直接持股31.34%；其全资子公司中央汇金资产管理另持股0.91%，两者分别披露。本图不把关联权益写成中央汇金直接持股，也不简单相加已四舍五入的百分比。",
+    "risk":"股东背景说明公司的股权与治理关系，不代表任何保单的本金、收益或未来分红获得股东保证。"
   },
   "metrics": [
     {"id":"assets","name":"总资产","value":"1.9581","unit":"万亿元","meaning":"看公司整体经营规模，不等于利润","period":"2026年6月30日","source":"H1-2026","page":"印刷第13页，原值1,958,077百万元","status":"confirmed"},
@@ -29,7 +41,7 @@
   ],
   "modules": [
     {"id":"identity","title":"新华公司身份","source":"H1-2026","page":"印刷第2—4页","period":"公司历史与性质","status":"confirmed"},
-    {"id":"ownership","title":"中央汇金与股东背景","source":"COMPANY-PDF","page":"第1—3页","period":"资料所载股权及管理关系","status":"confirmed"},
+    {"id":"ownership","title":"主要股东：中央汇金与中国宝武","source":"H1-2026","page":"印刷第56—57页；股权与权益披露","period":"截至2026年6月30日","status":"confirmed"},
     {"id":"operation","title":"2026经营数据","source":"H1-2026","page":"印刷第13—14、34、116页","period":"2026年上半年／2026年6月30日","status":"confirmed"},
     {"id":"investment","title":"投资实力与资产结构","source":"H1-2026","page":"印刷第30—32页","period":"2026年上半年／2026年6月30日","status":"confirmed"},
     {"id":"logic","title":"投资与分红逻辑","source":"COMPANY-PDF","page":"第4—7页","period":"概念说明","status":"confirmed"},

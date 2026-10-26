@@ -8,7 +8,7 @@ const PORT = 8927;
 const TARGETS = process.argv.slice(2).length ? process.argv.slice(2) : ['about-xinhua.html', 'hongli-realization.html', 'content-composer.html'];
 const VIEWPORTS = [{name:'390', width:390, height:844}, {name:'430', width:430, height:844}, {name:'1440', width:1440, height:900}];
 const REQUIRED = {
-  'about-xinhua.html': ['新华保险是一家什么样的公司？','中央汇金与股东背景','投资实力与资产结构'],
+  'about-xinhua.html': ['新华保险是一家什么样的公司？','主要股东：中央汇金与中国宝武','31.34%','12.09%','1.94%','14.03%','投资实力与资产结构'],
   'hongli-realization.html': ['分红险中的三个关键数字','2025红利实现率','宏泰世家'],
   'content-composer.html': ['内容拼装器','客户版','专业版','简洁版']
 };
