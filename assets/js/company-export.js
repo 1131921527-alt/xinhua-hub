@@ -106,6 +106,45 @@ const css=`
 .hxe-company.hxe-wide .kt-equity-svg{height:380px!important;width:564px!important;max-width:100%!important;margin:auto!important}
 .hxe-company.hxe-wide .kt-equity-figure figcaption{font-size:17px!important}
 .hxe-company.hxe-wide [data-module="ownership"]>.kt-intro{font-size:22px!important;line-height:1.45!important}
+/* 紧凑PDF：重排原网页完整内容，不缩放整页、不新增独立来源页。 */
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf){font-size:16px!important;line-height:1.4!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .hxe-page{padding:16px 20px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) :where(.kt-panel,.kt-hero){padding:12px!important;margin-bottom:10px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) h1{font-size:28px!important;margin:2px 0 8px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) h2{font-size:23px!important;margin:3px 0 8px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) h3{font-size:19px!important;margin:10px 0 6px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) p{margin:6px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) :is(.kt-intro,summary){font-size:16px!important;line-height:1.4!important;margin:6px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) :is(.kt-grid,.kt-contract){gap:8px!important;margin:8px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-stat{padding:10px!important;font-size:16px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-stat .kt-value{font-size:26px!important;line-height:1.2!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-stat .kt-value small{font-size:14px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-stat b{font-size:16px!important;line-height:1.3!important;margin:4px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-stat p{font-size:15px!important;line-height:1.4!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-date{font-size:12px!important;margin-top:4px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-kicker{font-size:12px!important;margin-bottom:4px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-contract>div{font-size:15px!important;line-height:1.4!important;padding:9px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-timeline{font-size:16px!important;margin:10px 0!important;gap:8px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-event{padding:7px 4px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-event strong{font-size:22px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-node{font-size:15px!important;padding:10px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-node b{font-size:18px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-bar-row{grid-template-columns:160px minmax(0,1fr) 68px!important;font-size:15px!important;margin:7px 0!important;gap:8px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) :is(.kt-track,.kt-fill){height:16px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-warning{font-size:14px!important;line-height:1.4!important;padding:9px!important;margin:8px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-note{font-size:14px!important;line-height:1.4!important;margin:7px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-source{font-size:10px!important;line-height:1.35!important;margin:3px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) :is(th,td){font-size:14px!important;line-height:1.4!important;padding:6px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-equity-figure{padding:8px!important;margin:8px 0!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-equity-svg{max-height:315px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-equity-figure figcaption{font-size:12px!important;line-height:1.4!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) :is(.kt-owner-profiles,[data-module="operation"]>.kt-grid){grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-owner-profiles :is(h3,p,b){font-size:13px!important;line-height:1.35!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-owner-profiles>div{padding:7px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) details{padding-top:4px!important}
+.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .kt-hero .kt-stat p{display:block!important}
+.hxe-document.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf),.hxe-company:is(.hxe-mobile-pdf,.hxe-a4-pdf) .hxe-page{width:1000px!important}
+.hxe-document.hxe-company.hxe-a4-pdf,.hxe-company.hxe-a4-pdf .hxe-page{width:1100px!important}
 `;
 const norm=s=>s.replace(/\s+/g,'');
 function texts(root){const map={};const walk=root.ownerDocument.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=walk.nextNode()){if(n.parentElement.closest('[data-hxe-added]'))continue;const t=norm(n.textContent);if(t)map[t]=(map[t]||0)+1;}return map;}
@@ -114,11 +153,7 @@ function graphs(root){return {chains:root.querySelectorAll('.kt-chain').length,t
 function prepare(clone,doc){
  const blocks=[...clone.children].filter(n=>n.textContent.trim()||n.querySelector('img,svg'));const modules=blocks.map((n,i)=>{const id=n.dataset.module||n.id||('company-'+i);n.dataset.hxeOrigin=id;return{id,title:n.querySelector('h1,h2')?.textContent.trim()||'公司介绍',text:texts(n)};});
  const baseline={text:texts(clone),graphs:graphs(clone),modules};
- const sources=doc.createElement('div');sources.className='hxe-company-sources';sources.dataset.hxeSources='true';
- const h=doc.createElement('h3');h.textContent='数据来源';h.dataset.hxeAdded='true';sources.append(h);
- // Retain every original source and its hyperlink, attached to its original module for QA.
- for(const n of [...clone.querySelectorAll('.kt-source')]){n.dataset.hxeOrigin=n.closest('[data-hxe-origin]')?.dataset.hxeOrigin||'';sources.append(n);}
- if(sources.children.length>1)clone.append(sources);
+ // 来源留在对应模块内的小字位置；不再生成单独的“数据来源”尾页。
  // Keep explanatory text and the visual it qualifies in the same pagination unit.
  for(const bars of [...clone.querySelectorAll('.kt-bars')]){const note=bars.previousElementSibling,heading=note?.previousElementSibling,after=bars.nextElementSibling;const group=doc.createElement('div');group.className='hxe-figure';bars.before(group);if(heading?.matches('h3'))group.append(heading);if(note?.matches('.kt-note'))group.append(note);group.append(bars);if(after?.matches('.kt-contract'))group.append(after);}
  const capital=[...clone.querySelectorAll('#module-operation h3')].find(n=>n.textContent.includes('资本覆盖'));if(capital){const grid=capital.nextElementSibling,note=grid?.nextElementSibling,group=doc.createElement('div');group.className='hxe-figure hxe-capital';capital.before(group);group.append(capital);if(grid)group.append(grid);if(note?.matches('.kt-note'))group.append(note);}
@@ -127,26 +162,28 @@ function prepare(clone,doc){
 }
 function paginate(stage,mode){
  const {doc,root,clone,companyBaseline:baseline}=stage;root.classList.add('hxe-company');
- const density=Number(root.dataset.density)||2,max=mode==='pptx'?720:mode==='mobile-pdf'?1334:mode==='a4-pdf'?1060:Math.min(1600,Math.floor(8800000/(750*density*density)));
+ const density=Number(root.dataset.density)||2,max=mode==='pptx'?720:mode==='mobile-pdf'?1778:mode==='a4-pdf'?1554:Math.min(1600,Math.floor(8800000/(750*density*density)));
  const pages=[];let page,body;
  const make=()=>{page=doc.createElement('section');page.className='hxe-page';body=doc.createElement('div');body.className='hxe-page-body';page.append(body);root.append(page);pages.push(page);};
  const fits=()=>Math.max(page.scrollHeight,body.getBoundingClientRect().bottom-page.getBoundingClientRect().top+24)<=max;
  const minimum=(n)=>n.nodeType===3?!!n.textContent.trim():!!n.textContent.trim()||!!n.querySelector('img,svg');
  const origin=n=>n.closest?.('[data-hxe-origin]')?.dataset.hxeOrigin;
  function wrapper(n){const w=n.cloneNode(false);w.removeAttribute('id');return w;}
- function appendBlock(block){
+ function appendBlock(block,provenance){
   if(!minimum(block))return;
+  if(block.nodeType===3){const span=doc.createElement('span');span.append(block);if(provenance)span.dataset.hxeOrigin=provenance;block=span;}
   if(!page)make();body.append(block);
   if(fits())return;
+  const blockHeight=block.getBoundingClientRect().height;
   block.remove();
   // Preserve atomic visual structures; never break a chart, relationship or timeline into text.
-  if(body.childNodes.length){make();body.append(block);if(fits())return;block.remove();}
+  if(body.childNodes.length&&blockHeight<max-48&&(!mode.includes('pdf')||block.matches?.('.kt-chain,.kt-bars,.kt-timeline,img,svg,tr,p,li,span,a,b,strong,.kt-stat,.kt-node'))){make();body.append(block);if(fits())return;block.remove();}
   if(block.matches?.('.kt-chain,.kt-bars,.kt-timeline,img,svg,tr'))throw Error('完整图表超过此格式的单页容量，已停止，未裁切图表。');
   const children=[...block.childNodes].filter(minimum);
   if(block.matches?.('.kt-grid,.kt-contract')){
    const count=2;for(let i=0;i<children.length;i+=count){const row=wrapper(block);row.append(...children.slice(i,i+count));body.append(row);if(fits())continue;row.remove();if(body.childNodes.length)make();body.append(row);if(!fits())throw Error('同组对照卡过高，已停止而不拆散含义。');}return;
   }
-  if(!children.length||block.matches?.('p,li,.kt-stat,.kt-node'))throw Error('完整内容块超过单页容量，请选择更适合的格式；未删减正文。');
+  if(!children.length||block.matches?.('p,li,span,a,b,strong,.kt-stat,.kt-node'))throw Error('完整内容块超过单页容量，请选择更适合的格式；未删减正文。');
   // Preserve parent classes and section context on every continuation fragment.
   let fragment=wrapper(block);body.append(fragment);
   for(let i=0;i<children.length;i++){
@@ -154,7 +191,7 @@ function paginate(stage,mode){
    const isHeading=child.nodeType===1&&child.matches('h1,h2,h3,h4,summary,.kt-kicker');
    let probe;if(isHeading&&children[i+1]){probe=children[i+1].cloneNode(true);fragment.append(probe);}
    const good=fits();probe?.remove();if(good)continue;
-   child.remove();if(!fragment.childNodes.length){fragment.remove();if(child.nodeType===1&&!child.dataset.hxeOrigin)child.dataset.hxeOrigin=block.dataset.hxeOrigin||'';appendBlock(child);fragment=wrapper(block);body.append(fragment);continue;}
+   child.remove();if(!fragment.childNodes.length){fragment.remove();if(child.nodeType===1&&!child.dataset.hxeOrigin)child.dataset.hxeOrigin=block.dataset.hxeOrigin||'';appendBlock(child,block.dataset.hxeOrigin||provenance);fragment=wrapper(block);body.append(fragment);continue;}
    // Carry a trailing heading forward rather than leaving a title on its own.
    const carry=[];while(fragment.lastElementChild?.matches('h1,h2,h3,h4,summary,.kt-kicker'))carry.unshift(fragment.removeChild(fragment.lastElementChild));
    if(!fragment.childNodes.length)fragment.remove();if(body.childNodes.length)make();fragment=wrapper(block);fragment.append(...carry.filter(Boolean),child);body.append(fragment);
@@ -162,7 +199,7 @@ function paginate(stage,mode){
     child.remove();if(!fragment.childNodes.length)fragment.remove();
     // The recursive item retains the original provenance even when an outer panel is split.
     if(child.nodeType===1&&!child.dataset.hxeOrigin)child.dataset.hxeOrigin=block.dataset.hxeOrigin||origin(block)||'';
-    appendBlock(child);fragment=wrapper(block);body.append(fragment);
+    appendBlock(child,block.dataset.hxeOrigin||provenance);fragment=wrapper(block);body.append(fragment);
    }
   }
   if(!fragment.childNodes.length)fragment.remove();

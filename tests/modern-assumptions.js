@@ -1,0 +1,4 @@
+'use strict';
+const assert=require('assert/strict'),fs=require('fs'),e=require('../assets/js/modern-calculator-engine');const f=JSON.parse(fs.readFileSync(process.argv[2],'utf8').replace(/^\uFEFF/,''));let money=0,rates=0;
+for(const c of f.cases){const rows=e.calculate(require('../assets/data/'+c.productId+'.json'),c.input).rows;for(const v of c.rows){const r=rows[v.year-1];for(const k of ['cumulativeDividend','survivalTotal']){assert.equal(r[k],v[k],`${c.productId} ${v.year} ${k}`);money++;}for(const k of ['annualGrowth','simpleAnnual']){if(typeof v[k]!=='number')continue;assert(Math.abs(r[k]-v[k])<1e-12,`${c.productId} ${v.year} ${k}`);rates++;}}}
+console.log('PASS independent Microsoft Excel 2.5% formulas',f.cases.length,'scenarios',money,'exact amounts',rates,'rate checks at machine precision');
