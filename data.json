@@ -21,6 +21,30 @@
       "icon": "🏦",
       "items": [
         {
+          "name": "盈满鑫两全保险（分红型）在线演示",
+          "type": "calculator",
+          "description": "原有利益演示，支持蓝色/橙色配色；产品与渠道规则分别核对",
+          "url": "calculator-yingmanxin.html"
+        },
+        {
+          "name": "宏御世家安悦版在线演示",
+          "type": "calculator",
+          "description": "未减保，累积生息 / 购买交清增额保险；依据2026-11-09原Excel，多组原表重算核验；产品通用规则不等于渠道全部开放",
+          "url": "calculator-hongyu-anyue.html"
+        },
+        {
+          "name": "宏安世家安悦版在线演示",
+          "type": "calculator",
+          "description": "未减保，累积生息 / 购买交清增额保险；依据2026-11-09原Excel，多组原表重算核验；产品通用规则不等于渠道全部开放",
+          "url": "calculator-hongan-anyue.html"
+        },
+        {
+          "name": "宏达人生锦泰版在线演示",
+          "type": "calculator",
+          "description": "年金保险，累积生息；个人养老金规则独立校验；依据2026-11-09原Excel，多组原表重算核验；产品通用规则不等于渠道全部开放",
+          "url": "calculator-hongda-jintai.html"
+        },
+        {
           "name": "宏禧乐安悦版两全保险（分红型）在线演示",
           "type": "calculator",
           "description": "趸交5/6/7/8年，支持累积生息与购买交清增额保险；依据原Excel计算，可下载完整PNG，渠道准入另行核对",
@@ -43,12 +67,6 @@
           "type": "calculator",
           "description": "养老年金利益演示，完整利益演示，年金起领年龄可选55/60/65/70岁，可下载计划书图片",
           "url": "calculator-hongyuan.html"
-        },
-        {
-          "name": "盈满鑫两全保险（分红型）在线演示",
-          "type": "calculator",
-          "description": "3年/5年交，6/8/10/15年期中短期两全险，累计生息模式，完整利益演示，利率可调1.75%/2.0%/2.5%，可下载计划书图片",
-          "url": "calculator-yingmanxin.html"
         },
         {
           "name": "宏禧来两全保险（分红型）在线演示",
