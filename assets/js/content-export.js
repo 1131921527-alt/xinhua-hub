@@ -77,7 +77,7 @@ function guard(root){
 }
 async function stage(mode,selector){
  await waitReady();const source=document.querySelector(selector||config.root);if(!source)throw Error('找不到已审核正文，不导出空白文件');guard(source);
- if(config.company){await loadScript('assets/js/company-export.js?v=20261110-bluegold',()=>!!window.HubCompanyExport);await loadScript('assets/js/company-brochure.js',()=>!!window.HubCompanyBrochure);}
+ if(config.company){await loadScript('assets/js/company-export.js?v=20261110-bluegold',()=>!!window.HubCompanyExport);await loadScript('assets/js/company-brochure.js?v=20261110-proofread',()=>!!window.HubCompanyBrochure);}
  const iframe=el('iframe');iframe.title='专用导出排版';iframe.style.cssText='position:absolute;left:-20000px;top:0;border:0;width:1400px;height:1600px;pointer-events:none';document.body.append(iframe);frame=iframe;
  const doc=iframe.contentDocument;doc.open();doc.write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"></head><body></body></html>');doc.close();const base=doc.createElement('base');base.href=location.href;doc.head.append(base);
  const pending=[];document.querySelectorAll('link[rel="stylesheet"],style').forEach(s=>{if(s.tagName==='LINK'){const c=s.cloneNode(true);c.href=s.href;pending.push(new Promise((r,j)=>{c.onload=r;c.onerror=()=>j(Error('页面样式未加载完成，已停止导出'))}));doc.head.append(c)}else doc.head.append(s.cloneNode(true))});await deadline(Promise.all(pending),'导出样式加载超时，请检查网络');
@@ -150,12 +150,12 @@ async function rasterCompanySVG(page,scale){
 async function render(page,mode){abort();const width=mode==='pptx'?1280:Math.ceil(page.getBoundingClientRect().width),height=mode==='pptx'?720:Math.ceil(Math.max(page.scrollHeight,page.getBoundingClientRect().height));if(mode==='pptx'&&page.scrollHeight>720)throw Error('幻灯片内容超出版式，已停止，未拉伸或裁切');const scale=mode==='png'?Number(densitySelector?.value||2):mode==='pptx'?2:1.5;if(width*height*scale*scale>9000000)throw Error('该段超出高清画布安全上限，请选择2倍高清或缩小导出范围；未降低倍率冒充高清。');await rasterCompanySVG(page,scale);const canvas=await html2canvas(page,{scale,backgroundColor:'#fff',logging:false,useCORS:true,allowTaint:false,width,height,windowWidth:1400,scrollX:0,scrollY:0});if(!canvas.width||!canvas.height)throw Error('画布为空，未生成文件');return canvas;}
 async function blobOf(canvas,type='image/png'){const b=await new Promise(r=>canvas.toBlob(r,type,type==='image/jpeg'?0.94:undefined));if(!b||b.size<100)throw Error('图片编码失败，未生成文件');return b;}
 function clearArtifacts(){for(const a of artifacts)if(a.url)URL.revokeObjectURL(a.url);artifacts=[];}
-async function generate(mode){
+async function generate(mode,settings={}){
  if(active)return;active=true;cancelled=false;clearArtifacts();result.replaceChildren();error.textContent='';setBusy(true);try{
   progress.textContent='正在载入字体、正文和图表…';await loadScript('html2canvas.min.js',()=>typeof window.html2canvas==='function');
   if(mode.includes('pdf'))await loadScript('assets/vendor/export/jspdf.umd.min.js',()=>!!window.jspdf?.jsPDF);
   if(mode==='pptx')await loadScript('assets/vendor/export/pptxgen.bundle.js',()=>typeof window.PptxGenJS==='function');
-  const st=await stage(mode,scopeSelector?.value||config.root),pages=paginate(st,mode);let pdf,ppt,vectorAudit;
+  const st=await stage(mode,settings.scope||scopeSelector?.value||config.root),pages=paginate(st,mode);let pdf,ppt,vectorAudit;
   if(mode.includes('pdf')){if(config.company){await loadScript('assets/vendor/export/svg2pdf.umd.min.js',()=>!!window.jspdf.jsPDF.API.svg);await loadScript('assets/js/vector-pdf.js?v=20261110-bluegold',()=>!!window.HubVectorPDF);}const mobile=mode==='mobile-pdf'&&!st.companyData;pdf=new jspdf.jsPDF({orientation:'portrait',unit:'mm',format:mobile?[108,192]:'a4',compress:true});pdf.setProperties({title:config.title,subject:config.company?'可选中文文本与矢量图形':'高清图像版；可选文字版本请使用打印预览',creator:'新华Hub统一内容导出'});if(config.company)vectorAudit=await HubVectorPDF.setup(pdf);}
   if(mode==='pptx'){ppt=new PptxGenJS();ppt.layout='LAYOUT_WIDE';ppt.author='新华Hub';ppt.subject='视觉型演示文稿，正文为高清图像，非逐元素可编辑版';ppt.title=config.title;ppt.lang='zh-CN';}
   for(let i=0;i<pages.length;i++){abort();progress.textContent=`正在生成 ${i+1}/${pages.length} ${mode==='pptx'?'张幻灯片':'页 / 段'}…`;
@@ -169,7 +169,8 @@ async function generate(mode){
   if(pdf)artifacts.push({name:filename((mode==='mobile-pdf'?'手机阅读版':'A4正式版')+(config.company?'-可搜索矢量':'-图像型'),'pdf'),blob:pdf.output('blob')});
   if(ppt)artifacts.push({name:filename('16比9视觉型','pptx'),blob:await ppt.write({outputType:'blob'})});
   abort();progress.textContent=`已生成 ${artifacts.length} 个文件。请点击下载/查看；浏览器没有确认前，不表示已保存到相册或磁盘。`;showArtifacts();
- }catch(e){clearArtifacts();result.replaceChildren();error.textContent=e.message||'导出失败，未生成可用文件';progress.textContent='本次未完成，未标记为保存成功。';}
+  if(settings.preview){if(!settings.preview.closed){settings.preview.location.replace(artifacts[0].url);overlay.hidden=true;}else progress.textContent='A4版已生成，请点击下方查看或下载。';}
+ }catch(e){clearArtifacts();result.replaceChildren();error.textContent=e.message||'导出失败，未生成可用文件';progress.textContent='本次未完成，未标记为保存成功。';if(settings.preview&&!settings.preview.closed)settings.preview.document.body.textContent='A4版准备失败：'+error.textContent+'。请返回原页面重试。';}
  finally{frame?.remove();frame=null;temporaryURLs.forEach(u=>URL.revokeObjectURL(u));temporaryURLs=[];active=false;setBusy(false);}
 }
 function crc32(bytes){let c=0xffffffff;for(const b of bytes){c^=b;for(let j=0;j<8;j++)c=(c>>>1)^((c&1)?0xedb88320:0)}return (c^0xffffffff)>>>0;}
@@ -213,8 +214,22 @@ if(config.company)for(const mode of ['mobile-pdf','a4-pdf']){const b=options.que
 densitySelector=el('select');densitySelector.setAttribute('aria-label','PNG清晰度');for(const[value,label]of [['2','2倍高清（默认，兼顾体积与内存）'],...(config.company?[['3','3倍超清（更大文件，自动安全分段）']]:[])]){const option=el('option','',label);option.value=value;densitySelector.append(option);}const densityLabel=el('label','hxe-density','PNG清晰度');densityLabel.append(densitySelector);modal.insertBefore(densityLabel,options);
 const print=el('button','','可选文字打印版 / 另存PDF');print.onclick=printPreview;if(formats.includes('a4-pdf'))modal.append(print);
 const progress=el('p','hxe-progress');progress.setAttribute('role','status');const error=el('p','hxe-error');error.setAttribute('role','alert');const cancel=el('button','hxe-cancel','取消本次生成');cancel.hidden=true;cancel.onclick=()=>{cancelled=true};const result=el('div','hxe-results');modal.append(progress,error,cancel,result,el('p','hxe-help',/MicroMessenger/i.test(navigator.userAgent)?'微信内置浏览器可能限制下载：请查看高清图后长按保存，或在浏览器中打开。系统分享仅在浏览器实际支持时显示。':'若手机没有弹出保存窗口，请点击查看，使用浏览器保存/分享。系统分享仅在实际支持时显示。'));overlay.append(modal);
-function init(){const target=document.querySelector(config.root);if(!target)return;document.body.prepend(launch);document.body.append(overlay);button.onclick=()=>{overlay.hidden=false;error.textContent='';if(scopeSelector){scopeSelector.replaceChildren();const all=el('option','','整页核心正文');all.value=config.root;scopeSelector.append(all);document.querySelectorAll('#company-content [data-module],main > section[id],#official-results').forEach(n=>{const name=n.querySelector('h2,h3')?.textContent;if(!name)return;const o=el('option','',n.id==='official-results'?'当前其他公司查询结果':name);o.value='#'+n.id;scopeSelector.append(o)})}close.focus()};overlay.addEventListener('keydown',e=>{if(e.key==='Escape')close.click();if(e.key==='Tab'){const f=[...modal.querySelectorAll('button,a,select')].filter(n=>!n.disabled&&!n.hidden&&n.getClientRects().length);if(e.shiftKey&&document.activeElement===f[0]){e.preventDefault();f.at(-1)?.focus()}else if(!e.shiftKey&&document.activeElement===f.at(-1)){e.preventDefault();f[0]?.focus()}}});}
+function init(){const target=document.querySelector(config.root);if(!target)return;document.body.prepend(launch);document.body.append(overlay);button.onclick=()=>{overlay.classList.remove('hxe-quick-view');modal.querySelector('h2').textContent='导出 / 分享';overlay.hidden=false;error.textContent='';if(scopeSelector){scopeSelector.replaceChildren();const all=el('option','','整页核心正文');all.value=config.root;scopeSelector.append(all);document.querySelectorAll('#company-content [data-module],main > section[id],#official-results').forEach(n=>{const name=n.querySelector('h2,h3')?.textContent;if(!name)return;const o=el('option','',n.id==='official-results'?'当前其他公司查询结果':name);o.value='#'+n.id;scopeSelector.append(o)})}close.focus()};overlay.addEventListener('keydown',e=>{if(e.key==='Escape')close.click();if(e.key==='Tab'){const f=[...modal.querySelectorAll('button,a,select')].filter(n=>!n.disabled&&!n.hidden&&n.getClientRects().length);if(e.shiftKey&&document.activeElement===f[0]){e.preventDefault();f.at(-1)?.focus()}else if(!e.shiftKey&&document.activeElement===f.at(-1)){e.preventDefault();f[0]?.focus()}}});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-if(config.company)document.addEventListener('click',e=>{if(e.target.closest?.('#download-company')){e.preventDefault();e.stopImmediatePropagation();button.click();generate('png');}},true);
+function quickA4(){
+ if(active)return;const popup=window.open('about:blank','_blank');
+ if(popup){popup.document.title='新华保险公司介绍 · 四页A4版';popup.document.body.textContent='正在准备四页A4版，完成后可直接查看、打印或保存PDF…';}
+ button.click();overlay.classList.add('hxe-quick-view');modal.querySelector('h2').textContent='四页A4查看 / 打印';
+ generate('a4-pdf',{scope:config.root,preview:popup});
+ if(!popup)progress.textContent='浏览器未允许新窗口，将在这里生成A4版，完成后点击查看或下载。';
+}
+if(config.company){
+ launch.classList.add('hxe-company-launch');
+ const primary=el('button','hxe-a4-primary','A4 查看 / 打印');primary.id='company-a4';primary.onclick=quickA4;launch.insertBefore(primary,button);
+ button.textContent='更多格式';launch.querySelector('.hxe-toolbar-title').textContent='公司介绍 · 四页A4版';
+ print.textContent='打开四页A4打印版';print.onclick=quickA4;
+ const composer=el('a','hxe-help','按模块组合资料');composer.href=url('content-composer.html');modal.append(composer);
+ document.addEventListener('click',e=>{if(e.target.closest?.('#download-company')){e.preventDefault();e.stopImmediatePropagation();quickA4();}},true);
+}
 window.HubContentExport={version:'1.2.0',registry,generate,printPreview};
 })();
