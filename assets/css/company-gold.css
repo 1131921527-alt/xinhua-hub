@@ -1,0 +1,10 @@
+/* 公司介绍的蓝金主题；正文与数据不变，导出另用A4专用组件。 */
+#company-content .kt-hero{background:#173f6d;border-top:5px solid #b3955d}
+#company-content .kt-hero .kt-value{color:#e4ca9b}
+#company-content .kt-panel{border-color:#ded2ba}
+#company-content .kt-panel h2{border-left:4px solid #ad8b50;padding-left:12px}
+#company-content .kt-stat .kt-value,#company-content .kt-event strong{color:#95723a}
+#company-content .kt-track{background:#e9e7e1}
+#company-content .kt-fill{background:#254b75}
+#company-content .kt-contract>div{border-color:#ded2ba}
+#company-content .kt-warning{background:#f4edde;border-color:#ad8b50;color:#70582e}

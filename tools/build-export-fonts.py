@@ -8,7 +8,7 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 from fontTools import subset
 root=Path(__file__).resolve().parents[1]
-paths=['assets/js/knowledge-topics.js','assets/js/company-export.js','assets/js/content-export.js','assets/data/knowledge-modules.json','about-xinhua.html']
+paths=['assets/js/knowledge-topics.js','assets/js/company-export.js','assets/js/company-brochure.js','assets/js/content-export.js','assets/data/knowledge-modules.json','about-xinhua.html']
 text=''.join((root/p).read_text(encoding='utf-8') for p in paths)
 needed=set(range(32,127))|{ord(c) for c in text if ord(c)>=160}
 source=Path(sys.argv[1]);dest=root/'assets/vendor/export';dest.mkdir(exist_ok=True)

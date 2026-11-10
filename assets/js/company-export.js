@@ -2,8 +2,8 @@
 'use strict';
 // Faithful company brochure: reuse the live approved DOM, never summarize or recalculate it.
 const css=`
-@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Regular.ttf') format('truetype');font-weight:400;font-display:block}
-@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Bold.ttf') format('truetype');font-weight:700;font-display:block}
+@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Regular.ttf?v=20261110-bluegold') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Bold.ttf?v=20261110-bluegold') format('truetype');font-weight:700;font-display:block}
 .hxe-document.hxe-company{font-size:25px!important;line-height:1.65!important;color:#20334d!important}
 .hxe-document.hxe-company{font-family:HubExportSans,"Microsoft YaHei",sans-serif!important}
 .hxe-company .kt-equity-figure{margin:16px 0!important;padding:14px!important;background:#f7faff!important}
@@ -161,6 +161,7 @@ function prepare(clone,doc){
  return baseline;
 }
 function paginate(stage,mode){
+ if(stage.companyData)return window.HubCompanyBrochure.build(stage,mode);
  const {doc,root,clone,companyBaseline:baseline}=stage;root.classList.add('hxe-company');
  const density=Number(root.dataset.density)||2,max=mode==='pptx'?720:mode==='mobile-pdf'?1778:mode==='a4-pdf'?1554:Math.min(1600,Math.floor(8800000/(750*density*density)));
  const pages=[];let page,body;

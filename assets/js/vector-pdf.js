@@ -2,10 +2,10 @@
 'use strict';
 let resources;
 const base=new URL('../../',document.currentScript.src);
-const binary=async name=>{const r=await fetch(new URL('assets/vendor/export/'+name,base));if(!r.ok)throw Error('中文字体资源未完整加载，已停止生成PDF');return new Uint8Array(await r.arrayBuffer());};
+const binary=async name=>{const r=await fetch(new URL('assets/vendor/export/'+name+'?v=20261110-bluegold',base));if(!r.ok)throw Error('中文字体资源未完整加载，已停止生成PDF');return new Uint8Array(await r.arrayBuffer());};
 const b64=bytes=>{let s='';for(let i=0;i<bytes.length;i+=32768)s+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(s);};
 async function setup(pdf){
- resources??=Promise.all([binary('HubExportSans-Regular.ttf'),binary('HubExportSans-Bold.ttf'),fetch(new URL('assets/vendor/export/font-coverage.json',base)).then(r=>{if(!r.ok)throw Error('字体映射未加载');return r.json();})]);
+ resources??=Promise.all([binary('HubExportSans-Regular.ttf'),binary('HubExportSans-Bold.ttf'),fetch(new URL('assets/vendor/export/font-coverage.json?v=20261110-bluegold',base)).then(r=>{if(!r.ok)throw Error('字体映射未加载');return r.json();})]);
  const [regular,bold,coverage]=await resources;pdf.addFileToVFS('HubExportSans-Regular.ttf',b64(regular));pdf.addFont('HubExportSans-Regular.ttf','HubExportSans','normal');pdf.addFileToVFS('HubExportSans-Bold.ttf',b64(bold));pdf.addFont('HubExportSans-Bold.ttf','HubExportSans','bold');
  return {codes:new Set(coverage.codepoints),ascent:coverage.ascentRatio||1.16,textCharacters:0,shapes:0,svgs:0,sourceImages:0};
 }

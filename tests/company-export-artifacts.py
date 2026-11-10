@@ -34,10 +34,17 @@ for file in root.glob('about-xinhua.html-*-pdf.pdf'):
             assert '/ToUnicode' in doc.xref_object(x)
             embedded.append((name,len(content)))
     assert len(embedded)>=2,'regular and bold CJK fonts must be embedded'
-    assert sum(len(p.get_links()) for p in doc)>=13
+    if coverage.get('brochure'):
+        assert len(doc)==4
+        assert all(abs(p.rect.width-595.276)<1 and abs(p.rect.height-841.89)<1 for p in doc),'true A4 portrait'
+        assert coverage['sourceReferences'],'provenance retained in audit, not repeated footers'
+        spans=[s for p in doc for b in p.get_text('dict')['blocks'] if 'lines' in b for l in b['lines'] for s in l['spans']]
+        assert sum(len(s['text']) for s in spans if s['size']>=11)/sum(len(s['text']) for s in spans)>.85,'readable A4 type'
+    else:
+        assert sum(len(p.get_links()) for p in doc)>=13
     thumbs=[]
     for i,p in enumerate(doc):
-        pix=p.get_pixmap(matrix=fitz.Matrix(390/p.rect.width,390/p.rect.width));name=out/f'{file.stem}-p{i+1:02}.png';pix.save(name);im=Image.open(name).convert('RGB');im.thumbnail((260,480));thumbs.append(im)
+        pix=p.get_pixmap(matrix=fitz.Matrix(900/p.rect.width,900/p.rect.width));name=out/f'{file.stem}-p{i+1:02}.png';pix.save(name);im=Image.open(name).convert('RGB');im.thumbnail((260,480));thumbs.append(im)
     rows=(len(thumbs)+3)//4;sheet=Image.new('RGB',(1120,510*rows),'#e5ebf3');draw=ImageDraw.Draw(sheet)
     for i,im in enumerate(thumbs):x=(i%4)*280+10;y=(i//4)*510+10;sheet.paste(im,(x,y));draw.text((x,y+485),f'{i+1}/{len(doc)}',fill='black')
     sheet.save(out/(file.stem+'-all.png'))
@@ -46,7 +53,9 @@ for file in root.glob('about-xinhua*.zip'):
     with zipfile.ZipFile(file) as z:
         assert z.testzip() is None
         for name in z.namelist():
-            im=Image.open(io.BytesIO(z.read(name)));assert im.width in (1500,2250);assert im.width*im.height<=9000000
+            im=Image.open(io.BytesIO(z.read(name)));assert im.width in (1500,2250,1588,2382);assert im.width*im.height<=9000000
+            if im.width in (1588,2382):assert abs(im.height/im.width-1123/794)<.002 and len(z.namelist())==4
+            im.save(out/(file.stem+'-'+Path(name).name))
         report['files'].append({'file':file.name,'parts':len(z.namelist()),'pngPixelWidth':im.width,'CRC':'passed','bytes':file.stat().st_size})
 for file in root.glob('*.pptx'):
     with zipfile.ZipFile(file) as z:
