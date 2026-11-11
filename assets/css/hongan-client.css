@@ -4,12 +4,12 @@ body[data-product="hongan-anyue"] .mc-professional{margin:18px 0;padding:12px 16
 body[data-product="hongan-anyue"] .mc-professional summary{cursor:pointer;font-weight:700}
 body[data-product="hongan-anyue"] #download{background:var(--calc-main);box-shadow:0 2px 5px #0002}
 body[data-product="hongan-anyue"] .mc-plan h2{font-size:25px}
-body[data-product="hongan-anyue"] .mc-capture h2{font-size:28px}
-body[data-product="hongan-anyue"] .mc-capture{padding:24px!important}
-body[data-product="hongan-anyue"] .mc-capture table{font-size:17px!important}
-body[data-product="hongan-anyue"] .mc-capture th{font-size:16px!important}
+body[data-product="hongan-anyue"] .mc-client-image h2{font-size:28px}
+body[data-product="hongan-anyue"] .mc-client-image{padding:24px!important}
+body[data-product="hongan-anyue"] .mc-client-image table{font-size:17px!important}
+body[data-product="hongan-anyue"] .mc-client-image th{font-size:16px!important}
 body[data-product="hongan-anyue"] .mc-plan th{background:var(--calc-main);color:#fff}
 body[data-product="hongan-anyue"] .mc-plan tr.mc-key{background:var(--calc-mid)}
 body[data-product="hongan-anyue"] .mc-plan tbody tr:nth-child(even):not(.mc-key){background:var(--calc-soft)}
 body[data-product="hongan-anyue"] .mc-plan td.mc-total{color:var(--calc-deep)}
-@media(max-width:600px){body[data-product="hongan-anyue"] .mc-plan h2{font-size:21px}body[data-product="hongan-anyue"] .mc-capture h2{font-size:28px}}
+@media(max-width:600px){body[data-product="hongan-anyue"] .mc-plan h2{font-size:21px}body[data-product="hongan-anyue"] .mc-client-image h2{font-size:28px}}
