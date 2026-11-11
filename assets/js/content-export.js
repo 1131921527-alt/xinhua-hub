@@ -166,7 +166,7 @@ async function generate(mode,settings={}){
    else{const slide=ppt.addSlide();slide.background={color:'FFFFFF'};slide.addImage({data:canvas.toDataURL('image/png'),x:0,y:0,w:13.333333,h:7.5});slide.addNotes(pageText+'\n来源页面：'+location.href.split('#')[0]+'\n视觉型PPTX：正文图像，不是逐元素可编辑版本。');}
    canvas.width=1;canvas.height=1;
   }
-  if(pdf)artifacts.push({name:filename((mode==='mobile-pdf'?'手机阅读版':'A4正式版')+(config.company?'-可搜索矢量':'-图像型'),'pdf'),blob:pdf.output('blob')});
+  if(pdf)artifacts.push({name:filename((mode==='mobile-pdf'?(config.company?'手机阅读版-同A4正式版':'手机阅读版'):'A4正式版')+(config.company?'-可搜索矢量':'-图像型'),'pdf'),blob:pdf.output('blob')});
   if(ppt)artifacts.push({name:filename('16比9视觉型','pptx'),blob:await ppt.write({outputType:'blob'})});
   abort();progress.textContent=`已生成 ${artifacts.length} 个文件。请点击下载/查看；浏览器没有确认前，不表示已保存到相册或磁盘。`;showArtifacts();
   if(settings.preview){if(!settings.preview.closed){settings.preview.location.replace(artifacts[0].url);overlay.hidden=true;}else progress.textContent='A4版已生成，请点击下方查看或下载。';}
@@ -210,7 +210,7 @@ modal.append(el('p','hxe-help',config.company?'全篇导出四张A4蓝金图文�
 if(config.note)modal.append(el('p','hxe-help',config.note));
 if(config.scopes){scopeSelector=el('select');scopeSelector.setAttribute('aria-label','导出主题');modal.append(scopeSelector);}
 const options=el('div','hxe-options');const formats=config.formats||['png','mobile-pdf','a4-pdf','pptx'];const labels={png:['高清长图 PNG','超长内容按段编号，可打包下载'],'mobile-pdf':['手机阅读版 PDF','竖屏单列 · 高清图像型'],'a4-pdf':['A4 正式 PDF','统一边距 · 高清图像型'],pptx:['16:9 演示版 PPTX','视觉型试用 · PowerPoint/WPS实机待验收']};for(const mode of formats){const b=el('button','',labels[mode][0]);b.dataset.format=mode;b.append(el('small','',labels[mode][1]));b.onclick=()=>generate(mode);options.append(b)}modal.append(options);
-if(config.company)for(const mode of ['mobile-pdf','a4-pdf']){const b=options.querySelector(`[data-format="${mode}"]`);b.firstChild.textContent=mode==='mobile-pdf'?'手机阅读版 PDF':'A4 正式 PDF';b.querySelector('small').textContent='全篇四页A4蓝金版 · 可选中文与矢量图形';}
+if(config.company)for(const mode of ['mobile-pdf','a4-pdf']){const b=options.querySelector(`[data-format="${mode}"]`);b.firstChild.textContent=mode==='mobile-pdf'?'手机阅读版 PDF（与 A4 版相同）':'A4 正式 PDF';b.querySelector('small').textContent='公司介绍固定为全篇四页 A4 蓝金版；两个按钮生成同一份文件，内容一致 · 可选中文与矢量图形';}
 densitySelector=el('select');densitySelector.setAttribute('aria-label','PNG清晰度');for(const[value,label]of [['2','2倍高清（默认，兼顾体积与内存）'],...(config.company?[['3','3倍超清（更大文件，自动安全分段）']]:[])]){const option=el('option','',label);option.value=value;densitySelector.append(option);}const densityLabel=el('label','hxe-density','PNG清晰度');densityLabel.append(densitySelector);modal.insertBefore(densityLabel,options);
 const print=el('button','','可选文字打印版 / 另存PDF');print.onclick=printPreview;if(formats.includes('a4-pdf'))modal.append(print);
 const progress=el('p','hxe-progress');progress.setAttribute('role','status');const error=el('p','hxe-error');error.setAttribute('role','alert');const cancel=el('button','hxe-cancel','取消本次生成');cancel.hidden=true;cancel.onclick=()=>{cancelled=true};const result=el('div','hxe-results');modal.append(progress,error,cancel,result,el('p','hxe-help',/MicroMessenger/i.test(navigator.userAgent)?'微信内置浏览器可能限制下载：请查看高清图后长按保存，或在浏览器中打开。系统分享仅在浏览器实际支持时显示。':'若手机没有弹出保存窗口，请点击查看，使用浏览器保存/分享。系统分享仅在实际支持时显示。'));overlay.append(modal);

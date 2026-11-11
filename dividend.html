@@ -47,6 +47,10 @@
   .r-good{color:var(--good);} .r-warn{color:var(--warn);}
   .note{margin:16px 2px; padding:13px 15px; background:#FFF7ED; border:1px solid #FED7AA; border-radius:12px; font-size:12px; color:#9A3412; line-height:1.6;}
   .note b{color:#7C2D12;}
+  .scope-note{margin:0 2px 14px;padding:13px 15px;background:#EFF6FF;border:1px solid #BFDBFE;border-left:4px solid var(--blue);border-radius:12px;font-size:12px;color:#1E3A5F;line-height:1.75;}
+  .scope-note b{color:var(--blue-d);}
+  .scope-note p{margin:6px 0;}
+  .scope-note a{color:var(--blue-d);font-weight:700;}
   .guide{margin:12px 2px 16px;}
   .guide a{display:flex; flex-wrap:wrap; align-items:center; gap:6px; padding:12px 14px; background:var(--blue-l); border:1px solid #BFDBFE; border-radius:12px; text-decoration:none; color:var(--blue-d); font-size:13px; line-height:1.5;}
   .guide a b{font-weight:700;}
@@ -80,6 +84,12 @@
     <div class="div-stat hl"><div class="v">128%</div><div class="l">全系产品平均<br>红利实现率</div></div>
     <div class="div-stat"><div class="v">97款</div><div class="l">披露产品数量<br>（现金+增额）</div></div>
     <div class="div-stat"><div class="v">79%</div><div class="l">2024年实现率<br>≥100%产品占比</div></div>
+  </div>
+  <div class="scope-note">
+    <b>统计口径与时效说明（请先看这里）</b>
+    <p>本页上方三项是<b>全系披露产品统计</b>：全系产品平均红利实现率、披露产品数量、2024 年实现率≥100% 的产品占比，统计范围为官网当期披露的全部分红型产品；数据时间为 <b id="scope-date">2026-07-21</b>，属上一轮统计快照，<b>尚未重新核实，标记待业务核实</b>，数字保持原样不擅自改动。</p>
+    <p>新版<a href="about-xinhua.html#module-rates">公司介绍 · 2024—2025 历史现金红利实现率</a>展示的是<b>代表产品统计</b>：2024 年 3 只 + 2025 年 7 只代表产品的现金红利实现率，按官网逐产品查询核对，核对日为 <b>2026-11-11</b>。</p>
+    <p>两者统计范围、样本数量与年份口径都不同，<b>不能直接比较、不能互相替代</b>；本页也没有把代表产品的 2026-11-11 核对日期套用到尚未重新核实的全系统计上。</p>
   </div>
   <div class="controls">
     <input class="search" id="q" placeholder="搜索产品名称，如：宏御 / 华彩 / 年金">
@@ -159,7 +169,8 @@ function render(){
 
 function init(d){
   DATA = d;
-  $('#m-upd').textContent = '更新：' + (d.updated || '—');
+  $('#m-upd').textContent = '全系统计截至：' + (d.updated || '—') + '（未重新核实）';
+  $('#scope-date').textContent = d.updated || '—';
   if(d.sourceUrl) $('#m-src').href = d.sourceUrl;
   if(d.note) $('#noteBox').innerHTML = '<b>重要说明：</b>' + d.note;
   render();

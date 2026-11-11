@@ -12,4 +12,8 @@ body[data-product="hongan-anyue"] .mc-plan th{background:var(--calc-main);color:
 body[data-product="hongan-anyue"] .mc-plan tr.mc-key{background:var(--calc-mid)}
 body[data-product="hongan-anyue"] .mc-plan tbody tr:nth-child(even):not(.mc-key){background:var(--calc-soft)}
 body[data-product="hongan-anyue"] .mc-plan td.mc-total{color:var(--calc-deep)}
+/* 客户版常驻非保证利益提示：网页与导出图片均保留，措辞取自正式产品培训资料 */
+body[data-product="hongan-anyue"] .mc-client-notice{margin:12px 0 0;padding:9px 12px;border:1px solid #f0c98a;border-radius:8px;background:#fff8ec;color:#8a4b0a;font-size:14px;line-height:1.6}
+body[data-product="hongan-anyue"] .mc-client-image .mc-client-notice{font-size:17px;padding:12px 14px}
+body[data-product="hongan-anyue"] .mc-spec{margin:10px 0;padding:9px 12px;border-left:3px solid var(--calc-main);background:var(--calc-soft);font-size:13px;line-height:1.6;color:#334155}
 @media(max-width:600px){body[data-product="hongan-anyue"] .mc-plan h2{font-size:21px}body[data-product="hongan-anyue"] .mc-client-image h2{font-size:28px}}
