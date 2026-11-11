@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "companyUpgrade": true,
+  "verifiedAt": "2026-11-11",
+  "sources": {
+    "CIC-PROFILE": {
+      "sourceId": "CIC-OFFICIAL-PROFILE",
+      "name": "中投公司官网：概况",
+      "url": "https://www.china-inv.cn/china_inv/About_CIC/Who_We_Are.shtml",
+      "date": "2026-11-11核对",
+      "status": "confirmed"
+    },
+    "CIC-HISTORY-2017": {
+      "sourceId": "CIC-ANNUAL-2017-HISTORY",
+      "name": "中投公司2017年度报告：中央汇金发展历程",
+      "url": "https://www.china-inv.cn/wps/wcm/connect/2ead2bc5-4e25-4a1f-bcca-3cee617f68a7/%E4%B8%AD%E6%8A%95%E5%85%AC%E5%8F%B82017%E5%B9%B4%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A.pdf?CACHEID=2ead2bc5-4e25-4a1f-bcca-3cee617f68a7&MOD=AJPERES",
+      "date": "2017年度报告，机构沿革而非现行经营数据",
+      "location": "印刷第55—56页，PDF第59页",
+      "status": "confirmed"
+    },
+    "R-CURRENT": {
+      "sourceId": "NCI-CASH-DIVIDEND-2025",
+      "name": "新华保险官网：2025年现金红利实现率披露",
+      "url": "https://www.newchinalife.com/info/4023_4?p0=13",
+      "date": "2026-11-11核对",
+      "status": "confirmed"
+    },
+    "R-HONGYINGLAI": {
+      "sourceId": "NCI-CASH-HONGYINGLAI",
+      "name": "新华保险官网：宏盈来两全保险（分红型）红利实现率",
+      "url": "https://www.newchinalife.com/node/2360?productName=%E5%AE%8F%E7%9B%88%E6%9D%A5%E4%B8%A4%E5%85%A8%E4%BF%9D%E9%99%A9%EF%BC%88%E5%88%86%E7%BA%A2%E5%9E%8B%EF%BC%89",
+      "date": "2026-11-11核对",
+      "status": "confirmed"
+    },
+    "R-HONGYAO": {
+      "sourceId": "NCI-CASH-HONGYAO",
+      "name": "新华保险官网：宏耀世家终身寿险（分红型）红利实现率",
+      "url": "https://www.newchinalife.com/node/2360?productName=%E5%AE%8F%E8%80%80%E4%B8%96%E5%AE%B6%E7%BB%88%E8%BA%AB%E5%AF%BF%E9%99%A9%EF%BC%88%E5%88%86%E7%BA%A2%E5%9E%8B%EF%BC%89",
+      "date": "2026-11-11核对",
+      "status": "confirmed"
+    },
+    "R-ZUNYUE": {
+      "sourceId": "NCI-CASH-ZUNYUE",
+      "name": "新华保险官网：新华尊悦终身年金保险（分红型）红利实现率",
+      "url": "https://www.newchinalife.com/node/2360?productName=%E6%96%B0%E5%8D%8E%E5%B0%8A%E6%82%A6%E7%BB%88%E8%BA%AB%E5%B9%B4%E9%87%91%E4%BF%9D%E9%99%A9%EF%BC%88%E5%88%86%E7%BA%A2%E5%9E%8B%EF%BC%89",
+      "date": "2026-11-11核对",
+      "status": "confirmed"
+    },
+    "R-HONGTU": {
+      "sourceId": "NCI-CASH-HONGTU",
+      "name": "新华保险官网：宏图世家终身寿险（分红型）红利实现率",
+      "url": "https://www.newchinalife.com/node/2360?productName=%E5%AE%8F%E5%9B%BE%E4%B8%96%E5%AE%B6%E7%BB%88%E8%BA%AB%E5%AF%BF%E9%99%A9%EF%BC%88%E5%88%86%E7%BA%A2%E5%9E%8B%EF%BC%89",
+      "date": "2026-11-11核对",
+      "status": "confirmed"
+    },
+    "R-HONGYU": {
+      "sourceId": "NCI-CASH-HONGYU",
+      "name": "新华保险官网：宏御世家终身寿险（分红型）红利实现率",
+      "url": "https://www.newchinalife.com/node/2360?productName=%E5%AE%8F%E5%BE%A1%E4%B8%96%E5%AE%B6%E7%BB%88%E8%BA%AB%E5%AF%BF%E9%99%A9%EF%BC%88%E5%88%86%E7%BA%A2%E5%9E%8B%EF%BC%89",
+      "date": "2026-11-11核对",
+      "status": "confirmed"
+    }
+  },
+  "ownershipPatch": {
+    "asOf": "2026-06-30",
+    "period": "截至2026年6月30日",
+    "cic": {
+      "name": "中国投资有限责任公司",
+      "short": "中投公司",
+      "description": "2007年9月29日成立的国家主权财富基金机构，致力于国家外汇资金多元化投资，在全球范围开展投资与资产配置。境外投资由中投国际、中投海外承担；中央汇金是其全资子公司，开展境内金融股权管理。",
+      "source": "CIC-PROFILE",
+      "location": "公司概况；全资关系见中投年报"
+    },
+    "huijinDescription": "2003年12月16日成立，中投公司全资子公司。根据国务院授权，对国有重点金融企业股权投资；以出资额为限，代表国家依法行使出资人权利、履行出资人义务，推动国有金融资产保值增值。不是商业银行，不经营保险，不干预所持股企业日常经营。",
+    "capitalHistory": {
+      "title": "三种关系，分别理解",
+      "text": "国务院授权：职责来源；中投全资持股：股权关系。2007年财政部发行特别国债，向人民银行购买汇金全部股权，再作为对中投出资的一部分注入。这是历史资本安排，不是财政部直接控股新华保险。",
+      "source": "CIC-HISTORY-2017",
+      "location": "印刷第55—56页"
+    },
+    "source": "H1-2026",
+    "location": "印刷第56—57页（PDF第57—58页）"
+  },
+  "companyRates": {
+    "kind": "现金红利实现率",
+    "years": [
+      2024,
+      2025
+    ],
+    "barMax": 125,
+    "explanation": "现金红利实现率反映实际派发现金红利与对应演示现金红利的比例。例如历史实现率118%，表示对应口径下实际派发红利为演示红利的118%；不等于保单投资收益率118%，也不代表未来分红一定达到118%，红利可能为零。",
+    "scope": "所列为代表产品，非全部产品或在售清单；不同产品、年度与红利类型不得混用。",
+    "rows": [
+      {
+        "product": "宏盈来两全保险（分红型）",
+        "year": 2024,
+        "rate": 121,
+        "category": "两全险",
+        "source": "R-HONGYINGLAI",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2024现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "宏耀世家终身寿险（分红型）",
+        "year": 2024,
+        "rate": 114,
+        "category": "终身寿险",
+        "source": "R-HONGYAO",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2024现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "新华尊悦终身年金保险（分红型）",
+        "year": 2024,
+        "rate": 117,
+        "category": "年金险",
+        "source": "R-ZUNYUE",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2024现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "宏图世家终身寿险（分红型）",
+        "year": 2025,
+        "rate": 114,
+        "category": "终身寿险",
+        "source": "R-HONGTU",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2025现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "宏御世家终身寿险（分红型）",
+        "year": 2025,
+        "rate": 118,
+        "category": "终身寿险",
+        "source": "R-HONGYU",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2025现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "盛世荣耀庆典版终身寿险（分红型）",
+        "year": 2025,
+        "rate": 118,
+        "category": "终身寿险",
+        "source": "R-CURRENT",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2025现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "宏泰世家终身寿险（分红型）",
+        "year": 2025,
+        "rate": 118,
+        "category": "终身寿险",
+        "source": "R-CURRENT",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2025现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "宏禧来两全保险（分红型）",
+        "year": 2025,
+        "rate": 118,
+        "category": "两全险",
+        "source": "R-CURRENT",
+        "secondary": false,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2025现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "盛世恒盈年金保险（分红型）",
+        "year": 2025,
+        "rate": 118,
+        "category": "年金险",
+        "source": "R-CURRENT",
+        "secondary": true,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2025现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      },
+      {
+        "product": "财富恒盈年金保险（分红型）",
+        "year": 2025,
+        "rate": 118,
+        "category": "年金险",
+        "source": "R-CURRENT",
+        "secondary": true,
+        "kind": "现金红利实现率",
+        "location": "官网分红年度2025现金红利实现率行",
+        "status": "confirmed",
+        "channel": "公司通用"
+      }
+    ]
+  }
+}

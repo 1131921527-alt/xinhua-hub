@@ -2,8 +2,8 @@
 'use strict';
 // Faithful company brochure: reuse the live approved DOM, never summarize or recalculate it.
 const css=`
-@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Regular.ttf?v=20261111-year2025') format('truetype');font-weight:400;font-display:block}
-@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Bold.ttf?v=20261111-year2025') format('truetype');font-weight:700;font-display:block}
+@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Regular.ttf?v=20261111-local-upgrade') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:HubExportSans;src:url('assets/vendor/export/HubExportSans-Bold.ttf?v=20261111-local-upgrade') format('truetype');font-weight:700;font-display:block}
 .hxe-document.hxe-company{font-size:25px!important;line-height:1.65!important;color:#20334d!important}
 .hxe-document.hxe-company{font-family:HubExportSans,"Microsoft YaHei",sans-serif!important}
 .hxe-company .kt-equity-figure{margin:16px 0!important;padding:14px!important;background:#f7faff!important}
