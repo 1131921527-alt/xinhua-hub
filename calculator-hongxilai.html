@@ -207,7 +207,7 @@ body.capturing .intro-row > .section:first-child{margin-right:0 !important;}
 }
 </style>
 <script defer src="assets/js/calculator-theme.js"></script>
-</head>
+<script src="assets/js/calculator-reserve.js?v=20261111"></script></head>
 <body>
 <a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="wrap">
@@ -419,9 +419,9 @@ function generate(){
   let html = '';
   // 储备期读取统一产品规则配置（宏禧来：dynamic，规则 rate<=0）
   const RULE = window.getProductRule('hongxilai');
-  const reserveCount = displayRows.filter(r => window.evalReserveRule(RULE, r)).length;
+  const reserveEnd=CalculatorReserve.end(rows,{year:r=>r.yr,benefit:r=>r.survival,principal:premium,rate:r=>r.rate});const reserveCount = displayRows.filter(r => r.yr<=reserveEnd).length;
   displayRows.forEach((r, idx) => {
-    const isReserve = window.evalReserveRule(RULE, r);
+    const isReserve = r.yr<=reserveEnd;
     const rateCell = isReserve
       ? (idx === 0 ? `<td class="reserve-cell" rowspan="${reserveCount}"><span>储备期</span></td>` : '')
       : `<td class="col-rate">${r.rate.toFixed(2) + '%'}</td>`;

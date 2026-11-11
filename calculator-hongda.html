@@ -142,7 +142,7 @@ body.capturing .plan-foot-source,body.capturing .plan-foot-note{padding:8px 4px!
 }
 </style>
 <script defer src="assets/js/calculator-theme.js"></script>
-</head>
+<script src="assets/js/calculator-reserve.js?v=20261111"></script></head>
 <body>
 <a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="calc-cover-banner"><img src="assets/preview/hongda-card.svg" alt="宏达人生"><div class="calc-cover-overlay"><span>宏达人生年金保险（分红型）</span></div></div>
@@ -432,7 +432,7 @@ function generate(){
   // 回本年：红利利益（生存总利益）首次超过累计保费的保单年度
   breakevenT = 0;
   const bk = allRows.find(r => r.survD > totalPrem);
-  if(bk) breakevenT = bk.t;
+  if(bk) breakevenT = bk.t;reserveEnd=CalculatorReserve.end(allRows,{year:r=>r.t,benefit:r=>r.survD,principal:totalPrem,term,rate:r=>r.yieldVal});
 
   document.getElementById('infoGender').textContent = g === 1 ? '女' : '男';
   document.getElementById('infoAge').textContent = age + '周岁';
@@ -467,7 +467,7 @@ function renderTable(){
     let rateCell;
     if(isReserve){
       rateCell = (r.t === displayRows[0].t)
-        ? `<td data-col="rate" class="col-rate" rowspan="${reserveCount}"><span class="reserve-cell">交费期</span></td>`
+        ? `<td data-col="rate" class="col-rate" rowspan="${reserveCount}"><span class="reserve-cell">储备期</span></td>`
         : '';
     } else {
       rateCell = `<td data-col="rate" class="col-rate">${r.yieldVal === null ? '−' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;

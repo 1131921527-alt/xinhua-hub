@@ -170,7 +170,7 @@ body.capturing .key-metrics{display:none !important;}
 
 </style>
 <script defer src="assets/js/calculator-theme.js"></script>
-</head>
+<script src="assets/js/calculator-reserve.js?v=20261111"></script></head>
 <body>
 <a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="calc-cover-banner"><img src="assets/preview/hongan-card.jpg" alt="宏安世家"><div class="calc-cover-overlay"><span>宏安世家终身寿险（分红型）</span></div></div>
@@ -429,13 +429,13 @@ function generate(){
   let displayRows = rows.filter((r, i) => (r.yr <= term) || window.shouldDisplayRow(r, viewMode, rows.length, i));
   // 储备期读取统一产品规则配置（宏安：fixed，前5年）
   const RULE = window.getProductRule('hongan');
-  const reserveYears = window.resolveReserveYears(RULE, 0);
+  const reserveYears = CalculatorReserve.end(rows,{year:r=>r.yr,benefit:r=>r.survival,principal:totalPrem,term,rate:r=>r.yieldVal});
   const showRate = RULE.showRate;
   tbody.innerHTML = displayRows.map((r, idx) => {
     const isReserve = r.yr <= reserveYears;
     // 仅首行输出合并单元格，后续储备期行不再输出该列 td
     const yieldCell = isReserve
-      ? (idx === 0 ? `<td class="col-rate reserve-merged" rowspan="${reserveYears}"><span class="reserve-cell">储备期</span></td>` : '')
+      ? (idx === 0 ? `<td class="col-rate reserve-merged" rowspan="${displayRows.filter(r=>r.yr<=reserveYears).length}"><span class="reserve-cell">储备期</span></td>` : '')
       : `<td class="col-rate">${r.yieldVal === null ? '-' : (r.yieldVal * 100).toFixed(2) + '%'}</td>`;
     const rowClass = r.survival > totalPrem ? 'row-positive' : '';
     return `<tr class="${rowClass}">

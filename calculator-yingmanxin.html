@@ -351,7 +351,7 @@ body:not(.capturing) #planArea .dep-table th,body:not(.capturing) #planArea .dep
 
 </style>
 <script defer src="assets/js/calculator-theme.js"></script>
-</head>
+<script src="assets/js/calculator-reserve.js?v=20261111"></script></head>
 <body>
 <a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="calc-cover-banner"><img src="assets/preview/yingmanxin-card.jpg" alt="盈满鑫"><div class="calc-cover-overlay"><span>盈满鑫两全保险（分红型）</span></div></div>
@@ -710,7 +710,7 @@ function generate(){
   let displayRows = window.filterDisplayRows(rows, viewMode);
   // 储备期读取统一产品规则配置（盈满鑫：按原 Excel 计划书口径，储备期=交费期+1年）
   const RULE = window.getProductRule('yingmanxin');
-  const reserveYears = window.resolveReserveYears(RULE, payTerm);
+  const reserveYears = CalculatorReserve.end(rows,{year:r=>r.yr,benefit:r=>r.cvTotal,principal:premium*payTerm,term:payTerm,rate:r=>r.yieldVal});
   // 储备期在 viewMode 过滤后的实际显示行数（避免 rowspan 大于实际行数导致布局错乱）
   const reserveDisplayCount = displayRows.filter(r => r.yr <= reserveYears).length;
   tbody.innerHTML = displayRows.map((r, idx) => {

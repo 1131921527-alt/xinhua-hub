@@ -128,7 +128,7 @@ body.capturing .key-metrics{display:none !important;}
 <script src="html2canvas.min.js"></script>
 <script src="product-rules.js"></script>
 <script defer src="assets/js/calculator-theme.js"></script>
-</head>
+<script src="assets/js/calculator-reserve.js?v=20261111"></script></head>
 <body>
 <a class="calc-back-bar" href="index.html"><span class="arrow">←</span> 返回资料库</a>
 <div class="calc-cover-banner"><img src="assets/preview/hongyu-card.jpg" alt="宏御世家"><div class="calc-cover-overlay"><span>宏御世家终身寿险（分红型）</span></div></div>
@@ -354,8 +354,7 @@ async function generate() {
     const paymentYears = term === 1 ? 1 : term;
     // 储备期读取统一产品规则配置（宏御：fixed，前5年）
     const RULE = window.getProductRule('hongyu');
-    const reserveYears = RULE.reserveType === 'fixed' ? RULE.reserveYears
-                        : RULE.reserveType === 'payterm' ? paymentYears : 0;
+    const reserveYears = paymentYears; // Rate arithmetic unchanged; reserve presentation follows complete results below.
     const showRate = RULE.showRate;
     
     // 第一遍：计算所有年份数据（即使被显示模式过滤也要计算）
@@ -415,7 +414,7 @@ async function generate() {
       prevO = O;
     }
 
-    let html = '';
+    const presentationReserveEnd=CalculatorReserve.end(allRows,{year:r=>r.yr,benefit:r=>r.total,principal:premium*paymentYears,term:paymentYears,rate:r=>parseFloat(r.rate)});let html = '';
     for (let i = 0; i < allRows.length; i++) {
       const r = allRows[i];
       
@@ -425,7 +424,7 @@ async function generate() {
       
       // 年增长率：前reserveYears年显示"储备期"，之后显示百分比
       // 储备期仅首行输出合并单元格（rowspan 由 applyReserveRowspan 处理）
-      const rateCell = r.rate === '储备期'
+      const rateCell = r.yr<=presentationReserveEnd
         ? `<td class="col-rate rate-reserve reserve-merge"><span class="reserve-cell">储备期</span></td>`
         : `<td class="col-rate ${r.rateClass}">${r.rate}</td>`;
       
@@ -745,12 +744,12 @@ function _legacyDownloadImage() {
       const dlEntry = CALC_DATA[dlKey];
       const dlYears = dlEntry ? dlEntry.y : [];
       const dlPayYears = term === 1 ? 1 : term;
-      const dlReserveYears = 5;  // 储备期=前5年（回本），与缴费期无关
+      const dlReserveYears = dlPayYears;  // 储备期=前5年（回本），与缴费期无关
       const dlDisplayMode = 'after60';
       const dlMaxYear = Math.min(dlYears.length, 105);
 
       let dlCumK = 0, dlPrevO = null, dlPrevTotal = null, dlCumPrem = 0;
-      const dlRows = [];
+      const dlRows = [],dlAllRows=[];
 
       for (let yr = 1; yr <= dlMaxYear; yr++) {
         const dRow = dlYears[yr-1];
@@ -774,11 +773,12 @@ function _legacyDownloadImage() {
         }
         const skip = (dlDisplayMode === 'after50' && currentAge2 > 50 && (currentAge2 - 50) % 5 !== 0) ||
                      (dlDisplayMode === 'after60' && currentAge2 > 60 && (currentAge2 - 60) % 5 !== 0);
-        if (!skip) { dlRows.push({ yr, age: currentAge2, annualPremium, cumPrem: dlCumPrem, guaranteed, paidup, total, rate }); }
+        const exportRow={ yr, age: currentAge2, annualPremium, cumPrem: dlCumPrem, guaranteed, paidup, total, rate };dlAllRows.push(exportRow);if(!skip)dlRows.push({...exportRow});
         dlPrevTotal = total;
         dlPrevO = O;
       }
 
+      const displayReserveEnd=CalculatorReserve.end(dlAllRows,{year:r=>r.yr,benefit:r=>r.total,principal:totalPremium,term:dlPayYears,rate:r=>parseFloat(r.rate)});dlRows.forEach(r=>{if(r.yr<=displayReserveEnd)r.rate='储备期';});
       // 预计算储备期块范围（用于合并居中）
       let reserveStart = -1, reserveCount = 0;
       dlRows.forEach((r, i) => {
