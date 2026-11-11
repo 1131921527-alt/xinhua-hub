@@ -22,7 +22,7 @@ for file in root.glob('about-xinhua.html-*-pdf.pdf'):
     if missing:
         (out/(file.stem+'-missing.json')).write_text(json.dumps(missing,ensure_ascii=False,indent=2),encoding='utf-8')
     assert not missing,(file.name,'PDF text extraction did not recover original segments',missing[:3])
-    assert all(token in text for token in ['31.34%','12.09%','1.94%','14.03%','0.91%','227.93','3103.84'])
+    expected=['31.34%','12.09%','1.94%','14.03%','0.91%']+(['46.27%','362.84','2878.40','210.47%','135.11%'] if coverage.get('edition')=='2025' else ['227.93','3103.84']);assert all(token in text for token in expected)
     assert text.count('资本覆盖：不是收益指标')==1
     assert 'github.io/xinhua-hub' not in text and '导出日期' not in text
     assert sum(len(p.get_images()) for p in doc)==0,'company PDF must not contain whole-page bitmap'

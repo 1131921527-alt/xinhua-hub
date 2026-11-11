@@ -1,5 +1,6 @@
 /* 公司介绍的蓝金主题；正文与数据不变，导出另用A4专用组件。 */
 #company-content .kt-hero{background:#173f6d;border-top:5px solid #b3955d}
+#company-content .kt-hero .kt-yoy,#company-content .kt-hero .kt-compare{display:none}
 #company-content .kt-hero .kt-value{color:#e4ca9b}
 #company-content .kt-panel{border-color:#ded2ba}
 #company-content .kt-panel h2{border-left:4px solid #ad8b50;padding-left:12px}
@@ -8,3 +9,8 @@
 #company-content .kt-fill{background:#254b75}
 #company-content .kt-contract>div{border-color:#ded2ba}
 #company-content .kt-warning{background:#f4edde;border-color:#ad8b50;color:#70582e}
+#company-content .kt-yoy{font-size:15px;color:#6b7380;margin:10px 0 6px}#company-content .kt-yoy b{color:#8a672d;font-size:20px}
+.knowledge .kt-yoy b{display:inline}.knowledge .kt-compare-row b{font-size:14px;white-space:nowrap}
+@media(max-width:600px){#module-operation>.kt-grid,#module-investment>.kt-grid{grid-template-columns:minmax(0,1fr)}}
+.kt-compare{margin-top:8px}.kt-compare-row{display:grid;grid-template-columns:38px minmax(0,1fr) 116px;gap:7px;align-items:center;font-size:13px;line-height:1.5;margin:5px 0}.kt-compare-row b{text-align:right;color:#173f6d}.kt-compare-track{display:block;background:#e5eaf0;height:8px}.kt-compare-track i{display:block;height:8px}
+.kt-aggregate{background:#f7f1e6;border:1px solid #d7c7a8;border-radius:10px;padding:18px;margin:16px 0;color:#173f6d}.kt-aggregate-value{display:block;font-size:42px;color:#94703c;line-height:1.2}.kt-stacked{display:flex;height:16px;margin:12px 0 8px;width:100%;overflow:hidden}.kt-stacked i{display:block;height:16px}.kt-aggregate-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px}.kt-aggregate-note{font-size:13px;line-height:1.5;color:#5c6875;margin:8px 0 0}

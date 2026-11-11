@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "edition": "2025",
+  "annualEdition": true,
+  "updatedAt": "2026-11-11",
+  "reportLabel": "2025年度／2025年末",
+  "source": "FY-2025",
+  "sources": {
+    "FY-2025": {
+      "sourceId": "NCI-ANNUAL-2025",
+      "name": "新华保险2025年年度报告",
+      "url": "https://static-cdn.newchinalife.com/ncl/pdf/20260327/d5c70560-e595-4188-a006-643ad4766e0d.pdf",
+      "date": "2026-03-27",
+      "status": "confirmed",
+      "sha256": "4a5d6ee54dc0a351acac6d9d3ce1d0eee6d4a388c4c36c1668a35d5ffd35c528"
+    },
+    "CIC-RELATION": {
+      "sourceId": "CIC-OFFICIAL-20101108",
+      "name": "中投公司官方致辞：直属国务院领导的机构背景",
+      "url": "https://www.china-inv.cn/china_inv/Media/2018-05/09/1000205/files/ea259860bb1f4dedb3c59b1c072df937.pdf",
+      "date": "2010-11-08，机构沿革说明，非2025经营数据",
+      "status": "confirmed"
+    }
+  },
+  "ownership": {
+    "asOf": "2025-12-31",
+    "period": "截至2025年12月31日",
+    "status": "confirmed",
+    "totalShares": 3119546600,
+    "denominator": "新华保险已发行股份总数（A股与H股合计）",
+    "cic": {
+      "name": "中国投资有限责任公司",
+      "short": "中投公司",
+      "description": "2007年成立的中国主权财富基金机构，承担国家外汇资金多元化投资等职能。中央汇金是其全资子公司。",
+      "source": "CIC",
+      "location": "印刷第11—12、43—44页"
+    },
+    "huijin": {
+      "name": "中央汇金投资有限责任公司",
+      "short": "中央汇金",
+      "directPct": "31.34",
+      "shares": 977530534,
+      "description": "中投公司的全资子公司。根据国务院授权，对国有重点金融企业进行股权投资，通过行使出资人权利履行股东职责，推动国有金融资产保值增值。它不是商业银行，也不直接经营新华保险的日常业务。",
+      "assetCompany": "中央汇金资产管理有限责任公司",
+      "assetPct": "0.91",
+      "assetShares": 28249200,
+      "relationship": "全资子公司",
+      "source": "FY-2025",
+      "location": "印刷第105—106页"
+    },
+    "baowu": {
+      "name": "中国宝武钢铁集团有限公司",
+      "short": "中国宝武",
+      "directPct": "12.09",
+      "shares": 377162581,
+      "description": "中央直接管理的国有重要骨干企业，由宝钢、武钢等钢铁产业资源联合重组发展而来，2022年正式转为国有资本投资公司，是新华保险的重要国有股东。中国宝武不隶属于中央汇金。",
+      "subsidiary": "华宝投资有限公司",
+      "subsidiaryPct": "1.94",
+      "subsidiaryShares": 60503300,
+      "subsidiaryClass": "H股",
+      "relationship": "全资子公司",
+      "combinedPct": "14.03",
+      "combinedBasis": "公开权益披露口径：中国宝武直接持有A股，加上通过全资子公司华宝投资持有的H股，合计占新华保险已发行股份总数14.03%；不是中国宝武直接持股比例。",
+      "source": "FY-2025",
+      "location": "印刷第105—106页"
+    },
+    "nomineeNote": "香港中央结算（代理人）有限公司属于名义持有人，代表不同客户与结算系统参与者持股，不能当作单一最终实益股东。华宝投资的1.94%已从该名义持股披露数量中扣除，避免重复计算。",
+    "huijinBasis": "中央汇金直接持股31.34%；其全资子公司中央汇金资产管理另持股0.91%，两者分别披露。本图不把关联权益写成中央汇金直接持股，也不简单相加已四舍五入的百分比。",
+    "risk": "股东背景说明公司的股权与治理关系，不代表任何保单的本金、收益或未来分红获得股东保证。",
+    "aggregate": {
+      "huijinShares": 1005779734,
+      "baowuShares": 437665881,
+      "combinedShares": 1443445615,
+      "directShares": 1354693115,
+      "huijinPct": "32.24",
+      "baowuPct": "14.03",
+      "combinedPct": "46.27",
+      "directPct": "43.43",
+      "remainingPct": "53.73",
+      "source": "FY-2025",
+      "location": "印刷第104—105页",
+      "formula": "(977530534+28249200+377162581+60503300)/3119546600*100",
+      "method": "按披露股数合计后除以总股本，再四舍五入至两位小数；不相加已舍入的百分比。",
+      "scope": "两大国资股东及其全资子公司，仅为持股统计合计，不表示一致行动或收益保证。"
+    },
+    "government": {
+      "root": "国务院",
+      "leftRole": "直属领导",
+      "rightAgency": "国务院国资委",
+      "rightRole": "代表国务院履行出资人职责",
+      "sourceLeft": "CIC-RELATION",
+      "sourceRight": "FY-2025",
+      "rightLocation": "印刷第106页",
+      "legend": "实线为持股关系，虚线为领导或履职关系；不表示国务院直接持有新华保险股份。"
+    }
+  },
+  "metrics": [
+    {
+      "id": "assets",
+      "name": "总资产",
+      "value": "1.8995",
+      "unit": "万亿元",
+      "meaning": "看公司整体经营规模，不等于利润",
+      "period": "2025年12月31日",
+      "source": "FY-2025",
+      "page": "印刷第18—19页",
+      "status": "confirmed",
+      "comparison": {
+        "currentMillions": 1899484,
+        "previousMillions": 1692297,
+        "currentYear": 2025,
+        "previousYear": 2024,
+        "growthPct": "12.2",
+        "source": "FY-2025",
+        "page": "印刷第18—19页"
+      }
+    },
+    {
+      "id": "premium",
+      "name": "原保险保费收入",
+      "value": "1958.71",
+      "unit": "亿元",
+      "meaning": "看寿险主业在这一期间的业务规模",
+      "period": "2025年度",
+      "source": "FY-2025",
+      "page": "印刷第18—19页",
+      "status": "confirmed",
+      "comparison": {
+        "currentMillions": 195871,
+        "previousMillions": 170511,
+        "currentYear": 2025,
+        "previousYear": 2024,
+        "growthPct": "14.9",
+        "source": "FY-2025",
+        "page": "印刷第18—19页"
+      }
+    },
+    {
+      "id": "profit",
+      "name": "归母净利润",
+      "value": "362.84",
+      "unit": "亿元",
+      "meaning": "看归属于母公司股东的当期经营成果",
+      "period": "2025年度",
+      "source": "FY-2025",
+      "page": "印刷第18—19页",
+      "status": "confirmed",
+      "comparison": {
+        "currentMillions": 36284,
+        "previousMillions": 26229,
+        "currentYear": 2025,
+        "previousYear": 2024,
+        "growthPct": "38.3",
+        "source": "FY-2025",
+        "page": "印刷第18—19页"
+      }
+    },
+    {
+      "id": "embedded",
+      "name": "内含价值",
+      "value": "2878.40",
+      "unit": "亿元",
+      "meaning": "看现有业务的长期价值，不等于可分红金额",
+      "period": "2025年12月31日",
+      "source": "FY-2025",
+      "page": "印刷第18—19页",
+      "status": "confirmed",
+      "comparison": {
+        "currentMillions": 287840,
+        "previousMillions": 258448,
+        "currentYear": 2025,
+        "previousYear": 2024,
+        "growthPct": "11.4",
+        "source": "FY-2025",
+        "page": "印刷第18—19页"
+      }
+    },
+    {
+      "id": "invested",
+      "name": "投资资产",
+      "value": "1.8412",
+      "unit": "万亿元",
+      "meaning": "看参与长期配置的资产规模，与总资产口径不同",
+      "period": "2025年12月31日",
+      "source": "FY-2025",
+      "page": "印刷第19、42页",
+      "status": "confirmed",
+      "comparison": {
+        "currentMillions": 1841227,
+        "previousMillions": 1629361,
+        "currentYear": 2025,
+        "previousYear": 2024,
+        "growthPct": "13.0",
+        "source": "FY-2025",
+        "page": "印刷第19、42页"
+      }
+    },
+    {
+      "id": "totalReturn",
+      "name": "总投资收益率",
+      "value": "6.6",
+      "unit": "%",
+      "meaning": "包含经常性收益、交易价差及相关市场价值变动",
+      "period": "2025年度",
+      "source": "FY-2025",
+      "page": "印刷第43页",
+      "status": "confirmed"
+    },
+    {
+      "id": "comprehensiveReturn",
+      "name": "综合投资收益率",
+      "value": "5.0",
+      "unit": "%",
+      "meaning": "在总投资收益基础上进一步考虑其他综合收益等变动",
+      "period": "2025年度",
+      "source": "FY-2025",
+      "page": "印刷第43页",
+      "status": "confirmed"
+    },
+    {
+      "id": "solvency",
+      "name": "综合偿付能力充足率",
+      "value": "210.47",
+      "unit": "%",
+      "meaning": "看实际资本相对于最低资本的覆盖程度，不是收益率",
+      "period": "2025年12月31日",
+      "source": "FY-2025",
+      "page": "印刷第47页",
+      "status": "confirmed"
+    },
+    {
+      "id": "coreSolvency",
+      "name": "核心偿付能力充足率",
+      "value": "135.11",
+      "unit": "%",
+      "meaning": "看核心资本相对于最低资本的覆盖程度",
+      "period": "2025年12月31日",
+      "source": "FY-2025",
+      "page": "印刷第47页",
+      "status": "confirmed"
+    },
+    {
+      "id": "nbv",
+      "name": "一年新业务价值",
+      "value": "98.42",
+      "unit": "亿元",
+      "meaning": "新增长期业务的价值贡献，不等于当期利润",
+      "period": "2025年度",
+      "source": "FY-2025",
+      "page": "印刷第19页",
+      "status": "confirmed",
+      "comparison": {
+        "currentMillions": 9842,
+        "previousMillions": 6253,
+        "currentYear": 2025,
+        "previousYear": 2024,
+        "growthPct": "57.4",
+        "source": "FY-2025",
+        "page": "印刷第19页"
+      }
+    }
+  ],
+  "allocation": {
+    "source": "FY-2025",
+    "page": "印刷第42页",
+    "period": "2025年12月31日",
+    "status": "confirmed",
+    "items": [
+      [
+        "债券及债务",
+        49.6
+      ],
+      [
+        "定期存款",
+        16
+      ],
+      [
+        "股票",
+        11.8
+      ],
+      [
+        "基金",
+        9.4
+      ],
+      [
+        "其他金融投资",
+        3.9
+      ],
+      [
+        "长期股权投资",
+        3.6
+      ],
+      [
+        "现金及现金等价物",
+        2.3
+      ],
+      [
+        "股权计划",
+        1.2
+      ],
+      [
+        "其他投资资产",
+        0.9
+      ],
+      [
+        "债权投资计划",
+        0.6
+      ],
+      [
+        "投资性房地产",
+        0.6
+      ],
+      [
+        "信托计划",
+        0.1
+      ]
+    ],
+    "amounts": [
+      914024,
+      293964,
+      216452,
+      172574,
+      72710,
+      65633,
+      42898,
+      22103,
+      16115,
+      11277,
+      11424,
+      2053
+    ],
+    "denominatorMillions": 1841227
+  },
+  "history": {
+    "source": "FY-2025",
+    "page": "印刷第18—19、42页",
+    "period": "2024年度／2024年末对照",
+    "items": [
+      [
+        "总资产",
+        "1.6923万亿元"
+      ],
+      [
+        "原保险保费收入",
+        "1705.11亿元"
+      ],
+      [
+        "内含价值",
+        "2584.48亿元"
+      ],
+      [
+        "投资资产",
+        "1.6294万亿元"
+      ]
+    ]
+  },
+  "investmentStrategy": {
+    "source": "FY-2025",
+    "page": "印刷第41页",
+    "items": [
+      [
+        "固收配置 · 匹配长期负债",
+        "以久期长、现金流稳定的固定收益类资产为基础，择机充实固收底仓。"
+      ],
+      [
+        "权益投资 · 坚持长期价值",
+        "理性布局权益底仓，辅以均衡配置，以资产负债匹配为前提。"
+      ]
+    ]
+  },
+  "creditRatings": {
+    "source": "FY-2025",
+    "page": "印刷第20页",
+    "period": "2025年年报披露",
+    "items": [
+      [
+        "惠誉财务实力",
+        "A"
+      ],
+      [
+        "穆迪财务实力",
+        "A2"
+      ]
+    ]
+  },
+  "modules": [
+    {
+      "id": "identity",
+      "title": "新华公司身份",
+      "source": "FY-2025",
+      "page": "印刷第16—20页",
+      "period": "公司历史与性质",
+      "status": "confirmed"
+    },
+    {
+      "id": "ownership",
+      "title": "主要股东：中央汇金与中国宝武",
+      "source": "FY-2025",
+      "page": "印刷第104—106页",
+      "period": "截至2025年12月31日",
+      "status": "confirmed"
+    },
+    {
+      "id": "operation",
+      "title": "2025年度经营实力",
+      "source": "FY-2025",
+      "page": "印刷第18—20、47页",
+      "period": "2025年度／2025年末",
+      "status": "confirmed"
+    },
+    {
+      "id": "investment",
+      "title": "投资实力与资产结构",
+      "source": "FY-2025",
+      "page": "印刷第41—43页",
+      "period": "2025年度／2025年末",
+      "status": "confirmed"
+    },
+    {
+      "id": "logic",
+      "title": "投资与分红逻辑",
+      "source": "COMPANY-PDF",
+      "page": "第4—7页",
+      "period": "概念说明",
+      "status": "confirmed"
+    },
+    {
+      "id": "rates",
+      "title": "2025红利实现率",
+      "source": "DIV-2025",
+      "page": "分红型保险表",
+      "period": "2025分红年度",
+      "status": "confirmed"
+    }
+  ]
+}
