@@ -384,6 +384,49 @@
           "url": "files/手工单模板/职业分类表（单独版）.pdf"
         }
       ]
+    },
+    {
+      "id": "contracts",
+      "name": "合同模板",
+      "icon": "📜",
+      "items": [
+        {
+          "name": "S11 宏御世家 · 合同模板",
+          "type": "contract",
+          "description": "新华宏御世家终身寿险合同模板",
+          "url": "files/合同模板/S11新华宏御世家合同.pdf"
+        },
+        {
+          "name": "S03 宏泰世家 · 合同模板",
+          "type": "contract",
+          "description": "宏泰世家分红型合同模板",
+          "url": "files/合同模板/宏泰合同模板.pdf"
+        },
+        {
+          "name": "S24 华彩鎏金 · 合同模板",
+          "type": "contract",
+          "description": "华彩鎏金年金保险合同模板",
+          "url": "files/合同模板/华彩鎏金年金保险（分红型）合同模板.pdf"
+        },
+        {
+          "name": "宏愿人生 · 合同模板",
+          "type": "contract",
+          "description": "宏愿人生养老年金合同模板",
+          "url": "files/合同模板/宏愿合同模板.pdf"
+        },
+        {
+          "name": "G23 恒享人生 · 合同模板",
+          "type": "contract",
+          "description": "恒享人生年金险合同模板",
+          "url": "files/合同模板/恒享人生合同模版.pdf"
+        },
+        {
+          "name": "G24 福盛世家添翼版 · 合同模板",
+          "type": "contract",
+          "description": "福盛世家添翼版合同模板",
+          "url": "files/合同模板/福盛添翼版合同模板.pdf"
+        }
+      ]
     }
   ]
 }
