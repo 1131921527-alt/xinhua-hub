@@ -42,3 +42,6 @@ qa/screenshots/*-debug/
 # Account-identifying screenshots remain local/private; never republish original copies.
 /files/增值服务/新华尊使用流程指引.jpg
 /files/originals/增值服务/新华尊使用流程指引.jpg
+
+# 真实客户保单原件，禁止公开（含姓名/身份证）
+/files/合同模板/
